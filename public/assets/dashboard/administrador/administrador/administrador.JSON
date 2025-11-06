@@ -1,0 +1,14 @@
+{
+  "reservas": [10, 20, 15, 25, 30, 28, 40, 35, 45, 50, 48, 70],
+  "gastos": [5, 10, 8, 12, 15, 13, 17, 19, 22, 20, 18, 25],
+  "ingresos": {
+    "total": 9470,
+    "reservas": 1699,
+    "comisiones": 799,
+    "impuestos": 199
+  },
+  "ultimaReserva": [
+    { "cliente": "Juan Pérez", "fecha": "12-Jul-2025", "precio": "Ruta Ecológica", "experiencia": "Rafting" },
+    { "cliente": "Pepito Mahecha", "fecha": "14-Jul-2025", "precio": "Desierto de la Tatacoa", "experiencia": "Caminata Nocturna" }
+  ]
+}

@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteBase /aventura_go/
+
+# Ignora archivos o carpetas reales
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+#Redirige todo a index.php
+rewriteRule ^(.*)$ index.php [QSA,L]

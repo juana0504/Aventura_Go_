@@ -1,0 +1,45 @@
+[
+  {
+    "titulo": "Explora y disfruta del campo a caballo en sasaima",
+    "descripcion": "2 días, 1 noche",
+    "precio": "Desde $450.000",
+    "tipo": "Pasadía",
+    "img": "../assets/website_externos/destacados/img/caballos.png"
+  },
+  {
+    "titulo": "Conoce una represa natural y disfruta un buen sancocho en villeta",
+    "descripcion": "Pasadía",
+    "precio": "Desde $130.000",
+    "tipo": "Pasadía",
+    "img": "../assets/website_externos/destacados/img/represa.png"
+    
+  },
+  {
+    "titulo": "Explora las vías del tren y disfruta de la naturaleza en villeta",
+    "descripcion": "Pasadía",
+    "precio": "Desde $960",
+    "tipo": "Pasadía",
+    "img": "../assets/website_externos/destacados/img/vias.png"
+  },
+  {
+    "titulo": "Pasadía en villeta, transporte desde bogotá",
+    "descripcion": "Pasadía",
+    "precio": "Desde $120.000",
+    "tipo": "Pasadía",
+    "img": "../assets/website_externos/destacados/img/pasadia.png"
+  },
+  {
+    "titulo": "Vive la experiencia del puente tibetano en útica",
+    "descripcion": "2 días, 1 noche",
+    "precio": "Desde $99.000",
+    "tipo": "Pasadía",
+    "img": "../assets/website_externos/destacados/img/puente.png"
+  },
+  {
+    "titulo": "Tarde de piscina en el centro de villeta",
+    "descripcion": "10 Nights, 9 days",
+    "precio": "Desde $85.000",
+    "tipo": "Pasadía",
+    "img": "../assets/website_externos/destacados/img/villeta.png"
+  }
+]

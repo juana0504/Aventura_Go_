@@ -1,0 +1,146 @@
+[
+    {
+        "id": 16,
+        "nombre": "carlos benavides",
+        "identificacion": 80325489,
+        "fecha": "20/10/2025",
+        "lugar": "villeta cundinamarca",
+        "actividad": "canopi",
+        "precio": 150000
+    },
+    {
+        "id": 15,
+        "nombre": "julio benavides",
+        "identificacion": 80325489,
+        "fecha": "20/10/2025",
+        "lugar": "villeta cundinamarca",
+        "actividad": "canotaje",
+        "precio": 350000
+    },
+    {
+        "id": 14,
+        "nombre": "carlos castaño",
+        "identificacion": 80325489,
+        "fecha": "20/10/2025",
+        "lugar": "villeta cundinamarca",
+        "actividad": "senderismo",
+        "precio": 150000
+    },
+    {
+        "id": 13,
+        "nombre": "abgel benavides",
+        "identificacion": 80325489,
+        "fecha": "19/10/2025",
+        "lugar": "villeta cundinamarca",
+        "actividad": "canopi",
+        "precio": 250000
+    },
+    {
+        "id": 12,
+        "nombre": "carlos uribe",
+        "identificacion": 80325489,
+        "fecha": "19/10/2025",
+        "lugar": "villeta cundinamarca",
+        "actividad": "rappel",
+        "precio": 350000
+    },
+    {
+        "id": 11,
+        "nombre": "carlos ramirez",
+        "identificacion": 80325489,
+        "fecha": "19/10/2025",
+        "lugar": "tobia cundinamarca",
+        "actividad": "pasadia",
+        "precio": 120000
+    },
+    {
+        "id": 10,
+        "nombre": "alejandra benavides",
+        "identificacion": 80325489,
+        "fecha": "19/10/2025",
+        "lugar": "tobia cundinamarca",
+        "actividad": "caballos",
+        "precio": 280000
+    },
+    {
+        "id": 9,
+        "nombre": "camila castaño",
+        "identificacion": 80325489,
+        "fecha": "15/10/2025",
+        "lugar": "utica Cundinamarca",
+        "actividad": "cuatrimotos",
+        "precio": 1350000
+    },
+    {
+        "id": 8,
+        "nombre": "julia benavides",
+        "identificacion": 80325489,
+        "fecha": "10/10/2025",
+        "lugar": "la vega cundinamarca",
+        "actividad": "cena romantica",
+        "precio": 360000
+    },
+    {
+        "id": 7,
+        "nombre": "ramiro benavides",
+        "identificacion": 80325489,
+        "fecha": "10/10/2025",
+        "lugar": "la vega cundinamarca",
+        "actividad": "senderismo",
+        "precio": 160000
+    },
+    {
+        "id": 6,
+        "nombre": "carlos gutierrez",
+        "identificacion": 80325489,
+        "fecha": "10/10/2025",
+        "lugar": "la vega cundinamarca",
+        "actividad": "visita guiada laguna",
+        "precio": 60000
+    },
+    {
+        "id": 5,
+        "nombre": "julio mancera",
+        "identificacion": 80325489,
+        "fecha": "10/10/2025",
+        "lugar": "la vega cundinamarca",
+        "actividad": "senderismo",
+        "precio": 160000
+    },
+    {
+        "id": 4,
+        "nombre": "rambo benavides",
+        "identificacion": 80325489,
+        "fecha": "10/10/2025",
+        "lugar": "la peña cundinamarca",
+        "actividad": "montañismo",
+        "precio": 210000
+    },
+    {
+        "id": 3,
+        "nombre": "sofia vergara",
+        "identificacion": 80325489,
+        "fecha": "9/10/2025",
+        "lugar": "sasaima cundinamarca",
+        "actividad": "cena romantica",
+        "precio": 260000
+    },
+    {
+        "id": 2,
+        "nombre": "juan gonzalez",
+        "identificacion": 80325489,
+        "fecha": "9/10/2025",
+        "lugar": "sasaima cundinamarca",
+        "actividad": "senderismo",
+        "precio": 160000
+    },
+    {
+        "id": 1,
+        "nombre": "mario baracus",
+        "identificacion": 80325489,
+        "fecha": "8/10/2025",
+        "lugar": "guaduas cundinamarca",
+        "actividad": "parapente",
+        "precio": 390000
+    }
+]

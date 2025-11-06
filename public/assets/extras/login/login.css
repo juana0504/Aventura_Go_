@@ -1,0 +1,229 @@
+/* Fondo con capa oscura */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
+    background: url('img/Rectangle 179.png') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+/* Capa superpuesta oscura */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+/* Aseguramos que el contenido principal esté por encima */
+.login-container,
+.container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Contenedor principal */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Caja principal del login */
+.login-box {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    max-width: 900px;
+    width: 90%;
+    height: 560px;
+    align-items: stretch;
+    line-height: 0;
+}
+
+.form-section,
+.image-section {
+    height: 100%;
+}
+
+/* Sección izquierda (formulario) */
+.form-section {
+    flex: 1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.logo {
+    width: 120px;
+    margin: 0 auto 20px;
+}
+
+h2 {
+    color: #1d3557;
+    margin-bottom: 5px;
+}
+
+p {
+    color: #444;
+    font-size: 14px;
+}
+
+/* Campos de texto */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 25px;
+    background-color: #f1f1f1;
+    text-indent: 10px;
+    font-size: 14px;
+    outline: none;
+}
+
+/* Contenedor del campo contraseña con icono */
+.password-container {
+    position: relative;
+}
+
+.password-container .eye-icon {
+    position: absolute;
+    right: 15px;
+    top: 12px;
+    cursor: pointer;
+}
+
+/* Botón */
+button {
+    background-color: #EA8217;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #c86f12;
+}
+
+/* Enlace registro */
+.register-text {
+    font-size: 13px;
+    margin-top: 15px;
+}
+
+.register-text a {
+    color: #1d3557;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.register-text a:hover {
+    text-decoration: underline;
+}
+
+/* 🖼️ Contenedor de la imagen */
+.image-section {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 📷 Imagen centrada */
+.image-section img {
+    position: absolute;       
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+/* Hover: zoom y brillo */
+.image-section:hover img {
+    transform: translate(-50%, -50%) scale(1.05);
+    filter: brightness(0.85);
+    cursor: pointer;
+}
+
+
+/* Enlace "¿Olvidaste tu contraseña?" */
+.forgot-password {
+    text-align: right;
+    margin: 5px 0 15px 0;
+    font-size: 13px;
+    color: #666;
+}
+
+.forgot-password a {
+    color: #1d3557;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.forgot-password a:hover {
+    color: #EA8217;
+    text-decoration: underline;
+}
+
+/* Enlaces de registro o extra */
+.extra-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+    font-size: 13px;
+    flex-wrap: wrap;
+}
+
+.extra-links a {
+    color: #1d3557;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.extra-links a:hover {
+    text-decoration: underline;
+    color: #EA8217;
+}
+
+/* 🔹 Responsividad */
+@media (max-width: 768px) {
+    .login-box {
+        flex-direction: column;
+        width: 90%;
+        height: auto;
+    }
+
+    .image-section {
+        height: 200px;
+    }
+
+    .form-section {
+        padding: 30px;
+    }
+}

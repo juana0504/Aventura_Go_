@@ -1,0 +1,582 @@
+/* fuente para titulos*/
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
+
+/*fuente para textos*/
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+h1 h2 h3 h4 h5 h6 {
+    --font-titles: 'Raleway', sans-serif;
+    /*tipografia titulos*/
+}
+
+p a button input {
+    --font-text: 'Lato', sans-serif;
+    /*tipografia textos*/
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f5f5f5;
+}
+
+/* Layout principal */
+#historial {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* PANEL LATERAL___________________________________________________________________________________________________*/
+.panel {
+    width: 280px;
+    background-color: #2D4059;
+    padding: 30px 20px;
+    display: block;
+}
+
+.panel>img {
+    width: 150px;
+    margin: 0 auto 40px auto;
+    display: block;
+}
+
+/* Items del menú */
+.items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.items a {
+    display: flex;
+    gap: 15px;
+    padding: 12px 15px;
+    color: #ecf0f1;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.items a:hover {
+    background-color: #EA8217;
+}
+
+.items a img {
+    width: 23px;
+    height: 23px;
+}
+
+.items a p {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* CONTENIDO LADO DERECHO ______________________________________________________________________________________________ */
+.info {
+    flex-grow: 1;
+    padding: 15px 40px;
+    background-color: #ffffff;
+}
+
+.info #usuario #datos {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.fila-Superior {
+    position: relative;
+    padding: 10px 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.fila-Superior input {
+    background-color: #DEE6F2;
+    height: 40px;
+    border-radius: 11px;
+    width: 640px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding: 8px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.fila-Superior .bi-search {
+    position: absolute;
+    bottom: 49px;
+    left: 605px;
+    font-size: 18px;
+    pointer-events: none;
+}
+
+#modoOscuroBtn,
+#notificacionesBtn {
+    margin-bottom: 16px;
+    margin-left: 10px;
+    padding: 7px 20px;
+    background-color: #DEE6F2;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.fila-Superior .bi-moon-fill,
+.fila-Superior .bi-bell-fill {
+    color: #000000;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.modo-oscuro .panel {
+    background: #2a2828;
+}
+
+.modo-oscuro .info {
+    background: #000000;
+    color: #FFFFFF;
+}
+
+.modo-oscuro .fila-Superior input {
+    background: #2a2828;
+    color: white;
+}
+
+.modo-oscuro #modoOscuroBtn {
+    background-color: #EA8217;
+}
+
+.modo-oscuro .bi-moon-fill::before {
+    background-color: #EA8217;
+}
+
+.modo-oscuro #notificacionesBtn {
+    background-color: #EA8217;
+}
+
+.modo-oscur #bi-bell-fill::before {
+    background-color: #EA8217;
+}
+
+.modo-oscuro .info h1 {
+    color: #FFFFFF;
+}
+
+.modo-oscuro .reserva {
+    background: #1d1c1c;
+    color: #FFFFFF;
+}
+
+.modo-oscuro .reserva p {
+    color: #FFFFFF;
+}
+
+.modo-oscuro #reservasContainer::-webkit-scrollbar-thumb {
+    background-color: #EA8217;
+    border-radius: 10px;
+}
+
+.modo-oscuro .items a:hover {
+    background-color: #000000;
+}
+
+
+.bufila-Superiorsqueda button a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* Título principal */
+.info h1 {
+    font-size: 28px;
+    color: #000000;
+    margin-bottom: 25px;
+    margin-left: 65px;
+    margin-top: -10px;
+}
+
+.info .ultimo-mes {
+    margin-left: 65px;
+    margin-bottom: 5px;
+}
+
+/* Perfil en el panel */
+.fila-Superior #perfil {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+    background-color: #EA8217;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #ffffff;
+    margin-left: 90px;
+    margin-bottom: 10px;
+}
+
+.fila-Superior #perfil img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.fila-Superior #perfil p {
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Estilos del dropdown */
+#perfil-dropdown .dropdown-menu {
+    border-radius: 0 0 12px;
+    border: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+#perfil-dropdown .dropdown-item {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #2D4059;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#perfil-dropdown .dropdown-item:hover {
+    background-color: #ffffff;
+    color: #EA8217;
+}
+
+#perfil-dropdown .dropdown-item i {
+    font-size: 16px;
+}
+
+#perfil-dropdown .dropdown-divider {
+    margin: 5px 0;
+}
+
+
+
+.search-bar button {
+    background-color: #EA8217;
+    border: none;
+    color: #000000;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+
+}
+
+.reserva {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F8F9FA;
+    border: 1px solid #E0E0E0;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin: 10px 60px;
+}
+
+.reserva p {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    color: #2B2B2B;
+}
+
+.reserva .ver {
+    background-color: #EA8217;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#reservasContainer {
+    max-height: 470px;
+    /*altura máxima visible */
+    overflow-y: auto;
+    /*activa el scroll vertical */
+    overflow-x: hidden;
+    /* evita el desplazamiento horizontal */
+    padding-right: 10px;
+    /* un pequeño espacio para la barra */
+}
+
+/*barra de desplazamiento */
+#reservasContainer::-webkit-scrollbar {
+    width: 7px;
+}
+
+#reservasContainer::-webkit-scrollbar-track {
+    background: #F8F9FA;
+    border-radius: 10px;
+}
+
+#reservasContainer::-webkit-scrollbar-thumb {
+    background-color: #2D4059;
+    border-radius: 10px;
+}
+
+
+/* MODAL DETALLE DE RESERVA ______________________________________________________________________________________________________ */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-contenido {
+    background-color: #FFFFFF;
+    padding: 30px;
+    border-radius: 16px;
+    width: 420px;
+    max-width: 92%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-family: 'Lato', sans-serif;
+}
+
+.modal-contenido h2 {
+    font-family: 'Raleway', sans-serif;
+    color: #2D4059;
+    margin-bottom: 12px;
+}
+
+.detalle-reserva p {
+    margin: 8px 0;
+    color: #2B2B2B;
+    line-height: 1.3;
+}
+
+.cerrar {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+    color: #EA8217;
+    font-weight: bold;
+    user-select: none;
+}
+
+.cerrar:hover {
+    color: #2D4059;
+}
+
+
+
+
+   /* RESPONSIVE iPhone 14 Pro Max (430 px) */
+@media screen and (max-width: 430px) {
+
+    /* Ajustes generales */
+    body {
+        background-color: #f5f5f5;
+        font-size: 15px;
+        overflow-x: hidden;
+    }
+
+    #historial {
+        flex-direction: column;
+        width: 100%;
+        min-height: 100vh;
+    }
+
+    #historial a p {
+        display: block !important;
+        font-size: 15px;
+        margin-top: 3px;
+        text-align: center;
+         border-radius: 15px;
+    }
+
+    /* PANEL LATERAL → se adapta como encabezado */
+    .panel {
+        width: 100%;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .panel > img {
+        width: 120px;
+        margin: 10px auto 20px auto;
+    }
+
+    .items {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .items a {
+        flex: 0 0 calc(33.33% - 10px);
+        padding: 10px;
+        justify-content: center;
+        border-radius: 10px;
+        box-shadow: 0px 0px 4px 1px #EA8217;
+    }
+
+    .items a img {
+        display: none;
+        /* width: 20px; se quitaron para dejar solo textos
+        height: 20px; */
+    }
+
+
+    /* CONTENIDO PRINCIPAL */
+    .info {
+        padding: 15px;
+        width: 100%;
+    }
+
+    /* Fila superior (buscador, botones, perfil) */
+    .fila-Superior {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 10px 0;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .fila-Superior input {
+        width: 100%;
+        margin-left: 0;
+        height: 42px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+    .fila-Superior .bi-search {
+        left: auto;
+        right: 20px;
+        bottom: 35px;
+        font-size: 18px;
+    }
+
+    #modoOscuroBtn{
+        width: 100%;
+        margin-left: 0;
+        padding: 12px;
+        border-radius: 10px;
+    }
+
+    #notificacionesBtn {
+        width: 100%;
+        margin-left: 0;
+        padding: 12px;
+        border-radius: 10px;
+    }
+
+    .fila-Superior #perfil {
+        width: 100%;
+        justify-content: center;
+        margin-left: 0;
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .fila-Superior #perfil img {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* TÍTULO Y TEXTOS */
+    .info h1 {
+        font-size: 22px;
+        text-align: center;
+        margin: 15px 0;
+    }
+
+    .info .ultimo-mes {
+        text-align: center;
+        margin: 0 auto 10px auto;
+    }
+
+    /* RESERVAS */
+    .reserva {
+        align-items: flex-start;
+        gap: 8px;
+        margin: 10px 0;
+        padding: 15px;
+        width: 100%;
+    }
+
+    .reserva p {
+        font-size: 15px;
+    }
+
+    .reserva .ver {
+        align-self: flex-end;
+        padding: 7px 14px;
+        font-size: 13px;
+    }
+
+
+    #reservasContainer {
+        max-height: 400px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 5px;
+    }
+
+    #reservasContainer::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    /* MODAL DETALLE DE RESERVA */
+    .modal-contenido {
+        width: 90%;
+        padding: 20px;
+        border-radius: 12px;
+    }
+
+    .modal-contenido h2 {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .detalle-reserva p {
+        font-size: 14px;
+        text-align: left;
+    }
+
+    .cerrar {
+        font-size: 22px;
+        top: 5px;
+        right: 10px;
+    }
+
+    /* OSCURO MODE en móvil */
+    .modo-oscuro .info {
+        background-color: #121212;
+        color: #fff;
+    }
+
+    .modo-oscuro .panel {
+        background-color: #1f1f1f;
+    }
+
+    .modo-oscuro .reserva {
+        background-color: #1e1e1e;
+    }
+}

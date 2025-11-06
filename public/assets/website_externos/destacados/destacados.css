@@ -1,0 +1,1099 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+
+:root {
+  --color-primary: #2d4059;
+  --color-secondary: #ea8217;
+  --color-white: #ffffff;
+  --color-bg-light: #f8f9fa;
+  --color-border: #e0e0e0;
+  --color-text: #2b2b2b;
+
+  --font-titles: "Raleway", sans-serif;
+  --font-text: "Lato", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+  font-family: var(--font-text);
+}
+
+
+header {
+  background-color: var(--color-white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  animation: fadeInDown 0.6s ease;
+}
+
+.navbar {
+  padding: 12px 0px;
+}
+
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo */
+.navbar-logo {
+  margin-left: 0;
+}
+
+/* Enlaces */
+.navbar-nav {
+  list-style: none;
+  display: flex;
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+  flex-direction: row;
+}
+
+.nav-link {
+  font-family: var(--font-titles);
+  font-weight: 500;
+  color: var(--color-text);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--color-secondary);
+}
+
+.nav-link.active {
+  color: var(--color-black);
+  font-weight: 700;
+}
+
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-secondary);
+  border-radius: 5px;
+}
+
+/* Input de búsqueda dentro de la barra */
+#input-busqueda {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #333;
+  font-size: 14px;
+  width: 100%;
+  font-family: inherit;
+}
+
+/* Placeholder más suave */
+#input-busqueda::placeholder {
+  color: #999;
+}
+
+/* Efecto al escribir */
+#input-busqueda:focus {
+  border-bottom: 1px solid #ff6600; /* línea naranja al enfocar */
+  transition: border-color 0.3s ease;
+}
+
+
+/* Botones */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: 10px;
+}
+
+.btn-login,
+.btn-register {
+  font-family: var(--font-titles);
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: var(--color-white);
+}
+
+.btn-login {
+  background-color: var(--color-primary);
+}
+
+.btn-register {
+  background-color: var(--color-secondary);
+}
+
+.btn-login:hover,
+.btn-register:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Menú móvil */
+.menu-toggle {
+  display: none;
+  font-size: 22px;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+.hero-destacados {
+  position: relative;
+  width: 100%;
+  height: 85vh;
+  background: url("../destacados/img/image\ 11\ \(1\).png") center/cover no-repeat;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.hero-destacados::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.hero-search {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -36px;
+  z-index: 50;
+  width: 80%;
+  max-width: 920px;
+  background: #fff;
+  border-radius: 40px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 22px;
+}
+
+
+.hero-overlay {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+}
+
+
+.titulo-hero {
+  font-family: var(--font-titles);
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.subtitulo-hero {
+  font-family: var(--font-titles);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Barra de búsqueda */
+.search-box {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border-radius: 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  max-width: 900px;
+  padding: 10px 25px;
+  z-index: 3;
+}
+
+.search-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-right: 1px solid #ddd;
+  padding-right: 20px;
+  position: relative;
+}
+
+.search-item:last-child {
+  border-right: none;
+}
+
+.search-item i {
+  font-size: 18px;
+  color: var(--color-secondary);
+}
+
+.search-item strong {
+  font-family: var(--font-titles);
+  color: var(--color-text);
+  font-size: 14px;
+}
+
+.search-item p {
+  font-family: var(--font-text);
+  color: #888;
+  font-size: 13px;
+  margin: 0;
+}
+
+.btn-buscar {
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 25px;
+  cursor: pointer;
+  font-family: var(--font-titles);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+
+.btn-buscar:hover {
+  transform: scale(1.05);
+  background: var(--color-secondary);
+}
+.fuera-hero {
+  position: relative;
+  top: -29px; /* sube un poco para que toque el borde del hero */
+  margin: 0 auto; /* centra horizontalmente */
+  width: 90%;
+  max-width: 1000px;
+  background: #fff;
+  border-radius: 40px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 25px;
+  z-index: 10;
+  left: 27%;
+  transform: translateX(-50%); /* ✅ centra horizontalmente */
+}
+
+
+/* ===== ESTILOS PARA BOTÓN DE INVITADOS ===== */
+.guest-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-text);
+  color: #888;
+  font-size: 13px;
+  padding: 0;
+  text-align: left;
+}
+
+.guest-button:hover {
+  color: var(--color-secondary);
+}
+
+/* ===== PANEL DESPLEGABLE DE INVITADOS ===== */
+.guest-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background: var(--color-white);
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  min-width: 400px;
+}
+
+.guest-panel.hidden {
+  display: none;
+}
+
+/* ===== CONTENEDOR DE RESERVAS (DENTRO DEL PANEL) ===== */
+.guest-panel .contenedor-reservas {
+  background-color: var(--color-primary);
+  border-radius: 20px;
+  width: 100%;
+  padding: 14px;
+  box-shadow: none;
+}
+
+.guest-panel .contenedor-blanco {
+  background-color: var(--color-white);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.guest-panel .contenedor-blanco h2 {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 14px 0;
+  margin: 0;
+}
+
+.guest-panel .grupo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.guest-panel .info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.guest-panel .icono img {
+  width: 36px;
+  height: 36px;
+}
+
+.guest-panel .info h3 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+  margin: 0;
+}
+
+.guest-panel .info p {
+  font-size: 12px;
+  color: #666;
+  margin: 2px 0 0 0;
+}
+
+.guest-panel .contador {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.guest-panel .btn-menos, 
+.guest-panel .btn-mas {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid #ccc;
+  background-color: var(--color-white);
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.guest-panel .btn-menos:hover, 
+.guest-panel .btn-mas:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.guest-panel .valor {
+  width: 28px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.guest-panel .franja-azul {
+  background-color: var(--color-primary);
+  height: 12px;
+  border-radius: 6px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.guest-panel .habitaciones .grupo {
+  border-bottom: none;
+}
+
+.guest-panel .resumen {
+  background-color: var(--color-white);
+  margin-top: 14px;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.guest-panel #resumen-texto {
+  font-size: 12px;
+  color: #333;
+  margin: 0;
+  flex: 1;
+}
+
+.guest-panel #btn-confirmar {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  border: none;
+  padding: 8px 16px;
+  font-size: 13px;
+  border-radius: 6px;
+  font-family: 'Raleway', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.guest-panel #btn-confirmar:hover {
+  background-color: #cf7113;
+  transform: scale(1.05);
+}
+
+
+.ofertas-temporada {
+  background-color: #fff;
+  padding: 60px 80px;
+  text-align: center;
+}
+
+.ofertas-temporada h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 10px;
+}
+
+.ofertas-temporada .descripcion {
+  max-width: 750px;
+  margin: 0 auto 40px;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ======== GRID ======== */
+.grid-ofertas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 30px;
+  justify-content: center;
+}
+
+/* ======== TARJETA ======== */
+.tarjeta-oferta {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta-oferta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ======== IMAGEN ======== */
+.imagen-oferta {
+  position: relative;
+}
+
+.imagen-oferta img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.etiqueta {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #000;
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+/* ======== CONTENIDO ======== */
+.contenido-oferta {
+  padding: 18px;
+}
+
+.contenido-oferta h3 {
+  font-size: 1rem;
+  color: #111;
+  margin-bottom: 6px;
+}
+
+.contenido-oferta p {
+  color: #555;
+  margin: 4px 0;
+  font-size: 0.9rem;
+}
+
+.info-extra {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  margin-top: 10px;
+  color: #666;
+}
+
+.precio {
+  margin-top: 10px;
+  font-weight: 700;
+  color: #007aff;
+}
+
+.tachado {
+  text-decoration: line-through;
+  color: #999;
+  margin-right: 8px;
+}
+
+/* ===========================================================
+   FOOTER SUPERIOR
+   =========================================================== */
+.footer-top {
+  width: 100%;
+  background-color: var(--color-primary);
+  color: white;
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-top .row .col-md-12 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.footer-top h2 {
+  font-family: var(--font-titles);
+  font-size: 28px;
+  font-weight: 400;
+  margin-left: -200px;
+  padding: 10PX 60px;
+}
+
+.footer-top a {
+  background-color: var(--color-secondary);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px;
+  border-radius: 20px;
+  padding: 10px 20px;
+  transition: transform 0.3s ease;
+  margin-right: 195 px;
+}
+
+.footer-top a:hover {
+  transform: scale(1.05);
+}
+
+/* ===========================================================
+   FOOTER INFERIOR
+   =========================================================== */
+.footer-bottom {
+  background-color: var(--color-bg-light);
+  padding: 40px 20px;
+  font-family: var(--font-text);
+  color: var(--color-text);
+}
+
+.footer-bottom .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  gap: 40px;
+}
+
+.footer-bottom .col-md-2 {
+  flex: 1;
+  min-width: 0;
+}
+
+.logo-section img {
+  max-width: 230px;
+  margin-bottom: 0;
+  margin-top: 43px;
+  margin-left: -6px;
+  width: 115%;
+}
+
+.description {
+  font-size: 12px;
+  line-height: 1.4;
+  margin-top: 33px;
+  margin-left: -22px;
+  margin-right: -63px;
+}
+
+/* Títulos */
+.dest-section,
+.enlaces-section,
+.contacto-section,
+.redes-section {
+  font-family: var(--font-titles);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  margin-left: 35px;
+}
+
+/* Listas */
+.footer-bottom .list-unstyled li {
+  margin-bottom: 5px;
+  font-size: 12px;
+  margin-left: 35px;
+}
+
+.footer-bottom .list-unstyled a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.footer-bottom .list-unstyled a:hover {
+  color: var(--color-secondary);
+}
+
+/* Redes */
+.social-links {
+  display: flex;
+  gap: 10px;
+  margin-left: 50px;
+}
+
+.social-links a {
+  color: var(--color-primary);
+  font-size: 16px;
+}
+
+.social-links a:hover {
+  color: var(--color-secondary);
+}
+/* ======== CONTENEDOR GENERAL ======== */
+#contenedor-tours {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  justify-content: center;
+  padding: 50px 80px;
+  background-color: #fff; /* Fondo blanco como el ejemplo */
+}
+
+.tours-populares {
+  background-color: #fff;
+  padding-top: 80px; /* espacio para que no se tape con la barra */
+  padding-bottom: 60px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ======== TÍTULO ======== */
+.tours-populares h2 {
+  font-size: 2rem;
+  color: #222;
+  margin-bottom: 40px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Eliminamos la línea decorativa */
+.tours-populares h2::after {
+  display: none;
+}
+
+
+/* ======== TARJETA ======== */
+.tarjeta-tour {
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+/* Efecto hover */
+.tarjeta-tour:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* ======== IMAGEN ======== */
+.tarjeta-tour img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* ======== INFO ======== */
+.tour-info {
+  padding: 15px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tour-info h3 {
+  font-size: 1.1rem;
+  color: #222;
+  margin: 0;
+}
+
+.tour-info p {
+  color: #555;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.tour-rating {
+  color: #f8b400; /* color de las estrellas */
+  font-size: 0.9rem;
+}
+
+/* ======== PRECIO ======== */
+.tour-precio {
+  font-weight: bold;
+  color: #007aff;
+  margin-top: 10px;
+}
+
+/* ===================== FUENTES ===================== */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&family=Lato:wght@400;700&display=swap');
+
+/* ==================== CONTENEDOR ==================== */
+.date-picker-container {
+    position: relative;
+    font-family: 'Lato', sans-serif;
+}
+
+/* ================== BOTÓN PRINCIPAL ================= */
+.date-button {
+    background-color: transparent;
+    border: none;
+    color: #2B2B2B;
+    font-family: 'Lato', sans-serif;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 13px;
+    transition: all .2s ease;
+    width: fit-content;
+    text-align: left;
+}
+
+.date-button:hover {
+    color: var(--color-secondary);
+}
+
+.date-button p {
+    margin: 0;
+    color: #888;
+    font-size: 13px;
+}
+
+.date-button span {
+    color: #888;
+    font-size: 13px;
+}
+
+/* icono */
+.calendar-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ================== CALENDARIO PANEL ================= */
+.calendar {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    padding: 14px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    width: 360px;
+    z-index: 999;
+    animation: fadeIn .15s ease-out;
+}
+
+/* animación entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+/* ============= ENCABEZADO MES/AÑO ============= */
+.calendar-header {
+    text-align: center;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #2D4059;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-btn {
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    transition: background .2s;
+    border: none;
+    background: none;
+}
+
+.nav-btn:hover {
+    background-color: #F0F0F0;
+}
+
+/* clickable label */
+#currentLabel {
+    cursor: pointer;
+    padding: 10px 8px;
+    border-radius: 6px;
+}
+
+#currentLabel:hover {
+    background-color: #F0F0F0;
+}
+
+/* ================== GRID DÍAS ================== */
+.week-names {
+    font-weight: bold;
+    color: #777;
+    font-size: 14px;
+    border-bottom: 1px solid #E0E0E0;
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    text-align: center;
+    font-size: 15px;
+}
+
+/* celdas */
+.calendar-grid div {
+    padding: 8px 0;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all .15s ease;
+}
+
+/* días hover */
+.calendar-grid div:not(.disabled):hover {
+    background-color: #EA8217;
+    color: #FFFFFF;
+}
+
+/* deshabilitados (días pasados) */
+.disabled {
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+/* fecha seleccionada */
+.selected {
+    background-color: #2D4059 !important;
+    color: #FFFFFF !important;
+    font-weight: bold;
+}
+
+/* rango entre fechas (si luego activas eso) */
+.range {
+    background-color: #EA8217 !important;
+    color: #FFFFFF !important;
+}
+
+/* ============= MESES & AÑOS VISTAS ============= */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    text-align: center;
+    margin-top: 12px;
+    border-top: 1px solid #E0E0E0;
+    padding-top: 10px;
+}
+
+.grid div {
+    padding: 12px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background .15s ease;
+}
+
+.grid div:hover:not(.disabled) {
+    background-color: #EA8217;
+    color: #FFFFFF;
+}
+
+/* Mes/Año seleccionado */
+.month-cell.selected,
+.year-cell.selected {
+    background-color: #2D4059;
+    color: #FFF;
+}
+
+/* ================= SCROLL Si es muy pequeño el viewport =============== */
+@media(max-height: 500px) {
+    .calendar {
+        overflow-y: auto;
+        max-height: 350px;
+    }
+}
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 768px) {
+  #contenedor-tours {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    padding: 30px;
+  }
+
+  .tarjeta-tour img {
+    height: 180px;
+  }
+}
+
+
+/* ===========================================================
+   ANIMACIONES
+   =========================================================== */
+@keyframes palpitar {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.palpitando {
+  animation: palpitar 1.5s infinite ease-in-out;
+}
+
+/* ===========================================================
+   RESPONSIVE
+   =========================================================== */
+@media (max-width: 768px) {
+  .titulo-hero {
+    font-size: 32px;
+  }
+  .subtitulo-hero {
+    font-size: 20px;
+  }
+  .search-box {
+    flex-direction: column;
+    gap: 10px;
+    bottom: -45px;
+    padding: 15px;
+  }
+  .search-item {
+    border: none;
+    padding: 0;
+  }
+  .btn-buscar {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .guest-panel {
+    min-width: 320px;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* iPhone 14 Pro Max (430px) */
+@media screen and (max-width: 430px) {
+  .navbar {
+    padding: 8px 16px;
+  }
+  .menu-toggle {
+    display: block;
+  }
+
+  .ofertas-temporada {
+    padding: 40px 20px;
+  }
+
+  .grid-ofertas {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-top h2 {
+    font-size: 16px;
+    margin: 0;
+    text-align: center;
+  }
+  .footer-top a {
+    font-size: 14px;
+    margin: 0;
+  }
+  .footer-bottom .row {
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+  .social-links {
+    justify-content: center;
+  }
+}

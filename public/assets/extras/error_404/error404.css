@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+  font-family: 'Raleway', sans-serif;
+}
+
+/* Fondo con capa oscura */
+body {
+  background: url('../error_404/img/404 imagen.png') no-repeat center center / cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Capa oscura */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+/* Contenedor principal */
+.container {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+}
+
+/* Imagen centrada */
+.container img {
+  max-width: 1000px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+
+/* Contenedor del texto (encima de la imagen) */
+.info {
+  position: absolute;
+  top: 50%; /* centra verticalmente */
+  left: 50%; /* centra horizontalmente */
+  transform: translate(-50%, -50%); /* ajuste exacto */
+  z-index: 3; /* por encima de la imagen */
+  color: rgba(255, 255, 255, 0.95);
+  text-align: center;
+  width: 80%; /* evita que se corte en pantallas pequeñas */
+}
+
+/* Mensaje principal */
+.info .mensaje {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Subtexto con enlace */
+.info .subtexto {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.subtexto a {
+  color: #ffffff;
+  text-decoration: underline;
+  transition: opacity 0.3s;
+}
+
+.subtexto a:hover {
+  opacity: 0.7;
+}
+

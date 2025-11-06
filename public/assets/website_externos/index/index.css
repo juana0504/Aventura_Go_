@@ -1,0 +1,1165 @@
+/* Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+/* Paleta de colores */
+:root {
+    --color-primary: #2D4059;
+    --color-secondary: #EA8217;
+    --color-white: #FFFFFF;
+    --color-bg-light: #F8F9FA;
+    --color-border: #E0E0E0;
+    --color-text: #2b2b2b;
+    --font-titles: 'Raleway', sans-serif;
+    --font-text: 'Lato', sans-serif;
+}
+
+/* Elimina el scroll horizontal global */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+    /*evita que ciertos elementos con position: absolute (como los del carrusel) se salgan del flujo del documento.S*/
+}
+
+
+/*  NAVBAR ___________________________________________________________________________________________________________ */
+header {
+    background-color: var(--color-white);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    animation: fadeInDown 0.6s ease;
+}
+
+.navbar {
+    padding: 12px 0px;
+}
+
+.navbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/*LOGO  */
+.navbar-logo {
+    margin-left: 0;
+}
+
+/* LINKS PRINCIPALES */
+.navbar-nav {
+    list-style: none;
+    display: flex;
+    gap: 28px;
+    margin: 0;
+    padding: 0;
+    flex-direction: row;
+}
+
+.nav-link {
+    font-family: var(--font-titles);
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--color-secondary);
+}
+
+.nav-link.active {
+    color: var(--color-black);
+    font-weight: 700;
+}
+
+.nav-link.active::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-secondary);
+    border-radius: 5px;
+}
+
+/* BOTONES */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-right: 10px;
+}
+
+.btn-login {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-family: var(--font-titles);
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-login:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.btn-register {
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+    font-family: var(--font-titles);
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-register:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* ICONO MENÚ MÓVIL  */
+.menu-toggle {
+    display: none;
+    font-size: 22px;
+    color: var(--color-primary);
+    cursor: pointer;
+}
+
+
+
+/* SECCIÓN HERO____________________________________________________________________________________________________   */
+#hero {
+    position: relative;
+    margin-left: 0;
+    padding-right: 0;
+    margin-top: 80px;
+}
+
+#hero .carousel {
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    margin: 0 40px;
+}
+
+/* Imágenes del carrusel */
+#hero .carousel-item img {
+    object-fit: cover;
+    filter: brightness(40%);
+    max-height: 700px;
+}
+
+/* Contenido superpuesto */
+#hero .carousel-caption {
+    position: absolute;
+    top: 43%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    text-align: left;
+    color: #FFFFFF;
+    width: 100%;
+    font-family: 'Lato', sans-serif;
+}
+
+/* Titulares principales */
+#hero .carousel-caption h1,
+#hero .carousel-caption h2 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+#hero .carousel-caption h1 {
+    font-size: 78px;
+}
+
+#hero .carousel-caption h2 {
+    font-size: 78px;
+    margin-bottom: 20px;
+}
+
+/* Párrafos */
+#hero .carousel-caption p {
+    font-size: 20px;
+    margin-bottom: 10px;
+    line-height: 1.1;
+}
+
+/* === Estilos flechas del carrusel === */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 40px;
+    height: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+    font-size: 30px;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Quitar los íconos por defecto de Bootstrap */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    display: none;
+}
+
+/* Insertar texto con pseudo-elementos */
+.carousel-control-prev::before {
+    content: "<";
+}
+
+.carousel-control-next::before {
+    content: ">";
+}
+
+/* Posicionamiento */
+.carousel-control-prev {
+    left: 5px;
+}
+
+.carousel-control-next {
+    right: 5px;
+}
+
+/* Caja de búsqueda */
+#hero .search-box {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 10px 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
+    width: fit-content;
+}
+
+#hero .search-box strong {
+    color: #2B2B2B;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Lato', sans-serif;
+}
+
+#hero .search-btn {
+    background-color: #2D4059;
+    color: #FFFFFF;
+    font-size: 14px;
+    padding: 8px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+#hero .search-btn:hover {
+    background-color: #EA8217;
+}
+
+/* Controles del carrusel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(1);
+}
+
+/* Marca “AVENTURA GO” */
+#hero h2.marca {
+    font-size: 48px;
+    font-weight: 700;
+    position: absolute;
+    bottom: 40px;
+    right: 140px;
+    text-align: right;
+    color: white;
+}
+
+/* ================================ SECCIÓN DESTINOS POPULARES ======================================== */
+.destinos-populares {
+    font-family: 'Raleway', sans-serif;
+    margin: 60px 40px 40px 100px;
+}
+
+.titulo-seccion {
+    font-weight: 700;
+    font-size: 2rem;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.subtitulo-seccion {
+    color: #666;
+    margin-top: 0;
+    margin-bottom: 40px;
+    font-size: 1rem;
+}
+
+/* === CONTENEDOR SUPERIOR DE TÍTULO Y BUSCADOR === */
+.destinos-populares>.d-flex.justify-content-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    gap: 20px;
+}
+
+/* Contenedor del título */
+.destinos-populares>.d-flex>div:first-child {
+    flex: 1;
+}
+
+/* Contenedor del buscador */
+.destinos-populares .d-flex.justify-content-end {
+    flex-shrink: 0;
+}
+
+/* === BUSCADOR A LA DERECHA === */
+.buscador {
+    position: relative;
+    display: inline-block;
+    top: 40px;
+    right: 60px;
+    width: 260px;
+
+}
+
+.buscador input {
+    border: 1px solid #e0e0e0;
+    padding: 10px 45px 10px 15px;
+    border-radius: 20px;
+    background-color: #fff;
+    color: #333;
+    font-size: 0.9rem;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.3s ease;
+}
+
+.buscador input::placeholder {
+    color: #ccc;
+}
+
+.buscador input:focus {
+    border-color: #999999;
+}
+
+.buscador i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #000;
+    font-size: 0.9rem;
+    pointer-events: none;
+}
+
+/* === BOTÓN "MÁS DESTINOS" CENTRADO === */
+.destinos-populares .text-center {
+    text-align: center;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.btn-ver-mas {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: #000;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.btn-ver-mas:hover {
+    color: #666;
+    text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .destinos-populares>.d-flex.justify-content-between {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .buscador {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* === GRID DE TARJETAS === */
+.destinos-populares .row {
+    margin-bottom: 40px;
+}
+
+/* === TARJETAS DE DESTINOS === */
+.destino-card {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    height: 100%;
+}
+
+.destino-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.destino-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* CONTENIDO DE LA TARJETA */
+.destino-card .card-body {
+    width: 100%;
+    padding: 15px;
+    background-color: #fff;
+}
+
+.destino-card .card-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.destino-card .card-text.estrellas {
+    font-size: 0.85rem;
+    color: #FFB800;
+    margin: 0;
+}
+
+/* ETIQUETA DE OFERTA */
+.oferta {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #fff;
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* === BOTÓN "MÁS DESTINOS" === */
+.btn-ver-mas {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: #000;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    padding: 0;
+}
+
+.btn-ver-mas:hover {
+    color: #666;
+}
+
+.btn-ver-mas::after {
+    content: '→';
+    font-size: 1.2rem;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .destinos-populares .row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .destinos-populares .row {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .buscador {
+        max-width: 100%;
+        margin-top: 20px;
+    }
+}
+
+/* ================================ SECCIÓN DESTINOS MÁS VISITADOS ======================================== */
+.destinos-visitados {
+    padding: 60px 0;
+    background-color: #fff;
+    text-align: center;
+}
+
+.titulo-seccion-visitados {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 50px;
+}
+
+/* === SLIDER CONTAINER === */
+.slider-visitados {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* === FLECHAS DEL SLIDER === */
+.slider-arrow {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    z-index: 2;
+}
+
+.slider-arrow:hover {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+}
+
+.slider-arrow i {
+    font-size: 1rem;
+}
+
+/* === CONTENEDOR DE TARJETAS === */
+.slider-contenido {
+    display: flex;
+    gap: 25px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px 0;
+    flex: 1;
+    justify-content: center;
+}
+
+.slider-contenido::-webkit-scrollbar {
+    height: 0;
+}
+
+/* === TARJETAS === */
+.tarjeta-visitado {
+    flex: 0 0 320px;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta-visitado:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* === IMAGEN === */
+.imagen-container {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+}
+
+.imagen-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Etiquetas en la imagen */
+.etiqueta-oferta {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #000;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.etiqueta-descuento {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #000;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* === INFO DE LA TARJETA === */
+.tarjeta-info {
+    padding: 20px;
+}
+
+.tarjeta-titulo {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.tarjeta-estrellas {
+    font-size: 0.85rem;
+    color: #FFB800;
+    margin-bottom: 12px;
+}
+
+.tarjeta-estrellas .reviews {
+    color: #999;
+    font-size: 0.8rem;
+}
+
+/* === DETALLES === */
+.tarjeta-detalles {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.duracion {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: #666;
+    margin: 0;
+}
+
+.duracion i {
+    font-size: 0.9rem;
+}
+
+.precio {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 0;
+}
+
+.precio-anterior {
+    font-size: 0.75rem;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.precio-actual {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #000;
+}
+
+/* === BOTÓN VER TODOS === */
+.btn-todos-destinos {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: #000;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    padding: 0;
+    justify-content: center;
+}
+
+.btn-todos-destinos:hover {
+    color: #666;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .slider-arrow {
+        display: none;
+    }
+
+    .tarjeta-visitado {
+        flex: 0 0 280px;
+    }
+}
+
+/* E S T I L O S    F O O T E R-_________________________________________________________________________________________ */
+/* footer superior */
+.footer-top {
+    width: 100%;
+    align-content: center;
+    background-color: #2D4059;
+    color: white;
+    padding: 5px 0;
+}
+
+
+.footer-top .row .col-md-12 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.footer-top h2 {
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    margin-left: 315px;
+}
+
+@keyframes palpitar {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.palpitando {
+    animation: palpitar 1.5s infinite ease-in-out;
+}
+
+.footer-top a {
+    background-color: #EA8217;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    font-family: 'Raleway', sans-serif;
+    border-radius: 20px;
+    padding: 10px 20px;
+    transition: transform 0.3s ease;
+    margin-right: 375px;
+}
+
+.footer-top a:hover {
+    transform: scale(1.05);
+    text-decoration: none;
+}
+
+/* FOOTER INFERIOR------------------------------------------------------------------------ */
+.footer-bottom {
+    background-color: var(--color-bg-light);
+    color: white;
+    padding: 40px 20px;
+    font-family: 'Lato', sans-serif;
+}
+
+.footer-bottom .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    gap: 40px;
+}
+
+/* Cada columna ocupa espacio automático */
+.footer-bottom .col-md-2 {
+    flex: 1;
+    min-width: 0;
+    /* Permite que se ajusten */
+}
+
+/* Logo  */
+.logo-section img {
+    max-width: 230px;
+    margin-bottom: 0px;
+    margin-top: 43px;
+    margin-left: -6px;
+    width: 115%;
+}
+
+/* y descripción */
+.description {
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--color-text);
+    margin-top: 33px;
+    margin-left: -22px;
+    margin-right: -63px;
+}
+
+/* Títulos */
+.dest-section,
+.enlaces-section,
+.contacto-section,
+.redes-section {
+    font-family: 'lato', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    color: var(--color-text);
+    margin-left: 35px;
+
+}
+
+/* Listas */
+.footer-bottom .list-unstyled li {
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: var(--color-text);
+    margin-left: 35px;
+    margin-right: -40px;
+}
+
+.footer-bottom .list-unstyled a {
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.footer-bottom .list-unstyled a:hover {
+    color: #EA8217;
+}
+
+/* Contactos */
+.contact-list li {
+    font-size: 12px;
+    color: #cccccc;
+    margin-bottom: 8px;
+}
+
+/* Redes sociales en fila */
+.social-links {
+    display: flex;
+    gap: 10px;
+    margin-left: 50px;
+}
+
+.social-links a {
+    color: var(--color-primary);
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    color: #EA8217;
+}
+
+
+/* RESPONSIVE PARA IPHONE 14 PRO MAX - 430px x 932ps_____________________________________________________________________________ */
+@media screen and (max-width: 430px) {
+
+    /* HEADER ____________________________________ */
+    .navbar {
+        padding: 8px 16px;
+    }
+
+    .navbar .container-fluid {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0;
+    }
+
+    /* Logo */
+    .navbar-logo {
+        width: 100px;
+        margin-left: 0;
+    }
+
+    /* Ocultar menú por defecto */
+    .navbar-nav {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 18px;
+        width: 160px;
+        background-color: var(--color-white);
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+        z-index: 1000;
+    }
+
+    .navbar-nav.show {
+        display: flex;
+        animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .nav-link {
+        font-size: 14px;
+        padding: 0px 12px;
+        text-align: left;
+        width: 100%;
+    }
+
+    /* Botones */
+    .actions {
+        margin-right: 5px;
+        gap: 8px;
+    }
+
+    .btn-login,
+    .btn-register {
+        padding: 6px 12px;
+        font-size: 12px;
+        border-radius: 6px;
+    }
+
+    .menu-toggle {
+        display: block;
+        font-size: 20px;
+    }
+
+    /* HERO ____________________________________________*/
+    #hero {
+        margin-top: 60px;
+        height: auto;
+        padding: 0 15px;
+        margin-left: 0;
+    }
+
+    #hero .carousel {
+        border-radius: 12px;
+        margin: 0 10px;
+    }
+
+    #hero .carousel-item img {
+        height: 500px;
+        object-fit: cover;
+    }
+
+    /* Títulos del Hero */
+    #hero .carousel-caption {
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        text-align: left;
+    }
+
+    #hero .carousel-caption h1 {
+        font-size: 20px;
+        line-height: 1.2;
+        margin-bottom: 5px;
+        text-align: center;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    }
+
+    #hero .carousel-caption h2 {
+        font-size: 20px;
+        line-height: 1.2;
+        margin-bottom: 15px;
+        text-align: center;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Párrafos del Hero */
+    #hero .carousel-caption .parrafo1,
+    #hero .carousel-caption .parrafo2 {
+        font-size: 11px;
+        line-height: 1.4;
+        margin-bottom: 8px;
+        text-align: center;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Marca */
+    #hero h2.marca {
+        display: none;
+        /* font-size: 20px;
+            bottom: 55px;
+            right: 35px;
+            text-align: right; */
+    }
+
+    /* Caja de búsqueda */
+    #hero .search-box {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        width: 80%;
+        padding: 10px 20px;
+        gap: 10px;
+    }
+
+    #hero .search-box strong {
+        font-size: 14px;
+    }
+
+    #hero .search-btn {
+        padding: 6px 14px;
+        font-size: 12px;
+    }
+
+    /* Controles del carrusel */
+    .carousel-control-prev,
+    .carousel-control-next {
+        display: none;
+        /* Ocultar en móvil para más espacio */
+    }
+
+    /* FOOTER___________________________________________________ */
+    #footer {
+        text-align: center;
+        padding: 0;
+    }
+
+    /* Sección superior */
+    .footer-top {
+        padding: 20px 15px;
+    }
+
+    .footer-top .row .col-md-12 {
+        flex-direction: column;
+        gap: 15px;
+        margin: 0;
+    }
+
+    .footer-top h2 {
+        font-size: 16px;
+        margin: 0;
+        text-align: center;
+    }
+
+    .footer-top a {
+        padding: 10px 20px;
+        font-size: 14px;
+        margin: 0;
+    }
+
+    /* Footer inferior */
+    .footer-bottom {
+        padding: 30px 15px;
+    }
+
+    .footer-bottom .row {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .footer-bottom .col-md-2 {
+        width: 100%;
+        margin-bottom: 0;
+        text-align: center;
+    }
+
+    .logo-section img {
+        width: 150px;
+        margin: 0 auto;
+    }
+
+    .description {
+        max-width: 100%;
+        margin: 0 10px;
+        font-size: 14px;
+        line-height: 1.5;
+        padding: 0 10px;
+    }
+
+    .dest-section,
+    .enlaces-section,
+    .contacto-section,
+    .redes-section {
+        margin-left: 0;
+        font-size: 16px;
+    }
+
+    .footer-bottom .list-unstyled li {
+        margin-left: 0;
+        margin-right: 0;
+        font-size: 14px;
+    }
+
+    .contact-list li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 14px;
+    }
+
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 10px 0 0 0;
+    }
+
+    .social-links a i {
+        font-size: 18px;
+    }
+}

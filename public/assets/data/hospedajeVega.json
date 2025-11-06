@@ -1,0 +1,167 @@
+[
+  {
+    "id": 1,
+    "titulo": "Hotel Montaña Dorada",
+    "imagen": "/assets/dashboard/turista/hospedaje_vega/img/1.png",
+    "reseñas": 4.8,
+    "opiniones": 124,
+    "noches": 2,
+    "dias": 3,
+    "precio": 250000,
+    "descripcion": "Disfruta de una estadía rodeada de montañas, piscina y desayuno incluido. Ideal para quienes buscan tranquilidad y paisajes naturales."
+  },
+  {
+    "id": 2,
+    "titulo": "Eco Lodge La Cascada",
+    "imagen": "/assets/dashboard/turista/hospedaje_vega/img/2.png",
+    "reseñas": 4.5,
+    "opiniones": 97,
+    "noches": 3,
+    "dias": 4,
+    "precio": 310000,
+    "descripcion": "Un alojamiento ecológico junto a un río cristalino, con senderos naturales y cocina artesanal."
+  },
+  {
+    "id": 3,
+    "titulo": "Casa Campestre El Paraíso",
+    "imagen": "/assets/dashboard/turista/hospedaje_vega/img/3.png",
+    "reseñas": 4.9,
+    "opiniones": 211,
+    "noches": 1,
+    "dias": 2,
+    "precio": 180000,
+    "descripcion": "Casa privada con jacuzzi, BBQ y amplios jardines. Perfecta para parejas o familias pequeñas."
+  },
+  {
+    "id": 4,
+    "titulo": "Hostal La Cabaña Azul",
+    "imagen": "/assets/dashboard/turista/hospedaje_vega/img/4.png",
+    "reseñas": 4.3,
+    "opiniones": 156,
+    "noches": 2,
+    "dias": 3,
+    "precio": 150000,
+    "descripcion": "Alojamiento rústico con vista al valle, desayuno típico y atención familiar."
+  },
+  {
+    "id": 5,
+    "titulo": "Finca Los Robles",
+    "imagen": "/assets/dashboard/turista/hospedaje_vega/img/5.png",
+    "reseñas": 4.7,
+    "opiniones": 198,
+    "noches": 3,
+    "dias": 4,
+    "precio": 290000,
+    "descripcion": "Finca tradicional rodeada de árboles frutales, piscina natural y restaurante campestre."
+  },
+  {
+    "id": 6,
+    "titulo": "Hotel Jardín Encantado",
+    "imagen": "/assets/dashboard/turista/hospedaje_vega/img/6.png",
+    "reseñas": 4.6,
+    "opiniones": 87,
+    "noches": 2,
+    "dias": 3,
+    "precio": 230000,
+    "descripcion": "Habitaciones amplias con balcón al jardín. Desayuno incluido y senderos privados."
+  },
+  {
+    "id": 7,
+    "titulo": "Glamping Estrella Verde",
+    "imagen": "/assets/dashboard/turista/hospedaje_vega/img/7.png",
+    "reseñas": 4.8,
+    "opiniones": 142,
+    "noches": 1,
+    "dias": 2,
+    "precio": 270000,
+    "descripcion": "Vive una experiencia glamping bajo las estrellas con chimenea y jacuzzi al aire libre."
+  },
+  {
+    "id": 8,
+    "titulo": "Refugio Río Claro",
+    "imagen": "/assets/dashboard/turista/hospedaje_vega/img/8.png",
+    "reseñas": 4.4,
+    "opiniones": 134,
+    "noches": 2,
+    "dias": 3,
+    "precio": 210000,
+    "descripcion": "Ubicado frente al río. Incluye kayak, fogata nocturna y desayuno campestre."
+  },
+  {
+    "id": 9,
+    "titulo": "Hotel Boutique Mirador del Sol",
+    "imagen": "/assets/dashboard/turista/hospedaje_vega/img/9.png",
+    "reseñas": 5.0,
+    "opiniones": 178,
+    "noches": 2,
+    "dias": 3,
+    "precio": 350000,
+    "descripcion": "Hotel de lujo con vista panorámica, spa, piscina infinita y restaurante gourmet."
+  },
+  {
+    "id": 10,
+    "titulo": "Cabañas El Bosque Secreto",
+    "imagen": "/assets/dashboard/turista/hospedaje_vega/img/10.png",
+    "reseñas": 4.7,
+    "opiniones": 165,
+    "noches": 3,
+    "dias": 4,
+    "precio": 280000,
+    "descripcion": "Cabañas de madera en medio del bosque con chimenea, zona de picnic y acceso a cascada."
+  },
+  {
+    "id": 11,
+    "titulo": "Posada Las Palmeras",
+    "imagen": "/assets/dashboard/turista/hospedaje_vega/img/11.png",
+    "reseñas": 4.2,
+    "opiniones": 94,
+    "noches": 1,
+    "dias": 2,
+    "precio": 160000,
+    "descripcion": "Posada acogedora cerca del centro. Ideal para viajeros que buscan comodidad y economía."
+  },
+  {
+    "id": 12,
+    "titulo": "Hotel Campestre Villa Real",
+    "imagen": "/assets/dashboard/turista/hospedaje_vega/img/12.png",
+    "reseñas": 4.9,
+    "opiniones": 220,
+    "noches": 3,
+    "dias": 4,
+    "precio": 330000,
+    "descripcion": "Piscina semiolímpica, restaurante, zonas verdes y habitaciones familiares."
+  },
+  {
+    "id": 13,
+    "titulo": "EcoRefugio El Encanto",
+    "imagen": "/assets/dashboard/turista/hospedaje_vega/img/13.png",
+    "reseñas": 4.8,
+    "opiniones": 175,
+    "noches": 2,
+    "dias": 3,
+    "precio": 295000,
+    "descripcion": "Hospedaje ecológico con energía solar, comida orgánica y senderismo guiado."
+  },
+  {
+    "id": 14,
+    "titulo": "Cabaña Horizonte Azul",
+    "imagen": "/assets/dashboard/turista/hospedaje_vega/img/14.png",
+    "reseñas": 4.5,
+    "opiniones": 130,
+    "noches": 1,
+    "dias": 2,
+    "precio": 200000,
+    "descripcion": "Cabaña con vista a las montañas y terraza privada. Perfecta para escapadas románticas."
+  },
+  {
+    "id": 15,
+    "titulo": "Hotel Aventura Natural",
+    "imagen": "/assets/dashboard/turista/hospedaje_vega/img/15.png",
+    "reseñas": 4.6,
+    "opiniones": 203,
+    "noches": 2,
+    "dias": 3,
+    "precio": 260000,
+    "descripcion": "Ideal para los amantes del senderismo, rafting y canopy. Incluye desayuno continental."
+  }
+]

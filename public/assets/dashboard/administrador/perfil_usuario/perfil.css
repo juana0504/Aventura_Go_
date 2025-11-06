@@ -1,0 +1,431 @@
+/* fuente para titulos*/
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
+
+/*fuente para textos*/
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+h1 h2 h3 h4 h5 h6{
+    --font-titles: 'Raleway', sans-serif;/*tipografia titulos*/
+}
+
+p a button input{
+    --font-text: 'Lato', sans-serif;/*tipografia textos*/
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f5f5f5;
+}
+
+/* Layout principal */
+.perfil {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ========== PANEL LATERAL ========== */
+.panel {
+    width: 280px;
+    background-color: #2D4059;
+    padding: 30px 20px;
+    display: block;
+}
+
+.panel>img {
+    width: 150px;
+    margin: 0 auto 40px auto;
+    display: block;
+}
+
+/* Items del menú */
+.items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.items a {
+    display: flex;
+    gap: 15px;
+    padding: 12px 15px;
+    color: #ecf0f1;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.items a:hover {
+    background-color: #34495e;
+}
+
+.items a img {
+    width: 23px;
+    height: 23px;
+}
+
+.items a p {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* ========== CONTENIDO PRINCIPAL ========== */
+.info {
+    flex-grow: 1;
+    padding: 15px 40px;
+    background-color: #ffffff;
+}
+
+.info #usuario #datos {
+    display: inline-block;
+    vertical-align: top;
+}
+
+form {
+    position: relative;
+    padding: 10px 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+form input {
+    background-color: #DEE6F2;
+    height: 40px;
+    border-radius: 11px;
+    width: 640px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding: 8px;
+    margin-bottom: 20px;
+}
+
+form .bi-search {
+    position: absolute;
+    bottom: 49px;
+    left: 605px;
+    font-size: 18px;
+    pointer-events: none;
+}
+
+#modoOscuroBtn,
+#notificacionesBtn {
+    margin-bottom: 16px;
+    margin-left: 10px;
+    padding: 7px 20px;
+    background-color: #DEE6F2;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+form .bi-moon-fill,
+form .bi-bell-fill {
+    color: #000000;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+form button a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* Título principal */
+.info h1 {
+    font-size: 28px;
+    color: #000000;
+    margin-bottom: 25px;
+}
+
+/* Perfil en el panel */
+form #perfil {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+    background-color: #EA8217;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #ffffff;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+form #perfil img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+form #perfil p {
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Estilos del dropdown */
+#perfil-dropdown .dropdown-menu {
+    border-radius: 0 0 12px;
+    border: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+#perfil-dropdown .dropdown-item {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #2D4059;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#perfil-dropdown .dropdown-item:hover {
+    background-color: #ffffff;
+    color: #EA8217;
+}
+
+#perfil-dropdown .dropdown-item i {
+    font-size: 16px;
+}
+
+#perfil-dropdown .dropdown-divider {
+    margin: 5px 0;
+}
+
+/* ========== TARJETA DE PERFIL ========== */
+.usuario {
+    width: 25%;
+    margin-right: 3%;
+    background-color: #2D4059;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ffffff;
+    position: relative;
+}
+
+.usuario h2 {
+    font-size: 22px;
+    font-weight: 600;
+    align-self: flex-start;
+    margin-bottom: 20px;
+}
+
+.usuario img {
+    width: 115px;
+    height: 115px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.usuario .bi-pen-fill {
+    right: 63px;
+    position: absolute;
+    top: 146px;
+    background-color: #EA8217;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.usuario h3 {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 300;
+    margin-bottom: 5px;
+    letter-spacing: 0.5px;
+}
+
+.usuario p {
+    font-size: 14px;
+    color: #ffffff;
+    margin-bottom: 25px;
+}
+
+.usuario button {
+    width: 100%;
+    max-width: 350px;
+    padding: 13px 20px;
+    background-color: #EA8217;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.usuario button a {
+    text-decoration: none;
+    width: 100%;
+    max-width: 350px;
+    padding: 13px 20px;
+    background-color: #EA8217;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+/* ==========Secciones========== */
+.datos, .editar, .ajustes, .cambiar{
+    display: none;
+}
+
+.activa{
+    display: block;
+}
+.datos, .editar, .ajustes, form.cambiar{
+    background: #f5f5f5;
+    width: 57%;
+    padding: 30px;
+    border-radius: 15px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* ==========DATOS ========== */
+.datos h3{
+    text-align: center;
+    color: #000000;
+    margin-bottom: 50px;
+}
+
+.datos h4 {
+    padding: 0 30px;
+    font-size: 15px;
+    color: #2D4059;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.datos p{
+    padding: 0 30px;
+    font-size: 15px;
+    color: #000000;
+    margin-bottom: 30px;
+}
+
+/* Editar */
+.editar h4{
+    text-align: center;
+    columns: #000000;
+}
+
+.editar #descargar{
+    border: none;
+    padding: 5px;
+    background-color: #2D4059;
+    color: #FFFFFF;
+    border-radius: 10px;
+}
+
+.editar #descargar:hover{
+    background-color: #4b75a0;
+}
+
+.editar #eliminar{
+    border: none;
+    padding: 5px;
+    background-color: red;
+    color: #FFFFFF;
+    border-radius: 10px;
+}
+
+.editar #eliminar:hover{
+    background-color: #850909;
+}
+
+
+
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+    form input {
+        width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .perfil {
+        flex-direction: column;
+    }
+
+    .panel {
+        width: 100%;
+    }
+
+    .datos {
+        grid-template-columns: 1fr;
+    }
+
+    form input {
+        width: 100%;
+    }
+
+    .botones {
+        flex-direction: column;
+    }
+
+    .botones button {
+        width: 100%;
+    }
+}
+
+/* modo oscuro */
+.modo-oscuro .panel{
+    background: #2a2828;
+}
+
+.modo-oscuro .info {
+    background: #000000;
+    color: #FFFFFF;
+}
+
+.modo-oscuro form input{
+    background: #2a2828;
+}
+
+.modo-oscuro #modoOscuroBtn,
+.modo-oscuro #notificacionesBtn{
+    background: #EA8217;
+}
+
+.modo-oscuro .usuario{
+    background: #2a2828;
+}
+
+.modo-oscuro form#datos h4{
+    color: #ffffff;
+}
+
+.modo-oscuro form#datos input{
+    background: #2a2828;
+}
+
+.modo-oscuro form#datos #espacio{
+    background: #2a2828;
+}
