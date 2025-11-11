@@ -26,7 +26,7 @@
                 <h2 class="fw-bold">INICIO DE SESIÓN</h2>
                 <p>Por favor ingresa tu usuario y contraseña para iniciar sesión</p>
 
-                <form action="iniciarSesion" method="POST">
+                <form action="iniciar-sesion" method="POST">
                     <input type="email" name="email" class="form-control mb-3 rounded-pill" placeholder="Correo" required>
 
                     <div class="password-container position-relative mb-3">

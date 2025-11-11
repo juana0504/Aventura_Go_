@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'rol' => $resultado['rol']
     ];
 
-    mostrarSweetAlert('success', 'Bienvenido', 'Inicio de sesión exitoso. Rediriguiendo...', '/aventura_go/administrador');
+    mostrarSweetAlert('success', 'Bienvenido', 'Inicio de sesión exitoso. Rediriguiendo...', '/aventura_go/administrador/dashboard');
     exit();
 } else {
     http_response_code(405);

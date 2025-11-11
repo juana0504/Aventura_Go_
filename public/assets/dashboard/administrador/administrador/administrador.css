@@ -110,8 +110,6 @@ form input {
 
 form .bi-search {
     position: absolute;
-    bottom: 49px;
-    left: 605px;
     font-size: 18px;
     pointer-events: none;
 }

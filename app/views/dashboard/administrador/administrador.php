@@ -1,93 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- // AQUI VA EL HEADER -->
+<?php
+include_once __DIR__ . '/../../layouts/header_administrador.php';
+?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrador</title>
-
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <!-- Icono de bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <!-- Estilos CSS -->
-    <link rel="stylesheet" href="public/assets/dashboard/administrador/administrador/administrador.css">
-</head>
 
 <body>
-
     <section id="listado">
 
-        <div class="panel">
-
-            <img src="public/assets/dashboard/administrador/administrador/img/LOGO-POSITIVO 2 (1).png" alt="logo">
-
-            <div class="items">
-
-                <a href="">
-                    <img src="public/assets/dashboard/administrador/listado_de_reservas/img/inicio.png" alt="inicio">
-                    <p>Inicio</p>
-                </a>
-                <a href="">
-                    <img src="public/assets/dashboard/administrador/listado_de_reservas/img/tours.png" alt="tours">
-                    <p>Tours</p>
-                </a>
-                <a href="">
-                    <img src="public/assets/dashboard/administrador/listado_de_reservas/img/destino 2.png"
-                        alt="destinos">
-                    <p>Destinos</p>
-                </a>
-                <a href="administrador.html">
-                    <img src="public/assets/dashboard/administrador/listado_de_reservas/img/Dashboard.png"
-                        alt="dashboard">
-                    <p>Dashboard</p>
-                </a>
-                <a href="../administrador/listado_reservas.html">
-                    <img src="public/assets/dashboard/administrador/listado_de_reservas/img/listado.png" alt="listado">
-                    <p>Listado de Reservas</p>
-                </a>
-                <a href="../administrador/historial_reservas.html">
-                    <img src="public/assets/dashboard/administrador/listado_de_reservas/img/historial.png"
-                        alt="historial">
-                    <p>Historial de reservas</p>
-                </a>
-
-            </div>
-
-
-        </div>
-
+        <!-- // AQUI VA EL MENU -->
+        <?php
+        include_once __DIR__ . '/../../layouts/panel-izq_administrador.php';
+        ?>
 
 
         <div class="info">
-            <form action="busqueda">
-                <input type="text">
-                <i class="bi bi-search"></i>
+            <!-- // AQUI VA EL buscador -->
+            <?php
+            include_once __DIR__ . '/../../layouts/buscador_administrador.php';
+            ?>
 
-                <button id="modoOscuroBtn"> <i class="bi bi-moon-fill"></i></button>
-                <button id="notificacionesBtn"> <i class="bi bi-bell-fill"></i></button>
-
-                <!-- Dropdown con Bootstrap -->
-                <div class="dropdown" id="perfil-dropdown">
-                    <a href="#" id="perfil" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="public/assets/dashboard/administrador/listado_de_reservas/img/perfil.png"
-                            alt="persona">
-                        <p>AR-Ana</p>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="../../dashboard/administrador/perfil_usuario.html"><i
-                                    class="bi bi-person"></i> Mi
-                                Perfil</a>
-                        </li>
-                        <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="../../index.html"><i class="bi bi-box-arrow-right"></i>
-                                Cerrar Sesión</a>
-                        </li>
-                    </ul>
-                </div>
-            </form>
             <!-- Contenedor principal del dashboard -->
             <div class="dashboard-content">
                 <main class="main-content">
@@ -205,19 +136,10 @@
         </div>
 
     </section>
-
-
-    <!-- chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-
-    <!-- JavaScript -->
-    <script src="public/assets/dashboard/administrador/administrador/administrador.js"></script>
-
+    <!-- // AQUI VA EL FOOTER -->
+    <?php
+    include_once __DIR__ . '/../../layouts/footer_administrador.php';
+    ?>
 </body>
 
 </html>

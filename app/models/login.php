@@ -11,7 +11,7 @@
 
         public function autenticar($correo, $clave){
             try{
-                $consultar = "SELECT * FROM usuario WHERE email = :correo AND estado = 'Activo' ";
+                $consultar = "SELECT * FROM usuario WHERE email = :correo AND estado = 'Activo' lIMIT 1";
 
                 $resultado = $this->conexion->prepare($consultar);
                 $resultado->bindParam(':correo', $correo);
