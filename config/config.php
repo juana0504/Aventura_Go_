@@ -1,20 +1,20 @@
 <?php
-// Este archivo se creo para cuando carguemos a un servidor no se mayor configuracion en ese hosting cuando se publique 
-// configuración global del proyecto
+//este archivo es para cuando carguemos a un servuidor no se haga mayor configuracion en ese hosting cuando se publique, ni cambiar carpetas
+//configuracion global del proyecto
 
-// Detectar protocolo (HTTP o HTTPS)
-$protocol = isset($_SERVER['HTTPS']) ? 'https//' : 'http://';
+//detectar protocolo (http o https)
+$protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
 
-// Nombre de la cqrarpeta del proyecto local
+//nombre de la carpeta del proyecto en el local
 $baseFolder = '/aventura_go';
 
-// Host actual
+//host actual
 $host = $_SERVER['HTTP_HOST'];
 
-// URL base dinamica (funciona en local y hosting)
+//URL base dinamica (funciona en local y en hosting)
 define('BASE_URL', $protocol . $host . $baseFolder);
 
-// Ruta base del proyecto (para requiere o include)
+//ruta base del proyecto (pra require o include)
 define('BASE_PATH', dirname(__DIR__));
 
 ?>

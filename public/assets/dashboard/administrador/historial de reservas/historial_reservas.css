@@ -96,21 +96,22 @@ body {
     gap: 15px;
 }
 
-.fila-Superior input {
+form input {
     background-color: #DEE6F2;
     height: 40px;
     border-radius: 11px;
-    width: 640px;
+    width: 560px;
     border: none;
     outline: none;
     font-size: 14px;
     padding: 8px;
     margin-bottom: 20px;
-    margin-left: 20px;
 }
 
-.fila-Superior .bi-search {
+form .bi-search {
     position: absolute;
+    bottom: 54px;
+    left: 530px;
     font-size: 18px;
     pointer-events: none;
 }

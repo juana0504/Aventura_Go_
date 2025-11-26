@@ -1,35 +1,35 @@
 <?php
-// Importamos las dependependencias
-
+//impotamos las dependencias
+require_once __DIR__ . '/../helpers/alert_helper.php';
 require_once __DIR__ . '/../models/login.php';
+
 
 // $clave = '0704';
 // echo password_hash($clave, PASSWORD_DEFAULT);
 
-// Ejecutar segun la solisitud del servidor 'POST'
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//ejeciutar segun la solicitud al servisor "POST"
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
-    // Capturamos los valores enviados a travez delos name del formulario y el metodo POST
+    //capturamos en variables los valores enviados a travez de los name del formulario y el method POST
     $correo = $_POST['email'] ?? '';
     $clave = $_POST['contrasena'] ?? '';
 
-    // validamos los campos
-    if (empty($correo) || empty($clave)) {
-        mostrarSweetAlert('error', 'Campos vacios', 'Por favor completar los campos vacios');
+    //validamos que los campos/variables no esten vacios
+    if (empty($correo) || empty($clave)){
+        mostrarSweetAlert('error', 'campos vacios', 'por favor completar todos los campos');
         exit();
     }
-    // PDO instanciamos la clase del modelo, para acceder a un METHOD (Función) en expecifico
-
+    //POO -INSTANCIAMOS LA CLASE DEL MODELO, PARA ACCEDER A UN METHOD (FUNCION) EN ESPECIFICO
     $login = new login();
     $resultado = $login->autenticar($correo, $clave);
 
-    // Verifica si el modelo devolvio un error
+    //verificar si el modelo devolvio un error
     if (isset($resultado['error'])) {
-        mostrarSweetAlert('error', 'error de autenticacion', $resultado['error']);
+        mostrarSweetAlert('Error', 'Error de autenticacion', $resultado['error']);
         exit();
     }
 
-    // Si pasa esta linea, el usuario es valido
+    //si pasa esta linea el ususario es valido
     session_start();
     $_SESSION['user'] = [
         'id' => $resultado['id_usuario'],
@@ -37,74 +37,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'rol' => $resultado['rol']
     ];
 
-    mostrarSweetAlert('success', 'Bienvenido', 'Inicio de sesión exitoso. Rediriguiendo...', '/aventura_go/administrador/dashboard');
+    // Redirección segun el rol 
+    $redirectUrl = '/aventura_go/login';
+    $mensaje = 'Rol inexistente. Redirigiendo al inicio de sesión...';
+
+    switch ($resultado['rol']) {
+        case 'administrador':
+            $rendirectUrl = '/aventura_go/administrador/dashboard';
+            $mensaje = 'Bienvenido Administrador.';
+            break;
+        case 'proveedor-turistico':
+            $rendirectUrl = '/aventura_go/proveedor_turistico/dashboard';
+            $mensaje = 'Bienvenido Proveedor.';
+            break;
+        case 'proveedor-hotelero':
+            $rendirectUrl = '/aventura_go/proveedor_hotelero/dashboard';
+            $mensaje = 'Bienvenido Proveedor.';
+            break;
+        case 'turista':
+            $rendirectUrl = '/aventura_go/turista/tours';
+            $mensaje = 'Bienvenido Turista.';
+            break;
+        
+        default:
+            # code...
+            break;
+    }
+
+    mostrarSweetAlert('success', 'Ingreso exitoso', $mensaje, $rendirectUrl);
     exit();
-} else {
+
+} else{
     http_response_code(405);
     echo "Metodo no permitido";
     exit();
 }
 
-/**
- * Función para imprimir SweetAlert dinámico con estilo SENA
- */
-function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null){
-    echo "
-    <html>
-        <head>
-            <meta charset='UTF-8'>
-            <style>
-                @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap&#39;);
 
-                body {
-                    margin: 0;
-                    height: 100vh;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    background: linear-gradient(135deg, #00304D, #007832);
-                    font-family: 'Montserrat', sans-serif;
-                    color: #fff;
-                }
-
-                .swal2-popup {
-                    font-family: 'Montserrat', sans-serif !important;
-                }
-
-                .swal2-title {
-                    color: #00304D !important;
-                    font-weight: 600 !important;
-                }
-
-                .swal2-styled.swal2-confirm {
-                    background-color: #007832 !important;
-                    border: none !important;
-                }
-
-                .swal2-styled.swal2-confirm:hover {
-                    background-color: #005d28 !important;
-                }
-
-                .swal2-styled.swal2-cancel {
-                    background-color: #00304D !important;
-                }
-            </style>
-            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>;
-        </head>
-        <body>
-            <script>
-                Swal.fire({
-                    icon: '$tipo',
-                    title: '$titulo',
-                    text: '$mensaje',
-                    confirmButtonText: 'Aceptar',
-                    confirmButtonColor: '#007832',
-                    background: '#fff',
-                    color: '#00304D'
-                }).then((result) => {
-                    " . ($redirect ? "window.location.href = '$redirect';" : "window.history.back();") . "
-                });
-            </script>
-        </body>
-    </html>";
-}
+?>

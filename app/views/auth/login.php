@@ -30,14 +30,12 @@
                     <input type="email" name="email" class="form-control mb-3 rounded-pill" placeholder="Correo" required>
 
                     <div class="password-container position-relative mb-3">
-                        <input type="password" name="contrasena" class="form-control rounded-pill" id="password" placeholder="Contraseña"
-                            required>
-                        <i class="bi bi-eye-fill position-absolute top-50 end-0 translate-middle-y me-3 text-secondary"
-                            id="togglePassword" style="cursor: pointer;"></i>
+                        <input type="password" name="contrasena" class="form-control rounded-pill" id="password" placeholder="Contraseña" required>
+                        <i class="bi bi-eye-fill position-absolute top-50 end-0 translate-middle-y me-3 text-secondary" id="togglePassword" style="cursor: pointer;"></i>
                     </div>
 
                     <p class="forgot-password">
-                        <a href="resetPassword.html">¿Olvidaste tu contraseña?</a>
+                        <a href="recoverpw">¿Olvidaste tu contraseña?</a>
                     </p>
 
                     <button type="submit" class="btn w-100 rounded-pill fw-bold text-white"

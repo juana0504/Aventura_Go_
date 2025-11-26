@@ -1,0 +1,634 @@
+/* Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+/* Paleta de colores */
+:root {
+    --color-primary: #2D4059;
+    --color-secondary: #EA8217;
+    --color-white: #FFFFFF;
+    --color-bg-light: #F8F9FA;
+    --color-border: #E0E0E0;
+    --color-text: #2b2b2b;
+    --font-titles: 'Raleway', sans-serif;
+    --font-text: 'Lato', sans-serif;
+}
+
+h1 h2 h3 h4 h5 h6 {
+    --font-titles: 'Raleway', sans-serif; /* /tipografia titulos/ */
+}
+
+p a button input {
+    --font-text: 'Lato', sans-serif;    /* /tipografia textos/ */
+}
+
+/* Reset y Variables */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* ========== LAYOUT PRINCIPAL ========== */
+#admin-dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ========== PANEL LATERAL ========== */
+.panel {
+    width: 280px;
+    background-color: #2D4059;
+    padding: 30px 20px;
+    display: block;
+}
+
+.panel>img {
+    width: 150px;
+    margin: 0 auto 40px auto;
+    display: block;
+}
+
+/* Items del menú */
+.items{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#btn-panel {
+    background: transparent;
+    color: #ffffff;
+    padding: 12px 15px;
+    border-radius: 8px;
+    transition: all .3s ease;
+    border: none;
+}
+
+.dropdown-toggle-aventura::after{
+    display: inline-block;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+}
+
+#menu-panel a{
+    color: #2D4059;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #2D4059;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#menu-panel a:hover{
+    color: #EA8217;
+    background: #ffffff;
+}
+
+.items a {
+    display: flex;
+    gap: 15px;
+    padding: 12px 15px;
+    color: #ecf0f1;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.items a:hover {
+    background-color: #34495e;
+}
+
+.items a img {
+    width: 23px;
+    height: 23px;
+}
+
+.items a p {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* ========== CONTENIDO PRINCIPAL ========== */
+.info {
+    flex-grow: 1;
+    padding: 15px 40px;
+    background-color: #ffffff;
+}
+
+.info #usuario #datos {
+    display: inline-block;
+    vertical-align: top;
+}
+
+/* ========== BARRA DE BÚSQUEDA ========== */
+form[action="busqueda"] {
+    position: relative;
+    padding: 10px 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+form[action="busqueda"] input {
+    background-color: #DEE6F2;
+    height: 40px;
+    border-radius: 11px;
+    width: 600px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding: 8px 8px 8px 45px;
+    margin-bottom: 20px;
+}
+
+form[action="busqueda"] .bi-search {
+    position: absolute;
+    bottom: 54px;
+    left: 570px;
+    font-size: 18px;
+    pointer-events: none;
+    color: #95a5a6;
+}
+
+#modoOscuroBtn,
+#notificacionesBtn {
+    margin-bottom: 16px;
+    margin-left: 10px;
+    padding: 7px 20px;
+    background-color: #DEE6F2;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+form[action="busqueda"] .bi-moon-fill,
+form[action="busqueda"] .bi-bell-fill {
+    color: #000000;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Estilos del dropdown de perfil */
+form[action="busqueda"] #perfil {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+    background-color: #EA8217;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #ffffff;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+form[action="busqueda"] #perfil img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+form[action="busqueda"] #perfil p {
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0;
+}
+
+form[action="busqueda"] #perfil h6 {
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0;
+}
+
+#perfil-dropdown .dropdown-menu {
+    border-radius: 0 0 12px 12px;
+    border: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+#perfil-dropdown .dropdown-item {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #2D4059;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#perfil-dropdown .dropdown-item:hover {
+    background-color: #f3f4f6;
+    color: #EA8217;
+}
+
+#perfil-dropdown .dropdown-item i {
+    font-size: 16px;
+}
+
+#perfil-dropdown .dropdown-divider {
+    margin: 5px 0;
+}
+
+/* Título principal */
+.info h1 {
+    font-size: 28px;
+    color: #000000;
+    margin-bottom: 25px;
+}
+
+/* ========== FORMULARIO WIZARD ========== */
+.wizard-container {
+    max-width: 1000px;
+    margin: 30px auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+/* Header del Wizard */
+.wizard-header {
+    background: linear-gradient(135deg, #2D4059 0%, #3d5464 100%);
+    color: white;
+    padding: 30px 40px;
+    text-align: center;
+}
+
+.wizard-header h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.wizard-header h2 i {
+    color: #EA8217;
+    margin-right: 10px;
+}
+
+.wizard-header p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+/* Pasos del Wizard */
+.wizard-steps {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 60px;
+    background: #f8f9fa;
+    position: relative;
+}
+
+.wizard-steps::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100px;
+    right: 100px;
+    height: 3px;
+    background: #dee2e6;
+    transform: translateY(-50%);
+    z-index: 0;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.step-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #dee2e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    color: #adb5bd;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.step.active .step-circle {
+    background: #EA8217;
+    border-color: #EA8217;
+    color: white;
+    transform: scale(1.1);
+}
+
+.step.completed .step-circle {
+    background: #10b981;
+    border-color: #10b981;
+    color: white;
+}
+
+.step.completed .step-circle::after {
+    content: '✓';
+    font-size: 20px;
+}
+
+.step-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #6c757d;
+    text-align: center;
+}
+
+.step.active .step-label {
+    color: #EA8217;
+}
+
+/* Contenido del Wizard */
+.wizard-content {
+    padding: 40px 60px;
+    min-height: 400px;
+}
+
+.step-content {
+    display: none;
+}
+
+.step-content.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.step-content h4 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2D4059;
+    margin-bottom: 25px;
+}
+
+.step-content h4 i {
+    margin-right: 10px;
+}
+
+/* Campos de Formulario */
+.form-label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #374151;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-control,
+.form-select {
+    width: 100%;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #EA8217;
+    box-shadow: 0 0 0 3px rgba(234, 130, 23, 0.1);
+    outline: none;
+}
+
+textarea.form-control {
+    resize: vertical;
+}
+
+/* Checkboxes */
+.form-check {
+    padding-left: 0;
+    margin-bottom: 10px;
+}
+
+.form-check-input {
+    width: 20px;
+    height: 20px;
+    /* margin-right: 0; */
+    border: 2px solid #d1d5db;
+    cursor: pointer;
+}
+
+.form-check-input:checked {
+    background-color: #EA8217;
+    border-color: #EA8217;
+}
+
+.form-check-label {
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Preview Cards (Paso 4) */
+.text-center {
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 80px;
+    color: #10b981;
+    margin-bottom: 20px;
+}
+
+.preview-card {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+.preview-card h6 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.preview-card h6 i {
+    margin-right: 8px;
+}
+
+.preview-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.preview-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2D4059;
+    margin-bottom: 15px;
+}
+
+.text-primary {
+    color: #2D4059 !important;
+}
+
+/* Acciones del Wizard */
+.wizard-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 60px;
+    background: #f8f9fa;
+    border-top: 1px solid #e5e7eb;
+}
+
+.btn-primary-wizard,
+.btn-secondary-wizard {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary-wizard {
+    background: #EA8217;
+    color: white;
+}
+
+.btn-primary-wizard:hover {
+    background: #d97515;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(234, 130, 23, 0.3);
+}
+
+.btn-secondary-wizard {
+    background: #6b7280;
+    color: white;
+}
+
+.btn-secondary-wizard:hover {
+    background: #4b5563;
+    transform: translateY(-2px);
+}
+
+/* Bootstrap Grid */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+}
+
+.col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 0 15px;
+}
+
+.col-md-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0 15px;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #admin-dashboard {
+        flex-direction: column;
+    }
+
+    .panel {
+        width: 100%;
+    }
+
+    .info {
+        padding: 15px 20px;
+    }
+
+    form[action="busqueda"] input {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .wizard-steps {
+        flex-direction: column;
+        gap: 20px;
+        padding: 30px 20px;
+    }
+
+    .wizard-steps::before {
+        display: none;
+    }
+
+    .step {
+        flex-direction: row;
+        width: 100%;
+        justify-content: flex-start;
+        gap: 15px;
+    }
+
+    .step-circle {
+        margin-bottom: 0;
+    }
+
+    .wizard-content,
+    .wizard-actions {
+        padding: 30px 20px;
+    }
+
+    .col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}

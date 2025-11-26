@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte de Proveedores - Aventura Go</title>
+
+    <style>
+        body {
+            margin: 30px;
+        }
+
+        /* Encabezado */
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .header img {
+            width: 120px;
+        }
+
+        h1 {
+            color: #2D4059;
+            font-size: 22px;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        p {
+            color: #000000;
+            font-size: 12px;
+            margin-bottom: 25px;
+        }
+
+        /* Tabla */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+
+        table th {
+            background-color: #f0f0f0;
+            padding: 8px;
+            color: #2D4059;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .foto {
+            width: 45px;
+            height: auto;
+        }
+
+        /* Footer */
+        footer {
+            position: fixed;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 10px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Encabezado -->
+    <div class="header">
+        <img src="<?= BASE_URL ?>/public/assets/estilos_globales/img/LOGO-FINAL.png" alt="Logo Aventura Go">
+    </div>
+
+    <h1>Reporte de Proveedores Inscritos</h1>
+
+    <p>
+        El presente documento contiene el registro consolidado de los proveedores inscritos en Aventura Go. Este reporte
+        permite evaluar la participación de prestadores turísticos, analizar el crecimiento de la plataforma y mantener
+        actualizada la información relevante para la gestión administrativa.
+    </p>
+
+    <!-- Tabla de Proveedores -->
+    <table>
+        <thead>
+            <tr>
+                <th>Foto</th>
+                <th>Empresa</th>
+                <th>Representante</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Ciudad</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php if (!empty($proveedores)) : ?>
+                <?php foreach ($proveedores as $proveedor) : ?>
+                    <tr>
+                        <td>
+                            <img class="foto"
+                                src="<?= BASE_URL ?>/public/uploads/actividades/<?= $proveedor['foto'] ?>">
+                        </td>
+
+                        <td><?= $proveedor['nombre_empresa'] ?></td>
+                        <td><?= $proveedor['nombre_representante'] ?></td>
+                        <td><?= $proveedor['email'] ?></td>
+                        <td><?= $proveedor['telefono'] ?></td>
+                        <td><?= $proveedor['ciudad'] ?></td>
+                        <td>Activo</td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="7">No hay proveedores registrados.</td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
+
+    <!-- Footer -->
+    <footer>
+        © Aventura Go 2025 - Todos los derechos reservados
+    </footer>
+
+</body>
+
+</html>
