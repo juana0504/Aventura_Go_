@@ -1,16 +1,9 @@
 <?php
 require_once BASE_PATH . '/app/helpers/session_administrador.php';
-require_once BASE_PATH . '/app/controllers/hotelero.php';
+require_once BASE_PATH . '/app/controllers/turista.php';
 
-$datos = listarHoteles();
+$datos = listarTuristas();
 
-require_once __DIR__ . '/../../layouts/header_administrador.php';
-
-?>
-
-<?php
-
-require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
 ?>
 
@@ -64,7 +57,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
             <!-- Título y Acciones -->
             <div class="header-section">
-                <h1>Gestión de Proveedores</h1>
+                <h1>Gestión de Turista</h1>
             </div>
 
             <!-- Filtros Rápidos -->
@@ -81,7 +74,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                 <button class="filtro-btn" data-filter="pendiente">
                     <i class="bi bi-clock"></i> Pendientes
                 </button>
-                <a href="<?= BASE_URL ?>/administrador/reporte?tipo=hoteles" class="btn-pdf" target="_blank">
+                <a href="<?= BASE_URL ?>/administrador/reporte?tipo=turista" class="btn-pdf" target="_blank">
                     <i class="bi bi-file-earmark-pdf"></i>Generar Reporte
                 </a>
             </div>
@@ -91,11 +84,11 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                 <table id="tablaAdmin" class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Logo</th>
-                            <th>Empresa</th>
-                            <th>Establecimiento</th>
-                            <th>Habitaciones</th>
-                            <th>Calificacion</th>
+                            <th>Foto</th>
+                            <th>Nombre</th>
+                            <th>Genero</th>
+                            <th>Telefono</th>
+                            <th>Email</th>
                             <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
@@ -103,19 +96,19 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                     <tbody>
                         <tr>
                             <?php if (!empty($datos)) : ?>
-                                <?php foreach ($datos as $hotelero): ?>
-                                    <td><img src="<?= BASE_URL ?>/public/uploads/hoteles/<?= $hotelero['foto'] ?>" alt="" style="10px"></td>
-                                    <td><?= $hotelero['nombre_establecimiento'] ?></td>
-                                    <td><?= $hotelero['tipo_establecimiento'] ?></td>
-                                    <td><?= $hotelero['numero_habitaciones'] ?></td>
-                                    <td><?= $hotelero['calificacion_promedio'] ?></td>
-                                    <td><?= $hotelero['estado'] ?></td>
+                                <?php foreach ($datos as $turista): ?>
+                                    <td><img src="<?= BASE_URL ?>/public/uploads/usuario/<?= $turista['foto'] ?>" alt="" style="10px"></td>
+                                    <td><?= $turista['nombre'] ?></td>
+                                    <td><?= $turista['genero'] ?></td>
+                                    <td><?= $turista['telefono'] ?></td>
+                                    <td><?= $turista['email'] ?></td>
+                                    <td><?= $turista['estado'] ?></td>
                                     <td>
-                                        <a href="<?= BASE_URL ?>/administrador/editar-proveedor-hotelero?id=<?= $hotelero['id_proveedor_hotelero'] ?>" class="btn-accion btn-editar" title="Editar">
+                                        <a href="<?= BASE_URL ?>/administrador/editar-turista?id=<?= $turista['id_usuario'] ?>" class="btn-accion btn-editar" title="Editar">
                                             <i class="bi bi-pencil"></i>
 
                                         </a>
-                                        <a href="<?= BASE_URL ?>/administrador/eliminar-proveedor-hotelero?accion=eliminar&id=<?= $hotelero['id_proveedor_hotelero'] ?>" class="btn-accion btn-eliminar" title="Eliminar">
+                                        <a href="<?= BASE_URL ?>/administrador/eliminar-turista?accion=eliminar&id=<?= $turista['id_usuario'] ?>" class="btn-accion btn-eliminar" title="Eliminar">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                     </td>

@@ -26,31 +26,27 @@
                 <h2 class="fw-bold">REGISTRATE</h2>
 
 
-                <form action="login.html" method="POST" enctype="multipart/form-data">
+                <form action="<?= BASE_URL ?>/administrador/guardar-turista" method="POST" enctype="multipart/form-data">
 
                     <input type="text" placeholder="Nombre" name="nombre">
-                    <input type="text" placeholder="Apellidos" name="apellidos">
-                    <select name="Genero">
+                    <select name="genero">
                         <option value="" disabled selected hidden>Genero</option>
                         <option value="Femenino">Femenino</option>
                         <option value="Masculino">Masculino</option>
                     </select>
                     <input type="tel" placeholder="Teléfono" name="telefono">
-                    <input type="email" placeholder="Correo" required>
+                    <input type="email" name="email" placeholder="Correo" required>
                     <div class="password-container">
-                        <input type="password" placeholder="Contraseña" id="password" required>
+                        <input type="password" name="clave" placeholder="Contraseña" id="password" required>
                         <i class="bi bi-eye-fill" id="togglePassword"></i>
                     </div>
-                    
+                    <div class="col-md-6 mb-3">
+                        <input type="file" placeholder="Nombre" accept=".jpg, .png, .jpeg" name="foto" class="form-control" id="foto" required>
+                    </div>
+
                     <button type="submit">INICIO</button>
 
-
-
-
-
-
                 </form>
-
 
             </div>
 

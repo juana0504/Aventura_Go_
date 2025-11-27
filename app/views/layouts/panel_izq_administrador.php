@@ -35,9 +35,8 @@
                 <a class="btn btn-secondary dropdown-toggle-aventura" id="btn-panel" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Turista
                 </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                <ul class="dropdown-menu" id="menu-panel">
+                    <li><a class="dropdown-item" href="<?= BASE_URL ?>/administrador/consultar-turista">Consultar Turista</a></li>
                 </ul>
             </div>
 

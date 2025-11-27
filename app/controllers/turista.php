@@ -14,8 +14,8 @@ switch ($method) {
         $accion = $_POST['accion'] ?? '';
         if ($accion === 'actualizar') {
             actualizarTurista();
-        }else{
-        registrarTurista();
+        } else {
+            registrarTurista();
         }
         break;
 
@@ -26,7 +26,6 @@ switch ($method) {
         if ($accion === 'eliminar') {
             // esta funcion elimina el proveedor segun su id
             eliminarTurista($_GET['id']);
-            
         }
 
         if (isset($_GET['id'])) {
@@ -62,59 +61,41 @@ function registrarTurista()
     $telefono     = $_POST['telefono'] ?? '';
     $email        = $_POST['email'] ?? '';
     $clave        = $_POST['clave'] ?? '';
-    $rol          = $_POST['rol'] ?? [];
-    $estado       = $_POST['estado'] ?? '';
-
 
     if (
-        empty($nombre) || empty($genero) || empty($telefono) ||empty($email)  || empty($clave) ||
-        empty($rol) || empty($estado)
+        empty($nombre) || empty($genero) || empty($telefono) ||
+        empty($email) || empty($clave)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completa todos los campos');
         exit();
     }
 
-    
-
+    $claveHash = password_hash($clave, PASSWORD_DEFAULT);
 
     // Logica para cargar imagenes
     $foto_url = null;
 
-    // Validamos si se envio o no la foto desde el formulario
-    // ***Si el proveedorno registro una foto, dejar una imagen por defecto
-
     if (!empty($_FILES['foto']['name'])) {
-        $file =$_FILES['foto'];
-        // obtenemos la extencion del archivo
+        $file = $_FILES['foto'];
         $extencion = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-
-        // definimos las extenciones permitidas
         $permitidas = ['png', 'jpg', 'jpeg'];
 
-        // validar que la extencion de la imagen cargada este dentro de las permitideas
         if (!in_array($extencion, $permitidas)) {
-            mostrarSweetAlert('error', 'Extención no permitiva.', 'Las extenciones permitidas son: png, jpg, jpeg.');
+            mostrarSweetAlert('error', 'Extención no permitida.', 'Las extenciones permitidas son: png, jpg, jpeg.');
             exit();
         }
 
-        // validamos el tamaño o elpeso de la imagen
-        if ($file['size']> 2 *1024 * 1024) {
+        if ($file['size'] > 2 * 1024 * 1024) {
             mostrarSweetAlert('error', 'Error al cargar la foto.', 'El peso de la foto supera el limite de 2MB.');
             exit();
         }
 
-        // definimos el nombre del archivo y concatenamos la extencion
-        $foto_url = uniqid('proveedor_') . '.' . $extencion;
+        $foto_url = uniqid('turista_') . '.' . $extencion;
+        $destino = BASE_PATH . "/public/uploads/usuario/" . $foto_url;
 
-        // definimos el destino donde moveremos el archivo
-        $destino = BASE_PATH . "/public/uploads/usuario/" .$foto_url;
-
-        // movemos el archivo al destino
         move_uploaded_file($file['tmp_name'], $destino);
-        
-    }else{
-        // Agregar la logica de la imagen por default
-        $foto_url = 'default_proveedor.png';
+    } else {
+        $foto_url = 'default_turista.png';
     }
 
     $objTurista = new Turista();
@@ -124,8 +105,8 @@ function registrarTurista()
         'genero'      => $genero,
         'telefono'    => $telefono,
         'email'       => $email,
-        'clave'       => $clave,
-        'rol'         => $rol,
+        'clave'       => $claveHash,
+        'foto'        => $foto_url,
     ];
 
     $resultado = $objTurista->registrar($data);
@@ -137,7 +118,8 @@ function registrarTurista()
     }
 }
 
-function listarTurista()
+
+function listarTuristas()
 {
     $resultado = new Turista();
     $turista = $resultado->listar();
@@ -145,74 +127,58 @@ function listarTurista()
     return $turista;
 }
 
-function listarProveedorId($id)
+function listarTuristaId($id)
 {
     $objTurista = new Turista();
-    $proveedor = $objTurista->listarTurista($id);
+    $turista = $objTurista->listarTurista($id);
 
     return $turista;
 }
 
-function actualizarProveedor()
+function actualizarTurista()
 {
     $id_usuario         = $_POST['id_usuario'] ?? '';
-    $nombre        = $_POST['nombre'] ?? '';
-    $genero               = $_POST['genero'] ?? '';
-    $telefono              = $_POST['telefono'] ?? '';
-    $email                 = $_POST['email'] ?? '';
-    $clave           = $_POST['clave'] ?? [];
-    $rol           = $_POST['descripcion'] ?? '';
-    $departamento          = $_POST['departamento'] ?? '';
-    $ciudad                = $_POST['ciudad'] ?? '';
-    $direccion             = $_POST['direccion'] ?? '';
+    $nombre             = $_POST['nombre'] ?? '';
+    $genero             = $_POST['genero'] ?? '';
+    $telefono           = $_POST['telefono'] ?? '';
+    $email              = $_POST['email'] ?? '';
 
     if (
-        empty($nombre_empresa) || empty($nit_rut) || empty($nombre_representante) ||
-        empty($email) || empty($telefono) || empty($actividades) ||
-        empty($descripcion) || empty($departamento) || empty($ciudad) || empty($direccion)
+        empty($nombre) || empty($genero) || empty($telefono) ||
+        empty($email)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completa todos los campos');
         exit();
     }
 
-    // Convertir array de actividades en string
-    if (is_array($actividades)) {
-        $actividades = implode(",", $actividades);
-    }
-
-    $objProveedor = new Proveedor();
+    $objTurista = new Turista();
 
     $data = [
-        'id_proveedor'         => $id_proveedor,
-        'nombre_empresa'       => $nombre_empresa,
-        'nit_rut'              => $nit_rut,
-        'nombre_representante' => $nombre_representante,
-        'email'                => $email,
-        'telefono'             => $telefono,
-        'actividades'          => $actividades,
-        'descripcion'          => $descripcion,
-        'departamento'         => $departamento,
-        'ciudad'               => $ciudad,
-        'direccion'            => $direccion
+        'id_usuario'       => $id_usuario,
+        'nombre'           => $nombre,
+        'genero'           => $genero,
+        'telefono'         => $telefono,
+        'email'            => $email,
     ];
-
-    $resultado = $objProveedor->actualizar($data);
+    
+    $resultado = $objTurista->actualizar($data);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Actualización exitosa', 'Proveedor actualizado.', '/aventura_go/administrador/consultar-proveedor-turistico');
+        mostrarSweetAlert('success', 'Actualización exitosa', 'Turista actualizado.', '/aventura_go/administrador/consultar-turista');
     } else {
-        mostrarSweetAlert('error', 'Error al actualizar', 'No se pudo actualizar el proveedor.');
+        mostrarSweetAlert('error', 'Error al actualizar', 'No se pudo actualizar el turista.');
     }
 }
 
-function eliminarProveedor($id){
-    $objProveedor = new Proveedor();
+function eliminarTurista($id)
+{
+    $objTurista = new Turista();
 
-    $resultado = $objProveedor->eliminar($id);
+    $resultado = $objTurista->eliminar($id);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Eliminación exitosa', 'Proveedor eliminado.', '/aventura_go/administrador/consultar-proveedor-turistico');
+        mostrarSweetAlert('success', 'Eliminación exitosa', 'Turista eliminado.', '/aventura_go/administrador/consultar-turista');
     } else {
-        mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el proveedor.');
+        mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el turista.');
     }
 }
