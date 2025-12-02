@@ -92,7 +92,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                     <!-- Resumen de reservas -->
                     <section class="resumen-reservas">
                         <div class="resumen-header">
-                            <h3>Resumen de reservas</h3>
+                            <h3>Resumen de Reservas</h3>
                             <button class="btn-filtrar">Filtrar ▼</button>
                         </div>
 
@@ -153,8 +153,8 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                         <ul>
                             <li><span class="dot green_r"></span> Pago Experiencia <span class="amount">$2,852.21</span>
                             </li>
-                            <li><span class="dot blue_r"></span> Pago a operador <span class="amount">$910.00</span></li>
-                            <li><span class="dot red_r"></span> Pago de reserva <span class="amount">$420.30</span></li>
+                            <li><span class="dot blue_r"></span> Pago a Operador <span class="amount">$910.00</span></li>
+                            <li><span class="dot red_r"></span> Pago de Reserva <span class="amount">$420.30</span></li>
                         </ul>
                     </div>
 

@@ -15,7 +15,7 @@ $turista = listarTuristaId($id);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrador</title>
+    <title>Editar Turista</title>
 
     <!-- favicon -->
     <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
@@ -92,7 +92,7 @@ $turista = listarTuristaId($id);
                                     <input type="email" name="email" class="form-control" id="email" placeholder="contacto@empresa.com" required value="<?= $turista['email'] ?>">
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Foto actual:</label><br>
+                                    <label class="form-label">Foto Actual:</label><br>
                                     <img src="<?= BASE_URL ?>/public/uploads/usuario/<?= $turista['foto'] ?>"
                                         alt="Foto del turista" width="120" class="img-thumbnail mb-2">
                                 </div>

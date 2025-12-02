@@ -17,7 +17,7 @@
         href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/turista/tour_escogido/descubreTours.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/turista/tour_escogido/tour-escogido.css">
 </head>
 
 <body>
@@ -25,7 +25,7 @@
         <nav class="navbar">
             <div class="container-fluid">
                 <div class="logo">
-                    <img src="../turista/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
+                    <img src="/public/assets/turista/tour_escogido/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
                 </div>
 
                 <h1 class="page-title">Descubre Todo lo que Villeta Tiene para Ofrecerte</h1>
@@ -301,6 +301,8 @@
 
 
     </footer>
+
+    <script src="<?= BASE_URL ?>/public/assets/dashboard/turista/tour_escogido/tour_escogido.js"></script>
 
     <script>
         document.getElementById('menu-toggle').addEventListener('click', function () {

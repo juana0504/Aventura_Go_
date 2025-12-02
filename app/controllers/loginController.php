@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     //validamos que los campos/variables no esten vacios
     if (empty($correo) || empty($clave)){
-        mostrarSweetAlert('error', 'campos vacios', 'por favor completar todos los campos');
+        mostrarSweetAlert('error', 'Campos vacios', 'Por favor completar todos los campos');
         exit();
     }
     //POO -INSTANCIAMOS LA CLASE DEL MODELO, PARA ACCEDER A UN METHOD (FUNCION) EN ESPECIFICO
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     //verificar si el modelo devolvio un error
     if (isset($resultado['error'])) {
-        mostrarSweetAlert('Error', 'Error de autenticacion', $resultado['error']);
+        mostrarSweetAlert('error', 'Error de autenticacion', $resultado['error']);
         exit();
     }
 
@@ -48,11 +48,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             break;
         case 'proveedor-turistico':
             $rendirectUrl = '/aventura_go/proveedor_turistico/dashboard';
-            $mensaje = 'Bienvenido Proveedor.';
+            $mensaje = 'Bienvenido Proveedor Turistico.';
             break;
         case 'proveedor-hotelero':
             $rendirectUrl = '/aventura_go/proveedor_hotelero/dashboard';
-            $mensaje = 'Bienvenido Proveedor.';
+            $mensaje = 'Bienvenido Proveedor Hotelero.';
             break;
         case 'turista':
             $rendirectUrl = '/aventura_go/turista/tours';

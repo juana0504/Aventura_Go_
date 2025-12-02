@@ -6,6 +6,10 @@
     <title>Reporte de Proveedores Hoteleros - Aventura Go</title>
 
     <style>
+        /* Fuentes */
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
         body {
             margin: 30px;
         }
@@ -26,12 +30,14 @@
             font-size: 22px;
             margin-top: 10px;
             text-transform: uppercase;
+            font-family: 'Raleway', sans-serif;
         }
 
         p {
             color: #000000;
             font-size: 12px;
             margin-bottom: 25px;
+            font-family: 'Lato', sans-serif;
         }
 
         /* Tabla */
@@ -43,21 +49,28 @@
         }
 
         table th {
-            background-color: #f0f0f0;
-            padding: 8px;
-            color: #2D4059;
-            border: 1px solid #ddd;
-            text-align: left;
+            background-color: #2D4059;
+            color: #ffffff;
+            font-weight: 700;
+            font-family: 'Lato', sans-serif;
+            text-align: center;
+            font-size: 10px;
+            text-transform: uppercase;
+            padding: 15px 12px;
+            border-bottom: 2px solid #e5e7eb;
         }
 
         table td {
             padding: 8px;
             border: 1px solid #ddd;
+            font-family: 'Lato', sans-serif;
         }
 
         .foto {
-            width: 45px;
-            height: auto;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
         }
 
         /* Footer */

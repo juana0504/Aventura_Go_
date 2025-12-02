@@ -59,4 +59,19 @@ class login
             return ['Error' => 'Error interno del servidor'];
         }
     }
+
+    public function buscarPorId($id)
+    {
+        try {
+            $sql = "SELECT * FROM usuario WHERE id_usuario = :id LIMIT 1";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error en buscarPorId: " . $e->getMessage());
+            return false;
+        }
+    }
 }

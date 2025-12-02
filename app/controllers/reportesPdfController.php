@@ -3,6 +3,7 @@
 require_once BASE_PATH . '/app/helpers/pdf_helper.php';
 require_once BASE_PATH . '/app/controllers/proveedor.php';
 require_once BASE_PATH . '/app/controllers/hotelero.php';
+require_once BASE_PATH . '/app/controllers/turista.php';
 
 
 // ESTA FUNCION SE ENCARGA DE VALIDAR EL TIPO DE REPORTE Y EJECUTAR LA FUNCION CORRESPONDIENTE 
@@ -17,6 +18,9 @@ function reportesPdfControlers(){
             break;
         case 'hoteles':
             reporteHotelesPdf();
+            break;
+        case 'turista':
+            reporteTuristasPdf();
             break;
         
         default:
@@ -53,4 +57,19 @@ function reporteHotelesPdf(){
     $html = ob_get_clean();
 
     generarPDF($html, 'reporte_proveedores.pdf', false);
+}
+
+function reporteTuristasPdf(){
+
+    // CARGAR LA VISTA Y OBTENERLACOMO HTML
+    ob_start();
+
+    // ASIGNAMOS LOS DATOS DE LA FUNCION EN EL CONTROLADOR ENLAZADO A UNA VARIABLE QUE PODAMOS MANIPULAR EN LA VISTA DEL PDF
+    $turistas = listarTuristas();
+
+    // ARCHIVO QUE TIENE LA INTERFAZ DISEÑANDA EN HTML
+    require_once BASE_PATH . '/app/views/pdf/turista_pdf.php';
+    $html = ob_get_clean();
+
+    generarPDF($html, 'reporte_turistas.pdf', false);
 }

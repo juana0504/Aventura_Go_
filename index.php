@@ -46,6 +46,12 @@ switch ($request) {
     case '/administrador/dashboard':
         require BASE_PATH . '/app/views/dashboard/administrador/administrador.php';  //redirige al panel de administrador
         break;
+    // Perfil administrador 
+    case '/administrador/cambiar-password':
+        require BASE_PATH . '/app/controllers/passwordChangeController.php';
+        $controller = new PasswordChangeController();
+        $controller->cambiarClave();
+        break;
 
     // Registrar y consultar el Proveedor Turistico
     case '/administrador/registrar-proveedor-turistico':
@@ -62,7 +68,7 @@ switch ($request) {
     case '/administrador/editar-proveedor':
         require BASE_PATH . '/app/views/dashboard/administrador/editar_proveedor_turistico.php';  //redirige al guardar proveedor
         break;
-    case '/administrador/actualizar-proveedor':
+    case '/administrador/actualizar-proveedor-turistico':
         require BASE_PATH . '/app/controllers/proveedor.php';  //redirige al actualizar el proveedor
         break;
     case '/administrador/eliminar-proveedor':
@@ -117,7 +123,7 @@ switch ($request) {
     case '/administrador/eliminar-turista':
         require BASE_PATH . '/app/controllers/turista.php';  //elimina el turista
         break;
-    case '/administrador/reporte':
+    case '/administrador/reporte-turista':
         require BASE_PATH . '/app/controllers/reportesPdfController.php';  //pdf del el turista
         reportesPdfControlers();
         break;
@@ -126,6 +132,9 @@ switch ($request) {
     // Perfil del Administrador 
     case '/administrador/perfil':
         require BASE_PATH . '/app/views/dashboard/administrador/perfil_usuario.php';  //redirige al perfil del administradors
+        break;
+    case '/administrador/actualizar-perfil':
+        require BASE_PATH . '/app/controllers/administrador/editarPerfilAdmin.php';
         break;
 
 

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Reporte de Proveedores - Aventura Go</title>
+    <title>Reporte de Turistas - Aventura Go</title>
 
     <style>
         /* Fuentes */
@@ -93,43 +93,41 @@
         <img src="<?= BASE_URL ?>/public/assets/estilos_globales/img/LOGO-FINAL.png" alt="Logo Aventura Go">
     </div>
 
-    <h1>Reporte de Proveedores Inscritos</h1>
+    <h1>Reporte de Turistas Inscritos</h1>
 
     <p>
-        El presente documento contiene el registro consolidado de los proveedores inscritos en Aventura Go. Este reporte
+        El presente documento contiene el registro consolidado de los Turistas inscritos en Aventura Go. Este reporte
         permite evaluar la participación de prestadores turísticos, analizar el crecimiento de la plataforma y mantener
         actualizada la información relevante para la gestión administrativa.
     </p>
 
-    <!-- Tabla de Proveedores -->
+    <!-- Tabla de Turistas -->
     <table>
         <thead>
             <tr>
                 <th>Foto</th>
-                <th>Empresa</th>
-                <th>Representante</th>
-                <th>Email</th>
+                <th>Nombre</th>
+                <th>Genero</th>
                 <th>Teléfono</th>
-                <th>Ciudad</th>
+                <th>Email</th>
                 <th>Estado</th>
             </tr>
         </thead>
 
         <tbody>
-            <?php if (!empty($proveedores)) : ?>
-                <?php foreach ($proveedores as $proveedor) : ?>
+            <?php if (!empty($turistas)) : ?>
+                <?php foreach ($turistas as $turista) : ?>
                     <tr>
                         <td>
                             <img class="foto"
-                                src="<?= BASE_URL ?>/public/uploads/actividades/<?= $proveedor['foto'] ?>">
+                                src="<?= BASE_URL ?>/public/uploads/usuario/<?= $turista['foto'] ?>">
                         </td>
 
-                        <td><?= $proveedor['nombre_empresa'] ?></td>
-                        <td><?= $proveedor['nombre_representante'] ?></td>
-                        <td><?= $proveedor['email'] ?></td>
-                        <td><?= $proveedor['telefono'] ?></td>
-                        <td><?= $proveedor['ciudad'] ?></td>
-                        <td>Activo</td>
+                        <td><?= $turista['nombre'] ?></td>
+                        <td><?= $turista['genero'] ?></td>
+                        <td><?= $turista['telefono'] ?></td>
+                        <td><?= $turista['email'] ?></td>
+                        <td><?= $turista['estado'] ?></td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>

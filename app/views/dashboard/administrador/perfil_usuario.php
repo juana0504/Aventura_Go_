@@ -1,7 +1,4 @@
 <?php
-
-
-
 require_once __DIR__ . '/../../../helpers/alert_helper.php';
 // ENLAZAMOS LA DEPENDENCIA EN ESTE CASO EL CONTROLADOR QUE TIENE LA FUNCION DE CONSULTA
 require_once __DIR__ . '/../../../controllers/perfil.php';
@@ -54,33 +51,6 @@ $usuario = mostrarPerfilAdmin($id);
             include_once __DIR__ . '/../../layouts/buscador_administrador.php'
             ?>
 
-            <!-- <form action="busqueda">
-                <input type="text">
-                <i class="bi bi-search"></i>
-
-                <button id="modoOscuroBtn"> <i class="bi bi-moon-fill"></i></button>
-                <button id="notificacionesBtn"> <i class="bi bi-bell-fill"></i></button>
-
-                 Dropdown con Bootstrap -->
-            <!-- <div class="dropdown" id="perfil-dropdown">
-                    <a href="#" id="perfil" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="../../assets/dashboard/administrador/perfil_usuario/img/perfil.png" alt="persona">
-                        <p>AR-Ana</p>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="../../dashboard/administrador/perfil_usuario.html"><i
-                                    class="bi bi-person"></i> Mi
-                                Perfil</a>
-                        </li>
-                        <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="../../index.html"><i class="bi bi-box-arrow-right"></i>
-                                Cerrar Sesión</a>
-                        </li>
-                    </ul>
-                </div> -->
-            <!-- </form> -->
-
             <div class="container">
                 <div class="row">
 
@@ -90,7 +60,6 @@ $usuario = mostrarPerfilAdmin($id);
                             alt="persona"></i>
                         <h3><?= $_SESSION['user']['nombre'] ?></h3>
                         <p><?= $_SESSION['user']['rol'] ?></p>
-                        <i class="bi bi-facebook"></i>
 
                         <button id="btndescripcion">Descripción General</button>
                         <button id="btneditar">Editar Perfil</button>
@@ -124,7 +93,7 @@ $usuario = mostrarPerfilAdmin($id);
                                     <p><?= $usuario['telefono'] ?></p>
                                 </div>
 
-                             
+
 
                                 <div class="col-md-6">
                                     <h4>Rol:</h4>
@@ -137,7 +106,7 @@ $usuario = mostrarPerfilAdmin($id);
                                     <h4>Identificacion:</h4>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>K1002006049</p>
+                                    <p><?= $usuario['identificacion'] ?></p>
                                 </div>
                             </div>
                         </div>
@@ -145,45 +114,52 @@ $usuario = mostrarPerfilAdmin($id);
 
                     <div class="editar">
 
-                        <h4>Imagen Perfil</h4>
-                        <img src="<?= BASE_URL ?>/public/uploads/usuario/<?= $usuario['foto'] ?>"
-                        alt="persona"><i class="bi bi-pen-fill"></i>
+                      
 
-                        <button id="descargar">descargar</button>
-                        <button id="eliminar">eliminar</button>
+                      <form action="/aventura_go/administrador/actualizar-perfil" method="POST" enctype="multipart/form-data">
 
-                        <form action="">
+
+
+                            <h4>Imagen Perfil</h4>
+                            <input type="file" name="foto">
+
                             <h4>Nombre Completo</h4>
-                            <input type="text" placeholder="Kevin Anderson">
+                            <input type="text" name="nombre" value="<?= $usuario['nombre'] ?>">
 
                             <h4>Correo Electrónico</h4>
-                            <input type="text" placeholder="">
+                            <input type="text" name="email" value="<?= $usuario['email'] ?>">
+
 
                             <h4>Teléfono</h4>
-                            <input type="number" placeholder="">
+                            <input type="number" name="telefono" value="<?= $usuario['telefono'] ?>">
 
-                            <h4>Dirección</h4>
-                            <input type="text" placeholder="">
+                            
 
-                            <h4>Identificacion</h4>
-                            <input type="text" placeholder="">
+                            <h4>Identificación</h4>
+                            <input type="text" name="identificacion" value="<?= $usuario['identificacion'] ?>">
+
+                            <button type="submit" id="actualizar">Actualizar datos</button>
 
                         </form>
+
                     </div>
 
 
-                    <form action="cambiar" class="cambiar">
-                        <h4>Contraseña Actual</h4>
-                        <input type="text">
+                    <form action="/aventura_go/administrador/cambiar-password" method="POST" class="cambiar">
+                        <input type="hidden" name="accion" value="cambiar_password">
 
-                        <h4>nueva contraseña</h4>
-                        <input type="text">
+                        <h4>Contraseña Actual</h4>
+                        <input type="password" name="clave_actual" placeholder="Contraseña actual" required>
+
+                        <h4>Nueva contraseña</h4>
+                        <input type="password" name="clave_nueva" placeholder="Ingresa nueva contraseña" required minlength="6">
 
                         <h4>Confirmar Contraseña</h4>
-                        <input type="text">
+                        <input type="password" name="confirmar" placeholder="Confirma nueva contraseña" required minlength="6">
 
-                        <button>Cambiar Contraseña</button>
+                        <button type="submit">Cambiar Contraseña</button>
                     </form>
+
                 </div>
             </div>
 

@@ -22,7 +22,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrador</title>
+    <title>Turistico</title>
 
     <!-- favicon -->
     <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
@@ -86,7 +86,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                     <i class="bi bi-clock"></i> Pendientes
                 </button>
                 <a href="<?= BASE_URL ?>/administrador/reporte?tipo=turistico" class="btn-pdf" target="_blank">
-                    <i class="bi bi-file-earmark-pdf"></i>Generar Reporte
+                    <i class="bi bi-file-earmark-pdf"></i>Generar Reportes
                 </a>
             </div>
 
@@ -139,56 +139,6 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
             </div>
         </div>
     </section>
-
-    <!-- Modal para Agregar/Editar -->
-    <div class="modal fade" id="addModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"><i class="bi bi-plus-circle"></i> Agregar Proveedor</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Empresa</label>
-                                <input type="text" class="form-control" placeholder="Nombre de la empresa">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Representante</label>
-                                <input type="text" class="form-control" placeholder="Nombre completo">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Email</label>
-                                <input type="email" class="form-control" placeholder="email@empresa.com">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Teléfono</label>
-                                <input type="tel" class="form-control" placeholder="+57 300 123 4567">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Ciudad</label>
-                                <input type="text" class="form-control" placeholder="Ciudad">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Estado</label>
-                                <select class="form-select">
-                                    <option>Activo</option>
-                                    <option>Inactivo</option>
-                                    <option>Pendiente</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary-custom">Guardar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

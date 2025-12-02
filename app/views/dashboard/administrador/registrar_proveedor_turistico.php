@@ -12,7 +12,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrador</title>
+    <title>Registrar Proveedor</title>
    
     <!-- favicon -->
     <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
@@ -168,7 +168,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <h4 class="mb-4"><i class="fas fa-map-marker-alt text-primary"></i> Ubicación</h4>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">departamento *</label>
+                                    <label class="form-label">Departamento *</label>
                                     <input type="text" name="departamento" class="form-control" id="departamento" placeholder="Juan Pérez" required>
                                 </div>
                                 <div class="col-md-6 mb-3">

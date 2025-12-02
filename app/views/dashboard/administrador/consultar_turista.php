@@ -13,7 +13,7 @@ $datos = listarTuristas();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrador</title>
+    <title>Turista</title>
    
     <!-- favicon -->
     <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
@@ -74,8 +74,8 @@ $datos = listarTuristas();
                 <button class="filtro-btn" data-filter="pendiente">
                     <i class="bi bi-clock"></i> Pendientes
                 </button>
-                <a href="<?= BASE_URL ?>/administrador/reporte?tipo=turista" class="btn-pdf" target="_blank">
-                    <i class="bi bi-file-earmark-pdf"></i>Generar Reporte
+                <a href="<?= BASE_URL ?>/administrador/reporte-turista?tipo=turista" class="btn-pdf" target="_blank">
+                    <i class="bi bi-file-earmark-pdf"></i>Generar Reportes
                 </a>
             </div>
 

@@ -23,7 +23,7 @@ if (!empty($hotelero['tipo_establecimiento'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrador</title>
+    <title>Editar Proveedor</title>
 
     <!-- favicon -->
     <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
@@ -78,7 +78,8 @@ if (!empty($hotelero['tipo_establecimiento'])) {
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                     <label class="form-label">Logo</label>
-                                    <input type="file" accept=".jpg, .png, .jpeg" name="foto" class="form-control" id="foto" required>
+                                    <img src="<?= BASE_URL ?>/public/uploads/hoteles/<?= $hotelero['foto'] ?>"
+                                        alt="Foto del turista" width="120" class="img-thumbnail mb-2">
                                 </div>
                             <div class="col-md-6 mb-3">
                                 <!-- Nombre establecimiento -->
