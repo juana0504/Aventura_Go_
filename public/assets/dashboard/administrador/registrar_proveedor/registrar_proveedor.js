@@ -36,7 +36,7 @@ function changeStep(direction) {
 
     currentStep += direction;
     if (currentStep < 1) currentStep = 1;
-    if (currentStep > 4) currentStep = 4;
+    if (currentStep > 5) currentStep = 5;
 
     showStep(currentStep);
 }
@@ -71,6 +71,10 @@ function loadPreview() {
 
     document.getElementById("prev-ubicacion").textContent = `${ciudad.value}, ${departamento.value}`;
     document.getElementById("prev-descripcion").textContent = descripcion.value || "-";
+
+    document.getElementById("prev-nombre_repre").textContent = empresa.value;
+    document.getElementById("prev-email_repre").textContent = email.value;
+    document.getElementById("prev-telefono_repre").textContent = telefono.value;
 }
 
 // Iniciar

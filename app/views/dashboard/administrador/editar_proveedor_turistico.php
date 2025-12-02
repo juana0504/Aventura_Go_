@@ -183,8 +183,8 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Foto</label>
-                                    <input type="file" accept=".jpg, .png, .jpeg" name="foto" class="form-control" id="foto" required>
-                                    <input type="hidden" name="foto_actual" value="<?= $proveedor['foto'] ?>">
+                                    <img src="<?= BASE_URL ?>/public/uploads/actividades/<?= $proveedor['foto'] ?>"
+                                        alt="Foto del turista" width="120" class="img-thumbnail mb-2">
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label">Descripción actividades*</label>

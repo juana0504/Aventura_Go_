@@ -122,7 +122,8 @@ body {
     vertical-align: top;
 }
 
-form {
+/* ========== BARRA DE BÚSQUEDA ========== */
+form#busqueda {
     position: relative;
     padding: 10px 0 20px;
     display: flex;
@@ -130,24 +131,25 @@ form {
     gap: 15px;
 }
 
-form input {
+form#busqueda input {
     background-color: #DEE6F2;
     height: 40px;
     border-radius: 11px;
-    width: 640px;
+    width: 600px;
     border: none;
     outline: none;
     font-size: 14px;
-    padding: 8px;
+    padding: 8px 8px 8px 45px;
     margin-bottom: 20px;
 }
 
-form .bi-search {
+form#busqueda .bi-search {
     position: absolute;
-    bottom: 49px;
-    left: 605px;
+    bottom: 54px;
+    left: 570px;
     font-size: 18px;
     pointer-events: none;
+    color: #95a5a6;
 }
 
 #modoOscuroBtn,
@@ -162,29 +164,16 @@ form .bi-search {
     cursor: pointer;
 }
 
-form .bi-moon-fill,
-form .bi-bell-fill {
+form#busqueda .bi-moon-fill,
+form#busqueda .bi-bell-fill {
     color: #000000;
     font-size: 20px;
     cursor: pointer;
 }
 
-form button a {
-    color: #ffffff;
-    text-decoration: none;
-}
-
-/* Título principal */
-.info h1 {
-    font-size: 28px;
-    color: #000000;
-    margin-bottom: 25px;
-}
-
-/* Perfil en el panel */
-form #perfil {
+/* Estilos del dropdown de perfil */
+form#busqueda #perfil {
     display: flex;
-    flex-direction: row;
     align-items: center;
     gap: 12px;
     padding: 10px 20px;
@@ -196,28 +185,22 @@ form #perfil {
     margin-bottom: 10px;
 }
 
-form #perfil img {
+form#busqueda #perfil img {
     width: 35px;
     height: 35px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-form #perfil .info-usuario{
-    display: flex;
-    flex-direction: column;
-    line-height: 1.1;
-}
-
-form #perfil p {
+form#busqueda #perfil p {
     font-weight: 600;
     font-size: 14px;
     margin: 0;
 }
 
-form #perfil h6{
+form#busqueda #perfil h6 {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 16px;
     margin: 0;
 }
 

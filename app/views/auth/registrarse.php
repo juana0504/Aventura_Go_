@@ -41,7 +41,8 @@
                         <i class="bi bi-eye-fill" id="togglePassword"></i>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <input type="file" placeholder="Nombre" accept=".jpg, .png, .jpeg" name="foto" class="form-control" id="foto" required>
+                        <label class="form-label">Foto</label>
+                        <input type="file" placeholder="Foto" accept=".jpg, .png, .jpeg" name="foto" class="form-control" id="foto" required>
                     </div>
 
                     <button type="submit">INICIO</button>

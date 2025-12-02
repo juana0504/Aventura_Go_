@@ -13,23 +13,23 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Proveedor</title>
-   
+
     <!-- favicon -->
     <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
-   
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <!-- LIBRERIA AOS ANIMATE -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-    
+
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    
-        <!-- Icono de bootstrap -->
+
+    <!-- Icono de bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    
+
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_turistico.css">
 </head>
@@ -53,7 +53,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
             <!-- Formulario Wizard -->
             <form id="formProveedor" action="<?= BASE_URL ?>/administrador/guardar-proveedor" method="POST" enctype="multipart/form-data">
-
+                <input type="hidden" name="accion" value="registrar">
 
                 <div class="wizard-container">
                     <div class="wizard-header">
@@ -75,6 +75,10 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                         </div>
                         <div class="step" data-step="4">
                             <div class="step-circle">4</div>
+                            <div class="step-label">Representante</div>
+                        </div>
+                        <div class="step" data-step="5">
+                            <div class="step-circle">5</div>
                             <div class="step-label">Confirmación</div>
                         </div>
                     </div>
@@ -89,12 +93,12 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     <input type="text" name="nombre_empresa" class="form-control" id="empresa" placeholder="Ej: Aventuras Extremas SAS" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">NIT/RUT *</label>
-                                    <input type="text" name="nit_rut" class="form-control" id="nit" placeholder="123456789-0" required>
+                                    <label class="form-label">Logo</label>
+                                    <input type="file" accept=".jpg, .png, .jpeg" name="logo" class="form-control" id="logo" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Nombres y apellidos del Representante *</label>
-                                    <input type="text" name="nombre_representante" class="form-control" id="representante" placeholder="Juan Pérez" required>
+                                    <label class="form-label">NIT/RUT *</label>
+                                    <input type="text" name="nit_rut" class="form-control" id="nit" placeholder="123456789-0" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Email *</label>
@@ -153,8 +157,8 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Foto</label>
-                                    <input type="file" accept=".jpg, .png, .jpeg" name="foto" class="form-control" id="foto" required>
+                                    <label class="form-label">Foto Actividades</label>
+                                    <input type="file" accept=".jpg, .png, .jpeg" name="foto_actividades" class="form-control" id="foto_actividades" required>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label">Descripción actividades*</label>
@@ -184,6 +188,33 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
                         <!-- Paso 4 -->
                         <div class="step-content" data-step="4">
+                            <h4 class="mb-4"><i class="fas fa-map-marker-alt text-primary"></i> Representante</h4>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Nombre del Representante *</label>
+                                    <input type="text" name="nombre_representante" class="form-control" id="representante" placeholder="Juan Pérez" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Identificacion *</label>
+                                    <input type="tel" name="identificacion_representante" class="form-control" id="identiificacion_repre" placeholder="+57 300 123 4567" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Foto</label>
+                                    <input type="file" accept=".jpg, .png, .jpeg" name="foto_representante" class="form-control" id="foto_representante" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Email *</label>
+                                    <input type="email" name="email_representante" class="form-control" id="email_repre" placeholder="contacto@empresa.com" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Teléfono *</label>
+                                    <input type="tel" name="telefono_representante" class="form-control" id="telefono_repre" placeholder="+57 300 123 4567" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Paso 5 -->
+                        <div class="step-content" data-step="5">
                             <div class="text-center">
                                 <i class="fas fa-check-circle success-icon"></i>
                                 <h4>Confirma tu Registro</h4>
@@ -222,6 +253,23 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 <div class="preview-value" id="prev-ubicacion">-</div>
                             </div>
                             <div class="preview-card">
+                                <h6 class="text-primary mb-3"><i class="fas fa-building"></i> Representante</h6>
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <div class="preview-label">Nombre</div>
+                                        <div class="preview-value" id="prev-nombre_repre">-</div>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <div class="preview-label">Email</div>
+                                        <div class="preview-value" id="prev-email_repre">-</div>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <div class="preview-label">Telefono</div>
+                                        <div class="preview-value" id="prev-telefono_repre">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="preview-card">
                                 <h6 class="text-primary mb-3"><i class="fas fa-info-circle"></i> Descripción</h6>
                                 <div class="preview-value" id="prev-descripcion">-</div>
                             </div>
@@ -247,7 +295,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-        
+
 </body>
 
 </html>

@@ -9,7 +9,7 @@ $id = $_SESSION['user']['id'];
 $usuario = mostrarPerfilAdmin($id);
 ?>
 
-<form action="busqueda">
+<form id="busqueda" action="busqueda">
     <input type="text">
     <i class="bi bi-search"></i>
 

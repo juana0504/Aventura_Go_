@@ -14,8 +14,8 @@ switch ($method) {
         $accion = $_POST['accion'] ?? '';
         if ($accion === 'actualizar') {
             actualizarProveedor();
-        }else{
-        registrarProveedor();
+        } else {
+            registrarProveedor();
         }
         break;
 
@@ -26,7 +26,6 @@ switch ($method) {
         if ($accion === 'eliminar') {
             // esta funcion elimina el proveedor segun su id
             eliminarProveedor($_GET['id']);
-            
         }
 
         if (isset($_GET['id'])) {
@@ -57,20 +56,25 @@ switch ($method) {
 //FUNCIONES CRUD
 function registrarProveedor()
 {
-    $nombre_empresa        = $_POST['nombre_empresa'] ?? '';
-    $nit_rut               = $_POST['nit_rut'] ?? '';
-    $nombre_representante  = $_POST['nombre_representante'] ?? '';
-    $email                 = $_POST['email'] ?? '';
-    $telefono              = $_POST['telefono'] ?? '';
-    $actividades           = $_POST['actividades'] ?? [];
-    $descripcion           = $_POST['descripcion'] ?? '';
-    $departamento          = $_POST['departamento'] ?? '';
-    $ciudad                = $_POST['ciudad'] ?? '';
-    $direccion             = $_POST['direccion'] ?? '';
+    $nombre_empresa          = $_POST['nombre_empresa'] ?? '';
+    $nit_rut                 = $_POST['nit_rut'] ?? '';
+    $email                   = $_POST['email'] ?? '';
+    $telefono                = $_POST['telefono'] ?? '';
+    $nombre_representante    = $_POST['nombre_representante'] ?? '';
+    $identificacion_representante         = $_POST['identificacion_representante'] ?? '';
+    $identificacion         = $_POST['identificacion'] ?? '';
+    $email_representante     = $_POST['email_representante'] ?? '';
+    $telefono_representante = $_POST['telefono_representante'] ?? '';
+    $actividades             = $_POST['actividades'] ?? [];
+    $descripcion             = $_POST['descripcion'] ?? '';
+    $departamento            = $_POST['departamento'] ?? '';
+    $ciudad                  = $_POST['ciudad'] ?? '';
+    $direccion               = $_POST['direccion'] ?? '';
 
     if (
-        empty($nombre_empresa) || empty($nit_rut) || empty($nombre_representante) ||
-        empty($email) || empty($telefono) || empty($actividades) ||
+        empty($nombre_empresa) || empty($nit_rut) || empty($email) ||
+        empty($telefono) || empty($nombre_representante) || empty($identificacion) || empty($identificacion_representante) ||
+        empty($email_representante) || empty($telefono_representante) || empty($actividades) || 
         empty($descripcion) || empty($departamento) || empty($ciudad) || empty($direccion)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completa todos los campos');
@@ -85,58 +89,82 @@ function registrarProveedor()
 
     // Logica para cargar imagenes
     $foto_url = null;
+    $logo_url = null;
+    $foto_act = null;
 
-    // Validamos si se envio o no la foto desde el formulario
-    // ***Si el proveedorno registro una foto, dejar una imagen por defecto
+    // ---- SUBIDA DE IMÁGENES ----
 
-    if (!empty($_FILES['foto']['name'])) {
-        $file =$_FILES['foto'];
-        // obtenemos la extencion del archivo
-        $extencion = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-
-        // definimos las extenciones permitidas
+    // LOGO
+    if (!empty($_FILES['logo']['name'])) {
+        $file = $_FILES['logo'];
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
         $permitidas = ['png', 'jpg', 'jpeg'];
 
-        // validar que la extencion de la imagen cargada este dentro de las permitideas
-        if (!in_array($extencion, $permitidas)) {
-            mostrarSweetAlert('error', 'Extención no permitiva.', 'Las extenciones permitidas son: png, jpg, jpeg.');
-            exit();
+        if (!in_array($ext, $permitidas)) {
+            mostrarSweetAlert('error', 'Extensión no permitida', 'Solo PNG, JPG y JPEG');
+            exit;
         }
 
-        // validamos el tamaño o elpeso de la imagen
-        if ($file['size']> 2 *1024 * 1024) {
-            mostrarSweetAlert('error', 'Error al cargar la foto.', 'El peso de la foto supera el limite de 2MB.');
-            exit();
+        if ($file['size'] > 2 * 1024 * 1024) {
+            mostrarSweetAlert('error', 'Archivo muy pesado', 'Máximo 2MB');
+            exit;
         }
 
-        // definimos el nombre del archivo y concatenamos la extencion
-        $foto_url = uniqid('proveedor_') . '.' . $extencion;
-
-        // definimos el destino donde moveremos el archivo
-        $destino = BASE_PATH . "/public/uploads/actividades/" .$foto_url;
-
-        // movemos el archivo al destino
+        $logo_url = uniqid('logo_') . "." . $ext;
+        $destino = BASE_PATH . "/public/uploads/turistico/" . $logo_url;
         move_uploaded_file($file['tmp_name'], $destino);
-        
-    }else{
-        // Agregar la logica de la imagen por default
+    } else {
+        $logo_url = 'default_proveedor.png';
+    }
+
+
+    // FOTO PRINCIPAL
+    if (!empty($_FILES['foto']['name'])) {
+        $file = $_FILES['foto'];
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+        $foto_url = uniqid('foto_') . "." . $ext;
+        $destino = BASE_PATH . "/public/uploads/usuario/" . $foto_url;
+        move_uploaded_file($file['tmp_name'], $destino);
+    } else {
         $foto_url = 'default_proveedor.png';
     }
+
+
+    // FOTO ACTIVIDAD
+    if (!empty($_FILES['foto_actividad']['name'])) {
+        $file = $_FILES['foto_actividad'];
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+        $foto_act = uniqid('actividad_') . "." . $ext;
+        $destino = BASE_PATH . "/public/uploads/turistico/actividades/" . $foto_act;
+        move_uploaded_file($file['tmp_name'], $destino);
+    } else {
+        $foto_act = 'default_proveedor.png';
+    }
+
+    $claveHash = password_hash($identificacion, PASSWORD_DEFAULT);
 
     $objProveedor = new Proveedor();
 
     $data = [
-        'nombre_empresa'       => $nombre_empresa,
-        'nit_rut'              => $nit_rut,
-        'nombre_representante' => $nombre_representante,
-        'email'                => $email,
-        'telefono'             => $telefono,
-        'actividades'          => $actividades,
-        'descripcion'          => $descripcion,
-        'departamento'         => $departamento,
-        'ciudad'               => $ciudad,
-        'direccion'            => $direccion,
-        'foto'                 => $foto_url
+        'nombre_empresa'          => $nombre_empresa,
+        'logo'                    => $logo_url,
+        'email'                   => $email,
+        'telefono'                => $telefono,
+        'nit_rut'                 => $nit_rut,
+        'nombre_representante'    => $nombre_representante,
+        'identificacion_representante' =>$identificacion_representante,
+        'identificacion'          => $claveHash,
+        'foto_representante'      => $foto_url,
+        'email_representante'     => $email_representante,
+        'telefono_representante'  => $telefono_representante,
+        'actividades'             => $actividades,
+        'descripcion'             => $descripcion,
+        'departamento'            => $departamento,
+        'ciudad'                  => $ciudad,
+        'direccion'               => $direccion,
+        'foto_actividades'          => $foto_act
     ];
 
     $resultado = $objProveedor->registrar($data);
@@ -166,22 +194,25 @@ function listarProveedorId($id)
 
 function actualizarProveedor()
 {
-    $id_proveedor         = $_POST['id_proveedor'] ?? '';
-    $nombre_empresa        = $_POST['nombre_empresa'] ?? '';
-    $nit_rut               = $_POST['nit_rut'] ?? '';
-    $nombre_representante  = $_POST['nombre_representante'] ?? '';
-    $email                 = $_POST['email'] ?? '';
-    $telefono              = $_POST['telefono'] ?? '';
-    $actividades           = $_POST['actividades'] ?? [];
-    $descripcion           = $_POST['descripcion'] ?? '';
-    $departamento          = $_POST['departamento'] ?? '';
-    $ciudad                = $_POST['ciudad'] ?? '';
-    $direccion             = $_POST['direccion'] ?? '';
+    $id_proveedor            = $_POST['id_proveedor'] ?? '';
+    $nombre_empresa          = $_POST['nombre_empresa'] ?? '';
+    $email                   = $_POST['email'] ?? '';
+    $telefono                = $_POST['telefono'] ?? '';
+    $nit_rut                 = $_POST['nit_rut'] ?? '';
+    $nombre_representante    = $_POST['nombre_representante'] ?? '';
+    $email_representante     = $_POST['email_representante'] ?? '';
+    $telefono_representante = $_POST['telefono_representante'] ?? '';
+    $actividades             = $_POST['actividades'] ?? [];
+    $descripcion             = $_POST['descripcion'] ?? '';
+    $departamento            = $_POST['departamento'] ?? '';
+    $ciudad                  = $_POST['ciudad'] ?? '';
+    $direccion               = $_POST['direccion'] ?? '';
 
     if (
-        empty($nombre_empresa) || empty($nit_rut) || empty($nombre_representante) ||
-        empty($email) || empty($telefono) || empty($actividades) ||
-        empty($descripcion) || empty($departamento) || empty($ciudad) || empty($direccion)
+        empty($nombre_empresa) || empty($nit_rut) || empty($email) ||
+        empty($telefono) || empty($nombre_representante) || empty($email_representante) ||
+        empty($telefono_representante) || empty($actividades) || empty($descripcion) ||
+        empty($departamento) || empty($ciudad) || empty($direccion)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completa todos los campos');
         exit();
@@ -195,17 +226,19 @@ function actualizarProveedor()
     $objProveedor = new Proveedor();
 
     $data = [
-        'id_proveedor'         => $id_proveedor,
-        'nombre_empresa'       => $nombre_empresa,
-        'nit_rut'              => $nit_rut,
-        'nombre_representante' => $nombre_representante,
-        'email'                => $email,
-        'telefono'             => $telefono,
-        'actividades'          => $actividades,
-        'descripcion'          => $descripcion,
-        'departamento'         => $departamento,
-        'ciudad'               => $ciudad,
-        'direccion'            => $direccion
+        'id_proveedor'             => $id_proveedor,
+        'nombre_empresa'           => $nombre_empresa,
+        'email'                    => $email,
+        'telefono'                 => $telefono,
+        'nit_rut'                  => $nit_rut,
+        'nombre_representante'     => $nombre_representante,
+        'email_representante'      => $email_representante,
+        'telefono_representante'   => $telefono_representante,
+        'actividades'              => $actividades,
+        'descripcion'              => $descripcion,
+        'departamento'             => $departamento,
+        'ciudad'                   => $ciudad,
+        'direccion'                => $direccion
     ];
 
     $resultado = $objProveedor->actualizar($data);
@@ -217,7 +250,8 @@ function actualizarProveedor()
     }
 }
 
-function eliminarProveedor($id){
+function eliminarProveedor($id)
+{
     $objProveedor = new Proveedor();
 
     $resultado = $objProveedor->eliminar($id);
