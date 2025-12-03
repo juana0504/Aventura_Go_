@@ -105,7 +105,7 @@
     <table>
         <thead>
             <tr>
-                <th>Foto</th>
+                <th>Logo</th>
                 <th>Empresa</th>
                 <th>Representante</th>
                 <th>Email</th>
@@ -121,7 +121,7 @@
                     <tr>
                         <td>
                             <img class="foto"
-                                src="<?= BASE_URL ?>/public/uploads/actividades/<?= $proveedor['foto'] ?>">
+                                src="<?= BASE_URL ?>/public/uploads/turistico/<?= $proveedor['logo'] ?>">
                         </td>
 
                         <td><?= $proveedor['nombre_empresa'] ?></td>

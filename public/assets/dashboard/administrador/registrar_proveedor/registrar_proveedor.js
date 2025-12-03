@@ -18,7 +18,7 @@ function showStep(step) {
     const nextBtn = document.getElementById("nextBtn");
 
     // Si es el paso final → pasa a "Registrar"
-    if (step === 4) {
+    if (step == 5) {
         nextBtn.innerHTML = `Registrar <i class="fas fa-check"></i>`;
         nextBtn.type = "submit"; // ✅ Aquí ya envía
         loadPreview(); // ✅ cargar vista previa
@@ -61,7 +61,6 @@ function validateStep(step) {
 function loadPreview() {
     document.getElementById("prev-empresa").textContent = empresa.value;
     document.getElementById("prev-nit").textContent = nit.value;
-    document.getElementById("prev-representante").textContent = representante.value;
     document.getElementById("prev-email").textContent = email.value;
     document.getElementById("prev-telefono").textContent = telefono.value;
 
@@ -72,9 +71,9 @@ function loadPreview() {
     document.getElementById("prev-ubicacion").textContent = `${ciudad.value}, ${departamento.value}`;
     document.getElementById("prev-descripcion").textContent = descripcion.value || "-";
 
-    document.getElementById("prev-nombre_repre").textContent = empresa.value;
-    document.getElementById("prev-email_repre").textContent = email.value;
-    document.getElementById("prev-telefono_repre").textContent = telefono.value;
+    document.getElementById("prev-nombre_repre").textContent = nombre_repre.value;
+    document.getElementById("prev-email_repre").textContent = email_repre.value;
+    document.getElementById("prev-telefono_repre").textContent = telefono_repre.value;
 }
 
 // Iniciar
@@ -84,7 +83,7 @@ showStep(currentStep);
 document.getElementById("nextBtn").addEventListener("click", function (e) {
 
     // Si NO estamos en el paso final → avanzar
-    if (currentStep < 4) {
+    if (currentStep < 5) {
         e.preventDefault();
         changeStep(1);
     }

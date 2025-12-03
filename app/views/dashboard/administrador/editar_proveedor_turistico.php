@@ -96,6 +96,10 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                         </div>
                         <div class="step" data-step="4">
                             <div class="step-circle">4</div>
+                            <div class="step-label">Representante</div>
+                        </div>
+                        <div class="step" data-step="5">
+                            <div class="step-circle">5</div>
                             <div class="step-label">Confirmación</div>
                         </div>
                     </div>
@@ -103,8 +107,13 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                     <div class="wizard-content">
                         <!-- Paso 1 -->
                         <div class="step-content active" data-step="1">
-                            <h4 class="mb-4"><i class="fas fa-building text-primary"></i> Información Básica del Proveedor</h4>
+                            <h4 class="mb-4"><i class="fas fa-building text-primary"></i> Información Básica de La Empresa</h4>
                             <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Logo</label>
+                                    <img src="<?= BASE_URL ?>/public/uploads/turistico/<?= $proveedor['logo'] ?>"
+                                        alt="Foto del turista" width="120" class="img-thumbnail mb-2">
+                                </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Nombre de la Empresa *</label>
                                     <input type="text" name="nombre_empresa" class="form-control" id="empresa" placeholder="Ej: Aventuras Extremas SAS" required value="<?= $proveedor['nombre_empresa'] ?>">
@@ -182,8 +191,8 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Foto</label>
-                                    <img src="<?= BASE_URL ?>/public/uploads/actividades/<?= $proveedor['foto'] ?>"
+                                    <label class="form-label">Foto actividades</label>
+                                    <img src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $proveedor['foto_actividades'] ?>"
                                         alt="Foto del turista" width="120" class="img-thumbnail mb-2">
                                 </div>
                                 <div class="col-md-12 mb-3">
@@ -215,6 +224,34 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
                         <!-- Paso 4 -->
                         <div class="step-content" data-step="4">
+                            <h4 class="mb-4"><i class="fas fa-map-marker-alt text-primary"></i> Representante</h4>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Nombre del Representante *</label>
+                                    <input type="text" name="nombre_representante" class="form-control" id="nombre_repre" placeholder="Juan Pérez" required <?= $proveedor['nombre_representante'] ?>>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Identificacion *</label>
+                                    <input type="tel" name="identificacion_representante" class="form-control" id="identiificacion_repre" placeholder="+57 300 123 4567" required <?= $proveedor['identificacion_representante'] ?>>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Foto</label>
+                                    <img src="<?= BASE_URL ?>/public/uploads/usuario<?= $proveedor['foto_representante'] ?>"
+                                        alt="Foto del turista" width="120" class="img-thumbnail mb-2">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Email *</label>
+                                    <input type="email" name="email_representante" class="form-control" id="email_repre" placeholder="contacto@empresa.com" required <?= $proveedor['email_representante'] ?>>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Teléfono *</label>
+                                    <input type="tel" name="telefono_representante" class="form-control" id="telefono_repre" placeholder="+57 300 123 4567" required <?= $proveedor['telefono_representante'] ?>>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Paso 5 -->
+                        <div class="step-content" data-step="5">
                             <div class="text-center">
                                 <i class="fas fa-check-circle success-icon"></i>
                                 <h4>Confirma tu Registro</h4>

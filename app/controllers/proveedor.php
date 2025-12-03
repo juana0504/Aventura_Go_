@@ -62,7 +62,6 @@ function registrarProveedor()
     $telefono                = $_POST['telefono'] ?? '';
     $nombre_representante    = $_POST['nombre_representante'] ?? '';
     $identificacion_representante         = $_POST['identificacion_representante'] ?? '';
-    $identificacion         = $_POST['identificacion'] ?? '';
     $email_representante     = $_POST['email_representante'] ?? '';
     $telefono_representante = $_POST['telefono_representante'] ?? '';
     $actividades             = $_POST['actividades'] ?? [];
@@ -73,7 +72,7 @@ function registrarProveedor()
 
     if (
         empty($nombre_empresa) || empty($nit_rut) || empty($email) ||
-        empty($telefono) || empty($nombre_representante) || empty($identificacion) || empty($identificacion_representante) ||
+        empty($telefono) || empty($nombre_representante) || empty($identificacion_representante) ||
         empty($email_representante) || empty($telefono_representante) || empty($actividades) || 
         empty($descripcion) || empty($departamento) || empty($ciudad) || empty($direccion)
     ) {
@@ -143,7 +142,7 @@ function registrarProveedor()
         $foto_act = 'default_proveedor.png';
     }
 
-    $claveHash = password_hash($identificacion, PASSWORD_DEFAULT);
+    $claveHash = password_hash($identificacion_representante, PASSWORD_DEFAULT);
 
     $objProveedor = new Proveedor();
 

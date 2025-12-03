@@ -95,7 +95,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                 <table id="tablaAdmin" class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Foto</th>
+                            <th>Logo</th>
                             <th>Empresa</th>
                             <th>Representante</th>
                             <th>Email</th>
@@ -109,7 +109,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                         <tr>
                             <?php if (!empty($datos)) : ?>
                                 <?php foreach ($datos as $proveedor): ?>
-                                    <td><img src="<?= BASE_URL ?>/public/uploads/actividades/<?= $proveedor['foto'] ?>" alt="" style="10px"></td>
+                                    <td><img src="<?= BASE_URL ?>/public/uploads/turistico/<?= $proveedor['logo'] ?>" alt="" style="10px"></td>
                                     <td><?= $proveedor['nombre_empresa'] ?></td>
                                     <td><?= $proveedor['nombre_representante'] ?></td>
                                     <td><?= $proveedor['email'] ?></td>

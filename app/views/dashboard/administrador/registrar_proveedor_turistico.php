@@ -89,12 +89,12 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <h4 class="mb-4"><i class="fas fa-building text-primary"></i> Información Básica del Proveedor</h4>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Nombre de la Empresa *</label>
-                                    <input type="text" name="nombre_empresa" class="form-control" id="empresa" placeholder="Ej: Aventuras Extremas SAS" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
                                     <label class="form-label">Logo</label>
                                     <input type="file" accept=".jpg, .png, .jpeg" name="logo" class="form-control" id="logo" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Nombre de la Empresa *</label>
+                                    <input type="text" name="nombre_empresa" class="form-control" id="empresa" placeholder="Ej: Aventuras Extremas SAS" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">NIT/RUT *</label>
@@ -192,7 +192,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Nombre del Representante *</label>
-                                    <input type="text" name="nombre_representante" class="form-control" id="representante" placeholder="Juan Pérez" required>
+                                    <input type="text" name="nombre_representante" class="form-control" id="nombre_repre" placeholder="Juan Pérez" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Identificacion *</label>
@@ -256,15 +256,15 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 <h6 class="text-primary mb-3"><i class="fas fa-building"></i> Representante</h6>
                                 <div class="row">
                                     <div class="col-md-6 mb-2">
-                                        <div class="preview-label">Nombre</div>
+                                        <div class="preview-label">Nombre del Representante</div>
                                         <div class="preview-value" id="prev-nombre_repre">-</div>
                                     </div>
                                     <div class="col-md-6 mb-2">
-                                        <div class="preview-label">Email</div>
+                                        <div class="preview-label">Email del Representante</div>
                                         <div class="preview-value" id="prev-email_repre">-</div>
                                     </div>
                                     <div class="col-md-6 mb-2">
-                                        <div class="preview-label">Telefono</div>
+                                        <div class="preview-label">Telefono del Representante</div>
                                         <div class="preview-value" id="prev-telefono_repre">-</div>
                                     </div>
                                 </div>
