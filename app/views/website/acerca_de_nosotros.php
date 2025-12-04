@@ -24,7 +24,7 @@
     <!-- LIBRERIA AOS ANIMATE -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="../assets/website_externos/acerca_de_nosotros/acerca_de_nosotros.css">
+    <link rel="stylesheet" href="public/assets/website_externos/acerca_de_nosotros/acerca_de_nosotros.css">
 </head>
 
 <body>
@@ -35,23 +35,23 @@
             <div class="container-fluid">
                 <!-- Logo -->
                 <div class="logo">
-                    <img src="../assets/website_externos/acerca_de_nosotros/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go"
+                    <img src="public/assets/website_externos/acerca_de_nosotros/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go"
                         class="navbar-logo">
                 </div>
 
                 <!-- Menú principal -->
                 <ul class="navbar-nav" id="navbarNav">
-                    <li><a class="nav-link" href="index.html">Inicio</a></li>
-                    <li><a class="nav-link" href="toursDestacados.html">Destacados</a></li>
-                    <li><a class="nav-link active" href="acerca_de_nosotros.html">Acerca de nosotros</a></li>
-                    <li><a class="nav-link" href="contactanos.html">Contáctanos</a></li>
+                    <li><a class="nav-link" href="/aventura_go/">Inicio</a></li>
+                    <li><a class="nav-link" href="/aventura_go/destacados">Destacados</a></li>
+                    <li><a class="nav-link active" href="/aventura_go/acerca-de-nosotros">Acerca de nosotros</a></li>
+                    <li><a class="nav-link" href="/aventura_go/contactanos">Contáctanos</a></li>
                 </ul>
 
                 <!-- Botones y menú móvil -->
                 <div class="actions">
                     <div class="actions">
-                        <a href="../extras/login.html" class="btn-login">Ingresa</a>
-                        <a href="../extras/registrarse.html" class="btn-register">Regístrate</a>
+                        <a href="login" class="btn-login">Ingresa</a>
+                        <a href="registrarse" class="btn-register">Regístrate</a>
 
                         <!-- menu hambirguesa en responsive -->
                         <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
@@ -76,7 +76,7 @@
                 <div class="carousel-inner">
 
                     <div class="carousel-item active">
-                        <img src="../assets/website_externos/acerca_de_nosotros/img/header.png" class="d-block w-100"
+                        <img src="public/assets/website_externos/acerca_de_nosotros/img/header.png" class="d-block w-100"
                             alt="Turismo en bote">
                         <div class="carousel-caption">
                             <h1>Conecta con la aventura,</h1>
@@ -92,7 +92,7 @@
                     </div>
 
                     <div class="carousel-item">
-                        <img src="../assets/website_externos/acerca_de_nosotros/img/montanismo.png" class="d-block w-100" alt="...">
+                        <img src="public/assets/website_externos/acerca_de_nosotros/img/montanismo.png" class="d-block w-100" alt="...">
                         <div class="carousel-caption">
                             <h1>Descubre tu lado aventurero,</h1>
                             <h2>déjate llevar por la emoción</h2>
@@ -104,7 +104,7 @@
                     </div>
 
                     <div class="carousel-item">
-                        <img src="../assets/website_externos/acerca_de_nosotros/img/canopy.png" class="d-block w-100" alt="...">
+                        <img src="public/assets/website_externos/acerca_de_nosotros/img/canopy.png" class="d-block w-100" alt="...">
                         <div class="carousel-caption">
                             <h1>vive la naturaleza al máximo,</h1>
                             <h2>Explora en altura</h2>
@@ -158,7 +158,7 @@
                     <div class="col-12 col-md-4 mb-4 d-flex" data-aos="zoom-in" data-aos-duration="1500">
                         <!-- Añadí d-flex -->
                         <div class="feature-card1 p-4 shadow-sm w-100"> <!-- Añadí w-100 -->
-                            <img src="../assets/website_externos/acerca_de_nosotros/img/caracteristicas_icono_reserva.png" alt="logo1"
+                            <img src="public/assets/website_externos/acerca_de_nosotros/img/caracteristicas_icono_reserva.png" alt="logo1"
                                 class="icono">
                             <h4>Reserva con confianza</h4>
                             <p>Disfruta experiencias seguras y respaldadas por prestadores locales certificados.</p>
@@ -170,7 +170,7 @@
                     <div class="col-12 col-md-4 mb-4 d-flex" data-aos="zoom-in" data-aos-duration="2500">
                         <!-- Añadí d-flex -->
                         <div class="feature-card2 p-4 shadow-sm w-100"> <!-- Añadí w-100 -->
-                            <img src="../assets/website_externos/acerca_de_nosotros/img/caracteristicas_icono_reserva2.png" alt="logo2"
+                            <img src="public/assets/website_externos/acerca_de_nosotros/img/caracteristicas_icono_reserva2.png" alt="logo2"
                                 class="icono">
                             <h4>Aventura sin complicaciones</h4>
                             <p>Nos encargamos de los detalles para que tú solo vivas la emoción de viajar.</p>
@@ -183,7 +183,7 @@
                     <div class="col-12 col-md-4 mb-4 d-flex" data-aos="zoom-in" data-aos-duration="3000">
                         <!-- Añadí d-flex -->
                         <div class="feature-card3 p-4 shadow-sm w-100"> <!-- Añadí w-100 -->
-                            <img src="../assets/website_externos/acerca_de_nosotros/img/caracteristicas_icono_reserva3.png" alt="logo3"
+                            <img src="public/assets/website_externos/acerca_de_nosotros/img/caracteristicas_icono_reserva3.png" alt="logo3"
                                 class="icono">
                             <h4>Opciones flexibles</h4>
                             <p>Elige entre distintos destinos y actividades para adaptar tu viaje a tu medida.</p>
@@ -243,7 +243,7 @@
                         <!-- Card 1 -->
                         <div class="card-testimonio">
                             <div class="cont-img">
-                                <img src="../assets/website_externos/acerca_de_nosotros/img/index_foto_opiniones.png" alt="foto mujer">
+                                <img src="public/assets/website_externos/acerca_de_nosotros/img/index_foto_opiniones.png" alt="foto mujer">
                             </div>
                             <div class="cont-info">
                                 <h3>Kristin Krause</h3>
@@ -264,7 +264,7 @@
                         <!-- Card 2 -->
                         <div class="card-testimonio">
                             <div class="cont-img">
-                                <img src="../assets/website_externos/acerca_de_nosotros/img/index_foto_opiniones.png" alt="foto mujer">
+                                <img src="public/assets/website_externos/acerca_de_nosotros/img/index_foto_opiniones.png" alt="foto mujer">
                             </div>
                             <div class="cont-info">
                                 <h3>Alejandro Catro </h3>
@@ -287,7 +287,7 @@
                         <!-- Card 3 -->
                         <div class="card-testimonio">
                             <div class="cont-img">
-                                <img src="../assets/website_externos/acerca_de_nosotros/img/index_foto_opiniones.png" alt="foto mujer">
+                                <img src="public/assets/website_externos/acerca_de_nosotros/img/index_foto_opiniones.png" alt="foto mujer">
                             </div>
                             <div class="cont-info">
                                 <h3>claudia Sachica</h3>
@@ -308,7 +308,7 @@
                         <!-- Card 4 -->
                         <div class="card-testimonio">
                             <div class="cont-img">
-                                <img src="../assets/website_externos/acerca_de_nosotros/img/index_foto_opiniones.png" alt="foto mujer">
+                                <img src="public/assets/website_externos/acerca_de_nosotros/img/index_foto_opiniones.png" alt="foto mujer">
                             </div>
                             <div class="cont-info">
                                 <h3>Juana Mendoza</h3>
@@ -329,7 +329,7 @@
                         <!-- Card 5 -->
                         <div class="card-testimonio">
                             <div class="cont-img">
-                                <img src="../assets/website_externos/acerca_de_nosotros/img/index_foto_opiniones.png" alt="foto mujer">
+                                <img src="public/assets/website_externos/acerca_de_nosotros/img/index_foto_opiniones.png" alt="foto mujer">
                             </div>
                             <div class="cont-info">
                                 <h3>Alberto Gongora</h3>
@@ -377,7 +377,7 @@
                     <!-- Columna 1: Logo -->
                     <div class="col-md-2">
                         <div class="logo-section">
-                            <img src="../assets/website_externos/acerca_de_nosotros/img/LOGO-NEGATIVO.png" alt="logo Aventura Go">
+                            <img src="public/assets/website_externos/acerca_de_nosotros/img/LOGO-NEGATIVO.png" alt="logo Aventura Go">
                         </div>
                     </div>
 
@@ -465,7 +465,7 @@
         AOS.init();
     </script>
 
-    <script src="../assets/website_externos/acerca_de_nosotros/acerca_de_nosotros.js"></script>
+    <script src="public/assets/website_externos/acerca_de_nosotros/acerca_de_nosotros.js"></script>
 
 </body>
 
