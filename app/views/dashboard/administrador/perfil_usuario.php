@@ -114,14 +114,15 @@ $usuario = mostrarPerfilAdmin($id);
 
                     <div class="editar">
 
-                      
-
-                      <form action="/aventura_go/administrador/actualizar-perfil" method="POST" enctype="multipart/form-data">
-
-
+                        <form action="/aventura_go/administrador/actualizar-perfil" method="POST" enctype="multipart/form-data">
 
                             <h4>Imagen Perfil</h4>
-                            <input type="file" name="foto">
+                            <img src="<?= BASE_URL ?>/public/uploads/usuario/<?= $usuario['foto'] ?>" alt="persona">
+
+                            <div class="botones-imagen">
+                                <button id="descargar">DESCARGAR</button>
+                                <button id="eliminar">ELIMINAR</button>
+                            </div>
 
                             <h4>Nombre Completo</h4>
                             <input type="text" name="nombre" value="<?= $usuario['nombre'] ?>">
@@ -129,11 +130,8 @@ $usuario = mostrarPerfilAdmin($id);
                             <h4>Correo Electrónico</h4>
                             <input type="text" name="email" value="<?= $usuario['email'] ?>">
 
-
                             <h4>Teléfono</h4>
                             <input type="number" name="telefono" value="<?= $usuario['telefono'] ?>">
-
-                            
 
                             <h4>Identificación</h4>
                             <input type="text" name="identificacion" value="<?= $usuario['identificacion'] ?>">
@@ -143,6 +141,7 @@ $usuario = mostrarPerfilAdmin($id);
                         </form>
 
                     </div>
+
 
 
                     <form action="/aventura_go/administrador/cambiar-password" method="POST" class="cambiar">

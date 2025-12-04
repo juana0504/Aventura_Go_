@@ -158,7 +158,7 @@ switch ($request) {
         break;
 
     case '/administrador/actualizar-perfil':
-        require BASE_PATH . '/app/controllers/administrador/editarPerfilAdmin.php';
+        require BASE_PATH . '/app/controllers/editarPerfilAdmin.php';
         break;
 
 
