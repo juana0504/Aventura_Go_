@@ -19,11 +19,12 @@
             alt="Aventura Go" />
         </a>
 
-        <ul class="navbar-nav">
-          <li><a href="index.html" class="nav-link">Inicio</a></li>
-          <li><a href="destacados.html" class="nav-link active">Destacados</a></li>
-          <li><a href="acerca_de_nosotros.html" class="nav-link">Acerca de nosotros</a></li>
-          <li><a href="contactanos.html" class="nav-link">Contáctanos</a></li>
+        <!-- Menú principal -->
+        <ul class="navbar-nav" id="navbarNav">
+          <li><a class="nav-link" href="/aventura_go/">Inicio</a></li>
+          <li><a class="nav-link active" href="/aventura_go/destacados">Destacados</a></li>
+          <li><a class="nav-link" href="/aventura_go/acerca-de-nosotros">Acerca de nosotros</a></li>
+          <li><a class="nav-link" href="/aventura_go/contactanos">Contáctanos</a></li>
         </ul>
 
         <div class="actions">
@@ -215,6 +216,8 @@
     <h2>Tours populares</h2>
     <div id="contenedor-tours" class="contenedor-tours"></div>
   </section>
+
+
 
   <section class="ofertas-temporada">
     <div class="contenedor-ofertas">
