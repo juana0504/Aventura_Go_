@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../../helpers/alert_helper.php';
-require_once __DIR__ . '/../../models/editarPerfilAdmin.php';
+require_once __DIR__ . '/../helpers/alert_helper.php';
+require_once __DIR__ . '/../models/editarPerfilAdmin.php';
 
 session_start();
 

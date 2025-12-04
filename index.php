@@ -39,6 +39,8 @@ switch ($request) {
     case '/recoverpw':
         require BASE_PATH . '/app/views/auth/resetPassword.php';  //redirige al guardar proveedor
         break;
+
+    
     //fin rutas login
 
 
@@ -134,7 +136,7 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/administrador/perfil_usuario.php';  //redirige al perfil del administradors
         break;
     case '/administrador/actualizar-perfil':
-        require BASE_PATH . '/app/controllers/administrador/editarPerfilAdmin.php';
+        require BASE_PATH . '/app/controllers/editarPerfilAdmin.php';
         break;
 
 
