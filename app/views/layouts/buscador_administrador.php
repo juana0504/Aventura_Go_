@@ -31,7 +31,11 @@ $usuario = mostrarPerfilAdmin($id);
             </li>
             <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="../../website/index.html"><i class="bi bi-box-arrow-right"></i>Cerrar Sesión</a></li>
+             <li>
+                <a class="dropdown-item" href="<?= BASE_URL ?>/logout">
+                    <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                </a>
+            </li>
         </ul>
     </div>
 </form>
