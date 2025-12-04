@@ -21,7 +21,7 @@
     <!-- LIBRERIA AOS ANIMATE -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="../assets/website_externos/contactanos/contactanos.css">
+    <link rel="stylesheet" href="public/assets/website_externos/contactanos/contactanos.css">
 </head>
 
 
@@ -33,23 +33,23 @@
             <div class="container">
                 <!-- Logo -->
                 <div class="logo">
-                    <img src="../assets/website_externos/contactanos/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go"
+                    <img src="public/assets/website_externos/contactanos/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go"
                         class="navbar-logo">
                 </div>
 
                 <!-- Menú principal -->
                 <ul class="navbar-nav" id="navbarNav">
-                    <li><a class="nav-link" href="index.html">Inicio</a></li>
-                    <li><a class="nav-link" href="destacados.html">Destacados</a></li>
-                    <li><a class="nav-link" href="acerca_de_nosotros.html">Acerca de nosotros</a></li>
-                    <li><a class="nav-link active" href="contactanos.html">Contáctanos</a></li>
+                    <li><a class="nav-link" href="/aventura_go/">Inicio</a></li>
+                    <li><a class="nav-link" href="/aventura_go/destacados">Destacados</a></li>
+                    <li><a class="nav-link" href="/aventura_go/acerca-de-nosotros">Acerca de nosotros</a></li>
+                    <li><a class="nav-link active" href="/aventura_go/contactanos">Contáctanos</a></li>
                 </ul>
 
                 <!-- Botones y menú móvil -->
                 <div class="actions">
                     <div class="actions">
-                        <a href="../extras/login.html" class="btn-login">Ingresa</a>
-                        <a href="../extras/registrarse.html" class="btn-register">Regístrate</a>
+                        <a href="login" class="btn-login">Ingresa</a>
+                        <a href="registrarse" class="btn-register">Regístrate</a>
 
                         <!-- menu hambirguesa en responsive -->
                         <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
@@ -70,27 +70,27 @@
 
             <div class="row hero-img">
                 <div class="col-12 header-arriba">
-                    <img src="../assets/website_externos/contactanos/img/Hero_contactanos.png" alt="img contactanos">
+                    <img src="public/assets/website_externos/contactanos/img/Hero_contactanos.png" alt="img contactanos">
                     <h1 class="palpitando">CONTACTANOS</h1>
                 </div>
             </div>
 
             <div class="row hero-info">
                 <div class="col-12 col-sm-4 col-md-4 text-center p-3">
-                    <img src="../assets/website_externos/contactanos/img/hero_icon_email.png" class="icono-email"
+                    <img src="public/assets/website_externos/contactanos/img/hero_icon_email.png" class="icono-email"
                         alt="icono hero_icon_email">
                     <h2 class="h2-email">E-mail</h2>
                     <h3 class="h3-email">aventura_go@gmail.com</h3>
                     <h3 class="h3-email">aventurago.2025@gmail.com</h3>
                 </div>
                 <div class="col-12 col-sm-4 col-md-4 text-center p-3">
-                    <img src="../assets/website_externos/contactanos/img/hero_icon_phone.png" alt="icono hero_icon_phone">
+                    <img src="public/assets/website_externos/contactanos/img/hero_icon_phone.png" alt="icono hero_icon_phone">
                     <h2>Telefono</h2>
                     <h3>+57 320 123 4567</h3>
                     <h3>+57 310 987 6543</h3>
                 </div>
                 <div class="col-12 col-sm-4 col-md-4 text-center p-3">
-                    <img src="../assets/website_externos/contactanos/img/hero_icon_lugar.png" alt="icono hero_icon_lugar">
+                    <img src="public/assets/website_externos/contactanos/img/hero_icon_lugar.png" alt="icono hero_icon_lugar">
                     <h2>Direccion</h2>
                     <h3>Villeta, Cundinamarca</h3>
                     <h3>Colombia</h3>
@@ -113,7 +113,7 @@
 
                 <!-- SECCIÓN IZQUIERDA - IMAGEN Y TEXTO AZUL -->
                 <div class="seccion-izquierda">
-                    <img src="../assets/website_externos/contactanos/img/img_formulario.png" alt="img form">
+                    <img src="public/assets/website_externos/contactanos/img/img_formulario.png" alt="img form">
                     <p class="p1">¿No sabes qué destino elegir?</p>
                     <p class="p2 palpitando"><strong>Nosotros podemos ayudarte</strong></p>
                 </div>
@@ -219,7 +219,7 @@
                     <!-- Columna 1: Logo -->
                     <div class="col-md-2">
                         <div class="logo-section">
-                            <img src="../assets/website_externos/contactanos/img/LOGO-NEGATIVO.png"
+                            <img src="public/assets/website_externos/contactanos/img/LOGO-NEGATIVO.png"
                                 alt="logo Aventura Go">
                         </div>
                     </div>
@@ -306,7 +306,7 @@
         AOS.init();
     </script>
 
-    <script src="../assets/website_externos/contactanos/contactanos.js"></script>
+    <script src="public/assets/website_externos/contactanos/contactanos.js"></script>
 
 
 </body>
