@@ -19,9 +19,19 @@ class Hotelero
 
         try {
             $insertar = "INSERT INTO proveedor_hotelero(
-            foto,
+            logo,
             nombre_establecimiento,
+            email,
+            telefono,
             tipo_establecimiento,
+            nombre_representante,
+            identificacion_represntante,
+            foto_representante,
+            email_representante,
+            telefono_representante,
+            departamento,
+            ciudad,
+            direccion,
             numero_habitaciones,
             calificacion_promedio,
             estado
