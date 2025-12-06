@@ -705,6 +705,7 @@ textarea.form-control {
     box-shadow: 0 4px 15px rgba(234, 130, 23, 0.3);
     position: relative;
     overflow: hidden;
+    margin-left: 920px;
 }
 
 .btn-primary-wizard::before {

@@ -66,10 +66,10 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
             <!-- Título y Acciones -->
             <div class="header-section">
-                <h1>Gestión de Proveedores</h1>
+                <h1>Gestión de Proveedores turisticos</h1>
             </div>
 
-            
+
 
             <!-- Filtros Rápidos -->
             <div class="filtros-rapidos">
@@ -117,6 +117,11 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     <td><?= $proveedor['ciudad'] ?></td>
                                     <td><span class="badge-activo">Activo</span></td>
                                     <td>
+
+                                        <a class="btn-accion btn-ver" title="Ver Proveedor">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+
                                         <a href="<?= BASE_URL ?>/administrador/editar-proveedor?id=<?= $proveedor['id_proveedor'] ?>" class="btn-accion btn-editar" title="Editar">
                                             <i class="bi bi-pencil"></i>
 
@@ -127,12 +132,12 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     </td>
                         </tr>
 
-                        <?php endforeach; ?>
-                        <?php else : ?>
-                            <tr>
-                                <td colspan="8">No hay proveedores registrados.</td>
-                            </tr>
-                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <tr>
+                        <td colspan="8">No hay proveedores registrados.</td>
+                    </tr>
+                <?php endif; ?>
 
                     </tbody>
                 </table>
