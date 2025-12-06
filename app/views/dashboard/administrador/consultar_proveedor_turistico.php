@@ -109,7 +109,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                         <tr>
                             <?php if (!empty($datos)) : ?>
                                 <?php foreach ($datos as $proveedor): ?>
-                                    <td><img src="<?= BASE_URL ?>/public/uploads/turistico/<?= $proveedor['logo'] ?>" alt="" style="10px"></td>
+                                    <td><img src="<?= BASE_URL ?>/public/uploads/turistico/<?= $proveedor['logo'] ?>" alt="logo empresa"></td>
                                     <td><?= $proveedor['nombre_empresa'] ?></td>
                                     <td><?= $proveedor['nombre_representante'] ?></td>
                                     <td><?= $proveedor['email'] ?></td>
@@ -131,7 +131,6 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                         </a>
                                     </td>
                         </tr>
-
                     <?php endforeach; ?>
                 <?php else : ?>
                     <tr>

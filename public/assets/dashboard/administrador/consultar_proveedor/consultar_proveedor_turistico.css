@@ -100,7 +100,7 @@ table.table {
 
 
 /* Define anchos específicos para cada columna */
-table.table thead th:nth-child(1) { width: 8%; } /* FOTO*/
+table.table thead th:nth-child(1) { width: 8%; } /* logo*/
 table.table thead th:nth-child(2) { width: 15%; } /* EMPRESA */
 table.table thead th:nth-child(3) { width: 20%; } /* REPRESENTANTE */
 table.table thead th:nth-child(4) { width: 20%; } /* EMAIL */
@@ -120,6 +120,7 @@ table.table tbody td:nth-child(6) {/* CIUDAD */
 }
 
 /* Para columnas que deben mantener su contenido visible */
+table.table thead th:nth-child(1),/*logo */
 table.table thead th:nth-child(5),/* TELÉFONO */
 table.table tbody td:nth-child(7), /* ESTADO */
 table.table tbody td:nth-child(8) { /* ACCIONES */
@@ -162,14 +163,37 @@ table.table tbody td:hover {
     position: relative;
 }
 
-
-
 table.table tbody tr {
     transition: all 0.3s;
 }
 
 table.table tbody tr:hover {
     background-color: #f9fafb;
+}
+
+/* ========== ESTILOS PARA LOGO EN TABLA ========== */
+tbody tr td img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #e5e7eb;
+    background-color: #f8f9fa;
+    display: block;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+tbody tr td img:hover {
+    transform: scale(1.1);
+    border-color: #EA8217;
+    box-shadow: 0 4px 8px rgba(234, 130, 23, 0.2);
+}
+
+/* Asegurar que la celda del logo tenga el contenido centrado */
+tbody tr td:nth-child(1) {
+    text-align: center;
+    vertical-align: middle;
 }
 
 /* Badges de Estado */

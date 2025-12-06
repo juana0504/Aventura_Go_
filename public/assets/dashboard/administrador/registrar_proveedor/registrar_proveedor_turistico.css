@@ -719,20 +719,24 @@ textarea.form-control {
     background: rgba(255, 255, 255, 0.2);
     transform: translate(-50%, -50%);
     transition: width 0.6s, height 0.6s;
+    margin-left: 920px;
 }
 
 .btn-primary-wizard:hover::before {
     width: 300px;
     height: 300px;
+    margin-left: 920px;
 }
 
 .btn-primary-wizard:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(234, 130, 23, 0.4);
+     margin-left: 920px;
 }
 
 .btn-primary-wizard:active {
     transform: translateY(-1px);
+     margin-left: 920px;
 }
 
 .btn-secondary-wizard {
