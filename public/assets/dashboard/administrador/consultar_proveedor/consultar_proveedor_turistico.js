@@ -1,104 +1,109 @@
-// Función para abrir el modal con los datos del proveedor
-function abrirModalVerProveedor(fila) {
-    // Obtener todos los datos de la fila (deberían tener atributos data-*)
-    const proveedorData = {
-        id: fila.getAttribute('data-id'),
-        empresa: fila.getAttribute('data-empresa') || fila.cells[0].textContent.trim(),
-        nit: fila.getAttribute('data-nit') || 'No especificado',
-        representante: fila.getAttribute('data-representante') || fila.cells[1].textContent.trim(),
-        email: fila.getAttribute('data-email') || fila.cells[2].textContent.trim(),
-        telefono: fila.getAttribute('data-telefono') || fila.cells[3].textContent.trim(),
-        actividades: fila.getAttribute('data-actividades') || 'No especificado',
-        descripcion: fila.getAttribute('data-descripcion') || 'Sin descripción disponible',
-        departamento: fila.getAttribute('data-departamento') || 'No especificado',
-        ciudad: fila.getAttribute('data-ciudad') || fila.cells[4].textContent.trim(),
-        direccion: fila.getAttribute('data-direccion') || 'No especificado',
-        estado: fila.getAttribute('data-estado') || fila.cells[5].textContent.trim(),
-        // Datos adicionales del formulario
-        foto: fila.getAttribute('data-foto') || 'default-proveedor.jpg'
-    };
-    
-    // Llenar el modal con los datos
-    document.getElementById('modal-empresa').textContent = proveedorData.empresa;
-    document.getElementById('modal-nit').textContent = proveedorData.nit;
-    document.getElementById('modal-representante').textContent = proveedorData.representante;
-    document.getElementById('modal-email').textContent = proveedorData.email;
-    document.getElementById('modal-telefono').textContent = proveedorData.telefono;
-   // Actividades
-    const actividadesContainer = document.getElementById('modal-actividades');
-    actividadesContainer.innerHTML = '';
-    if (proveedorData.actividades && proveedorData.actividades !== 'No especificado') {
-        const actividades = proveedorData.actividades.split(',');
-        actividades.forEach(actividad => {
-            if (actividad.trim()) {
-                const badge = document.createElement('span');
-                badge.className = 'badge-servicio';
-                badge.textContent = actividad.trim();
-                actividadesContainer.appendChild(badge);
+// --- Cargar datos del proveedor y llenar el modal ---
+document.addEventListener('DOMContentLoaded', function () {
+    const botones = document.querySelectorAll('.btn-ver');
+
+    botones.forEach(boton => {
+        boton.addEventListener('click', async function () {
+            const id = this.getAttribute('data-id');
+            if (!id) {
+                console.error('No se encontró data-id en el botón.');
+                return;
             }
-        });
-    } else {
-        actividadesContainer.innerHTML = '<span class="badge-servicio">No especificadas</span>';
-    }  
-    document.getElementById('modal-descripcion').textContent = proveedorData.descripcion;
-    document.getElementById('modal-departamento').textContent = proveedorData.departamento;
-    document.getElementById('modal-ciudad').textContent = proveedorData.ciudad;
-    document.getElementById('modal-direccion').textContent = proveedorData.direccion;
-    
-    // Foto del proveedor
-    const fotoElement = document.getElementById('modal-foto');
-    const fotoUrl = proveedorData.foto.includes('http') ? proveedorData.foto : 
-                    `<?= BASE_URL ?>/uploads/proveedores/${proveedorData.foto}`;
-    
-    fotoElement.src = fotoUrl;
-    fotoElement.onerror = function() {
-        this.src = '<?= BASE_URL ?>/assets/img/default-proveedor.jpg';
-    };
-    
-    // Estado con badge
-    const badgeEstado = document.getElementById('modal-estado');
-    badgeEstado.textContent = proveedorData.estado;
-    badgeEstado.className = proveedorData.estado.toLowerCase() === 'active' || 
-                            proveedorData.estado.toLowerCase() === 'activo' ? 'badge-activo' : 
-                            proveedorData.estado.toLowerCase() === 'inactivo' ? 'badge-inactivo' : 
-                            'badge-pendiente';
-    
 
-    // Mostrar el modal
-    const modal = new bootstrap.Modal(document.getElementById('modalVerProveedor'));
-    modal.show();
-}
+            try {
+                const res = await fetch(`/aventura_go/administrador/consultar-proveedor-id?id=${encodeURIComponent(id)}`);
+                if (!res.ok) {
+                    console.error('Respuesta HTTP inesperada', res.status);
+                    return;
+                }
 
-// Asignar eventos a los botones de "Ver" (ojo)
-document.addEventListener('DOMContentLoaded', function() {
-    // Seleccionar todos los botones de "Ver" (ojo)
-    const botonesVer = document.querySelectorAll('.btn-ver');
-    
-    botonesVer.forEach(boton => {
-        boton.addEventListener('click', function() {
-            // Obtener la fila padre
-            const fila = this.closest('tr');
-            
-            if (fila) {
-                abrirModalVerProveedor(fila);
+                const data = await res.json();
+                if (!data || data.error) {
+                    console.error('Error en la respuesta JSON', data?.error ?? data);
+                    return;
+                }
+
+                // Campos principales (IDs tal como están en el modal)
+                document.getElementById('modal-empresa').textContent = data.nombre_empresa ?? '-';
+                document.getElementById('modal-nit').textContent = data.nit_rut ?? 'No especificado';
+                document.getElementById('modal-email').textContent = data.email ?? '-';
+                document.getElementById('modal-telefono').textContent = data.telefono ?? '-';
+                document.getElementById('modal-descripcion').textContent = data.descripcion ?? 'Sin descripción disponible';
+
+                // Representante
+                document.getElementById('modal-representante').textContent = data.nombre_representante ?? '-';
+                document.getElementById('modal-identificacion').textContent = data.identificacion_representante ?? '-';
+                document.getElementById('modal-email-repre').textContent = data.email_representante ?? '-';
+                document.getElementById('modal-telefono-repre').textContent = data.telefono_representante ?? '-';
+
+                // Ubicación
+                document.getElementById('modal-departamento').textContent = data.departamento ?? '-';
+                document.getElementById('modal-ciudad').textContent = data.ciudad ?? '-';
+                document.getElementById('modal-direccion').textContent = data.direccion ?? '-';
+
+                //Fecha de registro
+                const fecha = data.created_at ?? null;
+                document.getElementById('modal-fecha-registro').textContent = fecha ? ('Registrado el: ' + fecha) : '';
+
+                // Estado / badge
+                const badge = document.getElementById('modal-status');
+                const estado = (data.estado ?? data.estado_proveedor ?? '').toString().toLowerCase();
+                badge.textContent = (data.estado ?? data.estado_proveedor ?? 'Desconocido').toString();
+                badge.className = estado === 'activo' || estado === 'active' ? 'status-badge badge-activo' :
+                                estado === 'inactivo' || estado === 'inactive' ? 'status-badge badge-inactivo' :
+                                'status-badge badge-pendiente';
+
+                // Actividades (array o string separado por comas)
+                const actividadesContainer = document.getElementById('modal-actividades');
+                actividadesContainer.innerHTML = '';
+                let actividades = data.actividades ?? data.actividad ?? '';
+                if (Array.isArray(actividades)) {
+                    actividades = actividades.join(',');
+                }
+                if (actividades && actividades.toString().trim() !== '') {
+                    actividades.toString().split(',').forEach(a => {
+                        if (a.trim()) {
+                            const span = document.createElement('span');
+                            span.className = 'badge-servicio';
+                            span.textContent = a.trim();
+                            actividadesContainer.appendChild(span);
+                        }
+                    });
+                } else {
+                    actividadesContainer.innerHTML = '<span class="badge-servicio">No especificadas</span>';
+                }
+
+                // Imágenes: logo y foto de actividades (rutas públicas relativas)
+                const logoEl = document.getElementById('modal-logo');
+                const fotoActEl = document.getElementById('modal-foto-actividades');
+                const fotoRepreEl = document.getElementById('modal-img-repre');
+
+                if (data.logo && data.logo !== '') {
+                    logoEl.src = `/aventura_go/public/uploads/turistico/${data.logo}`;
+                } else {
+                    logoEl.src = `/aventura_go/public/assets/img/default-proveedor.jpg`;
+                }
+
+                if (data.foto_actividades && data.foto_actividades !== '') {
+                    fotoActEl.src = `/aventura_go/public/uploads/turistico/actividades/${data.foto_actividades}`;
+                } else {
+                    fotoActEl.src = `/aventura_go/public/assets/img/default-proveedor.jpg`;
+                }
+
+                if (data.foto_representante && data.foto_representante !== '') {
+                    fotoRepreEl.src = `/aventura_go/public/uploads/usuario/${data.foto_representante}`;
+                } else {
+                    fotoRepreEl.src = `/aventura_go/public/assets/img/default-proveedor.jpg`;
+                }
+
+                // Mostrar el modal (id tal como en tu vista)
+                const modalEl = document.getElementById('verProveedorModal');
+                const modal = new bootstrap.Modal(modalEl);
+                modal.show();
+
+            } catch (err) {
+                console.error('Error en fetch/parse:', err);
             }
         });
     });
-    
-        // Cerrar el modal actual
-        const modal = bootstrap.Modal.getInstance(document.getElementById('modalVerProveedor'));
-        modal.hide();
-    });
-
-
-// Función para obtener datos del proveedor via AJAX (si necesitas datos completos)
-async function cargarDatosProveedor(id) {
-    try {
-        const response = await fetch(`<?= BASE_URL ?>/administrador/consultar_proveedor/${id}`);
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Error al cargar datos:', error);
-        return null;
-    }
-}
+});
