@@ -681,7 +681,7 @@ textarea.form-control {
 
 /* ========== ACCIONES DEL WIZARD ========== */
 .wizard-actions {
-     display: flex;
+    display: flex;
     justify-content: right; /* CAMBIA de space-between a la derecha */
     gap: 20px; /* Espacio entre botones */
     padding: 25px 0;
