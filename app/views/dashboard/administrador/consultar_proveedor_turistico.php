@@ -106,22 +106,30 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <?php if (!empty($datos)) : ?>
-                                <?php foreach ($datos as $proveedor): ?>
-                                    <td><img src="<?= BASE_URL ?>/public/uploads/turistico/<?= $proveedor['logo'] ?>" alt="logo empresa"></td>
+                        <?php if (!empty($datos)) : ?>
+                            <?php foreach ($datos as $proveedor): ?>
+                                <tr id="fila-<?= $proveedor['id_proveedor'] ?>">
+                                    <td>
+                                        <img src="<?= BASE_URL ?>/public/uploads/turistico/<?= $proveedor['logo'] ?>" alt="logo empresa">
+                                    </td>
                                     <td><?= $proveedor['nombre_empresa'] ?></td>
                                     <td><?= $proveedor['nombre_representante'] ?></td>
                                     <td><?= $proveedor['email'] ?></td>
                                     <td><?= $proveedor['telefono'] ?></td>
                                     <td><?= $proveedor['ciudad'] ?></td>
-                                    <td><span class="badge-activo">Activo</span></td>
+
+                                    <!-- ESTADO -->
+                                    <td class="col-estado">
+                                        <?php if ($proveedor['estado'] == 'activo'): ?>
+                                            <span class="badge-activo">Activo</span>
+                                        <?php elseif ($proveedor['estado'] == 'inactivo'): ?>
+                                            <span class="badge-inactivo">Inactivo</span>
+                                        <?php else: ?>
+                                            <span class="badge-pendiente">Pendiente</span>
+                                        <?php endif; ?>
+                                    </td>
+
                                     <td>
-
-                                        <!-- <a class="btn-accion btn-ver" title="Ver Proveedor">
-                                            <i class="bi bi-eye"></i>
-                                        </a> -->
-
                                         <button class="btn-accion btn-ver"
                                             data-id="<?= $proveedor['id_proveedor'] ?>"
                                             data-bs-toggle="modal"
@@ -129,23 +137,23 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                             <i class="i bi-eye"></i>
                                         </button>
 
-                                        <a href="<?= BASE_URL ?>/administrador/editar-proveedor?id=<?= $proveedor['id_proveedor'] ?>" class="btn-accion btn-editar" title="Editar">
+                                        <a href="<?= BASE_URL ?>/administrador/editar-proveedor?id=<?= $proveedor['id_proveedor'] ?>" class="btn-accion btn-editar">
                                             <i class="bi bi-pencil"></i>
-
                                         </a>
-                                        <a href="<?= BASE_URL ?>/administrador/eliminar-proveedor?accion=eliminar&id=<?= $proveedor['id_proveedor'] ?>" class="btn-accion btn-eliminar" title="Eliminar">
+
+                                        <a href="<?= BASE_URL ?>/administrador/eliminar-proveedor?accion=eliminar&id=<?= $proveedor['id_proveedor'] ?>" class="btn-accion btn-eliminar">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                     </td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else : ?>
-                    <tr>
-                        <td colspan="8">No hay proveedores registrados.</td>
-                    </tr>
-                <?php endif; ?>
-
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <tr>
+                                <td colspan="8">No hay proveedores registrados.</td>
+                            </tr>
+                        <?php endif; ?>
                     </tbody>
+
                 </table>
             </div>
         </div>
@@ -162,29 +170,28 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                 <div class="modal-header aventura-modal-header">
                     <div class="modal-header-content">
                         <div class="modal-logo">
-                            <div class="logo-icon-small">
-                                <i class="fas fa-mountain"></i>
-                            </div>
-                            <div class="modal-title">
-                                <h5 class="modal-title-text" id="verProveedorModalLabel">
-                                    <span class="aventura-text">Detalles del Proveedor</span>
-                                </h5>
-                                <small class="modal-subtitle">Información completa del proveedor turístico</small>
-                            </div>
+                            <img src="<?= BASE_URL ?>/public/uploads/turistico/<?= $proveedor['logo'] ?>" alt="Logo del Proveedor" id="modal-logo-header">
+                        </div>
+                        <div class="modal-title">
+                            <h5 class="modal-title-text" id="verProveedorModalLabel">
+                                <span class="aventura-text">Detalles del Proveedor</span>
+                            </h5>
+                            <small class="modal-subtitle">Información completa del proveedor turístico</small>
                         </div>
                     </div>
-                    <button type="button" class="btn-close aventura-close" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="fas fa-times"></i>
-                    </button>
                 </div>
 
                 <!-- Body del Modal -->
                 <div class="modal-body">
                     <div class="container-fluid">
                         <!-- Barra de estado -->
-                        <div class="status-bar mb-4">
-                            <span class="status-badge" id="modal-status"></span>
-                            <span class="register-date" id="modal-fecha-registro"></span>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="status-bar mb-4">
+                                    <span class="status-badge" id="modal-status"></span>
+                                    <span class="register-date" id="modal-fecha-registro"></span>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Sección 1: Información Principal -->
@@ -258,14 +265,6 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                         <div class="info-value" id="modal-telefono-repre">-</div>
                                     </div>
                                 </div>
-                                <div class="col-md-8 mb-3">
-                                    <div class="info-card">
-                                        <div class="info-label"><i class="fas fa-image"></i> Foto del Representante</div>
-                                        <div class="info-value" id="modal-foto-repre">
-                                            <img src="" alt="Foto del representante" class="representante-img" id="modal-img-repre">
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
@@ -303,32 +302,10 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 <i class="fas fa-hiking section-icon"></i>
                                 <h6>Actividades Turísticas</h6>
                             </div>
-                            <div class="activities-container" id="modal-actividades">
-                                <!-- Las actividades se insertarán aquí dinámicamente -->
-                            </div>
-                        </div>
-
-                        <!-- Sección 5: Multimedia -->
-                        <div class="info-section">
-                            <div class="section-header">
-                                <i class="fas fa-images section-icon"></i>
-                                <h6>Multimedia</h6>
-                            </div>
                             <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <div class="info-card">
-                                        <div class="info-label"><i class="fas fa-image"></i> Logo de la Empresa</div>
-                                        <div class="info-value">
-                                            <img src="" alt="Logo de la empresa" class="logo-img" id="modal-logo">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="info-card">
-                                        <div class="info-label"><i class="fas fa-camera"></i> Foto de Actividades</div>
-                                        <div class="info-value">
-                                            <img src="" alt="Foto de actividades" class="activity-img" id="modal-foto-actividades">
-                                        </div>
+                                <div class="col-12">
+                                    <div class="activities-container" id="modal-actividades">
+                                        <!-- Las actividades se insertarán aquí dinámicamente -->
                                     </div>
                                 </div>
                             </div>
@@ -353,6 +330,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
             </div>
         </div>
     </div>
+
 
 
     <!-- Scripts -->

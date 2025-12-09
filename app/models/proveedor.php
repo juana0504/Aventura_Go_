@@ -210,4 +210,17 @@ class Proveedor
             return;
         }
     }
+
+    public function cambiarEstado($id, $estado)
+    {
+        try {
+            $actualizarEstado = "UPDATE proveedor SET estado = :estado WHERE id_proveedor = :id_proveedor";
+            $resultado = $this->conexion->prepare($actualizarEstado);
+            $resultado->execute([':estado' => $estado, ':id_proveedor' => $id]);
+
+            return ['success' => true];
+        } catch (PDOException $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
 }

@@ -101,8 +101,14 @@ switch ($request) {
         break;
     case '/administrador/consultar-proveedor-id':
         require BASE_PATH . '/app/controllers/proveedor.php';
-        consultarProveedorAjax(); // Llama a la función que devuelve JSON
+        consultarProveedorOjo(); // Llama a la función que devuelve JSON
         break;
+    case '/administrador/cambiar-estado-proveedor-turistico':
+        require BASE_PATH . '/app/controllers/proveedor.php';
+        cambiarEstadoProveedorTuristico();
+        break;
+
+
 
 
     //Fin de Registrar y consultar el Proveedor Turistico
