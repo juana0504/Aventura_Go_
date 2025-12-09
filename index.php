@@ -3,27 +3,43 @@
 
 require_once __DIR__ . '/config/config.php';
 
-//OBTENER LA URI ACTUAL (por ejemplo: aventura_go/login)
-$requestUri = $_SERVER['REQUEST_URI'];
+$requestUri = $_SERVER['REQUEST_URI']; //OBTENER LA URI ACTUAL (por ejemplo: aventura_go/login)
 
-//Quitar el prefijo de la carpeta del proyecto
-$request = str_replace('/aventura_go', '', $requestUri);
+$request = str_replace('/aventura_go', '', $requestUri); //Quitar el prefijo de la carpeta del proyecto
 
-//Quitar parametros tipo ?id=123
-$request = strtok($request, '?');
+$request = strtok($request, '?'); //Quitar parametros tipo ?id=123
 
-//Quitar la barra final (si existe)
-$request = rtrim($request, '/');
+$request = rtrim($request, '/'); //Quitar la barra final (si existe)
 
-//si la ruta queda vacia, se interpreta como "/"
-if ($request === '') $request = '/';
+if ($request === '') $request = '/'; //si la ruta queda vacia, se interpreta como "/"
 
-//enrutamiento basico
+//ENRUTAMIENTO BASICO
 switch ($request) {
+    // ===================================================================================================
+    //                                             RUTAS PÁGINAS PÚBLICAS
+    // ===================================================================================================
     case '/':
-        require BASE_PATH . '/app/views/website/index.html'; //redirige a la pagina de inicio
+        require BASE_PATH . '/app/views/website/index.php';
         break;
-    //inicio rutas login
+
+    // Ruta: /destacados
+    case '/destacados':
+        require BASE_PATH . '/app/views/website/toursDestacados.php';
+        break;
+
+    // Ruta: /acerca-de-nosotros
+    case '/acerca-de-nosotros':
+        require BASE_PATH . '/app/views/website/acerca_de_nosotros.php';
+        break;
+
+    // Ruta: /contactanos
+    case '/contactanos':
+        require BASE_PATH . '/app/views/website/contactanos.php';
+        break;
+
+    // ===================================================================================================
+    //                                            RUTAS LOGIN
+    // ===================================================================================================
     case '/login':
         require BASE_PATH . '/app/views/auth/login.php'; //redirige a el login 
         break;
@@ -39,10 +55,16 @@ switch ($request) {
     case '/recoverpw':
         require BASE_PATH . '/app/views/auth/resetPassword.php';  //redirige al guardar proveedor
         break;
+
+    case '/logout':
+        require BASE_PATH . '/app/controllers/logoutController.php';
+        break;
     //fin rutas login
 
 
-    //........................inicio rutas administrador
+    // ===================================================================================================
+    //                                   RUTAS DASBOARD ADMINISTRADOR
+    // ===================================================================================================
     case '/administrador/dashboard':
         require BASE_PATH . '/app/views/dashboard/administrador/administrador.php';  //redirige al panel de administrador
         break;
@@ -54,14 +76,13 @@ switch ($request) {
         break;
 
     // Registrar y consultar el Proveedor Turistico
+    // CRUD del Proveedor Turistico
     case '/administrador/registrar-proveedor-turistico':
         require BASE_PATH . '/app/views/dashboard/administrador/registrar_proveedor_turistico.php';  //redirige al perfil de usuario de administrador
         break;
     case '/administrador/consultar-proveedor-turistico':
         require BASE_PATH . '/app/views/dashboard/administrador/consultar_proveedor_turistico.php';  //redirige al perfil de usuario de administrador
         break;
-
-    // CRUD del Proveedor Turistico
     case '/administrador/guardar-proveedor':
         require BASE_PATH . '/app/controllers/proveedor.php';  //redirige al guardar proveedor
         break;
@@ -78,8 +99,15 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/reportesPdfController.php';  //elimina el proveedor
         reportesPdfControlers();
         break;
+    case '/administrador/consultar-proveedor-id':
+        require BASE_PATH . '/app/controllers/proveedor.php';
+        consultarProveedorAjax(); // Llama a la función que devuelve JSON
+        break;
+
+
     //Fin de Registrar y consultar el Proveedor Turistico
 
+    //CRUD DE PROVEEDOR HOTELERO
     // Registrar y consultar el Proveedor Hotelero
     case '/administrador/registrar-proveedor-hotelero':
         require BASE_PATH . '/app/views/dashboard/administrador/registrar_proveedor_hotelero.php';  //redirige al perfil de usuario de administrador
@@ -133,8 +161,9 @@ switch ($request) {
     case '/administrador/perfil':
         require BASE_PATH . '/app/views/dashboard/administrador/perfil_usuario.php';  //redirige al perfil del administradors
         break;
+
     case '/administrador/actualizar-perfil':
-        require BASE_PATH . '/app/controllers/administrador/editarPerfilAdmin.php';
+        require BASE_PATH . '/app/controllers/editarPerfilAdmin.php';
         break;
 
 
@@ -142,6 +171,26 @@ switch ($request) {
     case '/turista/tours':
         require BASE_PATH . '/app/views/dashboard/turista/descubre_tours.php';  //redirige al perfil de usuario de administrador
         break;
+
+
+
+    // ===================================================================================================
+    //                                     RUTAS PROVEEDOR TURISTICO
+    // ===================================================================================================
+
+
+
+    // ===================================================================================================
+    //                                      RUTAS PROVEEDOR HOTELERO
+    // ===================================================================================================
+
+
+
+
+
+    // ===================================================================================================
+    //                                      RUTAS TURISTA (USUARIO)
+    // ===================================================================================================
 
 
     default:

@@ -120,10 +120,12 @@ class Proveedor
         }
     }
 
+
+
     public function listar()
     {
         try {
-            // Variable que almacena laq sentencia de sql a ejecutar
+            // Variable que almacena la sentencia de sql a ejecutar
             $consultar = "SELECT * FROM proveedor WHERE id_proveedor = id_proveedor order BY id_proveedor DESC";
 
             // Preparar lo necesario para ejecutar la función
@@ -136,6 +138,8 @@ class Proveedor
             return [];
         }
     }
+
+
 
     public function listarProveedor($id)
     {
@@ -153,6 +157,8 @@ class Proveedor
             return;
         }
     }
+
+
 
     public function actualizar($data)
     {

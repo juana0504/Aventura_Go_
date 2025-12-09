@@ -114,14 +114,15 @@ $usuario = mostrarPerfilAdmin($id);
 
                     <div class="editar">
 
-                      
-
-                      <form action="/aventura_go/administrador/actualizar-perfil" method="POST" enctype="multipart/form-data">
-
-
+                        <form action="/aventura_go/administrador/actualizar-perfil" method="POST" enctype="multipart/form-data">
 
                             <h4>Imagen Perfil</h4>
-                            <input type="file" name="foto">
+                            <img src="<?= BASE_URL ?>/public/uploads/usuario/<?= $usuario['foto'] ?>" alt="persona">
+
+                            <div class="botones-imagen">
+                                <button id="descargar">DESCARGAR</button>
+                                <button id="eliminar">ELIMINAR</button>
+                            </div>
 
                             <h4>Nombre Completo</h4>
                             <input type="text" name="nombre" value="<?= $usuario['nombre'] ?>">
@@ -129,11 +130,8 @@ $usuario = mostrarPerfilAdmin($id);
                             <h4>Correo Electrónico</h4>
                             <input type="text" name="email" value="<?= $usuario['email'] ?>">
 
-
                             <h4>Teléfono</h4>
                             <input type="number" name="telefono" value="<?= $usuario['telefono'] ?>">
-
-                            
 
                             <h4>Identificación</h4>
                             <input type="text" name="identificacion" value="<?= $usuario['identificacion'] ?>">
@@ -145,20 +143,34 @@ $usuario = mostrarPerfilAdmin($id);
                     </div>
 
 
+
                     <form action="/aventura_go/administrador/cambiar-password" method="POST" class="cambiar">
+
                         <input type="hidden" name="accion" value="cambiar_password">
 
                         <h4>Contraseña Actual</h4>
-                        <input type="password" name="clave_actual" placeholder="Contraseña actual" required>
+                        <div class="input-password">
+                            <input type="password" id="clave_actual" name="clave_actual" placeholder="Contraseña actual" required>
+                            <i class="bi bi-eye-fill togglePassword" data-input="clave_actual"></i>
+                        </div>
 
                         <h4>Nueva contraseña</h4>
-                        <input type="password" name="clave_nueva" placeholder="Ingresa nueva contraseña" required minlength="6">
+                        <div class="input-password">
+                            <input type="password" id="clave_nueva" name="clave_nueva" placeholder="Ingresa nueva contraseña" required minlength="6">
+                            <i class="bi bi-eye-fill togglePassword" data-input="clave_nueva"></i>
+                        </div>
 
                         <h4>Confirmar Contraseña</h4>
-                        <input type="password" name="confirmar" placeholder="Confirma nueva contraseña" required minlength="6">
+                        <div class="input-password">
+                            <input type="password" id="confirmar" name="confirmar" placeholder="Confirma nueva contraseña" required minlength="6">
+                            <i class="bi bi-eye-fill togglePassword" data-input="confirmar"></i>
+                        </div>
 
                         <button type="submit">Cambiar Contraseña</button>
+
                     </form>
+
+
 
                 </div>
             </div>

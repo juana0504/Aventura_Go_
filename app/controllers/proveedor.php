@@ -56,24 +56,24 @@ switch ($method) {
 //FUNCIONES CRUD
 function registrarProveedor()
 {
-    $nombre_empresa                = $_POST['nombre_empresa'] ?? '';
-    $nit_rut                       = $_POST['nit_rut'] ?? '';
-    $email                         = $_POST['email'] ?? '';
-    $telefono                      = $_POST['telefono'] ?? '';
-    $nombre_representante          = $_POST['nombre_representante'] ?? '';
-    $identificacion_representante  = $_POST['identificacion_representante'] ?? '';
-    $email_representante           = $_POST['email_representante'] ?? '';
-    $telefono_representante        = $_POST['telefono_representante'] ?? '';
-    $actividades                   = $_POST['actividades'] ?? [];
-    $descripcion                   = $_POST['descripcion'] ?? '';
-    $departamento                  = $_POST['departamento'] ?? '';
-    $ciudad                        = $_POST['ciudad'] ?? '';
-    $direccion                     = $_POST['direccion'] ?? '';
+    $nombre_empresa               = $_POST['nombre_empresa'] ?? '';
+    $nit_rut                      = $_POST['nit_rut'] ?? '';
+    $email                        = $_POST['email'] ?? '';
+    $telefono                     = $_POST['telefono'] ?? '';
+    $nombre_representante         = $_POST['nombre_representante'] ?? '';
+    $identificacion_representante = $_POST['identificacion_representante'] ?? '';
+    $email_representante          = $_POST['email_representante'] ?? '';
+    $telefono_representante       = $_POST['telefono_representante'] ?? '';
+    $actividades                  = $_POST['actividades'] ?? [];
+    $descripcion                  = $_POST['descripcion'] ?? '';
+    $departamento                 = $_POST['departamento'] ?? '';
+    $ciudad                       = $_POST['ciudad'] ?? '';
+    $direccion                    = $_POST['direccion'] ?? '';
 
     if (
         empty($nombre_empresa) || empty($nit_rut) || empty($email) ||
         empty($telefono) || empty($nombre_representante) || empty($identificacion_representante) ||
-        empty($email_representante) || empty($telefono_representante) || empty($actividades) || 
+        empty($email_representante) || empty($telefono_representante) || empty($actividades) ||
         empty($descripcion) || empty($departamento) || empty($ciudad) || empty($direccion)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completa todos los campos');
@@ -153,7 +153,7 @@ function registrarProveedor()
         'telefono'                => $telefono,
         'nit_rut'                 => $nit_rut,
         'nombre_representante'    => $nombre_representante,
-        'identificacion_representante' =>$identificacion_representante,
+        'identificacion_representante' => $identificacion_representante,
         'identificacion'          => $claveHash,
         'foto_representante'      => $foto_url,
         'email_representante'     => $email_representante,
@@ -264,4 +264,34 @@ function eliminarProveedor($id)
     } else {
         mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el proveedor.');
     }
+}
+
+// API: devuelve los datos de un proveedor en JSON para uso por AJAX
+function consultarProveedorAjax()
+{
+    // Obtener ID desde GET
+    $id = $_GET['id'] ?? null;
+
+    if (!$id) {
+        http_response_code(400);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['error' => 'ID del proveedor no especificado']);
+        exit;
+    }
+
+    // Consultar el modelo directamente
+    $objProveedor = new Proveedor();
+    $proveedor = $objProveedor->listarProveedor($id);
+
+    if (!$proveedor) {
+        http_response_code(404);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['error' => 'Proveedor no encontrado']);
+        exit;
+    }
+
+    // Responder con JSON (ok)
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($proveedor);
+    exit;
 }
