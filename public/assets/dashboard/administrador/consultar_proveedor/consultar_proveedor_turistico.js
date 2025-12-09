@@ -67,8 +67,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 badge.textContent = data.estado ?? 'Desconocido';
                 badge.className =
-                    estado === 'activo' ? 'status-badge badge-activo' :
-                    estado === 'inactivo' ? 'status-badge badge-inactivo' :
+                    estado === 'ACTIVO' ? 'status-badge badge-activo' :
+                    estado === 'INACTIVO' ? 'status-badge badge-inactivo' :
                     'status-badge badge-pendiente';
 
                 // Actividades
@@ -95,11 +95,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     ? `/aventura_go/public/uploads/turistico/${data.logo}`
                     : `/aventura_go/public/assets/img/default-proveedor.jpg`;
 
-                // Foto representante
-                const fotoRepreEl = document.getElementById('modal-foto-representante');
-                fotoRepreEl.src = data.foto_representante
-                    ? `/aventura_go/public/uploads/usuario/${data.foto_representante}`
-                    : `/aventura_go/public/assets/img/default-proveedor.jpg`;
+                // // Foto representante
+                // const fotoRepreEl = document.getElementById('modal-foto-representante');
+                // fotoRepreEl.src = data.foto_representante
+                //     ? `/aventura_go/public/uploads/usuario/${data.foto_representante}`
+                //     : `/aventura_go/public/assets/img/default-proveedor.jpg`;
 
                 // Mostrar modal
                 const modalEl = document.getElementById('verProveedorModal');
@@ -110,14 +110,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 modalEl.dataset.id = id; // id viene del fetch que ya hiciste
 
                 // setear los botones del footer con el id y con el estado actual
-                const btnActivar = document.getElementById('btn-activar-proveedor');
-                const btnDesactivar = document.getElementById('btn-desactivar-proveedor');
+                // dentro del evento donde ya tienes modalEl
+                const btnActivar = modalEl.querySelector('#btn-activar-proveedor');
+                const btnDesactivar = modalEl.querySelector('#btn-desactivar-proveedor');
+console.log("Llegué a la parte del HREF");
+                btnActivar.setAttribute('href',
+                    `/aventura_go/administrador/cambiar-estado-proveedor-turistico?id=${id}&accion=activar`
+                );
 
-                btnActivar.dataset.id = id;
-                btnDesactivar.dataset.id = id;
+                btnDesactivar.setAttribute('href',
+                    `/aventura_go/administrador/cambiar-estado-proveedor-turistico?id=${id}&accion=desactivar`
+                );
 
-                btnActivar.dataset.estado = data.estado ?? 'pendiente';
-                btnDesactivar.dataset.estado = data.estado ?? 'pendiente';
+                console.log("HREF ACTIVAR:", btnActivar.href);
+console.log("HREF DESACTIVAR:", btnDesactivar.href);
 
                 // Mostrar/ocultar botón apropiado según estado actual
                 if ((data.estado ?? '').toLowerCase() === 'activo') {
@@ -178,103 +184,6 @@ document.addEventListener("click", function (e) {
 
  /* ---------- handlers globales para los botones del modal (pegarlos UNA VEZ al final del archivo) ---------- */
 
-document.addEventListener('DOMContentLoaded', function () {
-    const btnActivarGlobal = document.getElementById('btn-activar-proveedor');
-    const btnDesactivarGlobal = document.getElementById('btn-desactivar-proveedor');
 
-    if (btnActivarGlobal) {
-        btnActivarGlobal.addEventListener('click', async function () {
-            const id = this.dataset.id;
-            if (!id) return alert('Falta id del proveedor');
-
-            const nuevoEstado = 'activo';
-
-            try {
-                const fd = new FormData();
-                fd.append('id', id);
-                fd.append('estado', nuevoEstado);
-
-                const res = await fetch('/aventura_go/administrador/cambiar-estado-proveedor-turistico', { method: 'POST', body: fd });
-                const json = await res.json();
-
-                if (json.success) {
-                    actualizarFilaEstado(id, nuevoEstado);
-                    // ajustar botones del modal
-                    this.style.display = 'none';
-                    if (btnDesactivarGlobal) btnDesactivarGlobal.style.display = 'inline-block';
-                    // actualizar el badge del modal también
-                    const badge = document.getElementById('modal-status');
-                    badge.textContent = 'Activo';
-                    badge.className = 'status-badge badge-activo';
-                    // opcional: cerrar modal
-                    const bsModal = bootstrap.Modal.getInstance(document.getElementById('verProveedorModal'));
-                    if (bsModal) bsModal.hide();
-                } else {
-                    alert('Error: ' + (json.error ?? 'No se pudo actualizar'));
-                }
-            } catch (err) {
-                alert('Error en la petición: ' + err);
-            }
-        });
-    }
-
-    if (btnDesactivarGlobal) {
-        btnDesactivarGlobal.addEventListener('click', async function () {
-            const id = this.dataset.id;
-            if (!id) return alert('Falta id del proveedor');
-
-            const nuevoEstado = 'inactivo';
-
-            try {
-                const fd = new FormData();
-                fd.append('id', id);
-                fd.append('estado', nuevoEstado);
-
-                const res = await fetch('/aventura_go/administrador/cambiar-estado-proveedor-turistico', { method: 'POST', body: fd });
-                const json = await res.json();
-
-                if (json.success) {
-                    actualizarFilaEstado(id, nuevoEstado);
-                    // ajustar botones del modal
-                    this.style.display = 'none';
-                    if (btnActivarGlobal) btnActivarGlobal.style.display = 'inline-block';
-                    // actualizar el badge del modal también
-                    const badge = document.getElementById('modal-status');
-                    badge.textContent = 'Inactivo';
-                    badge.className = 'status-badge badge-inactivo';
-                    // opcional: cerrar modal
-                    const bsModal = bootstrap.Modal.getInstance(document.getElementById('verProveedorModal'));
-                    if (bsModal) bsModal.hide();
-                } else {
-                    alert('Error: ' + (json.error ?? 'No se pudo actualizar'));
-                }
-            } catch (err) {
-                alert('Error en la petición: ' + err);
-            }
-        });
-    }
-});
 
 /* ---------- función helper para actualizar la fila en la tabla ---------- */
-
-function actualizarFilaEstado(id, nuevoEstado) {
-    const fila = document.querySelector(`#fila-${id}`);
-    if (!fila) return;
-
-    const celEstado = fila.querySelector('.col-estado');
-    if (!celEstado) return;
-
-    // reconstruir el badge según nuevoEstado (mismo HTML que en PHP)
-    if (nuevoEstado === 'activo') {
-        celEstado.innerHTML = '<span class="badge-activo">Activo</span>';
-    } else if (nuevoEstado === 'inactivo') {
-        celEstado.innerHTML = '<span class="badge-inactivo">Inactivo</span>';
-    } else {
-        celEstado.innerHTML = '<span class="badge-pendiente">Pendiente</span>';
-    }
-
-    // Si usas DataTables y quieres que redibuje:
-    if (window.$ && $.fn && $.fn.dataTable && $('#tablaAdmin').length) {
-        try { $('#tablaAdmin').DataTable().draw(false); } catch(e) { /* ignore */ }
-    }
-}

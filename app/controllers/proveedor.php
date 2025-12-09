@@ -26,6 +26,12 @@ switch ($method) {
         if ($accion === 'eliminar') {
             // esta funcion elimina el proveedor segun su id
             eliminarProveedor($_GET['id']);
+        } else if ($accion === 'activar') {
+            // esta funcion ACTIVA el proveedor segun su id
+            activarProveedorTuristico($_GET['id']);
+        } else if ($accion === 'desactivar') {
+            // esta funcion DESACTIVA el proveedor segun su id
+            desactivarProveedorTuristico($_GET['id']);
         }
 
         if (isset($_GET['id'])) {
@@ -299,32 +305,30 @@ function consultarProveedorOjo()
     exit;
 }
 
-//cambiar estado del proveedor
-function cambiarEstadoProveedorTuristico()
+//cambiar estado del proveedor a ACTIVO
+function activarProveedorTuristico($id)
 {
-    // Espera POST: id, estado
-    $id = $_POST['id'] ?? null;
-    $estado = $_POST['estado'] ?? null;
-
-    header('Content-Type: application/json; charset=utf-8');
-
-    if (!$id || !$estado) {
-        http_response_code(400);
-        echo json_encode(['error' => 'Faltan datos (id / estado)']);
-        exit;
-    }
-
     $objProveedor = new Proveedor();
 
-    // Llama al método del modelo (ver más abajo si necesitas crearlo)
-    $resultado = $objProveedor->cambiarEstado($id, $estado);
+    $resultado = $objProveedor->activarProveedor($id);
 
-    if (isset($resultado['error'])) {
-        http_response_code(500);
-        echo json_encode(['error' => $resultado['error']]);
-        exit;
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Activación Exítosa del proveedor', 'Proveedor turistico activo en el sistema.', '/aventura_go/administrador/consultar-proveedor-turistico');
+    } else {
+        mostrarSweetAlert('error', 'Error al activar ', 'No se pudo activar el proveedor turistico.');
     }
+}
 
-    echo json_encode(['success' => true, 'estado' => $estado]);
-    exit;
+//cambiar estado del proveedor a INACTIVO
+function desactivarProveedorTuristico($id)
+{
+    $objProveedor = new Proveedor();
+
+    $resultado = $objProveedor->desactivarProveedor($id);
+
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Desactivación Exítosa del proveedor', 'Proveedor turistico inactivo en el sistema.', '/aventura_go/administrador/consultar-proveedor-turistico');
+    } else {
+        mostrarSweetAlert('error', 'Error al Desactivar', 'No se pudo activar el proveedor turistico.');
+    }
 }
