@@ -163,12 +163,33 @@ class Proveedor
     public function actualizar($data)
     {
         try {
+
+            $act_usuario = "UPDATE usuario SET 
+                nombre = :nombre_representante,
+                identificacion = :identificacion_representante,
+                telefono = :telefono_representante,
+                email = :email_representante
+            WHERE id_usuario = :id_usuario";
+
+            $usuario = $this->conexion->prepare($act_usuario);
+            $usuario->bindParam(':id_usuario', $data['id_usuario']);
+            $usuario->bindParam(':nombre_representante', $data['nombre_representante']);
+            $usuario->bindParam(':identificacion_representante', $data['identificacion_representante']);
+            $usuario->bindParam(':telefono_representante', $data['telefono_representante']);
+            $usuario->bindParam(':email_representante', $data['email_representante']);
+
+            $usuario->execute();
+            
             $actualizar = "UPDATE proveedor SET
+                id_usuario = :id_usuario,
                 nombre_empresa = :nombre_empresa,
                 nit_rut = :nit_rut,
-                nombre_representante = :nombre_representante,
                 email = :email,
                 telefono = :telefono,
+                nombre_representante = :nombre_representante,
+                identificacion_representante = :identificacion_representante,
+                email_representante = :email_representante,
+                telefono_representante = :telefono_representante,
                 actividades = :actividades,
                 descripcion = :descripcion,
                 departamento = :departamento,
@@ -177,12 +198,16 @@ class Proveedor
             WHERE id_proveedor = :id_proveedor";
 
             $resultado = $this->conexion->prepare($actualizar);
+            $resultado->bindParam(':id_usuario', $data['id_usuario']);
             $resultado->bindParam(':id_proveedor', $data['id_proveedor']);
             $resultado->bindParam(':nombre_empresa', $data['nombre_empresa']);
             $resultado->bindParam(':nit_rut', $data['nit_rut']);
-            $resultado->bindParam(':nombre_representante', $data['nombre_representante']);
             $resultado->bindParam(':email', $data['email']);
             $resultado->bindParam(':telefono', $data['telefono']);
+            $resultado->bindParam(':nombre_representante', $data['nombre_representante']);
+            $resultado->bindParam(':identificacion_representante', $data['identificacion_representante']);
+            $resultado->bindParam(':email_representante', $data['email_representante']);
+            $resultado->bindParam(':telefono_representante', $data['telefono_representante']);
             $resultado->bindParam(':actividades', $data['actividades']);
             $resultado->bindParam(':descripcion', $data['descripcion']);
             $resultado->bindParam(':departamento', $data['departamento']);
@@ -199,6 +224,7 @@ class Proveedor
     public function eliminar($id)
     {
         try {
+
             $eliminar = "DELETE FROM proveedor WHERE id_proveedor = :id_proveedor";
 
             $resultado = $this->conexion->prepare($eliminar);

@@ -120,7 +120,7 @@ $usuario = mostrarPerfilAdmin($id);
                             <img src="<?= BASE_URL ?>/public/uploads/usuario/<?= $usuario['foto'] ?>" alt="persona">
 
                             <div class="botones-imagen">
-                                <button id="descargar">DESCARGAR</button>
+                                <button id="descargar">EDITAR FOTO</button>
                                 <button id="eliminar">ELIMINAR</button>
                             </div>
 

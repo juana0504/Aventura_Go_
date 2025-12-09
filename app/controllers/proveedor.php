@@ -200,11 +200,13 @@ function listarProveedorId($id)
 function actualizarProveedor()
 {
     $id_proveedor            = $_POST['id_proveedor'] ?? '';
+    $id_usuario            = $_POST['id_usuario'] ?? '';
     $nombre_empresa          = $_POST['nombre_empresa'] ?? '';
     $email                   = $_POST['email'] ?? '';
     $telefono                = $_POST['telefono'] ?? '';
     $nit_rut                 = $_POST['nit_rut'] ?? '';
     $nombre_representante    = $_POST['nombre_representante'] ?? '';
+    $identificacion_representante  = $_POST['identificacion_representante'] ?? '';
     $email_representante     = $_POST['email_representante'] ?? '';
     $telefono_representante = $_POST['telefono_representante'] ?? '';
     $actividades             = $_POST['actividades'] ?? [];
@@ -215,7 +217,7 @@ function actualizarProveedor()
 
     if (
         empty($nombre_empresa) || empty($nit_rut) || empty($email) ||
-        empty($telefono) || empty($nombre_representante) || empty($email_representante) ||
+        empty($telefono) || empty($nombre_representante) || empty($identificacion_representante) || empty($email_representante) ||
         empty($telefono_representante) || empty($actividades) || empty($descripcion) ||
         empty($departamento) || empty($ciudad) || empty($direccion)
     ) {
@@ -232,11 +234,13 @@ function actualizarProveedor()
 
     $data = [
         'id_proveedor'             => $id_proveedor,
+        'id_usuario'             => $id_usuario,
         'nombre_empresa'           => $nombre_empresa,
         'email'                    => $email,
         'telefono'                 => $telefono,
         'nit_rut'                  => $nit_rut,
         'nombre_representante'     => $nombre_representante,
+        'identificacion_representante'     => $identificacion_representante,
         'email_representante'      => $email_representante,
         'telefono_representante'   => $telefono_representante,
         'actividades'              => $actividades,

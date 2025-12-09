@@ -56,76 +56,126 @@ switch ($method) {
 //FUNCIONES CRUD
 function registrarHotel()
 {
-    $nombre_establecimiento       = $_POST['nombre_establecimiento'] ?? '';
-    $tipo_establecimiento         = $_POST['tipo_establecimiento'] ?? '';
-    $numero_habitaciones          = $_POST['numero_habitaciones'] ?? '';
-    $calificacion_promedio        = $_POST['calificacion_promedio'] ?? '';
-    $estado                       = $_POST['estado'] ?? '';
+    $nombre_establecimiento          = $_POST['nombre_establecimiento'] ?? '';
+    $email                           = $_POST['email'] ?? '';
+    $telefono                        = $_POST['telefono'] ?? '';
+    $tipo_establecimiento            = $_POST['tipo_est$tipo_establecimiento'] ?? '';
+    $nombre_representante            = $_POST['nombre_representante'] ?? '';
+    $identificacion_representante    = $_POST['identificacion_representante'] ?? '';
+    $email_representante             = $_POST['email_representante'] ?? '';
+    $telefono_representante          = $_POST['telefono_representante'] ?? '';
+    $departamento                    = $_POST['departamento'] ?? '';
+    $ciudad                          = $_POST['ciudad'] ?? '';
+    $direccion                       = $_POST['direccion'] ?? '';
+    $tipo_habitacion                 = $_POST['tipo_habitacion'] ?? '';
+    $max_huesped                     = $_POST['max_huesped'] ?? '';
+    $capacidad_personas              = $_POST['capacidad_personas'] ?? '';
+    $servicio_incluido               = $_POST['servicio_incluido'] ?? '';
+    $capacidad_habitacion            = $_POST['capacidad_habitacion'] ?? '';
+    $nit_rut                         = $_POST['nit_rut'] ?? '';
+    $camara_comercio                 = $_POST['camara_comercio'] ?? '';
+    $licencia                        = $_POST['licencia'] ?? '';
+    $metodo_pago                     = $_POST['metodo_pago'] ?? '';
+    $estado                          = $_POST['estado'] ?? '';
 
     if (
-        empty($nombre_establecimiento) || empty($tipo_establecimiento) || empty($numero_habitaciones) ||
-        empty($calificacion_promedio) || empty($estado)
+        empty($nombre_establecimiento) || empty($email) || empty($telefono) ||
+        empty($tipo_establecimiento) || empty($nombre_representante) || empty($identificacion_representante) ||
+        empty($email_representante) || empty($telefono_representante) || empty($departamento) ||
+        empty($ciudad) || empty($direccion) || empty($tipo_habitacion) ||
+        empty($max_huesped) || empty($capacidad_personas) || empty($servicio_incluido) ||
+        empty($capacidad_habitacion) || empty($nit_rut) || empty($camara_comercio) ||
+        empty($licencia) || empty($metodo_pago) || empty($estado)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completa todos los campos');
         exit();
     }
 
-    // Convertir array de actividades en string
+    // Convertir array de tipo establecimiento en string
     if (is_array($tipo_establecimiento)) {
         $tipo_establecimiento = implode(",", $tipo_establecimiento);
+    }
+
+    // Convertir array de tipo habitacion en string
+    if (is_array($tipo_habitacion)) {
+        $tipo_habitacion = implode(",", $tipo_habitacion);
+    }
+
+    // Convertir array de tipo de pago en string
+    if (is_array($metodo_pago)) {
+        $metodo_pago = implode(",", $metodo_pago);
     }
 
 
 
     // Logica para cargar imagenes
+    $logo_url = null;
     $foto_url = null;
 
     // Validamos si se envio o no la foto desde el formulario
     // ***Si el proveedorno registro una foto, dejar una imagen por defecto
 
-    if (!empty($_FILES['foto']['name'])) {
-        $file =$_FILES['foto'];
-        // obtenemos la extencion del archivo
-        $extencion = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-
-        // definimos las extenciones permitidas
+    // LOGO
+    if (!empty($_FILES['logo']['name'])) {
+        $file = $_FILES['logo'];
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
         $permitidas = ['png', 'jpg', 'jpeg'];
 
-        // validar que la extencion de la imagen cargada este dentro de las permitideas
-        if (!in_array($extencion, $permitidas)) {
-            mostrarSweetAlert('error', 'Extención no permitiva.', 'Las extenciones permitidas son: png, jpg, jpeg.');
-            exit();
+        if (!in_array($ext, $permitidas)) {
+            mostrarSweetAlert('error', 'Extensión no permitida', 'Solo PNG, JPG y JPEG');
+            exit;
         }
 
-        // validamos el tamaño o elpeso de la imagen
-        if ($file['size']> 2 *1024 * 1024) {
-            mostrarSweetAlert('error', 'Error al cargar la foto.', 'El peso de la foto supera el limite de 2MB.');
-            exit();
+        if ($file['size'] > 2 * 1024 * 1024) {
+            mostrarSweetAlert('error', 'Archivo muy pesado', 'Máximo 2MB');
+            exit;
         }
 
-        // definimos el nombre del archivo y concatenamos la extencion
-        $foto_url = uniqid('hoteles_') . '.' . $extencion;
-
-        // definimos el destino donde moveremos el archivo
-        $destino = BASE_PATH . "/public/uploads/hoteles/" .$foto_url;
-
-        // movemos el archivo al destino
+        $logo_url = uniqid('logo_') . "." . $ext;
+        $destino = BASE_PATH . "/public/uploads/hotelero/" . $logo_url;
         move_uploaded_file($file['tmp_name'], $destino);
+    } else {
+        $logo_url = 'default_proveedor_hotelero.png';
+    }
 
-    }else{
-        // Agregar la logica de la imagen por default
-        $foto_url = 'default_hoteles.png';
+
+    // FOTO PRINCIPAL
+    if (!empty($_FILES['foto']['name'])) {
+        $file = $_FILES['foto'];
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+        $foto_url = uniqid('foto_') . "." . $ext;
+        $destino = BASE_PATH . "/public/uploads/usuario/" . $foto_url;
+        move_uploaded_file($file['tmp_name'], $destino);
+    } else {
+        $foto_url = 'default_proveedor_usuario.png';
     }
 
     $objhotelero = new Hotelero();
 
     $data = [
+        'logo'                       => $logo_url,
         'nombre_establecimiento'     => $nombre_establecimiento,
+        'email'                      => $email,
+        'telefono'                   => $telefono,
         'tipo_establecimiento'       => $tipo_establecimiento,
-        'numero_habitaciones'        => $numero_habitaciones,
-        'calificacion_promedio'      => $calificacion_promedio,
-        'estado'                     => $estado,
-        'foto'                       => $foto_url,
+        'nombre_representante'       => $nombre_representante,
+        'tipo_establecimiento'       => $tipo_establecimiento,
+        'foto_representante'         => $foto_url,
+        'email_representante'        => $email_representante,
+        'telefono_representante'     => $telefono_representante,
+        'departamento'               => $departamento,
+        'ciudad'                     => $ciudad,
+        'direccion'                  => $direccion,
+        'tipo_habitacion'            => $tipo_habitacion,
+        'max_huesped'                => $max_huesped,
+        'capacidad_personas'         => $capacidad_personas,
+        'servicio_incluido'          => $servicio_incluido,
+        'capacidad_habitacion'       => $capacidad_habitacion,
+        'nit_rut'                    => $nit_rut,
+        'camara_comercio'            => $camara_comercio,
+        'licencia'                   => $licencia,
+        'metodo_pago'                => $metodo_pago,
     ];
 
     $resultado = $objhotelero->registrar($data);
