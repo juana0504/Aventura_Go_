@@ -1,9 +1,11 @@
 // --- Cargar datos del proveedor y llenar el modal ---
 document.addEventListener('DOMContentLoaded', function () {
+
     const botones = document.querySelectorAll('.btn-ver');
 
     botones.forEach(boton => {
         boton.addEventListener('click', async function () {
+
             const id = this.getAttribute('data-id');
             if (!id) {
                 console.error('No se encontró data-id en el botón.');
@@ -23,12 +25,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     return;
                 }
 
-                // Campos principales (IDs tal como están en el modal)
+                // Campos principales
                 document.getElementById('modal-empresa').textContent = data.nombre_empresa ?? '-';
-                document.getElementById('modal-nit').textContent = data.nit_rut ?? 'No especificado';
+                document.getElementById('modal-nit').textContent = data.nit_rut ?? '-';
                 document.getElementById('modal-email').textContent = data.email ?? '-';
                 document.getElementById('modal-telefono').textContent = data.telefono ?? '-';
-                document.getElementById('modal-descripcion').textContent = data.descripcion ?? 'Sin descripción disponible';
+                document.getElementById('modal-descripcion').textContent = data.descripcion ?? '-';
 
                 // Representante
                 document.getElementById('modal-representante').textContent = data.nombre_representante ?? '-';
@@ -41,65 +43,90 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('modal-ciudad').textContent = data.ciudad ?? '-';
                 document.getElementById('modal-direccion').textContent = data.direccion ?? '-';
 
-                //Fecha de registro
+                // Fecha
                 const fecha = data.created_at ?? null;
-                document.getElementById('modal-fecha-registro').textContent = fecha ? ('Registrado el: ' + fecha) : '';
+
+                if (fecha) {
+                    const f = new Date(fecha);
+                    const meses = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+
+                    const dia = f.getDate().toString().padStart(2, '0');
+                    const mes = meses[f.getMonth()];
+                    const anio = f.getFullYear();
+                    const hora = f.toTimeString().split(' ')[0];
+
+                    document.getElementById('modal-fecha-registro').textContent =
+                        `Registrado el: ${dia}-${mes}-${anio} a las ${hora}`;
+                } else {
+                    document.getElementById('modal-fecha-registro').textContent = '';
+                }
 
                 // Estado / badge
                 const badge = document.getElementById('modal-status');
-                const estado = (data.estado ?? data.estado_proveedor ?? '').toString().toLowerCase();
-                badge.textContent = (data.estado ?? data.estado_proveedor ?? 'Desconocido').toString();
-                badge.className = estado === 'activo' || estado === 'active' ? 'status-badge badge-activo' :
-                                estado === 'inactivo' || estado === 'inactive' ? 'status-badge badge-inactivo' :
-                                'status-badge badge-pendiente';
+                const estado = (data.estado ?? '').toString().toLowerCase();
 
-                // Actividades (array o string separado por comas)
+                badge.textContent = data.estado ?? 'Desconocido';
+                badge.className =
+                    estado === 'activo' ? 'status-badge badge-activo' :
+                    estado === 'inactivo' ? 'status-badge badge-inactivo' :
+                    'status-badge badge-pendiente';
+
+                // Actividades
                 const actividadesContainer = document.getElementById('modal-actividades');
                 actividadesContainer.innerHTML = '';
-                let actividades = data.actividades ?? data.actividad ?? '';
-                if (Array.isArray(actividades)) {
-                    actividades = actividades.join(',');
-                }
-                if (actividades && actividades.toString().trim() !== '') {
-                    actividades.toString().split(',').forEach(a => {
-                        if (a.trim()) {
-                            const span = document.createElement('span');
-                            span.className = 'badge-servicio';
-                            span.textContent = a.trim();
-                            actividadesContainer.appendChild(span);
-                        }
+                let actividades = data.actividades ?? '';
+
+                if (Array.isArray(actividades)) actividades = actividades.join(',');
+
+                if (actividades.trim() !== '') {
+                    actividades.split(',').forEach(a => {
+                        const span = document.createElement('span');
+                        span.className = 'badge-servicio';
+                        span.textContent = a.trim();
+                        actividadesContainer.appendChild(span);
                     });
                 } else {
                     actividadesContainer.innerHTML = '<span class="badge-servicio">No especificadas</span>';
                 }
 
-                // Imágenes: logo y foto de actividades (rutas públicas relativas)
+                // Logo
                 const logoEl = document.getElementById('modal-logo');
-                const fotoActEl = document.getElementById('modal-foto-actividades');
-                const fotoRepreEl = document.getElementById('modal-img-repre');
+                logoEl.src = data.logo
+                    ? `/aventura_go/public/uploads/turistico/${data.logo}`
+                    : `/aventura_go/public/assets/img/default-proveedor.jpg`;
 
-                if (data.logo && data.logo !== '') {
-                    logoEl.src = `/aventura_go/public/uploads/turistico/${data.logo}`;
-                } else {
-                    logoEl.src = `/aventura_go/public/assets/img/default-proveedor.jpg`;
-                }
+                // Foto representante
+                const fotoRepreEl = document.getElementById('modal-foto-representante');
+                fotoRepreEl.src = data.foto_representante
+                    ? `/aventura_go/public/uploads/usuario/${data.foto_representante}`
+                    : `/aventura_go/public/assets/img/default-proveedor.jpg`;
 
-                if (data.foto_actividades && data.foto_actividades !== '') {
-                    fotoActEl.src = `/aventura_go/public/uploads/turistico/actividades/${data.foto_actividades}`;
-                } else {
-                    fotoActEl.src = `/aventura_go/public/assets/img/default-proveedor.jpg`;
-                }
-
-                if (data.foto_representante && data.foto_representante !== '') {
-                    fotoRepreEl.src = `/aventura_go/public/uploads/usuario/${data.foto_representante}`;
-                } else {
-                    fotoRepreEl.src = `/aventura_go/public/assets/img/default-proveedor.jpg`;
-                }
-
-                // Mostrar el modal (id tal como en tu vista)
+                // Mostrar modal
                 const modalEl = document.getElementById('verProveedorModal');
                 const modal = new bootstrap.Modal(modalEl);
                 modal.show();
+                
+                // guardamos el id en el modal y en los botones del footer para que sepan qué proveedor están manejando
+                modalEl.dataset.id = id; // id viene del fetch que ya hiciste
+
+                // setear los botones del footer con el id y con el estado actual
+                const btnActivar = document.getElementById('btn-activar-proveedor');
+                const btnDesactivar = document.getElementById('btn-desactivar-proveedor');
+
+                btnActivar.dataset.id = id;
+                btnDesactivar.dataset.id = id;
+
+                btnActivar.dataset.estado = data.estado ?? 'pendiente';
+                btnDesactivar.dataset.estado = data.estado ?? 'pendiente';
+
+                // Mostrar/ocultar botón apropiado según estado actual
+                if ((data.estado ?? '').toLowerCase() === 'activo') {
+                    btnActivar.style.display = 'none';
+                    btnDesactivar.style.display = 'inline-block';
+                } else {
+                    btnActivar.style.display = 'inline-block';
+                    btnDesactivar.style.display = 'none';
+                }
 
             } catch (err) {
                 console.error('Error en fetch/parse:', err);
@@ -107,3 +134,147 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+
+// --- CAMBIAR ESTADO (ACTIVAR/DESACTIVAR) ---
+document.addEventListener("click", function (e) {
+
+    if (!e.target.classList.contains("btn-estado")) return;
+
+    let id = e.target.dataset.id;
+    let estado = e.target.dataset.estado;
+
+    let nuevoEstado = estado === "activo" ? "inactivo" : "activo";
+
+    fetch("/aventura_go/administrador/cambiar-estado-proveedor-turistico", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `id=${id}&estado=${nuevoEstado}`
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        if (data.success) {
+
+            let fila = document.querySelector(`#fila-${id}`);
+            let colEstado = fila.querySelector(".col-estado");
+
+            colEstado.textContent = nuevoEstado;
+
+            e.target.dataset.estado = nuevoEstado;
+
+            e.target.textContent = nuevoEstado === "activo" ? "Desactivar" : "Activar";
+            e.target.classList.toggle("btn-danger");
+            e.target.classList.toggle("btn-success");
+
+        } else {
+            alert("Error: " + data.error);
+        }
+    })
+    .catch(err => alert("Error en la petición: " + err));
+});
+
+ /* ---------- handlers globales para los botones del modal (pegarlos UNA VEZ al final del archivo) ---------- */
+
+document.addEventListener('DOMContentLoaded', function () {
+    const btnActivarGlobal = document.getElementById('btn-activar-proveedor');
+    const btnDesactivarGlobal = document.getElementById('btn-desactivar-proveedor');
+
+    if (btnActivarGlobal) {
+        btnActivarGlobal.addEventListener('click', async function () {
+            const id = this.dataset.id;
+            if (!id) return alert('Falta id del proveedor');
+
+            const nuevoEstado = 'activo';
+
+            try {
+                const fd = new FormData();
+                fd.append('id', id);
+                fd.append('estado', nuevoEstado);
+
+                const res = await fetch('/aventura_go/administrador/cambiar-estado-proveedor-turistico', { method: 'POST', body: fd });
+                const json = await res.json();
+
+                if (json.success) {
+                    actualizarFilaEstado(id, nuevoEstado);
+                    // ajustar botones del modal
+                    this.style.display = 'none';
+                    if (btnDesactivarGlobal) btnDesactivarGlobal.style.display = 'inline-block';
+                    // actualizar el badge del modal también
+                    const badge = document.getElementById('modal-status');
+                    badge.textContent = 'Activo';
+                    badge.className = 'status-badge badge-activo';
+                    // opcional: cerrar modal
+                    const bsModal = bootstrap.Modal.getInstance(document.getElementById('verProveedorModal'));
+                    if (bsModal) bsModal.hide();
+                } else {
+                    alert('Error: ' + (json.error ?? 'No se pudo actualizar'));
+                }
+            } catch (err) {
+                alert('Error en la petición: ' + err);
+            }
+        });
+    }
+
+    if (btnDesactivarGlobal) {
+        btnDesactivarGlobal.addEventListener('click', async function () {
+            const id = this.dataset.id;
+            if (!id) return alert('Falta id del proveedor');
+
+            const nuevoEstado = 'inactivo';
+
+            try {
+                const fd = new FormData();
+                fd.append('id', id);
+                fd.append('estado', nuevoEstado);
+
+                const res = await fetch('/aventura_go/administrador/cambiar-estado-proveedor-turistico', { method: 'POST', body: fd });
+                const json = await res.json();
+
+                if (json.success) {
+                    actualizarFilaEstado(id, nuevoEstado);
+                    // ajustar botones del modal
+                    this.style.display = 'none';
+                    if (btnActivarGlobal) btnActivarGlobal.style.display = 'inline-block';
+                    // actualizar el badge del modal también
+                    const badge = document.getElementById('modal-status');
+                    badge.textContent = 'Inactivo';
+                    badge.className = 'status-badge badge-inactivo';
+                    // opcional: cerrar modal
+                    const bsModal = bootstrap.Modal.getInstance(document.getElementById('verProveedorModal'));
+                    if (bsModal) bsModal.hide();
+                } else {
+                    alert('Error: ' + (json.error ?? 'No se pudo actualizar'));
+                }
+            } catch (err) {
+                alert('Error en la petición: ' + err);
+            }
+        });
+    }
+});
+
+/* ---------- función helper para actualizar la fila en la tabla ---------- */
+
+function actualizarFilaEstado(id, nuevoEstado) {
+    const fila = document.querySelector(`#fila-${id}`);
+    if (!fila) return;
+
+    const celEstado = fila.querySelector('.col-estado');
+    if (!celEstado) return;
+
+    // reconstruir el badge según nuevoEstado (mismo HTML que en PHP)
+    if (nuevoEstado === 'activo') {
+        celEstado.innerHTML = '<span class="badge-activo">Activo</span>';
+    } else if (nuevoEstado === 'inactivo') {
+        celEstado.innerHTML = '<span class="badge-inactivo">Inactivo</span>';
+    } else {
+        celEstado.innerHTML = '<span class="badge-pendiente">Pendiente</span>';
+    }
+
+    // Si usas DataTables y quieres que redibuje:
+    if (window.$ && $.fn && $.fn.dataTable && $('#tablaAdmin').length) {
+        try { $('#tablaAdmin').DataTable().draw(false); } catch(e) { /* ignore */ }
+    }
+}

@@ -266,12 +266,13 @@ function eliminarProveedor($id)
     }
 }
 
-// API: devuelve los datos de un proveedor en JSON para uso por AJAX
-function consultarProveedorAjax()
+// consultar un proveedor (boton ojo de la tabla)
+function consultarProveedorOjo()
 {
     // Obtener ID desde GET
     $id = $_GET['id'] ?? null;
 
+    // Validar ID
     if (!$id) {
         http_response_code(400);
         header('Content-Type: application/json; charset=utf-8');
@@ -283,6 +284,8 @@ function consultarProveedorAjax()
     $objProveedor = new Proveedor();
     $proveedor = $objProveedor->listarProveedor($id);
 
+
+    // Validar si se encontró el proveedor
     if (!$proveedor) {
         http_response_code(404);
         header('Content-Type: application/json; charset=utf-8');
@@ -293,5 +296,35 @@ function consultarProveedorAjax()
     // Responder con JSON (ok)
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($proveedor);
+    exit;
+}
+
+//cambiar estado del proveedor
+function cambiarEstadoProveedorTuristico()
+{
+    // Espera POST: id, estado
+    $id = $_POST['id'] ?? null;
+    $estado = $_POST['estado'] ?? null;
+
+    header('Content-Type: application/json; charset=utf-8');
+
+    if (!$id || !$estado) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Faltan datos (id / estado)']);
+        exit;
+    }
+
+    $objProveedor = new Proveedor();
+
+    // Llama al método del modelo (ver más abajo si necesitas crearlo)
+    $resultado = $objProveedor->cambiarEstado($id, $estado);
+
+    if (isset($resultado['error'])) {
+        http_response_code(500);
+        echo json_encode(['error' => $resultado['error']]);
+        exit;
+    }
+
+    echo json_encode(['success' => true, 'estado' => $estado]);
     exit;
 }
