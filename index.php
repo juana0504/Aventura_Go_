@@ -105,7 +105,6 @@ switch ($request) {
         break;
     case '/administrador/cambiar-estado-proveedor-turistico':
         require BASE_PATH . '/app/controllers/proveedor.php';
-        cambiarEstadoProveedorTuristico();
         break;
 
 

@@ -31,26 +31,26 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Proveedor</title>
-   
+
     <!-- favicon -->
     <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
-   
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <!-- LIBRERIA AOS ANIMATE -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-    
+
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    
-        <!-- Icono de bootstrap -->
+
+    <!-- Icono de bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    
+
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_turistico.css">
-    
+
 </head>
 
 <body>
@@ -72,8 +72,8 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
             <!-- Formulario Wizard -->
             <form id="formProveedor" action="<?= BASE_URL ?>/administrador/actualizar-proveedor-turistico" method="POST" enctype="multipart/form-data">
-                <input type="hidden"  name="id_proveedor" value="<?= $proveedor['id_proveedor'] ?>">
-                <input type="hidden"  name="accion" value="actualizar">
+                <input type="hidden" name="id_proveedor" value="<?= $proveedor['id_proveedor'] ?>">
+                <input type="hidden" name="accion" value="actualizar">
 
 
                 <div class="wizard-container">
@@ -213,7 +213,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Ciudad *</label>
                                     <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ej: Medellín" required
-                                    value="<?= $proveedor['ciudad'] ?>">
+                                        value="<?= $proveedor['ciudad'] ?>">
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label">Dirección *</label>
@@ -311,6 +311,9 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
         </div>
     </section>
 
+
+
+
     <!-- chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -318,7 +321,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    
+
     <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/editar_proveedor.js"></script>
 </body>
 

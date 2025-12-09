@@ -120,9 +120,9 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
                                     <!-- ESTADO -->
                                     <td class="col-estado">
-                                        <?php if ($proveedor['estado'] == 'activo'): ?>
+                                        <?php if ($proveedor['estado'] == 'ACTIVO'): ?>
                                             <span class="badge-activo">Activo</span>
-                                        <?php elseif ($proveedor['estado'] == 'inactivo'): ?>
+                                        <?php elseif ($proveedor['estado'] == 'INACTIVO'): ?>
                                             <span class="badge-inactivo">Inactivo</span>
                                         <?php else: ?>
                                             <span class="badge-pendiente">Pendiente</span>
@@ -170,7 +170,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                 <div class="modal-header aventura-modal-header">
                     <div class="modal-header-content">
                         <div class="modal-logo">
-                            <img src="<?= BASE_URL ?>/public/uploads/turistico/<?= $proveedor['logo'] ?>" alt="Logo del Proveedor" id="modal-logo-header">
+                            <img src="" alt="Logo del Proveedor" id="modal-logo">
                         </div>
                         <div class="modal-title">
                             <h5 class="modal-title-text" id="verProveedorModalLabel">
@@ -319,12 +319,14 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                         <i class="fas fa-times"></i> Cerrar
                     </button>
                     <div class="action-buttons">
-                        <button type="button" class="btn btn-aventura-success" id="btn-activar-proveedor">
+
+                        <a class="btn btn-aventura-success" id="btn-activar-proveedor">
                             <i class="fas fa-check-circle"></i> Activar
-                        </button>
-                        <button type="button" class="btn btn-aventura-danger" id="btn-desactivar-proveedor">
+                        </a>
+
+                        <a class="btn btn-aventura-danger" id="btn-desactivar-proveedor">
                             <i class="fas fa-ban"></i> Desactivar
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

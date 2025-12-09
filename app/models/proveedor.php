@@ -223,4 +223,33 @@ class Proveedor
             return ['error' => $e->getMessage()];
         }
     }
+
+    public function activarProveedor($id)
+    {
+        try {
+            $activarEstado = "UPDATE proveedor SET estado= 'ACTIVO' WHERE id_proveedor = :id_proveedor";
+
+            $resultado = $this->conexion->prepare($activarEstado);
+            $resultado->bindParam(':id_proveedor', $id);
+
+            return $resultado->execute();
+        } catch (PDOException $e) {
+            error_log("Error al activarEstado proveedor::activarEstado->" . $e->getMessage());
+            return;
+        }
+    }
+    public function desactivarProveedor($id)
+    {
+        try {
+            $desactivarEstado = "UPDATE proveedor SET estado= 'INACTIVO' WHERE id_proveedor = :id_proveedor";
+
+            $resultado = $this->conexion->prepare($desactivarEstado);
+            $resultado->bindParam(':id_proveedor', $id);
+
+            return $resultado->execute();
+        } catch (PDOException $e) {
+            error_log("Error al desactivarEstado proveedor::desactivarEstado->" . $e->getMessage());
+            return;
+        }
+    }
 }
