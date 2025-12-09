@@ -430,32 +430,6 @@ header {
     color: #666;
 }
 
-
-/* ===================================================== 📱 RESPONSIVE ===================================================== */
-
-@media (max-width: 992px) {
-    .buscador {
-        width: 100%;
-        max-width: 350px;
-        margin-top: 10px;
-    }
-}
-
-@media (max-width: 576px) {
-    .destinos-populares {
-        padding: 0 10px;
-    }
-
-    .buscador {
-        width: 100%;
-    }
-
-    .destino-card img {
-        height: 180px;
-    }
-}
-
-
 /* ================================ SECCIÓN DESTINOS MÁS VISITADOS ======================================== */
 .destinos-visitados {
     padding: 60px 0;
@@ -664,17 +638,6 @@ header {
     color: #666;
 }
 
-/* === RESPONSIVE === */
-@media (max-width: 768px) {
-    .slider-arrow {
-        display: none;
-    }
-
-    .tarjeta-visitado {
-        flex: 0 0 280px;
-    }
-}
-
 /* E S T I L O S    F O O T E R-_________________________________________________________________________________________ */
 /* footer superior */
 .footer-top {
@@ -834,207 +797,219 @@ header {
     color: #EA8217;
 }
 
+/* =====================================================
+    RESPONSIVE
+===================================================== */
 
-/* RESPONSIVE PARA IPHONE 14 PRO MAX - 430px x 932ps_____________________________________________________________________________ */
-@media screen and (max-width: 430px) {
+/* -----------------------------------------------------
+   📌 992px — Tablets / Laptops pequeños
+----------------------------------------------------- */
+@media (max-width: 992px) {
 
-    /* HEADER ____________________________________ */
-    .navbar {
-        padding: 8px 16px;
+    /* BUSCADOR */
+    .buscador {
+        width: 100%;
+        max-width: 350px;
+        margin-top: 10px;
     }
 
-    .navbar .container-fluid {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0;
+    /* NAVBAR */
+    .menu-toggle {
+        display: block;
     }
 
-    /* Logo */
-    .navbar-logo {
-        width: 100px;
-        margin-left: 0;
-    }
-
-    /* Ocultar menú por defecto */
     .navbar-nav {
         display: none;
         position: absolute;
-        top: 60px;
-        right: 18px;
-        width: 160px;
-        background-color: var(--color-white);
-        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
-        border-radius: 12px;
+        top: 70px;
+        right: 0;
+        width: 100%;
+        background: var(--color-white);
         flex-direction: column;
-        gap: 15px;
-        padding: 20px;
-        z-index: 1000;
+        gap: 18px;
+        padding: 20px 0;
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        z-index: 999;
     }
 
     .navbar-nav.show {
         display: flex;
-        animation: slideDown 0.3s ease;
     }
 
-    @keyframes slideDown {
-        from {
-            opacity: 0;
-            transform: translateY(-10px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .nav-link {
-        font-size: 14px;
-        padding: 0px 12px;
-        text-align: left;
-        width: 100%;
-    }
-
-    /* Botones */
     .actions {
-        margin-right: 5px;
         gap: 8px;
     }
 
-    .btn-login,
-    .btn-register {
-        padding: 6px 12px;
-        font-size: 12px;
-        border-radius: 6px;
+    /* HERO */
+    #hero .carousel-caption {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 90%;
     }
 
-    .menu-toggle {
-        display: block;
-        font-size: 20px;
+    #hero .carousel-caption h1,
+    #hero .carousel-caption h2 {
+        font-size: 48px;
     }
 
-    /* HERO ____________________________________________*/
-    #hero {
-        margin-top: 60px;
-        height: auto;
-        padding: 0 15px;
+    #hero .carousel-caption p {
+        font-size: 16px;
+    }
+
+    #hero .search-box {
+        bottom: 15px;
+        flex-direction: column;
+        gap: 10px;
+        padding: 12px 18px;
+    }
+
+    #hero .search-btn {
+        padding: 8px 20px;
+        font-size: 14px;
+    }
+
+    #hero h2.marca {
+        bottom: 20px;
+        right: 20px;
+        font-size: 32px;
+    }
+
+    /* FOOTER — 992px */
+    .footer-top .row .col-md-12 {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .footer-top h2 {
+        margin-left: 0;
+        font-size: 22px;
+    }
+
+    .footer-top a {
+        margin-right: 0;
+        padding: 8px 18px;
+    }
+
+    .footer-bottom .row {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .footer-bottom .col-md-2 {
+        flex: 0 0 45%;
+    }
+
+    .footer-bottom .list-unstyled li,
+    .dest-section,
+    .enlaces-section,
+    .contacto-section,
+    .redes-section {
+        margin-left: 0 !important;
+    }
+
+    .social-links {
+        justify-content: center;
         margin-left: 0;
     }
+}
 
+/* -----------------------------------------------------
+   📌 768px — Tablets verticales
+----------------------------------------------------- */
+@media (max-width: 768px) {
+
+    .slider-arrow {
+        display: none;
+    }
+
+    .tarjeta-visitado {
+        flex: 0 0 280px;
+    }
+}
+
+/* -----------------------------------------------------
+   📌 576px — Celulares estándar
+----------------------------------------------------- */
+@media (max-width: 576px) {
+
+    .destinos-populares {
+        padding: 0 10px;
+    }
+
+    .fila-subtitulo-buscador {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .buscador {
+        width: 100%;
+    }
+
+    .destino-card img {
+        height: 180px;
+    }
+
+    /* HERO ajustes móviles */
     #hero .carousel {
-        border-radius: 12px;
         margin: 0 10px;
     }
 
     #hero .carousel-item img {
-        height: 500px;
-        object-fit: cover;
+        max-height: 430px;
     }
 
-    /* Títulos del Hero */
     #hero .carousel-caption {
-        position: absolute;
-        top: 35%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        top: 45%;
         width: 90%;
-        text-align: left;
-    }
-
-    #hero .carousel-caption h1 {
-        font-size: 20px;
-        line-height: 1.2;
-        margin-bottom: 5px;
         text-align: center;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
     }
 
+    #hero .carousel-caption h1,
     #hero .carousel-caption h2 {
-        font-size: 20px;
-        line-height: 1.2;
-        margin-bottom: 15px;
-        text-align: center;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        font-size: 32px;
     }
 
-    /* Párrafos del Hero */
-    #hero .carousel-caption .parrafo1,
-    #hero .carousel-caption .parrafo2 {
-        font-size: 11px;
-        line-height: 1.4;
-        margin-bottom: 8px;
-        text-align: center;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    #hero .carousel-caption p {
+        font-size: 14px;
     }
 
-    /* Marca */
-    #hero h2.marca {
-        display: none;
-        /* font-size: 20px;
-            bottom: 55px;
-            right: 35px;
-            text-align: right; */
-    }
-
-    /* Caja de búsqueda */
     #hero .search-box {
-        position: absolute;
-        bottom: 20px;
+        width: 90%;
+        bottom: 15px;
         left: 50%;
-        width: 80%;
-        padding: 10px 20px;
+        transform: translateX(-50%);
+        padding: 12px 16px;
         gap: 10px;
+        text-align: center;
     }
 
     #hero .search-box strong {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     #hero .search-btn {
-        padding: 6px 14px;
-        font-size: 12px;
-    }
-
-    /* Controles del carrusel */
-    .carousel-control-prev,
-    .carousel-control-next {
-        display: none;
-        /* Ocultar en móvil para más espacio */
-    }
-
-    /* FOOTER___________________________________________________ */
-    #footer {
-        text-align: center;
-        padding: 0;
-    }
-
-    /* Sección superior */
-    .footer-top {
-        padding: 20px 15px;
-    }
-
-    .footer-top .row .col-md-12 {
-        flex-direction: column;
-        gap: 15px;
-        margin: 0;
-    }
-
-    .footer-top h2 {
-        font-size: 16px;
-        margin: 0;
-        text-align: center;
-    }
-
-    .footer-top a {
-        padding: 10px 20px;
+        width: 100%;
+        padding: 10px 0;
         font-size: 14px;
-        margin: 0;
     }
 
-    /* Footer inferior */
+    #hero h2.marca {
+        bottom: 10px;
+        right: 10px;
+        font-size: 22px;
+    }
+
+    /* FOOTER — 576px */
     .footer-bottom {
-        padding: 30px 15px;
+        text-align: center;
+        padding: 30px 10px;
     }
 
     .footer-bottom .row {
@@ -1045,50 +1020,171 @@ header {
 
     .footer-bottom .col-md-2 {
         width: 100%;
-        margin-bottom: 0;
-        text-align: center;
+        flex: none;
     }
 
     .logo-section img {
-        width: 150px;
         margin: 0 auto;
     }
 
     .description {
-        max-width: 100%;
-        margin: 0 10px;
-        font-size: 14px;
-        line-height: 1.5;
-        padding: 0 10px;
-    }
-
-    .dest-section,
-    .enlaces-section,
-    .contacto-section,
-    .redes-section {
-        margin-left: 0;
-        font-size: 16px;
-    }
-
-    .footer-bottom .list-unstyled li {
-        margin-left: 0;
-        margin-right: 0;
-        font-size: 14px;
-    }
-
-    .contact-list li {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        font-size: 14px;
+        margin: 0 auto;
+        max-width: 90%;
     }
 
     .social-links {
-        display: flex;
+        justify-content: center;
+        margin-left: 0;
+    }
+}
+
+/* -----------------------------------------------------
+   📌 430px — iPhone 14 Pro Max y móviles pequeños
+----------------------------------------------------- */
+@media screen and (max-width: 430px) {
+
+    /* HEADER */
+    .navbar {
+        padding: 8px 16px;
+    }
+
+    .navbar .container-fluid {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .navbar-logo {
+        width: 100px;
+    }
+
+    .navbar-nav {
+        display: none;
+        top: 60px;
+        right: 18px;
+        width: 160px;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+        border-radius: 12px;
+        background-color: var(--color-white);
+        box-shadow: 0px 4px 15px rgba(0,0,0,0.15);
+    }
+
+    .nav-link {
+        font-size: 14px;
+        text-align: left;
+    }
+
+    .actions {
+        gap: 8px;
+        margin-right: 5px;
+    }
+
+    .btn-login,
+    .btn-register {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    /* HERO */
+    #hero {
+        margin-top: 60px;
+        padding: 0 15px;
+    }
+
+    #hero .carousel {
+        border-radius: 12px;
+        margin: 0 10px;
+    }
+
+    #hero .carousel-item img {
+        height: 500px;
+    }
+
+    #hero .carousel-caption {
+        top: 35%;
+        width: 90%;
+        text-align: left;
+    }
+
+    #hero .carousel-caption h1,
+    #hero .carousel-caption h2 {
+        font-size: 20px;
+        text-align: center;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+    }
+
+    #hero .carousel-caption p {
+        font-size: 11px;
+        text-align: center;
+    }
+
+    #hero h2.marca {
+        display: none;
+    }
+
+    #hero .search-box {
+        width: 80%;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px 20px;
+        gap: 10px;
+    }
+
+    #hero .search-btn {
+        padding: 6px 14px;
+        font-size: 12px;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        display: none;
+    }
+
+    /* FOOTER — 430px */
+    #footer {
+        text-align: center;
+        padding: 0;
+    }
+
+    .footer-top {
+        padding: 20px 15px;
+    }
+
+    .footer-bottom {
+        padding: 30px 15px;
+    }
+
+    .footer-bottom .row {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .logo-section img {
+        width: 150px;
+    }
+
+    .description {
+        max-width: 100%;
+        padding: 0 10px;
+        font-size: 14px;
+    }
+
+    .footer-bottom .list-unstyled li {
+        font-size: 14px;
+        margin: 0;
+    }
+
+    .contact-list li {
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .social-links {
         justify-content: center;
         gap: 15px;
-        margin: 10px 0 0 0;
+        margin-top: 10px;
     }
 
     .social-links a i {
