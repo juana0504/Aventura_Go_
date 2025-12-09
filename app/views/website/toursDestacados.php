@@ -15,7 +15,7 @@
     <nav class="navbar">
       <div class="container">
         <a href="index.html" class="navbar-logo">
-          <img src="public/assets/dashboard/turista/hospedaje_vega/img/LOGO-FINAL copy.png" width="100px"
+          <img src="public/assets/estilos_globales/img/LOGO-FINAL.png " width="150px"
             alt="Aventura Go" />
         </a>
 
@@ -287,7 +287,7 @@
       <div class="row">
         <div class="col-md-2">
           <div class="logo-section">
-            <img src="public/assets/estilos_globales/img/LOGO-FINAL copy.png" alt="logo Aventura Go" />
+            <img src="public/assets/estilos_globales/img/LOGO-FINAL.png" width="150px" alt="logo Aventura Go" />
           </div>
         </div>
         <div class="col-md-2">

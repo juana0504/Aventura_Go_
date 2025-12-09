@@ -33,7 +33,7 @@
             <div class="container">
                 <!-- Logo -->
                 <div class="logo">
-                    <img src="public/assets/website_externos/contactanos/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go"
+                    <img src="public/assets/website_externos/contactanos/img/LOGO-FINAL.png" width="150px" alt="Logo Aventura Go"
                         class="navbar-logo">
                 </div>
 
@@ -219,7 +219,7 @@
                     <!-- Columna 1: Logo -->
                     <div class="col-md-2">
                         <div class="logo-section">
-                            <img src="public/assets/website_externos/contactanos/img/LOGO-NEGATIVO.png"
+                            <img src="public/assets/website_externos/contactanos/img/LOGO-FINAL.png" width="120px"
                                 alt="logo Aventura Go">
                         </div>
                     </div>

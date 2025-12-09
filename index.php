@@ -76,14 +76,13 @@ switch ($request) {
         break;
 
     // Registrar y consultar el Proveedor Turistico
+    // CRUD del Proveedor Turistico
     case '/administrador/registrar-proveedor-turistico':
         require BASE_PATH . '/app/views/dashboard/administrador/registrar_proveedor_turistico.php';  //redirige al perfil de usuario de administrador
         break;
     case '/administrador/consultar-proveedor-turistico':
         require BASE_PATH . '/app/views/dashboard/administrador/consultar_proveedor_turistico.php';  //redirige al perfil de usuario de administrador
         break;
-
-    // CRUD del Proveedor Turistico
     case '/administrador/guardar-proveedor':
         require BASE_PATH . '/app/controllers/proveedor.php';  //redirige al guardar proveedor
         break;
@@ -100,6 +99,12 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/reportesPdfController.php';  //elimina el proveedor
         reportesPdfControlers();
         break;
+    case '/administrador/consultar-proveedor-id':
+        require BASE_PATH . '/app/controllers/proveedor.php';
+        consultarProveedorAjax(); // Llama a la función que devuelve JSON
+        break;
+
+
     //Fin de Registrar y consultar el Proveedor Turistico
 
     //CRUD DE PROVEEDOR HOTELERO

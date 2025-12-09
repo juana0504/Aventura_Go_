@@ -15,13 +15,51 @@ class Hotelero
     }
 
     // Función para autenticar usuario (recibe el correo y la clave escrita por el usuario)
-    public function registrar($data){
+    public function registrar($data)
+    {
 
         try {
-            $insertar = "INSERT INTO proveedor_hotelero(
-            foto,
+
+            $insertar = "INSERT INTO usuario(
+            logo,
             nombre_establecimiento,
+            email,
+            telefono,
             tipo_establecimiento,
+            nombre_representante,
+            identificacion_represntante,
+            foto_representante,
+            email_representante,
+            telefono_representante,
+            departamento,
+            ciudad,
+            direccion,
+            numero_habitaciones,
+            calificacion_promedio,
+            estado
+        ) VALUES (
+            :foto,
+            :nombre_establecimiento,
+            :tipo_establecimiento,
+            :numero_habitaciones,
+            :calificacion_promedio,
+            :estado
+            )";
+
+            $insertar = "INSERT INTO proveedor_hotelero(
+            logo,
+            nombre_establecimiento,
+            email,
+            telefono,
+            tipo_establecimiento,
+            nombre_representante,
+            identificacion_represntante,
+            foto_representante,
+            email_representante,
+            telefono_representante,
+            departamento,
+            ciudad,
+            direccion,
             numero_habitaciones,
             calificacion_promedio,
             estado
@@ -51,25 +89,26 @@ class Hotelero
         }
     }
 
-    public function listar(){
-        try{
+    public function listar()
+    {
+        try {
             // Variable que almacena laq sentencia de sql a ejecutar
             $consultar = "SELECT * FROM proveedor_hotelero WHERE id_proveedor_hotelero = id_proveedor_hotelero order BY id_proveedor_hotelero DESC";
 
             // Preparar lo necesario para ejecutar la función
-            $resultado = $this->conexion->prepare($consultar);                                                                            
+            $resultado = $this->conexion->prepare($consultar);
             $resultado->execute();
 
             return $resultado->fetchAll();
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             error_log("Error en proveedor::listar->" . $e->getMessage());
             return [];
-
         }
     }
 
-    public function listarHoteles($id){
-        try{
+    public function listarHoteles($id)
+    {
+        try {
 
             $consultar = "SELECT * FROM proveedor_hotelero WHERE id_proveedor_hotelero = :id_proveedor_hotelero LIMIT 1";
 
@@ -78,14 +117,15 @@ class Hotelero
             $resultado->execute();
 
             return $resultado->fetch();
-        }catch(PDOexception $e){
+        } catch (PDOexception $e) {
             error_log("Error en proveedor::listarHoteles->" . $e->getMessage());
             return;
         }
     }
 
-    public function actualizar($data){
-        try{
+    public function actualizar($data)
+    {
+        try {
             $actualizar = "UPDATE proveedor_hotelero SET
                 nombre_establecimiento = :nombre_establecimiento,
                 tipo_establecimiento = :tipo_establecimiento,
@@ -101,21 +141,22 @@ class Hotelero
             $resultado->bindParam(':calificacion_promedio', $data['calificacion_promedio']);
 
             return $resultado->execute();
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             error_log("Error al actualizar proveedor::actualizar->" . $e->getMessage());
             return;
         }
     }
 
-    public function eliminar($id){
-        try{
+    public function eliminar($id)
+    {
+        try {
             $eliminar = "DELETE FROM proveedor_hotelero WHERE id_proveedor_hotelero = :id_proveedor_hotelero";
 
             $resultado = $this->conexion->prepare($eliminar);
             $resultado->bindParam(':id_proveedor_hotelero', $id);
 
             return $resultado->execute();
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             error_log("Error al eliminar proveedor::eliminar->" . $e->getMessage());
             return;
         }

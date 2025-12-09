@@ -73,6 +73,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
             <!-- Formulario Wizard -->
             <form id="formProveedor" action="<?= BASE_URL ?>/administrador/actualizar-proveedor-turistico" method="POST" enctype="multipart/form-data">
                 <input type="hidden"  name="id_proveedor" value="<?= $proveedor['id_proveedor'] ?>">
+                <input type="hidden" name="id_usuario" value="<?= $proveedor['id_usuario'] ?>">
                 <input type="hidden"  name="accion" value="actualizar">
 
 
@@ -228,11 +229,11 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Nombre del Representante *</label>
-                                    <input type="text" name="nombre_representante" class="form-control" id="nombre_repre" placeholder="Juan Pérez" required <?= $proveedor['nombre_representante'] ?>>
+                                    <input type="text" name="nombre_representante" class="form-control" id="nombre_repre" placeholder="Juan Pérez" required value=" <?= $proveedor['nombre_representante'] ?>">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Identificacion *</label>
-                                    <input type="tel" name="identificacion_representante" class="form-control" id="identiificacion_repre" placeholder="+57 300 123 4567" required <?= $proveedor['identificacion_representante'] ?>>
+                                    <input type="tel" name="identificacion_representante" class="form-control" id="identiificacion_repre" placeholder="+57 300 123 4567" required value="<?= $proveedor['identificacion_representante'] ?>">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Foto</label>
@@ -241,11 +242,11 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Email *</label>
-                                    <input type="email" name="email_representante" class="form-control" id="email_repre" placeholder="contacto@empresa.com" required <?= $proveedor['email_representante'] ?>>
+                                    <input type="email" name="email_representante" class="form-control" id="email_repre" placeholder="contacto@empresa.com" required value="<?= $proveedor['email_representante'] ?>">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Teléfono *</label>
-                                    <input type="tel" name="telefono_representante" class="form-control" id="telefono_repre" placeholder="+57 300 123 4567" required <?= $proveedor['telefono_representante'] ?>>
+                                    <input type="tel" name="telefono_representante" class="form-control" id="telefono_repre" placeholder="+57 300 123 4567" required value="<?= $proveedor['telefono_representante'] ?>">
                                 </div>
                             </div>
                         </div>
