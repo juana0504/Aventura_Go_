@@ -530,6 +530,94 @@ form#busqueda #perfil h6 {
     box-shadow: 0 8px 25px rgba(234, 130, 23, 0.4);
 }
 
+
+/* Contenedor del formulario */
+.cambiar {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 30px 35px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Titulos */
+.cambiar h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+/* Contenedor del input + ojito */
+.input-password {
+    position: relative;
+    width: 100%;
+}
+
+/* Inputs */
+.input-password input {
+    width: 100%;
+    padding: 12px 45px 12px 15px;
+    margin-bottom: 18px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #f7f8fa;
+    transition: 0.2s ease-in-out;
+}
+
+/* Focus */
+.input-password input:focus {
+    border-color: #0d6efd;
+    background: #fff;
+    box-shadow: 0 0 4px rgba(13,110,253,0.3);
+}
+
+/* Contenedor del input con ojito */
+.input-password {
+    position: relative;
+    width: 100%;
+}
+
+/* Icono del ojito */
+.togglePassword {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #777;
+    cursor: pointer;
+    user-select: none;
+    transition: 0.2s;
+}
+
+/* Hover del ojito */
+.togglePassword:hover {
+    color: #000;
+}
+
+/* Botón */
+.cambiar button {
+    width: 100%;
+    padding: 12px;
+    background-color:  #EA8217;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.cambiar button:hover {
+    background-color: #d67414;
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .editar {
