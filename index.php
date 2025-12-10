@@ -107,9 +107,6 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/proveedor.php';
         break;
 
-
-
-
     //Fin de Registrar y consultar el Proveedor Turistico
 
     //CRUD DE PROVEEDOR HOTELERO
