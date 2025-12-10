@@ -1,50 +1,58 @@
 <?php
-// Incluye la configuración de la base de datos
 require_once __DIR__ . '/../../config/database.php';
 
-// Definición de la clase login
 class login
 {
-    private $conexion; // Propiedad para almacenar la conexión a la base de datos
+    private $conexion;
 
-    // Constructor: se ejecuta automáticamente cuando se crea el objeto
     public function __construct()
     {
-        $db = new conexion(); // Crea una nueva instancia de la clase conexion (config/database.php)
-        $this->conexion = $db->getConexion(); // Obtiene la conexión PDO y la guarda en $this->conexion
+        $db = new conexion();
+        $this->conexion = $db->getConexion();
     }
 
-    // Función para autenticar usuario (recibe el correo y la clave escrita por el usuario)
     public function autenticar($correo, $clave)
     {
         try {
-            // Consulta SQL para buscar al usuario activo con ese correo
-            // LIMIT 1 asegura que solo regrese 1 registro
-            $consultar = "SELECT * FROM usuario WHERE email = :correo AND estado = 'activo' LIMIT 1";
+            $sql = "SELECT * FROM usuario WHERE email = :correo AND estado = 'activo' LIMIT 1";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':correo', $correo);
+            $stmt->execute();
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // Preparamos la consulta para evitar inyección SQL
-            $resultado = $this->conexion->prepare($consultar);
-
-            // Enlazamos el valor recibido a la variable SQL :correo (protección de seguridad)
-            $resultado->bindParam(':correo', $correo);
-
-            // Ejecutamos la consulta
-            $resultado->execute();
-
-            // Obtenemos los datos del usuario como un arreglo asociativo
-            $user = $resultado->fetch();
-
-            // Si no trae datos, significa que el usuario no existe o está inactivo
             if (!$user) {
                 return ['error' => 'Usuario no encontrado o inactivo'];
             }
 
-            // Verificamos la contraseña usando password_verify (compara la clave escrita con la encriptada)
-            if (!password_verify($clave, $user['clave'])) {
-                return ['error' => 'Contraseña incorrecta'];
+            // 🔒 Verificar si está bloqueado
+            if ($user['bloqueado_hasta'] && strtotime($user['bloqueado_hasta']) > time()) {
+                return ['error' => 'Cuenta bloqueada temporalmente. Intenta más tarde'];
             }
 
-            // Si todo está bien, retornamos un arreglo con datos del usuario
+            // ❌ Contraseña incorrecta
+            if (!password_verify($clave, $user['clave'])) {
+
+                $intentosActuales = $user['intentos_fallidos'] + 1;
+                $intentosMaximos = 5;
+                $intentosRestantes = $intentosMaximos - $intentosActuales;
+
+                $this->registrarIntento($user['id_usuario'], $correo, 0);
+                $this->incrementarIntentos($user);
+
+                if ($intentosRestantes <= 0) {
+                    return ['error' => 'Cuenta bloqueada por 5 minutos debido a múltiples intentos fallidos'];
+                }
+
+                return [
+                    'error' => 'Ingreso fallido. Te quedan ' . $intentosRestantes . ' intentos'
+                ];
+            }
+
+
+            // ✅ LOGIN EXITOSO
+            $this->registrarIntento($user['id_usuario'], $correo, 1);
+            $this->limpiarIntentos($user['id_usuario']);
+
             return [
                 'id_usuario' => $user['id_usuario'],
                 'rol' => $user['rol'],
@@ -52,14 +60,61 @@ class login
                 'correo' => $user['email']
             ];
         } catch (PDOException $e) {
-            // Si hay un error en base de datos, lo registra en el log del servidor
-            error_log("Error en el modelo login: " . $e->getMessage());
-
-            // Retorna un mensaje genérico al usuario para no revelar detalles internos
-            return ['Error' => 'Error interno del servidor'];
+            error_log("Error en login: " . $e->getMessage());
+            return ['error' => 'Error interno del servidor'];
         }
     }
 
+    // 🔢 Aumentar intentos y bloquear si llega a 5
+    private function incrementarIntentos($user)
+    {
+        $intentos = $user['intentos_fallidos'] + 1;
+        $bloqueado_hasta = null;
+
+        if ($intentos >= 5) {
+            $bloqueado_hasta = date('Y-m-d H:i:s', strtotime('+5 minutes'));
+        }
+
+        $sql = "
+            UPDATE usuario 
+            SET intentos_fallidos = :intentos, bloqueado_hasta = :bloqueado
+            WHERE id_usuario = :id
+        ";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':intentos', $intentos);
+        $stmt->bindParam(':bloqueado', $bloqueado_hasta);
+        $stmt->bindParam(':id', $user['id_usuario']);
+        $stmt->execute();
+    }
+
+    // 🧹 Limpiar intentos al login exitoso
+    private function limpiarIntentos($id_usuario)
+    {
+        $sql = "
+            UPDATE usuario 
+            SET intentos_fallidos = 0, bloqueado_hasta = NULL
+            WHERE id_usuario = :id
+        ";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':id', $id_usuario);
+        $stmt->execute();
+    }
+
+    // 📝 Registrar cada intento
+    private function registrarIntento($id_usuario, $correo, $exito)
+    {
+        $sql = "
+            INSERT INTO login_intentos (id_usuario, email, exito)
+            VALUES (:id, :email, :exito)
+        ";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':id', $id_usuario);
+        $stmt->bindParam(':email', $correo);
+        $stmt->bindParam(':exito', $exito, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    // ✅ Método que ya tenías
     public function buscarPorId($id)
     {
         try {
@@ -67,7 +122,6 @@ class login
             $stmt = $this->conexion->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
-
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log("Error en buscarPorId: " . $e->getMessage());
