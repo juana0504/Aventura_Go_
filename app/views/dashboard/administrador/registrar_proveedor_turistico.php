@@ -2,6 +2,7 @@
 
 require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
+
 ?>
 
 
@@ -196,7 +197,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Identificacion *</label>
-                                    <input type="tel" name="identificacion_representante" class="form-control" id="identiificacion_repre" placeholder="+57 300 123 4567" required>
+                                    <input type="tel" name="identificacion_representante" class="form-control" id="identiificacion_repre" placeholder="N.°" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Foto</label>

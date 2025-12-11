@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     ];
 
     // Redirección segun el rol 
-    $redirectUrl = '/aventura_go/login';
+    $rendirectUrl = '/aventura_go/login';
     $mensaje = 'Rol inexistente. Redirigiendo al inicio de sesión...';
 
     switch ($resultado['rol']) {

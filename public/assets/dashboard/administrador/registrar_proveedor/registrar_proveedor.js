@@ -81,12 +81,10 @@ showStep(currentStep);
 
 // Acción del botón Next / Registrar
 document.getElementById("nextBtn").addEventListener("click", function (e) {
-
     // Si NO estamos en el paso final → avanzar
     if (currentStep < 5) {
         e.preventDefault();
         changeStep(1);
     }
-
     // Si estamos en paso 4, deja que el submit funcione normal ✅
 });

@@ -31,6 +31,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_hotelero.css">
 
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_turistico.css">
 
 </head>
 
@@ -53,6 +54,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
             <!-- Formulario Wizard -->
             <form id="formProveedor" action="<?= BASE_URL ?>/administrador/guardar-proveedor-hotelero" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="accion" value="registrar">
 
                 <div class="wizard-container">
                     <div class="wizard-content">
@@ -60,74 +62,247 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <p class="mb-0">Registro de Proveedor Hotelero</p>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                    <label class="form-label">Logo</label>
-                                    <input type="file" accept=".jpg, .png, .jpeg" name="foto" class="form-control" id="foto" required>
-                                </div>
-                            <div class="col-md-6 mb-3">
-                                <!-- Nombre establecimiento -->
-                                <label class="form-label" for="nombre_establecimiento">Nombre del establecimiento:</label>
-                                <input type="text" name="nombre_establecimiento" id="nombre_establecimiento" maxlength="100" required>
-                                <br><br>
+                        <div class="wizard-steps">
+                            <div class="step active" data-step="1">
+                                <div class="step-circle">1</div>
+                                <div class="step-label">Información Básica</div>
+                            </div>
+                            <div class="step" data-step="2">
+                                <div class="step-circle">2</div>
+                                <div class="step-label">Servicios</div>
+                            </div>
+                            <div class="step" data-step="3">
+                                <div class="step-circle">3</div>
+                                <div class="step-label">Ubicación</div>
+                            </div>
+                            <div class="step" data-step="4">
+                                <div class="step-circle">4</div>
+                                <div class="step-label">Representante</div>
+                            </div>
+                            <div class="step" data-step="5">
+                                <div class="step-circle">5</div>
+                                <div class="step-label">Confirmación</div>
                             </div>
                         </div>
 
-                        <!-- Tipo establecimiento (ENUM) -->
-                        <div class="step-content">
-                            <h4 class="mb-4">Tipo de establecimiento</h4>
-                            <div class="row">
-                                <div class="col-md-12 mb-4">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="hotel" value="Hotel">
-                                                <label class="form-check-label">Hotel</label>
+                        <div class="wizard-content">
+                            <!-- Paso 1 -->
+                            <div class="step-content active" data-step="1">
+                                <h4 class="mb-4"><i class="fas fa-building text-primary"></i> Información Básica del Proveedor Hotelero</h4>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Logo</label>
+                                        <input type="file" accept=".jpg, .png, .jpeg" name="foto" class="form-control" id="foto" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <!-- Nombre establecimiento -->
+                                        <label class="form-label" for="nombre_establecimiento">Nombre del establecimiento:</label>
+                                        <input type="text" name="nombre_establecimiento" id="nombre_establecimiento" maxlength="100" required>
+                                        <br><br>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Email *</label>
+                                        <input type="email" name="email" class="form-control" id="email" placeholder="contacto@empresa.com" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Teléfono *</label>
+                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="+57 300 123 4567" required>
+                                    </div>
+
+                                    <h4 class="mb-4"><i class="bi bi-file-earmark-medical-fill"></i> Tipo de establecimiento</h4>
+                                    <div class="col-md-12 mb-4">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="hotel" value="Hotel">
+                                                    <label class="form-check-label">Hotel</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="cabana" value="Cabaña">
+                                                    <label class="form-check-label">Cabaña</label>
+                                                </div>
                                             </div>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="cabana" value="Cabaña">
-                                                <label class="form-check-label">Cabaña</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="hostal" value="Hostal">
-                                                <label class="form-check-label">Hostal</label>
-                                            </div>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="glamping" value="Glamping">
-                                                <label class="form-check-label">Glamping</label>
+                                            <div class="col-md-6">
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="hostal" value="Hostal">
+                                                    <label class="form-check-label">Hostal</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="glamping" value="Glamping">
+                                                    <label class="form-check-label">Glamping</label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="step-content" data-step="2">
+                                <h4 class="mb-4"><i class="bi bi-person-fill"></i> Representante</h4>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Nombre del Representante *</label>
+                                        <input type="text" name="nombre_representante" class="form-control" id="nombre_repre" placeholder="Juan Pérez" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Identificacion *</label>
+                                        <input type="tel" name="identificacion_representante" class="form-control" id="identiificacion_repre" placeholder="N.°" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Foto</label>
+                                        <input type="file" accept=".jpg, .png, .jpeg" name="foto_representante" class="form-control" id="foto_representante" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Email *</label>
+                                        <input type="email" name="email_representante" class="form-control" id="email_repre" placeholder="contacto@empresa.com" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Teléfono *</label>
+                                        <input type="tel" name="telefono_representante" class="form-control" id="telefono_repre" placeholder="+57 300 123 4567" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="step-content" data-step="3">
+                                <h4 class="mb-4"><i class="fas fa-map-marker-alt text-primary"></i> Ubicación</h4>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Departamento *</label>
+                                        <input type="text" name="departamento" class="form-control" id="departamento" placeholder="Juan Pérez" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Ciudad *</label>
+                                        <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ej: Medellín" required>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label">Dirección *</label>
+                                        <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Calle 123 #45-67" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tipo establecimiento (ENUM) -->
+                            <div class="step-content" data-step="4">
+                                <h4 class="mb-4"><i class="bi bi-file-earmark-medical-fill"></i> Tipo de habitación</h4>
+                                <div class="row">
+                                    <div class="col-md-12 mb-4">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Estandar" value="Estandar">
+                                                    <label class="form-check-label">Estándar</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Doble" value="Doble">
+                                                    <label class="form-check-label">Doble</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Suite" value="Suite">
+                                                    <label class="form-check-label">Suite</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Familiar" value="Familiar">
+                                                    <label class="form-check-label">Familiar</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <label class="form-check-label">Premium</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Número máximo de huéspedes *</label>
+                                        <input type="tel" name="departamento" class="form-control" id="departamento" placeholder="Juan Pérez" required>
+                                    </div>
+
+                                    <h4 class="mb-4"><i class="bi bi-file-earmark-medical-fill"></i> Servicios incluidos</h4>
+                                    <div class="col-md-12 mb-4">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Estandar" value="Estandar">
+                                                    <label class="form-check-label">WiFi</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Doble" value="Doble">
+                                                    <label class="form-check-label">Parqueadero</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Suite" value="Suite">
+                                                    <label class="form-check-label">Piscina</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Familiar" value="Familiar">
+                                                    <label class="form-check-label">Restaurante</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <label class="form-check-label">Bar</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <label class="form-check-label">Spa</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <label class="form-check-label">Pet Friendly</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <label class="form-check-label">Servicio al cuarto</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <label class="form-check-label">Transporte</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <label class="form-check-label">Desayuno incluido</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <label class="form-check-label">Accesibilidad</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </div>
+                            </div>
+
+                            <div class="step-content" data-step="5">
+                                <h4 class="mb-4"><i class="fas fa-map-marker-alt text-primary"></i> Documentación obligatoria</h4>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Departamento *</label>
+                                        <input type="text" name="departamento" class="form-control" id="departamento" placeholder="Juan Pérez" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Ciudad *</label>
+                                        <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ej: Medellín" required>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label">Dirección *</label>
+                                        <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Calle 123 #45-67" required>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <!-- Número habitaciones -->
-                                <label class="form-label" for="numero_habitaciones">Número de habitaciones:</label>
-                                <input type="number" name="numero_habitaciones" id="numero_habitaciones" min="1" required>
-                                <br><br>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <!-- Calificación promedio -->
-                                <label class="form-label" for="calificacion_promedio">Calificación promedio:</label>
-                                <input type="number" step="0.01" name="calificacion_promedio" id="calificacion_promedio" min="0" max="5">
-                                <br><br>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <!-- Estado -->
-                                <label class="form-label" for="estado">Estado:</label>
-                                <input type="text" name="estado" id="estado" maxlength="50">
-                                <br><br>
-                            </div>
-                        </div>
+                        <div class="wizard-actions">
+                            <button class="btn btn-secondary-wizard" id="prevBtn" style="display:none;" onclick="changeStep(-1)">
+                                <i class="fas fa-arrow-left"></i> Anterior
+                            </button>
 
-                        <button class="btn btn-primary-wizard" id="nextBtn">
-                            Registrar <i class="fas fa-arrow-right"></i>
-                        </button>
+                            <button class="btn btn-primary-wizard" id="nextBtn">
+                                Siguiente <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </form>

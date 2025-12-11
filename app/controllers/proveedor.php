@@ -26,6 +26,12 @@ switch ($method) {
         if ($accion === 'eliminar') {
             // esta funcion elimina el proveedor segun su id
             eliminarProveedor($_GET['id']);
+        } else if ($accion === 'activar') {
+            // esta funcion ACTIVA el proveedor segun su id
+            activarProveedorTuristico($_GET['id']);
+        } else if ($accion === 'desactivar') {
+            // esta funcion DESACTIVA el proveedor segun su id
+            desactivarProveedorTuristico($_GET['id']);
         }
 
         if (isset($_GET['id'])) {
@@ -56,24 +62,24 @@ switch ($method) {
 //FUNCIONES CRUD
 function registrarProveedor()
 {
-    $nombre_empresa          = $_POST['nombre_empresa'] ?? '';
-    $nit_rut                 = $_POST['nit_rut'] ?? '';
-    $email                   = $_POST['email'] ?? '';
-    $telefono                = $_POST['telefono'] ?? '';
-    $nombre_representante    = $_POST['nombre_representante'] ?? '';
-    $identificacion_representante         = $_POST['identificacion_representante'] ?? '';
-    $email_representante     = $_POST['email_representante'] ?? '';
-    $telefono_representante = $_POST['telefono_representante'] ?? '';
-    $actividades             = $_POST['actividades'] ?? [];
-    $descripcion             = $_POST['descripcion'] ?? '';
-    $departamento            = $_POST['departamento'] ?? '';
-    $ciudad                  = $_POST['ciudad'] ?? '';
-    $direccion               = $_POST['direccion'] ?? '';
+    $nombre_empresa               = $_POST['nombre_empresa'] ?? '';
+    $nit_rut                      = $_POST['nit_rut'] ?? '';
+    $email                        = $_POST['email'] ?? '';
+    $telefono                     = $_POST['telefono'] ?? '';
+    $nombre_representante         = $_POST['nombre_representante'] ?? '';
+    $identificacion_representante = $_POST['identificacion_representante'] ?? '';
+    $email_representante          = $_POST['email_representante'] ?? '';
+    $telefono_representante       = $_POST['telefono_representante'] ?? '';
+    $actividades                  = $_POST['actividades'] ?? [];
+    $descripcion                  = $_POST['descripcion'] ?? '';
+    $departamento                 = $_POST['departamento'] ?? '';
+    $ciudad                       = $_POST['ciudad'] ?? '';
+    $direccion                    = $_POST['direccion'] ?? '';
 
     if (
         empty($nombre_empresa) || empty($nit_rut) || empty($email) ||
         empty($telefono) || empty($nombre_representante) || empty($identificacion_representante) ||
-        empty($email_representante) || empty($telefono_representante) || empty($actividades) || 
+        empty($email_representante) || empty($telefono_representante) || empty($actividades) ||
         empty($descripcion) || empty($departamento) || empty($ciudad) || empty($direccion)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completa todos los campos');
@@ -153,7 +159,7 @@ function registrarProveedor()
         'telefono'                => $telefono,
         'nit_rut'                 => $nit_rut,
         'nombre_representante'    => $nombre_representante,
-        'identificacion_representante' =>$identificacion_representante,
+        'identificacion_representante' => $identificacion_representante,
         'identificacion'          => $claveHash,
         'foto_representante'      => $foto_url,
         'email_representante'     => $email_representante,
@@ -194,11 +200,13 @@ function listarProveedorId($id)
 function actualizarProveedor()
 {
     $id_proveedor            = $_POST['id_proveedor'] ?? '';
+    $id_usuario            = $_POST['id_usuario'] ?? '';
     $nombre_empresa          = $_POST['nombre_empresa'] ?? '';
     $email                   = $_POST['email'] ?? '';
     $telefono                = $_POST['telefono'] ?? '';
     $nit_rut                 = $_POST['nit_rut'] ?? '';
     $nombre_representante    = $_POST['nombre_representante'] ?? '';
+    $identificacion_representante  = $_POST['identificacion_representante'] ?? '';
     $email_representante     = $_POST['email_representante'] ?? '';
     $telefono_representante = $_POST['telefono_representante'] ?? '';
     $actividades             = $_POST['actividades'] ?? [];
@@ -209,7 +217,7 @@ function actualizarProveedor()
 
     if (
         empty($nombre_empresa) || empty($nit_rut) || empty($email) ||
-        empty($telefono) || empty($nombre_representante) || empty($email_representante) ||
+        empty($telefono) || empty($nombre_representante) || empty($identificacion_representante) || empty($email_representante) ||
         empty($telefono_representante) || empty($actividades) || empty($descripcion) ||
         empty($departamento) || empty($ciudad) || empty($direccion)
     ) {
@@ -226,11 +234,13 @@ function actualizarProveedor()
 
     $data = [
         'id_proveedor'             => $id_proveedor,
+        'id_usuario'             => $id_usuario,
         'nombre_empresa'           => $nombre_empresa,
         'email'                    => $email,
         'telefono'                 => $telefono,
         'nit_rut'                  => $nit_rut,
         'nombre_representante'     => $nombre_representante,
+        'identificacion_representante'     => $identificacion_representante,
         'email_representante'      => $email_representante,
         'telefono_representante'   => $telefono_representante,
         'actividades'              => $actividades,
@@ -259,5 +269,66 @@ function eliminarProveedor($id)
         mostrarSweetAlert('success', 'Eliminación exitosa', 'Proveedor eliminado.', '/aventura_go/administrador/consultar-proveedor-turistico');
     } else {
         mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el proveedor.');
+    }
+}
+
+// consultar un proveedor (boton ojo de la tabla)
+function consultarProveedorOjo()
+{
+    // Obtener ID desde GET
+    $id = $_GET['id'] ?? null;
+
+    // Validar ID
+    if (!$id) {
+        http_response_code(400);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['error' => 'ID del proveedor no especificado']);
+        exit;
+    }
+
+    // Consultar el modelo directamente
+    $objProveedor = new Proveedor();
+    $proveedor = $objProveedor->listarProveedor($id);
+
+
+    // Validar si se encontró el proveedor
+    if (!$proveedor) {
+        http_response_code(404);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['error' => 'Proveedor no encontrado']);
+        exit;
+    }
+
+    // Responder con JSON (ok)
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($proveedor);
+    exit;
+}
+
+//cambiar estado del proveedor a ACTIVO
+function activarProveedorTuristico($id)
+{
+    $objProveedor = new Proveedor();
+
+    $resultado = $objProveedor->activarProveedor($id);
+
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Activación Exítosa del proveedor', 'Proveedor turistico activo en el sistema.', '/aventura_go/administrador/consultar-proveedor-turistico');
+    } else {
+        mostrarSweetAlert('error', 'Error al activar ', 'No se pudo activar el proveedor turistico.');
+    }
+}
+
+//cambiar estado del proveedor a INACTIVO
+function desactivarProveedorTuristico($id)
+{
+    $objProveedor = new Proveedor();
+
+    $resultado = $objProveedor->desactivarProveedor($id);
+
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Desactivación Exítosa del proveedor', 'Proveedor turistico inactivo en el sistema.', '/aventura_go/administrador/consultar-proveedor-turistico');
+    } else {
+        mostrarSweetAlert('error', 'Error al Desactivar', 'No se pudo activar el proveedor turistico.');
     }
 }
