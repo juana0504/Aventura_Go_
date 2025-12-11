@@ -100,7 +100,7 @@
                     </div>
 
                     <div class="carousel-item">
-                        <img src="public/assets/website_externos/index/img/senderismo1.jpg" class="d-block w-100"
+                        <img src="public/assets/website_externos/index/img/rafting1.jpg" class="d-block w-100"
                             alt="...">
                         <div class="carousel-caption">
                             <h1>El mundo te espera,</h1>
@@ -111,7 +111,7 @@
                     </div>
 
                     <div class="carousel-item">
-                        <img src="public/assets/website_externos/index/img/torrentismo1.jpg" class="d-block w-100"
+                        <img src="public/assets/website_externos/index/img/rafting1.jpg" class="d-block w-100"
                             alt="...">
                         <div class="carousel-caption">
                             <h1>Destinos que inspiran,</h1>
@@ -152,23 +152,33 @@
 
     <!-- SECCIÓN DESTINOS POPULARES -->
     <section class="destinos-populares container my-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <div>
+
+        <!-- FILA 1: SOLO EL TÍTULO CENTRADO -->
+        <div class="row">
+            <div class="col-12 text-center">
                 <h2 class="titulo-seccion">Destinos populares</h2>
+            </div>
+        </div>
+
+        <!-- FILA 2: SUBTÍTULO IZQUIERDA / BUSCADOR DERECHA -->
+        <div class="row align-items-center mt-3 fila-subtitulo-buscador">
+
+            <!-- Subtítulo -->
+            <div class="col-md-9 text-md-start text-center">
                 <p class="subtitulo-seccion">
                     Atrévete a vivir emociones únicas en los destinos más extremos de Colombia.
                 </p>
             </div>
 
             <!-- Buscador -->
-            <div class="d-flex justify-content-end align-items-center">
+            <div class="col-md-3 text-md-end text-center mt-3 mt-md-0">
                 <div class="buscador">
-                    <input type="text" placeholder="Busca tu destino preferido">
+                    <input type="text" placeholder="Busca tu destino">
                     <i class="fas fa-search"></i>
                 </div>
             </div>
-        </div>
 
+        </div>
 
         <!-- GRID DE DESTINOS -->
         <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -191,7 +201,7 @@
                         class="card-img-top" alt="Villeta">
                     <div class="card-body">
                         <h5 class="card-title">VILLETA</h5>
-                        <p class="card-text estrellas">★★★★★ (1 Review)</p>
+                        <p class="card-text estrellas">★★★★★</p>
                     </div>
                 </div>
             </div>
@@ -203,7 +213,7 @@
                         class="card-img-top" alt="La Vega">
                     <div class="card-body">
                         <h5 class="card-title">LA VEGA</h5>
-                        <p class="card-text estrellas">★★★★★ (1 Review)</p>
+                        <p class="card-text estrellas">★★★★★</p>
                     </div>
                 </div>
             </div>
@@ -215,9 +225,8 @@
                         class="card-img-top" alt="San Francisco">
                     <div class="card-body">
                         <h5 class="card-title">SAN FRANCISCO</h5>
-                        <p class="card-text estrellas">★★★★★ (1 Review)</p>
+                        <p class="card-text estrellas">★★★★★</p>
                     </div>
-                    <span class="oferta">20% OFF</span>
                 </div>
             </div>
 
@@ -228,7 +237,7 @@
                         class="card-img-top" alt="Sasaima">
                     <div class="card-body">
                         <h5 class="card-title">SASAIMA</h5>
-                        <p class="card-text estrellas">★★★★★ (1 Review)</p>
+                        <p class="card-text estrellas">★★★★★</p>
                     </div>
                 </div>
             </div>
@@ -236,11 +245,11 @@
             <!-- Tarjeta 6 -->
             <div class="col">
                 <div class="card destino-card shadow-sm">
-                    <img src="public/assets/website_externos/index/img/destinos_populares_tobia.png" class="card-img-top"
-                        alt="Tobia">
+                    <img src="public/assets/website_externos/index/img/destinos_populares_tobia.png"
+                        class="card-img-top" alt="Tobia">
                     <div class="card-body">
                         <h5 class="card-title">TOBIA</h5>
-                        <p class="card-text estrellas">★★★★★ (1 Review)</p>
+                        <p class="card-text estrellas">★★★★★</p>
                     </div>
                 </div>
             </div>
@@ -248,13 +257,13 @@
 
         <!-- BOTÓN MÁS DESTINOS -->
         <div class="text-center mt-5">
-            <a href="#" class="btn-ver-mas">Más destinos</a>
+            <a href="#" class="btn-ver-mas">Más destinos </a>
         </div>
     </section>
 
     <!-- SECCIÓN DESTINOS MÁS VISITADOS -->
     <section class="destinos-visitados container my-5">
-        <h2 class="titulo-seccion-visitados text-center">DESTINOS MÁS VISITADOS</h2>
+        <h2 class="titulo-seccion-visitados text-center">Destinos más visitados</h2>
 
         <div class="slider-visitados">
             <!-- Flecha izquierda -->
@@ -328,11 +337,6 @@
             <button class="slider-arrow arrow-right">
                 <i class="fas fa-chevron-right"></i>
             </button>
-        </div>
-
-        <!-- Botón ver todos -->
-        <div class="text-center mt-4">
-            <a href="#" class="btn-todos-destinos">→ Todos los destinos</a>
         </div>
     </section>
 
