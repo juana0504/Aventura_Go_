@@ -20,56 +20,57 @@ class Hotelero
 
         try {
 
-            $insertar = "INSERT INTO usuario(
-            logo,
-            nombre_establecimiento,
-            email,
-            telefono,
-            tipo_establecimiento,
-            nombre_representante,
-            identificacion_represntante,
-            foto_representante,
-            email_representante,
-            telefono_representante,
-            departamento,
-            ciudad,
-            direccion,
-            numero_habitaciones,
-            calificacion_promedio,
-            estado
-        ) VALUES (
-            :foto,
-            :nombre_establecimiento,
-            :tipo_establecimiento,
-            :numero_habitaciones,
-            :calificacion_promedio,
-            :estado
+            $insert_usuario = "INSERT INTO usuario(
+                nombre,
+                identificacion,
+                email,
+                telefono,
+                clave,
+                rol,
+                foto,
+                estado
+            ) VALUES (
+                :nombre_representante,
+                :identificacion_representante,
+                :email_representante,
+                :telefono_representante,
+                :identificacion,
+                'proveedor_turistico',
+                :foto_representante,
+                'Activo'
             )";
+            $usuario = $this->conexion->prepare($insert_usuario);
+            $usuario->bindParam(':nombre_representante', $data['nombre_representante']);
+            $usuario->bindParam(':identificacion_representante', $data['identificacion_representante']);
+            $usuario->bindParam(':email_representante', $data['email_representante']);
+            $usuario->bindParam(':telefono_representante', $data['telefono_representante']);
+            $usuario->bindParam(':identificacion', $data['identificacion']);
+            $usuario->bindParam(':foto_representante', $data['foto_representante']);
 
             $insertar = "INSERT INTO proveedor_hotelero(
-            logo,
-            nombre_establecimiento,
-            email,
-            telefono,
-            tipo_establecimiento,
-            nombre_representante,
-            identificacion_represntante,
-            foto_representante,
-            email_representante,
-            telefono_representante,
-            departamento,
-            ciudad,
-            direccion,
-            numero_habitaciones,
-            calificacion_promedio,
-            estado
-        ) VALUES (
-            :foto,
-            :nombre_establecimiento,
-            :tipo_establecimiento,
-            :numero_habitaciones,
-            :calificacion_promedio,
-            :estado
+                logo,
+                nombre_establecimiento,
+                email,
+                telefono,
+                tipo_establecimiento,
+                nombre_representante,
+                identificacion_represntante,
+                foto_representante,
+                email_representante,
+                telefono_representante,
+                departamento,
+                ciudad,
+                direccion,
+                numero_habitaciones,
+                calificacion_promedio,
+                estado
+            ) VALUES (
+                :foto,
+                :nombre_establecimiento,
+                :tipo_establecimiento,
+                :numero_habitaciones,
+                :calificacion_promedio,
+                :estado
             )";
 
             $resultado = $this->conexion->prepare($insertar);
