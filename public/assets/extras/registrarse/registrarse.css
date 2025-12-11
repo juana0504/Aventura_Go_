@@ -9,13 +9,12 @@
   --color-text-light: #666666;
   --color-bg-light: #F8F9FA;
   --color-border: #E0E0E0;
-  --shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-
+  --shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
   --font-titles: 'Raleway', sans-serif;
   --font-text: 'Lato', sans-serif;
 }
 
-
+/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -23,10 +22,7 @@
   font-family: var(--font-text);
 }
 
-
-/* FONDO Y CONTENEDOR PRINCIPAL */
-
-
+/* Fondo y contenedor principal */
 body {
   position: relative;
   display: flex;
@@ -38,7 +34,7 @@ body {
   background-attachment: fixed;
 }
 
-/* Capa oscura para resaltar formulario */
+
 body::before {
   content: "";
   position: absolute;
@@ -48,18 +44,47 @@ body::before {
   z-index: 0;
 }
 
-/* Contenedor general */
+
+.select-container {
+  position: relative;
+  width: 100%;
+}
+
+.select-container select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  background: white;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  font-size: 15px;
+}
+
+/* Flecha */
+.select-container::after {
+  content: "▼";
+  font-size: 12px;
+  color: #444;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+
 .login-container {
   position: relative;
   z-index: 1;
-  width: 90%;
+  width: 100%;
   max-width: 1100px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Caja principal (formulario + imagen) */
 .login-box {
   background-color: var(--color-white);
   display: flex;
@@ -69,20 +94,17 @@ body::before {
   overflow: hidden;
   box-shadow: var(--shadow);
   width: 100%;
-  max-height: 650px;
+  max-height: 700px;
   backdrop-filter: blur(6px);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .login-box:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-
-/*  FORMULARIO DE REGISTRO */
-
-
+/* Formulario */
 .form-section {
   flex: 1;
   padding: 50px 60px;
@@ -92,30 +114,48 @@ body::before {
   justify-content: center;
 }
 
-/* Logo */
 .logo {
-  width: 120px;
-  margin-bottom: 10px;
+  width: 110px;
+  margin-bottom: 15px;
+  position: relative;
+  bottom: -10px;
 }
 
-/* Título */
 .form-section h2 {
   font-family: var(--font-titles);
   font-weight: 700;
   text-transform: uppercase;
   color: var(--color-primary);
-  font-size: 28px;
-  margin-bottom: 25px;
+  font-size: 26px;
+  margin-bottom: 10px;
 }
 
-/* Formulario */
+h3 {
+    font-family: var(--font-titles);
+    font-weight: 300;
+    color: var(--color-primary);
+    font-size: 14px;
+    line-height: 1.4;
+  margin-bottom: 25px;
+
+}
+
+/* Centrar solo la segunda línea */
+h3 .centered-line {
+    display: block;
+    text-align: center;
+    margin-top: 5px; /* Ajusta el espacio si quieres */
+}
+
+
+/* Formulario interno */
 form {
   width: 100%;
   max-width: 320px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 /* Inputs y selects */
@@ -123,79 +163,44 @@ form input,
 form select {
   width: 100%;
   max-width: 800px;
-  padding: 10px 15px;
-  border: 1px solid transparent;
+  padding: 12px 18px;
+  border: 1px solid #d1d5db;
   border-radius: 20px;
-  background-color: #f1f1f1;
+  background-color: #f9f9f9;
   font-size: 15px;
   color: var(--color-text);
-  text-align: left;
   transition: 0.3s;
-  appearance: none;
 }
 
-option{
-  width: 100%;
-  max-width: 800px;
-  padding: 10px 15px;
-  border: 1px solid transparent;
-  border-radius: 20px;
-  background-color: #f1f1f1;
-  font-size: 15px;
-  color: var(--color-text);
-  text-align: left;
-  transition: 0.3s;
-  appearance: none;
-}
-
-.form-label {
-  font-family: var(--font-titles);
-  font-weight: 600;
-  color: var(--color-primary);
-  font-size: 14px;
-  margin-bottom: 8px;
-  display: block;
-  transition: color 0.3s ease;
-}
-
-.form-control {
-  width: 100%;
-  padding: 14px 16px;
-  border-radius: 12px;
-  border: 2px solid #e5e7eb;
-  font-family: var(--font-text);
-  font-size: 15px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background: white;
-  color: var(--color-text);
+option {
+  background-color: #f9f9f9;
 }
 
 form input::placeholder {
-  color: #777;
+  color: #999;
 }
 
 form input:focus,
 form select:focus {
   outline: none;
   border-color: var(--color-secondary);
+  box-shadow: 0 0 8px rgba(234, 130, 23, 0.25);
   background-color: #fff;
 }
 
-/* Campo de contraseña con ícono */
+/* Campo contraseña con icono */
 .password-container {
   position: relative;
   width: 100%;
-  max-width: 800px;
 }
 
 .password-container input {
-  width: 100%;
-  padding-right: 35px;
+  padding-right: 40px;
 }
 
 .password-container i {
   position: absolute;
-  right: 18px;
+  right: 15px;
   top: 50%;
   transform: translateY(-50%);
   color: #555;
@@ -207,9 +212,7 @@ form select:focus {
   color: var(--color-secondary);
 }
 
-/* 🔘 BOTÓN */
-
-
+/* Botón general */
 button {
   width: 85%;
   max-width: 300px;
@@ -221,18 +224,18 @@ button {
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  margin-top: 12px;
-  transition: background 0.3s, transform 0.2s;
+  margin-top: -18px;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
 }
 
 button:hover {
   background-color: #142538;
   transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* SECCIÓN DE IMAGEN */
-
-
+/* Imagen sección */
 .image-section {
   flex: 1;
   display: flex;
@@ -242,19 +245,65 @@ button:hover {
 }
 
 .image-section img {
-  width: 100%;
-  height: 100%;
+  width: 492px;
+  height: 738px;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.5s ease, box-shadow 0.3s ease;
+  border-radius: 0 0 25px 25px;
 }
 
 .image-section img:hover {
   transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* RESPONSIVO */
+/* Contenedor igual a los otros campos */
+.file-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Input tipo file con el mismo estilo que los otros */
+.file-container input[type="file"] {
+  width: 100%;
+  padding: 12px 18px;
+  border: 1px solid #d1d5db;
+  border-radius: 20px;
+  background-color: #f9f9f9;
+  font-size: 15px;
+  color: transparent; /* Oculta el texto del archivo */
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Placeholder falso */
+.file-placeholder {
+  position: relative;
+  top: -39px;
+  left: 170px;
+  transform: translateY(-50%);
+  color: #838383;
+  pointer-events: none;
+  font-size: 15px;
+}
+
+/* Cuando se selecciona un archivo, ocultamos el placeholder */
+.file-container input[type="file"]:valid + .file-placeholder {
+  display: none;
+}
+
+/* Hover y focus */
+.file-container input[type="file"]:hover,
+.file-container input[type="file"]:focus {
+  border-color: var(--color-secondary);
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(234, 130, 23, 0.25);
+}
 
 
+
+
+/* Responsive */
 @media (max-width: 900px) {
   .login-box {
     flex-direction: column;

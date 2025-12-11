@@ -24,14 +24,10 @@ class Recoverypass
             $user = $resultado->fetch();
 
             if ($user) {
-                // generamos la nueva contraseña a partir de una base de caracteres y un random
+                // Generación de la nueva contraseña
                 $base = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-                // mezclamos la cadena de caracteres
                 $random = str_shuffle($base);
-
-                // sustraemos una cantidad definida de este random
-                $nuevaClave = substr($random, 0, 6); //el cero es la posicion inicial y el 6 la cantidad de caracteres
+                $nuevaClave = substr($random, 0, 6); // 6 caracteres
 
                 $claveHash = password_hash($nuevaClave, PASSWORD_BCRYPT);
             
@@ -42,48 +38,82 @@ class Recoverypass
                 $stmtActualizar->bindParam(':id', $user['id_usuario']);
                 $stmtActualizar->execute();
 
+                // Inicialización y configuración del correo electrónico
                 $mail = mailer_init();
 
                 $mail->setFrom('aventurago.contacto@gmail.com', 'Soporte Aventura_go');
                 $mail->addAddress($user['email'], $user['nombre']);
 
-                $mail->Subject = "Aventura_go - Nueva clave generada";                            //Set email format to HTML
-                    $mail->Body    = $mail->Body    = <<<HTML
-                        <div style="font-family: Lato, Arial, sans-serif; background-color: #F8F9FA; padding: 40px;">
-                            <div style="max-width: 650px; margin: auto; background: #FFFFFF; border-radius: 10px; overflow: hidden; border: 1px solid #E0E0E0;">
+                $mail->Subject = "🔒 Tu Nueva Contraseña Temporal para Aventura GO";
+                $mail->isHTML(true); 
+                
+                // INICIO DEL BLOQUE HTML MEJORADO (Heredoc Corregido)
+                $mail->Body = <<<HTML
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperación de Contraseña | Aventura GO</title>
+</head>
+<body style="margin: 0; padding: 0;">
+    <div style="font-family: Arial, sans-serif; background-color: #1A1A1A; padding: 40px 10px;">
+        <div style="max-width: 600px; margin: auto; background: #2B2B2B; border-radius: 10px; overflow: hidden;">
 
-                                <!-- ENCABEZADO CON COLOR PRIMARIO -->
-                                <div style="background-color: #2D4059; padding: 25px; text-align: center;">
-                                    <img src="https://raw.githubusercontent.com/Albert-Gutierrez/Aventura-Go/refs/heads/main/assets/estilos_globales/img/LOGO-POSITIVO.png" alt="Aventura Go" style="width: 160px; margin-bottom: 10px;">
-                                </div>
+            <div style="background-color: #2D4059; padding: 30px; text-align: center;">
+                <img src="https://raw.githubusercontent.com/Albert-Gutierrez/Aventura-Go/refs/heads/main/assets/estilos_globales/img/LOGO-POSITIVO.png" alt="Aventura Go" style="width: 150px; margin-bottom: 5px;">
+                <!-- <h1 style="color: #FFFFFF; font-size: 24px; margin: 5px 0 0; font-weight: bold;">Aventura GO</h1> -->
+                <p style="color: #A9A9A9; font-size: 14px; margin: 0;">Tu compañero de aventuras</p>
+            </div>
 
-                                <!-- CONTENIDO -->
-                                <div style="padding: 30px; color: #2B2B2B; font-size: 16px;">
+            <div style="padding: 30px; color: #CCCCCC; font-size: 16px; line-height: 1.5;">
 
-                                    <h2 style="color: #000000; margin: 0; font-family: Raleway, Arial, sans-serif; text-align: center; font-size: 15px;">
-                                        Señor usuario, Se ha generado una nueva contraseña para tu cuenta. <br> 
-                                        Por motivos de seguridad, te recomendamos cambiarla inmediatamente después de iniciar sesión.
-                                    </h2>
-    
-                                    <p style="margin-bottom: 15px; text-align: center; font-size: 25px; ">
-                                        <strong style="color: #EA8217;">Nueva contraseña generada:</strong><br>
-                                        $nuevaClave
-                                    </p>
+                <h2 style="color: #FFFFFF; margin: 0 0 20px; text-align: center; font-size: 18px; font-weight: bold;">
+                    ¡SOLICITUD DE RESTABLECIMIENTO RECIBIDA!
+                </h2>
+                
+                <p style="margin-bottom: 20px; text-align: center;">
+                    Hemos generado una **clave temporal** que te permitirá acceder de forma segura a tu cuenta.
+                </p>
 
-                                    <p style="margin-bottom: 10px;  text-align: center; font-size: 13px; ">
-                                        Si no solicitaste este cambio, por favor contacta a nuestro equipo de soporte inmediatamente.
-                                    </p>
+                <div style="background-color: #383838; padding: 25px; border-radius: 8px; text-align: center; margin-bottom: 25px;">
+                    <p style="margin: 0 0 10px; color: #FF9900; font-size: 14px; font-weight: bold;">
+                        TU NUEVA CONTRASEÑA TEMPORAL:
+                    </p>
+                    <p style="margin: 0; color: #FFFFFF; font-size: 32px; font-weight: bold; font-family: 'Courier New', Courier, monospace; letter-spacing: 2px;">
+                        $nuevaClave
+                    </p>
+                </div>
 
-                                </div>
+                <div style="background-color: #404000; border: 1px solid #707000; padding: 15px; border-radius: 6px; margin-bottom: 25px;">
+                    <p style="margin: 0; color: #FFD700; font-size: 15px; line-height: 22px;">
+                        <span style="font-weight: bold;">⚠️ Seguridad Obligatoria:</span> Por tu protección, esta clave es de un solo uso. Debes cambiarla **inmediatamente** después de iniciar sesión en tu perfil.
+                    </p>
+                </div>
 
-                                <!-- PIE DE PÁGINA -->
-                                <div style="background-color: #2D4059; color: #FFFFFF; padding: 15px; text-align: center; font-size: 13px;">
-                                    Mensaje enviado desde el formulario de recuperacion de contraseña de <strong>Aventura Go</strong>.
-                                </div>
+                <!-- <div style="text-align: center; margin-bottom: 30px;">
+                    <a href="aventura_go/login" target="_blank" style="background-color: #FF9900; color: #2D4059; padding: 15px 30px; border-radius: 6px; font-size: 18px; font-weight: bold; text-decoration: none; display: inline-block;">
+                        INICIAR SESIÓN AHORA
+                    </a>
+                </div> -->
 
-                            </div>
-                        </div>
-                    HTML;
+                <p style="margin-bottom: 0; text-align: center; font-size: 14px; color: #A9A9A9;">
+                    Si no solicitaste este cambio, por favor contacta a nuestro equipo de soporte inmediatamente.
+                </p>
+            </div>
+
+            <div style="background-color: #101010; color: #777777; padding: 15px; text-align: center; font-size: 12px;">
+                <p style="margin: 0 0 5px;">Este correo fue enviado desde el formulario de recuperación de contraseña de **Aventura GO**.</p>
+                <p style="margin: 0;">© 2025 Aventura GO. Todos los derechos reservados.</p>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
+HTML; // <-- ¡Este identificador debe estar pegado al margen izquierdo!
+                // FIN DEL BLOQUE HTML
+
                 $mail->send();
 
                 return true;

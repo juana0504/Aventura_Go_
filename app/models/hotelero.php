@@ -15,23 +15,62 @@ class Hotelero
     }
 
     // Función para autenticar usuario (recibe el correo y la clave escrita por el usuario)
-    public function registrar($data){
+    public function registrar($data)
+    {
 
         try {
+
+            $insert_usuario = "INSERT INTO usuario(
+                nombre,
+                identificacion,
+                email,
+                telefono,
+                clave,
+                rol,
+                foto,
+                estado
+            ) VALUES (
+                :nombre_representante,
+                :identificacion_representante,
+                :email_representante,
+                :telefono_representante,
+                :identificacion,
+                'proveedor_turistico',
+                :foto_representante,
+                'Activo'
+            )";
+            $usuario = $this->conexion->prepare($insert_usuario);
+            $usuario->bindParam(':nombre_representante', $data['nombre_representante']);
+            $usuario->bindParam(':identificacion_representante', $data['identificacion_representante']);
+            $usuario->bindParam(':email_representante', $data['email_representante']);
+            $usuario->bindParam(':telefono_representante', $data['telefono_representante']);
+            $usuario->bindParam(':identificacion', $data['identificacion']);
+            $usuario->bindParam(':foto_representante', $data['foto_representante']);
+
             $insertar = "INSERT INTO proveedor_hotelero(
-            foto,
-            nombre_establecimiento,
-            tipo_establecimiento,
-            numero_habitaciones,
-            calificacion_promedio,
-            estado
-        ) VALUES (
-            :foto,
-            :nombre_establecimiento,
-            :tipo_establecimiento,
-            :numero_habitaciones,
-            :calificacion_promedio,
-            :estado
+                logo,
+                nombre_establecimiento,
+                email,
+                telefono,
+                tipo_establecimiento,
+                nombre_representante,
+                identificacion_represntante,
+                foto_representante,
+                email_representante,
+                telefono_representante,
+                departamento,
+                ciudad,
+                direccion,
+                numero_habitaciones,
+                calificacion_promedio,
+                estado
+            ) VALUES (
+                :foto,
+                :nombre_establecimiento,
+                :tipo_establecimiento,
+                :numero_habitaciones,
+                :calificacion_promedio,
+                :estado
             )";
 
             $resultado = $this->conexion->prepare($insertar);
@@ -51,25 +90,26 @@ class Hotelero
         }
     }
 
-    public function listar(){
-        try{
+    public function listar()
+    {
+        try {
             // Variable que almacena laq sentencia de sql a ejecutar
             $consultar = "SELECT * FROM proveedor_hotelero WHERE id_proveedor_hotelero = id_proveedor_hotelero order BY id_proveedor_hotelero DESC";
 
             // Preparar lo necesario para ejecutar la función
-            $resultado = $this->conexion->prepare($consultar);                                                                            
+            $resultado = $this->conexion->prepare($consultar);
             $resultado->execute();
 
             return $resultado->fetchAll();
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             error_log("Error en proveedor::listar->" . $e->getMessage());
             return [];
-
         }
     }
 
-    public function listarHoteles($id){
-        try{
+    public function listarHoteles($id)
+    {
+        try {
 
             $consultar = "SELECT * FROM proveedor_hotelero WHERE id_proveedor_hotelero = :id_proveedor_hotelero LIMIT 1";
 
@@ -78,14 +118,15 @@ class Hotelero
             $resultado->execute();
 
             return $resultado->fetch();
-        }catch(PDOexception $e){
+        } catch (PDOexception $e) {
             error_log("Error en proveedor::listarHoteles->" . $e->getMessage());
             return;
         }
     }
 
-    public function actualizar($data){
-        try{
+    public function actualizar($data)
+    {
+        try {
             $actualizar = "UPDATE proveedor_hotelero SET
                 nombre_establecimiento = :nombre_establecimiento,
                 tipo_establecimiento = :tipo_establecimiento,
@@ -101,21 +142,22 @@ class Hotelero
             $resultado->bindParam(':calificacion_promedio', $data['calificacion_promedio']);
 
             return $resultado->execute();
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             error_log("Error al actualizar proveedor::actualizar->" . $e->getMessage());
             return;
         }
     }
 
-    public function eliminar($id){
-        try{
+    public function eliminar($id)
+    {
+        try {
             $eliminar = "DELETE FROM proveedor_hotelero WHERE id_proveedor_hotelero = :id_proveedor_hotelero";
 
             $resultado = $this->conexion->prepare($eliminar);
             $resultado->bindParam(':id_proveedor_hotelero', $id);
 
             return $resultado->execute();
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             error_log("Error al eliminar proveedor::eliminar->" . $e->getMessage());
             return;
         }
