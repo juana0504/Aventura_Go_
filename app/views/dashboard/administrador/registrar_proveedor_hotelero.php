@@ -81,7 +81,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             </div>
                             <div class="step" data-step="5">
                                 <div class="step-circle">5</div>
-                                <div class="step-label">Confirmación</div>
+                                <div class="step-label">Documentación</div>
                             </div>
                         </div>
 
@@ -93,7 +93,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Logo</label>
-                                        <input type="file" accept=".jpg, .png, .jpeg" name="foto" class="form-control" id="foto" required>
+                                        <input type="file" accept=".jpg, .png, .jpeg" name="logo" class="form-control" id="logo" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <!-- Nombre establecimiento -->
@@ -190,25 +190,25 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Estandar" value="Estandar">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_habitacion[]" id="Estandar" value="Estandar">
                                                     <label class="form-check-label">Estándar</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Doble" value="Doble">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_habitacion[]" id="Doble" value="Doble">
                                                     <label class="form-check-label">Doble</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Suite" value="Suite">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_habitacion[]" id="Suite" value="Suite">
                                                     <label class="form-check-label">Suite</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Familiar" value="Familiar">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_habitacion[]" id="Familiar" value="Familiar">
                                                     <label class="form-check-label">Familiar</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_habitacion[]" id="Premium" value="Premium">
                                                     <label class="form-check-label">Premium</label>
                                                 </div>
                                             </div>
@@ -216,7 +216,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Número máximo de huéspedes *</label>
-                                        <input type="tel" name="departamento" class="form-control" id="departamento" placeholder="Juan Pérez" required>
+                                        <input type="tel" name="max_huesped" class="form-control" id="max_huesped" placeholder="Juan Pérez" required>
                                     </div>
 
                                     <h4 class="mb-4"><i class="bi bi-file-earmark-medical-fill"></i> Servicios incluidos</h4>
@@ -224,54 +224,54 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Estandar" value="Estandar">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="WiFi" value="WiFi">
                                                     <label class="form-check-label">WiFi</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Doble" value="Doble">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Parqueadero" value="Parqueadero">
                                                     <label class="form-check-label">Parqueadero</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Suite" value="Suite">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Piscina" value="Piscina">
                                                     <label class="form-check-label">Piscina</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Familiar" value="Familiar">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Restaurante" value="Restaurante">
                                                     <label class="form-check-label">Restaurante</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Bar" value="Bar">
                                                     <label class="form-check-label">Bar</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Spa" value="Spa">
                                                     <label class="form-check-label">Spa</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Pet Friendly" value="Pet Friendly">
                                                     <label class="form-check-label">Pet Friendly</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Servicio al cuarto" value="Servicio al cuarto">
                                                     <label class="form-check-label">Servicio al cuarto</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Transporte" value="Transporte">
                                                     <label class="form-check-label">Transporte</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Desayuno incluido" value="Desayuno incluido">
                                                     <label class="form-check-label">Desayuno incluido</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Accesibilidad" value="Accesibilidad">
                                                     <label class="form-check-label">Accesibilidad</label>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>  
+                                    </div>
                                 </div>
                             </div>
 
@@ -279,16 +279,42 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 <h4 class="mb-4"><i class="fas fa-map-marker-alt text-primary"></i> Documentación obligatoria</h4>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Departamento *</label>
-                                        <input type="text" name="departamento" class="form-control" id="departamento" placeholder="Juan Pérez" required>
+                                        <label class="form-label">NIT/RUT *</label>
+                                        <input type="text" name="nit_rut" class="form-control" id="nit" placeholder="123456789-0" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Ciudad *</label>
-                                        <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ej: Medellín" required>
+                                        <label class="form-label">Camara de Comercio *</label>
+                                        <input type="text" name="camara_comercio" class="form-control" id="camara_comercio" required>
                                     </div>
-                                    <div class="col-md-12 mb-3">
-                                        <label class="form-label">Dirección *</label>
-                                        <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Calle 123 #45-67" required>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Licencia *</label>
+                                        <input type="text" name="licencia" class="form-control" id="licencia" placeholder="Ej: Medellín" required>
+                                    </div>
+                                    
+                                    <h4 class="mb-4"><i class="bi bi-file-earmark-medical-fill"></i> Tipo de pago</h4>
+                                    <div class="col-md-12 mb-4">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="metodo_pago[]" id="Tarjeta de Crédito" value="Tarjeta de Crédito">
+                                                    <label class="form-check-label">Tarjeta de Crédito</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="metodo_pago[]" id="Tarjeta Débito" value="Tarjeta Débito">
+                                                    <label class="form-check-label">Tarjeta Débito</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="metodo_pago[]" id="PSE" value="PSE">
+                                                    <label class="form-check-label">PSE</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="metodo_pago[]" id="Nequi" value="Nequi">
+                                                    <label class="form-check-label">Nequi</label>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -233,21 +233,21 @@ function actualizarProveedor()
     $objProveedor = new Proveedor();
 
     $data = [
-        'id_proveedor'             => $id_proveedor,
-        'id_usuario'             => $id_usuario,
-        'nombre_empresa'           => $nombre_empresa,
-        'email'                    => $email,
-        'telefono'                 => $telefono,
-        'nit_rut'                  => $nit_rut,
-        'nombre_representante'     => $nombre_representante,
-        'identificacion_representante'     => $identificacion_representante,
-        'email_representante'      => $email_representante,
-        'telefono_representante'   => $telefono_representante,
-        'actividades'              => $actividades,
-        'descripcion'              => $descripcion,
-        'departamento'             => $departamento,
-        'ciudad'                   => $ciudad,
-        'direccion'                => $direccion
+        'id_proveedor'                  => $id_proveedor,
+        'id_usuario'                    => $id_usuario,
+        'nombre_empresa'                => $nombre_empresa,
+        'email'                         => $email,
+        'telefono'                      => $telefono,
+        'nit_rut'                       => $nit_rut,
+        'nombre_representante'          => $nombre_representante,
+        'identificacion_representante'  => $identificacion_representante,
+        'email_representante'           => $email_representante,
+        'telefono_representante'        => $telefono_representante,
+        'actividades'                   => $actividades,
+        'descripcion'                   => $descripcion,
+        'departamento'                  => $departamento,
+        'ciudad'                        => $ciudad,
+        'direccion'                     => $direccion
     ];
 
     $resultado = $objProveedor->actualizar($data);

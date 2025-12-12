@@ -120,8 +120,6 @@ class Proveedor
         }
     }
 
-
-
     public function listar()
     {
         try {

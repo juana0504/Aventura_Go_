@@ -14,6 +14,16 @@ class Hotelero
         $this->conexion = $db->getConexion(); // Obtiene la conexión PDO y la guarda en $this->conexion
     }
 
+    // Función para verificar si un email ya existe en la base de datos
+    public function emailExiste($email)
+    {
+        $query = "SELECT id_usuario FROM usuario WHERE email = :email LIMIT 1";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":email", $email);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     // Función para autenticar usuario (recibe el correo y la clave escrita por el usuario)
     public function registrar($data)
     {
@@ -35,7 +45,7 @@ class Hotelero
                 :email_representante,
                 :telefono_representante,
                 :identificacion,
-                'proveedor_turistico',
+                'proveedor_hotelero',
                 :foto_representante,
                 'Activo'
             )";
@@ -47,44 +57,88 @@ class Hotelero
             $usuario->bindParam(':identificacion', $data['identificacion']);
             $usuario->bindParam(':foto_representante', $data['foto_representante']);
 
+            $usuario->execute();
+            $id_usuario = $this->conexion->lastInsertId();
+
             $insertar = "INSERT INTO proveedor_hotelero(
+                id_usuario,
                 logo,
                 nombre_establecimiento,
                 email,
                 telefono,
                 tipo_establecimiento,
                 nombre_representante,
-                identificacion_represntante,
+                identificacion_representante,
                 foto_representante,
                 email_representante,
                 telefono_representante,
                 departamento,
                 ciudad,
                 direccion,
-                numero_habitaciones,
-                calificacion_promedio,
+                tipo_habitacion,
+                max_huesped,
+                servicio_incluido,
+                nit_rut,
+                camara_comercio,
+                licencia,
+                metodo_pago,
                 estado
             ) VALUES (
-                :foto,
+                :id_usuario,
+                :logo,
                 :nombre_establecimiento,
+                :email,
+                :telefono,
                 :tipo_establecimiento,
-                :numero_habitaciones,
-                :calificacion_promedio,
-                :estado
+                :nombre_representante,
+                :identificacion_representante,
+                :foto_representante,
+                :email_representante,
+                :telefono_representante,
+                :departamento,
+                :ciudad,
+                :direccion,
+                :tipo_habitacion,
+                :max_huesped,
+                :servicio_incluido,
+                :nit_rut,
+                :camara_comercio,
+                :licencia,
+                :metodo_pago,
+                'Activo'
             )";
 
             $resultado = $this->conexion->prepare($insertar);
-            $resultado->bindParam(':foto', $data['foto']);
+            $resultado->bindParam(':id_usuario', $id_usuario);
+            $resultado->bindParam(':logo', $data['logo']);
             $resultado->bindParam(':nombre_establecimiento', $data['nombre_establecimiento']);
+            $resultado->bindParam(':email', $data['email']);
+            $resultado->bindParam(':telefono', $data['telefono']);
             $resultado->bindParam(':tipo_establecimiento', $data['tipo_establecimiento']);
-            $resultado->bindParam(':numero_habitaciones', $data['numero_habitaciones']);
-            $resultado->bindParam(':calificacion_promedio', $data['calificacion_promedio']);
-            $resultado->bindParam(':estado', $data['estado']);
-
-
+            $resultado->bindParam(':nombre_representante', $data['nombre_representante']);
+            $resultado->bindParam(':identificacion_representante', $data['identificacion_representante']);
+            $resultado->bindParam(':foto_representante', $data['foto_representante']);
+            $resultado->bindParam(':email_representante', $data['email_representante']);
+            $resultado->bindParam(':telefono_representante', $data['telefono_representante']);
+            $resultado->bindParam(':departamento', $data['departamento']);
+            $resultado->bindParam(':ciudad', $data['ciudad']);
+            $resultado->bindParam(':direccion', $data['direccion']);
+            $resultado->bindParam(':tipo_habitacion', $data['tipo_habitacion']);
+            $resultado->bindParam(':max_huesped', $data['max_huesped']);
+            $resultado->bindParam(':servicio_incluido', $data['servicio_incluido']);
+            $resultado->bindParam(':nit_rut', $data['nit_rut']);
+            $resultado->bindParam(':camara_comercio', $data['camara_comercio']);
+            $resultado->bindParam(':licencia', $data['licencia']);
+            $resultado->bindParam(':metodo_pago', $data['metodo_pago']);
 
             return $resultado->execute();
         } catch (PDOException $e) {
+            // 🔥 AQUÍ VA TU CATCH PARA CLAVE DUPLICADA
+            if ($e->getCode() == 23000) {
+                mostrarSweetAlert('error', 'Correo duplicado', 'Este correo ya existe en el sistema.');
+                return false;
+            }
+
             error_log("Error en proveedor::registrar->" . $e->getMessage());
             return false;
         }

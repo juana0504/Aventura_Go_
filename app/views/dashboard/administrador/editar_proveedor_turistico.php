@@ -73,6 +73,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
             <!-- Formulario Wizard -->
             <form id="formProveedor" action="<?= BASE_URL ?>/administrador/actualizar-proveedor-turistico" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id_proveedor" value="<?= $proveedor['id_proveedor'] ?>">
+                <input type="hidden" name="id_usuario" value="<?= $proveedor['id_usuario'] ?>">
                 <input type="hidden" name="accion" value="actualizar">
 
 
