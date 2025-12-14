@@ -70,7 +70,7 @@
 
             <div class="row hero-img">
                 <div class="col-12 header-arriba">
-                    <img src="public/assets/website_externos/contactanos/img/Hero_contactanos.png" alt="img contactanos">
+                    <img src="public/assets/website_externos/contactanos/img/contactanos_1.jpeg" alt="img contactanos">
                     <h1 class="palpitando">CONTACTANOS</h1>
                 </div>
             </div>
@@ -80,8 +80,7 @@
                     <img src="public/assets/website_externos/contactanos/img/hero_icon_email.png" class="icono-email"
                         alt="icono hero_icon_email">
                     <h2 class="h2-email">E-mail</h2>
-                    <h3 class="h3-email">aventura_go@gmail.com</h3>
-                    <h3 class="h3-email">aventurago.2025@gmail.com</h3>
+                    <h3 class="h3-email">aventurago.contacto@gmail.com</h3>
                 </div>
                 <div class="col-12 col-sm-4 col-md-4 text-center p-3">
                     <img src="public/assets/website_externos/contactanos/img/hero_icon_phone.png" alt="icono hero_icon_phone">
@@ -227,9 +226,8 @@
                     <!-- col 2 Descripción  -->
                     <div class="col-md-2">
                         <p class="description">
-                            Aventura Go, somos una plataforma de turismo que conecta viajeros con experiencias
-                            únicas de aventura. Promovemos el turismo sostenible, apoyamos a prestadores locales y
-                            ofrecemos actividades seguras y memorables en destinos naturales.
+                            Aventura Go conecta viajeros con experiencias de aventura,
+                            promoviendo el turismo sostenible y apoyando a prestadores locales en destinos naturales."
                         </p>
                     </div>
 
