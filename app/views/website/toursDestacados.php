@@ -292,8 +292,8 @@
         </div>
         <div class="col-md-2">
           <p class="description">
-            Aventura Go, somos una plataforma de turismo que conecta viajeros
-            con experiencias únicas de aventura.
+            Aventura Go conecta viajeros con experiencias de aventura,
+            promoviendo el turismo sostenible y apoyando a prestadores locales en destinos naturales."
           </p>
         </div>
         <div class="col-md-2">
