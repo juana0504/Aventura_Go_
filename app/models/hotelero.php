@@ -133,7 +133,7 @@ class Hotelero
 
             return $resultado->execute();
         } catch (PDOException $e) {
-            // 🔥 AQUÍ VA TU CATCH PARA CLAVE DUPLICADA
+            //AQUÍ VA TU CATCH PARA CLAVE DUPLICADA
             if ($e->getCode() == 23000) {
                 mostrarSweetAlert('error', 'Correo duplicado', 'Este correo ya existe en el sistema.');
                 return false;
@@ -181,19 +181,65 @@ class Hotelero
     public function actualizar($data)
     {
         try {
+
+             $act_usuario = "UPDATE usuario SET 
+                nombre = :nombre_representante,
+                identificacion = :identificacion_representante,
+                telefono = :telefono_representante,
+                email = :email_representante
+            WHERE id_usuario = :id_usuario";
+
+            $usuario = $this->conexion->prepare($act_usuario);
+            $usuario->bindParam(':id_usuario', $data['id_usuario']);
+            $usuario->bindParam(':nombre_representante', $data['nombre_representante']);
+            $usuario->bindParam(':identificacion_representante', $data['identificacion_representante']);
+            $usuario->bindParam(':telefono_representante', $data['telefono_representante']);
+            $usuario->bindParam(':email_representante', $data['email_representante']);
+
+            $usuario->execute();
+
             $actualizar = "UPDATE proveedor_hotelero SET
                 nombre_establecimiento = :nombre_establecimiento,
+                email = :email,
+                telefono = :telefono,
                 tipo_establecimiento = :tipo_establecimiento,
-                numero_habitaciones = :numero_habitaciones,
-                calificacion_promedio = :calificacion_promedio
+                nombre_representante = :nombre_representante,
+                identificacion_representante = :identificacion_representante,
+                email_representante = :email_representante,
+                telefono_representante = :telefono_representante,
+                departamento = :departamento,
+                ciudad = :ciudad,
+                direccion = :direccion,
+                tipo_habitacion = :tipo_habitacion,
+                max_huesped = :max_huesped,
+                servicio_incluido = :servicio_incluido,
+                nit_rut = :nit_rut,
+                camara_comercio = :camara_comercio,
+                licencia = :licencia,
+                metodo_pago = :metodo_pago
             WHERE id_proveedor_hotelero = :id_proveedor_hotelero";
 
             $resultado = $this->conexion->prepare($actualizar);
+            
             $resultado->bindParam(':id_proveedor_hotelero', $data['id_proveedor_hotelero']);
             $resultado->bindParam(':nombre_establecimiento', $data['nombre_establecimiento']);
+            $resultado->bindParam(':email', $data['email']);
+            $resultado->bindParam(':telefono', $data['telefono']);
             $resultado->bindParam(':tipo_establecimiento', $data['tipo_establecimiento']);
-            $resultado->bindParam(':numero_habitaciones', $data['numero_habitaciones']);
-            $resultado->bindParam(':calificacion_promedio', $data['calificacion_promedio']);
+            $resultado->bindParam(':nombre_representante', $data['nombre_representante']);
+            $resultado->bindParam(':identificacion_representante', $data['identificacion_representante']);
+            $resultado->bindParam(':email_representante', $data['email_representante']);
+            $resultado->bindParam(':telefono_representante', $data['telefono_representante']);
+            $resultado->bindParam(':departamento', $data['departamento']);
+            $resultado->bindParam(':ciudad', $data['ciudad']);
+            $resultado->bindParam(':direccion', $data['direccion']);
+            $resultado->bindParam(':tipo_habitacion', $data['tipo_habitacion']);
+            $resultado->bindParam(':max_huesped', $data['max_huesped']);
+            $resultado->bindParam(':servicio_incluido', $data['servicio_incluido']);
+            $resultado->bindParam(':nit_rut', $data['nit_rut']);
+            $resultado->bindParam(':camara_comercio', $data['camara_comercio']);
+            $resultado->bindParam(':licencia', $data['licencia']);
+            $resultado->bindParam(':metodo_pago', $data['metodo_pago']);
 
             return $resultado->execute();
         } catch (PDOException $e) {

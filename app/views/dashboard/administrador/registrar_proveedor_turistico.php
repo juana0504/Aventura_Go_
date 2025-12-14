@@ -90,10 +90,6 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <h4 class="mb-4"><i class="fas fa-building text-primary"></i> Información Básica del Proveedor</h4>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Logo</label>
-                                    <input type="file" accept=".jpg, .png, .jpeg" name="logo" class="form-control" id="logo" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
                                     <label class="form-label">Nombre de la Empresa *</label>
                                     <input type="text" name="nombre_empresa" class="form-control" id="empresa" placeholder="Ej: Aventuras Extremas SAS" required>
                                 </div>
@@ -108,6 +104,10 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Teléfono *</label>
                                     <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="+57 300 123 4567" required>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Logo</label>
+                                    <input type="file" accept=".jpg, .png, .jpeg" name="logo" class="form-control" id="logo" required>
                                 </div>
                             </div>
                         </div>
@@ -157,14 +157,6 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Foto Actividades</label>
-                                    <input type="file" accept=".jpg, .png, .jpeg" name="foto_actividades" class="form-control" id="foto_actividades" required>
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <label class="form-label">Descripción actividades*</label>
-                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="4" placeholder="Describe los servicios que ofreces..." required></textarea>
-                                </div>
                             </div>
                         </div>
 
@@ -174,7 +166,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Departamento *</label>
-                                    <input type="text" name="departamento" class="form-control" id="departamento" placeholder="Juan Pérez" required>
+                                    <input type="text" name="departamento" class="form-control" id="departamento" placeholder="cundinamarca" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Ciudad *</label>

@@ -191,15 +191,6 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Foto actividades</label>
-                                    <img src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $proveedor['foto_actividades'] ?>"
-                                        alt="Foto del turista" width="120" class="img-thumbnail mb-2">
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <label class="form-label">Descripción actividades*</label>
-                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="4" placeholder="Describe los servicios que ofreces..." required><?= $proveedor['descripcion'] ?></textarea>
-                                </div>
                             </div>
                         </div>
 
@@ -236,10 +227,10 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     <input type="tel" name="identificacion_representante" class="form-control" id="identiificacion_repre" placeholder="+57 300 123 4567" required value="<?= $proveedor['identificacion_representante'] ?>">
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Foto</label>
-                                    <img src="<?= BASE_URL ?>/public/uploads/usuario<?= $proveedor['foto_representante'] ?>"
-                                        alt="Foto del turista" width="120" class="img-thumbnail mb-2">
-                                </div>
+                                        <label class="form-label">Foto</label>
+                                        <img src="<?= BASE_URL ?>/public/uploads/usuario<?= $proveedor['foto_representante'] ?>"
+                                            alt="Foto del turista" width="120" class="img-thumbnail mb-2">
+                                    </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Email *</label>
                                     <input type="email" name="email_representante" class="form-control" id="email_repre" placeholder="contacto@empresa.com" required value="<?= $proveedor['email_representante'] ?>">

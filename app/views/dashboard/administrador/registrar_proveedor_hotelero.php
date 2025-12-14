@@ -92,10 +92,6 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Logo</label>
-                                        <input type="file" accept=".jpg, .png, .jpeg" name="logo" class="form-control" id="logo" required>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
                                         <!-- Nombre establecimiento -->
                                         <label class="form-label" for="nombre_establecimiento">Nombre del establecimiento:</label>
                                         <input type="text" name="nombre_establecimiento" id="nombre_establecimiento" maxlength="100" required>
@@ -108,6 +104,10 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Teléfono *</label>
                                         <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="+57 300 123 4567" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Logo</label>
+                                        <input type="file" accept=".jpg, .png, .jpeg" name="logo" class="form-control" id="logo" required>
                                     </div>
 
                                     <h4 class="mb-4"><i class="bi bi-file-earmark-medical-fill"></i> Tipo de establecimiento</h4>
@@ -169,7 +169,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Departamento *</label>
-                                        <input type="text" name="departamento" class="form-control" id="departamento" placeholder="Juan Pérez" required>
+                                        <input type="text" name="departamento" class="form-control" id="departamento" placeholder="Cundinamarca" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Ciudad *</label>
@@ -216,7 +216,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Número máximo de huéspedes *</label>
-                                        <input type="tel" name="max_huesped" class="form-control" id="max_huesped" placeholder="Juan Pérez" required>
+                                        <input type="tel" name="max_huesped" class="form-control" id="max_huesped" placeholder="40" required>
                                     </div>
 
                                     <h4 class="mb-4"><i class="bi bi-file-earmark-medical-fill"></i> Servicios incluidos</h4>
@@ -288,7 +288,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Licencia *</label>
-                                        <input type="text" name="licencia" class="form-control" id="licencia" placeholder="Ej: Medellín" required>
+                                        <input type="text" name="licencia" class="form-control" id="licencia" required>
                                     </div>
                                     
                                     <h4 class="mb-4"><i class="bi bi-file-earmark-medical-fill"></i> Tipo de pago</h4>

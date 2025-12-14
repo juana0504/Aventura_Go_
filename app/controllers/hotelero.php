@@ -81,7 +81,7 @@ function registrarHotel()
         empty($email_representante) || empty($telefono_representante) || empty($departamento) ||
         empty($ciudad) || empty($direccion) || empty($tipo_habitacion) ||
         empty($max_huesped) || empty($servicio_incluido) ||
-        empty($nit_rut) || empty($camara_comercio) 
+        empty($nit_rut) || empty($camara_comercio)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completa todos los campos');
         exit();
@@ -140,16 +140,18 @@ function registrarHotel()
     }
 
     // FOTO PRINCIPAL
-    if (!empty($_FILES['foto']['name'])) {
-        $file = $_FILES['foto'];
+    if (!empty($_FILES['foto_representante']['name'])) {
+        $file = $_FILES['foto_representante'];
         $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
         $foto_url = uniqid('foto_') . "." . $ext;
         $destino = BASE_PATH . "/public/uploads/usuario/" . $foto_url;
+
         move_uploaded_file($file['tmp_name'], $destino);
     } else {
-        $foto_url = 'default_proveedor_usuario.png';
+        $foto_url = 'default_proveedor.png';
     }
+
 
     $claveHash = password_hash($identificacion_representante, PASSWORD_DEFAULT);
 
@@ -218,33 +220,83 @@ function listarHotelId($id)
 
 function actualizarHotel()
 {
-    $id_proveedor_hotelero       = $_POST['id_proveedor_hotelero'] ?? '';
-    $nombre_establecimiento      = $_POST['nombre_establecimiento'] ?? '';
-    $tipo_establecimiento        = $_POST['tipo_establecimiento'] ?? '';
-    $numero_habitaciones         = $_POST['numero_habitaciones'] ?? '';
-    $calificacion_promedio       = $_POST['calificacion_promedio'] ?? '';
+    $id_proveedor_hotelero            = $_POST['id_proveedor_hotelero'] ?? '';
+    $id_usuario            = $_POST['id_usuario'] ?? '';
+    $nombre_establecimiento          = $_POST['nombre_establecimiento'] ?? '';
+    $email                           = $_POST['email'] ?? '';
+    $telefono                        = $_POST['telefono'] ?? '';
+    $tipo_establecimiento            = $_POST['tipo_establecimiento'] ?? '';
+    $nombre_representante            = $_POST['nombre_representante'] ?? '';
+    $identificacion_representante    = $_POST['identificacion_representante'] ?? '';
+    $email_representante             = $_POST['email_representante'] ?? '';
+    $telefono_representante          = $_POST['telefono_representante'] ?? '';
+    $departamento                    = $_POST['departamento'] ?? '';
+    $ciudad                          = $_POST['ciudad'] ?? '';
+    $direccion                       = $_POST['direccion'] ?? '';
+    $tipo_habitacion                 = $_POST['tipo_habitacion'] ?? '';
+    $max_huesped                     = $_POST['max_huesped'] ?? '';
+    $servicio_incluido               = $_POST['servicio_incluido'] ?? '';
+    $nit_rut                         = $_POST['nit_rut'] ?? '';
+    $camara_comercio                 = $_POST['camara_comercio'] ?? '';
+    $licencia                        = $_POST['licencia'] ?? '';
+    $metodo_pago                     = $_POST['metodo_pago'] ?? '';
 
     if (
-        empty($nombre_establecimiento) || empty($tipo_establecimiento) || empty($numero_habitaciones) ||
-        empty($calificacion_promedio) 
+        empty($nombre_establecimiento) || empty($email) || empty($telefono) ||
+        empty($tipo_establecimiento) || empty($nombre_representante) || empty($identificacion_representante) ||
+        empty($email_representante) || empty($telefono_representante) || empty($departamento) ||
+        empty($ciudad) || empty($direccion) || empty($tipo_habitacion) ||
+        empty($max_huesped) || empty($servicio_incluido) ||
+        empty($nit_rut) || empty($camara_comercio)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completa todos los campos');
         exit();
     }
 
-    // Convertir array de actividades en string
+    // Convertir array de tipo establecimiento en string
     if (is_array($tipo_establecimiento)) {
         $tipo_establecimiento = implode(",", $tipo_establecimiento);
     }
 
+    // Convertir array de tipo habitacion en string
+    if (is_array($tipo_habitacion)) {
+        $tipo_habitacion = implode(",", $tipo_habitacion);
+    }
+
+    // Convertir array de tipo de servicio incluido en string
+    if (is_array($servicio_incluido)) {
+        $servicio_incluido = implode(",", $servicio_incluido);
+    }
+
+    // Convertir array de tipo de pago en string
+    if (is_array($metodo_pago)) {
+        $metodo_pago = implode(",", $metodo_pago);
+    }
+
+
     $objHotelero = new Hotelero();
 
     $data = [
-        'id_proveedor_hotelero'      => $id_proveedor_hotelero,
+        'id_proveedor_hotelero'                  => $id_proveedor_hotelero,
+        'id_usuario'                    => $id_usuario,
         'nombre_establecimiento'     => $nombre_establecimiento,
+        'email'                      => $email,
+        'telefono'                   => $telefono,
         'tipo_establecimiento'       => $tipo_establecimiento,
-        'numero_habitaciones'        => $numero_habitaciones,
-        'calificacion_promedio'      => $calificacion_promedio,
+        'nombre_representante'       => $nombre_representante,
+        'identificacion_representante'       => $identificacion_representante,
+        'email_representante'        => $email_representante,
+        'telefono_representante'     => $telefono_representante,
+        'departamento'               => $departamento,
+        'ciudad'                     => $ciudad,
+        'direccion'                  => $direccion,
+        'tipo_habitacion'            => $tipo_habitacion,
+        'max_huesped'                => $max_huesped,
+        'servicio_incluido'          => $servicio_incluido,
+        'nit_rut'                    => $nit_rut,
+        'camara_comercio'            => $camara_comercio,
+        'licencia'                   => $licencia,
+        'metodo_pago'                => $metodo_pago,
     ];
 
     $resultado = $objHotelero->actualizar($data);
