@@ -18,8 +18,9 @@
     padding: 20px 40px;
     background-color: #ffffff;
 }
+
 /* ========== estilos boton pdf ========== */
-.btn-pdf{
+.btn-pdf {
     background: red;
     color: #ffffff;
     text-decoration: none;
@@ -88,42 +89,85 @@
     border-radius: 15px;
     padding: 25px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    overflow-x: auto; /* Permite scroll horizontal en pantallas pequeñas */
+    overflow-x: auto;
+    /* Permite scroll horizontal en pantallas pequeñas */
 }
 
 table.table {
     width: 100%;
     margin-bottom: 0;
-    table-layout: fixed; /* Esto hace que las columnas mantengan su ancho */
+    table-layout: fixed;
+    /* Esto hace que las columnas mantengan su ancho */
     border-collapse: collapse;
 }
 
 
 /* Define anchos específicos para cada columna */
-table.table thead th:nth-child(1) { width: 8%; } /* logo*/
-table.table thead th:nth-child(2) { width: 15%; } /* EMPRESA */
-table.table thead th:nth-child(3) { width: 20%; } /* REPRESENTANTE */
-table.table thead th:nth-child(4) { width: 20%; } /* EMAIL */
-table.table thead th:nth-child(5) { width: 15%; } /* TELÉFONO */
-table.table thead th:nth-child(6) { width: 15%; } /* CIUDAD */
-table.table thead th:nth-child(7) { width: 15%; } /* ESTADO */
-table.table thead th:nth-child(8) { width: 20%; } /* ACCIONES */
+table.table thead th:nth-child(1) {
+    width: 8%;
+}
+
+/* logo*/
+table.table thead th:nth-child(2) {
+    width: 15%;
+}
+
+/* EMPRESA */
+table.table thead th:nth-child(3) {
+    width: 20%;
+}
+
+/* REPRESENTANTE */
+table.table thead th:nth-child(4) {
+    width: 20%;
+}
+
+/* EMAIL */
+table.table thead th:nth-child(5) {
+    width: 15%;
+}
+
+/* TELÉFONO */
+table.table thead th:nth-child(6) {
+    width: 15%;
+}
+
+/* CIUDAD */
+table.table thead th:nth-child(7) {
+    width: 15%;
+}
+
+/* ESTADO */
+table.table thead th:nth-child(8) {
+    width: 20%;
+}
+
+/* ACCIONES */
 
 /* Estilos específicos para columnas con contenido largo */
-table.table tbody td:nth-child(2), /* EMPRESA */
-table.table tbody td:nth-child(3), /* REPRESENTANTE */
-table.table tbody td:nth-child(4), /* EMAIL */
-table.table tbody td:nth-child(6) {/* CIUDAD */
+table.table tbody td:nth-child(2),
+/* EMPRESA */
+table.table tbody td:nth-child(3),
+/* REPRESENTANTE */
+table.table tbody td:nth-child(4),
+/* EMAIL */
+table.table tbody td:nth-child(6) {
+    /* CIUDAD */
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap; /* Muestra puntos suspensivos si es muy largo */
+    white-space: nowrap;
+    /* Muestra puntos suspensivos si es muy largo */
 }
 
 /* Para columnas que deben mantener su contenido visible */
-table.table thead th:nth-child(1),/*logo */
-table.table thead th:nth-child(5),/* TELÉFONO */
-table.table tbody td:nth-child(7), /* ESTADO */
-table.table tbody td:nth-child(8) { /* ACCIONES */
+table.table thead th:nth-child(1),
+/*logo */
+table.table thead th:nth-child(5),
+/* TELÉFONO */
+table.table tbody td:nth-child(7),
+/* ESTADO */
+table.table tbody td:nth-child(8) {
+    /* ACCIONES */
     white-space: normal;
 }
 
@@ -136,8 +180,10 @@ table.table thead th {
     text-transform: uppercase;
     padding: 15px 12px;
     border-bottom: 2px solid #e5e7eb;
-    text-align: left; /*alineamos texto a la izq*/
-    white-space: nowrap; /* Evita que el texto del encabezado se divida */
+    text-align: left;
+    /*alineamos texto a la izq*/
+    white-space: nowrap;
+    /* Evita que el texto del encabezado se divida */
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -148,9 +194,11 @@ table.table tbody td {
     font-size: 14px;
     color: #374151;
     border-bottom: 1px solid #f3f4f6;
-    word-wrap: break-word; /* Permite que el texto largo se divida */
+    word-wrap: break-word;
+    /* Permite que el texto largo se divida */
     overflow-wrap: break-word;
-    max-width: 0; /* Necesario para que funcione text-overflow */
+    max-width: 0;
+    /* Necesario para que funcione text-overflow */
 }
 
 /* Mantén el texto completo al hacer hover */
@@ -294,10 +342,8 @@ div.dataTables_wrapper div.dataTables_scrollBody td {
 }
 
 
-/* ===== Modal Aventura Go ===== */
-/* ===== Modal Aventura Go (Logo en header, sin multimedia) ===== */
-/* ===== Modal Aventura Go Mejorado ===== */
-/* Estilos para el Modal de Proveedor - Aventura Go */
+/* ====================================================== Modal Aventura Go ======================================================= */
+
 .aventura-modal {
     border: none;
     border-radius: 12px;
@@ -631,7 +677,7 @@ div.dataTables_wrapper div.dataTables_scrollBody td {
 
 
 
- /* ::::fin estilos modal:::: */
+/* ::::fin estilos modal:::: */
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -640,22 +686,22 @@ div.dataTables_wrapper div.dataTables_scrollBody td {
         text-align: center;
         gap: 1rem;
     }
-    
+
     .modal-logo {
         width: 60px;
         height: 60px;
     }
-    
+
     .aventura-modal-footer {
         flex-direction: column;
         gap: 1rem;
     }
-    
+
     .action-buttons {
         width: 100%;
         justify-content: space-between;
     }
-    
+
     .action-buttons .btn {
         flex: 1;
         justify-content: center;
@@ -666,15 +712,15 @@ div.dataTables_wrapper div.dataTables_scrollBody td {
     .modal-body {
         padding: 1rem;
     }
-    
+
     .info-section {
         padding: 1rem;
     }
-    
+
     .info-card {
         padding: 1rem;
     }
-    
+
     .activities-container {
         justify-content: center;
     }
@@ -689,33 +735,51 @@ div.dataTables_wrapper div.dataTables_scrollBody td {
         width: 100%;
         height: auto;
     }
-    
+
     .info {
         margin-left: 0;
     }
-    
+
     #admin-dashboard {
         flex-direction: column;
     }
 }
+
 @media (max-width: 768px) {
     .tabla-container {
         padding: 15px;
     }
-    
+
     table.table thead th,
     table.table tbody td {
         padding: 10px 8px;
         font-size: 13px;
     }
-    
+
     /* Ajusta los anchos de columna en móvil */
-    table.table thead th:nth-child(1) { width: 20%; }
-    table.table thehead th:nth-child(2) { width: 20%; }
-    table.table thead th:nth-child(3) { width: 25%; }
-    table.table thead th:nth-child(4) { width: 15%; }
-    table.table thead th:nth-child(5) { width: 10%; }
-    table.table thead th:nth-child(6) { width: 10%; }
+    table.table thead th:nth-child(1) {
+        width: 20%;
+    }
+
+    table.table thehead th:nth-child(2) {
+        width: 20%;
+    }
+
+    table.table thead th:nth-child(3) {
+        width: 25%;
+    }
+
+    table.table thead th:nth-child(4) {
+        width: 15%;
+    }
+
+    table.table thead th:nth-child(5) {
+        width: 10%;
+    }
+
+    table.table thead th:nth-child(6) {
+        width: 10%;
+    }
 }
 
 @media (max-width: 480px) {
@@ -723,7 +787,7 @@ div.dataTables_wrapper div.dataTables_scrollBody td {
         border-radius: 10px;
         padding: 10px;
     }
-    
+
     /* Hace que la tabla sea más compacta en móviles muy pequeños */
     .btn-accion {
         padding: 6px 8px;

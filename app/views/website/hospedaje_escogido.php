@@ -140,7 +140,7 @@
                     nesciunt
                     voluptate.</p>
 
-                    
+
                 <!-- seccion mapa -->
                 <section id="mapa" class="mapa-section">
                     <div class="mapa-contenedor">
@@ -184,9 +184,8 @@
                     <!-- col 2 Descripción  -->
                     <div class="col-md-2">
                         <p class="description">
-                            Aventura Go, somos una plataforma de turismo que conecta viajeros con experiencias
-                            únicas de aventura. Promovemos el turismo sostenible, apoyamos a prestadores locales y
-                            ofrecemos actividades seguras y memorables en destinos naturales.
+                            Aventura Go conecta viajeros con experiencias de aventura,
+                            promoviendo el turismo sostenible y apoyando a prestadores locales en destinos naturales."
                         </p>
                     </div>
 

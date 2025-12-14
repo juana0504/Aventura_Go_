@@ -128,14 +128,12 @@
 
                 <h2 class="marca">AVENTURA<br>GO</h2>
 
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <button class="carousel-control-prev " type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                    <i class="bi bi-caret-left-fill"></i>
                 </button>
 
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                    <i class="bi bi-caret-right-fill"></i>
                 </button>
             </div>
         </div>
@@ -384,9 +382,8 @@
                     <!-- col 2 Descripción  -->
                     <div class="col-md-2">
                         <p class="description">
-                            Aventura Go, somos una plataforma de turismo que conecta viajeros con experiencias
-                            únicas de aventura. Promovemos el turismo sostenible, apoyamos a prestadores locales y
-                            ofrecemos actividades seguras y memorables en destinos naturales.
+                            Aventura Go conecta viajeros con experiencias de aventura,
+                            promoviendo el turismo sostenible y apoyando a prestadores locales en destinos naturales."
                         </p>
                     </div>
 
