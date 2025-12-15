@@ -223,6 +223,15 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     <input type="text" name="nombre_representante" class="form-control" id="nombre_repre" placeholder="Juan Pérez" required value=" <?= $proveedor['nombre_representante'] ?>">
                                 </div>
                                 <div class="col-md-6 mb-3">
+                                    <label class="form-label">Tipo de documento *</label>
+                                    <select name="tipo_documento">
+                                        <option value="" disabled selected hidden>Tipo de documento</option>
+                                        <option value="CC" <?= $proveedor['tipo_documento'] == "CC" ? "selected" : "" ?>>CC</option>
+                                        <option value="CE" <?= $proveedor['tipo_documento'] == "CE" ? "selected" : "" ?>>CE</option>
+                                        <option value="Pasaporte" <?= $proveedor['tipo_documento'] == "Pasaporte" ? "selected" : "" ?>>Pasaporte</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
                                     <label class="form-label">Identificacion *</label>
                                     <input type="tel" name="identificacion_representante" class="form-control" id="identiificacion_repre" placeholder="+57 300 123 4567" required value="<?= $proveedor['identificacion_representante'] ?>">
                                 </div>

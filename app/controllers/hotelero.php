@@ -61,6 +61,7 @@ function registrarHotel()
     $telefono                        = $_POST['telefono'] ?? '';
     $tipo_establecimiento            = $_POST['tipo_establecimiento'] ?? '';
     $nombre_representante            = $_POST['nombre_representante'] ?? '';
+    $tipo_documento                  = $_POST['tipo_documento'] ?? '';
     $identificacion_representante    = $_POST['identificacion_representante'] ?? '';
     $email_representante             = $_POST['email_representante'] ?? '';
     $telefono_representante          = $_POST['telefono_representante'] ?? '';
@@ -77,7 +78,7 @@ function registrarHotel()
 
     if (
         empty($nombre_establecimiento) || empty($email) || empty($telefono) ||
-        empty($tipo_establecimiento) || empty($nombre_representante) || empty($identificacion_representante) ||
+        empty($tipo_establecimiento) || empty($nombre_representante) || empty($identificacion_representante) || empty($tipo_documento) ||
         empty($email_representante) || empty($telefono_representante) || empty($departamento) ||
         empty($ciudad) || empty($direccion) || empty($tipo_habitacion) ||
         empty($max_huesped) || empty($servicio_incluido) ||
@@ -171,27 +172,28 @@ function registrarHotel()
 
 
     $data = [
-        'logo'                       => $logo_url,
-        'nombre_establecimiento'     => $nombre_establecimiento,
-        'email'                      => $email,
-        'telefono'                   => $telefono,
-        'tipo_establecimiento'       => $tipo_establecimiento,
-        'nombre_representante'       => $nombre_representante,
-        'identificacion_representante'       => $identificacion_representante,
-        'identificacion'          => $claveHash,
-        'foto_representante'         => $foto_url,
-        'email_representante'        => $email_representante,
-        'telefono_representante'     => $telefono_representante,
-        'departamento'               => $departamento,
-        'ciudad'                     => $ciudad,
-        'direccion'                  => $direccion,
-        'tipo_habitacion'            => $tipo_habitacion,
-        'max_huesped'                => $max_huesped,
-        'servicio_incluido'          => $servicio_incluido,
-        'nit_rut'                    => $nit_rut,
-        'camara_comercio'            => $camara_comercio,
-        'licencia'                   => $licencia,
-        'metodo_pago'                => $metodo_pago,
+        'logo'                          => $logo_url,
+        'nombre_establecimiento'        => $nombre_establecimiento,
+        'email'                         => $email,
+        'telefono'                      => $telefono,
+        'tipo_establecimiento'          => $tipo_establecimiento,
+        'nombre_representante'          => $nombre_representante,
+        'tipo_documento'                => $tipo_documento,
+        'identificacion_representante'  => $identificacion_representante,
+        'identificacion'                => $claveHash,
+        'foto_representante'            => $foto_url,
+        'email_representante'           => $email_representante,
+        'telefono_representante'        => $telefono_representante,
+        'departamento'                  => $departamento,
+        'ciudad'                        => $ciudad,
+        'direccion'                     => $direccion,
+        'tipo_habitacion'               => $tipo_habitacion,
+        'max_huesped'                   => $max_huesped,
+        'servicio_incluido'             => $servicio_incluido,
+        'nit_rut'                       => $nit_rut,
+        'camara_comercio'               => $camara_comercio,
+        'licencia'                      => $licencia,
+        'metodo_pago'                   => $metodo_pago,
     ];
 
     $resultado = $objhotelero->registrar($data);
@@ -221,13 +223,14 @@ function listarHotelId($id)
 
 function actualizarHotel()
 {
-    $id_proveedor_hotelero            = $_POST['id_proveedor_hotelero'] ?? '';
-    $id_usuario            = $_POST['id_usuario'] ?? '';
+    $id_proveedor_hotelero           = $_POST['id_proveedor_hotelero'] ?? '';
+    $id_usuario                      = $_POST['id_usuario'] ?? '';
     $nombre_establecimiento          = $_POST['nombre_establecimiento'] ?? '';
     $email                           = $_POST['email'] ?? '';
     $telefono                        = $_POST['telefono'] ?? '';
     $tipo_establecimiento            = $_POST['tipo_establecimiento'] ?? '';
     $nombre_representante            = $_POST['nombre_representante'] ?? '';
+    $tipo_documento                  = $_POST['tipo_documento'] ?? '';
     $identificacion_representante    = $_POST['identificacion_representante'] ?? '';
     $email_representante             = $_POST['email_representante'] ?? '';
     $telefono_representante          = $_POST['telefono_representante'] ?? '';
@@ -244,7 +247,7 @@ function actualizarHotel()
 
     if (
         empty($nombre_establecimiento) || empty($email) || empty($telefono) ||
-        empty($tipo_establecimiento) || empty($nombre_representante) || empty($identificacion_representante) ||
+        empty($tipo_establecimiento) || empty($nombre_representante) || empty($identificacion_representante) || empty($tipo_documento) ||
         empty($email_representante) || empty($telefono_representante) || empty($departamento) ||
         empty($ciudad) || empty($direccion) || empty($tipo_habitacion) ||
         empty($max_huesped) || empty($servicio_incluido) ||
@@ -278,26 +281,27 @@ function actualizarHotel()
     $objHotelero = new Hotelero();
 
     $data = [
-        'id_proveedor_hotelero'                  => $id_proveedor_hotelero,
+        'id_proveedor_hotelero'         => $id_proveedor_hotelero,
         'id_usuario'                    => $id_usuario,
-        'nombre_establecimiento'     => $nombre_establecimiento,
-        'email'                      => $email,
-        'telefono'                   => $telefono,
-        'tipo_establecimiento'       => $tipo_establecimiento,
-        'nombre_representante'       => $nombre_representante,
-        'identificacion_representante'       => $identificacion_representante,
-        'email_representante'        => $email_representante,
-        'telefono_representante'     => $telefono_representante,
-        'departamento'               => $departamento,
-        'ciudad'                     => $ciudad,
-        'direccion'                  => $direccion,
-        'tipo_habitacion'            => $tipo_habitacion,
-        'max_huesped'                => $max_huesped,
-        'servicio_incluido'          => $servicio_incluido,
-        'nit_rut'                    => $nit_rut,
-        'camara_comercio'            => $camara_comercio,
-        'licencia'                   => $licencia,
-        'metodo_pago'                => $metodo_pago,
+        'nombre_establecimiento'        => $nombre_establecimiento,
+        'email'                         => $email,
+        'telefono'                      => $telefono,
+        'tipo_establecimiento'          => $tipo_establecimiento,
+        'nombre_representante'          => $nombre_representante,
+        'tipo_documento'                => $tipo_documento,
+        'identificacion_representante'  => $identificacion_representante,
+        'email_representante'           => $email_representante,
+        'telefono_representante'        => $telefono_representante,
+        'departamento'                  => $departamento,
+        'ciudad'                        => $ciudad,
+        'direccion'                     => $direccion,
+        'tipo_habitacion'               => $tipo_habitacion,
+        'max_huesped'                   => $max_huesped,
+        'servicio_incluido'             => $servicio_incluido,
+        'nit_rut'                       => $nit_rut,
+        'camara_comercio'               => $camara_comercio,
+        'licencia'                      => $licencia,
+        'metodo_pago'                   => $metodo_pago,
     ];
 
     $resultado = $objHotelero->actualizar($data);

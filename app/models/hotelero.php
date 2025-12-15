@@ -45,6 +45,7 @@ class Hotelero
 
             $insert_usuario = "INSERT INTO usuario(
                 nombre,
+                tipo_documento,
                 identificacion,
                 email,
                 telefono,
@@ -54,6 +55,7 @@ class Hotelero
                 estado
             ) VALUES (
                 :nombre_representante,
+                :tipo_documento,
                 :identificacion_representante,
                 :email_representante,
                 :telefono_representante,
@@ -64,6 +66,7 @@ class Hotelero
             )";
             $usuario = $this->conexion->prepare($insert_usuario);
             $usuario->bindParam(':nombre_representante', $data['nombre_representante']);
+            $usuario->bindParam(':tipo_documento', $data['tipo_documento']);
             $usuario->bindParam(':identificacion_representante', $data['identificacion_representante']);
             $usuario->bindParam(':email_representante', $data['email_representante']);
             $usuario->bindParam(':telefono_representante', $data['telefono_representante']);
@@ -81,6 +84,7 @@ class Hotelero
                 telefono,
                 tipo_establecimiento,
                 nombre_representante,
+                tipo_documento,
                 identificacion_representante,
                 foto_representante,
                 email_representante,
@@ -104,6 +108,7 @@ class Hotelero
                 :telefono,
                 :tipo_establecimiento,
                 :nombre_representante,
+                :tipo_documento,
                 :identificacion_representante,
                 :foto_representante,
                 :email_representante,
@@ -129,6 +134,7 @@ class Hotelero
             $resultado->bindParam(':telefono', $data['telefono']);
             $resultado->bindParam(':tipo_establecimiento', $data['tipo_establecimiento']);
             $resultado->bindParam(':nombre_representante', $data['nombre_representante']);
+            $resultado->bindParam(':tipo_documento', $data['tipo_documento']);
             $resultado->bindParam(':identificacion_representante', $data['identificacion_representante']);
             $resultado->bindParam(':foto_representante', $data['foto_representante']);
             $resultado->bindParam(':email_representante', $data['email_representante']);
@@ -146,7 +152,7 @@ class Hotelero
 
             return $resultado->execute();
         } catch (PDOException $e) {
-            //AQUÍ VA TU CATCH PARA CLAVE DUPLICADA
+            //AQUÍ VA TU CATCH PARA CORREO DUPLICADO
             if ($e->getCode() == 23000) {
                 mostrarSweetAlert('error', 'Correo duplicado', 'Este correo ya existe en el sistema.');
                 return false;
@@ -197,6 +203,7 @@ class Hotelero
 
             $act_usuario = "UPDATE usuario SET 
                 nombre = :nombre_representante,
+                tipo_documento = :tipo_documento,
                 identificacion = :identificacion_representante,
                 telefono = :telefono_representante,
                 email = :email_representante
@@ -205,6 +212,7 @@ class Hotelero
             $usuario = $this->conexion->prepare($act_usuario);
             $usuario->bindParam(':id_usuario', $data['id_usuario']);
             $usuario->bindParam(':nombre_representante', $data['nombre_representante']);
+            $usuario->bindParam(':tipo_documento', $data['tipo_documento']);
             $usuario->bindParam(':identificacion_representante', $data['identificacion_representante']);
             $usuario->bindParam(':telefono_representante', $data['telefono_representante']);
             $usuario->bindParam(':email_representante', $data['email_representante']);
@@ -217,6 +225,7 @@ class Hotelero
                 telefono = :telefono,
                 tipo_establecimiento = :tipo_establecimiento,
                 nombre_representante = :nombre_representante,
+                tipo_documento = :tipo_documento,
                 identificacion_representante = :identificacion_representante,
                 email_representante = :email_representante,
                 telefono_representante = :telefono_representante,
@@ -240,6 +249,7 @@ class Hotelero
             $resultado->bindParam(':telefono', $data['telefono']);
             $resultado->bindParam(':tipo_establecimiento', $data['tipo_establecimiento']);
             $resultado->bindParam(':nombre_representante', $data['nombre_representante']);
+            $resultado->bindParam(':tipo_documento', $data['tipo_documento']);
             $resultado->bindParam(':identificacion_representante', $data['identificacion_representante']);
             $resultado->bindParam(':email_representante', $data['email_representante']);
             $resultado->bindParam(':telefono_representante', $data['telefono_representante']);

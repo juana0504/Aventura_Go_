@@ -67,6 +67,7 @@ function registrarProveedor()
     $email                        = $_POST['email'] ?? '';
     $telefono                     = $_POST['telefono'] ?? '';
     $nombre_representante         = $_POST['nombre_representante'] ?? '';
+    $tipo_documento               = $_POST['tipo_documento'] ?? '';
     $identificacion_representante = $_POST['identificacion_representante'] ?? '';
     $email_representante          = $_POST['email_representante'] ?? '';
     $telefono_representante       = $_POST['telefono_representante'] ?? '';
@@ -77,7 +78,7 @@ function registrarProveedor()
 
     if (
         empty($nombre_empresa) || empty($nit_rut) || empty($email) ||
-        empty($telefono) || empty($nombre_representante) || empty($identificacion_representante) ||
+        empty($telefono) || empty($nombre_representante) || empty($identificacion_representante) || empty($tipo_documento) ||
         empty($email_representante) || empty($telefono_representante) || empty($actividades) ||
         empty($departamento) || empty($ciudad) || empty($direccion)
     ) {
@@ -159,6 +160,7 @@ function registrarProveedor()
         'telefono'                => $telefono,
         'nit_rut'                 => $nit_rut,
         'nombre_representante'    => $nombre_representante,
+        'tipo_documento'                => $tipo_documento,
         'identificacion_representante' => $identificacion_representante,
         'identificacion'          => $claveHash,
         'foto_representante'      => $foto_url,
@@ -204,6 +206,7 @@ function actualizarProveedor()
     $telefono                = $_POST['telefono'] ?? '';
     $nit_rut                 = $_POST['nit_rut'] ?? '';
     $nombre_representante    = $_POST['nombre_representante'] ?? '';
+    $tipo_documento                  = $_POST['tipo_documento'] ?? '';
     $identificacion_representante  = $_POST['identificacion_representante'] ?? '';
     $email_representante     = $_POST['email_representante'] ?? '';
     $telefono_representante = $_POST['telefono_representante'] ?? '';
@@ -214,7 +217,7 @@ function actualizarProveedor()
 
     if (
         empty($nombre_empresa) || empty($nit_rut) || empty($email) ||
-        empty($telefono) || empty($nombre_representante) || empty($identificacion_representante) || empty($email_representante) ||
+        empty($telefono) || empty($nombre_representante) || empty($identificacion_representante) || empty($tipo_documento) || empty($email_representante) ||
         empty($telefono_representante) || empty($actividades) ||
         empty($departamento) || empty($ciudad) || empty($direccion)
     ) {
@@ -237,6 +240,7 @@ function actualizarProveedor()
         'telefono'                      => $telefono,
         'nit_rut'                       => $nit_rut,
         'nombre_representante'          => $nombre_representante,
+        'tipo_documento'                => $tipo_documento,
         'identificacion_representante'  => $identificacion_representante,
         'email_representante'           => $email_representante,
         'telefono_representante'        => $telefono_representante,

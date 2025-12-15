@@ -185,6 +185,15 @@ if (!empty($hotelero['metodo_pago'])) {
                                         <input type="text" name="nombre_representante" class="form-control" id="nombre_repre" placeholder="Juan Pérez" required value=" <?= $hotelero['nombre_representante'] ?>">
                                     </div>
                                     <div class="col-md-6 mb-3">
+                                        <label class="form-label">Tipo de documento *</label>
+                                        <select name="tipo_documento">
+                                            <option value="" disabled selected hidden>Tipo de documento</option>
+                                            <option value="CC" <?= $hotelero['tipo_documento'] == "CC" ? "selected" : "" ?>>CC</option>
+                                            <option value="CE" <?= $hotelero['tipo_documento'] == "CE" ? "selected" : "" ?>>CE</option>
+                                            <option value="Pasaporte" <?= $hotelero['tipo_documento'] == "Pasaporte" ? "selected" : "" ?>>Pasaporte</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Identificacion *</label>
                                         <input type="tel" name="identificacion_representante" class="form-control" id="identiificacion_repre" placeholder="N.°" required value="<?= $hotelero['identificacion_representante'] ?>">
                                     </div>
