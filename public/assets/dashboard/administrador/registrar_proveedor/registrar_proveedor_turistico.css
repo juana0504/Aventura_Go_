@@ -430,6 +430,26 @@ form[action="busqueda"] #perfil h6 {
     opacity: 1;
 }
 
+.form-select {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 2px solid #e5e7eb;
+    font-family: var(--font-text);
+    font-size: 15px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: white;
+    color: var(--color-text);
+}
+
+.form-select:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 4px rgba(234, 130, 23, 0.12);
+    transform: translateY(-1px);
+}
+
+
 textarea.form-control {
     resize: vertical;
 }
