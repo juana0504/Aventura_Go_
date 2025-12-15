@@ -40,6 +40,8 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_hotelero.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
+
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/estilos_globales/panel.css">
 
 
@@ -106,42 +108,42 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                     <tbody>
                         <tr>
                             <?php if (!empty($datos)) : ?>
-                            <?php foreach ($datos as $hotelero): ?>
-                            <td><img src="<?= BASE_URL ?>/public/uploads/hoteles/<?= $hotelero['logo'] ?>" alt="" style="10px"></td>
-                            <td><?= $hotelero['nombre_establecimiento'] ?></td>
-                            <td><?= $hotelero['tipo_establecimiento'] ?></td>
-                            <td><?= $hotelero['nombre_representante'] ?></td>
-                            <td><?= $hotelero['email'] ?></td>
-                            <td><?= $hotelero['telefono'] ?></td>
-                            <td><?= $hotelero['ciudad'] ?></td>
+                                <?php foreach ($datos as $hotelero): ?>
+                                    <td><img src="<?= BASE_URL ?>/public/uploads/hoteles/<?= $hotelero['logo'] ?>" alt="" style="10px"></td>
+                                    <td><?= $hotelero['nombre_establecimiento'] ?></td>
+                                    <td><?= $hotelero['tipo_establecimiento'] ?></td>
+                                    <td><?= $hotelero['nombre_representante'] ?></td>
+                                    <td><?= $hotelero['email'] ?></td>
+                                    <td><?= $hotelero['telefono'] ?></td>
+                                    <td><?= $hotelero['ciudad'] ?></td>
 
-                            <!-- ESTADO -->
-                            <td class="col-estado">
-                                <?php if ($hotelero['estado'] == 'ACTIVO'): ?>
-                                    <span class="badge-activo">Activo</span>
-                                <?php elseif ($hotelero['estado'] == 'INACTIVO'): ?>
-                                    <span class="badge-inactivo">Inactivo</span>
-                                <?php else: ?>
-                                    <span class="badge-pendiente">Pendiente</span>
-                                <?php endif; ?>
-                            </td>
+                                    <!-- ESTADO -->
+                                    <td class="col-estado">
+                                        <?php if ($hotelero['estado'] == 'ACTIVO'): ?>
+                                            <span class="badge-activo">Activo</span>
+                                        <?php elseif ($hotelero['estado'] == 'INACTIVO'): ?>
+                                            <span class="badge-inactivo">Inactivo</span>
+                                        <?php else: ?>
+                                            <span class="badge-pendiente">Pendiente</span>
+                                        <?php endif; ?>
+                                    </td>
 
-                            <td>
-                                <button class="btn-accion btn-ver"
-                                    data-id="<?= $hotelero['id_proveedor_hotelero'] ?>"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#verProveedorModal">
-                                    <i class="i bi-eye"></i>
-                                </button>
+                                    <td>
+                                        <button class="btn-accion btn-ver"
+                                            data-id="<?= $hotelero['id_proveedor_hotelero'] ?>"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#verProveedorModal">
+                                            <i class="i bi-eye"></i>
+                                        </button>
 
-                                <a href="<?= BASE_URL ?>/administrador/editar-proveedor-hotelero?id=<?= $hotelero['id_proveedor_hotelero'] ?>" class="btn-accion btn-editar">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
+                                        <a href="<?= BASE_URL ?>/administrador/editar-proveedor-hotelero?id=<?= $hotelero['id_proveedor_hotelero'] ?>" class="btn-accion btn-editar">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
 
-                                <a href="<?= BASE_URL ?>/administrador/eliminar-proveedor-hotelero?accion=eliminar&id=<?= $hotelero['id_proveedor_hotelero'] ?>" class="btn-accion btn-eliminar">
-                                    <i class="bi bi-trash"></i>
-                                </a>
-                            </td>
+                                        <a href="<?= BASE_URL ?>/administrador/eliminar-proveedor-hotelero?accion=eliminar&id=<?= $hotelero['id_proveedor_hotelero'] ?>" class="btn-accion btn-eliminar">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </td>
                         </tr>
 
                     <?php endforeach; ?>
