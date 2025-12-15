@@ -100,6 +100,12 @@ function registrarTurista()
 
     $objTurista = new Turista();
 
+    // correo de la empresa
+    if ($objTurista->emailUsuarioExiste($email)) {
+        mostrarSweetAlert('error', 'Correo duplicado', 'El correo ya existe.');
+        exit();
+    }
+
     $data = [
         'nombre'      => $nombre,
         'genero'      => $genero,

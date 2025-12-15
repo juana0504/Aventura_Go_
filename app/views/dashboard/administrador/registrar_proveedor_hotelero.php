@@ -70,7 +70,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             </div>
                             <div class="step" data-step="2">
                                 <div class="step-circle">2</div>
-                                <div class="step-label">Servicios</div>
+                                <div class="step-label">Representante</div>
                             </div>
                             <div class="step" data-step="3">
                                 <div class="step-circle">3</div>
@@ -78,7 +78,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             </div>
                             <div class="step" data-step="4">
                                 <div class="step-circle">4</div>
-                                <div class="step-label">Representante</div>
+                                <div class="step-label">Tipo de habitación</div>
                             </div>
                             <div class="step" data-step="5">
                                 <div class="step-circle">5</div>
