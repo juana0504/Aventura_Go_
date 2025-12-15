@@ -50,6 +50,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_turistico.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/estilos_globales/panel.css">
 
 </head>
 
@@ -73,6 +74,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
             <!-- Formulario Wizard -->
             <form id="formProveedor" action="<?= BASE_URL ?>/administrador/actualizar-proveedor-turistico" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id_proveedor" value="<?= $proveedor['id_proveedor'] ?>">
+                <input type="hidden" name="id_usuario" value="<?= $proveedor['id_usuario'] ?>">
                 <input type="hidden" name="accion" value="actualizar">
 
 
@@ -190,15 +192,6 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Foto actividades</label>
-                                    <img src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $proveedor['foto_actividades'] ?>"
-                                        alt="Foto del turista" width="120" class="img-thumbnail mb-2">
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <label class="form-label">Descripción actividades*</label>
-                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="4" placeholder="Describe los servicios que ofreces..." required><?= $proveedor['descripcion'] ?></textarea>
-                                </div>
                             </div>
                         </div>
 
@@ -208,12 +201,11 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Departamento *</label>
-                                    <input type="text" name="departamento" class="form-control" id="departamento" placeholder="Juan Pérez" required value="<?= $proveedor['departamento'] ?>">
+                                    <select name="departamento" id="departamento" class="form-control" required></select>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Ciudad *</label>
-                                    <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ej: Medellín" required
-                                        value="<?= $proveedor['ciudad'] ?>">
+                                    <select name="ciudad" id="ciudad" class="form-control" required></select>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label">Dirección *</label>
@@ -236,7 +228,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Foto</label>
-                                    <img src="<?= BASE_URL ?>/public/uploads/usuario<?= $proveedor['foto_representante'] ?>"
+                                    <img src="<?= BASE_URL ?>/public/uploads/usuario/<?= $proveedor['foto_representante'] ?>"
                                         alt="Foto del turista" width="120" class="img-thumbnail mb-2">
                                 </div>
                                 <div class="col-md-6 mb-3">
@@ -323,6 +315,13 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
         crossorigin="anonymous"></script>
 
     <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/editar_proveedor.js"></script>
+
+    <script>
+        const departamentoActual = "<?= $proveedor['departamento'] ?>";
+        const ciudadActual = "<?= $proveedor['ciudad'] ?>";
+    </script>
+
+    <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/departamento.js"></script>
 </body>
 
 </html>

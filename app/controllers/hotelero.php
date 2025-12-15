@@ -59,7 +59,7 @@ function registrarHotel()
     $nombre_establecimiento          = $_POST['nombre_establecimiento'] ?? '';
     $email                           = $_POST['email'] ?? '';
     $telefono                        = $_POST['telefono'] ?? '';
-    $tipo_establecimiento            = $_POST['tipo_est$tipo_establecimiento'] ?? '';
+    $tipo_establecimiento            = $_POST['tipo_establecimiento'] ?? '';
     $nombre_representante            = $_POST['nombre_representante'] ?? '';
     $identificacion_representante    = $_POST['identificacion_representante'] ?? '';
     $email_representante             = $_POST['email_representante'] ?? '';
@@ -69,23 +69,19 @@ function registrarHotel()
     $direccion                       = $_POST['direccion'] ?? '';
     $tipo_habitacion                 = $_POST['tipo_habitacion'] ?? '';
     $max_huesped                     = $_POST['max_huesped'] ?? '';
-    $capacidad_personas              = $_POST['capacidad_personas'] ?? '';
     $servicio_incluido               = $_POST['servicio_incluido'] ?? '';
-    $capacidad_habitacion            = $_POST['capacidad_habitacion'] ?? '';
     $nit_rut                         = $_POST['nit_rut'] ?? '';
     $camara_comercio                 = $_POST['camara_comercio'] ?? '';
     $licencia                        = $_POST['licencia'] ?? '';
     $metodo_pago                     = $_POST['metodo_pago'] ?? '';
-    $estado                          = $_POST['estado'] ?? '';
 
     if (
         empty($nombre_establecimiento) || empty($email) || empty($telefono) ||
         empty($tipo_establecimiento) || empty($nombre_representante) || empty($identificacion_representante) ||
         empty($email_representante) || empty($telefono_representante) || empty($departamento) ||
         empty($ciudad) || empty($direccion) || empty($tipo_habitacion) ||
-        empty($max_huesped) || empty($capacidad_personas) || empty($servicio_incluido) ||
-        empty($capacidad_habitacion) || empty($nit_rut) || empty($camara_comercio) ||
-        empty($licencia) || empty($metodo_pago) || empty($estado)
+        empty($max_huesped) || empty($servicio_incluido) ||
+        empty($nit_rut) || empty($camara_comercio)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completa todos los campos');
         exit();
@@ -99,6 +95,11 @@ function registrarHotel()
     // Convertir array de tipo habitacion en string
     if (is_array($tipo_habitacion)) {
         $tipo_habitacion = implode(",", $tipo_habitacion);
+    }
+
+    // Convertir array de tipo de servicio incluido en string
+    if (is_array($servicio_incluido)) {
+        $servicio_incluido = implode(",", $servicio_incluido);
     }
 
     // Convertir array de tipo de pago en string
@@ -132,26 +133,42 @@ function registrarHotel()
         }
 
         $logo_url = uniqid('logo_') . "." . $ext;
-        $destino = BASE_PATH . "/public/uploads/hotelero/" . $logo_url;
+        $destino = BASE_PATH . "/public/uploads/hoteles/" . $logo_url;
         move_uploaded_file($file['tmp_name'], $destino);
     } else {
         $logo_url = 'default_proveedor_hotelero.png';
     }
 
-
     // FOTO PRINCIPAL
-    if (!empty($_FILES['foto']['name'])) {
-        $file = $_FILES['foto'];
+    if (!empty($_FILES['foto_representante']['name'])) {
+        $file = $_FILES['foto_representante'];
         $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
         $foto_url = uniqid('foto_') . "." . $ext;
         $destino = BASE_PATH . "/public/uploads/usuario/" . $foto_url;
+
         move_uploaded_file($file['tmp_name'], $destino);
     } else {
-        $foto_url = 'default_proveedor_usuario.png';
+        $foto_url = 'default_proveedor.png';
     }
 
+
+    $claveHash = password_hash($identificacion_representante, PASSWORD_DEFAULT);
+
     $objhotelero = new Hotelero();
+
+    // correo de la empresa
+    if ($objhotelero->emailHotelExiste($email)) {
+        mostrarSweetAlert('error', 'Correo duplicado', 'El correo del hotel ya existe.');
+        exit();
+    }
+
+    // correo del representante
+    if ($objhotelero->emailUsuarioExiste($email_representante)) {
+        mostrarSweetAlert('error', 'Correo duplicado', 'El correo del representante ya existe.');
+        exit();
+    }
+
 
     $data = [
         'logo'                       => $logo_url,
@@ -160,7 +177,8 @@ function registrarHotel()
         'telefono'                   => $telefono,
         'tipo_establecimiento'       => $tipo_establecimiento,
         'nombre_representante'       => $nombre_representante,
-        'tipo_establecimiento'       => $tipo_establecimiento,
+        'identificacion_representante'       => $identificacion_representante,
+        'identificacion'          => $claveHash,
         'foto_representante'         => $foto_url,
         'email_representante'        => $email_representante,
         'telefono_representante'     => $telefono_representante,
@@ -169,9 +187,7 @@ function registrarHotel()
         'direccion'                  => $direccion,
         'tipo_habitacion'            => $tipo_habitacion,
         'max_huesped'                => $max_huesped,
-        'capacidad_personas'         => $capacidad_personas,
         'servicio_incluido'          => $servicio_incluido,
-        'capacidad_habitacion'       => $capacidad_habitacion,
         'nit_rut'                    => $nit_rut,
         'camara_comercio'            => $camara_comercio,
         'licencia'                   => $licencia,
@@ -205,33 +221,83 @@ function listarHotelId($id)
 
 function actualizarHotel()
 {
-    $id_proveedor_hotelero       = $_POST['id_proveedor_hotelero'] ?? '';
-    $nombre_establecimiento      = $_POST['nombre_establecimiento'] ?? '';
-    $tipo_establecimiento        = $_POST['tipo_establecimiento'] ?? '';
-    $numero_habitaciones         = $_POST['numero_habitaciones'] ?? '';
-    $calificacion_promedio       = $_POST['calificacion_promedio'] ?? '';
+    $id_proveedor_hotelero            = $_POST['id_proveedor_hotelero'] ?? '';
+    $id_usuario            = $_POST['id_usuario'] ?? '';
+    $nombre_establecimiento          = $_POST['nombre_establecimiento'] ?? '';
+    $email                           = $_POST['email'] ?? '';
+    $telefono                        = $_POST['telefono'] ?? '';
+    $tipo_establecimiento            = $_POST['tipo_establecimiento'] ?? '';
+    $nombre_representante            = $_POST['nombre_representante'] ?? '';
+    $identificacion_representante    = $_POST['identificacion_representante'] ?? '';
+    $email_representante             = $_POST['email_representante'] ?? '';
+    $telefono_representante          = $_POST['telefono_representante'] ?? '';
+    $departamento                    = $_POST['departamento'] ?? '';
+    $ciudad                          = $_POST['ciudad'] ?? '';
+    $direccion                       = $_POST['direccion'] ?? '';
+    $tipo_habitacion                 = $_POST['tipo_habitacion'] ?? '';
+    $max_huesped                     = $_POST['max_huesped'] ?? '';
+    $servicio_incluido               = $_POST['servicio_incluido'] ?? '';
+    $nit_rut                         = $_POST['nit_rut'] ?? '';
+    $camara_comercio                 = $_POST['camara_comercio'] ?? '';
+    $licencia                        = $_POST['licencia'] ?? '';
+    $metodo_pago                     = $_POST['metodo_pago'] ?? '';
 
     if (
-        empty($nombre_establecimiento) || empty($tipo_establecimiento) || empty($numero_habitaciones) ||
-        empty($calificacion_promedio) 
+        empty($nombre_establecimiento) || empty($email) || empty($telefono) ||
+        empty($tipo_establecimiento) || empty($nombre_representante) || empty($identificacion_representante) ||
+        empty($email_representante) || empty($telefono_representante) || empty($departamento) ||
+        empty($ciudad) || empty($direccion) || empty($tipo_habitacion) ||
+        empty($max_huesped) || empty($servicio_incluido) ||
+        empty($nit_rut) || empty($camara_comercio)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completa todos los campos');
         exit();
     }
 
-    // Convertir array de actividades en string
+    // Convertir array de tipo establecimiento en string
     if (is_array($tipo_establecimiento)) {
         $tipo_establecimiento = implode(",", $tipo_establecimiento);
     }
 
+    // Convertir array de tipo habitacion en string
+    if (is_array($tipo_habitacion)) {
+        $tipo_habitacion = implode(",", $tipo_habitacion);
+    }
+
+    // Convertir array de tipo de servicio incluido en string
+    if (is_array($servicio_incluido)) {
+        $servicio_incluido = implode(",", $servicio_incluido);
+    }
+
+    // Convertir array de tipo de pago en string
+    if (is_array($metodo_pago)) {
+        $metodo_pago = implode(",", $metodo_pago);
+    }
+
+
     $objHotelero = new Hotelero();
 
     $data = [
-        'id_proveedor_hotelero'      => $id_proveedor_hotelero,
+        'id_proveedor_hotelero'                  => $id_proveedor_hotelero,
+        'id_usuario'                    => $id_usuario,
         'nombre_establecimiento'     => $nombre_establecimiento,
+        'email'                      => $email,
+        'telefono'                   => $telefono,
         'tipo_establecimiento'       => $tipo_establecimiento,
-        'numero_habitaciones'        => $numero_habitaciones,
-        'calificacion_promedio'      => $calificacion_promedio,
+        'nombre_representante'       => $nombre_representante,
+        'identificacion_representante'       => $identificacion_representante,
+        'email_representante'        => $email_representante,
+        'telefono_representante'     => $telefono_representante,
+        'departamento'               => $departamento,
+        'ciudad'                     => $ciudad,
+        'direccion'                  => $direccion,
+        'tipo_habitacion'            => $tipo_habitacion,
+        'max_huesped'                => $max_huesped,
+        'servicio_incluido'          => $servicio_incluido,
+        'nit_rut'                    => $nit_rut,
+        'camara_comercio'            => $camara_comercio,
+        'licencia'                   => $licencia,
+        'metodo_pago'                => $metodo_pago,
     ];
 
     $resultado = $objHotelero->actualizar($data);

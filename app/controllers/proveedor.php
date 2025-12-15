@@ -71,7 +71,6 @@ function registrarProveedor()
     $email_representante          = $_POST['email_representante'] ?? '';
     $telefono_representante       = $_POST['telefono_representante'] ?? '';
     $actividades                  = $_POST['actividades'] ?? [];
-    $descripcion                  = $_POST['descripcion'] ?? '';
     $departamento                 = $_POST['departamento'] ?? '';
     $ciudad                       = $_POST['ciudad'] ?? '';
     $direccion                    = $_POST['direccion'] ?? '';
@@ -80,7 +79,7 @@ function registrarProveedor()
         empty($nombre_empresa) || empty($nit_rut) || empty($email) ||
         empty($telefono) || empty($nombre_representante) || empty($identificacion_representante) ||
         empty($email_representante) || empty($telefono_representante) || empty($actividades) ||
-        empty($descripcion) || empty($departamento) || empty($ciudad) || empty($direccion)
+        empty($departamento) || empty($ciudad) || empty($direccion)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completa todos los campos');
         exit();
@@ -124,33 +123,34 @@ function registrarProveedor()
 
 
     // FOTO PRINCIPAL
-    if (!empty($_FILES['foto']['name'])) {
-        $file = $_FILES['foto'];
+    if (!empty($_FILES['foto_representante']['name'])) {
+        $file = $_FILES['foto_representante'];
         $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
         $foto_url = uniqid('foto_') . "." . $ext;
         $destino = BASE_PATH . "/public/uploads/usuario/" . $foto_url;
+
         move_uploaded_file($file['tmp_name'], $destino);
     } else {
         $foto_url = 'default_proveedor.png';
     }
 
 
-    // FOTO ACTIVIDAD
-    if (!empty($_FILES['foto_actividad']['name'])) {
-        $file = $_FILES['foto_actividad'];
-        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-
-        $foto_act = uniqid('actividad_') . "." . $ext;
-        $destino = BASE_PATH . "/public/uploads/turistico/actividades/" . $foto_act;
-        move_uploaded_file($file['tmp_name'], $destino);
-    } else {
-        $foto_act = 'default_proveedor.png';
-    }
-
     $claveHash = password_hash($identificacion_representante, PASSWORD_DEFAULT);
 
     $objProveedor = new Proveedor();
+
+    // correo de la empresa
+    if ($objProveedor->emailHotelExiste($email)) {
+        mostrarSweetAlert('error', 'Correo duplicado', 'El correo del hotel ya existe.');
+        exit();
+    }
+
+    // correo del representante
+    if ($objProveedor->emailUsuarioExiste($email_representante)) {
+        mostrarSweetAlert('error', 'Correo duplicado', 'El correo del representante ya existe.');
+        exit();
+    }
 
     $data = [
         'nombre_empresa'          => $nombre_empresa,
@@ -165,11 +165,9 @@ function registrarProveedor()
         'email_representante'     => $email_representante,
         'telefono_representante'  => $telefono_representante,
         'actividades'             => $actividades,
-        'descripcion'             => $descripcion,
         'departamento'            => $departamento,
         'ciudad'                  => $ciudad,
         'direccion'               => $direccion,
-        'foto_actividades'          => $foto_act
     ];
 
     $resultado = $objProveedor->registrar($data);
@@ -210,7 +208,6 @@ function actualizarProveedor()
     $email_representante     = $_POST['email_representante'] ?? '';
     $telefono_representante = $_POST['telefono_representante'] ?? '';
     $actividades             = $_POST['actividades'] ?? [];
-    $descripcion             = $_POST['descripcion'] ?? '';
     $departamento            = $_POST['departamento'] ?? '';
     $ciudad                  = $_POST['ciudad'] ?? '';
     $direccion               = $_POST['direccion'] ?? '';
@@ -218,7 +215,7 @@ function actualizarProveedor()
     if (
         empty($nombre_empresa) || empty($nit_rut) || empty($email) ||
         empty($telefono) || empty($nombre_representante) || empty($identificacion_representante) || empty($email_representante) ||
-        empty($telefono_representante) || empty($actividades) || empty($descripcion) ||
+        empty($telefono_representante) || empty($actividades) ||
         empty($departamento) || empty($ciudad) || empty($direccion)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completa todos los campos');
@@ -233,21 +230,20 @@ function actualizarProveedor()
     $objProveedor = new Proveedor();
 
     $data = [
-        'id_proveedor'             => $id_proveedor,
-        'id_usuario'             => $id_usuario,
-        'nombre_empresa'           => $nombre_empresa,
-        'email'                    => $email,
-        'telefono'                 => $telefono,
-        'nit_rut'                  => $nit_rut,
-        'nombre_representante'     => $nombre_representante,
-        'identificacion_representante'     => $identificacion_representante,
-        'email_representante'      => $email_representante,
-        'telefono_representante'   => $telefono_representante,
-        'actividades'              => $actividades,
-        'descripcion'              => $descripcion,
-        'departamento'             => $departamento,
-        'ciudad'                   => $ciudad,
-        'direccion'                => $direccion
+        'id_proveedor'                  => $id_proveedor,
+        'id_usuario'                    => $id_usuario,
+        'nombre_empresa'                => $nombre_empresa,
+        'email'                         => $email,
+        'telefono'                      => $telefono,
+        'nit_rut'                       => $nit_rut,
+        'nombre_representante'          => $nombre_representante,
+        'identificacion_representante'  => $identificacion_representante,
+        'email_representante'           => $email_representante,
+        'telefono_representante'        => $telefono_representante,
+        'actividades'                   => $actividades,
+        'departamento'                  => $departamento,
+        'ciudad'                        => $ciudad,
+        'direccion'                     => $direccion
     ];
 
     $resultado = $objProveedor->actualizar($data);

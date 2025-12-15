@@ -14,6 +14,29 @@ class Proveedor
         $this->conexion = $db->getConexion(); // Obtiene la conexión PDO y la guarda en $this->conexion
     }
 
+    // Función para verificar si un email ya existe en la base de datos
+    // Verifica correo en la tabla USUARIO (representante)
+    public function emailUsuarioExiste($email)
+    {
+        $sql = "SELECT id_usuario FROM usuario WHERE email = :email LIMIT 1";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    // Verifica correo en la tabla PROVEEDOR_HOTELERO (empresa)
+    public function emailHotelExiste($email)
+    {
+        $sql = "SELECT id_proveedor_hotelero 
+            FROM proveedor_hotelero 
+            WHERE email = :email LIMIT 1";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     // Función para autenticar usuario (recibe el correo y la clave escrita por el usuario)
     public function registrar($data)
     {
@@ -66,8 +89,6 @@ class Proveedor
             email_representante,
             telefono_representante,
             actividades,
-            foto_actividades,
-            descripcion,
             departamento,
             ciudad,
             direccion,
@@ -85,8 +106,6 @@ class Proveedor
             :email_representante,
             :telefono_representante,
             :actividades,
-            :foto_actividades,
-            :descripcion,
             :departamento,
             :ciudad,
             :direccion,
@@ -106,8 +125,6 @@ class Proveedor
             $resultado->bindParam(':email_representante', $data['email_representante']);
             $resultado->bindParam(':telefono_representante', $data['telefono_representante']);
             $resultado->bindParam(':actividades', $data['actividades']);
-            $resultado->bindParam(':foto_actividades', $data['foto_actividades']);
-            $resultado->bindParam(':descripcion', $data['descripcion']);
             $resultado->bindParam(':departamento', $data['departamento']);
             $resultado->bindParam(':ciudad', $data['ciudad']);
             $resultado->bindParam(':direccion', $data['direccion']);
@@ -115,12 +132,16 @@ class Proveedor
 
             return $resultado->execute();
         } catch (PDOException $e) {
+             //AQUÍ VA TU CATCH PARA CLAVE DUPLICADA
+            if ($e->getCode() == 23000) {
+                mostrarSweetAlert('error', 'Correo duplicado', 'Este correo ya existe en el sistema.');
+                return false;
+            }
+
             error_log("Error en proveedor::registrar->" . $e->getMessage());
             return false;
         }
     }
-
-
 
     public function listar()
     {
@@ -181,7 +202,6 @@ class Proveedor
             $usuario->execute();
             
             $actualizar = "UPDATE proveedor SET
-                id_usuario = :id_usuario,
                 nombre_empresa = :nombre_empresa,
                 nit_rut = :nit_rut,
                 email = :email,
@@ -191,14 +211,12 @@ class Proveedor
                 email_representante = :email_representante,
                 telefono_representante = :telefono_representante,
                 actividades = :actividades,
-                descripcion = :descripcion,
                 departamento = :departamento,
                 ciudad = :ciudad,
                 direccion = :direccion
             WHERE id_proveedor = :id_proveedor";
 
             $resultado = $this->conexion->prepare($actualizar);
-            $resultado->bindParam(':id_usuario', $data['id_usuario']);
             $resultado->bindParam(':id_proveedor', $data['id_proveedor']);
             $resultado->bindParam(':nombre_empresa', $data['nombre_empresa']);
             $resultado->bindParam(':nit_rut', $data['nit_rut']);
@@ -209,7 +227,6 @@ class Proveedor
             $resultado->bindParam(':email_representante', $data['email_representante']);
             $resultado->bindParam(':telefono_representante', $data['telefono_representante']);
             $resultado->bindParam(':actividades', $data['actividades']);
-            $resultado->bindParam(':descripcion', $data['descripcion']);
             $resultado->bindParam(':departamento', $data['departamento']);
             $resultado->bindParam(':ciudad', $data['ciudad']);
             $resultado->bindParam(':direccion', $data['direccion']);

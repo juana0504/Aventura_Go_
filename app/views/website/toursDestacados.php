@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Destacados - Aventura Go</title>
+  <link rel="icon" type="image/png" href="public/assets/website_externos/index/img/FAVICON.png">
   <link rel="stylesheet" href="public/assets/website_externos/destacados/destacados.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
@@ -292,8 +293,8 @@
         </div>
         <div class="col-md-2">
           <p class="description">
-            Aventura Go, somos una plataforma de turismo que conecta viajeros
-            con experiencias únicas de aventura.
+            Aventura Go conecta viajeros con experiencias de aventura,
+            promoviendo el turismo sostenible y apoyando a prestadores locales en destinos naturales."
           </p>
         </div>
         <div class="col-md-2">

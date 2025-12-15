@@ -1,6 +1,8 @@
 <?php
+
 /**  * Función para imprimir SweetAlert dinámico con estilo */
-function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null) {
+function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null)
+{
     echo "
     <html>
         <head>
@@ -14,17 +16,17 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null) {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    background: linear-gradient(135deg, #00304D, #007832);
-                    font-family: 'Montserrat', sans-serif;
+                    background: linear-gradient(135deg, #2D4059, #007832);
+                    font-family: 'Lato', sans-serif;
                     color: #fff;
                 }
 
                 .swal2-popup {
-                    font-family: 'Montserrat', sans-serif !important;
+                    font-family: 'Lato', sans-serif !important;
                 }
 
                 .swal2-title {
-                    color: #00304D !important;
+                    color: #2D4059 !important;
                     font-weight: 600 !important;
                 }
 
@@ -41,8 +43,11 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null) {
                     background-color: #00304D !important;
                 }
             </style>
+
             <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+
         </head>
+        
         <body>
             <script>
                 Swal.fire({
@@ -52,7 +57,7 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null) {
                     confirmButtonText: 'Aceptar',
                     confirmButtonColor: '#007832',
                     background: '#fff',
-                    color: '#00304D'
+                    color: '#2D4059'
                 }).then((result) => {
                     " . ($redirect ? "window.location.href = '$redirect';" : "window.history.back();") . "
                 });
@@ -60,5 +65,3 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null) {
         </body>
     </html>";
 }
-
-?>
