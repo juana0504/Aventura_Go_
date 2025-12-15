@@ -50,6 +50,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_turistico.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/estilos_globales/panel.css">
 
 </head>
 
