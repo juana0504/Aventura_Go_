@@ -1,9 +1,9 @@
 /* Reset y Variables */
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
+} */
 
 body {
     font-family: 'Inter', 'Segoe UI', sans-serif;
@@ -19,12 +19,12 @@ body {
 /* ========== CONTENIDO PRINCIPAL ========== */
 .info {
     flex-grow: 1;
-    padding: 20px 40px;
+    padding: 15px 40px;
     background-color: #ffffff;
 }
 
 /* ========== BARRA DE BÚSQUEDA ========== */
-form[action="busqueda"] {
+/* form[action="busqueda"] {
     position: relative;
     padding: 10px 0 20px;
     display: flex;
@@ -71,10 +71,10 @@ form[action="busqueda"] .bi-bell-fill {
     color: #000000;
     font-size: 20px;
     cursor: pointer;
-}
+} */
 
 /* Estilos del dropdown de perfil */
-form[action="busqueda"] #perfil {
+/* form[action="busqueda"] #perfil {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -132,7 +132,7 @@ form[action="busqueda"] #perfil h6 {
 
 #perfil-dropdown .dropdown-divider {
     margin: 5px 0;
-}
+} */
 
 /* ========== HEADER SECTION ========== */
 .header-section {
@@ -149,7 +149,7 @@ form[action="busqueda"] #perfil h6 {
     margin: 0;
 }
 
-.btn-pdf{
+.btn-pdf {
     background: red;
     color: #ffffff;
     text-decoration: none;
@@ -249,7 +249,7 @@ table.table tbody td {
     border-bottom: 1px solid #f3f4f6;
 }
 
-table.table tbody td img{
+table.table tbody td img {
     width: 40px;
     height: 40px;
     border-radius: 8px;
@@ -436,11 +436,11 @@ div.dataTables_wrapper div.dataTables_length select {
         width: 100%;
         height: auto;
     }
-    
+
     .info {
         margin-left: 0;
     }
-    
+
     #admin-dashboard {
         flex-direction: column;
     }
@@ -452,15 +452,15 @@ div.dataTables_wrapper div.dataTables_length select {
         gap: 15px;
         align-items: flex-start;
     }
-    
+
     .filtros-rapidos {
         flex-wrap: wrap;
     }
-    
+
     form[action="busqueda"] {
         flex-wrap: wrap;
     }
-    
+
     form[action="busqueda"] input {
         width: 100%;
     }

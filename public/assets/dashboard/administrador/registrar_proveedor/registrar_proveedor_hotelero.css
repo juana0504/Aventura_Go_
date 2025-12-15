@@ -45,7 +45,7 @@ body {
 }
 
 /* ========== BARRA DE BÚSQUEDA ========== */
-form#busqueda {
+/* form#busqueda {
     position: relative;
     padding: 10px 0 20px;
     display: flex;
@@ -91,10 +91,10 @@ form#busqueda .bi-bell-fill {
     color: #000000;
     font-size: 20px;
     cursor: pointer;
-}
+} */
 
 /* Estilos del dropdown de perfil */
-form#busqueda #perfil {
+/* form#busqueda #perfil {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -152,7 +152,7 @@ form#busqueda #perfil h6 {
 
 #perfil-dropdown .dropdown-divider {
     margin: 5px 0;
-}
+} */
 
 /* Título principal */
 .info h1 {
@@ -166,8 +166,8 @@ form#busqueda #perfil h6 {
     background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
     border-radius: 24px;
     padding: 50px;
-    box-shadow: 0 10px 40px rgba(45, 64, 89, 0.12), 
-                0 2px 8px rgba(45, 64, 89, 0.08);
+    box-shadow: 0 10px 40px rgba(45, 64, 89, 0.12),
+        0 2px 8px rgba(45, 64, 89, 0.08);
     margin-top: 30px;
     position: relative;
     overflow: hidden;
@@ -329,6 +329,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(234, 130, 23, 0.3);
 }
+
 /* Checkboxes */
 .form-check {
     padding: 12px;
@@ -431,6 +432,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
