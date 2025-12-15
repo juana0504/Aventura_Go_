@@ -376,6 +376,15 @@ input[type="file"]::-webkit-file-upload-button:hover {
     margin-bottom: 10px;
 }
 
+.wizard-actions {
+    display: flex;
+    justify-content: right; /* CAMBIA de space-between a la derecha */
+    gap: 20px; /* Espacio entre botones */
+    padding: 25px 0;
+    margin-top: 25px;
+    border-top: 1px solid #e5e7eb; /* Línea separadora opcional */
+}
+
 /* Botón principal */
 .btn-primary-wizard {
     background: linear-gradient(135deg, var(--color-secondary) 0%, #d97515 100%);
@@ -425,6 +434,31 @@ input[type="file"]::-webkit-file-upload-button:hover {
     transform: translateY(-1px);
 }
 
+
+.btn-secondary-wizard1 {
+    background: #6b7280;
+    color: white;
+    border: none;
+    padding: 15px 32px;
+    border-radius: 12px;
+    font-family: var(--font-text);
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    position: absolute;
+    right: 226px;
+    bottom: 84px;
+}
+
+.btn-secondary-wizard1:hover {
+    background: #4b5563 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3) ;
+}
 /* Animación de entrada */
 @keyframes fadeInUp {
     from {

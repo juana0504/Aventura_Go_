@@ -326,7 +326,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                         </div>
 
                         <div class="wizard-actions">
-                            <button class="btn btn-secondary-wizard" id="prevBtn" style="display:none;" onclick="changeStep(-1)">
+                            <button class="btn btn-secondary-wizard1" id="prevBtn" style="display:none;" onclick="changeStep(-1)">
                                 <i class="fas fa-arrow-left"></i> Anterior
                             </button>
 
