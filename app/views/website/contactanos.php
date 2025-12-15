@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aventura Go - contactanos</title>
 
+    <link rel="icon" type="image/png" href="public/assets/website_externos/index/img/FAVICON.png">
+
     <!-- bootstrap primero -->
     <link href="path/to/bootstrap.min.css" rel="stylesheet">
 

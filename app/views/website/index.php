@@ -125,12 +125,12 @@
 
                 </div>
 
-                <div class="search-box">
+                <!-- <div class="search-box">
                     <div class="search-item">
-                        <strong>Dinos a dónde vas</strong>
+                        <strong>Busca tu destino</strong>
                     </div>
-                    <a href="website_externos/destinos.html" class="search-btn">Busca tu destino</a>
-                </div>
+                    <a href="website_externos/destinos.html" class="search-btn bi bi-search "></a>
+                </div> -->
 
                 <h2 class="marca">AVENTURA<br>GO</h2>
 
