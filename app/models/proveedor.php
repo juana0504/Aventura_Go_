@@ -15,11 +15,24 @@ class Proveedor
     }
 
     // Función para verificar si un email ya existe en la base de datos
-    public function emailExiste($email)
+    // Verifica correo en la tabla USUARIO (representante)
+    public function emailUsuarioExiste($email)
     {
-        $query = "SELECT id_usuario FROM usuario WHERE email = :email LIMIT 1";
-        $stmt = $this->conexion->prepare($query);
-        $stmt->bindParam(":email", $email);
+        $sql = "SELECT id_usuario FROM usuario WHERE email = :email LIMIT 1";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    // Verifica correo en la tabla PROVEEDOR_HOTELERO (empresa)
+    public function emailHotelExiste($email)
+    {
+        $sql = "SELECT id_proveedor_hotelero 
+            FROM proveedor_hotelero 
+            WHERE email = :email LIMIT 1";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':email', $email);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }

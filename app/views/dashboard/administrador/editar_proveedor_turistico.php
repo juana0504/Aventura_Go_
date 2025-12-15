@@ -200,12 +200,11 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Departamento *</label>
-                                    <input type="text" name="departamento" class="form-control" id="departamento" placeholder="Juan Pérez" required value="<?= $proveedor['departamento'] ?>">
+                                    <select name="departamento" id="departamento" class="form-control" required></select>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Ciudad *</label>
-                                    <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ej: Medellín" required
-                                        value="<?= $proveedor['ciudad'] ?>">
+                                    <select name="ciudad" id="ciudad" class="form-control" required></select>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label">Dirección *</label>
@@ -227,10 +226,10 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     <input type="tel" name="identificacion_representante" class="form-control" id="identiificacion_repre" placeholder="+57 300 123 4567" required value="<?= $proveedor['identificacion_representante'] ?>">
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                        <label class="form-label">Foto</label>
-                                        <img src="<?= BASE_URL ?>/public/uploads/usuario<?= $proveedor['foto_representante'] ?>"
-                                            alt="Foto del turista" width="120" class="img-thumbnail mb-2">
-                                    </div>
+                                    <label class="form-label">Foto</label>
+                                    <img src="<?= BASE_URL ?>/public/uploads/usuario/<?= $proveedor['foto_representante'] ?>"
+                                        alt="Foto del turista" width="120" class="img-thumbnail mb-2">
+                                </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Email *</label>
                                     <input type="email" name="email_representante" class="form-control" id="email_repre" placeholder="contacto@empresa.com" required value="<?= $proveedor['email_representante'] ?>">
@@ -315,6 +314,13 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
         crossorigin="anonymous"></script>
 
     <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/editar_proveedor.js"></script>
+
+    <script>
+        const departamentoActual = "<?= $proveedor['departamento'] ?>";
+        const ciudadActual = "<?= $proveedor['ciudad'] ?>";
+    </script>
+
+    <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/departamento.js"></script>
 </body>
 
 </html>

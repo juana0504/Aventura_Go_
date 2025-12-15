@@ -157,17 +157,18 @@ function registrarHotel()
 
     $objhotelero = new Hotelero();
 
-    // VALIDAR CORREO DEL ESTABLECIMIENTO
-    if ($objhotelero->emailExiste($email)) {
-        mostrarSweetAlert('error', 'Correo duplicado', 'El email del hotel ya está registrado.');
+    // correo de la empresa
+    if ($objhotelero->emailHotelExiste($email)) {
+        mostrarSweetAlert('error', 'Correo duplicado', 'El correo del hotel ya existe.');
         exit();
     }
 
-    // VALIDAR CORREO DEL REPRESENTANTE
-    if ($objhotelero->emailExiste($email_representante)) {
-        mostrarSweetAlert('error', 'Correo duplicado', 'El email del representante ya está registrado.');
+    // correo del representante
+    if ($objhotelero->emailUsuarioExiste($email_representante)) {
+        mostrarSweetAlert('error', 'Correo duplicado', 'El correo del representante ya existe.');
         exit();
     }
+
 
     $data = [
         'logo'                       => $logo_url,

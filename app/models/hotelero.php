@@ -15,15 +15,28 @@ class Hotelero
     }
 
     // Función para verificar si un email ya existe en la base de datos
-    public function emailExiste($email)
+    // Verifica correo en la tabla USUARIO (representante)
+    public function emailUsuarioExiste($email)
     {
-        $query = "SELECT id_usuario FROM usuario WHERE email = :email LIMIT 1";
-        $stmt = $this->conexion->prepare($query);
-        $stmt->bindParam(":email", $email);
+        $sql = "SELECT id_usuario FROM usuario WHERE email = :email LIMIT 1";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':email', $email);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    // Verifica correo en la tabla PROVEEDOR_HOTELERO (empresa)
+    public function emailHotelExiste($email)
+    {
+        $sql = "SELECT id_proveedor_hotelero 
+            FROM proveedor_hotelero 
+            WHERE email = :email LIMIT 1";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
     // Función para autenticar usuario (recibe el correo y la clave escrita por el usuario)
     public function registrar($data)
     {
@@ -182,7 +195,7 @@ class Hotelero
     {
         try {
 
-             $act_usuario = "UPDATE usuario SET 
+            $act_usuario = "UPDATE usuario SET 
                 nombre = :nombre_representante,
                 identificacion = :identificacion_representante,
                 telefono = :telefono_representante,
@@ -220,7 +233,7 @@ class Hotelero
             WHERE id_proveedor_hotelero = :id_proveedor_hotelero";
 
             $resultado = $this->conexion->prepare($actualizar);
-            
+
             $resultado->bindParam(':id_proveedor_hotelero', $data['id_proveedor_hotelero']);
             $resultado->bindParam(':nombre_establecimiento', $data['nombre_establecimiento']);
             $resultado->bindParam(':email', $data['email']);

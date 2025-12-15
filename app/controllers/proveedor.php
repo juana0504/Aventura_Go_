@@ -140,15 +140,15 @@ function registrarProveedor()
 
     $objProveedor = new Proveedor();
 
-    // VALIDAR CORREO DEL ESTABLECIMIENTO
-    if ($objProveedor->emailExiste($email)) {
-        mostrarSweetAlert('error', 'Correo duplicado', 'El email del hotel ya está registrado.');
+    // correo de la empresa
+    if ($objProveedor->emailHotelExiste($email)) {
+        mostrarSweetAlert('error', 'Correo duplicado', 'El correo del hotel ya existe.');
         exit();
     }
 
-    // VALIDAR CORREO DEL REPRESENTANTE
-    if ($objProveedor->emailExiste($email_representante)) {
-        mostrarSweetAlert('error', 'Correo duplicado', 'El email del representante ya está registrado.');
+    // correo del representante
+    if ($objProveedor->emailUsuarioExiste($email_representante)) {
+        mostrarSweetAlert('error', 'Correo duplicado', 'El correo del representante ya existe.');
         exit();
     }
 

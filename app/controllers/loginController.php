@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             break;
     }
 
-    mostrarSweetAlert('success', 'Ingreso exitoso', $mensaje, $redirectUrl);
+    mostrarSweetAlert('success', 'Ingreso exitoso', $mensaje, $rendirectUrl);
     exit();
 
 } else{

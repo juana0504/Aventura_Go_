@@ -165,12 +165,16 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <h4 class="mb-4"><i class="fas fa-map-marker-alt text-primary"></i> Ubicación</h4>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Departamento *</label>
-                                    <input type="text" name="departamento" class="form-control" id="departamento" placeholder="cundinamarca" required>
+                                    <label for="departamento">Departamento *</label>
+                                    <select name="departamento" id="departamento" class="form-control" required>
+                                        <option value="">Seleccione un departamento</option>
+                                    </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Ciudad *</label>
-                                    <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ej: Medellín" required>
+                                    <label for="ciudad">Ciudad *</label>
+                                    <select name="ciudad" id="ciudad" class="form-control" required disabled>
+                                        <option value="">Seleccione una ciudad</option>
+                                    </select>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label">Dirección *</label>
@@ -285,6 +289,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     </section>
 
     <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor.js"></script>
+    <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/departamento.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>

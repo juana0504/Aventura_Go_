@@ -189,7 +189,7 @@ if (!empty($hotelero['metodo_pago'])) {
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Foto</label>
-                                        <img src="<?= BASE_URL ?>/public/uploads/usuario<?= $hotelero['foto_representante'] ?>"
+                                        <img src="<?= BASE_URL ?>/public/uploads/usuario/<?= $hotelero['foto_representante'] ?>"
                                             alt="Foto del turista" width="120" class="img-thumbnail mb-2">
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -208,11 +208,11 @@ if (!empty($hotelero['metodo_pago'])) {
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Departamento *</label>
-                                        <input type="text" name="departamento" class="form-control" id="departamento" placeholder="Juan Pérez" required value="<?= $hotelero['departamento'] ?>">
+                                        <select name="departamento" id="departamento" class="form-control" required></select>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Ciudad *</label>
-                                        <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ej: Medellín" required  value="<?= $hotelero['ciudad'] ?>">
+                                        <select name="ciudad" id="ciudad" class="form-control" required></select>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Dirección *</label>
@@ -230,29 +230,29 @@ if (!empty($hotelero['metodo_pago'])) {
                                             <div class="col-md-6">
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="tipo_habitacion[]" id="Estandar" value="Estandar"
-                                                    <?= in_array("Estándar", $habitacionSeleccionada) ? "checked" : "" ?>>
+                                                        <?= in_array("Estándar", $habitacionSeleccionada) ? "checked" : "" ?>>
                                                     <label class="form-check-label">Estándar</label>
                                                 </div>
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="tipo_habitacion[]" id="Doble" value="Doble"
-                                                    <?= in_array("Doble", $habitacionSeleccionada) ? "checked" : "" ?>>
+                                                        <?= in_array("Doble", $habitacionSeleccionada) ? "checked" : "" ?>>
                                                     <label class="form-check-label">Doble</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="tipo_habitacion[]" id="Suite" value="Suite"
-                                                    <?= in_array("Suite", $habitacionSeleccionada) ? "checked" : "" ?>>
+                                                        <?= in_array("Suite", $habitacionSeleccionada) ? "checked" : "" ?>>
                                                     <label class="form-check-label">Suite</label>
                                                 </div>
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="tipo_habitacion[]" id="Familiar" value="Familiar"
-                                                    <?= in_array("Familiar", $habitacionSeleccionada) ? "checked" : "" ?>>
+                                                        <?= in_array("Familiar", $habitacionSeleccionada) ? "checked" : "" ?>>
                                                     <label class="form-check-label">Familiar</label>
                                                 </div>
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="tipo_habitacion[]" id="Premium" value="Premium"
-                                                    <?= in_array("Premium", $habitacionSeleccionada) ? "checked" : "" ?>>
+                                                        <?= in_array("Premium", $habitacionSeleccionada) ? "checked" : "" ?>>
                                                     <label class="form-check-label">Premium</label>
                                                 </div>
                                             </div>
@@ -269,59 +269,59 @@ if (!empty($hotelero['metodo_pago'])) {
                                             <div class="col-md-6">
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="WiFi" value="WiFi"
-                                                    <?= in_array("WiFi", $servicioSeleccionado) ? "checked" : "" ?>>
+                                                        <?= in_array("WiFi", $servicioSeleccionado) ? "checked" : "" ?>>
                                                     <label class="form-check-label">WiFi</label>
                                                 </div>
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Parqueadero" value="Parqueadero"
-                                                    <?= in_array("Parqueadero", $servicioSeleccionado) ? "checked" : "" ?>>
+                                                        <?= in_array("Parqueadero", $servicioSeleccionado) ? "checked" : "" ?>>
                                                     <label class="form-check-label">Parqueadero</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Piscina" value="Piscina"
-                                                    <?= in_array("Piscina", $servicioSeleccionado) ? "checked" : "" ?>>
+                                                        <?= in_array("Piscina", $servicioSeleccionado) ? "checked" : "" ?>>
                                                     <label class="form-check-label">Piscina</label>
                                                 </div>
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Restaurante" value="Restaurante"
-                                                    <?= in_array("Restaurante", $servicioSeleccionado) ? "checked" : "" ?>>
+                                                        <?= in_array("Restaurante", $servicioSeleccionado) ? "checked" : "" ?>>
                                                     <label class="form-check-label">Restaurante</label>
                                                 </div>
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Bar" value="Bar"
-                                                    <?= in_array("Bar", $servicioSeleccionado) ? "checked" : "" ?>>
+                                                        <?= in_array("Bar", $servicioSeleccionado) ? "checked" : "" ?>>
                                                     <label class="form-check-label">Bar</label>
                                                 </div>
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Spa" value="Spa"
-                                                    <?= in_array("Spa", $servicioSeleccionado) ? "checked" : "" ?>>
+                                                        <?= in_array("Spa", $servicioSeleccionado) ? "checked" : "" ?>>
                                                     <label class="form-check-label">Spa</label>
                                                 </div>
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Pet Friendly" value="Pet Friendly"
-                                                    <?= in_array("Pet Friendly", $servicioSeleccionado) ? "checked" : "" ?>>
+                                                        <?= in_array("Pet Friendly", $servicioSeleccionado) ? "checked" : "" ?>>
                                                     <label class="form-check-label">Pet Friendly</label>
                                                 </div>
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Servicio al cuarto" value="Servicio al cuarto"
-                                                    <?= in_array("Servicio al cuarto", $servicioSeleccionado) ? "checked" : "" ?>>
+                                                        <?= in_array("Servicio al cuarto", $servicioSeleccionado) ? "checked" : "" ?>>
                                                     <label class="form-check-label">Servicio al cuarto</label>
                                                 </div>
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Transporte" value="Transporte"
-                                                    <?= in_array("Transporte", $servicioSeleccionado) ? "checked" : "" ?>>
+                                                        <?= in_array("Transporte", $servicioSeleccionado) ? "checked" : "" ?>>
                                                     <label class="form-check-label">Transporte</label>
                                                 </div>
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Desayuno incluido" value="Desayuno incluido"
-                                                    <?= in_array("Desayuno incluido", $servicioSeleccionado) ? "checked" : "" ?>>
+                                                        <?= in_array("Desayuno incluido", $servicioSeleccionado) ? "checked" : "" ?>>
                                                     <label class="form-check-label">Desayuno incluido</label>
                                                 </div>
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Accesibilidad" value="Accesibilidad"
-                                                    <?= in_array("Accesibilidad", $servicioSeleccionado) ? "checked" : "" ?>>
+                                                        <?= in_array("Accesibilidad", $servicioSeleccionado) ? "checked" : "" ?>>
                                                     <label class="form-check-label">Accesibilidad</label>
                                                 </div>
                                             </div>
@@ -352,24 +352,24 @@ if (!empty($hotelero['metodo_pago'])) {
                                             <div class="col-md-6">
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="metodo_pago[]" id="Tarjeta de Crédito" value="Tarjeta de Crédito"
-                                                    <?= in_array("Tarjeta de Crédito", $pagoSeleccionado) ? "checked" : "" ?>>
+                                                        <?= in_array("Tarjeta de Crédito", $pagoSeleccionado) ? "checked" : "" ?>>
                                                     <label class="form-check-label">Tarjeta de Crédito</label>
                                                 </div>
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="metodo_pago[]" id="Tarjeta Débito" value="Tarjeta Débito"
-                                                    <?= in_array("Tarjeta Débito", $pagoSeleccionado) ? "checked" : "" ?>>
+                                                        <?= in_array("Tarjeta Débito", $pagoSeleccionado) ? "checked" : "" ?>>
                                                     <label class="form-check-label">Tarjeta Débito</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="metodo_pago[]" id="PSE" value="PSE"
-                                                    <?= in_array("PSE", $pagoSeleccionado) ? "checked" : "" ?>>
+                                                        <?= in_array("PSE", $pagoSeleccionado) ? "checked" : "" ?>>
                                                     <label class="form-check-label">PSE</label>
                                                 </div>
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="metodo_pago[]" id="Nequi" value="Nequi"
-                                                    <?= in_array("Nequi", $pagoSeleccionado) ? "checked" : "" ?>>
+                                                        <?= in_array("Nequi", $pagoSeleccionado) ? "checked" : "" ?>>
                                                     <label class="form-check-label">Nequi</label>
                                                 </div>
                                             </div>
@@ -400,6 +400,13 @@ if (!empty($hotelero['metodo_pago'])) {
         crossorigin="anonymous"></script>
 
     <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/editar_proveedor.js"></script>
+
+    <script>
+        const departamentoActual = "<?= $hotelero['departamento'] ?>";
+        const ciudadActual = "<?= $hotelero['ciudad'] ?>";
+    </script>
+
+    <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/departamento.js"></script>
 </body>
 
 </html>
