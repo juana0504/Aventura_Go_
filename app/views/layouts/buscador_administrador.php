@@ -9,7 +9,7 @@ $id = $_SESSION['user']['id'];
 $usuario = mostrarPerfilAdmin($id);
 ?>
 
-<form id="busqueda" action="busqueda">
+<form id="busqueda" class="ag-buscador-admin" action="busqueda">
     <input type="text">
     <i class="bi bi-search"></i>
 
@@ -31,7 +31,7 @@ $usuario = mostrarPerfilAdmin($id);
             </li>
             <hr class="dropdown-divider">
             </li>
-             <li>
+            <li>
                 <a class="dropdown-item" href="<?= BASE_URL ?>/logout">
                     <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
                 </a>

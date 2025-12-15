@@ -55,7 +55,7 @@ body {
 }
 
 /* ========== BARRA DE BÚSQUEDA ========== */
-form[action="busqueda"] {
+/* form[action="busqueda"] {
     position: relative;
     padding: 10px 0 20px;
     display: flex;
@@ -101,10 +101,10 @@ form[action="busqueda"] .bi-bell-fill {
     color: #000000;
     font-size: 20px;
     cursor: pointer;
-}
+} */
 
 /* Estilos del dropdown de perfil */
-form[action="busqueda"] #perfil {
+/* form[action="busqueda"] #perfil {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -162,7 +162,7 @@ form[action="busqueda"] #perfil h6 {
 
 #perfil-dropdown .dropdown-divider {
     margin: 5px 0;
-}
+} */
 
 /* Título principal */
 .info h1 {
@@ -176,8 +176,8 @@ form[action="busqueda"] #perfil h6 {
     background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
     border-radius: 24px;
     padding: 50px;
-    box-shadow: 0 10px 40px rgba(45, 64, 89, 0.12), 
-                0 2px 8px rgba(45, 64, 89, 0.08);
+    box-shadow: 0 10px 40px rgba(45, 64, 89, 0.12),
+        0 2px 8px rgba(45, 64, 89, 0.08);
     margin-top: 30px;
     position: relative;
     overflow: hidden;
@@ -323,6 +323,7 @@ form[action="busqueda"] #perfil h6 {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -429,6 +430,26 @@ form[action="busqueda"] #perfil h6 {
     color: #9ca3af;
     opacity: 1;
 }
+
+.form-select {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 2px solid #e5e7eb;
+    font-family: var(--font-text);
+    font-size: 15px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: white;
+    color: var(--color-text);
+}
+
+.form-select:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 4px rgba(234, 130, 23, 0.12);
+    transform: translateY(-1px);
+}
+
 
 textarea.form-control {
     resize: vertical;
@@ -594,17 +615,20 @@ textarea.form-control {
 }
 
 .text-primary {
-    color: #2D4059 !important;
+    color: #ea8217 !important;
 }
 
 /* ========== ACCIONES DEL WIZARD ========== */
 .wizard-actions {
     display: flex;
-    justify-content: right; /* CAMBIA de space-between a la derecha */
-    gap: 20px; /* Espacio entre botones */
+    justify-content: right;
+    /* CAMBIA de space-between a la derecha */
+    gap: 20px;
+    /* Espacio entre botones */
     padding: 25px 0;
     margin-top: 25px;
-    border-top: 1px solid #e5e7eb; /* Línea separadora opcional */
+    border-top: 1px solid #e5e7eb;
+    /* Línea separadora opcional */
 }
 
 /* ========== BOTONES ========== */

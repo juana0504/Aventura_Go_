@@ -35,6 +35,8 @@ $turista = listarTuristaId($id);
 
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_turistico.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
+
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/estilos_globales/panel.css">
 
 </head>
@@ -104,7 +106,7 @@ $turista = listarTuristaId($id);
                     </div>
 
                     <button type="submit">
-                        Actualizar<i class="fas fa-arrow-left"></i> 
+                        Actualizar<i class="fas fa-arrow-left"></i>
                     </button>
 
 
