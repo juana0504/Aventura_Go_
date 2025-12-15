@@ -364,11 +364,7 @@
                 <!-- Columna 1: Logo -->
                 <div class="col-md-2">
                     <div class="logo-section">
-<<<<<<< HEAD:app/views/website/index.html
                         <img src="public/assets/website_externos/index/img/LOGO-NEGATIVO.png" alt="logo Aventura Go">
-=======
-                        <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="logo Aventura Go">
->>>>>>> 94addec9d9289dc94ffba26b2227eca5102d606f:app/views/website/index.php
                     </div>
                 </div>
 
