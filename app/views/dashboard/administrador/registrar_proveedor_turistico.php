@@ -196,7 +196,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Tipo de documento *</label>
-                                    <select name="tipo_documento">
+                                    <select name="tipo_documento" class="form-select1" id="tipo_documento">
                                         <option value="" disabled selected hidden>Tipo de documento</option>
                                         <option value="CC">CC</option>
                                         <option value="CE">CE</option>
