@@ -352,6 +352,9 @@
         </div>
     </section>
 
+
+
+    <!-- seccion equipo -->
     <section id="equipo">
         <div class="container-fluid">
 
@@ -367,46 +370,46 @@
 
 
                         <!-- Card 1 -->
-                        <div class="equipo" data-aos="zoom-in" data-aos-duration="1500"> <!-- Añadí d-flex -->
+                        <div class="equipo" data-aos="zoom-in" data-aos-duration="1500">
                             <div class="card1 p-4 shadow-sm w-100">
-                                <img src="public/assets" alt="foto albert" class="foto">
-                                <h4>Sofia Camelo</h4>
+                                <img src="public/assets/website_externos/acerca_de_nosotros/img/foto_albert.png" alt="foto albert" class="foto">
+                                <h4>Albert gutierrez</h4>
                                 <p>Scrum master</p>
                             </div>
                         </div>
 
 
                         <!-- Card 2 -->
-                        <div class="equipo" data-aos="zoom-in" data-aos-duration="1500"> <!-- Añadí d-flex -->
+                        <div class="equipo" data-aos="zoom-in" data-aos-duration="1500">
                             <div class="card2 p-4 shadow-sm w-100">
-                                <img src="public/assets" alt="foto albert" class="foto">
+                                <img src="public/assets/website_externos/acerca_de_nosotros/img/foto_sofia.png" alt="foto sofia" class="foto">
                                 <h4>Sofia Camelo</h4>
                                 <p>Scrum master</p>
                             </div>
                         </div>
 
                         <!-- Card 3 -->
-                        <div class="equipo" data-aos="zoom-in" data-aos-duration="1500"> <!-- Añadí d-flex -->
+                        <div class="equipo" data-aos="zoom-in" data-aos-duration="1500">
                             <div class="card3 p-4 shadow-sm w-100">
-                                <img src="public/assets" alt="foto albert" class="foto">
+                                <img src="public/assets/website_externos/acerca_de_nosotros/img/foto_juan.png" alt="foto juan" class="foto">
                                 <h4>Juan mahecha</h4>
                                 <p>Development Team</p>
                             </div>
                         </div>
 
                         <!-- Card 4 -->
-                        <div class="equipo" data-aos="zoom-in" data-aos-duration="1500"> <!-- Añadí d-flex -->
+                        <div class="equipo" data-aos="zoom-in" data-aos-duration="1500">
                             <div class="card4 p-4 shadow-sm w-100">
-                                <img src="public/assets" alt="foto albert" class="foto">
+                                <img src="public/assets/website_externos/acerca_de_nosotros/img/foto_juana.png" alt="foto juana" class="foto">
                                 <h4>juana rodriguez</h4>
                                 <p>Development Team</p>
                             </div>
                         </div>
 
                         <!-- Card 5 -->
-                        <div class="equipo" data-aos="zoom-in" data-aos-duration="1500"> <!-- Añadí d-flex -->
+                        <div class="equipo" data-aos="zoom-in" data-aos-duration="1500">
                             <div class="card5 p-4 shadow-sm w-100">
-                                <img src="public/assets" alt="foto albert" class="foto">
+                                <img src="public/assets/website_externos/acerca_de_nosotros/img/foto_stiven.png" alt="foto stiven" class="foto">
                                 <h4>Stiven aguilar</h4>
                                 <p>Development Team</p>
                             </div>
