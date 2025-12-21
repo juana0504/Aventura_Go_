@@ -34,12 +34,17 @@
 
   <!-- CONTENIDO PRINCIPAL -->
   <main class="container hospedaje-container">
-    <h2 class="titulo-seccion text-center mt-5">Descubre tu hospedaje en La Vega</h2>
+    <h2 class="titulo-seccion text-center mt-5">Descubre tu hospedaje</h2>
 
     <!-- Filtros -->
     <div class="filtros mt-4 d-flex flex-wrap justify-content-center gap-3">
       <input type="text" id="buscador" class="form-control buscador" placeholder="Buscar hospedaje específico...">
       <button class="secundario" id="btnBuscar">Buscar</button>
+    </div>
+
+    <div class="tabs-container">
+      <a href="<?= BASE_URL ?>/descubre-tours" class="tab-btn"> TOURS Y AVENTURA </a>
+      <a href="<?= BASE_URL ?>/descubre-hospedaje" class="tab-btn"> HOSPEDAJE </a>
     </div>
 
     <!-- Tarjetas dinámicas -->
