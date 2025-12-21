@@ -37,7 +37,7 @@
             <div class="container-fluid">
                 <!-- Logo -->
                 <div class="logo">
-                    <img src="public/assets/website_externos/acerca_de_nosotros/img/LOGO-FINAL.png" width="150px" alt="Logo Aventura Go"
+                    <img src="public/assets/website_externos/acerca_de_nosotros/img/LOGO-FINAL.png" alt="Logo Aventura Go"
                         class="navbar-logo">
                 </div>
 
@@ -130,7 +130,7 @@
 
                 <h2 class="marca">AVENTURA<br>GO</h2>
 
-                <button class="carousel-control-prev " type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
                     <i class="bi bi-caret-left-fill"></i>
                 </button>
 

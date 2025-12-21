@@ -6,19 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Destacados - Aventura Go</title>
   <link rel="icon" type="image/png" href="public/assets/website_externos/index/img/FAVICON.png">
-  <link rel="stylesheet" href="public/assets/website_externos/destacados/destacados.css" />
+  <!-- bootstrap para el carrusel -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- bootstrap primero -->
+  <link href="path/to/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="public/assets/website_externos/destacados/destacados.css">
+
 </head>
 
 <body>
   <!-- HEADER -->
   <header>
     <nav class="navbar">
-      <div class="container">
-        <a href="index.html" class="navbar-logo">
-          <img src="public/assets/estilos_globales/img/LOGO-FINAL.png " width="150px"
-            alt="Aventura Go" />
-        </a>
+      <div class="container-fluid">
+        <!-- Logo -->
+        <div class="logo">
+          <img src="public/assets/website_externos/destacados/img/LOGO-FINAL.png" alt="Logo Aventura Go"
+            class="navbar-logo">
+        </div>
 
         <!-- Menú principal -->
         <ul class="navbar-nav" id="navbarNav">
@@ -28,21 +39,71 @@
           <li><a class="nav-link" href="/aventura_go/contactanos">Contáctanos</a></li>
         </ul>
 
+        <!-- Botones y menú móvil -->
         <div class="actions">
-          <a href="login" class="btn-login">Ingresa</a>
-          <a href="../extras/registrarse.html" class="btn-register">Regístrate</a>
+          <div class="actions">
+            <a href="login" class="btn-login">Ingresa</a>
+            <a href="registrarse" class="btn-register">Regístrate</a>
+
+            <!-- menu hambirguesa en responsive -->
+            <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+              <i class="fas fa-bars"></i>
+            </div>
+          </div>
         </div>
+
       </div>
     </nav>
   </header>
 
   <!-- SECCIÓN DESTACADOS -->
-  <section class="hero-destacados">
-    <div class="hero-overlay">
-      <h1 class="titulo-hero">DESTACADOS</h1>
-      <h2 class="subtitulo-hero">AVENTURA GO</h2>
+  <section id="hero">
+
+    <div class="container-fluid">
+
+      <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2500">
+
+        <div class="carousel-inner">
+
+          <div class="carousel-item active">
+            <img src="public/assets/website_externos/destacados/img/image_11.png" class="d-block w-100"
+              alt="Turismo en bote">
+            <div class="carousel-caption">
+              <h1>Tours destacados</h1>
+
+              <p class="parrafo1">Embárcate en rutas llenas de adrenalina, cultura y naturaleza que te
+                harán vibrar.</p>
+            </div>
+          </div>
+
+
+
+        </div>
+
+        <!-- <div class="search-box">
+                    <div class="search-item">
+                        <strong>Busca tu destino</strong>
+                    </div>
+                    <a href="website_externos/destinos.html" class="search-btn bi bi-search "></a>
+                </div> -->
+
+        <h2 class="marca">AVENTURA<br>GO</h2>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+          <i class="bi bi-caret-left-fill flecha-prev"></i>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+          <i class="bi bi-caret-right-fill"></i>
+        </button>
+      </div>
     </div>
   </section>
+
+
+
+
+
 
   <!-- Barra de búsqueda dentro del banner, no se les olvide copiar el js, el css y las img para los iconos -->
   <div class="search-box fuera-hero">
@@ -341,6 +402,13 @@
       </div>
     </div>
   </footer>
+
+  <!-- Abootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- JavaScript de Slick -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="public/assets/website_externos/destacados/destacados.js"></script>

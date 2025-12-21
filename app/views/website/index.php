@@ -45,7 +45,7 @@
             <div class="container-fluid">
                 <!-- Logo -->
                 <div class="logo">
-                    <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" width="150px" alt="Logo Aventura Go"
+                    <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
                         class="navbar-logo">
                 </div>
 

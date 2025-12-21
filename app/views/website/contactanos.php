@@ -8,6 +8,9 @@
 
     <link rel="icon" type="image/png" href="public/assets/website_externos/index/img/FAVICON.png">
 
+    <!-- bootstrap para el carrusel -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- bootstrap primero -->
     <link href="path/to/bootstrap.min.css" rel="stylesheet">
 
@@ -32,10 +35,10 @@
     <!-- header________________________________________________________________________________________________________________________________ -->
     <header>
         <nav class="navbar">
-            <div class="container">
+            <div class="container-fluid">
                 <!-- Logo -->
                 <div class="logo">
-                    <img src="public/assets/website_externos/contactanos/img/LOGO-FINAL.png" width="150px" alt="Logo Aventura Go"
+                    <img src="public/assets/website_externos/contactanos/img/LOGO-FINAL.png" alt=" Logo Aventura Go"
                         class="navbar-logo">
                 </div>
 
@@ -66,47 +69,104 @@
 
 
     <!-- HERO CONTACTANOS_______________________________________________________________________________________________ -->
-    <section id="hero-contactanos">
+    <section id="hero">
 
         <div class="container-fluid">
 
-            <div class="row hero-img">
-                <div class="col-12 header-arriba">
-                    <img src="public/assets/website_externos/contactanos/img/contactanos_1.jpeg" alt="img contactanos">
-                    <h1 class="palpitando">CONTACTANOS</h1>
+            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2500">
+
+                <div class="carousel-inner">
+
+                    <div class="carousel-item active">
+                        <img src="public/assets/website_externos/contactanos/img/Hero_contactanos.png" class="d-block w-100"
+                            alt="Turismo en bote">
+                        <div class="carousel-caption">
+                            <h1>Contacta con nosotros</h1>
+                            <h2>descubre tu próximo destino</h2>
+                        </div>
+                    </div>
+
+                    <!-- <div class="carousel-item">
+                        <img src="public/assets/website_externos/contactanos/img/Hero_contactanos.png" class="d-block w-100"
+                            alt="...">
+                        <div class="carousel-caption">
+                            <h1>El mundo te espera,</h1>
+                            <h2>atrévete a vivirlo</h2>
+                            <p class="parrafo1">Sumérgete en nuevas aventuras, desde montañas imponentes hasta mares
+                                cristalinos.</p>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="public/assets/website_externos/contactanos/img/Hero_contactanos.png" class="d-block w-100"
+                            alt="...">
+                        <div class="carousel-caption">
+                            <h1>Destinos que inspiran,</h1>
+                            <h2>aventuras que transforman</h2>
+                            <p class="parrafo1">Viaja a lugares mágicos donde cada paso cuenta una historia y cada
+                                paisaje
+                                deja huella.</p>
+
+                        </div>
+                    </div> -->
+
+                </div>
+
+                <!-- <div class="search-box">
+                    <div class="search-item">
+                        <strong>Busca tu destino</strong>
+                    </div>
+                    <a href="website_externos/destinos.html" class="search-btn bi bi-search "></a>
+                </div> -->
+
+                <h2 class="marca">AVENTURA<br>GO</h2>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                    <i class="bi bi-caret-left-fill flecha-prev"></i>
+                </button>
+
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                    <i class="bi bi-caret-right-fill"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SECCIÓN infO -->
+    <section id="info">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="hero-info">
+                    <div class="col-12 col-sm-4 col-md-4 text-center p-3">
+                        <img src="public/assets/website_externos/contactanos/img/hero_icon_email.png" class="icono-email"
+                            alt="icono hero_icon_email">
+                        <h2 class="h2-email">E-mail</h2>
+                        <h3 class="h3-email">aventurago.contacto@gmail.com</h3>
+                    </div>
+                    <div class="col-12 col-sm-4 col-md-4 text-center p-3">
+                        <img src="public/assets/website_externos/contactanos/img/hero_icon_phone.png" alt="icono hero_icon_phone">
+                        <h2>Telefono</h2>
+                        <h3>+57 320 123 4567</h3>
+                        <h3>+57 310 987 6543</h3>
+                    </div>
+                    <div class="col-12 col-sm-4 col-md-4 text-center p-3">
+                        <img src="public/assets/website_externos/contactanos/img/hero_icon_lugar.png" alt="icono hero_icon_lugar">
+                        <h2>Direccion</h2>
+                        <h3>Villeta, Cundinamarca</h3>
+                        <h3>Colombia</h3>
+                    </div>
                 </div>
             </div>
-
-            <div class="row hero-info">
-                <div class="col-12 col-sm-4 col-md-4 text-center p-3">
-                    <img src="public/assets/website_externos/contactanos/img/hero_icon_email.png" class="icono-email"
-                        alt="icono hero_icon_email">
-                    <h2 class="h2-email">E-mail</h2>
-                    <h3 class="h3-email">aventurago.contacto@gmail.com</h3>
-                </div>
-                <div class="col-12 col-sm-4 col-md-4 text-center p-3">
-                    <img src="public/assets/website_externos/contactanos/img/hero_icon_phone.png" alt="icono hero_icon_phone">
-                    <h2>Telefono</h2>
-                    <h3>+57 320 123 4567</h3>
-                    <h3>+57 310 987 6543</h3>
-                </div>
-                <div class="col-12 col-sm-4 col-md-4 text-center p-3">
-                    <img src="public/assets/website_externos/contactanos/img/hero_icon_lugar.png" alt="icono hero_icon_lugar">
-                    <h2>Direccion</h2>
-                    <h3>Villeta, Cundinamarca</h3>
-                    <h3>Colombia</h3>
-                </div>
-            </div>
-
         </div>
     </section>
 
 
 
     <!-- SECCIÓN FORMULARIO DE CONTACTO -->
-    <div id="formulario">
+    <section id="formulario">
 
-        <div class="container">
+        <div class="container-fluid">
 
             <h2 class="titulo-principal">Aclarámos tus dudas, escríbenos</h2>
 
@@ -175,24 +235,26 @@
                             onclick="window.location.href='../website_externos/contactanos_gracias.html'">
                             Enviar mensaje
                         </button>
-
-
                     </form>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
 
 
     <!-- seccion mapa -->
-    <section id="mapa" class="mapa-section">
-        <h2>Encuéntranos fácilmente</h2>
-        <div class="mapa-contenedor">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.166972063625!2d-74.472745125039!3d5.013951139904496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4067dfb5f1a3e7%3A0xeca58a4d9a0f72cb!2sVilleta%2C%20Cundinamarca!5e0!3m2!1ses!2sco!4v1690391856678!5m2!1ses!2sco"
-                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+    <section id="mapa">
+        <div class="container-fluid">
+            <div class="mapa-section">
+                <h2>Encuéntranos fácilmente</h2>
+                <div class="mapa-contenedor">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.166972063625!2d-74.472745125039!3d5.013951139904496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4067dfb5f1a3e7%3A0xeca58a4d9a0f72cb!2sVilleta%2C%20Cundinamarca!5e0!3m2!1ses!2sco!4v1690391856678!5m2!1ses!2sco"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -294,6 +356,12 @@
 
     </footer>
 
+    <!-- Abootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript de Slick -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 
     <!-- JavaScript de Slick -->
