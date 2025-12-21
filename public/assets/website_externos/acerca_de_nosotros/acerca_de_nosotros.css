@@ -52,6 +52,7 @@ header {
 /*LOGO  */
 .navbar-logo {
     margin-left: 0;
+    width: 150px;
 }
 
 /* LINKS PRINCIPALES */
@@ -232,6 +233,10 @@ header {
 .carousel-control-next {
     right: 5px;
 }
+
+
+
+
 
 /* Caja de búsqueda */
 #hero .search-box {
