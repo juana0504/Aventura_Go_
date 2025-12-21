@@ -82,7 +82,7 @@
                             alt="Turismo en bote">
                         <div class="carousel-caption">
                             <h1>Contacta con nosotros</h1>
-                            <h2>descubre tu próximo destino</h2>
+                            <h2>y descubre tu próximo destino</h2>
                         </div>
                     </div>
 

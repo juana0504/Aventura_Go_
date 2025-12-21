@@ -92,8 +92,7 @@
                             <h1>Explora sin límites,</h1>
                             <h2>descubre tu próximo destino</h2>
                             <p class="parrafo1">Embárcate en rutas llenas de adrenalina, cultura y naturaleza que te
-                                harán
-                                vibrar.</p>
+                                harán vibrar.</p>
 
 
                         </div>
@@ -117,8 +116,7 @@
                             <h1>Destinos que inspiran,</h1>
                             <h2>aventuras que transforman</h2>
                             <p class="parrafo1">Viaja a lugares mágicos donde cada paso cuenta una historia y cada
-                                paisaje
-                                deja huella.</p>
+                                paisaje deja huella.</p>
 
                         </div>
                     </div>
@@ -194,15 +192,18 @@
 
             <!-- Tarjeta 2 -->
             <div class="col">
-                <div class="card destino-card shadow-sm">
-                    <img src="public/assets/website_externos/index/img/destinos_visitados_villeta.png"
-                        class="card-img-top" alt="Villeta">
-                    <div class="card-body">
-                        <h5 class="card-title">VILLETA</h5>
-                        <p class="card-text estrellas">★★★★★</p>
+                <a href="/aventura_go/descubre-tours" class="text-decoration-none">
+                    <div class="card destino-card shadow-sm">
+                        <img src="public/assets/website_externos/index/img/destinos_visitados_villeta.png"
+                            class="card-img-top" alt="Villeta">
+                        <div class="card-body">
+                            <h5 class="card-title">VILLETA</h5>
+                            <p class="card-text estrellas">★★★★★</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
+
 
             <!-- Tarjeta 3 -->
             <div class="col">

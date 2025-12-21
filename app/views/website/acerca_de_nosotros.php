@@ -375,6 +375,7 @@
                                 <img src="public/assets/website_externos/acerca_de_nosotros/img/foto_albert.png" alt="foto albert" class="foto">
                                 <h4>Albert gutierrez</h4>
                                 <p>Scrum master</p>
+                                <p>Frontend</p>
                             </div>
                         </div>
 
@@ -385,6 +386,7 @@
                                 <img src="public/assets/website_externos/acerca_de_nosotros/img/foto_sofia.png" alt="foto sofia" class="foto">
                                 <h4>Sofia Camelo</h4>
                                 <p>Scrum master</p>
+                                <p>Frontend</p>
                             </div>
                         </div>
 
@@ -394,6 +396,7 @@
                                 <img src="public/assets/website_externos/acerca_de_nosotros/img/foto_juan.png" alt="foto juan" class="foto">
                                 <h4>Juan mahecha</h4>
                                 <p>Development Team</p>
+                                <p>Frontend</p>
                             </div>
                         </div>
 
@@ -403,6 +406,7 @@
                                 <img src="public/assets/website_externos/acerca_de_nosotros/img/foto_juana.png" alt="foto juana" class="foto">
                                 <h4>juana rodriguez</h4>
                                 <p>Development Team</p>
+                                <p>Backend</p>
                             </div>
                         </div>
 
@@ -412,6 +416,7 @@
                                 <img src="public/assets/website_externos/acerca_de_nosotros/img/foto_stiven.png" alt="foto stiven" class="foto">
                                 <h4>Stiven aguilar</h4>
                                 <p>Development Team</p>
+                                <p>Backend</p>
                             </div>
                         </div>
 
