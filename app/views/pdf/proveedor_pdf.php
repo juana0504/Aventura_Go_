@@ -128,7 +128,7 @@
                         <td><?= $proveedor['nombre_representante'] ?></td>
                         <td><?= $proveedor['email'] ?></td>
                         <td><?= $proveedor['telefono'] ?></td>
-                        <td><?= $proveedor['ciudad'] ?></td>
+                        <td><?= $proveedor['id_ciudad'] ?></td>
                         <td>Activo</td>
                     </tr>
                 <?php endforeach; ?>
