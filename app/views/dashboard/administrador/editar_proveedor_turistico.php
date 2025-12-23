@@ -207,7 +207,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Ciudad *</label>
-                                    <select name="ciudad" id="ciudad" class="form-control" required></select>
+                                    <select name="id_ciudad" id="id_ciudad" class="form-control" required></select>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label">Dirección *</label>
@@ -329,7 +329,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
     <script>
         const departamentoActual = "<?= $proveedor['departamento'] ?>";
-        const ciudadActual = "<?= $proveedor['ciudad'] ?>";
+        const ciudadActual = "<?= $proveedor['id_ciudad'] ?>";
     </script>
 
     <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/departamento.js"></script>

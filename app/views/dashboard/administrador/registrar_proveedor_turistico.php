@@ -174,8 +174,9 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
+
                                     <label for="ciudad">Ciudad *</label>
-                                    <select name="ciudad" id="ciudad" class="form-control" required disabled>
+                                    <select name="id_ciudad" id="id_ciudad" class="form-control" required>
                                         <option value="">Seleccione una ciudad</option>
                                     </select>
                                 </div>

@@ -3,6 +3,11 @@
 //impotamos las dependencias
 require_once __DIR__ . '/../helpers/alert_helper.php';
 require_once __DIR__ . '/../models/hotelero.php';
+require_once __DIR__ . '/../models/Ciudad.php';
+
+
+$ciudadModel = new Ciudad();
+$ciudades = $ciudadModel->obtenerCiudadesActivas();
 
 
 //capturamos en ua variable el metodo o solicitud hecha  al servidor
@@ -66,7 +71,7 @@ function registrarHotel()
     $email_representante             = $_POST['email_representante'] ?? '';
     $telefono_representante          = $_POST['telefono_representante'] ?? '';
     $departamento                    = $_POST['departamento'] ?? '';
-    $ciudad                          = $_POST['ciudad'] ?? '';
+    $id_ciudad                       = $_POST['id_ciudad '] ?? '';
     $direccion                       = $_POST['direccion'] ?? '';
     $tipo_habitacion                 = $_POST['tipo_habitacion'] ?? '';
     $max_huesped                     = $_POST['max_huesped'] ?? '';
@@ -80,7 +85,7 @@ function registrarHotel()
         empty($nombre_establecimiento) || empty($email) || empty($telefono) ||
         empty($tipo_establecimiento) || empty($nombre_representante) || empty($identificacion_representante) || empty($tipo_documento) ||
         empty($email_representante) || empty($telefono_representante) || empty($departamento) ||
-        empty($ciudad) || empty($direccion) || empty($tipo_habitacion) ||
+        empty($id_ciudad) || empty($direccion) || empty($tipo_habitacion) ||
         empty($max_huesped) || empty($servicio_incluido) ||
         empty($nit_rut) || empty($camara_comercio)
     ) {
@@ -185,7 +190,7 @@ function registrarHotel()
         'email_representante'           => $email_representante,
         'telefono_representante'        => $telefono_representante,
         'departamento'                  => $departamento,
-        'ciudad'                        => $ciudad,
+        'id_ciudad'                     => $id_ciudad,
         'direccion'                     => $direccion,
         'tipo_habitacion'               => $tipo_habitacion,
         'max_huesped'                   => $max_huesped,
@@ -235,7 +240,7 @@ function actualizarHotel()
     $email_representante             = $_POST['email_representante'] ?? '';
     $telefono_representante          = $_POST['telefono_representante'] ?? '';
     $departamento                    = $_POST['departamento'] ?? '';
-    $ciudad                          = $_POST['ciudad'] ?? '';
+    $id_ciudad                       = $_POST['id_ciudad '] ?? '';
     $direccion                       = $_POST['direccion'] ?? '';
     $tipo_habitacion                 = $_POST['tipo_habitacion'] ?? '';
     $max_huesped                     = $_POST['max_huesped'] ?? '';
@@ -249,7 +254,7 @@ function actualizarHotel()
         empty($nombre_establecimiento) || empty($email) || empty($telefono) ||
         empty($tipo_establecimiento) || empty($nombre_representante) || empty($identificacion_representante) || empty($tipo_documento) ||
         empty($email_representante) || empty($telefono_representante) || empty($departamento) ||
-        empty($ciudad) || empty($direccion) || empty($tipo_habitacion) ||
+        empty($id_ciudad) || empty($direccion) || empty($tipo_habitacion) ||
         empty($max_huesped) || empty($servicio_incluido) ||
         empty($nit_rut) || empty($camara_comercio)
     ) {
@@ -293,7 +298,7 @@ function actualizarHotel()
         'email_representante'           => $email_representante,
         'telefono_representante'        => $telefono_representante,
         'departamento'                  => $departamento,
-        'ciudad'                        => $ciudad,
+        'id_ciudad'                     => $id_ciudad,
         'direccion'                     => $direccion,
         'tipo_habitacion'               => $tipo_habitacion,
         'max_huesped'                   => $max_huesped,

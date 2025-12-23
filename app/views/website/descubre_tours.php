@@ -195,16 +195,23 @@
                 </div>
             </div>
 
-            <div class="search-banner">
+            <!-- barra de busqyeda -->
+            <form class="search-banner" action="<?= BASE_URL ?>busqueda" method="GET">
                 <div class="search-banner-text">
                     <i class="fas fa-search"></i>
-                    <span>¿Buscas alguna actividad específica?</span>
+                    <input
+                        type="text"
+                        name="q"
+                        placeholder="¿Buscas alguna actividad específica?"
+                        required>
                 </div>
-                <button class="search-banner-btn">
+
+                <button type="submit" class="search-banner-btn">
                     <i class="fas fa-search"></i>
                     Buscar
                 </button>
-            </div>
+            </form>
+
         </div>
     </main>
 
