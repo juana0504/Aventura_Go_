@@ -1,6 +1,6 @@
 <?php
 include_once __DIR__ . '/../../layouts/header_administrador.php';
-require_once BASE_PATH . '/app/controllers/turista.php';
+require_once BASE_PATH . '/app/controllers/administrador/turista.php';
 
 // le asignamos el valor id del registro segun la tabla 
 $id = $_GET['id'];

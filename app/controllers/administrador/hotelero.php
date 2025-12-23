@@ -1,8 +1,8 @@
 <?php
 
 //impotamos las dependencias
-require_once __DIR__ . '/../helpers/alert_helper.php';
-require_once __DIR__ . '/../models/hotelero.php';
+require_once __DIR__ . '/../../helpers/alert_helper.php';
+require_once __DIR__ . '/../../models/administrador/hotelero.php';
 
 
 //capturamos en ua variable el metodo o solicitud hecha  al servidor

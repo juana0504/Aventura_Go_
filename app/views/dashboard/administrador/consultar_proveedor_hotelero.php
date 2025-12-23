@@ -1,6 +1,6 @@
 <?php
 require_once BASE_PATH . '/app/helpers/session_administrador.php';
-require_once BASE_PATH . '/app/controllers/hotelero.php';
+require_once BASE_PATH . '/app/controllers/administrador/hotelero.php';
 
 $datos = listarHoteles();
 

@@ -84,27 +84,27 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/administrador/consultar_proveedor_turistico.php';  //redirige al perfil de usuario de administrador
         break;
     case '/administrador/guardar-proveedor':
-        require BASE_PATH . '/app/controllers/proveedor.php';  //redirige al guardar proveedor
+        require BASE_PATH . '/app/controllers/administrador/proveedor.php';  //redirige al guardar proveedor
         break;
     case '/administrador/editar-proveedor':
         require BASE_PATH . '/app/views/dashboard/administrador/editar_proveedor_turistico.php';  //redirige al guardar proveedor
         break;
     case '/administrador/actualizar-proveedor-turistico':
-        require BASE_PATH . '/app/controllers/proveedor.php';  //redirige al actualizar el proveedor
+        require BASE_PATH . '/app/controllers/administrador/proveedor.php';  //redirige al actualizar el proveedor
         break;
     case '/administrador/eliminar-proveedor':
-        require BASE_PATH . '/app/controllers/proveedor.php';  //elimina el proveedor
+        require BASE_PATH . '/app/controllers/administrador/proveedor.php';  //elimina el proveedor
         break;
     case '/administrador/reporte':
         require BASE_PATH . '/app/controllers/reportesPdfController.php';  //elimina el proveedor
         reportesPdfControlers();
         break;
     case '/administrador/consultar-proveedor-id':
-        require BASE_PATH . '/app/controllers/proveedor.php';
+        require BASE_PATH . '/app/controllers/administrador/proveedor.php';
         consultarProveedorOjo(); // Llama a la función que devuelve JSON
         break;
     case '/administrador/cambiar-estado-proveedor-turistico':
-        require BASE_PATH . '/app/controllers/proveedor.php';
+        require BASE_PATH . '/app/controllers/administrador/proveedor.php';
         break;
 
     //Fin de Registrar y consultar el Proveedor Turistico
@@ -119,16 +119,16 @@ switch ($request) {
         break;
     // CRUD del Proveedor Hotelero
     case '/administrador/guardar-proveedor-hotelero':
-        require BASE_PATH . '/app/controllers/hotelero.php';  //redirige al guardar proveedor
+        require BASE_PATH . '/app/controllers/administrador/hotelero.php';  //redirige al guardar proveedor
         break;
     case '/administrador/editar-proveedor-hotelero':
         require BASE_PATH . '/app/views/dashboard/administrador/editar_proveedor_hotelero.php';  //redirige al guardar proveedor
         break;
     case '/administrador/actualizar-proveedor-hotelero':
-        require BASE_PATH . '/app/controllers/hotelero.php';  //redirige al actualizar el proveedor
+        require BASE_PATH . '/app/controllers/administrador/hotelero.php';  //redirige al actualizar el proveedor
         break;
     case '/administrador/eliminar-proveedor-hotelero':
-        require BASE_PATH . '/app/controllers/hotelero.php';  //elimina el proveedor
+        require BASE_PATH . '/app/controllers/administrador/hotelero.php';  //elimina el proveedor
         break;
     //Fin de Registrar y consultar el Proveedor Hotelero
 
@@ -142,16 +142,16 @@ switch ($request) {
 
     // CRUD del Turista
     case '/administrador/guardar-turista':
-        require BASE_PATH . '/app/controllers/turista.php';  //redirige al guardar turista
+        require BASE_PATH . '/app/controllers/administrador/turista.php';  //redirige al guardar turista
         break;
     case '/administrador/editar-turista':
         require BASE_PATH . '/app/views/dashboard/administrador/editar_turista.php';  //redirige al guardar turista
         break;
     case '/administrador/actualizar-turista':
-        require BASE_PATH . '/app/controllers/turista.php';  //redirige al actualizar el turista
+        require BASE_PATH . '/app/controllers/administrador/turista.php';  //redirige al actualizar el turista
         break;
     case '/administrador/eliminar-turista':
-        require BASE_PATH . '/app/controllers/turista.php';  //elimina el turista
+        require BASE_PATH . '/app/controllers/administrador/turista.php';  //elimina el turista
         break;
     case '/administrador/reporte-turista':
         require BASE_PATH . '/app/controllers/reportesPdfController.php';  //pdf del el turista
@@ -165,7 +165,7 @@ switch ($request) {
         break;
 
     case '/administrador/actualizar-perfil':
-        require BASE_PATH . '/app/controllers/editarPerfilAdmin.php';
+        require BASE_PATH . '/app/controllers/administrador/editarPerfilAdmin.php';
         break;
 
 

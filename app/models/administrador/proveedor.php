@@ -1,6 +1,6 @@
 <?php
 // Incluye la configuración de la base de datos
-require_once __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../../../config/database.php';
 
 // Definición de la clase login
 class Proveedor
