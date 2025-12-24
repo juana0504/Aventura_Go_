@@ -34,9 +34,7 @@ $datos = listarTuristas();
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_hotelero.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
-
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/estilos_globales/panel.css">
-
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel.css">
 
 </head>
 

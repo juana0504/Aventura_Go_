@@ -36,8 +36,7 @@ $usuario = mostrarPerfilAdmin($id);
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/perfil.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
-
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/estilos_globales/panel.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel.css">
 </head>
 
 <body>
@@ -120,12 +119,10 @@ $usuario = mostrarPerfilAdmin($id);
                         <form action="/aventura_go/administrador/actualizar-perfil" method="POST" enctype="multipart/form-data">
 
                             <h4>Imagen Perfil</h4>
-                            <img src="<?= BASE_URL ?>/public/uploads/usuario/<?= $usuario['foto'] ?>" alt="persona">
+                            <input type="file" name="foto">
 
-                            <div class="botones-imagen">
-                                <button id="descargar">EDITAR FOTO</button>
-                                <button id="eliminar">ELIMINAR</button>
-                            </div>
+
+
 
                             <h4>Nombre Completo</h4>
                             <input type="text" name="nombre" value="<?= $usuario['nombre'] ?>">
