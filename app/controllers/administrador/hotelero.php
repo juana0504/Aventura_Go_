@@ -1,9 +1,9 @@
 <?php
 
 //impotamos las dependencias
-require_once __DIR__ . '/../helpers/alert_helper.php';
-require_once __DIR__ . '/../models/hotelero.php';
-require_once __DIR__ . '/../models/Ciudad.php';
+require_once __DIR__ . '/../../helpers/alert_helper.php';
+require_once __DIR__ . '/../../models/administrador/hotelero.php';
+require_once __DIR__ . '/../../models/Ciudad.php';
 
 
 $ciudadModel = new Ciudad();
