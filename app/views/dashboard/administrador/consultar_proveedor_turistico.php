@@ -43,8 +43,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_turistico.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
-
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/estilos_globales/panel.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel.css">
 
 
 </head>
@@ -318,9 +317,9 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
                 <!-- Footer del Modal -->
                 <div class="modal-footer aventura-modal-footer">
-                    <button type="button" class="btn btn-aventura-secondary" data-bs-dismiss="modal">
+                    <!-- <button type="button" class="btn btn-aventura-secondary" data-bs-dismiss="modal">
                         <i class="fas fa-times"></i> Cerrar
-                    </button>
+                    </button> -->
                     <div class="action-buttons">
 
                         <a class="btn btn-aventura-success" id="btn-activar-proveedor">
