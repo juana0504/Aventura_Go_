@@ -93,7 +93,7 @@ class Proveedor
             telefono_representante,
             actividades,
             departamento,
-            ciudad,
+            id_ciudad,
             direccion,
             validado
         ) VALUES (
@@ -111,7 +111,7 @@ class Proveedor
             :telefono_representante,
             :actividades,
             :departamento,
-            :ciudad,
+            :id_ciudad,
             :direccion,
             'activo'
             )";
@@ -131,7 +131,7 @@ class Proveedor
             $resultado->bindParam(':telefono_representante', $data['telefono_representante']);
             $resultado->bindParam(':actividades', $data['actividades']);
             $resultado->bindParam(':departamento', $data['departamento']);
-            $resultado->bindParam(':ciudad', $data['ciudad']);
+            $resultado->bindParam(':id_ciudad', $data['id_ciudad']);
             $resultado->bindParam(':direccion', $data['direccion']);
 
 
@@ -152,7 +152,10 @@ class Proveedor
     {
         try {
             // Variable que almacena la sentencia de sql a ejecutar
-            $consultar = "SELECT * FROM proveedor WHERE id_proveedor = id_proveedor order BY id_proveedor DESC";
+            // $consultar = "SELECT * FROM proveedor WHERE id_proveedor = id_proveedor order BY id_proveedor DESC";
+
+            $consultar = " SELECT p.*, c.nombre AS nombre_ciudad FROM proveedor p LEFT JOIN ciudades c ON p.id_ciudad = c.id_ciudad ORDER BY p.id_proveedor DESC
+";
 
             // Preparar lo necesario para ejecutar la función
             $resultado = $this->conexion->prepare($consultar);
@@ -207,7 +210,7 @@ class Proveedor
             $usuario->bindParam(':email_representante', $data['email_representante']);
 
             $usuario->execute();
-            
+
             $actualizar = "UPDATE proveedor SET
                 nombre_empresa = :nombre_empresa,
                 nit_rut = :nit_rut,
@@ -220,7 +223,7 @@ class Proveedor
                 telefono_representante = :telefono_representante,
                 actividades = :actividades,
                 departamento = :departamento,
-                ciudad = :ciudad,
+                id_ciudad = :id_ciudad,
                 direccion = :direccion
             WHERE id_proveedor = :id_proveedor";
 
@@ -237,7 +240,7 @@ class Proveedor
             $resultado->bindParam(':telefono_representante', $data['telefono_representante']);
             $resultado->bindParam(':actividades', $data['actividades']);
             $resultado->bindParam(':departamento', $data['departamento']);
-            $resultado->bindParam(':ciudad', $data['ciudad']);
+            $resultado->bindParam(':id_ciudad', $data['id_ciudad']);
             $resultado->bindParam(':direccion', $data['direccion']);
 
             return $resultado->execute();

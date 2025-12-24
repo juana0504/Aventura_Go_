@@ -1,8 +1,13 @@
 <?php
 
 //impotamos las dependencias
-require_once __DIR__ . '/../../helpers/alert_helper.php';
-require_once __DIR__ . '/../../models/administrador/proveedor.php';
+require_once __DIR__ . '/../helpers/alert_helper.php';
+require_once __DIR__ . '/../models/proveedor.php';
+require_once __DIR__ . '/../models/Ciudad.php';
+
+
+$ciudadModel = new Ciudad();
+$ciudades = $ciudadModel->obtenerCiudadesActivas();
 
 
 //capturamos en ua variable el metodo o solicitud hecha  al servidor
@@ -33,6 +38,17 @@ switch ($method) {
             // esta funcion DESACTIVA el proveedor segun su id
             desactivarProveedorTuristico($_GET['id']);
         }
+
+        if ($accion === 'registrar') {
+
+            // Cargar ciudades PARA ESTA VISTA
+            $ciudadModel = new Ciudad();
+            $ciudades = $ciudadModel->obtenerCiudadesActivas();
+
+            require_once __DIR__ . '/../views/dashboard/administrador/registrar_proveedor_turistico.php';
+            exit;
+        }
+
 
         if (isset($_GET['id'])) {
             // esta funcion llena la tabla con el proveedor segun su id
@@ -73,14 +89,14 @@ function registrarProveedor()
     $telefono_representante       = $_POST['telefono_representante'] ?? '';
     $actividades                  = $_POST['actividades'] ?? [];
     $departamento                 = $_POST['departamento'] ?? '';
-    $ciudad                       = $_POST['ciudad'] ?? '';
+    $id_ciudad                    = $_POST['id_ciudad'] ?? '';
     $direccion                    = $_POST['direccion'] ?? '';
 
     if (
         empty($nombre_empresa) || empty($nit_rut) || empty($email) ||
         empty($telefono) || empty($nombre_representante) || empty($identificacion_representante) || empty($tipo_documento) ||
         empty($email_representante) || empty($telefono_representante) || empty($actividades) ||
-        empty($departamento) || empty($ciudad) || empty($direccion)
+        empty($departamento) || empty($id_ciudad) || empty($direccion)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completa todos los campos');
         exit();
@@ -168,7 +184,7 @@ function registrarProveedor()
         'telefono_representante'  => $telefono_representante,
         'actividades'             => $actividades,
         'departamento'            => $departamento,
-        'ciudad'                  => $ciudad,
+        'id_ciudad'               => $id_ciudad,
         'direccion'               => $direccion,
     ];
 
@@ -199,27 +215,27 @@ function listarProveedorId($id)
 
 function actualizarProveedor()
 {
-    $id_proveedor            = $_POST['id_proveedor'] ?? '';
-    $id_usuario            = $_POST['id_usuario'] ?? '';
-    $nombre_empresa          = $_POST['nombre_empresa'] ?? '';
-    $email                   = $_POST['email'] ?? '';
-    $telefono                = $_POST['telefono'] ?? '';
-    $nit_rut                 = $_POST['nit_rut'] ?? '';
-    $nombre_representante    = $_POST['nombre_representante'] ?? '';
-    $tipo_documento                  = $_POST['tipo_documento'] ?? '';
+    $id_proveedor                  = $_POST['id_proveedor'] ?? '';
+    $id_usuario                    = $_POST['id_usuario'] ?? '';
+    $nombre_empresa                = $_POST['nombre_empresa'] ?? '';
+    $email                         = $_POST['email'] ?? '';
+    $telefono                      = $_POST['telefono'] ?? '';
+    $nit_rut                       = $_POST['nit_rut'] ?? '';
+    $nombre_representante          = $_POST['nombre_representante'] ?? '';
+    $tipo_documento                = $_POST['tipo_documento'] ?? '';
     $identificacion_representante  = $_POST['identificacion_representante'] ?? '';
-    $email_representante     = $_POST['email_representante'] ?? '';
-    $telefono_representante = $_POST['telefono_representante'] ?? '';
-    $actividades             = $_POST['actividades'] ?? [];
-    $departamento            = $_POST['departamento'] ?? '';
-    $ciudad                  = $_POST['ciudad'] ?? '';
-    $direccion               = $_POST['direccion'] ?? '';
+    $email_representante           = $_POST['email_representante'] ?? '';
+    $telefono_representante        = $_POST['telefono_representante'] ?? '';
+    $actividades                   = $_POST['actividades'] ?? [];
+    $departamento                  = $_POST['departamento'] ?? '';
+    $id_ciudad                     = $_POST['id_ciudad'] ?? '';
+    $direccion                     = $_POST['direccion'] ?? '';
 
     if (
         empty($nombre_empresa) || empty($nit_rut) || empty($email) ||
         empty($telefono) || empty($nombre_representante) || empty($identificacion_representante) || empty($tipo_documento) || empty($email_representante) ||
         empty($telefono_representante) || empty($actividades) ||
-        empty($departamento) || empty($ciudad) || empty($direccion)
+        empty($departamento) || empty($id_ciudad) || empty($direccion)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completa todos los campos');
         exit();
@@ -246,7 +262,7 @@ function actualizarProveedor()
         'telefono_representante'        => $telefono_representante,
         'actividades'                   => $actividades,
         'departamento'                  => $departamento,
-        'ciudad'                        => $ciudad,
+        'id_ciudad'                     => $id_ciudad,
         'direccion'                     => $direccion
     ];
 

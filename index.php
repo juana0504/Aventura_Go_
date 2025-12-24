@@ -15,11 +15,22 @@ if ($request === '') $request = '/'; //si la ruta queda vacia, se interpreta com
 
 //ENRUTAMIENTO BASICO
 switch ($request) {
+
     // ===================================================================================================
-    //                                             RUTAS PÁGINAS PÚBLICAS
+    //                                      RUTAS TURISTA (USUARIO)
     // ===================================================================================================
     case '/':
         require BASE_PATH . '/app/views/website/index.php';
+        break;
+
+    // Ruta: descubre tours
+    case '/descubre-tours':
+        require BASE_PATH . '/app/views/website/descubre_tours.php';
+        break;
+
+    // Ruta: descubre hospedaje
+    case '/descubre-hospedaje':
+        require BASE_PATH . '/app/views/website/descubre_hospedaje.php';
         break;
 
     // Ruta: /destacados
@@ -36,6 +47,7 @@ switch ($request) {
     case '/contactanos':
         require BASE_PATH . '/app/views/website/contactanos.php';
         break;
+
 
     // ===================================================================================================
     //                                            RUTAS LOGIN
@@ -190,9 +202,7 @@ switch ($request) {
 
 
 
-    // ===================================================================================================
-    //                                      RUTAS TURISTA (USUARIO)
-    // ===================================================================================================
+
 
 
     default:

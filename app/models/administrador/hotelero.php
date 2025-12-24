@@ -36,7 +36,7 @@ class Hotelero
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    
+
     // Función para autenticar usuario (recibe el correo y la clave escrita por el usuario)
     public function registrar($data)
     {
@@ -90,7 +90,7 @@ class Hotelero
                 email_representante,
                 telefono_representante,
                 departamento,
-                ciudad,
+                id_ciudad,
                 direccion,
                 tipo_habitacion,
                 max_huesped,
@@ -114,7 +114,7 @@ class Hotelero
                 :email_representante,
                 :telefono_representante,
                 :departamento,
-                :ciudad,
+                :id_ciudad,
                 :direccion,
                 :tipo_habitacion,
                 :max_huesped,
@@ -140,7 +140,7 @@ class Hotelero
             $resultado->bindParam(':email_representante', $data['email_representante']);
             $resultado->bindParam(':telefono_representante', $data['telefono_representante']);
             $resultado->bindParam(':departamento', $data['departamento']);
-            $resultado->bindParam(':ciudad', $data['ciudad']);
+            $resultado->bindParam(':id_ciudad', $data['id_ciudad']);
             $resultado->bindParam(':direccion', $data['direccion']);
             $resultado->bindParam(':tipo_habitacion', $data['tipo_habitacion']);
             $resultado->bindParam(':max_huesped', $data['max_huesped']);
@@ -230,7 +230,7 @@ class Hotelero
                 email_representante = :email_representante,
                 telefono_representante = :telefono_representante,
                 departamento = :departamento,
-                ciudad = :ciudad,
+                id_ciudad = :id_ciudad,
                 direccion = :direccion,
                 tipo_habitacion = :tipo_habitacion,
                 max_huesped = :max_huesped,
@@ -254,7 +254,7 @@ class Hotelero
             $resultado->bindParam(':email_representante', $data['email_representante']);
             $resultado->bindParam(':telefono_representante', $data['telefono_representante']);
             $resultado->bindParam(':departamento', $data['departamento']);
-            $resultado->bindParam(':ciudad', $data['ciudad']);
+            $resultado->bindParam(':id_ciudad', $data['id_ciudad']);
             $resultado->bindParam(':direccion', $data['direccion']);
             $resultado->bindParam(':tipo_habitacion', $data['tipo_habitacion']);
             $resultado->bindParam(':max_huesped', $data['max_huesped']);

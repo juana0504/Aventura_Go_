@@ -119,7 +119,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     <td><?= $proveedor['nombre_representante'] ?></td>
                                     <td><?= $proveedor['email'] ?></td>
                                     <td><?= $proveedor['telefono'] ?></td>
-                                    <td><?= $proveedor['ciudad'] ?></td>
+                                    <td><?= $proveedor['nombre_ciudad'] ?? '—' ?></td>
 
                                     <!-- ESTADO -->
                                     <td class="col-estado">

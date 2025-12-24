@@ -115,7 +115,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     <td><?= $hotelero['nombre_representante'] ?></td>
                                     <td><?= $hotelero['email'] ?></td>
                                     <td><?= $hotelero['telefono'] ?></td>
-                                    <td><?= $hotelero['ciudad'] ?></td>
+                                    <td><?= $hotelero['nombre_ciudad'] ?? '—' ?></td>
 
                                     <!-- ESTADO -->
                                     <td class="col-estado">

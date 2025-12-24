@@ -102,6 +102,8 @@
             </div>
         </div>
     </section>
+
+
     <!-- seccion fotos -->
     <div class="container my-5">
         <!-- Galería -->

@@ -17,7 +17,7 @@
         href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/turista/tour_escogido/tour-escogido.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/turista/descubre_tours/descubreTours.css">
 </head>
 
 <body>
@@ -25,13 +25,13 @@
         <nav class="navbar">
             <div class="container-fluid">
                 <div class="logo">
-                    <img src="/public/assets/turista/tour_escogido/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
+                    <img src="/public/assets/dashboard/turista/descubre_tours/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
                 </div>
 
                 <h1 class="page-title">Descubre Todo lo que Villeta Tiene para Ofrecerte</h1>
 
                 <div class="actions">
-                    <a href="#" class="btn-login">Atrás</a>
+                    <a href="/aventura_go" class="btn-login">Atrás</a>
                     <div class="menu-toggle" id="menu-toggle">
                         <i class="fas fa-bars"></i>
                     </div>
@@ -44,7 +44,7 @@
         <div class="container">
             <div class="tabs-container">
                 <button class="tab-btn active">TOURS Y AVENTURA</button>
-                <button class="tab-btn">HOSPEDAJE</button>
+                <a href="<?= BASE_URL ?>/descubre-hospedaje" class="tab-btn"> HOSPEDAJE </a>
             </div>
 
             <div class="search-filters">
@@ -195,16 +195,23 @@
                 </div>
             </div>
 
-            <div class="search-banner">
+            <!-- barra de busqyeda -->
+            <form class="search-banner" action="<?= BASE_URL ?>busqueda" method="GET">
                 <div class="search-banner-text">
                     <i class="fas fa-search"></i>
-                    <span>¿Buscas alguna actividad específica?</span>
+                    <input
+                        type="text"
+                        name="q"
+                        placeholder="¿Buscas alguna actividad específica?"
+                        required>
                 </div>
-                <button class="search-banner-btn">
+
+                <button type="submit" class="search-banner-btn">
                     <i class="fas fa-search"></i>
                     Buscar
                 </button>
-            </div>
+            </form>
+
         </div>
     </main>
 
