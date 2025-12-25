@@ -270,7 +270,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <h2 class="palpitando">¿Quieres que tu negocio aparezca aquí?</h2>
-                        <a href="../index.html">Publicate en Aventura Go</a>
+                        <a href="contactanos">Publicate en Aventura Go</a>
                     </div>
                 </div>
             </div>
