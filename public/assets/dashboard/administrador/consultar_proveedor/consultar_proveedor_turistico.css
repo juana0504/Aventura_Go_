@@ -1,23 +1,38 @@
 /* Reset y Variables */
+/* fuente para titulos*/
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
+
+/*fuente para textos*/
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+h1 h2 h3 h4 h5 h6 {
+    --font-titles: 'Raleway', sans-serif;
+    /*tipografia titulos*/
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-
-/* ========== LAYOUT PRINCIPAL ========== */
-#admin-dashboard {
-    display: flex;
-    min-height: 100vh;
+body {
+    background-color: #f5f5f5;
 }
 
-/* ========== CONTENIDO PRINCIPAL ========== */
-.info {
-    flex-grow: 1;
-    padding: 15px 40px;
-    background-color: #ffffff;
+body {
+    font-family: 'lato', sans-serif;
+    background-color: #f5f7fa;
 }
+
+
+/* Reset y Variables */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 
 /* ========== estilos boton pdf ========== */
 .btn-pdf {
@@ -730,19 +745,19 @@ div.dataTables_wrapper div.dataTables_scrollBody td {
 
 /* ========== RESPONSIVE ========== */
 @media (max-width: 1024px) {
-    .panel {
+    /* .panel {
         position: relative;
         width: 100%;
         height: auto;
-    }
+    } */
 
     .info {
         margin-left: 0;
     }
 
-    #admin-dashboard {
+    /* #admin-dashboard {
         flex-direction: column;
-    }
+    } */
 }
 
 @media (max-width: 768px) {

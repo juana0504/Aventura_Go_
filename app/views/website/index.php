@@ -146,6 +146,7 @@
     </section>
 
 
+
     <!-- SECCIÓN DESTINOS POPULARES -->
     <section class="destinos-populares container my-5">
 
@@ -260,6 +261,8 @@
         </div>
     </section>
 
+
+
     <!-- SECCIÓN DESTINOS MÁS VISITADOS -->
     <section class="destinos-visitados container my-5">
         <h2 class="titulo-seccion-visitados text-center">Destinos más visitados</h2>
@@ -341,9 +344,6 @@
 
 
 
-
-
-
     <!-- _______________________________F O O T E R__________________________________________ -->
     <footer id="footer" class="container-fluid">
 
@@ -352,7 +352,7 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <h2 class="palpitando">¿Quieres que tu negocio aparezca aquí?</h2>
-                    <a href="website_externos/contactanos.html">Publicate en Aventura Go</a>
+                    <a href="contactanos">Publicate en Aventura Go</a>
                 </div>
             </div>
         </div>
@@ -437,6 +437,7 @@
 
 
     </footer>
+
 
     <!-- Abootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
