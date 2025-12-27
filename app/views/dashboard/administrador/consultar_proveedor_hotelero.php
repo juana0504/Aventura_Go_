@@ -38,10 +38,16 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     <!-- Icono de bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <!-- Estilos CSS -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_hotelero.css">
+    <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
+
+    <!-- Componentes comunes -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel.css">
+
+    <!-- CSS SOLO DE ESTA VISTA (SIEMPRE AL FINAL) -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_hotelero.css">
+
 
 
 </head>

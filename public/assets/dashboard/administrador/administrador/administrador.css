@@ -9,10 +9,6 @@ h1 h2 h3 h4 h5 h6 {
     /*tipografia titulos*/
 }
 
-p a button input {
-    --font-text: 'Lato', sans-serif;
-    /*tipografia textos*/
-}
 
 * {
     margin: 0;
@@ -24,18 +20,6 @@ body {
     background-color: #f5f5f5;
 }
 
-/* Layout principal */
-#listado {
-    display: flex;
-    min-height: 100vh;
-}
-
-/* ========== CONTENIDO PRINCIPAL ========== */
-.info {
-    flex-grow: 1;
-    padding: 15px 40px;
-    background-color: #ffffff;
-}
 
 .info #usuario #datos {
     display: inline-block;
@@ -214,24 +198,7 @@ body {
     }
 }
 
-@media (max-width: 768px) {
-    #listado {
-        flex-direction: column;
-    }
 
-    .panel {
-        width: 100%;
-    }
-
-    .formulario {
-        grid-template-columns: 1fr;
-    }
-
-    .lista thead tr,
-    .lista tbody tr {
-        grid-template-columns: 1fr;
-    }
-}
 
 /* modo oscuro */
 .modo-oscuro .panel {

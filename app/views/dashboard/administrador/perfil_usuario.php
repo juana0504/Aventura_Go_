@@ -26,17 +26,27 @@ $usuario = mostrarPerfilAdmin($id);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil Usuario</title>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
     <!-- Icono de bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <!-- favicon -->
-    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
-    <!-- Estilos CSS -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/perfil.css">
+
+    <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
+
+    <!-- Componentes comunes -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel.css">
+
+    <!-- Estilos CSS (siempre al final)-->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/perfil.css">
+
 </head>
 
 <body>

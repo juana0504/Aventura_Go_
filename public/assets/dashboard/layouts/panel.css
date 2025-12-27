@@ -13,7 +13,7 @@
 }
 
 /* Items del menú */
-.items{
+.items {
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -28,7 +28,7 @@
     border: none;
 }
 
-.dropdown-toggle-aventura::after{
+.dropdown-toggle-aventura::after {
     display: inline-block;
     margin-bottom: 20px;
     margin-left: 10px;
@@ -40,7 +40,7 @@
     border-left: .3em solid transparent;
 }
 
-#menu-panel a{
+#menu-panel a {
     color: #2D4059;
     text-decoration: none;
     padding: 10px 20px;
@@ -51,7 +51,7 @@
     gap: 10px;
 }
 
-#menu-panel a:hover{
+#menu-panel a:hover {
     color: #EA8217;
     background: #ffffff;
 }

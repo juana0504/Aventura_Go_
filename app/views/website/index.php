@@ -146,6 +146,7 @@
     </section>
 
 
+
     <!-- SECCIÓN DESTINOS POPULARES -->
     <section class="destinos-populares container my-5">
 
@@ -260,6 +261,8 @@
         </div>
     </section>
 
+
+
     <!-- SECCIÓN DESTINOS MÁS VISITADOS -->
     <section class="destinos-visitados container my-5">
         <h2 class="titulo-seccion-visitados text-center">Destinos más visitados</h2>
@@ -338,9 +341,6 @@
             </button>
         </div>
     </section>
-
-
-
 
 
 
@@ -437,6 +437,7 @@
 
 
     </footer>
+
 
     <!-- Abootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
