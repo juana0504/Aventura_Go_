@@ -181,3 +181,4 @@ document.addEventListener("click", function (e) {
     })
     .catch(err => alert("Error en la petición: " + err));
 });
+

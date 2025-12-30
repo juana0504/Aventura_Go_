@@ -64,12 +64,12 @@ $usuario = mostrarPerfilAdmin($id);
             ?>
 
             <div class="container">
+
                 <div class="row">
 
                     <div class="usuario">
                         <h2>Perfil de Administrador</h2>
-                        <img src="<?= BASE_URL ?>/public/uploads/usuario/<?= $usuario['foto'] ?>"
-                            alt="persona"></i>
+                        <img src="<?= BASE_URL ?>/public/uploads/usuario/<?= $usuario['foto'] ?>" alt="persona"></i>
                         <h3><?= $_SESSION['user']['nombre'] ?></h3>
                         <p><?= $_SESSION['user']['rol'] ?></p>
 
@@ -105,8 +105,6 @@ $usuario = mostrarPerfilAdmin($id);
                                     <p><?= $usuario['telefono'] ?></p>
                                 </div>
 
-
-
                                 <div class="col-md-6">
                                     <h4>Rol:</h4>
                                 </div>
@@ -124,15 +122,16 @@ $usuario = mostrarPerfilAdmin($id);
                         </div>
                     </div>
 
+
+
+
+
                     <div class="editar">
 
                         <form action="/aventura_go/administrador/actualizar-perfil" method="POST" enctype="multipart/form-data">
 
                             <h4>Imagen Perfil</h4>
-                            <input type="file" name="foto">
-
-
-
+                            <input type="file" name="foto" value="<?= $usuario['foto'] ?>">
 
                             <h4>Nombre Completo</h4>
                             <input type="text" name="nombre" value="<?= $usuario['nombre'] ?>">
@@ -151,6 +150,8 @@ $usuario = mostrarPerfilAdmin($id);
                         </form>
 
                     </div>
+
+
 
 
 
