@@ -63,6 +63,8 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
             <form id="formProveedor" action="<?= BASE_URL ?>/administrador/guardar-proveedor-hotelero" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="accion" value="registrar">
 
+
+
                 <div class="wizard-container">
                     <div class="wizard-content">
                         <div class="wizard-header">
@@ -91,6 +93,8 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 <div class="step-label">Documentación</div>
                             </div>
                         </div>
+
+
 
                         <div class="wizard-content">
                             <!-- Paso 1 -->
@@ -145,6 +149,8 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 </div>
                             </div>
 
+
+
                             <div class="step-content" data-step="2">
                                 <h4 class="mb-4"><i class="bi bi-person-fill"></i> Representante</h4>
                                 <div class="row">
@@ -181,6 +187,8 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 </div>
                             </div>
 
+
+
                             <div class="step-content" data-step="3">
                                 <h4 class="mb-4"><i class="fas fa-map-marker-alt text-primary"></i> Ubicación</h4>
                                 <div class="row">
@@ -203,6 +211,8 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     </div>
                                 </div>
                             </div>
+
+
 
                             <!-- Tipo establecimiento (ENUM) -->
                             <div class="step-content" data-step="4">
@@ -238,13 +248,15 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Número máximo de huéspedes *</label>
-                                        <input type="tel" name="max_huesped" class="form-control" id="max_huesped" placeholder="40" required>
+                                        <input type="tel" name="max_huesped" class="form-control" id="max_huesped" placeholder="ej: 40" required>
                                     </div>
+
 
                                     <h4 class="mb-4"><i class="bi bi-file-earmark-medical-fill"></i> Servicios incluidos</h4>
                                     <div class="col-md-12 mb-4">
                                         <div class="row">
-                                            <div class="col-md-6">
+
+                                            <div class="col-md-4">
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="WiFi" value="WiFi">
                                                     <label class="form-check-label">WiFi</label>
@@ -253,8 +265,6 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                                     <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Parqueadero" value="Parqueadero">
                                                     <label class="form-check-label">Parqueadero</label>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Piscina" value="Piscina">
                                                     <label class="form-check-label">Piscina</label>
@@ -263,6 +273,9 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                                     <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Restaurante" value="Restaurante">
                                                     <label class="form-check-label">Restaurante</label>
                                                 </div>
+                                            </div>
+
+                                            <div class="col-md-4">
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Bar" value="Bar">
                                                     <label class="form-check-label">Bar</label>
@@ -279,6 +292,9 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                                     <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Servicio al cuarto" value="Servicio al cuarto">
                                                     <label class="form-check-label">Servicio al cuarto</label>
                                                 </div>
+                                            </div>
+
+                                            <div class="col-md-4">
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Transporte" value="Transporte">
                                                     <label class="form-check-label">Transporte</label>
@@ -296,6 +312,8 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     </div>
                                 </div>
                             </div>
+
+
 
                             <div class="step-content" data-step="5">
                                 <h4 class="mb-4"><i class="fas fa-map-marker-alt text-primary"></i> Documentación obligatoria</h4>
@@ -341,6 +359,8 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 </div>
                             </div>
                         </div>
+
+
 
                         <div class="wizard-actions">
                             <button class="btn btn-secondary-wizard1" id="prevBtn" style="display:none;" onclick="changeStep(-1)">

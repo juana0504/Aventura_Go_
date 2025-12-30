@@ -118,56 +118,57 @@ table.table {
 
 
 /* Define anchos específicos para cada columna */
+/* logo*/
 table.table thead th:nth-child(1) {
     width: 8%;
 }
 
-/* logo*/
+/* EMPRESA */
 table.table thead th:nth-child(2) {
     width: 15%;
 }
 
-/* EMPRESA */
+/* REPRESENTANTE */
 table.table thead th:nth-child(3) {
     width: 20%;
 }
 
-/* REPRESENTANTE */
+/* EMAIL */
 table.table thead th:nth-child(4) {
     width: 20%;
 }
 
-/* EMAIL */
+/* TELÉFONO */
 table.table thead th:nth-child(5) {
     width: 15%;
 }
 
-/* TELÉFONO */
+/* CIUDAD */
 table.table thead th:nth-child(6) {
     width: 15%;
 }
 
-/* CIUDAD */
+/* ESTADO */
 table.table thead th:nth-child(7) {
     width: 15%;
 }
 
-/* ESTADO */
+/* ACCIONES */
 table.table thead th:nth-child(8) {
     width: 20%;
 }
 
-/* ACCIONES */
+
 
 /* Estilos específicos para columnas con contenido largo */
-table.table tbody td:nth-child(2),
 /* EMPRESA */
-table.table tbody td:nth-child(3),
+table.table tbody td:nth-child(2),
 /* REPRESENTANTE */
-table.table tbody td:nth-child(4),
+table.table tbody td:nth-child(3),
 /* EMAIL */
+table.table tbody td:nth-child(4),
+/* CIUDAD */
 table.table tbody td:nth-child(6) {
-    /* CIUDAD */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -175,14 +176,14 @@ table.table tbody td:nth-child(6) {
 }
 
 /* Para columnas que deben mantener su contenido visible */
-table.table thead th:nth-child(1),
 /*logo */
-table.table thead th:nth-child(5),
+table.table thead th:nth-child(1),
 /* TELÉFONO */
-table.table tbody td:nth-child(7),
+table.table thead th:nth-child(5),
 /* ESTADO */
+table.table tbody td:nth-child(7),
+/* ACCIONES */
 table.table tbody td:nth-child(8) {
-    /* ACCIONES */
     white-space: normal;
 }
 
