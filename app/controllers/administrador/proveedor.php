@@ -1,17 +1,105 @@
 <?php
 
 //impotamos las dependencias
-require_once __DIR__ . '/../../helpers/alert_helper.php';
-require_once __DIR__ . '/../../models/administrador/proveedor.php';
-require_once __DIR__ . '/../../models/Ciudad.php';
-
-
-$ciudadModel = new Ciudad();
-$ciudades = $ciudadModel->obtenerCiudadesActivas();
-
+require_once __DIR__ . '/../helpers/alert_helper.php';
+require_once __DIR__ . '/../models/proveedor.php';
 
 //capturamos en ua variable el metodo o solicitud hecha  al servidor
 $method = $_SERVER['REQUEST_METHOD'];
+
+/**
+ * Valida un archivo de imagen de forma segura
+ *
+ * @param array $file  Elemento de $_FILES (ej. $_FILES['logo'])
+ * @param int $maxSizeBytes  Tamaño máximo en bytes
+ * @param array $extPermitidas  Extensiones permitidas (sin punto, en minúsculas)
+ * @return true|string  Retorna true si es válido, o un mensaje de error (string)
+ */
+function validarImagenSegura($file, $maxSizeBytes = 2097152, $extPermitidas = ['png','jpg','jpeg'])
+{
+    // 1) Verificar que se haya recibido el archivo
+    if (!isset($file) || !isset($file['name']) || $file['name'] === '') {
+        return "No se envió ningún archivo.";
+    }
+
+    // 2) Verificar errores de upload
+    if (!isset($file['error']) || $file['error'] !== UPLOAD_ERR_OK) {
+        // Mapear errores comunes
+        $code = $file['error'] ?? UPLOAD_ERR_OK;
+        switch ($code) {
+            case UPLOAD_ERR_INI_SIZE:
+            case UPLOAD_ERR_FORM_SIZE:
+                return "El archivo excede el tamaño permitido por el servidor.";
+            case UPLOAD_ERR_PARTIAL:
+                return "El archivo se subió de forma parcial.";
+            case UPLOAD_ERR_NO_FILE:
+                return "No se envió ningún archivo.";
+            case UPLOAD_ERR_NO_TMP_DIR:
+                return "Falta carpeta temporal en el servidor.";
+            case UPLOAD_ERR_CANT_WRITE:
+                return "No se pudo escribir el archivo en disco.";
+            case UPLOAD_ERR_EXTENSION:
+                return "Subida bloqueada por una extensión PHP en el servidor.";
+            default:
+                return "Error al subir el archivo (código: {$code}).";
+        }
+    }
+
+    // 3) Validar tamaño
+    if (!isset($file['size']) || $file['size'] > $maxSizeBytes) {
+        $maxMB = round($maxSizeBytes / (1024 * 1024), 2);
+        return "El archivo supera el tamaño permitido ({$maxMB} MB).";
+    }
+
+    // 4) Detectar doble extensión o extensiones peligrosas en el nombre original
+    $nombreOriginal = $file['name'];
+    // detectar patrones peligrosos o extensiones al final
+    if (preg_match('/\.(php|phtml|phar|pl|py|sh|exe|js|html|htm|svg|asp|aspx|jsp)$/i', $nombreOriginal)) {
+        return "Nombre de archivo no permitido (extensión peligrosa detectada).";
+    }
+
+    // 5) Validar extensión permitida (basado en nombre)
+    $ext = strtolower(pathinfo($nombreOriginal, PATHINFO_EXTENSION));
+    if (!in_array($ext, $extPermitidas)) {
+        return "Extensión no permitida. Solo se permiten: " . implode(', ', $extPermitidas) . ".";
+    }
+
+    // 6) Validar MIME real del archivo
+    if (!is_uploaded_file($file['tmp_name'])) {
+        return "Archivo inválido o no subido a la carpeta temporal.";
+    }
+
+    $mimeReal = mime_content_type($file['tmp_name']) ?: '';
+    $mimePermitidos = [];
+    // construir lista de MIME permitidos a partir de extensiones recibidas
+    foreach ($extPermitidas as $e) {
+        if ($e === 'jpg' || $e === 'jpeg') $mimePermitidos[] = 'image/jpeg';
+        if ($e === 'png') $mimePermitidos[] = 'image/png';
+        if ($e === 'gif') $mimePermitidos[] = 'image/gif';
+        if ($e === 'webp') $mimePermitidos[] = 'image/webp';
+    }
+    // evitar duplicados
+    $mimePermitidos = array_values(array_unique($mimePermitidos));
+
+    if (!in_array($mimeReal, $mimePermitidos)) {
+        return "Tipo de archivo no permitido (MIME inválido).";
+    }
+
+    // 7) Comprobar que getimagesize() pueda leerlo (protege contra archivos no-imagen)
+    $imageInfo = @getimagesize($file['tmp_name']);
+    if ($imageInfo === false) {
+        return "El archivo no es una imagen válida o está corrupto.";
+    }
+
+    // 8) Chequeos extra: evitar payloads con <?php o <script dentro del binario (simple heurística)
+    $contenido = @file_get_contents($file['tmp_name'], false, null, 0, 1024); // leer primer KB
+    if ($contenido !== false && preg_match('/(<\?php|<script|eval\(|base64_decode\(|shell_exec\()/i', $contenido)) {
+        return "El archivo contiene código o patrones potencialmente maliciosos.";
+    }
+
+    // Si pasa todas las validaciones
+    return true;
+}
 
 switch ($method) {
 
@@ -38,17 +126,6 @@ switch ($method) {
             // esta funcion DESACTIVA el proveedor segun su id
             desactivarProveedorTuristico($_GET['id']);
         }
-
-        if ($accion === 'registrar') {
-
-            // Cargar ciudades PARA ESTA VISTA
-            $ciudadModel = new Ciudad();
-            $ciudades = $ciudadModel->obtenerCiudadesActivas();
-
-            require_once __DIR__ . '/../views/dashboard/administrador/registrar_proveedor_turistico.php';
-            exit;
-        }
-
 
         if (isset($_GET['id'])) {
             // esta funcion llena la tabla con el proveedor segun su id
@@ -83,20 +160,20 @@ function registrarProveedor()
     $email                        = $_POST['email'] ?? '';
     $telefono                     = $_POST['telefono'] ?? '';
     $nombre_representante         = $_POST['nombre_representante'] ?? '';
-    $tipo_documento               = $_POST['tipo_documento'] ?? '';
     $identificacion_representante = $_POST['identificacion_representante'] ?? '';
     $email_representante          = $_POST['email_representante'] ?? '';
     $telefono_representante       = $_POST['telefono_representante'] ?? '';
     $actividades                  = $_POST['actividades'] ?? [];
+    $descripcion                  = $_POST['descripcion'] ?? '';
     $departamento                 = $_POST['departamento'] ?? '';
-    $id_ciudad                    = $_POST['id_ciudad'] ?? '';
+    $ciudad                       = $_POST['ciudad'] ?? '';
     $direccion                    = $_POST['direccion'] ?? '';
 
     if (
         empty($nombre_empresa) || empty($nit_rut) || empty($email) ||
-        empty($telefono) || empty($nombre_representante) || empty($identificacion_representante) || empty($tipo_documento) ||
+        empty($telefono) || empty($nombre_representante) || empty($identificacion_representante) ||
         empty($email_representante) || empty($telefono_representante) || empty($actividades) ||
-        empty($departamento) || empty($id_ciudad) || empty($direccion)
+        empty($descripcion) || empty($departamento) || empty($ciudad) || empty($direccion)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completa todos los campos');
         exit();
@@ -118,21 +195,21 @@ function registrarProveedor()
     // LOGO
     if (!empty($_FILES['logo']['name'])) {
         $file = $_FILES['logo'];
+
+        // Validación segura (máx 2MB, mismas extensiones permitidas que tenías)
+        $valid = validarImagenSegura($file, 2 * 1024 * 1024, ['png', 'jpg', 'jpeg']);
+        if ($valid !== true) {
+            mostrarSweetAlert('error', 'Archivo inválido (logo)', $valid);
+            exit;
+        }
+
         $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-        $permitidas = ['png', 'jpg', 'jpeg'];
-
-        if (!in_array($ext, $permitidas)) {
-            mostrarSweetAlert('error', 'Extensión no permitida', 'Solo PNG, JPG y JPEG');
-            exit;
-        }
-
-        if ($file['size'] > 2 * 1024 * 1024) {
-            mostrarSweetAlert('error', 'Archivo muy pesado', 'Máximo 2MB');
-            exit;
-        }
-
         $logo_url = uniqid('logo_') . "." . $ext;
-        $destino = BASE_PATH . "/public/uploads/turistico/" . $logo_url;
+        $destinoDir = BASE_PATH . "/public/uploads/turistico/";
+        if (!is_dir($destinoDir)) {
+            mkdir($destinoDir, 0755, true);
+        }
+        $destino = $destinoDir . $logo_url;
         move_uploaded_file($file['tmp_name'], $destino);
     } else {
         $logo_url = 'default_proveedor.png';
@@ -140,34 +217,55 @@ function registrarProveedor()
 
 
     // FOTO PRINCIPAL
-    if (!empty($_FILES['foto_representante']['name'])) {
-        $file = $_FILES['foto_representante'];
+    if (!empty($_FILES['foto']['name'])) {
+        $file = $_FILES['foto'];
+
+        // Validación segura (máx 3MB para foto principal)
+        $valid = validarImagenSegura($file, 3 * 1024 * 1024, ['png', 'jpg', 'jpeg']);
+        if ($valid !== true) {
+            mostrarSweetAlert('error', 'Archivo inválido (foto principal)', $valid);
+            exit;
+        }
+
         $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-
         $foto_url = uniqid('foto_') . "." . $ext;
-        $destino = BASE_PATH . "/public/uploads/usuario/" . $foto_url;
-
+        $destinoDir = BASE_PATH . "/public/uploads/usuario/";
+        if (!is_dir($destinoDir)) {
+            mkdir($destinoDir, 0755, true);
+        }
+        $destino = $destinoDir . $foto_url;
         move_uploaded_file($file['tmp_name'], $destino);
     } else {
         $foto_url = 'default_proveedor.png';
     }
 
 
+    // FOTO ACTIVIDAD
+    if (!empty($_FILES['foto_actividad']['name'])) {
+        $file = $_FILES['foto_actividad'];
+
+        // Validación segura (máx 3MB)
+        $valid = validarImagenSegura($file, 3 * 1024 * 1024, ['png', 'jpg', 'jpeg']);
+        if ($valid !== true) {
+            mostrarSweetAlert('error', 'Archivo inválido (foto actividad)', $valid);
+            exit;
+        }
+
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        $foto_act = uniqid('actividad_') . "." . $ext;
+        $destinoDir = BASE_PATH . "/public/uploads/turistico/actividades/";
+        if (!is_dir($destinoDir)) {
+            mkdir($destinoDir, 0755, true);
+        }
+        $destino = $destinoDir . $foto_act;
+        move_uploaded_file($file['tmp_name'], $destino);
+    } else {
+        $foto_act = 'default_proveedor.png';
+    }
+
     $claveHash = password_hash($identificacion_representante, PASSWORD_DEFAULT);
 
     $objProveedor = new Proveedor();
-
-    // correo de la empresa
-    if ($objProveedor->emailHotelExiste($email)) {
-        mostrarSweetAlert('error', 'Correo duplicado', 'El correo del hotel ya existe.');
-        exit();
-    }
-
-    // correo del representante
-    if ($objProveedor->emailUsuarioExiste($email_representante)) {
-        mostrarSweetAlert('error', 'Correo duplicado', 'El correo del representante ya existe.');
-        exit();
-    }
 
     $data = [
         'nombre_empresa'          => $nombre_empresa,
@@ -176,16 +274,17 @@ function registrarProveedor()
         'telefono'                => $telefono,
         'nit_rut'                 => $nit_rut,
         'nombre_representante'    => $nombre_representante,
-        'tipo_documento'                => $tipo_documento,
         'identificacion_representante' => $identificacion_representante,
         'identificacion'          => $claveHash,
         'foto_representante'      => $foto_url,
         'email_representante'     => $email_representante,
         'telefono_representante'  => $telefono_representante,
         'actividades'             => $actividades,
+        'descripcion'             => $descripcion,
         'departamento'            => $departamento,
-        'id_ciudad'               => $id_ciudad,
+        'ciudad'                  => $ciudad,
         'direccion'               => $direccion,
+        'foto_actividades'          => $foto_act
     ];
 
     $resultado = $objProveedor->registrar($data);
@@ -215,27 +314,27 @@ function listarProveedorId($id)
 
 function actualizarProveedor()
 {
-    $id_proveedor                  = $_POST['id_proveedor'] ?? '';
-    $id_usuario                    = $_POST['id_usuario'] ?? '';
-    $nombre_empresa                = $_POST['nombre_empresa'] ?? '';
-    $email                         = $_POST['email'] ?? '';
-    $telefono                      = $_POST['telefono'] ?? '';
-    $nit_rut                       = $_POST['nit_rut'] ?? '';
-    $nombre_representante          = $_POST['nombre_representante'] ?? '';
-    $tipo_documento                = $_POST['tipo_documento'] ?? '';
+    $id_proveedor            = $_POST['id_proveedor'] ?? '';
+    $id_usuario            = $_POST['id_usuario'] ?? '';
+    $nombre_empresa          = $_POST['nombre_empresa'] ?? '';
+    $email                   = $_POST['email'] ?? '';
+    $telefono                = $_POST['telefono'] ?? '';
+    $nit_rut                 = $_POST['nit_rut'] ?? '';
+    $nombre_representante    = $_POST['nombre_representante'] ?? '';
     $identificacion_representante  = $_POST['identificacion_representante'] ?? '';
-    $email_representante           = $_POST['email_representante'] ?? '';
-    $telefono_representante        = $_POST['telefono_representante'] ?? '';
-    $actividades                   = $_POST['actividades'] ?? [];
-    $departamento                  = $_POST['departamento'] ?? '';
-    $id_ciudad                     = $_POST['id_ciudad'] ?? '';
-    $direccion                     = $_POST['direccion'] ?? '';
+    $email_representante     = $_POST['email_representante'] ?? '';
+    $telefono_representante = $_POST['telefono_representante'] ?? '';
+    $actividades             = $_POST['actividades'] ?? [];
+    $descripcion             = $_POST['descripcion'] ?? '';
+    $departamento            = $_POST['departamento'] ?? '';
+    $ciudad                  = $_POST['ciudad'] ?? '';
+    $direccion               = $_POST['direccion'] ?? '';
 
     if (
         empty($nombre_empresa) || empty($nit_rut) || empty($email) ||
-        empty($telefono) || empty($nombre_representante) || empty($identificacion_representante) || empty($tipo_documento) || empty($email_representante) ||
-        empty($telefono_representante) || empty($actividades) ||
-        empty($departamento) || empty($id_ciudad) || empty($direccion)
+        empty($telefono) || empty($nombre_representante) || empty($identificacion_representante) || empty($email_representante) ||
+        empty($telefono_representante) || empty($actividades) || empty($descripcion) ||
+        empty($departamento) || empty($ciudad) || empty($direccion)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completa todos los campos');
         exit();
@@ -249,21 +348,21 @@ function actualizarProveedor()
     $objProveedor = new Proveedor();
 
     $data = [
-        'id_proveedor'                  => $id_proveedor,
-        'id_usuario'                    => $id_usuario,
-        'nombre_empresa'                => $nombre_empresa,
-        'email'                         => $email,
-        'telefono'                      => $telefono,
-        'nit_rut'                       => $nit_rut,
-        'nombre_representante'          => $nombre_representante,
-        'tipo_documento'                => $tipo_documento,
-        'identificacion_representante'  => $identificacion_representante,
-        'email_representante'           => $email_representante,
-        'telefono_representante'        => $telefono_representante,
-        'actividades'                   => $actividades,
-        'departamento'                  => $departamento,
-        'id_ciudad'                     => $id_ciudad,
-        'direccion'                     => $direccion
+        'id_proveedor'             => $id_proveedor,
+        'id_usuario'             => $id_usuario,
+        'nombre_empresa'           => $nombre_empresa,
+        'email'                    => $email,
+        'telefono'                 => $telefono,
+        'nit_rut'                  => $nit_rut,
+        'nombre_representante'     => $nombre_representante,
+        'identificacion_representante'     => $identificacion_representante,
+        'email_representante'      => $email_representante,
+        'telefono_representante'   => $telefono_representante,
+        'actividades'              => $actividades,
+        'descripcion'              => $descripcion,
+        'departamento'             => $departamento,
+        'ciudad'                   => $ciudad,
+        'direccion'                => $direccion
     ];
 
     $resultado = $objProveedor->actualizar($data);
