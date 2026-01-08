@@ -1,8 +1,10 @@
 <?php
 
 //impotamos las dependencias
-require_once __DIR__ . '/../helpers/alert_helper.php';
-require_once __DIR__ . '/../models/proveedor.php';
+require_once __DIR__ . '/../../helpers/alert_helper.php';
+require_once __DIR__ . '/../../models/administrador/proveedor.php';
+
+
 
 //capturamos en ua variable el metodo o solicitud hecha  al servidor
 $method = $_SERVER['REQUEST_METHOD'];

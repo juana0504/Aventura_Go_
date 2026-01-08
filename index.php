@@ -48,6 +48,13 @@ switch ($request) {
         require BASE_PATH . '/app/views/website/contactanos.php';
         break;
 
+    // Ruta para servir imágenes de proveedores turísticos
+    case '/imagen/turistico':
+        require_once BASE_PATH . '/app/controllers/ImagenController.php';
+        ImagenController::turistico($_GET['file'] ?? '');
+        break;
+
+
 
     // ===================================================================================================
     //                                            RUTAS LOGIN
