@@ -55,6 +55,14 @@ switch ($request) {
         break;
 
 
+    // AJAX: obtener proveedor por ID
+    case '/administrador/proveedor-obtener':
+        require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';
+        obtenerProveedorPorIdAjax();
+        break;
+
+
+
 
     // ===================================================================================================
     //                                            RUTAS LOGIN

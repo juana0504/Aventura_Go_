@@ -17,7 +17,7 @@ $method = $_SERVER['REQUEST_METHOD'];
  * @param array $extPermitidas  Extensiones permitidas (sin punto, en minúsculas)
  * @return true|string  Retorna true si es válido, o un mensaje de error (string)
  */
-function validarImagenSegura($file, $maxSizeBytes = 2097152, $extPermitidas = ['png','jpg','jpeg'])
+function validarImagenSegura($file, $maxSizeBytes = 2097152, $extPermitidas = ['png', 'jpg', 'jpeg'])
 {
     // 1) Verificar que se haya recibido el archivo
     if (!isset($file) || !isset($file['name']) || $file['name'] === '') {
@@ -448,4 +448,40 @@ function desactivarProveedorTuristico($id)
     } else {
         mostrarSweetAlert('error', 'Error al Desactivar', 'No se pudo activar el proveedor turistico.');
     }
+}
+
+/**
+ * Obtener proveedor por ID (AJAX)
+ * Retorna JSON
+ */
+function obtenerProveedorPorIdAjax()
+{
+    header('Content-Type: application/json');
+
+    if (!isset($_GET['id'])) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'ID no recibido'
+        ]);
+        exit;
+    }
+
+    $id = intval($_GET['id']);
+
+    // reutilizamos la función que YA EXISTE
+    $proveedor = listarProveedorId($id);
+
+    if (!$proveedor) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Proveedor no encontrado'
+        ]);
+        exit;
+    }
+
+    echo json_encode([
+        'success' => true,
+        'data' => $proveedor
+    ]);
+    exit;
 }
