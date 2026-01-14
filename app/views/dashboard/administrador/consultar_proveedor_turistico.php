@@ -40,11 +40,15 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     <!-- Icono de bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <!-- Estilos CSS -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_turistico.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
+    <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/estilos_globales/panel.css">
+    <!-- Componentes comunes -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel.css">
+
+    <!-- CSS SOLO DE ESTA VISTA (SIEMPRE AL FINAL) -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_turistico.css">
 
 
 </head>
@@ -318,9 +322,9 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
                 <!-- Footer del Modal -->
                 <div class="modal-footer aventura-modal-footer">
-                    <button type="button" class="btn btn-aventura-secondary" data-bs-dismiss="modal">
+                    <!-- <button type="button" class="btn btn-aventura-secondary" data-bs-dismiss="modal">
                         <i class="fas fa-times"></i> Cerrar
-                    </button>
+                    </button> -->
                     <div class="action-buttons">
 
                         <a class="btn btn-aventura-success" id="btn-activar-proveedor">

@@ -3,37 +3,24 @@
 require_once __DIR__ . '/../../config/database.php';
 /** * Este modelo se encarga exclusivamente de interactuar con la tabla `ciudades`.
  
- * Se usa para:
- *- Cargar ciudades en formularios (select)
- * - Garantizar consistencia con llaves foráneas (id_ciudad)
- 
- * NOTA:
- * No debe contener lógica de proveedores, hoteles o destinos. */
+ * Se usa para: *- Cargar ciudades en formularios (select)  * - Garantizar consistencia con llaves foráneas (id_ciudad)
+ * NOTA: * No debe contener lógica de proveedores, hoteles o destinos. */
 class Ciudad
 {
     /** Conexión a la base de datos (PDO) */
     private $conexion;
 
     /**
-     * Constructor
-     * Inicializa la conexión a la base de datos usando la clase `conexion`
-     * definida en config/database.php
-     */
+     * Constructor: * Inicializa la conexión a la base de datos usando la clase `conexion`  * definida en config/database.php */
     public function __construct()
     {
         $db = new conexion();
         $this->conexion = $db->getConexion();
     }
 
-    /** Obtener ciudades activas
-     * Retorna todas las ciudades con estado = 1
-     * ordenadas alfabéticamente.
-     * Se usa para:
-     * - Poblar selects simples
-     * - Pruebas iniciales
-     * 
-     * @return array Lista de ciudades [id_ciudad, nombre]
-     */
+    /** Obtener ciudades activas: * Retorna todas las ciudades con estado = 1  * ordenadas alfabéticamente.
+     * Se usa para:* - Poblar selects simples * - Pruebas iniciales * 
+     * @return array Lista de ciudades [id_ciudad, nombre] */
 
 
     public function obtenerCiudadesActivas()

@@ -38,11 +38,16 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     <!-- Icono de bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <!-- Estilos CSS -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_hotelero.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
+    <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/estilos_globales/panel.css">
+    <!-- Componentes comunes -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel.css">
+
+    <!-- CSS SOLO DE ESTA VISTA (SIEMPRE AL FINAL) -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_hotelero.css">
+
 
 
 </head>
@@ -67,7 +72,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
             <!-- Título y Acciones -->
             <div class="header-section">
-                <h1>Gestión de Proveedores</h1>
+                <h1>Gestión de Proveedores hoteleros</h1>
             </div>
 
             <!-- Filtros Rápidos -->
@@ -159,15 +164,189 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
         </div>
     </section>
 
+    <!-- Modal para ver detalles del proveedor -->
+    <div class="modal fade" id="verProveedorModal" tabindex="-1" aria-labelledby="verProveedorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content aventura-modal">
+
+                <!-- Header del Modal -->
+                <div class="modal-header aventura-modal-header">
+                    <div class="modal-header-content">
+                        <div class="modal-logo">
+                            <img src="" alt="Logo del Proveedor" id="modal-logo">
+                        </div>
+                        <div class="modal-title">
+                            <h5 class="modal-title-text" id="verProveedorModalLabel">
+                                <span class="aventura-text">Detalles del Proveedor</span>
+                            </h5>
+                            <small class="modal-subtitle">Información completa del proveedor hotelero</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Body del Modal -->
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <!-- Barra de estado -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="status-bar mb-4">
+                                    <span class="status-badge" id="modal-status"></span>
+                                    <span class="register-date" id="modal-fecha-registro"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sección 1: Información Principal -->
+                        <div class="info-section mb-4">
+                            <div class="section-header">
+                                <i class="fas fa-building section-icon"></i>
+                                <h6>Información Principal</h6>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="info-card">
+                                        <div class="info-label"><i class="fas fa-signature"></i> Nombre de la Empresa</div>
+                                        <div class="info-value" id="modal-empresa">-</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="info-card">
+                                        <div class="info-label"><i class="fas fa-id-card"></i> NIT/RUT</div>
+                                        <div class="info-value" id="modal-nit">-</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="info-card">
+                                        <div class="info-label"><i class="fas fa-envelope"></i> Email</div>
+                                        <div class="info-value" id="modal-email">-</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="info-card">
+                                        <div class="info-label"><i class="fas fa-phone"></i> Teléfono</div>
+                                        <div class="info-value" id="modal-telefono">-</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 mb-3">
+                                    <div class="info-card">
+                                        <div class="info-label"><i class="fas fa-align-left"></i> Descripción</div>
+                                        <div class="info-value" id="modal-descripcion">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sección 2: Representante -->
+                        <div class="info-section mb-4">
+                            <div class="section-header">
+                                <i class="fas fa-user-tie section-icon"></i>
+                                <h6>Información del Representante</h6>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="info-card">
+                                        <div class="info-label"><i class="fas fa-user"></i> Nombre Completo</div>
+                                        <div class="info-value" id="modal-representante">-</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="info-card">
+                                        <div class="info-label"><i class="fas fa-id-badge"></i> Identificación</div>
+                                        <div class="info-value" id="modal-identificacion">-</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="info-card">
+                                        <div class="info-label"><i class="fas fa-envelope"></i> Email Representante</div>
+                                        <div class="info-value" id="modal-email-repre">-</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="info-card">
+                                        <div class="info-label"><i class="fas fa-phone"></i> Teléfono Representante</div>
+                                        <div class="info-value" id="modal-telefono-repre">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sección 3: Ubicación -->
+                        <div class="info-section mb-4">
+                            <div class="section-header">
+                                <i class="fas fa-map-marker-alt section-icon"></i>
+                                <h6>Ubicación</h6>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="info-card">
+                                        <div class="info-label"><i class="fas fa-map"></i> Departamento</div>
+                                        <div class="info-value" id="modal-departamento">-</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="info-card">
+                                        <div class="info-label"><i class="fas fa-city"></i> Ciudad</div>
+                                        <div class="info-value" id="modal-ciudad">-</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="info-card">
+                                        <div class="info-label"><i class="fas fa-road"></i> Dirección</div>
+                                        <div class="info-value" id="modal-direccion">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sección 4: Actividades -->
+                        <div class="info-section mb-4">
+                            <div class="section-header">
+                                <i class="fas fa-hiking section-icon"></i>
+                                <h6>Actividades Turísticas</h6>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="activities-container" id="modal-actividades">
+                                        <!-- Las actividades se insertarán aquí dinámicamente -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer del Modal -->
+                <div class="modal-footer aventura-modal-footer">
+                    <!-- <button type="button" class="btn btn-aventura-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Cerrar
+                    </button> -->
+                    <div class="action-buttons">
+
+                        <a class="btn btn-aventura-success" id="btn-activar-proveedor">
+                            <i class="fas fa-check-circle"></i> Activar
+                        </a>
+
+                        <a class="btn btn-aventura-danger" id="btn-desactivar-proveedor">
+                            <i class="fas fa-ban"></i> Desactivar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+
     <?php
-    require_once __DIR__ . '/../../layouts/footer_administrador.php';
+    // require_once __DIR__ . '/../../layouts/footer_administrador.php';
     ?>
 
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_turistico.js"></script>
+    <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_hotelero.js"></script>
 
 </body>
 
