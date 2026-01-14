@@ -192,7 +192,9 @@ switch ($request) {
     //                                     RUTAS PROVEEDOR TURISTICO
     // ===================================================================================================
 
-
+    case '/Proveedor-Turistico/Actividad':
+        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/crear_actividad.php';  //redirige al panel de administrador
+        break;
 
     // ===================================================================================================
     //                                      RUTAS PROVEEDOR HOTELERO
