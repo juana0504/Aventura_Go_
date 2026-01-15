@@ -61,7 +61,7 @@ class Proveedor
                 :email_representante,
                 :telefono_representante,
                 :identificacion,
-                'proveedor_turistico',
+                'proveedor',
                 :foto_representante,
                 'Activo'
             )";

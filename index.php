@@ -89,10 +89,10 @@ switch ($request) {
 
     // Registrar y consultar el Proveedor Turistico
     // CRUD del Proveedor Turistico
-    case '/administrador/registrar-proveedor-turistico':
+    case '/administrador/registrar-proveedor':
         require BASE_PATH . '/app/views/dashboard/administrador/registrar_proveedor_turistico.php';  //redirige al perfil de usuario de administrador
         break;
-    case '/administrador/consultar-proveedor-turistico':
+    case '/administrador/consultar-proveedor':
         require BASE_PATH . '/app/views/dashboard/administrador/consultar_proveedor_turistico.php';  //redirige al perfil de usuario de administrador
         break;
     case '/administrador/guardar-proveedor':
@@ -101,7 +101,7 @@ switch ($request) {
     case '/administrador/editar-proveedor':
         require BASE_PATH . '/app/views/dashboard/administrador/editar_proveedor_turistico.php';  //redirige al guardar proveedor
         break;
-    case '/administrador/actualizar-proveedor-turistico':
+    case '/administrador/actualizar-proveedor':
         require BASE_PATH . '/app/controllers/administrador/proveedor.php';  //redirige al actualizar el proveedor
         break;
     case '/administrador/eliminar-proveedor':
@@ -115,7 +115,7 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/administrador/proveedor.php';
         consultarProveedorOjo(); // Llama a la función que devuelve JSON
         break;
-    case '/administrador/cambiar-estado-proveedor-turistico':
+    case '/administrador/cambiar-estado-proveedor':
         require BASE_PATH . '/app/controllers/administrador/proveedor.php';
         break;
 
@@ -183,7 +183,7 @@ switch ($request) {
 
     //fin rutas administrador
     case '/turista/tours':
-        require BASE_PATH . '/app/views/dashboard/turista/descubre_tours.php';  //redirige al perfil de usuario de administrador
+        require BASE_PATH . '/app/views/website/descubre_tours.php';  //redirige al perfil de usuario de administrador
         break;
 
 
@@ -191,6 +191,18 @@ switch ($request) {
     // ===================================================================================================
     //                                     RUTAS PROVEEDOR TURISTICO
     // ===================================================================================================
+
+    case '/proveedor/dashboard':
+        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/dashboard.php';
+        break;
+
+    case '/proveedor/registrar-actividad':
+        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/registrar_actividad_turistica.php';
+        break;
+
+
+    // ================= FIN RUTAS PROVEEDOR TURISTICO =================
+
 
 
 

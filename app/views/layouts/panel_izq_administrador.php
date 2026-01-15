@@ -15,8 +15,8 @@
                     Proveedor Turistico
                 </a>
                 <ul class="dropdown-menu" id="menu-panel">
-                    <li><a class="dropdown-item" href="<?= BASE_URL ?>/administrador/registrar-proveedor-turistico" <i class="bi bi-layout-text-sidebar-reverse"></i>Registrar Proveedor</a></li>
-                    <li><a class="dropdown-item" href="<?= BASE_URL ?>/administrador/consultar-proveedor-turistico" <i class="bi bi-table"></i>Consultar Proveedor</a></li>
+                    <li><a class="dropdown-item" href="<?= BASE_URL ?>/administrador/registrar-proveedor" <i class="bi bi-layout-text-sidebar-reverse"></i>Registrar Proveedor</a></li>
+                    <li><a class="dropdown-item" href="<?= BASE_URL ?>/administrador/consultar-proveedor" <i class="bi bi-table"></i>Consultar Proveedor</a></li>
                 </ul>
             </div>
 
