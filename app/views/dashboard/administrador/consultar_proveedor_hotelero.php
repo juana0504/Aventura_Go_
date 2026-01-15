@@ -164,7 +164,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
         </div>
     </section>
 
-    <!-- Modal para ver detalles del proveedor -->
+    <!-- Modal para ver detalles del proveedor hotelero -->
     <div class="modal fade" id="verProveedorModal" tabindex="-1" aria-labelledby="verProveedorModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content aventura-modal">
@@ -177,7 +177,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                         </div>
                         <div class="modal-title">
                             <h5 class="modal-title-text" id="verProveedorModalLabel">
-                                <span class="aventura-text">Detalles del Proveedor</span>
+                                <span class="aventura-text" id="modal-nombre-establecimiento">Proveedor Hotelero</span>
                             </h5>
                             <small class="modal-subtitle">Información completa del proveedor hotelero</small>
                         </div>
@@ -203,38 +203,43 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 <i class="fas fa-building section-icon"></i>
                                 <h6>Información Principal</h6>
                             </div>
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <div class="info-card">
-                                        <div class="info-label"><i class="fas fa-signature"></i> Nombre de la Empresa</div>
-                                        <div class="info-value" id="modal-empresa">-</div>
-                                    </div>
+                            <div class="info-section mb-4">
+                                <div class="section-header">
+                                    <i class="fas fa-building section-icon"></i>
+                                    <h6>Información del Establecimiento</h6>
                                 </div>
-                                <div class="col-md-4 mb-3">
-                                    <div class="info-card">
-                                        <div class="info-label"><i class="fas fa-id-card"></i> NIT/RUT</div>
-                                        <div class="info-value" id="modal-nit">-</div>
+
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="info-card">
+                                            <div class="info-label">Nombre del establecimiento</div>
+                                            <div class="info-value" id="modal-nombre-establecimiento"></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <div class="info-card">
-                                        <div class="info-label"><i class="fas fa-envelope"></i> Email</div>
-                                        <div class="info-value" id="modal-email">-</div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <div class="info-card">
+                                            <div class="info-label">Email</div>
+                                            <div class="info-value" id="modal-email"></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <div class="info-card">
-                                        <div class="info-label"><i class="fas fa-phone"></i> Teléfono</div>
-                                        <div class="info-value" id="modal-telefono">-</div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <div class="info-card">
+                                            <div class="info-label">Teléfono</div>
+                                            <div class="info-value" id="modal-telefono"></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-8 mb-3">
-                                    <div class="info-card">
-                                        <div class="info-label"><i class="fas fa-align-left"></i> Descripción</div>
-                                        <div class="info-value" id="modal-descripcion">-</div>
+
+                                    <div class="col-md-12 mb-3">
+                                        <div class="info-card">
+                                            <div class="info-label">Tipo de establecimiento</div>
+                                            <div class="info-value chips" id="modal-tipo-establecimiento"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
                         <!-- Sección 2: Representante -->
@@ -277,60 +282,115 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 <i class="fas fa-map-marker-alt section-icon"></i>
                                 <h6>Ubicación</h6>
                             </div>
+
                             <div class="row">
                                 <div class="col-md-4 mb-3">
                                     <div class="info-card">
-                                        <div class="info-label"><i class="fas fa-map"></i> Departamento</div>
-                                        <div class="info-value" id="modal-departamento">-</div>
+                                        <div class="info-label">Departamento</div>
+                                        <div class="info-value" id="modal-departamento"></div>
                                     </div>
                                 </div>
+
                                 <div class="col-md-4 mb-3">
                                     <div class="info-card">
-                                        <div class="info-label"><i class="fas fa-city"></i> Ciudad</div>
-                                        <div class="info-value" id="modal-ciudad">-</div>
+                                        <div class="info-label">Ciudad</div>
+                                        <div class="info-value" id="modal-ciudad"></div>
                                     </div>
                                 </div>
+
                                 <div class="col-md-4 mb-3">
                                     <div class="info-card">
-                                        <div class="info-label"><i class="fas fa-road"></i> Dirección</div>
-                                        <div class="info-value" id="modal-direccion">-</div>
+                                        <div class="info-label">Dirección</div>
+                                        <div class="info-value" id="modal-direccion"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Sección 4: Actividades -->
+
+                        <!-- Sección 4:HABITACIONES Y SERVICIOS -->
                         <div class="info-section mb-4">
                             <div class="section-header">
-                                <i class="fas fa-hiking section-icon"></i>
-                                <h6>Actividades Turísticas</h6>
+                                <i class="fas fa-bed section-icon"></i>
+                                <h6>Habitaciones y Servicios</h6>
                             </div>
+
                             <div class="row">
-                                <div class="col-12">
-                                    <div class="activities-container" id="modal-actividades">
-                                        <!-- Las actividades se insertarán aquí dinámicamente -->
+                                <div class="col-md-6 mb-3">
+                                    <div class="info-card">
+                                        <div class="info-label">Tipo de habitación</div>
+                                        <div class="info-value chips" id="modal-tipo-habitacion"></div>
                                     </div>
                                 </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <div class="info-card">
+                                        <div class="info-label">Máx. huéspedes</div>
+                                        <div class="info-value" id="modal-max-huesped"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <div class="info-card">
+                                        <div class="info-label">Servicios incluidos</div>
+                                        <div class="info-value chips" id="modal-servicios"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- seccion 5 documentacion y pagos -->
+                <div class="info-section mb-4">
+                    <div class="section-header">
+                        <i class="fas fa-file-alt section-icon"></i>
+                        <h6>Documentación y Pagos</h6>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="info-card">
+                                <div class="info-label">NIT / RUT</div>
+                                <div class="info-value" id="modal-nit"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <div class="info-card">
+                                <div class="info-label">Cámara de comercio</div>
+                                <div class="info-value" id="modal-camara"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <div class="info-card">
+                                <div class="info-label">Licencia</div>
+                                <div class="info-value" id="modal-licencia"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <div class="info-card">
+                                <div class="info-label">Métodos de pago</div>
+                                <div class="info-value chips" id="modal-metodos-pago"></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+
                 <!-- Footer del Modal -->
                 <div class="modal-footer aventura-modal-footer">
-                    <!-- <button type="button" class="btn btn-aventura-secondary" data-bs-dismiss="modal">
-                        <i class="fas fa-times"></i> Cerrar
-                    </button> -->
-                    <div class="action-buttons">
+                    <a class="btn btn-aventura-success" id="btn-activar-proveedor">
+                        <i class="fas fa-check-circle"></i> Activar
+                    </a>
 
-                        <a class="btn btn-aventura-success" id="btn-activar-proveedor">
-                            <i class="fas fa-check-circle"></i> Activar
-                        </a>
+                    <a class="btn btn-aventura-danger" id="btn-desactivar-proveedor">
+                        <i class="fas fa-ban"></i> Desactivar
+                    </a>
 
-                        <a class="btn btn-aventura-danger" id="btn-desactivar-proveedor">
-                            <i class="fas fa-ban"></i> Desactivar
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>

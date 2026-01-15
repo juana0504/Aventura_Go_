@@ -63,8 +63,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
             <form id="formProveedor" action="<?= BASE_URL ?>/administrador/guardar-proveedor-hotelero" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="accion" value="registrar">
 
-
-
+                <!-- botones indicadores superiores del wizard -->
                 <div class="wizard-container">
                     <div class="wizard-content">
                         <div class="wizard-header">
@@ -95,7 +94,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                         </div>
 
 
-
+                        <!-- CONTENIUDO DE LOS FIRMULARIOS DE INGRESO -->
                         <div class="wizard-content">
                             <!-- Paso 1 -->
                             <div class="step-content active" data-step="1">
