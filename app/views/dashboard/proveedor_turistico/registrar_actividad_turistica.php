@@ -1,107 +1,135 @@
 <?php
 
-require_once BASE_PATH . '/app/helpers/session_administrador.php';
+require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
-$id_proveedor = $_SESSION['user']['id'];
 
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 
+
 <head>
     <meta charset="UTF-8">
-    <title>Registrar actividad | Aventura Go</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Actividad Tturisitica</title>
 
-    <link rel="stylesheet" href="/aventura_go/public/assets/dashboard/proveedor/actividad.css">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
 
-    <style>
-        /* Wizard básico */
-        .wizard-step {
-            display: none;
-        }
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        .wizard-step.active {
-            display: block;
-        }
+    <!-- LIBRERIA AOS ANIMATE -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-        .wizard-actions {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-    </style>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- Icono de bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO)
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css"> -->
+
+    <!-- Componentes comunes -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turisitco.css">
+
+    <!-- Estilos CSS (siempre al final) -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/registrar_actividad_turistica/registrar_actividad_turistica.css">
+
 </head>
+
+
+
 
 <body>
 
-    <h2>Registrar actividad turística</h2>
+    <!-- Panel Lateral -->
+    <?php
+    include_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php';
+    ?>
 
-    <form action="/aventura_go/proveedor/guardar-actividad" method="POST">
 
-        <!-- proveedor oculto -->
-        <input type="hidden" name="id_proveedor" value="<?= $id_proveedor ?>">
 
-        <!-- ================= PASO 1 ================= -->
-        <div class="wizard-step active" id="step-1">
-            <h3>Paso 1: Información básica</h3>
+    <!-- Barra de Búsqueda Superior -->
+    <?php
+    include_once __DIR__ . '/../../layouts/buscador_administrador.php';
+    ?>
 
-            <label>Nombre de la actividad</label>
-            <input type="text" name="nombre" required>
+    <div class="contenido-principal">
 
-            <label>Destino</label>
-            <select name="id_destino" required>
-                <!-- luego lo llenas dinámico -->
-                <option value="">Seleccione destino</option>
-                <option value="1">Villeta</option>
-                <option value="2">Útica</option>
-            </select>
+        <h2>Registrar actividad turística</h2>
 
-            <label>Ubicación</label>
-            <input type="text" name="ubicacion" required>
+        <form action="/aventura_go/proveedor/guardar-actividad" method="POST">
 
-            <div class="wizard-actions">
-                <span></span>
-                <button type="button" onclick="nextStep(2)">Siguiente</button>
+            <!-- proveedor oculto -->
+            <input type="hidden" name="id_proveedor" value="<?= $id_proveedor ?>">
+
+            <!-- ================= PASO 1 ================= -->
+            <div class="wizard-step active" id="step-1">
+                <h3>Paso 1: Información básica</h3>
+
+                <label>Nombre de la actividad</label>
+                <input type="text" name="nombre" required>
+
+                <label>Destino</label>
+                <select name="id_destino" required>
+                    <!-- luego lo llenas dinámico -->
+                    <option value="">Seleccione destino</option>
+                    <option value="1">Villeta</option>
+                    <option value="2">Útica</option>
+                </select>
+
+                <label>Ubicación</label>
+                <input type="text" name="ubicacion" required>
+
+                <div class="wizard-actions">
+                    <span></span>
+                    <button type="button" onclick="nextStep(2)">Siguiente</button>
+                </div>
             </div>
-        </div>
 
-        <!-- ================= PASO 2 ================= -->
-        <div class="wizard-step" id="step-2">
-            <h3>Paso 2: Detalles de la actividad</h3>
+            <!-- ================= PASO 2 ================= -->
+            <div class="wizard-step" id="step-2">
+                <h3>Paso 2: Detalles de la actividad</h3>
 
-            <label>Descripción</label>
-            <textarea name="descripcion" rows="4" required></textarea>
+                <label>Descripción</label>
+                <textarea name="descripcion" rows="4" required></textarea>
 
-            <label>Cupos disponibles</label>
-            <input type="number" name="cupos" min="1" required>
+                <label>Cupos disponibles</label>
+                <input type="number" name="cupos" min="1" required>
 
-            <div class="wizard-actions">
-                <button type="button" onclick="prevStep(1)">Atrás</button>
-                <button type="button" onclick="nextStep(3)">Siguiente</button>
+                <div class="wizard-actions">
+                    <button type="button" onclick="prevStep(1)">Atrás</button>
+                    <button type="button" onclick="nextStep(3)">Siguiente</button>
+                </div>
             </div>
-        </div>
 
-        <!-- ================= PASO 3 ================= -->
-        <div class="wizard-step" id="step-3">
-            <h3>Paso 3: Precio y estado</h3>
+            <!-- ================= PASO 3 ================= -->
+            <div class="wizard-step" id="step-3">
+                <h3>Paso 3: Precio y estado</h3>
 
-            <label>Precio</label>
-            <input type="number" name="precio" step="0.01" required>
+                <label>Precio</label>
+                <input type="number" name="precio" step="0.01" required>
 
-            <label>Estado</label>
-            <select name="estado">
-                <option value="activa">Activa</option>
-                <option value="pausada">Pausada</option>
-            </select>
+                <label>Estado</label>
+                <select name="estado">
+                    <option value="activa">Activa</option>
+                    <option value="pausada">Pausada</option>
+                </select>
 
-            <div class="wizard-actions">
-                <button type="button" onclick="prevStep(2)">Atrás</button>
-                <button type="submit">Guardar actividad</button>
+                <div class="wizard-actions">
+                    <button type="button" onclick="prevStep(2)">Atrás</button>
+                    <button type="submit">Guardar actividad</button>
+                </div>
             </div>
-        </div>
 
-    </form>
+        </form>
+
+    </div>
 
     <script>
         function nextStep(step) {
@@ -113,6 +141,13 @@ $id_proveedor = $_SESSION['user']['id'];
             nextStep(step);
         }
     </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+
 
 </body>
 

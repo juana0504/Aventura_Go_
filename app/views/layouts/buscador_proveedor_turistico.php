@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../controllers/perfil.php';
 
 $id = $_SESSION['user']['id'] ?? null;
 
-$usuario = mostrarPerfilAdmin($id);
+$usuario = mostrarPerfilProveedor($id);
 
 ?>
 

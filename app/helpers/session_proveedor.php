@@ -5,11 +5,11 @@ session_start();
 //VALIDAMOS SI HAY UNA SECCION ACTIVA, se crea solo cuando hay una sesion activa
 if (!isset($_SESSION['user'])) {
     header('Location: /aventura_go/login');
-    exit();
+    exit;
 }
 
 //validamos que el rol sea el correspondiente
-if ($_SESSION['user']['rol'] != 'administrador') {
+if ($_SESSION['user']['rol'] !== 'proveedor') {
     header('Location: /aventura_go/login');
-    exit();
+    exit;
 }
