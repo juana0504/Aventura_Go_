@@ -10,7 +10,7 @@ $usuario = mostrarPerfilProveedor($id);
 ?>
 
 
-<form id="busqueda" class="ag-buscador-admin" action="busqueda">
+<form id="busqueda" class="ag-buscador-proveedor" action="busqueda">
     <input type="text">
     <i class="bi bi-search"></i>
 
@@ -28,7 +28,7 @@ $usuario = mostrarPerfilProveedor($id);
             </div>
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="<?= BASE_URL ?>/administrador/perfil"><i class="bi bi-person"></i> Mi Perfil</a>
+            <li><a class="dropdown-item" href="<?= BASE_URL ?>/proveedor/perfil"><i class="bi bi-person"></i> Mi Perfil</a>
             </li>
             <hr class="dropdown-divider">
             </li>

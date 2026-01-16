@@ -30,8 +30,8 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <!-- Icono de bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO)
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css"> -->
+    <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
 
     <!-- Componentes comunes -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
@@ -56,13 +56,14 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
     <!-- Barra de Búsqueda Superior -->
     <?php
-    include_once __DIR__ . '/../../layouts/buscador_administrador.php';
+    include_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php';
     ?>
 
     <div class="contenido-principal">
 
         <h2>Registrar actividad turística</h2>
-
+        `
+        <!-- PENDIENTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE -->
         <form action="/aventura_go/proveedor/guardar-actividad" method="POST">
 
             <!-- proveedor oculto -->

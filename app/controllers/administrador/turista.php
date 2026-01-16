@@ -166,7 +166,7 @@ function actualizarTurista()
         'telefono'         => $telefono,
         'email'            => $email,
     ];
-    
+
     $resultado = $objTurista->actualizar($data);
 
     if ($resultado === true) {

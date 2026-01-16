@@ -204,7 +204,14 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/proveedor_turistico/consultar_actividad_turistica.php';
         break;
 
+    // Perfil del proveedor turistico 
+    case '/proveedor/perfil':
+        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/perfil_usuario.php';  //redirige al perfil del proveedor turisitico
+        break;
 
+    case '/proveedor/actualizar-perfil':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/editarPerfilProveedor.php';
+        break;
     // ================= FIN RUTAS PROVEEDOR TURISTICO =================
 
 
