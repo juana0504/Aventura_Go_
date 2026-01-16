@@ -200,6 +200,10 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/proveedor_turistico/registrar_actividad_turistica.php';
         break;
 
+    case '/proveedor/consultar-actividad':
+        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/consultar_actividad_turistica.php';
+        break;
+
 
     // ================= FIN RUTAS PROVEEDOR TURISTICO =================
 
