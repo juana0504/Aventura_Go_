@@ -4,6 +4,9 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
 ?>
 
+<!DOCTYPE html>
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +33,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
     <!-- Componentes comunes -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turisitco.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
     <!-- Estilos CSS (siempre al final) -->
     <!-- <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turisitco/proveedor_turistico.css"> -->
@@ -40,10 +43,27 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 <body>
 
     <?php
+    // panel lateral
     require BASE_PATH . '/app/views/layouts/proveedor_turistico_panel_izq.php';
-    include_once __DIR__ . '/../../layouts/buscador_administrador.php';
+    // barra de busqueda
+    include_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php';
     ?>
+
+    <div>
+        <h1> ESTE ES EL DASBOARD DE PROVEEDOR TURISTICO</h1>
+    </div>
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 
 
 
 </body>
+
+</html>

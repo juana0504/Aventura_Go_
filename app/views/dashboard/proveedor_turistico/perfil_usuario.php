@@ -1,5 +1,8 @@
 <?php
+
+require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 require_once __DIR__ . '/../../../helpers/alert_helper.php';
+
 // ENLAZAMOS LA DEPENDENCIA EN ESTE CASO EL CONTROLADOR QUE TIENE LA FUNCION DE CONSULTA
 require_once __DIR__ . '/../../../controllers/perfil.php';
 
@@ -39,7 +42,7 @@ $usuario = mostrarPerfilproveedor($id);
 
     <!-- Componentes comunes -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turisitco.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
     <!-- Estilos CSS (siempre al final)-->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/perfil.css">
@@ -67,7 +70,7 @@ $usuario = mostrarPerfilproveedor($id);
                 <div class="row">
 
                     <div class="usuario">
-                        <h2>Perfil de Administrador</h2>
+                        <h2>Perfil de Proveedor Turistico</h2>
                         <img src="<?= BASE_URL ?>/public/uploads/usuario/<?= $usuario['foto'] ?>" alt="persona"></i>
                         <h3><?= $_SESSION['user']['nombre'] ?></h3>
                         <p><?= $_SESSION['user']['rol'] ?></p>
@@ -127,7 +130,7 @@ $usuario = mostrarPerfilproveedor($id);
 
                     <div class="editar">
 
-                        <form action="/aventura_go/administrador/actualizar-perfil" method="POST" enctype="multipart/form-data">
+                        <form action="/aventura_go/proveedor/actualizar-perfil" method="POST" enctype="multipart/form-data">
 
                             <h4>Imagen Perfil</h4>
                             <input type="file" name="foto" value="<?= $usuario['foto'] ?>">

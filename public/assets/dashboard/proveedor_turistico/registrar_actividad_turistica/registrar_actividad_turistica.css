@@ -9,6 +9,16 @@ body {
     color: #2B2B2B;
 }
 
+.panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background-color: #2D4059;
+    z-index: 100;
+}
+
 /* Contenedor principal */
 .contenido-principal {
     margin-left: 260px;

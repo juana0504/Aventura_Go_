@@ -35,7 +35,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
     <!-- Componentes comunes -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turisitco.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
     <!-- Estilos CSS (siempre al final) -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/registrar_actividad_turistica/registrar_actividad_turistica.css">
@@ -62,12 +62,12 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <div class="contenido-principal">
 
         <h2>Registrar actividad turística</h2>
-        `
-        <!-- PENDIENTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE -->
-        <form action="/aventura_go/proveedor/guardar-actividad" method="POST">
+
+        <form id="formActividad" action="<?= BASE_URL ?>/proveedor/guardar-actividad" method="POST" enctype="multipart/form-data">
 
             <!-- proveedor oculto -->
-            <input type="hidden" name="id_proveedor" value="<?= $id_proveedor ?>">
+            <input type="hidden" name="accion" value="registrar">
+
 
             <!-- ================= PASO 1 ================= -->
             <div class="wizard-step active" id="step-1">
@@ -77,7 +77,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                 <input type="text" name="nombre" required>
 
                 <label>Destino</label>
-                <select name="id_destino" required>
+                <select name="id_ciudad" required>
                     <!-- luego lo llenas dinámico -->
                     <option value="">Seleccione destino</option>
                     <option value="1">Villeta</option>
@@ -98,10 +98,10 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                 <h3>Paso 2: Detalles de la actividad</h3>
 
                 <label>Descripción</label>
-                <textarea name="descripcion" rows="4" required></textarea>
+                <textarea name="descripcion" required></textarea>
 
                 <label>Cupos disponibles</label>
-                <input type="number" name="cupos" min="1" required>
+                <input type="number" name="cupos" required>
 
                 <div class="wizard-actions">
                     <button type="button" onclick="prevStep(1)">Atrás</button>
@@ -114,13 +114,22 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                 <h3>Paso 3: Precio y estado</h3>
 
                 <label>Precio</label>
-                <input type="number" name="precio" step="0.01" required>
+                <input type="number" name="precio" required>
 
                 <label>Estado</label>
                 <select name="estado">
                     <option value="activa">Activa</option>
                     <option value="pausada">Pausada</option>
                 </select>
+
+                <label>Imágenes de la actividad (máx. 5)</label>
+                <input
+                    type="file"
+                    name="imagenes[]"
+                    multiple accept="image/jpeg,image/png"
+                    required>
+                <small>Selecciona hasta 5 imágenes (JPG o PNG)</small>
+
 
                 <div class="wizard-actions">
                     <button type="button" onclick="prevStep(2)">Atrás</button>
@@ -131,6 +140,8 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
         </form>
 
     </div>
+
+
 
     <script>
         function nextStep(step) {

@@ -200,9 +200,20 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/proveedor_turistico/registrar_actividad_turistica.php';
         break;
 
+    case '/proveedor/guardar-actividad':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php';  //redirige al guardar actividad turisitica
+        break;
+
     case '/proveedor/consultar-actividad':
         require BASE_PATH . '/app/views/dashboard/proveedor_turistico/consultar_actividad_turistica.php';
         break;
+
+
+
+
+
+
+
 
     // Perfil del proveedor turistico 
     case '/proveedor/perfil':

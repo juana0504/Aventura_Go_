@@ -4,6 +4,7 @@
     background-color: #2D4059;
     padding: 30px 20px;
     display: block;
+    position: fixed;
 }
 
 .panel>img {
