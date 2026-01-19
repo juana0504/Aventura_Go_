@@ -174,8 +174,22 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/turista/descubre_tours.php';  //redirige al perfil de usuario de administrador
         break;
 
+    // ===================================================================================================
+    //                                   RUTAS TICKETS ADMINISTRADOR
+    // ===================================================================================================
+    case '/administrador/crear-ticket':
+        require BASE_PATH . '/app/views/dashboard/administrador/crear_ticket.php';
+        break;
 
+    case '/administrador/guardar-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        $controller = new TicketController();
+        $controller->guardar();
+        break;
 
+    case '/administrador/consultar-tickets':
+    require BASE_PATH . '/app/views/dashboard/administrador/consultar_tickets.php';
+    break;
     // ===================================================================================================
     //                                     RUTAS PROVEEDOR TURISTICO
     // ===================================================================================================

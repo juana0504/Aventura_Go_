@@ -1,0 +1,144 @@
+/* Estilos específicos para el módulo de Tickets */
+
+.ticket-container {
+    max-width: 700px;
+    margin: 120px auto 50px; /* Margen superior para no quedar bajo el navbar fixed */
+    padding: 30px;
+    background-color: var(--color-white);
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    font-family: var(--font-text);
+}
+
+.ticket-header {
+    border-bottom: 2px solid var(--color-bg-light);
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+}
+
+.ticket-header h2 {
+    font-family: var(--font-titles);
+    color: var(--color-primary);
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.ticket-form .form-group {
+    margin-bottom: 20px;
+}
+
+.ticket-form label {
+    display: block;
+    font-family: var(--font-titles);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 8px;
+}
+
+.ticket-form .form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1.5px solid var(--color-border);
+    border-radius: 10px;
+    font-family: var(--font-text);
+    font-size: 15px;
+    transition: border-color 0.3s ease;
+}
+
+.ticket-form .form-control:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+}
+
+.ticket-form textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.btn-ticket-submit {
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+    font-family: var(--font-titles);
+    font-weight: 600;
+    font-size: 16px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.btn-ticket-submit:hover {
+    background-color: #d67515; /* Un tono un poco más oscuro que el secondary */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(234, 130, 23, 0.3);
+}
+
+/* Responsivo para móviles */
+@media screen and (max-width: 430px) {
+    .ticket-container {
+        margin: 100px 15px 30px;
+        padding: 20px;
+    }
+}
+
+
+
+
+
+
+
+
+/* Estilos para la Tabla de Consultar Tickets */
+.table-container {
+    max-width: 1000px;
+    margin: 120px auto 50px;
+    padding: 20px;
+    background: var(--color-white);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.ticket-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.ticket-table th {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-family: var(--font-titles);
+}
+
+.ticket-table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 14px;
+}
+
+/* Colores para estados y etiquetas */
+.tag-category {
+    background: #e1e7ed;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 11px;
+}
+
+.status-pending { color: #EA8217; font-weight: bold; }
+.status-resolved { color: #28a745; font-weight: bold; }
+
+.btn-action {
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    margin-right: 5px;
+}
+.btn-action.view { background-color: var(--color-primary); }
+.btn-action.edit { background-color: var(--color-secondary); }
