@@ -1,6 +1,6 @@
 <?php
 
-require_once BASE_PATH . '/app/helpers/session_proveedor.php';
+require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
 
 ?>
@@ -61,7 +61,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
             ?>
 
             <!-- Formulario Wizard -->
-            <form id="formProveedor" action="<?= BASE_URL ?>/proveedor/guardar-proveedor" method="POST" enctype="multipart/form-data">
+            <form id="formProveedor" action="<?= BASE_URL ?>/administrador/guardar-proveedor" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="accion" value="registrar">
 
                 <div class="wizard-container">

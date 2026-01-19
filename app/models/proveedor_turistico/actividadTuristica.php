@@ -174,4 +174,31 @@ class ActividadTuristica
             ':id_actividad'  => $data['id_actividad']
         ]);
     }
+
+
+    public function listarActividadesPublicas()
+    {
+        $sql = "
+        SELECT 
+            a.id_actividad,
+            a.nombre,
+            a.precio,
+            a.descripcion,
+            c.nombre AS ciudad,
+            img.imagen
+        FROM actividad a
+        INNER JOIN ciudad c 
+            ON a.id_ciudad = c.id_ciudad
+        LEFT JOIN actividad_imagen img 
+            ON img.id_actividad = a.id_actividad 
+           AND img.es_principal = 1
+        WHERE a.estado = 'activa'
+        ORDER BY a.created_at DESC
+    ";
+
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
