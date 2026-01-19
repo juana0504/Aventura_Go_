@@ -6,22 +6,17 @@ require_once __DIR__ . '/../../models/proveedor_turistico/ActividadTuristica.php
 require_once __DIR__ . '/../../models/Ciudad.php';
 
 
-// ===============================
 // DATOS PARA VISTAS (GET)
-// ===============================
+
 $ciudadModel = new Ciudad();
 $destinos = $ciudadModel->obtenerCiudadesActivas();
 
-// ===============================
 // MÉTODO HTTP
-// ===============================
 $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
 
-    // ===============================
     // POST → REGISTRAR / ACTUALIZAR
-    // ===============================
     case 'POST':
 
         $accion = $_POST['accion'] ?? '';
@@ -34,9 +29,7 @@ switch ($method) {
 
         break;
 
-    // ===============================
     // GET → LISTAR / CARGAR VISTAS / CAMBIAR ESTADO
-    // ===============================
     case 'GET':
 
         $accion = $_GET['accion'] ?? '';
@@ -72,9 +65,7 @@ switch ($method) {
         break;
 }
 
-// ===================================================
 // FUNCIONES CRUD
-// ===================================================
 
 function registrarActividad()
 {
@@ -93,10 +84,7 @@ function registrarActividad()
     $estado       = $_POST['estado'] ?? 'activa';
 
 
-
-    // ===============================
     // VALIDACIONES
-    // ===============================
     if (
         !$id_proveedor ||
         empty($nombre) ||
@@ -114,9 +102,7 @@ function registrarActividad()
         exit;
     }
 
-    // ===============================
     // VALIDAR IMÁGENES (máx. 5)
-    // ===============================
     if (!isset($_FILES['imagenes']) || empty($_FILES['imagenes']['name'][0])) {
         mostrarSweetAlert(
             'error',
@@ -137,9 +123,7 @@ function registrarActividad()
         exit;
     }
 
-    // ===============================
     // VALIDAR EXTENSIÓN Y TAMAÑO (cada imagen)
-    // ===============================
     $permitidas = ['jpg', 'jpeg', 'png'];
     $maxSize = 2 * 1024 * 1024; // 2MB
 
@@ -169,19 +153,8 @@ function registrarActividad()
         }
     }
 
-    mostrarSweetAlert(
-        'success',
-        'Registro exitoso',
-        'Actividad turística registrada correctamente',
-        '/aventura_go/proveedor/registrar-actividad'
-    );
-    exit;
 
-
-
-    // ===============================
     // GUARDAR ACTIVIDAD (SIN IMÁGENES)
-    // ===============================
     $objActividad = new ActividadTuristica();
 
     $data = [
@@ -208,9 +181,7 @@ function registrarActividad()
         exit;
     }
 
-    // ===============================
     // GUARDAR IMÁGENES DE LA ACTIVIDAD
-    // ===============================
     $directorio = BASE_PATH . '/public/uploads/turistico/actividades/';
 
     if (!is_dir($directorio)) {
@@ -236,6 +207,14 @@ function registrarActividad()
             'es_principal' => $esPrincipal
         ]);
     }
+
+    mostrarSweetAlert(
+        'success',
+        'Registro exitoso',
+        'Actividad turística registrada correctamente',
+        '/aventura_go/proveedor/registrar-actividad'
+    );
+    exit;
 }
 
 
@@ -243,9 +222,7 @@ function registrarActividad()
 
 function actualizarActividad()
 {
-    // ===============================
     // DATOS DEL FORMULARIO
-    // ===============================
     $id_actividad   = $_POST['id_actividad'] ?? '';
     $id_proveedor   = $_SESSION['user']['id_proveedor'] ?? null;
 
@@ -257,9 +234,7 @@ function actualizarActividad()
     $precio         = $_POST['precio'] ?? '';
     $estado         = $_POST['estado'] ?? 'activa';
 
-    // ===============================
     // VALIDACIONES
-    // ===============================
     if (
         empty($id_actividad) ||
         empty($id_proveedor) ||
@@ -278,9 +253,7 @@ function actualizarActividad()
         exit;
     }
 
-    // ===============================
     // DATA PARA EL MODELO
-    // ===============================
     $data = [
         'id_actividad' => $id_actividad,
         'id_proveedor' => $id_proveedor,
@@ -293,15 +266,11 @@ function actualizarActividad()
         'estado'       => $estado
     ];
 
-    // ===============================
     // MODELO
-    // ===============================
     $actividadModel = new ActividadTuristica();
     $resultado = $actividadModel->actualizarActividad($data);
 
-    // ===============================
     // RESPUESTA
-    // ===============================
     if ($resultado === true) {
         mostrarSweetAlert(
             'success',
@@ -326,8 +295,11 @@ function listarActividadesProveedor()
     $id_proveedor = $_SESSION['user']['id_proveedor'];
 
     $objActividad = new ActividadTuristica();
-    return $objActividad->listarPorProveedor($id_proveedor);
+    $actividades = $objActividad->listarPorProveedor($id_proveedor);
+
+    require_once __DIR__ . '/../../views/dashboard/proveedor_turistico/consultar_actividades.php';
 }
+
 
 
 

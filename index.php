@@ -48,6 +48,15 @@ switch ($request) {
         require BASE_PATH . '/app/views/website/contactanos.php';
         break;
 
+    case '/turista/tours':
+        require BASE_PATH . '/app/views/website/descubre_tours.php';
+        break;
+
+    case '/descubre-tours':
+        require BASE_PATH . '/app/controllers/website/descubreToursController.php';
+        break;
+
+
 
     // ===================================================================================================
     //                                            RUTAS LOGIN
@@ -182,9 +191,6 @@ switch ($request) {
 
 
     //fin rutas administrador
-    case '/turista/tours':
-        require BASE_PATH . '/app/views/website/descubre_tours.php';  //redirige al perfil de usuario de administrador
-        break;
 
 
 
@@ -207,10 +213,6 @@ switch ($request) {
     case '/proveedor/consultar-actividad':
         require BASE_PATH . '/app/views/dashboard/proveedor_turistico/consultar_actividad_turistica.php';
         break;
-
-
-
-
 
 
 
