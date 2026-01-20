@@ -10,7 +10,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // Eliminar todas las variables de sesión
 $_SESSION = [];
 
-// Destruir la cookie de sesión si existe, asi al dar ayras no abre la pagina en la que estaba anteriormente
+// Destruir la cookie de sesión si existe, asi al dar atras no abre la pagina en la que estaba anteriormente
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
     setcookie(

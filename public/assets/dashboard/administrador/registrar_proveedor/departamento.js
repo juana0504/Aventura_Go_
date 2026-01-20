@@ -1,68 +1,64 @@
-const datosColombia = {
-    "Antioquia": ["Medellín", "Envigado", "Bello", "Itagüí", "Rionegro"],
-    "Atlántico": ["Barranquilla", "Soledad", "Malambo"],
-    "Bogotá D.C.": ["Bogotá"],
-    "Bolívar": ["Cartagena", "Magangué"],
-    "Boyacá": ["Tunja", "Duitama", "Sogamoso"],
-    "Caldas": ["Manizales", "Chinchiná"],
-    "Cauca": ["Popayán"],
-    "Cesar": ["Valledupar"],
-    "Córdoba": ["Montería"],
-    "Cundinamarca": ["Soacha", "Chía", "Zipaquirá"],
-    "Huila": ["Neiva"],
-    "Magdalena": ["Santa Marta"],
-    "Meta": ["Villavicencio"],
-    "Nariño": ["Pasto", "Ipiales"],
-    "Norte de Santander": ["Cúcuta"],
-    "Quindío": ["Armenia"],
-    "Risaralda": ["Pereira", "Dosquebradas"],
-    "Santander": ["Bucaramanga", "Floridablanca"],
-    "Sucre": ["Sincelejo"],
-    "Tolima": ["Ibagué"],
-    "Valle del Cauca": ["Cali", "Palmira", "Buenaventura"]
-};
 
-const selectDepto = document.getElementById("departamento");
-const selectCiudad = document.getElementById("ciudad");
+// Obtenemos los selects del formulario
+const selectDepartamento = document.getElementById('departamento');
+const selectCiudad = document.getElementById('id_ciudad');
 
-// función cargar ciudades
-function cargarCiudades(depto, ciudadSeleccionada = null) {
+// Cargar departamentos al iniciar la página
+fetch('/aventura_go/app/controllers/departamentoController.php')
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(dep => {
+            const option = document.createElement('option');
+            option.value = dep.id_departamento;
+            option.textContent = dep.nombre;
+            selectDepartamento.appendChild(option);
+        });
+    })
+    .catch(error => {
+        console.error('Error cargando departamentos:', error);
+    });
+
+
+// Al cargar la página, dejamos el select de ciudades deshabilitado
+selectCiudad.disabled = true;
+
+// Escuchamos cuando el usuario cambia el departamento
+selectDepartamento.addEventListener('change', function () {
+
+    // Obtenemos el id del departamento seleccionado
+    const idDepartamento = this.value;
+
+    // Reiniciamos el select de ciudades
     selectCiudad.innerHTML = '<option value="">Seleccione una ciudad</option>';
     selectCiudad.disabled = true;
 
-    if (!datosColombia[depto]) return;
+    // Si no se seleccionó ningún departamento, no hacemos nada más
+    if (!idDepartamento) {
+        return;
+    }
 
-    datosColombia[depto].forEach(ciudad => {
-        const option = document.createElement("option");
-        option.value = ciudad;
-        option.textContent = ciudad;
+    // Llamamos al controlador que trae las ciudades desde la base de datos
+    fetch(`/aventura_go/app/controllers/ciudadController.php?id_departamento=${idDepartamento}`)
+        .then(response => response.json()) // Convertimos la respuesta a JSON
+        .then(data => {
 
-        if (ciudadSeleccionada && ciudad === ciudadSeleccionada) {
-            option.selected = true;
-        }
+            // Si no vienen ciudades, dejamos el select deshabilitado
+            if (data.length === 0) {
+                return;
+            }
 
-        selectCiudad.appendChild(option);
-    });
+            // Recorremos las ciudades recibidas
+            data.forEach(ciudad => {
+                const option = document.createElement('option');
+                option.value = ciudad.id_ciudad; // ID real (FK)
+                option.textContent = ciudad.nombre; // Nombre visible
+                selectCiudad.appendChild(option);
+            });
 
-    selectCiudad.disabled = false;
-}
-
-// 🔹 cargar departamentos (SIEMPRE)
-selectDepto.innerHTML = '<option value="">Seleccione un departamento</option>';
-for (const depto in datosColombia) {
-    const option = document.createElement("option");
-    option.value = depto;
-    option.textContent = depto;
-    selectDepto.appendChild(option);
-}
-
-// 🔹 SOLO si es editar
-if (typeof departamentoActual !== "undefined" && departamentoActual) {
-    selectDepto.value = departamentoActual;
-    cargarCiudades(departamentoActual, ciudadActual);
-}
-
-// 🔹 cuando cambia departamento
-selectDepto.addEventListener("change", function () {
-    cargarCiudades(this.value);
+            // Habilitamos el select de ciudades
+            selectCiudad.disabled = false;
+        })
+        .catch(error => {
+            console.error('Error cargando ciudades:', error);
+        });
 });

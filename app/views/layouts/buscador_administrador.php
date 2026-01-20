@@ -3,11 +3,12 @@
 require_once __DIR__ . '/../../helpers/alert_helper.php';
 require_once __DIR__ . '/../../controllers/perfil.php';
 
-
-$id = $_SESSION['user']['id'];
+$id = $_SESSION['user']['id'] ?? null;
 
 $usuario = mostrarPerfilAdmin($id);
+
 ?>
+
 
 <form id="busqueda" class="ag-buscador-admin" action="busqueda">
     <input type="text">

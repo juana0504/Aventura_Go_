@@ -126,7 +126,7 @@
                         <td><?= $hotelero['nombre_representante'] ?></td>
                         <td><?= $hotelero['email'] ?></td>
                         <td><?= $hotelero['telefono'] ?></td>
-                        <td><?= $hotelero['ciudad'] ?></td>
+                        <td><?= $hotelero['id_ciudad'] ?></td>
                         <td><?= $hotelero['estado'] ?></td>
                     </tr>
                 <?php endforeach; ?>

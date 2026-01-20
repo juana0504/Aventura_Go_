@@ -45,7 +45,7 @@
             <div class="container-fluid">
                 <!-- Logo -->
                 <div class="logo">
-                    <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" width="150px" alt="Logo Aventura Go"
+                    <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
                         class="navbar-logo">
                 </div>
 
@@ -92,8 +92,7 @@
                             <h1>Explora sin límites,</h1>
                             <h2>descubre tu próximo destino</h2>
                             <p class="parrafo1">Embárcate en rutas llenas de adrenalina, cultura y naturaleza que te
-                                harán
-                                vibrar.</p>
+                                harán vibrar.</p>
 
 
                         </div>
@@ -117,8 +116,7 @@
                             <h1>Destinos que inspiran,</h1>
                             <h2>aventuras que transforman</h2>
                             <p class="parrafo1">Viaja a lugares mágicos donde cada paso cuenta una historia y cada
-                                paisaje
-                                deja huella.</p>
+                                paisaje deja huella.</p>
 
                         </div>
                     </div>
@@ -146,6 +144,7 @@
             </div>
         </div>
     </section>
+
 
 
     <!-- SECCIÓN DESTINOS POPULARES -->
@@ -194,15 +193,18 @@
 
             <!-- Tarjeta 2 -->
             <div class="col">
-                <div class="card destino-card shadow-sm">
-                    <img src="public/assets/website_externos/index/img/destinos_visitados_villeta.png"
-                        class="card-img-top" alt="Villeta">
-                    <div class="card-body">
-                        <h5 class="card-title">VILLETA</h5>
-                        <p class="card-text estrellas">★★★★★</p>
+                <a href="/aventura_go/descubre-tours" class="text-decoration-none">
+                    <div class="card destino-card shadow-sm">
+                        <img src="public/assets/website_externos/index/img/destinos_visitados_villeta.png"
+                            class="card-img-top" alt="Villeta">
+                        <div class="card-body">
+                            <h5 class="card-title">VILLETA</h5>
+                            <p class="card-text estrellas">★★★★★</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
+
 
             <!-- Tarjeta 3 -->
             <div class="col">
@@ -258,6 +260,8 @@
             <a href="#" class="btn-ver-mas">Más destinos </a>
         </div>
     </section>
+
+
 
     <!-- SECCIÓN DESTINOS MÁS VISITADOS -->
     <section class="destinos-visitados container my-5">
@@ -340,9 +344,6 @@
 
 
 
-
-
-
     <!-- _______________________________F O O T E R__________________________________________ -->
     <footer id="footer" class="container-fluid">
 
@@ -351,7 +352,7 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <h2 class="palpitando">¿Quieres que tu negocio aparezca aquí?</h2>
-                    <a href="website_externos/contactanos.html">Publicate en Aventura Go</a>
+                    <a href="contactanos">Publicate en Aventura Go</a>
                 </div>
             </div>
         </div>
@@ -364,11 +365,7 @@
                 <!-- Columna 1: Logo -->
                 <div class="col-md-2">
                     <div class="logo-section">
-<<<<<<< HEAD:app/views/website/index.html
                         <img src="public/assets/website_externos/index/img/LOGO-NEGATIVO.png" alt="logo Aventura Go">
-=======
-                        <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="logo Aventura Go">
->>>>>>> 94addec9d9289dc94ffba26b2227eca5102d606f:app/views/website/index.php
                     </div>
                 </div>
 
@@ -440,6 +437,7 @@
 
 
     </footer>
+
 
     <!-- Abootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

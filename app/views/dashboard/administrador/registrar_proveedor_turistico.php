@@ -31,11 +31,16 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     <!-- Icono de bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <!-- Estilos CSS -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_turistico.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
+    <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/estilos_globales/panel.css">
+    <!-- Componentes comunes -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel.css">
+
+    <!-- Estilos CSS (siempre al final) -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_turistico.css">
+
 </head>
 
 <body>
@@ -174,8 +179,9 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
+
                                     <label for="ciudad">Ciudad *</label>
-                                    <select name="ciudad" id="ciudad" class="form-control" required disabled>
+                                    <select name="id_ciudad" id="id_ciudad" class="form-control" required>
                                         <option value="">Seleccione una ciudad</option>
                                     </select>
                                 </div>

@@ -52,7 +52,7 @@ header {
 /*LOGO  */
 .navbar-logo {
     margin-left: 0;
-    width: 160px;
+    width: 150px;
 }
 
 /* LINKS PRINCIPALES */
@@ -146,8 +146,6 @@ header {
     cursor: pointer;
 }
 
-
-
 /* SECCIÓN HERO____________________________________________________________________________________________________   */
 #hero {
     position: relative;
@@ -234,6 +232,12 @@ header {
     right: 5px;
 }
 
+/* Controles del carrusel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(1);
+}
+
 /* Caja de búsqueda */
 #hero .search-box {
     position: absolute;
@@ -271,11 +275,6 @@ header {
     background-color: #EA8217;
 }
 
-/* Controles del carrusel */
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    filter: invert(1);
-}
 
 /* Marca “AVENTURA GO” */
 #hero h2.marca {
@@ -961,6 +960,7 @@ header {
    📌 576px — Celulares estándar
 ----------------------------------------------------- */
 @media (max-width: 576px) {
+
 
     .destinos-populares {
         padding: 0 10px;

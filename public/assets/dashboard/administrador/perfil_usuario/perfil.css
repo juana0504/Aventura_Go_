@@ -658,9 +658,9 @@ form.cambiar {
         flex-direction: column;
     }
 
-    .panel {
+    /* .panel {
         width: 100%;
-    }
+    } */
 
     .editar {
         width: 100%;
