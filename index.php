@@ -192,8 +192,22 @@ switch ($request) {
 
     //fin rutas administrador
 
+    // ===================================================================================================
+    //                                   RUTAS TICKETS ADMINISTRADOR
+    // ===================================================================================================
+    case '/administrador/crear-ticket':
+        require BASE_PATH . '/app/views/dashboard/administrador/crear_ticket.php';
+        break;
 
+    case '/administrador/guardar-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        $controller = new TicketController();
+        $controller->guardar();
+        break;
 
+    case '/administrador/consultar-tickets':
+    require BASE_PATH . '/app/views/dashboard/administrador/consultar_tickets.php';
+    break;
     // ===================================================================================================
     //                                     RUTAS PROVEEDOR TURISTICO
     // ===================================================================================================
