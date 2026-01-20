@@ -1,39 +1,47 @@
 <?php
-require_once BASE_PATH . '/app/models/Ticket.php';
 
 class TicketController {
+    
+    // Función para MOSTRAR la lista de tickets
+    public function consultar() {
+        require_once BASE_PATH . '/app/models/Ticket.php';
+        $ticketModel = new Ticket();
+
+        // Obtenemos los datos desde el modelo (que ya tiene el LEFT JOIN)
+        $listadoTickets = $ticketModel->listarTodo();
+
+        // Cargamos la vista de la tabla
+        require_once BASE_PATH . '/app/views/dashboard/administrador/consultar_tickets.php';
+    }
+
+    // Tu función actual para GUARDAR (la que ya funciona)
     public function guardar() {
+        require_once BASE_PATH . '/app/models/Ticket.php';
+        
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            session_start(); // Asegúrate de tener la sesión iniciada para obtener el ID
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+
+            if (!isset($_SESSION['user']['id'])) {
+                die("Error: No se encontró una sesión activa.");
+            }
+
             $ticket = new Ticket();
+            $id_usuario = $_SESSION['user']['id'];
             
-            // Obtenemos el ID del administrador de la sesión
-            $id_usuario = $_SESSION['id_usuario']; 
-            
-            $res = $ticket->crear(
-                $id_usuario, 
-                $_POST['asunto'], 
-                $_POST['categoria'], 
-                $_POST['descripcion']
-            );
+            $asunto = $_POST['asunto'] ?? '';
+            $categoria = $_POST['categoria'] ?? '';
+            $descripcion = $_POST['descripcion'] ?? '';
+
+            $res = $ticket->crear($id_usuario, $asunto, $categoria, $descripcion);
             
             if ($res) {
-                // Redirigir al dashboard con un mensaje de éxito
-                header("Location: /aventura_go/administrador/dashboard?status=ticket_enviado");
+                header("Location: " . BASE_URL . "/administrador/consultar-tickets?status=success");
+                exit();
             } else {
                 echo "Error al guardar el ticket.";
             }
         }
-    }
-
-
-
-    public function consultar() {
-        $ticketModel = new Ticket();
-        // Obtenemos todos los tickets (puedes filtrar por usuario si no es admin)
-        $listadoTickets = $ticketModel->listarTodo(); 
-        
-        // Aquí cargarías la vista pasando la variable $listadoTickets
-        require BASE_PATH . '/app/views/dashboard/administrador/consultar_tickets.php';
     }
 }

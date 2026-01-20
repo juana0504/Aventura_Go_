@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/aventura_go/public/css/tickets.css">
+<link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/tickets/tickets.css">
 
 <main class="admin-main-content">
     <div class="ticket-container">

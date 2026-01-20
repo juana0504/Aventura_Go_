@@ -1,29 +1,47 @@
 <?php
+
 class Ticket {
     private $db;
 
     public function __construct() {
-        // Asumiendo que tienes una clase de conexión global
-        $this->db = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASS);
+        // Conexión manual única para evitar errores de constantes
+        $host = 'localhost';
+        $db_name = 'aventura_go';
+        $user = 'root';
+        $pass = '';
+
+        try {
+            $this->db = new PDO("mysql:host=$host;dbname=$db_name", $user, $pass);
+            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->db->exec("set names utf8");
+        } catch (PDOException $e) {
+            die("Error de conexión: " . $e->getMessage());
+        }
     }
 
     public function crear($id_usuario, $asunto, $categoria, $descripcion) {
-        $sql = "INSERT INTO ticket_reporte (id_usuario, asunto, categoria, descripcion) VALUES (?, ?, ?, ?)";
-        return $this->db->prepare($sql)->execute([$id_usuario, $asunto, $categoria, $descripcion]);
+        try {
+            $sql = "INSERT INTO ticket_reporte (id_usuario, asunto, categoria, descripcion, estado) 
+                    VALUES (?, ?, ?, ?, 'ABIERTO')";
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute([$id_usuario, $asunto, $categoria, $descripcion]);
+        } catch (PDOException $e) {
+            return false;
+        }
     }
-
-    public function listarPorUsuario($id_usuario) {
-        $sql = "SELECT * FROM ticket_reporte WHERE id_usuario = ? ORDER BY fecha_creacion DESC";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$id_usuario]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
 
     public function listarTodo() {
-        $sql = "SELECT * FROM ticket_reporte ORDER BY fecha_creacion DESC";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        try {
+            // Cambiamos a LEFT JOIN para que el ticket aparezca aunque haya problemas con el usuario
+            $sql = "SELECT t.*, u.nombre as nombre_usuario 
+                    FROM ticket_reporte t 
+                    LEFT JOIN usuario u ON t.id_usuario = u.id_usuario 
+                    ORDER BY t.fecha_creacion DESC";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return [];
+        }
     }
 }
