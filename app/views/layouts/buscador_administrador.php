@@ -3,13 +3,14 @@
 require_once __DIR__ . '/../../helpers/alert_helper.php';
 require_once __DIR__ . '/../../controllers/perfil.php';
 
-
-$id = $_SESSION['user']['id'];
+$id = $_SESSION['user']['id'] ?? null;
 
 $usuario = mostrarPerfilAdmin($id);
+
 ?>
 
-<form id="busqueda" action="busqueda">
+
+<form id="busqueda" class="ag-buscador-admin" action="busqueda">
     <input type="text">
     <i class="bi bi-search"></i>
 
@@ -31,7 +32,7 @@ $usuario = mostrarPerfilAdmin($id);
             </li>
             <hr class="dropdown-divider">
             </li>
-             <li>
+            <li>
                 <a class="dropdown-item" href="<?= BASE_URL ?>/logout">
                     <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
                 </a>

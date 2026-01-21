@@ -4,11 +4,11 @@
 /* /fuente para textos/ */
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
-h1 h2 h3 h4 h5 h6{
+h1 h2 h3 h4 h5 h6 {
     --font-titles: 'Raleway', sans-serif;
 }
 
-p a button input{
+p a button input {
     --font-text: 'Lato', sans-serif;
 }
 
@@ -41,7 +41,7 @@ body {
 }
 
 /* ========== BARRA DE BÚSQUEDA ========== */
-form#busqueda {
+/* form#busqueda {
     position: relative;
     padding: 10px 0 20px;
     display: flex;
@@ -87,10 +87,10 @@ form#busqueda .bi-bell-fill {
     color: #000000;
     font-size: 20px;
     cursor: pointer;
-}
+} */
 
 /* Estilos del dropdown de perfil */
-form#busqueda #perfil {
+/* form#busqueda #perfil {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -120,10 +120,10 @@ form#busqueda #perfil h6 {
     font-weight: 600;
     font-size: 16px;
     margin: 0;
-}
+} */
 
 /* Estilos del dropdown */
-#perfil-dropdown .dropdown-menu {
+/* #perfil-dropdown .dropdown-menu {
     border-radius: 0 0 12px;
     border: none;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -149,7 +149,7 @@ form#busqueda #perfil h6 {
 
 #perfil-dropdown .dropdown-divider {
     margin: 5px 0;
-}
+} */
 
 /* ========== TARJETA DE PERFIL ========== */
 .usuario {
@@ -241,14 +241,21 @@ form#busqueda #perfil h6 {
 }
 
 /* ==========Secciones========== */
-.datos, .editar, .ajustes, .cambiar{
+.datos,
+.editar,
+.ajustes,
+.cambiar {
     display: none;
 }
 
-.activa{
+.activa {
     display: block;
 }
-.datos, .editar, .ajustes, form.cambiar{
+
+.datos,
+.editar,
+.ajustes,
+form.cambiar {
     background: #f5f5f5;
     width: 57%;
     padding: 30px;
@@ -259,7 +266,7 @@ form#busqueda #perfil h6 {
 }
 
 /* ==========DATOS ========== */
-.datos h3{
+.datos h3 {
     text-align: center;
     color: #000000;
     margin-bottom: 50px;
@@ -273,7 +280,7 @@ form#busqueda #perfil h6 {
     margin-bottom: 30px;
 }
 
-.datos p{
+.datos p {
     padding: 0 30px;
     font-size: 15px;
     color: #000000;
@@ -309,7 +316,7 @@ form#busqueda #perfil h6 {
     top: -536px;
     position: relative;
     box-shadow: 0 10px 40px rgba(45, 64, 89, 0.12),
-                0 2px 8px rgba(45, 64, 89, 0.08);
+        0 2px 8px rgba(45, 64, 89, 0.08);
     overflow: hidden;
     text-align: center;
 }
@@ -332,7 +339,8 @@ form#busqueda #perfil h6 {
     padding-top: 30px;
     border-top: 3px solid var(--color-secondary);
     display: grid;
-    grid-template-columns: 1fr; /* Cambiado a una columna para etiquetas encima */
+    grid-template-columns: 1fr;
+    /* Cambiado a una columna para etiquetas encima */
     gap: 20px 0;
     text-align: left;
     position: relative;
@@ -345,7 +353,8 @@ form#busqueda #perfil h6 {
     font-size: 14px;
     font-weight: 700;
     color: var(--color-primary);
-    margin-bottom: 8px; /* margen para separar del input */
+    margin-bottom: 8px;
+    /* margen para separar del input */
 }
 
 /* ========== IMAGEN ========== */
@@ -491,7 +500,7 @@ form#busqueda #perfil h6 {
 .input-password input:focus {
     border-color: #0d6efd;
     background: #fff;
-    box-shadow: 0 0 4px rgba(13,110,253,0.3);
+    box-shadow: 0 0 4px rgba(13, 110, 253, 0.3);
 }
 
 /* Contenedor del input con ojito */
@@ -522,7 +531,7 @@ form#busqueda #perfil h6 {
 .cambiar button {
     width: 100%;
     padding: 12px;
-    background-color:  #EA8217;
+    background-color: #EA8217;
     border: none;
     border-radius: 8px;
     color: white;
@@ -592,7 +601,7 @@ form#busqueda #perfil h6 {
     background: radial-gradient(circle, rgba(234, 130, 23, 0.15) 0%, transparent 70%);
 }
 
-.modo-oscuro .editar > h4:first-of-type {
+.modo-oscuro .editar>h4:first-of-type {
     color: #ffffff;
 }
 
@@ -649,9 +658,9 @@ form#busqueda #perfil h6 {
         flex-direction: column;
     }
 
-    .panel {
+    /* .panel {
         width: 100%;
-    }
+    } */
 
     .editar {
         width: 100%;
@@ -662,11 +671,11 @@ form#busqueda #perfil h6 {
         border-radius: 20px;
     }
 
-    .editar > .bi-pen-fill {
+    .editar>.bi-pen-fill {
         left: calc(50% + 40px);
     }
 
-    .editar > button {
+    .editar>button {
         display: block;
         width: 100%;
         margin: 10px 0;
@@ -682,14 +691,45 @@ form#busqueda #perfil h6 {
         grid-column: 1;
     }
 
-    .editar form input:nth-of-type(1) { grid-row: 2; grid-column: 1; }
-    .editar form input:nth-of-type(2) { grid-row: 4; grid-column: 1; }
-    .editar form input:nth-of-type(3) { grid-row: 6; grid-column: 1; }
-    .editar form input:nth-of-type(4) { grid-row: 8; grid-column: 1; }
-    .editar form input:nth-of-type(5) { grid-row: 10; grid-column: 1; }
-    .editar form input:nth-of-type(6) { grid-row: 12; grid-column: 1; }
-    .editar form input:nth-of-type(7) { grid-row: 14; grid-column: 1; }
-    .editar form input:nth-of-type(8) { grid-row: 16; grid-column: 1; }
+    .editar form input:nth-of-type(1) {
+        grid-row: 2;
+        grid-column: 1;
+    }
+
+    .editar form input:nth-of-type(2) {
+        grid-row: 4;
+        grid-column: 1;
+    }
+
+    .editar form input:nth-of-type(3) {
+        grid-row: 6;
+        grid-column: 1;
+    }
+
+    .editar form input:nth-of-type(4) {
+        grid-row: 8;
+        grid-column: 1;
+    }
+
+    .editar form input:nth-of-type(5) {
+        grid-row: 10;
+        grid-column: 1;
+    }
+
+    .editar form input:nth-of-type(6) {
+        grid-row: 12;
+        grid-column: 1;
+    }
+
+    .editar form input:nth-of-type(7) {
+        grid-row: 14;
+        grid-column: 1;
+    }
+
+    .editar form input:nth-of-type(8) {
+        grid-row: 16;
+        grid-column: 1;
+    }
 
     .editar form button,
     .editar form #actualizar {

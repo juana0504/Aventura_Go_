@@ -102,6 +102,8 @@
             </div>
         </div>
     </section>
+
+
     <!-- seccion fotos -->
     <div class="container my-5">
         <!-- Galería -->
@@ -217,7 +219,7 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <h2 class="palpitando">¿Quieres que tu negocio aparezca aquí?</h2>
-                    <a href="../../website_externos/contactanos.html">Publicate en Aventura Go</a>
+                    <a href="contactanos">Publicate en Aventura Go</a>
                 </div>
             </div>
         </div>

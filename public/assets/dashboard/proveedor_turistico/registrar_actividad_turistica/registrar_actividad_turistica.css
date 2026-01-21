@@ -1,0 +1,145 @@
+/* ===============================
+   AVENTURA GO – REGISTRAR ACTIVIDAD
+   =============================== */
+
+/* Fuentes */
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #F8F9FA;
+    color: #2B2B2B;
+}
+
+.panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background-color: #2D4059;
+    z-index: 100;
+}
+
+/* Contenedor principal */
+.contenido-principal {
+    margin-left: 260px;
+    /* panel lateral */
+    padding: 30px;
+}
+
+/* Título principal */
+.contenido-principal h2 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #2D4059;
+    margin-bottom: 25px;
+}
+
+/* Formulario */
+form {
+    background-color: #FFFFFF;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #E0E0E0;
+    max-width: 900px;
+}
+
+/* Wizard steps */
+.wizard-step {
+    display: none;
+}
+
+.wizard-step.active {
+    display: block;
+}
+
+/* Subtítulos de pasos */
+.wizard-step h3 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    color: #2D4059;
+    margin-bottom: 20px;
+}
+
+/* Labels */
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    margin-top: 15px;
+    color: #2B2B2B;
+}
+
+/* Inputs y selects */
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #E0E0E0;
+    font-size: 14px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #EA8217;
+    box-shadow: 0 0 0 2px rgba(234, 130, 23, 0.15);
+}
+
+/* Textarea */
+textarea {
+    resize: vertical;
+}
+
+/* Acciones del wizard */
+.wizard-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+/* Botones */
+.wizard-actions button {
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Botón secundario */
+.wizard-actions button[type="button"] {
+    background-color: #2D4059;
+    color: #FFFFFF;
+}
+
+.wizard-actions button[type="button"]:hover {
+    background-color: #1f2f44;
+}
+
+/* Botón principal */
+.wizard-actions button[type="submit"] {
+    background-color: #EA8217;
+    color: #FFFFFF;
+}
+
+.wizard-actions button[type="submit"]:hover {
+    background-color: #d97314;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .contenido-principal {
+        margin-left: 0;
+        padding: 20px;
+    }
+
+    form {
+        padding: 20px;
+    }
+}

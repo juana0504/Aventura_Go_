@@ -31,12 +31,12 @@ body {
 }
 
 /* PANEL LATERAL___________________________________________________________________________________________________*/
-.panel {
+/* .panel {
     width: 280px;
     background-color: #2D4059;
     padding: 30px 20px;
     display: block;
-}
+} */
 
 .panel>img {
     width: 150px;
@@ -77,11 +77,11 @@ body {
 }
 
 /* CONTENIDO LADO DERECHO ______________________________________________________________________________________________ */
-.info {
+/* .info {
     flex-grow: 1;
     padding: 15px 40px;
     background-color: #ffffff;
-}
+} */
 
 .info #usuario #datos {
     display: inline-block;
@@ -381,7 +381,7 @@ form .bi-search {
 
 
 
-   /* RESPONSIVE iPhone 14 Pro Max (430 px) */
+/* RESPONSIVE iPhone 14 Pro Max (430 px) */
 @media screen and (max-width: 430px) {
 
     /* Ajustes generales */
@@ -402,19 +402,19 @@ form .bi-search {
         font-size: 15px;
         margin-top: 3px;
         text-align: center;
-         border-radius: 15px;
+        border-radius: 15px;
     }
 
     /* PANEL LATERAL → se adapta como encabezado */
-    .panel {
+    /* .panel {
         width: 100%;
         padding: 15px;
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
+    } */
 
-    .panel > img {
+    .panel>img {
         width: 120px;
         margin: 10px auto 20px auto;
     }
@@ -472,7 +472,7 @@ form .bi-search {
         font-size: 18px;
     }
 
-    #modoOscuroBtn{
+    #modoOscuroBtn {
         width: 100%;
         margin-left: 0;
         padding: 12px;

@@ -17,7 +17,7 @@
         href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/turista/tour_escogido/tour-escogido.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/turista/descubre_tours/descubreTours.css">
 </head>
 
 <body>
@@ -25,13 +25,13 @@
         <nav class="navbar">
             <div class="container-fluid">
                 <div class="logo">
-                    <img src="/public/assets/turista/tour_escogido/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
+                    <img src="/public/assets/dashboard/turista/descubre_tours/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
                 </div>
 
                 <h1 class="page-title">Descubre Todo lo que Villeta Tiene para Ofrecerte</h1>
 
                 <div class="actions">
-                    <a href="#" class="btn-login">Atrás</a>
+                    <a href="/aventura_go" class="btn-login">Atrás</a>
                     <div class="menu-toggle" id="menu-toggle">
                         <i class="fas fa-bars"></i>
                     </div>
@@ -44,7 +44,7 @@
         <div class="container">
             <div class="tabs-container">
                 <button class="tab-btn active">TOURS Y AVENTURA</button>
-                <button class="tab-btn">HOSPEDAJE</button>
+                <a href="<?= BASE_URL ?>/descubre-hospedaje" class="tab-btn"> HOSPEDAJE </a>
             </div>
 
             <div class="search-filters">
@@ -64,147 +64,82 @@
                 </div>
             </div>
 
+            <!-- aca va las actividdes -->
+
             <div class="activities-grid">
-                <div class="activity-card">
-                    <img src="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=400&h=300&fit=crop"
-                        alt="Cabalgata en Villeta" class="activity-image">
-                    <div class="activity-content">
-                        <div class="activity-category">villeta</div>
-                        <h3 class="activity-title">Explora y disfruta del campo a caballo en villeta</h3>
-                        <div class="activity-rating">
-                            <span class="stars">★★★★★</span>
-                            <span class="reviews">(1 Review)</span>
-                        </div>
-                        <div class="activity-duration">
-                            <i class="fas fa-clock"></i>
-                            <span>2 días, 1 noche</span>
-                        </div>
-                        <div class="activity-price">
-                            <span class="price-label">Desde</span>
-                            <span class="price-current">$450.000</span>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="activity-card">
-                    <img src="https://images.unsplash.com/photo-1571942676516-bcab84649e44?w=400&h=300&fit=crop"
-                        alt="Represa natural" class="activity-image">
-                    <div class="activity-content">
-                        <div class="activity-category">Villeta</div>
-                        <h3 class="activity-title">Conoce una represa natural y disfruta un buen sancocho en villeta
-                        </h3>
-                        <div class="activity-rating">
-                            <span class="stars">★★★★★</span>
-                            <span class="reviews">(1 Review)</span>
-                        </div>
-                        <div class="activity-duration">
-                            <i class="fas fa-clock"></i>
-                            <span>Pasadía</span>
-                        </div>
-                        <div class="activity-price">
-                            <span class="price-label">Desde</span>
-                            <span class="price-current">$130.000</span>
-                        </div>
-                    </div>
-                </div>
+                <?php if (!empty($actividades)): ?>
+                    <?php foreach ($actividades as $actividad): ?>
 
-                <div class="activity-card">
-                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop"
-                        alt="Vías del tren" class="activity-image">
-                    <div class="activity-content">
-                        <div class="activity-category">Villeta</div>
-                        <h3 class="activity-title">Explora las vías del tren y disfruta de la naturaleza en villeta</h3>
-                        <div class="activity-rating">
-                            <span class="stars">★★★★★</span>
-                            <span class="reviews">(1 Review)</span>
-                        </div>
-                        <div class="activity-duration">
-                            <i class="fas fa-clock"></i>
-                            <span>Pasadía</span>
-                        </div>
-                        <div class="activity-price">
-                            <span class="price-label">Desde</span>
-                            <span class="price-original">$95.000</span>
-                            <span class="price-current">$95.000</span>
-                        </div>
-                    </div>
-                </div>
+                        <div class="activity-card">
 
-                <div class="activity-card">
-                    <img src="https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?w=400&h=300&fit=crop"
-                        alt="Piscina Villeta" class="activity-image">
-                    <div class="activity-content">
-                        <div class="activity-category">Pasadía</div>
-                        <h3 class="activity-title">Pasadía en villeta, transporte desde bogotá</h3>
-                        <div class="activity-rating">
-                            <span class="stars">★★★★★</span>
-                            <span class="reviews">(1 Review)</span>
-                        </div>
-                        <div class="activity-duration">
-                            <i class="fas fa-clock"></i>
-                            <span>Pasadía</span>
-                        </div>
-                        <div class="activity-price">
-                            <span class="price-label">Desde</span>
-                            <span class="price-original">$120.000</span>
-                            <span class="price-current">$120.000</span>
-                        </div>
-                    </div>
-                </div>
+                            <img
+                                src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $actividad['imagen'] ?>"
+                                alt="<?= htmlspecialchars($actividad['nombre']) ?>"
+                                class="activity-image">
 
-                <div class="activity-card">
-                    <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&h=300&fit=crop"
-                        alt="Puente tibetano" class="activity-image">
-                    <div class="activity-content">
-                        <div class="activity-category">villeta</div>
-                        <h3 class="activity-title">Vive la experiencia del puente tibetano en villeta</h3>
-                        <div class="activity-rating">
-                            <span class="stars">★★★★☆</span>
-                            <span class="reviews">(1 Review)</span>
-                        </div>
-                        <div class="activity-duration">
-                            <i class="fas fa-clock"></i>
-                            <span>2 días, 1 noche</span>
-                        </div>
-                        <div class="activity-price">
-                            <span class="price-label">Desde</span>
-                            <span class="price-current">$99.000</span>
-                        </div>
-                    </div>
-                </div>
+                            <div class="activity-content">
 
-                <div class="activity-card">
-                    <img src="https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?w=400&h=300&fit=crop"
-                        alt="Piscina centro" class="activity-image">
-                    <div class="activity-content">
-                        <div class="activity-category">villeta</div>
-                        <h3 class="activity-title">Tarde de piscina en el centro de villeta (MUESTRA)</h3>
-                        <div class="activity-rating">
-                            <span class="stars">★★★★☆</span>
-                            <span class="reviews">(1 Review)</span>
+                                <!-- Ciudad -->
+                                <div class="activity-category">
+                                    <?= htmlspecialchars($actividad['ciudad']) ?>
+                                </div>
+
+                                <!-- Nombre -->
+                                <h3 class="activity-title">
+                                    <?= htmlspecialchars($actividad['nombre']) ?>
+                                </h3>
+
+                                <!-- Descripción corta -->
+                                <p class="activity-description">
+                                    <?= substr(htmlspecialchars($actividad['descripcion']), 0, 90) ?>...
+                                </p>
+
+                                <!-- Cupos -->
+                                <div class="activity-duration">
+                                    <i class="fas fa-users"></i>
+                                    <span><?= (int)$actividad['cupos'] ?> cupos disponibles</span>
+                                </div>
+
+                                <!-- Precio -->
+                                <div class="activity-price">
+                                    <span class="price-label">Desde</span>
+                                    <span class="price-current">
+                                        $<?= number_format($actividad['precio'], 0, ',', '.') ?>
+                                    </span>
+                                </div>
+
+                            </div>
                         </div>
-                        <div class="activity-duration">
-                            <i class="fas fa-clock"></i>
-                            <span>10 Nights, 9 days</span>
-                        </div>
-                        <div class="activity-price">
-                            <span class="price-label">Desde</span>
-                            <span class="price-current">$85.000</span>
-                        </div>
-                    </div>
-                </div>
+
+
+
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>No hay actividades disponibles.</p>
+                <?php endif; ?>
+
             </div>
 
-            <div class="search-banner">
+
+
+            <!-- barra de busqyeda -->
+            <form class="search-banner" action="<?= BASE_URL ?>busqueda" method="GET">
                 <div class="search-banner-text">
                     <i class="fas fa-search"></i>
-                    <span>¿Buscas alguna actividad específica?</span>
+                    <input
+                        type="text"
+                        name="q"
+                        placeholder="¿Buscas alguna actividad específica?"
+                        required>
                 </div>
-                <button class="search-banner-btn">
+
+                <button type="submit" class="search-banner-btn">
                     <i class="fas fa-search"></i>
                     Buscar
                 </button>
-            </div>
+            </form>
+
         </div>
     </main>
 

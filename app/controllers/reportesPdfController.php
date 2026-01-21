@@ -1,9 +1,9 @@
 <?php
 
 require_once BASE_PATH . '/app/helpers/pdf_helper.php';
-require_once BASE_PATH . '/app/controllers/proveedor.php';
-require_once BASE_PATH . '/app/controllers/hotelero.php';
-require_once BASE_PATH . '/app/controllers/turista.php';
+require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';
+require_once BASE_PATH . '/app/controllers/administrador/hotelero.php';
+require_once BASE_PATH . '/app/controllers/administrador/turista.php';
 
 
 // ESTA FUNCION SE ENCARGA DE VALIDAR EL TIPO DE REPORTE Y EJECUTAR LA FUNCION CORRESPONDIENTE 

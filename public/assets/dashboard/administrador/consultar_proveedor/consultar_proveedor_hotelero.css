@@ -1,4 +1,15 @@
 /* Reset y Variables */
+/* fuente para titulos*/
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
+
+/*fuente para textos*/
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+h1 h2 h3 h4 h5 h6 {
+    --font-titles: 'Raleway', sans-serif;
+    /*tipografia titulos*/
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,133 +17,14 @@
 }
 
 body {
-    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background-color: #f5f5f5;
+}
+
+body {
+    font-family: 'lato', sans-serif;
     background-color: #f5f7fa;
 }
 
-/* ========== LAYOUT PRINCIPAL ========== */
-#admin-dashboard {
-    display: flex;
-    min-height: 100vh;
-}
-
-/* ========== CONTENIDO PRINCIPAL ========== */
-.info {
-    flex-grow: 1;
-    padding: 20px 40px;
-    background-color: #ffffff;
-}
-
-/* ========== BARRA DE BÚSQUEDA ========== */
-form[action="busqueda"] {
-    position: relative;
-    padding: 10px 0 20px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 30px;
-}
-
-form[action="busqueda"] input {
-    background-color: #DEE6F2;
-    height: 40px;
-    border-radius: 11px;
-    width: 600px;
-    border: none;
-    outline: none;
-    font-size: 14px;
-    padding: 8px 8px 8px 45px;
-    margin-bottom: 20px;
-}
-
-form[action="busqueda"] .bi-search {
-    position: absolute;
-    bottom: 50px;
-    left: 570px;
-    font-size: 18px;
-    pointer-events: none;
-    color: #95a5a6;
-}
-
-#modoOscuroBtn,
-#notificacionesBtn {
-    margin-bottom: 16px;
-    margin-left: 10px;
-    padding: 7px 20px;
-    background-color: #DEE6F2;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-form[action="busqueda"] .bi-moon-fill,
-form[action="busqueda"] .bi-bell-fill {
-    color: #000000;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-/* Estilos del dropdown de perfil */
-form[action="busqueda"] #perfil {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 20px;
-    background-color: #EA8217;
-    border-radius: 12px;
-    text-decoration: none;
-    color: #ffffff;
-    margin-left: 20px;
-    margin-bottom: 10px;
-}
-
-form[action="busqueda"] #perfil img {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-form[action="busqueda"] #perfil p {
-    font-weight: 600;
-    font-size: 14px;
-    margin: 0;
-}
-
-form[action="busqueda"] #perfil h6 {
-    font-weight: 600;
-    font-size: 16px;
-    margin: 0;
-}
-
-#perfil-dropdown .dropdown-menu {
-    border-radius: 0 0 12px 12px;
-    border: none;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-
-#perfil-dropdown .dropdown-item {
-    padding: 10px 20px;
-    font-size: 14px;
-    color: #2D4059;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-#perfil-dropdown .dropdown-item:hover {
-    background-color: #f3f4f6;
-    color: #EA8217;
-}
-
-#perfil-dropdown .dropdown-item i {
-    font-size: 16px;
-}
-
-#perfil-dropdown .dropdown-divider {
-    margin: 5px 0;
-}
 
 /* ========== HEADER SECTION ========== */
 .header-section {
@@ -149,7 +41,7 @@ form[action="busqueda"] #perfil h6 {
     margin: 0;
 }
 
-.btn-pdf{
+.btn-pdf {
     background: red;
     color: #ffffff;
     text-decoration: none;
@@ -226,6 +118,139 @@ form[action="busqueda"] #perfil h6 {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
+
+table.table {
+    width: 100%;
+    margin-bottom: 0;
+    table-layout: fixed;
+    /* Esto hace que las columnas mantengan su ancho */
+    border-collapse: collapse;
+}
+
+
+/* Define anchos específicos para cada columna */
+/* logo*/
+table.table thead th:nth-child(1) {
+    width: 8%;
+}
+
+/* empresa */
+table.table thead th:nth-child(2) {
+    width: 15%;
+}
+
+/* establecimiento */
+table.table thead th:nth-child(3) {
+    width: 15%;
+}
+
+/* representante */
+table.table thead th:nth-child(4) {
+    width: 20%;
+}
+
+/* email */
+table.table thead th:nth-child(5) {
+    width: 20%;
+}
+
+/* telefono */
+table.table thead th:nth-child(6) {
+    width: 16%;
+}
+
+/* ciudad */
+table.table thead th:nth-child(7) {
+    width: 16%;
+}
+
+/* estado */
+table.table thead th:nth-child(8) {
+    width: 15%;
+}
+
+/* acciones */
+table.table thead th:nth-child(9) {
+    width: 22%;
+}
+
+/* Estilos específicos para columnas con contenido largo */
+
+/* EMPRESA */
+table.table tbody td:nth-child(2),
+/* ESTABLECIMIENTO */
+table.table tbody td:nth-child(3),
+/* REPRESENTANTE */
+table.table tbody td:nth-child(4),
+/* EMAIL */
+table.table tbody td:nth-child(5),
+/* TELÉFONO */
+table.table thead th:nth-child(6),
+/* CIUDAD */
+table.table tbody td:nth-child(7) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* Muestra puntos suspensivos si es muy largo */
+}
+
+/* Para columnas que deben mantener su contenido visible */
+/*logo */
+table.table thead th:nth-child(1),
+
+/* ESTADO */
+table.table tbody td:nth-child(8) {
+    white-space: normal;
+}
+
+
+table.table thead th {
+    background-color: #f8f9fa;
+    color: #2D4059;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    padding: 15px 12px;
+    border-bottom: 2px solid #e5e7eb;
+    text-align: left;
+    /*alineamos texto a la izq*/
+    white-space: nowrap;
+    /* Evita que el texto del encabezado se divida */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+table.table tbody td {
+    padding: 15px 12px;
+    vertical-align: middle;
+    font-size: 14px;
+    color: #374151;
+    border-bottom: 1px solid #f3f4f6;
+    word-wrap: break-word;
+    /* Permite que el texto largo se divida */
+    overflow-wrap: break-word;
+    max-width: 0;
+    /* Necesario para que funcione text-overflow */
+}
+
+/* Mantén el texto completo al hacer hover */
+table.table tbody td:hover {
+    overflow: visible;
+    white-space: normal;
+    word-wrap: break-word;
+    background-color: #f9fafb;
+    z-index: 1;
+    position: relative;
+}
+
+table.table tbody tr {
+    transition: all 0.3s;
+}
+
+table.table tbody tr:hover {
+    background-color: #f9fafb;
+}
+
 table.table {
     width: 100%;
     margin-bottom: 0;
@@ -249,7 +274,7 @@ table.table tbody td {
     border-bottom: 1px solid #f3f4f6;
 }
 
-table.table tbody td img{
+table.table tbody td img {
     width: 40px;
     height: 40px;
     border-radius: 8px;
@@ -367,83 +392,356 @@ div.dataTables_wrapper div.dataTables_length select {
     padding: 6px 10px;
 }
 
-/* ========== MODAL ========== */
-.modal-content {
-    border-radius: 15px;
+/* ====================================================== Modal Aventura Go ======================================================= */
+
+.aventura-modal {
     border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(45, 64, 89, 0.15);
+    overflow: hidden;
+    font-family: 'Lato', sans-serif;
 }
 
-.modal-header {
-    background-color: #2D4059;
-    color: white;
-    border-radius: 15px 15px 0 0;
-    padding: 20px 25px;
+/* Header del Modal */
+.aventura-modal-header {
+    background: linear-gradient(135deg, #2D4059 0%, #3A506B 100%);
+    border-bottom: 3px solid #EA8217;
+    padding: 1.5rem 2rem;
+    color: #FFFFFF;
 }
 
-.modal-header .modal-title {
-    font-weight: 700;
+.modal-header-content {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 1.5rem;
+    width: 100%;
 }
 
-.modal-header .btn-close {
-    filter: brightness(0) invert(1);
+.modal-logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 3px solid #FFFFFF;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+.modal-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 5px;
+}
+
+.modal-title {
+    flex: 1;
+}
+
+.modal-title-text {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin: 0;
+    color: #FFFFFF;
+}
+
+.aventura-text {
+    color: #EA8217;
+    font-weight: 800;
+}
+
+.modal-subtitle {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Body del Modal */
 .modal-body {
-    padding: 25px;
+    padding: 2rem;
+    background-color: #F8F9FA;
+    color: #2B2B2B;
 }
 
-.form-label {
-    font-weight: 600;
-    font-size: 13px;
-    color: #374151;
-    margin-bottom: 8px;
-}
-
-.form-control,
-.form-select {
-    border: 1px solid #e5e7eb;
+/* Barra de estado */
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background-color: #FFFFFF;
     border-radius: 8px;
-    padding: 10px 15px;
-    font-size: 14px;
+    border: 1px solid #E0E0E0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.form-control:focus,
-.form-select:focus {
-    border-color: #EA8217;
-    box-shadow: 0 0 0 3px rgba(234, 130, 23, 0.1);
+.status-badge {
+    padding: 0.375rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: 'Lato', sans-serif;
 }
 
-.btn-primary-custom {
-    background-color: #EA8217;
-    color: white;
-    padding: 10px 25px;
+.status-badge[data-status="activo"] {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status-badge[data-status="inactivo"] {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.status-badge[data-status="pendiente"] {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.register-date {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+/* Secciones de información */
+.info-section {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 1.5rem;
+    border: 1px solid #E0E0E0;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.info-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #EA8217;
+}
+
+.section-icon {
+    color: #2D4059;
+    font-size: 1.25rem;
+    background-color: rgba(234, 130, 23, 0.1);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-header h6 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: #2D4059;
+    margin: 0;
+}
+
+/* Tarjetas de información */
+.info-card {
+    height: 100%;
+    padding: 1.25rem;
+    background-color: #F8F9FA;
+    border-radius: 8px;
+    border-left: 4px solid #2D4059;
+    transition: all 0.3s ease;
+}
+
+.info-card:hover {
+    background-color: #FFFFFF;
+    border-left-color: #EA8217;
+    box-shadow: 0 4px 12px rgba(45, 64, 89, 0.1);
+}
+
+.info-label {
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #2D4059;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.info-label i {
+    color: #EA8217;
+    font-size: 0.9rem;
+}
+
+.info-value {
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    color: #2B2B2B;
+    line-height: 1.5;
+    min-height: 24px;
+}
+
+/* Actividades */
+.activities-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.activity-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    background-color: rgba(45, 64, 89, 0.08);
+    border-radius: 20px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875rem;
+    color: #2D4059;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(45, 64, 89, 0.1);
+}
+
+.activity-badge:hover {
+    background-color: rgba(234, 130, 23, 0.1);
+    color: #EA8217;
+    border-color: rgba(234, 130, 23, 0.2);
+    transform: translateY(-2px);
+}
+
+.activity-badge i {
+    font-size: 0.8rem;
+}
+
+/* Imagen del logo */
+.logo-img {
+    max-width: 150px;
+    max-height: 100px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid #E0E0E0;
+    padding: 0.5rem;
+    background-color: #FFFFFF;
+}
+
+/* Footer del Modal */
+.aventura-modal-footer {
+    background-color: #F8F9FA;
+    border-top: 1px solid #E0E0E0;
+    padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Botones personalizados */
+.btn-aventura-secondary {
+    background-color: #6c757d;
+    color: #FFFFFF;
     border: none;
-    border-radius: 8px;
+    padding: 0.625rem 1.5rem;
+    border-radius: 6px;
+    font-family: 'Lato', sans-serif;
     font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.btn-primary-custom:hover {
-    background-color: #d97515;
+.btn-aventura-secondary:hover {
+    background-color: #5a6268;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.btn-aventura-success {
+    background-color: #28a745;
+    color: #FFFFFF;
+    border: none;
+    padding: 0.625rem 1.5rem;
+    border-radius: 6px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-aventura-success:hover {
+    background-color: #218838;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.2);
+}
+
+.btn-aventura-danger {
+    background-color: #dc3545;
+    color: #FFFFFF;
+    border: none;
+    padding: 0.625rem 1.5rem;
+    border-radius: 6px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-aventura-danger:hover {
+    background-color: #c82333;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.2);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* ::::fin estilos modal:::: */
+
 
 /* ========== RESPONSIVE ========== */
 @media (max-width: 1024px) {
-    .panel {
+    /* .panel {
         position: relative;
         width: 100%;
         height: auto;
-    }
-    
+    } */
+
     .info {
         margin-left: 0;
     }
-    
-    #admin-dashboard {
+
+    /* #admin-dashboard {
         flex-direction: column;
-    }
+    } */
 }
 
 @media (max-width: 768px) {
@@ -452,15 +750,15 @@ div.dataTables_wrapper div.dataTables_length select {
         gap: 15px;
         align-items: flex-start;
     }
-    
+
     .filtros-rapidos {
         flex-wrap: wrap;
     }
-    
+
     form[action="busqueda"] {
         flex-wrap: wrap;
     }
-    
+
     form[action="busqueda"] input {
         width: 100%;
     }
