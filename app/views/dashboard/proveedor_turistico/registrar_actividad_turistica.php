@@ -59,7 +59,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
                 <!-- 🔥 NUEVO: DEPARTAMENTO -->
                 <label>Departamento</label>
-                <select id="id_departamento" required>
+                <select id="id_departamento">
                     <option value="">Seleccione departamento</option>
                 </select>
 
