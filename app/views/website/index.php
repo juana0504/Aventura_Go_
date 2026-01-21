@@ -364,19 +364,14 @@
                 <!-- Columna 1: Logo -->
                 <div class="col-md-2">
                     <div class="logo-section">
-<<<<<<< HEAD:app/views/website/index.html
                         <img src="public/assets/website_externos/index/img/LOGO-NEGATIVO.png" alt="logo Aventura Go">
-=======
-                        <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="logo Aventura Go">
->>>>>>> 94addec9d9289dc94ffba26b2227eca5102d606f:app/views/website/index.php
                     </div>
                 </div>
 
                 <!-- col 2 Descripción  -->
                 <div class="col-md-2">
                     <p class="description">
-                        Aventura Go conecta viajeros con experiencias de aventura,
-                        promoviendo el turismo sostenible y apoyando a prestadores locales en destinos naturales."
+                        Aventuras únicas, seguras y confiables.
                     </p>
                 </div>
 
