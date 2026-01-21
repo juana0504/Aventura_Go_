@@ -51,6 +51,10 @@ switch ($method) {
             exit;
         }
 
+        // 👇 ESTA ES LA RUTA DE "CONSULTAR ACTIVIDADES"
+        listarActividadesProveedor();
+        exit;
+
         if (isset($_GET['id'])) {
             listarActividadId($_GET['id']);
         } else {
@@ -289,16 +293,23 @@ function actualizarActividad()
 
 
 
-
 function listarActividadesProveedor()
 {
-    $id_proveedor = $_SESSION['user']['id_proveedor'];
+    require_once __DIR__ . '/../../models/proveedor_turistico/Proveedor.php';
 
-    $objActividad = new ActividadTuristica();
-    $actividades = $objActividad->listarPorProveedor($id_proveedor);
+    $proveedorModel = new Proveedor();
+    $id_usuario = $_SESSION['user']['id'];
 
-    require_once __DIR__ . '/../../views/dashboard/proveedor_turistico/consultar_actividades.php';
+    $id_proveedor = $proveedorModel->obtenerIdProveedorPorUsuario($id_usuario);
+
+    $actividadModel = new ActividadTuristica();
+    $actividades = $actividadModel->listarPorProveedor($id_proveedor);
+
+    require_once __DIR__ . '/../../views/dashboard/proveedor_turistico/consultar_actividad_turistica.php';
 }
+
+
+
 
 
 

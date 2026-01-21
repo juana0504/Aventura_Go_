@@ -114,41 +114,42 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                         <tr>
                             <?php if (!empty($datos)) : ?>
                                 <?php foreach ($datos as $hotelero): ?>
-                                    <td><img src="<?= BASE_URL ?>/public/uploads/hoteles/<?= $hotelero['logo'] ?>" alt="" style="10px"></td>
-                                    <td><?= $hotelero['nombre_establecimiento'] ?></td>
-                                    <td><?= $hotelero['tipo_establecimiento'] ?></td>
-                                    <td><?= $hotelero['nombre_representante'] ?></td>
-                                    <td><?= $hotelero['email'] ?></td>
-                                    <td><?= $hotelero['telefono'] ?></td>
-                                    <td><?= $hotelero['nombre_ciudad'] ?? '—' ?></td>
+                        <tr id="fila-<?= $hotelero['id_proveedor_hotelero'] ?>">
+                            <td><img src="<?= BASE_URL ?>/public/uploads/hoteles/<?= $hotelero['logo'] ?>" alt="" style="10px"></td>
+                            <td><?= $hotelero['nombre_establecimiento'] ?></td>
+                            <td><?= $hotelero['tipo_establecimiento'] ?></td>
+                            <td><?= $hotelero['nombre_representante'] ?></td>
+                            <td><?= $hotelero['email'] ?></td>
+                            <td><?= $hotelero['telefono'] ?></td>
+                            <td><?= $hotelero['nombre_ciudad'] ?? '—' ?></td>
 
-                                    <!-- ESTADO -->
-                                    <td class="col-estado">
-                                        <?php if ($hotelero['estado'] == 'ACTIVO'): ?>
-                                            <span class="badge-activo">Activo</span>
-                                        <?php elseif ($hotelero['estado'] == 'INACTIVO'): ?>
-                                            <span class="badge-inactivo">Inactivo</span>
-                                        <?php else: ?>
-                                            <span class="badge-pendiente">Pendiente</span>
-                                        <?php endif; ?>
-                                    </td>
+                            <!-- ESTADO -->
+                            <td class="col-estado">
+                                <?php if ($hotelero['estado'] == 'ACTIVO'): ?>
+                                    <span class="badge-activo">Activo</span>
+                                <?php elseif ($hotelero['estado'] == 'INACTIVO'): ?>
+                                    <span class="badge-inactivo">Inactivo</span>
+                                <?php else: ?>
+                                    <span class="badge-pendiente">Pendiente</span>
+                                <?php endif; ?>
+                            </td>
 
-                                    <td>
-                                        <button class="btn-accion btn-ver"
-                                            data-id="<?= $hotelero['id_proveedor_hotelero'] ?>"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#verProveedorModal">
-                                            <i class="i bi-eye"></i>
-                                        </button>
+                            <td>
+                                <button class="btn-accion btn-ver"
+                                    data-id="<?= $hotelero['id_proveedor_hotelero'] ?>"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#verProveedorModal">
+                                    <i class="i bi-eye"></i>
+                                </button>
 
-                                        <a href="<?= BASE_URL ?>/administrador/editar-proveedor-hotelero?id=<?= $hotelero['id_proveedor_hotelero'] ?>" class="btn-accion btn-editar">
-                                            <i class="bi bi-pencil"></i>
-                                        </a>
+                                <a href="<?= BASE_URL ?>/administrador/editar-proveedor-hotelero?id=<?= $hotelero['id_proveedor_hotelero'] ?>" class="btn-accion btn-editar">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
 
-                                        <a href="<?= BASE_URL ?>/administrador/eliminar-proveedor-hotelero?accion=eliminar&id=<?= $hotelero['id_proveedor_hotelero'] ?>" class="btn-accion btn-eliminar">
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                    </td>
+                                <a href="<?= BASE_URL ?>/administrador/eliminar-proveedor-hotelero?accion=eliminar&id=<?= $hotelero['id_proveedor_hotelero'] ?>" class="btn-accion btn-eliminar">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
                         </tr>
 
                     <?php endforeach; ?>
@@ -209,11 +210,12 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     <h6>Información del Establecimiento</h6>
                                 </div>
 
+
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
                                         <div class="info-card">
                                             <div class="info-label">Nombre del establecimiento</div>
-                                            <div class="info-value" id="modal-nombre-establecimiento"></div>
+                                            <div class="info-value" id="modal-nombre-establecimiento-card"></div>
                                         </div>
                                     </div>
 
@@ -383,14 +385,17 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
                 <!-- Footer del Modal -->
                 <div class="modal-footer aventura-modal-footer">
-                    <a class="btn btn-aventura-success" id="btn-activar-proveedor">
-                        <i class="fas fa-check-circle"></i> Activar
-                    </a>
 
-                    <a class="btn btn-aventura-danger" id="btn-desactivar-proveedor">
-                        <i class="fas fa-ban"></i> Desactivar
-                    </a>
+                    <div class="action-buttons">
 
+                        <a class="btn btn-aventura-success" id="btn-activar-proveedor">
+                            <i class="fas fa-check-circle"></i> Activar
+                        </a>
+
+                        <a class="btn btn-aventura-danger" id="btn-desactivar-proveedor">
+                            <i class="fas fa-ban"></i> Desactivar
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -402,9 +407,10 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
-    <?php
-    // require_once __DIR__ . '/../../layouts/footer_administrador.php';
-    ?>
+
+    <script>
+        const BASE_URL = "<?= BASE_URL ?>";
+    </script>
 
     <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_hotelero.js"></script>
 
