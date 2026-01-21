@@ -137,14 +137,7 @@ class Proveedor
 
             return $resultado->execute();
         } catch (PDOException $e) {
-            //AQUÍ VA TU CATCH PARA CORREO DUPLICADO
-            if ($e->getCode() == 23000) {
-                mostrarSweetAlert('error', 'Correo duplicado', 'Este correo ya existe en el sistema.');
-                return false;
-            }
-
-            error_log("Error en proveedor::registrar->" . $e->getMessage());
-            return false;
+            die($e->getMessage());
         }
     }
 

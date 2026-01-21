@@ -113,7 +113,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 // dentro del evento donde ya tienes modalEl
                 const btnActivar = modalEl.querySelector('#btn-activar-proveedor');
                 const btnDesactivar = modalEl.querySelector('#btn-desactivar-proveedor');
-console.log("Llegué a la parte del HREF");
+                
+                console.log("Llegué a la parte del HREF");
+                
                 btnActivar.setAttribute('href',
                     `/aventura_go/administrador/cambiar-estado-proveedor?id=${id}&accion=activar`
                 );
@@ -123,7 +125,7 @@ console.log("Llegué a la parte del HREF");
                 );
 
                 console.log("HREF ACTIVAR:", btnActivar.href);
-console.log("HREF DESACTIVAR:", btnDesactivar.href);
+                console.log("HREF DESACTIVAR:", btnDesactivar.href);
 
                 // Mostrar/ocultar botón apropiado según estado actual
                 if ((data.estado ?? '').toLowerCase() === 'activo') {
