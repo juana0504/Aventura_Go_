@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Logo
                 const logoEl = document.getElementById('modal-logo');
                 logoEl.src = data.logo
-                    ? `/aventura_go/public/assets/uploads/turistico/${data.logo}`
+                    ? `/aventura_go/public/uploads/turistico/${data.logo}`
                     : `/aventura_go/public/assets/img/default-proveedor.jpg`;
 
                 // // Foto representante

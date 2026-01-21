@@ -220,8 +220,8 @@ switch ($request) {
         break;
 
     case '/administrador/consultar-tickets':
-    require BASE_PATH . '/app/views/dashboard/administrador/consultar_tickets.php';
-    break;
+        require BASE_PATH . '/app/views/dashboard/administrador/consultar_tickets.php';
+        break;
     // ===================================================================================================
     //                                     RUTAS PROVEEDOR TURISTICO
     // ===================================================================================================
@@ -241,8 +241,6 @@ switch ($request) {
     case '/proveedor/consultar-actividad':
         require BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php';
         break;
-
-
 
 
 
