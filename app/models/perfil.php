@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once __DIR__ . '/../../config/database.php';
 
@@ -14,9 +14,10 @@ class Perfil
         $this->conexion = $db->getConexion(); // Obtiene la conexión PDO y la guarda en $this->conexion
     }
 
-    // esta funcion se duplica por cada rol
-    public function mostrarPerfilAdmin($id){
-        try{
+    // esta funcion se duplica por cada rol (ADMINISTRADOR)
+    public function mostrarPerfilAdmin($id)
+    {
+        try {
 
             $consultar = "SELECT * FROM usuario WHERE id_usuario = :id_usuario LIMIT 1";
 
@@ -25,7 +26,65 @@ class Perfil
             $resultado->execute();
 
             return $resultado->fetch();
-        }catch(PDOexception $e){
+        } catch (PDOexception $e) {
+            error_log("Error en proveedor::mostrarPerfilAdmin->" . $e->getMessage());
+            return;
+        }
+    }
+
+
+    // esta funcion se duplica por cada rol (PROVEEDOR TURISTICO)
+    public function mostrarPerfilProveedor($id)
+    {
+        try {
+
+            $consultar = "SELECT * FROM usuario WHERE id_usuario = :id_usuario LIMIT 1";
+
+            $resultado = $this->conexion->prepare($consultar);
+            $resultado->bindParam(':id_usuario', $id);
+            $resultado->execute();
+
+            return $resultado->fetch();
+        } catch (PDOexception $e) {
+            error_log("Error en proveedor::mostrarPerfilAdmin->" . $e->getMessage());
+            return;
+        }
+    }
+
+
+    // esta funcion se duplica por cada rol (PROVEEDOR HOTEKLERO)
+    public function mostrarPerfilProveedorHotelero($id)
+    {
+        try {
+
+            $consultar = "SELECT * FROM usuario WHERE id_usuario = :id_usuario LIMIT 1";
+
+            $resultado = $this->conexion->prepare($consultar);
+            $resultado->bindParam(':id_usuario', $id);
+            $resultado->execute();
+
+            return $resultado->fetch();
+        } catch (PDOexception $e) {
+            error_log("Error en proveedor::mostrarPerfilAdmin->" . $e->getMessage());
+            return;
+        }
+    }
+
+
+
+    // esta funcion se duplica por cada rol (TURISTA)
+    public function mostrarPerfilTurista($id)
+    {
+        try {
+
+            $consultar = "SELECT * FROM usuario WHERE id_usuario = :id_usuario LIMIT 1";
+
+            $resultado = $this->conexion->prepare($consultar);
+            $resultado->bindParam(':id_usuario', $id);
+            $resultado->execute();
+
+            return $resultado->fetch();
+        } catch (PDOexception $e) {
             error_log("Error en proveedor::mostrarPerfilAdmin->" . $e->getMessage());
             return;
         }

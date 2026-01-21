@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Logo
                 const logoEl = document.getElementById('modal-logo');
                 logoEl.src = data.logo
-                    ? `/aventura_go/public/uploads/turistico/${data.logo}`
+                    ? `/aventura_go/public/assets/uploads/turistico/${data.logo}`
                     : `/aventura_go/public/assets/img/default-proveedor.jpg`;
 
                 // // Foto representante
@@ -115,11 +115,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 const btnDesactivar = modalEl.querySelector('#btn-desactivar-proveedor');
 console.log("Llegué a la parte del HREF");
                 btnActivar.setAttribute('href',
-                    `/aventura_go/administrador/cambiar-estado-proveedor-turistico?id=${id}&accion=activar`
+                    `/aventura_go/administrador/cambiar-estado-proveedor?id=${id}&accion=activar`
                 );
 
                 btnDesactivar.setAttribute('href',
-                    `/aventura_go/administrador/cambiar-estado-proveedor-turistico?id=${id}&accion=desactivar`
+                    `/aventura_go/administrador/cambiar-estado-proveedor?id=${id}&accion=desactivar`
                 );
 
                 console.log("HREF ACTIVAR:", btnActivar.href);
@@ -152,7 +152,7 @@ document.addEventListener("click", function (e) {
 
     let nuevoEstado = estado === "activo" ? "inactivo" : "activo";
 
-    fetch("/aventura_go/administrador/cambiar-estado-proveedor-turistico", {
+    fetch("/aventura_go/administrador/cambiar-estado-proveedor", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"

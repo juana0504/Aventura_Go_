@@ -8,11 +8,6 @@ require_once __DIR__ . '/../../layouts/header_administrador.php';
 
 ?>
 
-<?php
-
-require_once BASE_PATH . '/app/helpers/session_administrador.php';
-
-?>
 
 
 
