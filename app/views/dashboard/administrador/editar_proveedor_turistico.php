@@ -319,6 +319,43 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     </section>
 
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const idProveedor = <?= $_GET['id'] ?? 'null' ?>;
+
+            if (!idProveedor) {
+                console.error('ID de proveedor no encontrado');
+                return;
+            }
+
+            fetch(`/aventura_go/administrador/proveedor?id=${idProveedor}`)
+                .then(res => res.json())
+                .then(response => {
+
+                    if (!response.success) {
+                        alert(response.message);
+                        return;
+                    }
+
+                    const data = response.data;
+
+                    document.getElementById('id_proveedor').value = data.id_proveedor;
+                    document.getElementById('nombre_empresa').value = data.nombre_empresa;
+                    document.getElementById('telefono').value = data.telefono;
+                    document.getElementById('email').value = data.email;
+                    document.getElementById('direccion').value = data.direccion;
+
+                })
+                .catch(error => {
+                    console.error('Error AJAX:', error);
+                });
+
+        });
+    </script>
+
+
+
 
 
     <!-- chart.js -->
