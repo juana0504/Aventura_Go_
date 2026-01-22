@@ -43,10 +43,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
         <h2>Registrar actividad turística</h2>
 
-        <form id="formActividad"
-            action="<?= BASE_URL ?>/proveedor/guardar-actividad"
-            method="POST"
-            enctype="multipart/form-data">
+        <form id="formActividad" action="<?= BASE_URL ?>/proveedor/guardar-actividad" method="POST" enctype="multipart/form-data">
 
             <input type="hidden" name="accion" value="registrar">
 
@@ -59,7 +56,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
                 <!-- 🔥 NUEVO: DEPARTAMENTO -->
                 <label>Departamento</label>
-                <select id="id_departamento">
+                <select name="id_departamento" id="id_departamento" required>
                     <option value="">Seleccione departamento</option>
                 </select>
 
@@ -83,7 +80,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                 <h3>Paso 2: Detalles de la actividad</h3>
 
                 <label>Descripción</label>
-                <textarea name="descripcion" required></textarea>
+                <textarea type="text" name="descripcion" required></textarea>
 
                 <label>Cupos disponibles</label>
                 <input type="number" name="cupos" required>

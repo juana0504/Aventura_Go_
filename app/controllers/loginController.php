@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     session_start();
     $_SESSION['user'] = [
         'id' => $resultado['id_usuario'],
+        'id_usuario' => $resultado['id_usuario'],
         'nombre' => $resultado['nombre'],
         'rol' => $resultado['rol']
     ];
