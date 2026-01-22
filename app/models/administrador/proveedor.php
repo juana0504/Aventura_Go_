@@ -40,45 +40,48 @@ class Proveedor
     // Función para autenticar usuario (recibe el correo y la clave escrita por el usuario)
     public function registrar($data)
     {
-
         try {
-            // Registro a la tabla Usuario
+            // 🔒 INICIAR TRANSACCIÓN
+            $this->conexion->beginTransaction();
 
-            $insert_usuario = "INSERT INTO usuario(
-                nombre,
-                tipo_documento,
-                identificacion,
-                email,
-                telefono,
-                clave,
-                rol,
-                foto,
-                estado
-            ) VALUES (
-                :nombre_representante,
-                :tipo_documento,
-                :identificacion_representante,
-                :email_representante,
-                :telefono_representante,
-                :identificacion,
-                'proveedor',
-                :foto_representante,
-                'Activo'
-            )";
+            // 1️⃣ INSERT USUARIO
+            $insert_usuario = "INSERT INTO usuario (
+            nombre,
+            tipo_documento,
+            identificacion,
+            email,
+            telefono,
+            clave,
+            rol,
+            foto,
+            estado
+        ) VALUES (
+            :nombre_representante,
+            :tipo_documento,
+            :identificacion_representante,
+            :email_representante,
+            :telefono_representante,
+            :identificacion,
+            'proveedor',
+            :foto_representante,
+            'Activo'
+        )";
+
             $usuario = $this->conexion->prepare($insert_usuario);
-            $usuario->bindParam(':nombre_representante', $data['nombre_representante']);
-            $usuario->bindParam(':tipo_documento', $data['tipo_documento']);
-            $usuario->bindParam(':identificacion_representante', $data['identificacion_representante']);
-            $usuario->bindParam(':email_representante', $data['email_representante']);
-            $usuario->bindParam(':telefono_representante', $data['telefono_representante']);
-            $usuario->bindParam(':identificacion', $data['identificacion']);
-            $usuario->bindParam(':foto_representante', $data['foto_representante']);
+            $usuario->execute([
+                ':nombre_representante'        => $data['nombre_representante'],
+                ':tipo_documento'              => $data['tipo_documento'],
+                ':identificacion_representante' => $data['identificacion_representante'],
+                ':email_representante'         => $data['email_representante'],
+                ':telefono_representante'      => $data['telefono_representante'],
+                ':identificacion'              => $data['identificacion'],
+                ':foto_representante'          => $data['foto_representante']
+            ]);
 
-            $usuario->execute();
             $id_usuario = $this->conexion->lastInsertId();
 
-
-            $insertar = "INSERT INTO proveedor(
+            // 2️⃣ INSERT PROVEEDOR
+            $insert_proveedor = "INSERT INTO proveedor (
             id_usuario,
             nombre_empresa,
             logo,
@@ -114,39 +117,38 @@ class Proveedor
             :id_ciudad,
             :direccion,
             'activo'
-            )";
+        )";
 
-            $resultado = $this->conexion->prepare($insertar);
-            $resultado->bindParam(':id_usuario', $id_usuario);
-            $resultado->bindParam(':nombre_empresa', $data['nombre_empresa']);
-            $resultado->bindParam(':logo', $data['logo']);
-            $resultado->bindParam(':email', $data['email']);
-            $resultado->bindParam(':telefono', $data['telefono']);
-            $resultado->bindParam(':nit_rut', $data['nit_rut']);
-            $resultado->bindParam(':nombre_representante', $data['nombre_representante']);
-            $resultado->bindParam(':tipo_documento', $data['tipo_documento']);
-            $resultado->bindParam(':identificacion_representante', $data['identificacion_representante']);
-            $resultado->bindParam(':foto_representante', $data['foto_representante']);
-            $resultado->bindParam(':email_representante', $data['email_representante']);
-            $resultado->bindParam(':telefono_representante', $data['telefono_representante']);
-            $resultado->bindParam(':actividades', $data['actividades']);
-            $resultado->bindParam(':departamento', $data['departamento']);
-            $resultado->bindParam(':id_ciudad', $data['id_ciudad']);
-            $resultado->bindParam(':direccion', $data['direccion']);
+            $proveedor = $this->conexion->prepare($insert_proveedor);
+            $proveedor->execute([
+                ':id_usuario'                  => $id_usuario,
+                ':nombre_empresa'              => $data['nombre_empresa'],
+                ':logo'                        => $data['logo'],
+                ':email'                       => $data['email'],
+                ':telefono'                    => $data['telefono'],
+                ':nit_rut'                     => $data['nit_rut'],
+                ':nombre_representante'        => $data['nombre_representante'],
+                ':tipo_documento'              => $data['tipo_documento'],
+                ':identificacion_representante' => $data['identificacion_representante'],
+                ':foto_representante'          => $data['foto_representante'],
+                ':email_representante'         => $data['email_representante'],
+                ':telefono_representante'      => $data['telefono_representante'],
+                ':actividades'                 => $data['actividades'],
+                ':departamento'                => $data['departamento'],
+                ':id_ciudad'                   => $data['id_ciudad'],
+                ':direccion'                   => $data['direccion']
+            ]);
 
-
-            return $resultado->execute();
+            // ✅ TODO BIEN → CONFIRMAR
+            $this->conexion->commit();
+            return true;
         } catch (PDOException $e) {
-            //AQUÍ VA TU CATCH PARA CORREO DUPLICADO
-            if ($e->getCode() == 23000) {
-                mostrarSweetAlert('error', 'Correo duplicado', 'Este correo ya existe en el sistema.');
-                return false;
-            }
-
-            error_log("Error en proveedor::registrar->" . $e->getMessage());
+            // ❌ ALGO FALLÓ → DESHACER TODO
+            $this->conexion->rollBack();
             return false;
         }
     }
+
 
     public function listar()
     {
@@ -174,18 +176,30 @@ class Proveedor
     {
         try {
 
-            $consultar = "SELECT * FROM proveedor WHERE id_proveedor = :id_proveedor LIMIT 1";
+            $consultar = "
+            SELECT 
+                p.*,
+                c.nombre AS ciudad,
+                d.nombre AS departamento
+            FROM proveedor p
+            LEFT JOIN ciudades c ON p.id_ciudad = c.id_ciudad
+            LEFT JOIN departamentos d ON c.id_departamento = d.id_departamento
+            WHERE p.id_proveedor = :id
+            LIMIT 1
+        ";
 
             $resultado = $this->conexion->prepare($consultar);
-            $resultado->bindParam(':id_proveedor', $id);
+            $resultado->bindParam(':id', $id, PDO::PARAM_INT);
             $resultado->execute();
 
-            return $resultado->fetch();
-        } catch (PDOexception $e) {
-            error_log("Error en proveedor::listarProveedor->" . $e->getMessage());
-            return;
+            return $resultado->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log('Error en proveedor::listarProveedor -> ' . $e->getMessage());
+            return null;
         }
     }
+
+
 
 
 

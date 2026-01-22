@@ -1,9 +1,9 @@
 <?php
-
 require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
-
 ?>
+
+
 
 
 
@@ -47,7 +47,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 <body>
 
     <!-- Layout Principal -->
-    <section id="admin-dashboard">
+    <section id="proveedor-actividades">
 
         <!-- Panel Lateral -->
         <?php
@@ -116,10 +116,11 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                                             <!-- Imagen -->
                                             <td>
                                                 <img
-                                                    src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $actividad['imagen'] ?? 'actividad_default.png' ?>"
+                                                    src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $actividad['imagen_principal'] ?? 'actividad_default.png' ?>"
                                                     alt="Actividad"
                                                     width="60"
                                                     class="rounded">
+
                                             </td>
 
                                             <!-- Nombre -->
@@ -148,11 +149,13 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
                                             <!-- Acciones -->
                                             <td>
-                                                <a
-                                                    href="<?= BASE_URL ?>/proveedor/ver-actividad?id=<?= $actividad['id_actividad'] ?>"
-                                                    class="btn btn-sm btn-outline-primary">
-                                                    <i class="fas fa-eye"></i>
-                                                </a>
+                                                <button
+                                                    class="btn btn-sm btn-outline-primary btn-ver-actividad"
+                                                    data-id="<?= $actividad['id_actividad'] ?>"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#modalActividad">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -168,9 +171,82 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                     </div>
                 </div>
             </div>
+    </section>
+
+    <div class="modal fade" id="modalActividad" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content aventura-modal">
+
+                <div class="modal-header aventura-modal-header">
+                    <h5 class="modal-title">Detalle de la Actividad</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-4 text-center">
+                            <img id="modal-imagen" class="img-fluid rounded">
+                        </div>
+
+                        <div class="col-md-8">
+                            <p><strong>Nombre:</strong> <span id="modal-nombre"></span></p>
+                            <p><strong>Ciudad:</strong> <span id="modal-destino"></span></p>
+                            <p><strong>Ubicación:</strong> <span id="modal-ubicacion"></span></p>
+                            <p><strong>Cupos:</strong> <span id="modal-cupos"></span></p>
+                            <p><strong>Precio:</strong> $<span id="modal-precio"></span></p>
+                            <p><strong>Estado:</strong> <span id="modal-estado"></span></p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <strong>Descripción:</strong>
+                        <p id="modal-descripcion"></p>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <a id="btn-desactivar" class="btn btn-danger">Pausar</a>
+                    <a id="btn-activar" class="btn btn-success">Activar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            document.querySelectorAll('.btn-ver-actividad').forEach(btn => {
+                btn.addEventListener('click', () => {
+
+                    const id = btn.dataset.id;
+
+                    fetch(`<?= BASE_URL ?>/app/controllers/proveedor_turistico/actividadDetalle.php?id=${id}`)
+                        .then(res => res.json())
+                        .then(data => {
+
+                            if (data.error) {
+                                alert(data.error);
+                                return;
+                            }
+
+                            document.getElementById('m-nombre').textContent = data.nombre;
+                            document.getElementById('m-descripcion').textContent = data.descripcion;
+                            document.getElementById('m-ubicacion').textContent = data.ubicacion;
+                            document.getElementById('m-cupos').textContent = data.cupos;
+                            document.getElementById('m-precio').textContent = data.precio;
+                            document.getElementById('m-estado').textContent = data.estado;
+                        });
+                });
+            });
+
+        });
+    </script>
 
 
-
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 
 
 

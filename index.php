@@ -126,6 +126,19 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/administrador/consultar_proveedor_hotelero.php';
         break;
 
+    case '/administrador/consultar-proveedor-hotelero-id':
+        require BASE_PATH . '/app/controllers/administrador/hotelero.php';
+        consultarProveedorHoteleroOjo();
+        break;
+
+    case '/administrador/cambiar-estado-proveedor-hotelero':
+        require BASE_PATH . '/app/controllers/administrador/hotelero.php';
+        break;
+
+
+
+
+    // CRUD del Proveedor Hotelero
     case '/administrador/guardar-proveedor-hotelero':
     case '/administrador/editar-proveedor-hotelero':
     case '/administrador/actualizar-proveedor-hotelero':
@@ -166,6 +179,9 @@ switch ($request) {
     case '/administrador/consultar-tickets':
         require BASE_PATH . '/app/views/dashboard/administrador/consultar_tickets.php';
         break;
+    // ===================================================================================================
+    //                                     RUTAS PROVEEDOR TURISTICO
+    // ===================================================================================================
 
     // =====================================================================
     // PROVEEDOR TURÍSTICO
@@ -183,9 +199,12 @@ switch ($request) {
         break;
 
     case '/proveedor/consultar-actividad':
-        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/consultar_actividad_turistica.php';
+        require BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php';
         break;
 
+
+
+    // Perfil del proveedor turistico 
     case '/proveedor/perfil':
         require BASE_PATH . '/app/views/dashboard/proveedor_turistico/perfil_usuario.php';
         break;

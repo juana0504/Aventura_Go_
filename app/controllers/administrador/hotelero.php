@@ -23,25 +23,32 @@ switch ($method) {
             registrarHotel();
         }
         break;
-
     case 'GET':
-        // esta variable captura la accion a realizar
         $accion = $_GET['accion'] ?? '';
 
         if ($accion === 'eliminar') {
-            // esta funcion elimina el proveedor segun su id
             eliminarHotel($_GET['id']);
+            exit;
+        }
+
+        if ($accion === 'activar') {
+            activarProveedorHotelero($_GET['id']);
+            exit;
+        }
+
+        if ($accion === 'desactivar') {
+            desactivarProveedorHotelero($_GET['id']);
+            exit;
         }
 
         if (isset($_GET['id'])) {
-            // esta funcion llena la tabla con el proveedor segun su id
             listarHotelId($_GET['id']);
         } else {
-            // esta funcion llena la tabla con todos los proveedores
             listarHoteles();
         }
 
         break;
+
 
     // case 'PUT':
 
@@ -71,7 +78,7 @@ function registrarHotel()
     $email_representante             = $_POST['email_representante'] ?? '';
     $telefono_representante          = $_POST['telefono_representante'] ?? '';
     $departamento                    = $_POST['departamento'] ?? '';
-    $id_ciudad                       = $_POST['id_ciudad '] ?? '';
+    $id_ciudad                       = $_POST['id_ciudad'] ?? '';
     $direccion                       = $_POST['direccion'] ?? '';
     $tipo_habitacion                 = $_POST['tipo_habitacion'] ?? '';
     $max_huesped                     = $_POST['max_huesped'] ?? '';
@@ -240,7 +247,7 @@ function actualizarHotel()
     $email_representante             = $_POST['email_representante'] ?? '';
     $telefono_representante          = $_POST['telefono_representante'] ?? '';
     $departamento                    = $_POST['departamento'] ?? '';
-    $id_ciudad                       = $_POST['id_ciudad '] ?? '';
+    $id_ciudad                       = $_POST['id_ciudad'] ?? '';
     $direccion                       = $_POST['direccion'] ?? '';
     $tipo_habitacion                 = $_POST['tipo_habitacion'] ?? '';
     $max_huesped                     = $_POST['max_huesped'] ?? '';
@@ -328,5 +335,85 @@ function eliminarHotel($id)
         mostrarSweetAlert('success', 'Eliminación exitosa', 'Proveedor eliminado.', '/aventura_go/administrador/consultar-proveedor-hotelero');
     } else {
         mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el proveedor.');
+    }
+}
+
+// consultar un proveedor hotelero (botón ojo de la tabla)
+function consultarProveedorHoteleroOjo()
+{
+    // Obtener ID desde GET
+    $id = $_GET['id'] ?? null;
+
+    // Validar ID
+    if (!$id) {
+        http_response_code(400);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['error' => 'ID del proveedor hotelero no especificado']);
+        exit;
+    }
+
+    // Consultar el modelo directamente
+    $objHotelero = new Hotelero();
+    $hotelero = $objHotelero->listarProveedorHotelero($id);
+
+    // Validar si se encontró el proveedor
+    if (!$hotelero) {
+        http_response_code(404);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['error' => 'Proveedor hotelero no encontrado']);
+        exit;
+    }
+
+    // Responder con JSON (ok)
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($hotelero);
+    exit;
+}
+
+
+// cambiar estado del proveedor hotelero a ACTIVO
+function activarProveedorHotelero($id)
+{
+    $objHotelero = new Hotelero();
+    $resultado = $objHotelero->activarProveedorHotelero($id);
+
+    if ($resultado === true) {
+        mostrarSweetAlert(
+            'success',
+            'Activación exitosa',
+            'Proveedor hotelero activo en el sistema.',
+            '/aventura_go/administrador/consultar-proveedor-hotelero'
+        );
+    } else {
+        mostrarSweetAlert(
+            'error',
+            'Error al activar',
+            'No se pudo activar el proveedor hotelero.',
+            '/aventura_go/administrador/consultar-proveedor-hotelero'
+        );
+    }
+}
+
+// cambiar estado del proveedor hotelero a INACTIVO
+function desactivarProveedorHotelero($id)
+{
+
+    $objHotelero = new Hotelero();
+    $resultado = $objHotelero->desactivarProveedorHotelero($id);
+
+    if ($resultado === true) {
+        mostrarSweetAlert(
+            'success',
+            'Desactivación exitosa',
+            'Proveedor hotelero inactivo en el sistema.',
+            '/aventura_go/administrador/consultar-proveedor-hotelero'
+        );
+    } else {
+        mostrarSweetAlert(
+            'error',
+            'Error al desactivar',
+            'No se pudo desactivar el proveedor hotelero.',
+            '/aventura_go/administrador/consultar-proveedor-hotelero'
+        );
     }
 }

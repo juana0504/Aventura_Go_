@@ -97,12 +97,17 @@ class ActividadTuristica
     public function listarPorProveedor($id_proveedor)
     {
         $sql = "SELECT 
-                    a.*,
-                    d.nombre AS destino
-                FROM actividad a
-                INNER JOIN destino d ON a.id_ciudad = d.id_ciudad
-                WHERE a.id_proveedor = :id_proveedor
-                ORDER BY a.created_at DESC";
+                a.*,
+                c.nombre AS destino,
+                img.imagen AS imagen_principal
+            FROM actividad a
+            INNER JOIN ciudades c 
+                ON a.id_ciudad = c.id_ciudad
+            LEFT JOIN actividad_imagen img 
+                ON img.id_actividad = a.id_actividad
+               AND img.es_principal = 1
+            WHERE a.id_proveedor = :id_proveedor
+            ORDER BY a.created_at DESC";
 
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':id_proveedor', $id_proveedor, PDO::PARAM_INT);
@@ -110,6 +115,8 @@ class ActividadTuristica
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
 
 
 

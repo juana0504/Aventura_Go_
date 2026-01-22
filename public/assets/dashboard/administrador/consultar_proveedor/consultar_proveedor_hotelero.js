@@ -11,9 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!idProveedor) return;
 
         try {
-            const response = await fetch(
-                `${BASE_URL}/administrador/ver-proveedor-hotelero?id=${idProveedor}`
-            );
+            const response = await fetch(`/aventura_go/administrador/consultar-proveedor-hotelero-id?id=${encodeURIComponent(idProveedor)}`);
 
             if (!response.ok) {
                 throw new Error('No se pudo obtener la información');
@@ -35,17 +33,19 @@ document.addEventListener('DOMContentLoaded', () => {
     function llenarModal(data) {
 
         // Header
-        setText('modal-nombre-establecimiento', data.nombre_establecimiento);
+        setText('modal-nombre-establecimiento', data.nombre_establecimiento ?? '—');
         setImg('modal-logo', `${BASE_URL}/public/uploads/hoteles/${data.logo}`);
 
         // Estado y fecha
         setText('modal-status', data.estado);
-        setText('modal-fecha-registro', data.fecha_registro);
+        setText('modal-fecha-registro', data.created_at ?? '—');
 
         // Información principal
         setText('modal-email', data.email);
         setText('modal-telefono', data.telefono);
         setChips('modal-tipo-establecimiento', data.tipo_establecimiento);
+        setText('modal-nombre-establecimiento-card', data.nombre_establecimiento ?? '—');
+
 
         // Representante
         setText('modal-representante', data.nombre_representante);
@@ -55,23 +55,80 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Ubicación
         setText('modal-departamento', data.departamento);
-        setText('modal-ciudad', data.ciudad);
+        setText('modal-ciudad', data.ciudad ?? '—');
         setText('modal-direccion', data.direccion);
 
         // Habitaciones y servicios
-        setChips('modal-tipo-habitacion', data.tipo_habitacion);
+        setText('modal-tipo-habitacion', data.tipo_habitacion?.replaceAll(',', ', ') ?? '—');
         setText('modal-max-huesped', data.max_huesped);
-        setChips('modal-servicios', data.servicio_incluido);
+        setText('modal-servicios', data.servicio_incluido?.replaceAll(',', ', ') ?? '—');
 
         // Documentación y pagos
         setText('modal-nit', data.nit_rut);
         setText('modal-camara', data.camara_comercio);
         setText('modal-licencia', data.licencia);
-        setChips('modal-metodos-pago', data.metodo_pago);
+        setText('modal-metodos-pago', data.metodo_pago?.replaceAll(',', ', ') ?? '—');
 
-        // Botones activar / desactivar
-        configurarBotonesEstado(data.id, data.estado);
+        // Fecha
+        const fecha = data.created_at ?? null;
+
+        if (fecha) {
+            const f = new Date(fecha);
+            const meses = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+
+            const dia = f.getDate().toString().padStart(2, '0');
+            const mes = meses[f.getMonth()];
+            const anio = f.getFullYear();
+            const hora = f.toTimeString().split(' ')[0];
+
+            document.getElementById('modal-fecha-registro').textContent =
+                `Registrado el: ${dia}-${mes}-${anio} a las ${hora}`;
+        } else {
+            document.getElementById('modal-fecha-registro').textContent = '';
+        }
+
+            // Estado / badge
+        const badge = document.getElementById('modal-status');
+        const estado = (data.estado ?? '').toString().toLowerCase();
+
+        badge.textContent = data.estado ?? 'Desconocido';
+        badge.className =
+            estado === 'ACTIVO' ? 'status-badge badge-activo' :
+            estado === 'INACTIVO' ? 'status-badge badge-inactivo' :
+            'status-badge badge-pendiente';
+
+        const modalEl = document.getElementById('verProveedorModal');
+
+        const btnActivar = modalEl.querySelector('#btn-activar-proveedor');
+        const btnDesactivar = modalEl.querySelector('#btn-desactivar-proveedor');
+
+        btnActivar.setAttribute(
+            'href',
+            `/aventura_go/administrador/cambiar-estado-proveedor-hotelero?id=${data.id_proveedor_hotelero}&accion=activar`
+        );
+
+        btnDesactivar.setAttribute(
+            'href',
+            `/aventura_go/administrador/cambiar-estado-proveedor-hotelero?id=${data.id_proveedor_hotelero}&accion=desactivar`
+        );
+
+        console.log("HREF ACTIVAR:", btnActivar.href);
+        console.log("HREF DESACTIVAR:", btnDesactivar.href);
+      
+
+        // Mostrar/ocultar botón apropiado según estado actual
+        if ((data.estado ?? '').toLowerCase() === 'activo') {
+            btnActivar.style.display = 'none';
+            btnDesactivar.style.display = 'inline-block';
+        } else {
+            btnActivar.style.display = 'inline-block';
+            btnDesactivar.style.display = 'none';
+        }
+
     }
+
+
+
 
     /* ===============================
        HELPERS
@@ -111,42 +168,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function configurarBotonesEstado(id, estado) {
-        const btnActivar = document.getElementById('btn-activar-proveedor');
-        const btnDesactivar = document.getElementById('btn-desactivar-proveedor');
+});
 
-        btnActivar.style.display = estado === 'ACTIVO' ? 'none' : 'inline-block';
-        btnDesactivar.style.display = estado === 'INACTIVO' ? 'none' : 'inline-block';
 
-        btnActivar.onclick = () => cambiarEstado(id, 'ACTIVO');
-        btnDesactivar.onclick = () => cambiarEstado(id, 'INACTIVO');
-    }
 
-    async function cambiarEstado(id, nuevoEstado) {
-        if (!confirm(`¿Seguro que deseas ${nuevoEstado === 'ACTIVO' ? 'activar' : 'desactivar'} este proveedor?`)) {
-            return;
+// --- CAMBIAR ESTADO (ACTIVAR/DESACTIVAR) ---
+document.addEventListener("click", function (e) {
+
+    if (!e.target.classList.contains("btn-estado")) return;
+
+    let id = e.target.dataset.id;
+    let estado = e.target.dataset.estado;
+
+    let nuevoEstado = estado === "activo" ? "inactivo" : "activo";
+
+    fetch("/aventura_go/administrador/cambiar-estado-proveedor-hotelero", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `id=${id}&estado=${nuevoEstado}`
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        if (data.success) {
+
+            let fila = document.querySelector(`#fila-${id}`);
+            let colEstado = fila.querySelector(".col-estado");
+
+            colEstado.textContent = nuevoEstado;
+
+            e.target.dataset.estado = nuevoEstado;
+
+            e.target.textContent = nuevoEstado === "activo" ? "Desactivar" : "Activar";
+            e.target.classList.toggle("btn-danger");
+            e.target.classList.toggle("btn-success");
+
+        } else {
+            alert("Error: " + data.error);
         }
-
-        try {
-            const response = await fetch(
-                `${BASE_URL}/administrador/cambiar-estado-proveedor-hotelero`,
-                {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        id: id,
-                        estado: nuevoEstado
-                    })
-                }
-            );
-
-            if (!response.ok) throw new Error();
-
-            location.reload();
-
-        } catch (error) {
-            alert('No se pudo cambiar el estado');
-        }
-    }
-
+    })
+    .catch(err => alert("Error en la petición: " + err));
 });

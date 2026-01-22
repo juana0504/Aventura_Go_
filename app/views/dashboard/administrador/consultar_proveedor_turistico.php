@@ -318,9 +318,7 @@ require_once __DIR__ . '/../../layouts/header_administrador.php';
 
                 <!-- Footer del Modal -->
                 <div class="modal-footer aventura-modal-footer">
-                    <!-- <button type="button" class="btn btn-aventura-secondary" data-bs-dismiss="modal">
-                        <i class="fas fa-times"></i> Cerrar
-                    </button> -->
+
                     <div class="action-buttons">
 
                         <a class="btn btn-aventura-success" id="btn-activar-proveedor">
