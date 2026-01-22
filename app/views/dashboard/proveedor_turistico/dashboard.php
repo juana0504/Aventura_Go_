@@ -49,18 +49,112 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     include_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php';
     ?>
 
-    <div>
-        <h1> ESTE ES EL DASBOARD DE PROVEEDOR TURISTICO</h1>
-    </div>
+    <main class="container-fluid mt-4">
+
+        <!-- Encabezado -->
+        <section class="mb-4">
+            <h3 class="fw-bold">Panel del Proveedor Turístico</h3>
+            <p class="text-muted">Gestiona tus experiencias, reservas e ingresos</p>
+        </section>
+
+        <!-- Tarjetas resumen -->
+        <section class="row g-4 mb-4">
+            <div class="col-md-3 col-12">
+                <div class="card shadow-sm p-3">
+                    <i class="bi bi-briefcase fs-3"></i>
+                    <p class="mt-2 mb-0">Mis Servicios</p>
+                    <h3>5</h3>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-12">
+                <div class="card shadow-sm p-3">
+                    <i class="bi bi-calendar-check fs-3"></i>
+                    <p class="mt-2 mb-0">Reservas</p>
+                    <h3>12</h3>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-12">
+                <div class="card shadow-sm p-3">
+                    <i class="bi bi-cash-stack fs-3"></i>
+                    <p class="mt-2 mb-0">Ingresos</p>
+                    <h3>$1.250.000</h3>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-12">
+                <div class="card shadow-sm p-3">
+                    <i class="bi bi-check-circle fs-3 text-success"></i>
+                    <p class="mt-2 mb-0">Estado</p>
+                    <span class="badge bg-success">Activo</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Acciones rápidas -->
+        <section class="mb-5">
+            <h5 class="mb-3">Acciones rápidas</h5>
+            <div class="d-flex gap-3 flex-wrap">
+                <a href="#" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Nuevo servicio
+                </a>
+                <a href="#" class="btn btn-outline-secondary">
+                    <i class="bi bi-calendar-event"></i> Ver reservas
+                </a>
+                <a href="#" class="btn btn-outline-dark">
+                    <i class="bi bi-person"></i> Mi perfil
+                </a>
+            </div>
+        </section>
+
+        <!-- Tabla de reservas -->
+        <section class="bg-light p-3 rounded">
+            <h5 class="mb-3">Últimas reservas</h5>
+            <table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Fecha</th>
+                        <th>Experiencia</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Juan Pérez</td>
+                        <td>20-Jul-2025</td>
+                        <td>Canopy</td>
+                        <td><span class="badge bg-success">Confirmada</span></td>
+                    </tr>
+                    <tr>
+                        <td>María Gómez</td>
+                        <td>18-Jul-2025</td>
+                        <td>Rafting</td>
+                        <td><span class="badge bg-warning text-dark">Pendiente</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
 
 
 
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
 
 
 
