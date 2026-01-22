@@ -73,14 +73,15 @@ switch ($method) {
 
 function registrarActividad()
 {
+
     require_once __DIR__ . '/../../models/proveedor_turistico/Proveedor.php';
 
     $proveedorModel = new Proveedor();
-    $id_usuario = $_SESSION['user']['id'];
+    $id_usuario = $_SESSION['user']['id_usuario'];
     $id_proveedor = $proveedorModel->obtenerIdProveedorPorUsuario($id_usuario);
 
     $nombre       = $_POST['nombre'] ?? '';
-    $id_ciudad   = $_POST['id_ciudad'] ?? '';
+    $id_ciudad    = $_POST['id_ciudad'] ?? '';
     $ubicacion    = $_POST['ubicacion'] ?? '';
     $descripcion  = $_POST['descripcion'] ?? '';
     $cupos        = $_POST['cupos'] ?? '';
@@ -229,7 +230,6 @@ function actualizarActividad()
     // DATOS DEL FORMULARIO
     $id_actividad   = $_POST['id_actividad'] ?? '';
     $id_proveedor   = $_SESSION['user']['id_proveedor'] ?? null;
-
     $nombre         = $_POST['nombre'] ?? '';
     $id_ciudad      = $_POST['id_ciudad'] ?? '';
     $ubicacion      = $_POST['ubicacion'] ?? '';
@@ -298,7 +298,7 @@ function listarActividadesProveedor()
     require_once __DIR__ . '/../../models/proveedor_turistico/Proveedor.php';
 
     $proveedorModel = new Proveedor();
-    $id_usuario = $_SESSION['user']['id'];
+    $id_usuario = $_SESSION['user']['id_usuario'];
 
     $id_proveedor = $proveedorModel->obtenerIdProveedorPorUsuario($id_usuario);
 

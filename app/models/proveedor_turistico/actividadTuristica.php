@@ -63,7 +63,10 @@ class ActividadTuristica
             // 🔥 DEVOLVEMOS EL ID DE LA ACTIVIDAD
             return $this->conexion->lastInsertId();
         } catch (PDOException $e) {
-            return false;
+            echo '<pre>';
+            echo $e->getMessage();
+            echo '</pre>';
+            exit;
         }
     }
 
