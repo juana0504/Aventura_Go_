@@ -285,4 +285,63 @@ class Hotelero
             return;
         }
     }
+
+    public function listarProveedorHotelero($id)
+    {
+        $sql = "
+    SELECT 
+        ph.*,
+        c.nombre AS ciudad,
+        d.nombre AS departamento
+    FROM proveedor_hotelero ph
+    LEFT JOIN ciudades c ON ph.id_ciudad = c.id_ciudad
+    LEFT JOIN departamentos d ON c.id_departamento = d.id_departamento
+    WHERE ph.id_proveedor_hotelero = :id
+    LIMIT 1
+";
+
+
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+
+    // activar proveedor hotelero
+    public function activarProveedorHotelero($id)
+    {
+        try {
+            $sql = "UPDATE proveedor_hotelero 
+                SET estado = 'ACTIVO' 
+                WHERE id_proveedor_hotelero = :id";
+
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error activarProveedorHotelero: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    // desactivar proveedor hotelero
+    public function desactivarProveedorHotelero($id)
+    {
+        try {
+            $sql = "UPDATE proveedor_hotelero 
+                SET estado = 'INACTIVO' 
+                WHERE id_proveedor_hotelero = :id";
+
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error desactivarProveedorHotelero: " . $e->getMessage());
+            return false;
+        }
+    }
 }

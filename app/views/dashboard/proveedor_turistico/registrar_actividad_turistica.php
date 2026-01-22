@@ -1,18 +1,14 @@
 <?php
-
 require_once BASE_PATH . '/app/helpers/session_proveedor.php';
-
-
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Actividad Tturisitica</title>
+    <title>Registrar Actividad Turística</title>
 
     <!-- favicon -->
     <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
@@ -20,54 +16,39 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- LIBRERIA AOS ANIMATE -->
+    <!-- AOS -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Icono de bootstrap -->
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
+    <!-- Layouts -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
-
-    <!-- Componentes comunes -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
-    <!-- Estilos CSS (siempre al final) -->
+    <!-- CSS propio -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/registrar_actividad_turistica/registrar_actividad_turistica.css">
-
 </head>
-
-
-
 
 <body>
 
-    <!-- Panel Lateral -->
-    <?php
-    include_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php';
-    ?>
-
-
-
-    <!-- Barra de Búsqueda Superior -->
-    <?php
-    include_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php';
-    ?>
+    <?php include_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php'; ?>
+    <?php include_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php'; ?>
 
     <div class="contenido-principal">
 
         <h2>Registrar actividad turística</h2>
 
-        <form id="formActividad" action="<?= BASE_URL ?>/proveedor/guardar-actividad" method="POST" enctype="multipart/form-data">
+        <form id="formActividad"
+            action="<?= BASE_URL ?>/proveedor/guardar-actividad"
+            method="POST"
+            enctype="multipart/form-data">
 
-            <!-- proveedor oculto -->
             <input type="hidden" name="accion" value="registrar">
-
 
             <!-- ================= PASO 1 ================= -->
             <div class="wizard-step active" id="step-1">
@@ -76,12 +57,16 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                 <label>Nombre de la actividad</label>
                 <input type="text" name="nombre" required>
 
-                <label>Destino</label>
-                <select name="id_ciudad" required>
-                    <!-- luego lo llenas dinámico -->
-                    <option value="">Seleccione destino</option>
-                    <option value="1">Villeta</option>
-                    <option value="2">Útica</option>
+                <!-- 🔥 NUEVO: DEPARTAMENTO -->
+                <label>Departamento</label>
+                <select id="id_departamento">
+                    <option value="">Seleccione departamento</option>
+                </select>
+
+                <!-- 🔥 NUEVO: CIUDAD (DESTINO REAL) -->
+                <label>Destino (Ciudad)</label>
+                <select name="id_ciudad" id="id_ciudad" required>
+                    <option value="">Seleccione ciudad</option>
                 </select>
 
                 <label>Ubicación</label>
@@ -123,13 +108,8 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                 </select>
 
                 <label>Imágenes de la actividad (máx. 5)</label>
-                <input
-                    type="file"
-                    name="imagenes[]"
-                    multiple accept="image/jpeg,image/png"
-                    required>
+                <input type="file" name="imagenes[]" multiple required>
                 <small>Selecciona hasta 5 imágenes (JPG o PNG)</small>
-
 
                 <div class="wizard-actions">
                     <button type="button" onclick="prevStep(2)">Atrás</button>
@@ -138,11 +118,9 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
             </div>
 
         </form>
-
     </div>
 
-
-
+    <!-- WIZARD JS (TUYO, SIN TOCAR) -->
     <script>
         function nextStep(step) {
             document.querySelectorAll('.wizard-step').forEach(el => el.classList.remove('active'));
@@ -154,12 +132,46 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
         }
     </script>
 
+    <!-- 🔥 JS NUEVO: DEPARTAMENTO → CIUDAD -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+            const departamentoSelect = document.getElementById('id_departamento');
+            const ciudadSelect = document.getElementById('id_ciudad');
 
+            // Cargar departamentos
+            fetch('<?= BASE_URL ?>/app/controllers/departamentoController.php')
+                .then(res => res.json())
+                .then(data => {
+                    data.forEach(dep => {
+                        const opt = document.createElement('option');
+                        opt.value = dep.id_departamento;
+                        opt.textContent = dep.nombre;
+                        departamentoSelect.appendChild(opt);
+                    });
+                });
 
+            // Cargar ciudades por departamento
+            departamentoSelect.addEventListener('change', () => {
+                ciudadSelect.innerHTML = '<option value="">Seleccione ciudad</option>';
+
+                if (!departamentoSelect.value) return;
+
+                fetch(`<?= BASE_URL ?>/app/controllers/ciudadController.php?id_departamento=${departamentoSelect.value}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        data.forEach(ciudad => {
+                            const opt = document.createElement('option');
+                            opt.value = ciudad.id_ciudad;
+                            opt.textContent = ciudad.nombre;
+                            ciudadSelect.appendChild(opt);
+                        });
+                    });
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

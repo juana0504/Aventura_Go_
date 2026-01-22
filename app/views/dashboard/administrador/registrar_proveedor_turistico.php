@@ -178,13 +178,28 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                         <option value="">Seleccione un departamento</option>
                                     </select>
                                 </div>
-                                <div class="col-md-6 mb-3">
 
+                                <!-- <div class="col-md-6 mb-3">
                                     <label for="ciudad">Ciudad *</label>
                                     <select name="id_ciudad" id="id_ciudad" class="form-control" required>
                                         <option value="">Seleccione una ciudad</option>
                                     </select>
+                                </div> -->
+
+                                <div class="col-md-6 mb-3">
+                                    <select name="id_ciudad" id="id_ciudad" class="form-control" required>
+                                        <option value="">Seleccione una ciudad</option>
+                                        <?php if (!empty($ciudades)): ?>
+                                            <?php foreach ($ciudades as $ciudad): ?>
+                                                <option value="<?= $ciudad['id_ciudad']; ?>">
+                                                    <?= $ciudad['nombre']; ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </select>
                                 </div>
+
+
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label">Dirección *</label>
                                     <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Calle 123 #45-67" required>

@@ -44,7 +44,7 @@ function mostrarPerfilAdmin()
         'telefono'      => $user['telefono'] ?? '',
         'email'         => $user['email'] ?? '',
         'foto'          => $user['foto'] ?? '',
-        'identificacion'=> $user['identificacion'] ?? '',
+        'identificacion' => $user['identificacion'] ?? '',
         'rol'           => $user['rol'] ?? '',
         'estado'        => $user['estado'] ?? ''
     ];
@@ -117,7 +117,7 @@ function actualizarPerfilAdmin()
         'telefono'      => $telefono,
         'email'         => $email,
         'foto'          => $foto,
-        'identificacion'=> $identificacion
+        'identificacion' => $identificacion
     ];
 
     $resultado = $obj->actualizar($data);

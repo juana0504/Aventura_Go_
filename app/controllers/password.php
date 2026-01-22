@@ -10,8 +10,7 @@ $email = $_POST['email'] ?? '';
 
 
 if (empty($email)) {
-        mostrarSweetAlert('error', 'campo vacio', 'por favor complete el campos');
-    
+    mostrarSweetAlert('error', 'campo vacio', 'por favor complete el campos');
 }
 
 $objmodelo = new Recoverypass();
