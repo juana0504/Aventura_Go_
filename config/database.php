@@ -6,7 +6,7 @@
 class conexion
 {
     private $host = "localhost";
-    private $db = "aventura_go_nueva";
+    private $db = "aventura_go";
     private $user = "root";
     private $pass = "";
     private $conexion;
