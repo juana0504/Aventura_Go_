@@ -112,8 +112,7 @@ require_once __DIR__ . '/../../layouts/header_administrador.php';
                             <?php foreach ($datos as $proveedor): ?>
                                 <tr id="fila-<?= $proveedor['id_proveedor'] ?>">
                                     <td>
-                                        <img
-                                            src="<?= BASE_URL ?>/imagen/turistico?file=<?= urlencode($proveedor['logo']) ?>"alt="logo empresa">
+                                        <img src="<?= BASE_URL ?>/public/uploads/turistico/<?= $proveedor['logo'] ?>" alt="logo empresa">
                                     </td>
                                     <td><?= $proveedor['nombre_empresa'] ?></td>
                                     <td><?= $proveedor['nombre_representante'] ?></td>
