@@ -1,7 +1,0 @@
-# Evitar listado de directorios
-Options -Indexes
-
-# Bloquear todo acceso web directo
-<FilesMatch ".*">
-    Require all denied
-</FilesMatch>
