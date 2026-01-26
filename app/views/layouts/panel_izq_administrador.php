@@ -43,7 +43,6 @@
                             Soporte y Reportes
                         </a>
                         <ul class="dropdown-menu" id="menu-panel">
-                            <li><a class="dropdown-item" href="<?= BASE_URL ?>/administrador/crear-ticket">Generar Reporte</a></li>
                             <li><a class="dropdown-item" href="<?= BASE_URL ?>/administrador/consultar-tickets">Consultar Tickets</a></li>
                         </ul>
                     </div>
