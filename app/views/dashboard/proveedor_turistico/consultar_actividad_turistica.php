@@ -65,7 +65,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
             <!-- Título y Acciones -->
             <div class="header-section">
-                <h1>Gestión de Proveedores turisticos</h1>
+                <h1>Gestión de Actividades turisticas</h1>
             </div>
 
 
