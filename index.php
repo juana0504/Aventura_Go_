@@ -202,11 +202,11 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php';
         break;
 
-        // consultar reservas
     case '/proveedor/consultar-reservas':
         require BASE_PATH . '/app/views/dashboard/proveedor_turistico/consultar_reservas.php';
         break;
 
+        
 
 
 

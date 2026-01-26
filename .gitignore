@@ -1,2 +1,7 @@
+#Dependencias
 /vendor/
 /vendor/*
+
+#Archivos subidos por usuarios (No versionar)
+/public/uploads/
+/public/uploads/*
