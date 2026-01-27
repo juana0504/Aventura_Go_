@@ -38,7 +38,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
 <body>
 
-<section id="proveedor-actividades">
+<section id="proveedor-reservas">
 
     <!-- Panel lateral -->
     <?php require_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php'; ?>
@@ -52,31 +52,33 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
         <!-- Header -->
         <div class="header-section">
             <h1>Consultar Reservas</h1>
-            <p class="text-muted">Listado de reservas realizadas en tus actividades</p>
+           
         </div>
 
-        <!-- Filtros rápidos -->
-        <div class="filtros-rapidos">
-            <button class="filtro-btn active" data-filter="all">
-                <i class="bi bi-grid"></i> Todas
-            </button>
-            <button class="filtro-btn" data-filter="pendiente">
-                <i class="bi bi-clock"></i> Pendientes
-            </button>
-            <button class="filtro-btn" data-filter="confirmada">
-                <i class="bi bi-check-circle"></i> Confirmadas
-            </button>
-            <button class="filtro-btn" data-filter="cancelada">
-                <i class="bi bi-x-circle"></i> Canceladas
-            </button>
-        </div>
+        
+          <!-- Filtros Rápidos -->
+            <div class="filtros-rapidos">
+                <button class="filtro-btn active" data-filter="all">
+                    <i class="bi bi-grid"></i> Todos
+                </button>
+                <button class="filtro-btn" data-filter="activo">
+                    <i class="bi bi-check-circle"></i> Activos
+                </button>
+                <button class="filtro-btn" data-filter="inactivo">
+                    <i class="bi bi-x-circle"></i> Inactivos
+                </button>
+                <button class="filtro-btn" data-filter="pendiente">
+                    <i class="bi bi-clock"></i> Pendientes
+                </button>
+                <a href="<?= BASE_URL ?>/administrador/reporte?tipo=turistico" class="btn-pdf" target="_blank">
+                    <i class="bi bi-file-earmark-pdf"></i>Generar Reportes
+                </a>
+            </div>
 
         <!-- Tabla -->
         <div class="card shadow-sm mt-4">
-            <div class="card-header bg-white">
-                <h5 class="mb-0">Listado de Reservas</h5>
-            </div>
-
+            
+           
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-hover align-middle">
