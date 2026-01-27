@@ -321,6 +321,7 @@ function listarActividadId($id)
     return $objActividad->listarPorId($id);
 }
 
+
 function activarActividad($id)
 {
     $objActividad = new ActividadTuristica();
@@ -363,5 +364,19 @@ function desactivarActividad($id)
             'Error',
             'No se pudo desactivar la actividad'
         );
+    }
+}
+
+
+function eliminaractividad($id)
+{
+    $objActividad = new ActividadTuristica();
+
+    $resultado = $objActividad->eliminar($id);
+
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Eliminación exitosa', 'actividad eliminada.', '/aventura_go/proveedor/consultar-turista');
+    } else {
+        mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el turista.');
     }
 }
