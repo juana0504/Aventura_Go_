@@ -220,7 +220,9 @@ switch ($request) {
         break;
 
     case '/administrador/consultar-tickets':
-        require BASE_PATH . '/app/views/dashboard/administrador/consultar_tickets.php';
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        $controller = new TicketController();
+        $controller->consultar(); // <--- Esto ejecutará la consulta y cargará la vista con datos
         break;
     // ===================================================================================================
     //                                     RUTAS PROVEEDOR TURISTICO

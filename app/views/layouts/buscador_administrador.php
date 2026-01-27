@@ -1,13 +1,19 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+require_once __DIR__ . '/../../helpers/auth.php';
+auth('administrador');
 
 require_once __DIR__ . '/../../helpers/alert_helper.php';
 require_once __DIR__ . '/../../controllers/perfil.php';
 
-$id = $_SESSION['user']['id'] ?? null;
+$id = $_SESSION['user']['id'];
 
 $usuario = mostrarPerfilAdmin($id);
-
 ?>
+
 
 
 <form id="busqueda" class="ag-buscador-admin" action="busqueda">

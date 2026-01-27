@@ -4,15 +4,25 @@ class TicketController {
     
     // Función para MOSTRAR la lista de tickets
     public function consultar() {
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // VALIDAR ADMINISTRADOR
+        if (!isset($_SESSION['administrador'])) {
+            header("Location: " . BASE_URL . "/login");
+            exit;
+        }
+
         require_once BASE_PATH . '/app/models/Ticket.php';
         $ticketModel = new Ticket();
 
-        // Obtenemos los datos desde el modelo (que ya tiene el LEFT JOIN)
         $listadoTickets = $ticketModel->listarTodo();
 
-        // Cargamos la vista de la tabla
         require_once BASE_PATH . '/app/views/dashboard/administrador/consultar_tickets.php';
     }
+
 
     // Tu función actual para GUARDAR (la que ya funciona)
     public function guardar() {
