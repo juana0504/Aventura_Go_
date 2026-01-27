@@ -127,6 +127,8 @@ class ActividadTuristica
     public function listarPorId($id)
     {
         $sql = "SELECT * FROM actividad WHERE id_actividad = :id";
+
+
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();

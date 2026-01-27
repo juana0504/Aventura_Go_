@@ -42,18 +42,17 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
         <!-- Panel Lateral -->
         <?php
-        include_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php';
+        require_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php';
         ?>
 
         <!-- Contenido Principal -->
         <div class="contenido-principal">
 
             <!-- Barra de Búsqueda Superior -->
-            <div id="barra">
-                <?php
-                include_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php';
-                ?>
-            </div>
+            <?php
+            require_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php';
+            ?>
+
 
 
             <!-- Formulario Wizard -->
@@ -141,6 +140,11 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
 
 
+    <script>
+        const BASE_URL = "<?= BASE_URL ?>";
+    </script>
+
+    <script src="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/consultar_actividad_turistica/modal_actividad_detalle.js"></script>
 
 
     <!-- WIZARD JS (TUYO, SIN TOCAR) -->

@@ -51,16 +51,6 @@ body {
 
 }
 
-#barra {
-    box-shadow: none !important;
-    border-bottom: none !important;
-    margin-bottom: 0 !important;
-    background: transparent !important;
-    border: none !important;
-}
-
-
-
 
 .wizard-header {
     width: 100%;
