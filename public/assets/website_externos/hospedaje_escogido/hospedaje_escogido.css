@@ -26,7 +26,7 @@ body {
     font-family: var(--font-text);
 }
 
-/*  HEADER  */
+/* ========== HEADER ========== */
 header {
     margin: 10px 30px 0 30px;
 }
@@ -84,7 +84,10 @@ button.principal {
     color: var(--color-white);
 }
 
-
+button.secundario {
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+}
 
 button.principal:hover,
 button.secundario:hover {
@@ -92,86 +95,37 @@ button.secundario:hover {
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
 }
 
+/* ===============================
+   BIENVENIDA USUARIO - HEADER
+   =============================== */
 
-   
-/* ESTILOS PARA EL FILTRO DE BÚSQUEDA  */
-.search-filters {
-  background-color: #f5f5f5; /* Fondo claro del bloque */
-  border-radius: 20px;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.Bienvenido {
+    background-color: #2D4059;
+    /* azul Aventura Go */
+    color: #FFFFFF;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    margin-right: 10px;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
 }
 
-/* Contenedor de los filtros */
-.filters-row {
-  background-color: #23384b; /* Fondo azul oscuro */
-  padding: 10px 20px;
-  border-radius: 10px;
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+/* Ajuste para que no se pegue al botón salir */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-/* Cada ítem del filtro */
-.filter-item {
-  background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  padding: 8px 12px;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  min-width: 260px;
-  border: 1px solid #ccc;
+.bienvenido strong {
+    font-weight: 700;
 }
 
-/* Iconos */
-.filter-item i {
-  color: #23384b;
-  margin-right: 8px;
-  font-size: 16px;
-}
-
-/* Input */
-.filter-item input {
-  border: none;
-  outline: none;
-  background: none;
-  color: #333;
-  font-size: 14px;
-  width: 100%;
-}
-
-/* Flecha tipo desplegable*/
-.filter-item::after {
-  content: "\f078"; /* icono fa-chevron-down */
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  color: #333;
-  margin-left: 10px;
-  font-size: 12px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .filters-row {
-    flex-direction: column;
-  }
-  .filter-item {
-    width: 100%;
-  }
-}
-
-/* estilos de stars */
-.stars i{
-    color: var(--color-secondary);
-}
-
-
-/*  MAIN - INFO SECTION  */
+/* ========== MAIN - INFO SECTION ========== */
 #info {
     max-width: 1200px;
     margin: 30px auto;
@@ -197,7 +151,7 @@ button.secundario:hover {
 
 .detalle h2 {
     font-family: var(--font-titles);
-    font-size:25px;
+    font-size: 28px;
     font-weight: 700;
     color: var(--color-secondary);
     margin-bottom: 10px;
@@ -206,7 +160,7 @@ button.secundario:hover {
 .detalle span {
     position: absolute;
     top: 21px;
-    left:500px;
+    left: 448px;
     background-color: #000000;
     color: white;
     padding: 8px 20px;
@@ -272,65 +226,33 @@ button.secundario:hover {
     font-weight: 700;
     color: var(--color-secondary);
 }
-.linea-gradiente {
-    width: 2px;
-    height:180px;
-    position: absolute;
-    margin: 0 auto;
-    bottom:230px;
-    left: 50px;
-    right:40px;
-    background: linear-gradient(180deg, #3e3e3e, #545353);
-    border-radius: 10px;
+
+/* ========== GALERÍA DE IMÁGENES ========== */
+#info>img {
+    width: calc(33.33% - 10px);
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
-/*  SECCIÓN INFO  */
+#info>img:hover {
+    transform: scale(1.05);
+}
+
+/* Grid de imágenes */
 #info {
-    display: block; /* Cambiado de flex a block */
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #info>.targeta {
     width: 100%;
 }
 
-/*  GALERÍA DE IMÁGENES  */
-/*  GALERÍA DE IMÁGENES  */
-.img-grande {
-    width: 100%;
-    height: 60%;
-    object-fit: cover;
-    min-height: 400px;
-}
-
-.img-mediana {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.img-pequena {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-}
-
-/* Efectos hover para todas las imágenes */
-.img-grande:hover,
-.img-mediana:hover,
-.img-pequena:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-}
-.galeria-tours img {
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.galeria-tours img:hover {
-    transform: scale(1.05);
-}   
-/*  DESCRIPCIÓN LARGA  */
+/* ========== DESCRIPCIÓN LARGA ========== */
 #info>p:last-of-type {
     width: 100%;
     font-size: 14px;
@@ -343,12 +265,12 @@ button.secundario:hover {
 
 .dato {
     background: #FFFFFF;
-    margin-top: -180px;
+    margin-top: 30px;
     padding: 20px;
     border-radius: 20px;
 }
 
-/*  MAPA  */
+/* ========== MAPA ========== */
 .mapa-section {
     width: 100%;
     margin: 40px 0;
@@ -370,7 +292,7 @@ button.secundario:hover {
     border: none;
 }
 
-/*  FOOTER  */
+/* ========== FOOTER ========== */
 .container-fluid {
     width: 100%;
     padding: 0;
@@ -511,7 +433,7 @@ button.secundario:hover {
     color: #EA8217;
 }
 
-/*  RESPONSIVE  */
+/* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
     .navbar .container {
         flex-direction: column;
@@ -526,7 +448,3 @@ button.secundario:hover {
         flex-direction: column;
     }
 }
-
-
-
-

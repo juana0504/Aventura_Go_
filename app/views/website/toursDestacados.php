@@ -47,7 +47,7 @@
           <?php if (isset($_SESSION['user'])): ?>
 
             <span class="Bienvenido">
-              Bienvenido, <?= htmlspecialchars($_SESSION['user']['nombre']) ?>
+              Bienvenido, <?= htmlspecialchars(ucwords(explode(' ', $_SESSION['user']['nombre'])[0] . ' ' . (explode(' ', $_SESSION['user']['nombre'])[1] ?? ''))) ?>
             </span>
 
             <a href="/aventura_go/logout" class="btn-register">
@@ -100,12 +100,6 @@
 
         </div>
 
-        <!-- <div class="search-box">
-                    <div class="search-item">
-                        <strong>Busca tu destino</strong>
-                    </div>
-                    <a href="website_externos/destinos.html" class="search-btn bi bi-search "></a>
-                </div> -->
 
         <h2 class="marca">AVENTURA<br>GO</h2>
 
@@ -119,8 +113,6 @@
       </div>
     </div>
   </section>
-
-
 
 
 

@@ -32,7 +32,7 @@
           <?php if (isset($_SESSION['user'])): ?>
 
             <span class="Bienvenido">
-              Bienvenido, <?= htmlspecialchars($_SESSION['user']['nombre']) ?>
+              Bienvenido, <?= htmlspecialchars(ucwords(explode(' ', $_SESSION['user']['nombre'])[0] . ' ' . (explode(' ', $_SESSION['user']['nombre'])[1] ?? ''))) ?>
             </span>
 
             <a href="/aventura_go/logout" class="btn-register">
