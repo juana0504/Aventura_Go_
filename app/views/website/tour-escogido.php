@@ -27,7 +27,7 @@
     <!-- LIBRERIA AOS ANIMATE -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <!-- CSS personalizado -->
-    <link rel="stylesheet" href="../../assets/dashboard/turista/tour_escogido/tour-escogido.css">
+    <link rel="stylesheet" href="public/assets/website_externos/tour_escogido/tour_escogido.css">
 
 
 

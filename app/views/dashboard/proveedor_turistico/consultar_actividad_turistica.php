@@ -90,9 +90,6 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
             </div>
 
             <div class="card shadow-sm mt-4">
-                <div class="card-header bg-white">
-                    <h5 class="mb-0">Listado de actividades turísticas</h5>
-                </div>
 
                 <div class="table-responsive">
                     <table id="tablaActividades" class="table table-hover align-middle">

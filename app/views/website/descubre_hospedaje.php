@@ -12,7 +12,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Estilos personalizados -->
-  <link rel="stylesheet" href="../../assets/dashboard/turista/hospedaje_vega/hospedajeVega.css">
+  <link rel="stylesheet" href="public/assets/website_externos/hospedaje_vega/hospedajeVega.css">
+
 </head>
 
 <body>
