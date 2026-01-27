@@ -153,6 +153,36 @@ header {
     justify-content: center;
 }
 
+/* ===============================
+   BIENVENIDA USUARIO - HEADER
+   =============================== */
+
+.Bienvenido {
+    background-color: #2D4059;
+    /* azul Aventura Go */
+    color: #FFFFFF;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    margin-right: 10px;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+/* Ajuste para que no se pegue al botón salir */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bienvenido strong {
+    font-weight: 700;
+}
+
 /* BOTONES */
 .tab-btn {
     padding: 12px 30px;
@@ -164,6 +194,29 @@ header {
     transition: all 0.3s ease;
     border: 2px solid transparent;
 }
+
+.Bienvenido {
+    background-color: #2D4059;
+    /* azul Aventura Go */
+    color: #FFFFFF;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    margin-right: 10px;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+/* Ajuste para que no se pegue al botón salir */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 
 /* BOTÓN ACTIVO (NARANJA) */
 .tab-btn.active {

@@ -169,6 +169,10 @@ header {
   gap: 8px;
 }
 
+.bienvenido strong {
+  font-weight: 700;
+}
+
 /* SECCIÓN HERO____________________________________________________________________________________________________   */
 #hero {
   position: relative;
