@@ -22,12 +22,14 @@ form#busqueda input {
 
 form#busqueda .bi-search {
     position: absolute;
-    bottom: 54px;
-    left: 570px;
+    left: 445px;
+    top: 35%;
+    transform: translateY(-50%);
     font-size: 18px;
-    pointer-events: none;
     color: #95a5a6;
+    pointer-events: none;
 }
+
 
 #modoOscuroBtn,
 #notificacionesBtn {

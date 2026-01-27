@@ -33,12 +33,12 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
     <!-- CSS propio de reservas -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/reservas/consultar_reservas.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/consultar_reservas/consultar_reservas.css">
 </head>
 
 <body>
 
-<section id="proveedor-reservas">
+<section id="proveedor-actividades">
 
     <!-- Panel lateral -->
     <?php require_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php'; ?>
