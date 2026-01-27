@@ -43,9 +43,9 @@ body {
     padding: 0;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
+.info {
+    max-width: 1300px;
+    margin-left: 280px;
     padding: 20px;
 }
 
