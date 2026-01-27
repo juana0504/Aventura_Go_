@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +26,35 @@
                 <ul class="navbar-nav">
                     <h1>Tu hospedaje en la vega</h1>
                 </ul>
+
                 <div class="actions">
+
+                    <?php if (isset($_SESSION['user'])): ?>
+
+                        <span class="Bienvenido">
+                            Bienvenido, <?= htmlspecialchars($_SESSION['user']['nombre']) ?>
+                        </span>
+
+                        <a href="/aventura_go/logout" class="btn-register">
+                            Salir
+                        </a>
+
+                    <?php else: ?>
+
+                        <a href="/aventura_go/login" class="btn-login">
+                            Ingresa
+                        </a>
+
+                        <a href="/aventura_go/registrarse" class="btn-register">
+                            Regístrate
+                        </a>
+
+                    <?php endif; ?>
+
+                    <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+                        <i class="fas fa-bars"></i>
+                    </div>
+
                     <button class="principal">Atrás</button>
                     <button class="secundario">Salir</button>
                 </div>
