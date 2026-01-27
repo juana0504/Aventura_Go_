@@ -1,0 +1,195 @@
+/* ==============================
+   CONSULTAR RESERVAS - AVENTURA GO
+   ============================== */
+
+/* Layout principal (igual al proyecto) */
+/* Layout base 
+    ============================== */
+.info {
+    flex: 1;
+    margin-left: 280px;
+    overflow-x: hidden;
+    padding: 15px 40px;
+}
+
+
+/* ==============================
+   HEADER
+   ============================== */
+
+.header-section {
+    margin-bottom: 25px;
+}
+
+.header-section h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #000000;
+    font-family: 'Raleway', sans-serif;
+}
+
+.header-section p {
+    margin-top: 4px;
+    font-size: 14px;
+    color: #34495e;
+    font-family: 'Lato', sans-serif;
+}
+
+/* ==============================
+   FILTROS RÁPIDOS
+   ============================== */
+
+.filtros-rapidos {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.filtro-btn {
+    padding: 10px 18px;
+    border-radius: 20px;
+    border: none;
+    background-color: #DEE6F2;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2D4059;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Lato', sans-serif;
+}
+
+.filtro-btn:hover {
+    background-color: #d4dceb;
+}
+
+.filtro-btn.active {
+    background-color: #EA8217;
+    color: #ffffff;
+}
+
+/* ==============================
+   LISTA / TABLA DE RESERVAS
+   ============================== */
+
+.card {
+    background-color: #DEE6F2;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border: none;
+}
+
+.card-header {
+    background: none;
+    border: none;
+    padding: 0 0 15px 0;
+}
+
+.card-header h5 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000000;
+    font-family: 'Raleway', sans-serif;
+}
+
+/* Tabla */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table thead th {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #000000;
+    border-bottom: 2px solid #d1d5db;
+    padding: 12px;
+}
+
+.table tbody td {
+    font-size: 14px;
+    color: #34495e;
+    padding: 14px 12px;
+    vertical-align: middle;
+}
+
+/* ==============================
+   ESTADOS
+   ============================== */
+
+.badge {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge.bg-success {
+    background-color: #2ecc71 !important;
+}
+
+.badge.bg-warning {
+    background-color: #f39c12 !important;
+}
+
+.badge.bg-danger {
+    background-color: #e74c3c !important;
+}
+
+/* ==============================
+   BOTÓN VER DETALLE
+   ============================== */
+
+.btn-outline-primary {
+    border: none;
+    background-color: #EA8217;
+    color: #ffffff;
+    border-radius: 8px;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-outline-primary:hover {
+    background-color: #ff7a29;
+}
+
+/* ==============================
+   MODAL
+   ============================== */
+
+.aventura-modal {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.aventura-modal-header {
+    background-color: #2D4059;
+    color: #ffffff;
+}
+
+.aventura-modal-header .modal-title {
+    font-weight: 600;
+    font-family: 'Raleway', sans-serif;
+}
+
+.aventura-modal .modal-body p {
+    font-size: 14px;
+    margin-bottom: 8px;
+    font-family: 'Lato', sans-serif;
+}
+
+/* ==============================
+   RESPONSIVE
+   ============================== */
+
+@media (max-width: 992px) {
+    .info {
+        margin-left: 0;
+        padding: 15px;
+    }
+}
