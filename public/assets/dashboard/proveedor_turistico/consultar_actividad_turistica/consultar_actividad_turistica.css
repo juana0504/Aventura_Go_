@@ -1,0 +1,749 @@
+/* AVENTURA GO – CONSULTAR ACTIVIDADES TURÍSTICAS */
+
+/* fuente para titulos*/
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
+
+/*fuente para textos*/
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+h1 h2 h3 h4 h5 h6 {
+    --font-titles: 'Raleway', sans-serif;
+    /*tipografia titulos*/
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'lato', sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* da estilos a toda la seccion izquierda */
+.info {
+    flex: 1;
+    margin-left: 280px;
+    overflow-x: hidden;
+}
+
+/* ========== estilos boton pdf ========== */
+.btn-pdf {
+    background: red;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+/* ========== HEADER SECTION ========== */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.header-section h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2D4059;
+    margin: 0;
+}
+
+/* ========== FILTROS RÁPIDOS ========== */
+.filtros-rapidos {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.filtro-btn {
+    padding: 10px 20px;
+    background-color: #f0f4f8;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #6b7280;
+}
+
+.filtro-btn:hover {
+    background-color: #e5eaf0;
+}
+
+.filtro-btn.active {
+    background-color: #fff;
+    border-color: #EA8217;
+    color: #EA8217;
+}
+
+
+/* ========== TABLA ========== */
+.tabla-container {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+    /* Permite scroll horizontal en pantallas pequeñas */
+}
+
+table.table {
+    width: 100%;
+    margin-bottom: 0;
+    table-layout: fixed;
+    /* Esto hace que las columnas mantengan su ancho */
+    border-collapse: collapse;
+}
+
+/* ========== TABLA ========== */
+.table-responsive {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+    /* Permite scroll horizontal en pantallas pequeñas */
+}
+
+table.table {
+    width: 100%;
+    margin-bottom: 0;
+    table-layout: fixed;
+    /* Esto hace que las columnas mantengan su ancho */
+    border-collapse: collapse;
+}
+
+
+
+/* ===============================
+TABLA
+=============================== */
+
+.table-responsive {
+    background: #FFFFFF;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+}
+
+#tablaActividades {
+    width: 100%;
+    margin-bottom: 0;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+/* Anchos de columnas */
+/* Imagen */
+#tablaActividades thead th:nth-child(1) {
+    width: 8%;
+}
+
+/* Nombre */
+#tablaActividades thead th:nth-child(2) {
+    width: 18%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* Muestra puntos suspensivos si es muy largo */
+}
+
+/* Destino */
+#tablaActividades thead th:nth-child(3) {
+    width: 10%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* Muestra puntos suspensivos si es muy largo */
+}
+
+/* Ubicación */
+#tablaActividades thead th:nth-child(4) {
+    width: 18%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* Muestra puntos suspensivos si es muy largo */
+}
+
+/* Cupos */
+#tablaActividades thead th:nth-child(5) {
+    width: 7%;
+}
+
+/* Precio */
+#tablaActividades thead th:nth-child(6) {
+    width: 10%;
+}
+
+/* Estado */
+#tablaActividades thead th:nth-child(7) {
+    width: 10%;
+}
+
+/* Acciones */
+#tablaActividades thead th:nth-child(8) {
+    width: 15%;
+}
+
+
+/* Encabezados */
+#tablaActividades thead th {
+    background-color: #F8F9FA;
+    color: #2D4059;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    padding: 14px 12px;
+    border-bottom: 2px solid #E0E0E0;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Celdas */
+#tablaActividades tbody td {
+    padding: 14px 12px;
+    font-size: 14px;
+    color: #2B2B2B;
+    border-bottom: 1px solid #F1F1F1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}
+
+/* Columnas con texto largo */
+#tablaActividades tbody td:nth-child(2),
+#tablaActividades tbody td:nth-child(3),
+#tablaActividades tbody td:nth-child(4) {
+    max-width: 0;
+}
+
+/* Hover texto completo */
+#tablaActividades tbody td:hover {
+    white-space: normal;
+    background-color: #F8F9FA;
+    position: relative;
+    z-index: 2;
+}
+
+/* Filas */
+#tablaActividades tbody tr {
+    transition: background-color 0.25s ease;
+}
+
+#tablaActividades tbody tr:hover {
+    background-color: #F9FAFB;
+}
+
+/* Imágenes */
+#tablaActividades tbody img {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #E0E0E0;
+}
+
+/* ========== ESTILOS PARA LOGO EN TABLA ========== */
+tbody tr td img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #e5e7eb;
+    background-color: #f8f9fa;
+    display: block;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+tbody tr td img:hover {
+    transform: scale(1.1);
+    border-color: #EA8217;
+    box-shadow: 0 4px 8px rgba(234, 130, 23, 0.2);
+}
+
+/* Asegurar que la celda del logo tenga el contenido centrado */
+tbody tr td:nth-child(1) {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Badges de Estado */
+.badge-activo,
+.badge-inactivo,
+.badge-pendiente {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.badge-activo {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.badge-inactivo {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.badge-pendiente {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+/* Botones de Acción */
+.btn-accion {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: all 0.3s;
+    font-size: 14px;
+}
+
+.btn-ver {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+.btn-ver:hover {
+    background-color: #bfdbfe;
+    transform: translateY(-2px);
+}
+
+.btn-editar {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.btn-editar:hover {
+    background-color: #fde68a;
+    transform: translateY(-2px);
+}
+
+.btn-eliminar {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.btn-eliminar:hover {
+    background-color: #fecaca;
+    transform: translateY(-2px);
+}
+
+
+
+/* DataTables Personalization */
+.dt-buttons {
+    margin-bottom: 15px;
+}
+
+div.dataTables_wrapper div.dataTables_filter input {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+div.dataTables_wrapper div.dataTables_length select {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 6px 10px;
+}
+
+/* Ajustes específicos para DataTables */
+div.dataTables_wrapper div.dataTables_scroll {
+    margin-bottom: 1em;
+}
+
+div.dataTables_wrapper div.dataTables_scrollBody {
+    border: none !important;
+}
+
+div.dataTables_wrapper div.dataTables_scrollBody td {
+    border-top: none !important;
+}
+
+
+
+
+/* ====================================================== Modal Aventura Go ======================================================= */
+
+.aventura-modal {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(45, 64, 89, 0.15);
+    overflow: hidden;
+    font-family: 'Lato', sans-serif;
+}
+
+/* Header del Modal */
+.aventura-modal-header {
+    background: linear-gradient(135deg, #2D4059 0%, #3A506B 100%);
+    border-bottom: 3px solid #EA8217;
+    padding: 1.5rem 2rem;
+    color: #FFFFFF;
+}
+
+.modal-header-content {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.modal-logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 3px solid #FFFFFF;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.modal-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 5px;
+}
+
+.modal-title {
+    flex: 1;
+}
+
+.modal-title-text {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin: 0;
+    color: #FFFFFF;
+}
+
+.aventura-text {
+    color: #EA8217;
+    font-weight: 800;
+}
+
+.modal-subtitle {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Body del Modal */
+.modal-body {
+    padding: 2rem;
+    background-color: #F8F9FA;
+    color: #2B2B2B;
+}
+
+/* Barra de estado */
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    border: 1px solid #E0E0E0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.status-badge {
+    padding: 0.375rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: 'Lato', sans-serif;
+}
+
+.status-badge[data-status="activo"] {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status-badge[data-status="inactivo"] {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.status-badge[data-status="pendiente"] {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.register-date {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+/* Secciones de información */
+.info-section {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 1.5rem;
+    border: 1px solid #E0E0E0;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.info-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #EA8217;
+}
+
+.section-icon {
+    color: #2D4059;
+    font-size: 1.25rem;
+    background-color: rgba(234, 130, 23, 0.1);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-header h6 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: #2D4059;
+    margin: 0;
+}
+
+/* Tarjetas de información */
+.info-card {
+    height: 100%;
+    padding: 1.25rem;
+    background-color: #F8F9FA;
+    border-radius: 8px;
+    border-left: 4px solid #2D4059;
+    transition: all 0.3s ease;
+}
+
+.info-card:hover {
+    background-color: #FFFFFF;
+    border-left-color: #EA8217;
+    box-shadow: 0 4px 12px rgba(45, 64, 89, 0.1);
+}
+
+.info-label {
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #2D4059;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.info-label i {
+    color: #EA8217;
+    font-size: 0.9rem;
+}
+
+.info-value {
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    color: #2B2B2B;
+    line-height: 1.5;
+    min-height: 24px;
+}
+
+/* Actividades */
+.activities-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.activity-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    background-color: rgba(45, 64, 89, 0.08);
+    border-radius: 20px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875rem;
+    color: #2D4059;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(45, 64, 89, 0.1);
+}
+
+.activity-badge:hover {
+    background-color: rgba(234, 130, 23, 0.1);
+    color: #EA8217;
+    border-color: rgba(234, 130, 23, 0.2);
+    transform: translateY(-2px);
+}
+
+.activity-badge i {
+    font-size: 0.8rem;
+}
+
+/* Imagen del logo */
+.logo-img {
+    max-width: 150px;
+    max-height: 100px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid #E0E0E0;
+    padding: 0.5rem;
+    background-color: #FFFFFF;
+}
+
+/* Footer del Modal */
+.aventura-modal-footer {
+    background-color: #F8F9FA;
+    border-top: 1px solid #E0E0E0;
+    padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Botones personalizados */
+.btn-aventura-secondary {
+    background-color: #6c757d;
+    color: #FFFFFF;
+    border: none;
+    padding: 0.625rem 1.5rem;
+    border-radius: 6px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-aventura-secondary:hover {
+    background-color: #5a6268;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-aventura-success {
+    background-color: #28a745;
+    color: #FFFFFF;
+    border: none;
+    padding: 0.625rem 1.5rem;
+    border-radius: 6px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-aventura-success:hover {
+    background-color: #218838;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.2);
+}
+
+.btn-aventura-danger {
+    background-color: #dc3545;
+    color: #FFFFFF;
+    border: none;
+    padding: 0.625rem 1.5rem;
+    border-radius: 6px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-aventura-danger:hover {
+    background-color: #c82333;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.2);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.75rem;
+}
+
+
+
+
+
+
+/* ===============================
+RESPONSIVE
+=============================== */
+
+@media (max-width: 992px) {
+    .info {
+        padding: 15px;
+    }
+
+    .header-section h1 {
+        font-size: 20px;
+    }
+
+    .btn-pdf {
+        margin-left: 0;
+    }
+}

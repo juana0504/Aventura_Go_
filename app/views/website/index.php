@@ -372,8 +372,7 @@
                 <!-- col 2 Descripción  -->
                 <div class="col-md-2">
                     <p class="description">
-                        Aventura Go conecta viajeros con experiencias de aventura,
-                        promoviendo el turismo sostenible y apoyando a prestadores locales en destinos naturales."
+                        Aventuras únicas, seguras y confiables.
                     </p>
                 </div>
 

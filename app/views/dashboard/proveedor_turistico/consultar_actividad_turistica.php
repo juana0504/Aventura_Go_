@@ -39,7 +39,8 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
     <!-- CSS SOLO DE ESTA VISTA (SIEMPRE AL FINAL) -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_turistico.css">
+    <!-- <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_turistico.css"> -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/consultar_actividad_turistica/consultar_actividad_turistica.css">
 
 
 </head>
@@ -64,7 +65,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
             <!-- Título y Acciones -->
             <div class="header-section">
-                <h1>Gestión de Proveedores turisticos</h1>
+                <h1>Gestión de Actividades turisticas</h1>
             </div>
 
 
@@ -93,82 +94,87 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                     <h5 class="mb-0">Listado de actividades turísticas</h5>
                 </div>
 
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="tablaActividades" class="table table-hover align-middle">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>IMAGEN</th>
-                                    <th>NOMBRE</th>
-                                    <th>DESTINO</th>
-                                    <th>UBICACIÓN</th>
-                                    <th>CUPOS</th>
-                                    <th>PRECIO</th>
-                                    <th>ESTADO</th>
-                                    <th>ACCIONES</th>
-                                </tr>
-                            </thead>
+                <div class="table-responsive">
+                    <table id="tablaActividades" class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>IMAGEN</th>
+                                <th>NOMBRE</th>
+                                <th>DESTINO</th>
+                                <th>UBICACIÓN</th>
+                                <th>CUPOS</th>
+                                <th>PRECIO</th>
+                                <th>ESTADO</th>
+                                <th>ACCIONES</th>
+                            </tr>
+                        </thead>
 
-                            <tbody>
-                                <?php if (!empty($actividades)): ?>
-                                    <?php foreach ($actividades as $actividad): ?>
-                                        <tr>
-                                            <!-- Imagen -->
-                                            <td>
-                                                <img
-                                                    src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $actividad['imagen_principal'] ?? 'actividad_default.png' ?>"
-                                                    alt="Actividad"
-                                                    width="60"
-                                                    class="rounded">
-
-                                            </td>
-
-                                            <!-- Nombre -->
-                                            <td><?= htmlspecialchars($actividad['nombre']) ?></td>
-
-                                            <!-- Destino / ciudad -->
-                                            <td><?= htmlspecialchars($actividad['destino'] ?? 'N/A') ?></td>
-
-                                            <!-- Ubicación -->
-                                            <td><?= htmlspecialchars($actividad['ubicacion']) ?></td>
-
-                                            <!-- Cupos -->
-                                            <td><?= $actividad['cupos'] ?></td>
-
-                                            <!-- Precio -->
-                                            <td>$<?= number_format($actividad['precio'], 0, ',', '.') ?></td>
-
-                                            <!-- Estado -->
-                                            <td>
-                                                <?php if ($actividad['estado'] === 'activa'): ?>
-                                                    <span class="badge bg-success">Activa</span>
-                                                <?php else: ?>
-                                                    <span class="badge bg-secondary">Inactiva</span>
-                                                <?php endif; ?>
-                                            </td>
-
-                                            <!-- Acciones -->
-                                            <td>
-                                                <button
-                                                    class="btn btn-sm btn-outline-primary btn-ver-actividad"
-                                                    data-id="<?= $actividad['id_actividad'] ?>"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#modalActividad">
-                                                    <i class="bi bi-eye"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                <?php else: ?>
+                        <tbody>
+                            <?php if (!empty($actividades)): ?>
+                                <?php foreach ($actividades as $actividad): ?>
                                     <tr>
-                                        <td colspan="8" class="text-center text-muted">
-                                            No hay actividades registradas
+                                        <!-- Imagen -->
+                                        <td>
+                                            <img
+                                                src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $actividad['imagen_principal'] ?? 'actividad_default.png' ?>"
+                                                alt="Actividad" class="rounded">
+
+                                        </td>
+
+                                        <!-- Nombre -->
+                                        <td><?= htmlspecialchars($actividad['nombre']) ?></td>
+
+                                        <!-- Destino / ciudad -->
+                                        <td><?= htmlspecialchars($actividad['destino'] ?? 'N/A') ?></td>
+
+                                        <!-- Ubicación -->
+                                        <td><?= htmlspecialchars($actividad['ubicacion']) ?></td>
+
+                                        <!-- Cupos -->
+                                        <td><?= $actividad['cupos'] ?></td>
+
+                                        <!-- Precio -->
+                                        <td>$<?= number_format($actividad['precio'], 0, ',', '.') ?></td>
+
+                                        <!-- Estado -->
+                                        <td>
+                                            <?php if ($actividad['estado'] === 'activa'): ?>
+                                                <span class="badge bg-success">Activa</span>
+                                            <?php else: ?>
+                                                <span class="badge bg-secondary">Inactiva</span>
+                                            <?php endif; ?>
+                                        </td>
+
+                                        <!-- Acciones -->
+                                        <td>
+                                            <button
+                                                class="btn-accion btn-ver"
+                                                data-id="<?= $actividad['id_actividad'] ?>"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modalActividad">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+
+                                            <a href="<?= BASE_URL ?>/proveedor/editar-actividad?id=<?= $proveedor['id_actividad'] ?>" class="btn-accion btn-editar">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+
+                                            <a href="<?= BASE_URL ?>/proveedor/eliminar-actividad?accion=eliminar&id=<?= $proveedor['id_actividad'] ?>" class="btn-accion btn-eliminar">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
                                         </td>
                                     </tr>
-                                <?php endif; ?>
-                            </tbody>
-                        </table>
-                    </div>
+                                <?php endforeach; ?>
+
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="8" class="text-center text-muted">
+                                        No hay actividades registradas
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
     </section>
@@ -215,7 +221,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            document.querySelectorAll('.btn-ver-actividad').forEach(btn => {
+            document.querySelectorAll('.btn-ver').forEach(btn => {
                 btn.addEventListener('click', () => {
 
                     const id = btn.dataset.id;
@@ -229,12 +235,12 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                                 return;
                             }
 
-                            document.getElementById('m-nombre').textContent = data.nombre;
-                            document.getElementById('m-descripcion').textContent = data.descripcion;
-                            document.getElementById('m-ubicacion').textContent = data.ubicacion;
-                            document.getElementById('m-cupos').textContent = data.cupos;
-                            document.getElementById('m-precio').textContent = data.precio;
-                            document.getElementById('m-estado').textContent = data.estado;
+                            document.getElementById('modal-nombre').textContent = data.nombre;
+                            document.getElementById('modal-descripcion').textContent = data.descripcion;
+                            document.getElementById('modal-ubicacion').textContent = data.ubicacion;
+                            document.getElementById('modal-cupos').textContent = data.cupos;
+                            document.getElementById('modal-precio').textContent = data.precio;
+                            document.getElementById('modal-estado').textContent = data.estado;
                         });
                 });
             });

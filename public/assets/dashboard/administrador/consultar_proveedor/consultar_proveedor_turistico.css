@@ -26,14 +26,6 @@ body {
 }
 
 
-/* Reset y Variables */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-
 /* ========== estilos boton pdf ========== */
 .btn-pdf {
     background: red;

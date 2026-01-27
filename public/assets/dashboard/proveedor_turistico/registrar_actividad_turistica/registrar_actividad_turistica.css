@@ -1,47 +1,112 @@
-/* ===============================
-   AVENTURA GO – REGISTRAR ACTIVIDAD
-   =============================== */
+/* ================= ESTILOS FORMULARIO PROVEEDOR TURISTICO ================= */
 
 /* Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+/* Paleta de colores */
+:root {
+    --color-primary: #2D4059;
+    --color-secondary: #EA8217;
+    --color-white: #FFFFFF;
+    --color-bg-light: #F8F9FA;
+    --color-border: #E0E0E0;
+    --color-text: #2b2b2b;
+    --font-titles: 'Raleway', sans-serif;
+    --font-text: 'Lato', sans-serif;
+}
+
+h1 h2 h3 h4 h5 h6 {
+    font-family: var(--font-titles);
+}
+
+p a button input {
+    font-family: var(--font-text);
+}
+
+/* Reset y Variables */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    font-family: 'Lato', sans-serif;
-    background-color: #F8F9FA;
-    color: #2B2B2B;
+    font-family: var(--font-text);
+    background-color: #f5f5f5;
 }
 
-.panel {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 280px;
-    height: 100vh;
-    background-color: #2D4059;
-    z-index: 100;
-}
+/* da estilos a toda la seccion izquierda */
 
-/* Contenedor principal */
+
 .contenido-principal {
-    margin-left: 260px;
-    /* panel lateral */
-    padding: 30px;
+    flex: 1;
+    overflow-x: hidden;
+    margin-left: 276px;
+    background-color: #F8F9FA;
+    min-height: 100vh;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    border-top: none !important;
+
 }
 
-/* Título principal */
-.contenido-principal h2 {
-    font-family: 'Raleway', sans-serif;
-    font-size: 26px;
-    font-weight: 700;
-    color: #2D4059;
-    margin-bottom: 25px;
+
+.wizard-header {
+    width: 100%;
+    background: linear-gradient(135deg, #2D4059, #3E5C76);
+    border-radius: 20px;
+    padding: 35px 20px;
+    text-align: center;
+    margin-bottom: 30px;
 }
+
+.wizard-header h1 {
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.wizard-header {
+    max-width: 1100px;
+    margin: 0 auto 30px auto;
+}
+
+h3 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #2D4059;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 8px;
+    margin-bottom: 30px;
+    margin-left: 50px;
+}
+
+h3::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #EA8217;
+    border-radius: 2px;
+}
+
+
+
+
 
 /* Formulario */
 form {
     background-color: #FFFFFF;
+    margin-left: 5px;
     padding: 30px;
-    border-radius: 8px;
-    border: 1px solid #E0E0E0;
-    max-width: 900px;
+    max-width: 1250px;
 }
 
 /* Wizard steps */
@@ -68,6 +133,7 @@ label {
     margin-bottom: 6px;
     margin-top: 15px;
     color: #2B2B2B;
+    margin-left: 50px;
 }
 
 /* Inputs y selects */
@@ -75,11 +141,12 @@ input[type="text"],
 input[type="number"],
 select,
 textarea {
-    width: 100%;
+    width: 90%;
     padding: 10px 12px;
     border-radius: 6px;
     border: 1px solid #E0E0E0;
     font-size: 14px;
+    margin-left: 50px;
 }
 
 input:focus,
@@ -116,6 +183,8 @@ textarea {
 .wizard-actions button[type="button"] {
     background-color: #2D4059;
     color: #FFFFFF;
+    margin-right: 50px;
+
 }
 
 .wizard-actions button[type="button"]:hover {
@@ -126,11 +195,28 @@ textarea {
 .wizard-actions button[type="submit"] {
     background-color: #EA8217;
     color: #FFFFFF;
+    margin-right: 50px;
 }
 
 .wizard-actions button[type="submit"]:hover {
     background-color: #d97314;
 }
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    margin-left: 50px;
+}
+
+
+
+
 
 /* Responsive */
 @media (max-width: 992px) {

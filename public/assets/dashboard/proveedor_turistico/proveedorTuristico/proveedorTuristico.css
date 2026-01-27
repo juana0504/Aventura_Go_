@@ -1,0 +1,228 @@
+/* fuente para titulos*/
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
+
+/*fuente para textos*/
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+h1 h2 h3 h4 h5 h6 {
+    --font-titles: 'Raleway', sans-serif;
+    /*tipografia titulos*/
+}
+
+/* ===============================
+   VARIABLES
+================================ */
+:root {
+    --primary: #EA8217;
+    /* Color principal */
+    --secondary: #3498db;
+    /* Color secundario */
+    --bg-light: #f5f5f5;
+    /* Fondo claro */
+    --text-muted: #6c757d;
+    /* Texto apagado */
+    --badge-success: #198754;
+    /* Color de badge de éxito */
+    --badge-warning: #ffc107;
+    /* Color de badge de advertencia */
+    --radius: 10px;
+    /* Radio de bordes */
+}
+
+/* ===============================
+   LAYOUT GENERAL
+================================ */
+body {
+    color: #333;
+    /* Color de texto estándar */
+    background-color: var(--bg-light);
+    /* Fondo claro */
+    font-family: 'lato', sans-serif;
+    /* Tipografía moderna */
+    margin: 0;
+    padding: 0;
+}
+
+.info {
+    max-width: 1300px;
+    margin-left: 280px;
+    padding: 20px;
+}
+
+/* ===============================
+   ENCABEZADO
+================================ */
+section h3 {
+    color: var(--primary);
+    font-size: 2rem;
+}
+
+section p {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/* ===============================
+   TARJETAS RESUMEN
+================================ */
+.card {
+    border: none;
+    border-radius: var(--radius);
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    /* Sombra más fuerte para mayor profundidad */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    /* Desplazamiento al hacer hover */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    /* Sombra más profunda al hacer hover */
+}
+
+.card i {
+    font-size: 35px;
+    color: var(--primary);
+    transition: color 0.3s ease;
+}
+
+.card:hover i {
+    color: #fff;
+    /* Cambiar el color del ícono al hacer hover */
+}
+
+.card h3 {
+    font-weight: 700;
+}
+
+.card .badge {
+    font-size: 1rem;
+    padding: 8px 14px;
+    border-radius: 25px;
+}
+
+/* ===============================
+   ACCIONES RÁPIDAS
+================================ */
+section h5 {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.btn {
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.2s ease;
+    text-transform: uppercase;
+    /* Texto en mayúsculas */
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+}
+
+.btn-outline-secondary {
+    border: 2px solid var(--secondary);
+    color: var(--secondary);
+    background-color: white;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    background-color: var(--secondary);
+    color: white;
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--secondary);
+    color: white;
+}
+
+/* ===============================
+   TABLA DE RESERVAS
+================================ */
+table {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* Sombra suave para la tabla */
+    width: 100%;
+}
+
+table thead th {
+    color: var(--text-muted);
+    font-weight: 600;
+    background-color: #f7f7f7;
+    /* Fondo más claro para el encabezado */
+    padding: 12px 15px;
+}
+
+table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+table tbody tr:hover {
+    background-color: #f1f4f9;
+    /* Fondo suave al hacer hover */
+    cursor: pointer;
+}
+
+table td .badge {
+    padding: 5px 12px;
+    font-size: 0.85rem;
+}
+
+.badge.bg-success {
+    background-color: var(--badge-success) !important;
+}
+
+.badge.bg-warning {
+    background-color: var(--badge-warning) !important;
+    color: #000;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 992px) {
+    .container-fluid {
+        padding: 20px;
+    }
+
+    .card {
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .col-md-3 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    /* Asegura que las tablas ocupen el 100% del ancho */
+    table {
+        width: 100%;
+    }
+
+    /* Asegura que los títulos no se desborden */
+    section h5 {
+        font-size: 1rem;
+    }
+
+    /* Mejorar la disposición de los elementos en móvil */
+    section .row {
+        flex-direction: column;
+    }
+
+    .card i {
+        font-size: 2rem;
+    }
+}

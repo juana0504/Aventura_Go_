@@ -127,6 +127,8 @@ class ActividadTuristica
     public function listarPorId($id)
     {
         $sql = "SELECT * FROM actividad WHERE id_actividad = :id";
+
+
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -157,6 +159,9 @@ class ActividadTuristica
 
         return $stmt->execute();
     }
+
+
+
 
     /** Actualizar actividad turística(para futuro uso: edición) */
     public function actualizarActividad($data)
@@ -210,5 +215,21 @@ class ActividadTuristica
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    public function eliminar($id)
+    {
+        try {
+            $sql = "DELETE FROM actividad WHERE id_actividad = :id_actividad";
+
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':id_actividad', $id, PDO::PARAM_INT);
+
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error al eliminar actividad::eliminar -> " . $e->getMessage());
+            return false;
+        }
     }
 }
