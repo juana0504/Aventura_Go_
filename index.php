@@ -204,15 +204,6 @@ switch ($request) {
         break;
 
 
-    //fin rutas administrador
-
-    // ===================================================================================================
-    //                                   RUTAS TICKETS ADMINISTRADOR
-    // ===================================================================================================
-    case '/proveedor/crear-ticket':
-        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/crear_ticket.php';
-        break;
-
     case '/administrador/guardar-ticket':
         require BASE_PATH . '/app/controllers/ticketController.php';
         $controller = new TicketController();
@@ -220,8 +211,14 @@ switch ($request) {
         break;
 
     case '/administrador/consultar-tickets':
-        require BASE_PATH . '/app/views/dashboard/administrador/consultar_tickets.php';
+        require BASE_PATH . '/app/views/dashboard/administrador/consultar_tickets.php'; //consultar tiquets enviados por el usuario
         break;
+
+
+    //fin rutas administrador
+
+
+
     // ===================================================================================================
     //                                     RUTAS PROVEEDOR TURISTICO
     // ===================================================================================================
@@ -254,6 +251,9 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/proveedor_turistico/consultar_reservas.php';
         break;
 
+    case '/proveedor/crear-ticket':
+        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/crear_ticket.php'; //crear los tiquets
+        break;
 
 
 

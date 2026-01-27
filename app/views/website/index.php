@@ -1,3 +1,8 @@
+<?php session_start(); ?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -59,16 +64,35 @@
 
                 <!-- Botones y menú móvil -->
                 <div class="actions">
-                    <div class="actions">
-                        <a href="login" class="btn-login">Ingresa</a>
-                        <a href="registrarse" class="btn-register">Regístrate</a>
 
-                        <!-- menu hambirguesa en responsive -->
-                        <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
-                            <i class="fas fa-bars"></i>
-                        </div>
+                    <?php if (isset($_SESSION['user'])): ?>
+
+                        <span class="Bienvenido">
+                            Bienvenido, <?= htmlspecialchars($_SESSION['user']['nombre']) ?>
+                        </span>
+
+                        <a href="/aventura_go/logout" class="btn-register">
+                            Salir
+                        </a>
+
+                    <?php else: ?>
+
+                        <a href="/aventura_go/login" class="btn-login">
+                            Ingresa
+                        </a>
+
+                        <a href="/aventura_go/registrarse" class="btn-register">
+                            Regístrate
+                        </a>
+
+                    <?php endif; ?>
+
+                    <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+                        <i class="fas fa-bars"></i>
                     </div>
+
                 </div>
+
 
             </div>
         </nav>
