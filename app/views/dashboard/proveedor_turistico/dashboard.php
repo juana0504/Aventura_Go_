@@ -41,18 +41,17 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
     <section id="listado">
 
-        <!-- Acá va el menú o panel izquierdo -->
+        <!-- Panel Lateral -->
         <?php
-        include_once __DIR__ . '/../../layouts/panel_izq_administrador.php';
+        require_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php';
         ?>
 
         <div class="info">
 
-            <!-- Acá va el buscador -->
+            <!-- Barra de Búsqueda Superior -->
             <?php
-            include_once __DIR__ . '/../../layouts/buscador_administrador.php';
+            require_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php';
             ?>
-
             <section id="listado">
 
                 <main class="container">

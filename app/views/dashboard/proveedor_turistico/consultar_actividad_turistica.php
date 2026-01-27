@@ -221,7 +221,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            document.querySelectorAll('.btn-ver-actividad').forEach(btn => {
+            document.querySelectorAll('.btn-ver').forEach(btn => {
                 btn.addEventListener('click', () => {
 
                     const id = btn.dataset.id;
