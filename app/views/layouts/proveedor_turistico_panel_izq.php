@@ -15,7 +15,7 @@
 
         <div class="items">
 
-            <a id="btn-panel" type="button">Proveedor Turistico</a>
+            <a id="btn-panel">Proveedor Turistico</a>
 
 
             <div id="Turistico">
@@ -25,16 +25,12 @@
                     <a href="<?= BASE_URL ?>/proveedor/registrar-actividad" class="bi bi-layout-text-sidebar-reverse">Registrar actividad turistica</a>
                     <a href="<?= BASE_URL ?>/proveedor/consultar-actividad" class="bi bi-table">Consultar actividades turisiticas</a>
                     <a href="<?= BASE_URL ?>/proveedor/consultar-reservas" class="bi bi-calendar-check">Consultar reservas</a>
-                    <a class="dropdown-item" href="<?= BASE_URL ?>/proveedor/crear-ticket">Generar Reporte</a>
+                    <a href="<?= BASE_URL ?>/proveedor/crear-ticket" class="bi bi-ticket-perforated">Generar Reporte</a>
 
                 </ul>
-            </div>
-            <div class="dropdown">
 
-                <ul class="dropdown-menu" id="menu-panel">
-                    <li></li>
-                </ul>
             </div>
+
 
         </div>
 
