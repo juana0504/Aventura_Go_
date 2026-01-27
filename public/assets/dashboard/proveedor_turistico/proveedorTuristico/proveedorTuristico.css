@@ -46,7 +46,8 @@ body {
 .info {
     max-width: 1300px;
     margin-left: 280px;
-    padding: 20px;
+    padding-top: 20px;
+    padding-left: 53px;
 }
 
 /* ===============================
@@ -58,7 +59,6 @@ section h3 {
 }
 
 section p {
-    color: var(--text-muted);
     font-size: 1rem;
 }
 
