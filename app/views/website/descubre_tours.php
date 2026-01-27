@@ -19,7 +19,7 @@
         href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/turista/descubre_tours/descubreTours.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/website_externos/descubre_tours/descubreTours.css">
 </head>
 
 <body>
@@ -37,7 +37,7 @@
                     <?php if (isset($_SESSION['user'])): ?>
 
                         <span class="Bienvenido">
-                            Bienvenido, <?= htmlspecialchars($_SESSION['user']['nombre']) ?>
+                            Bienvenido, <?= htmlspecialchars(ucwords(explode(' ', $_SESSION['user']['nombre'])[0] . ' ' . (explode(' ', $_SESSION['user']['nombre'])[1] ?? ''))) ?>
                         </span>
 
                         <a href="/aventura_go/logout" class="btn-register">
