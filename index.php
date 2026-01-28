@@ -204,26 +204,47 @@ switch ($request) {
         break;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+    // ===== TICKETS ADMIN =====
+    case '/administrador/tickets':
+        require BASE_PATH . '/app/controllers/administrador/TicketAdminController.php';
+        $controller = new TicketAdminController();
+        $controller->listar();
+        break;
+
+    case '/administrador/tickets/responder':
+        require BASE_PATH . '/app/controllers/administrador/TicketAdminController.php';
+        $controller = new TicketAdminController();
+        $controller->responderForm($_GET['id'] ?? null);
+        break;
+
+    case '/administrador/tickets/guardar-respuesta':
+        require BASE_PATH . '/app/controllers/administrador/TicketAdminController.php';
+        $controller = new TicketAdminController();
+        $controller->responder();
+        break;
+
+    case '/administrador/tickets/cerrar':
+        require BASE_PATH . '/app/controllers/administrador/TicketAdminController.php';
+        $controller = new TicketAdminController();
+        $controller->cerrar();
+        break;
+
+
+
     //fin rutas administrador
 
-    // ===================================================================================================
-    //                                   RUTAS TICKETS ADMINISTRADOR
-    // ===================================================================================================
-    case '/proveedor/crear-ticket':
-        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/crear_ticket.php';
-        break;
-
-    case '/administrador/guardar-ticket':
-        require BASE_PATH . '/app/controllers/ticketController.php';
-        $controller = new TicketController();
-        $controller->guardar();
-        break;
-
-    case '/administrador/consultar-tickets':
-        require BASE_PATH . '/app/controllers/ticketController.php';
-        $controller = new TicketController();
-        $controller->consultar(); // <--- Esto ejecutará la consulta y cargará la vista con datos
-        break;
     // ===================================================================================================
     //                                     RUTAS PROVEEDOR TURISTICO
     // ===================================================================================================
@@ -270,6 +291,43 @@ switch ($request) {
     case '/proveedor/actualizar-perfil':
         require BASE_PATH . '/app/controllers/proveedor_turistico/editarPerfilProveedor.php';
         break;
+
+
+
+
+
+
+    case '/proveedor_turistico/listar':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
+        $controller = new TicketProveedorController();
+        $controller->listar();
+        break;
+
+    case '/proveedor_turistico/crear_ticket':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
+        $controller = new TicketProveedorController();
+        $controller->crear();
+        break;
+
+    case '/proveedor_turistico/guardar_ticket':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
+        $controller = new TicketProveedorController();
+        $controller->guardar();
+        break;
+
+    case '/proveedor/tickets':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
+        $controller = new TicketProveedorController();
+        $controller->listar();
+        break;
+
+    case '/proveedor_turistico/ticket/ver':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
+        $controller = new TicketProveedorController();
+        $controller->ver($_GET['id'] ?? null);
+        break;
+
+
     // ================= FIN RUTAS PROVEEDOR TURISTICO =================
 
 
