@@ -211,7 +211,16 @@ switch ($request) {
         break;
 
     case '/proveedor/consultar-reservas':
-        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/consultar_reservas.php';
+        require BASE_PATH . '/app/controllers/proveedor_turistico/reservaController.php';
+        break;
+
+    case '/proveedor/reserva-detalle':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/reservaDetalle.php';
+        break;
+
+    case '/proveedor/pdf-reservas':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/reservaPdfController.php';
+        generarPdfReservas();
         break;
 
     case '/proveedor/crear-ticket':
