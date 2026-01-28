@@ -311,10 +311,6 @@ function listarActividadesProveedor()
 
 
 
-
-
-
-
 function listarActividadId($id)
 {
     $objActividad = new ActividadTuristica();
