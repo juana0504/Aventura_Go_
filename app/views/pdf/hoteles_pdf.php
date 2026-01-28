@@ -141,7 +141,7 @@
 
     <!-- Footer -->
     <footer>
-        © Aventura Go 2025 - Todos los derechos reservados
+        © Aventura Go <?= date('Y') ?> - Todos los derechos reservados
     </footer>
 
 </body>
