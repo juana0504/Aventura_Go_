@@ -232,4 +232,22 @@ class ActividadTuristica
             return false;
         }
     }
+
+    public function listarTodas()
+    {
+        $sql = "
+        SELECT 
+            a.*,
+            c.nombre AS ciudad
+        FROM actividad a
+        INNER JOIN ciudades c 
+            ON a.id_ciudad = c.id_ciudad
+        ORDER BY a.created_at DESC
+    ";
+
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

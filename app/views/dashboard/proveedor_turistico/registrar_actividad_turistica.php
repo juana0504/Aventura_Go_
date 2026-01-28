@@ -121,8 +121,8 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
                         <label>Estado</label>
                         <select name="estado">
-                            <option value="activa">Activa</option>
-                            <option value="pausada">Pausada</option>
+                            <option value="ACTIVO">Activa</option>
+                            <option value="INACTIVO">Inactiva</option>
                         </select>
 
                         <label>Imágenes de la actividad (máx. 5)</label>
@@ -142,16 +142,6 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
         </div>
 
     </section>
-
-
-
-
-    <script>
-        const BASE_URL = "<?= BASE_URL ?>";
-    </script>
-
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/consultar_actividad_turistica/modal_actividad_detalle.js"></script>
-
 
     <!-- WIZARD JS (TUYO, SIN TOCAR) -->
     <script>
@@ -203,6 +193,12 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
             });
         });
     </script>
+
+    <script>
+        const BASE_URL = "<?= BASE_URL ?>";
+    </script>
+
+    <script src="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/consultar_actividad_turistica/modal_actividad_detalle.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 

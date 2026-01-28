@@ -84,10 +84,17 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                 <button class="filtro-btn" data-filter="pendiente">
                     <i class="bi bi-clock"></i> Pendientes
                 </button>
-                <a href="<?= BASE_URL ?>/administrador/reporte?tipo=turistico" class="btn-pdf" target="_blank">
+
+                <a href="<?= BASE_URL ?>/proveedor/pdf-actividades" class="btn-pdf" target="_blank">
                     <i class="bi bi-file-earmark-pdf"></i>Generar Reportes
                 </a>
+
             </div>
+
+
+
+
+
 
             <div class="card shadow-sm mt-4">
 
