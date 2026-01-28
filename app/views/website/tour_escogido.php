@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php session_start();
+require_once __DIR__ . '/../../models/proveedor_turistico/ActividadTuristica.php';
+
+$actividadModel = new ActividadTuristica();
+$actividades = $actividadModel->listarActividadesPublicas();
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -27,7 +32,8 @@
     <!-- LIBRERIA AOS ANIMATE -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <!-- CSS personalizado -->
-    <link rel="stylesheet" href="public/assets/website_externos/tour_escogido/tour_escogido.css">
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/website_externos/tour_escogido/tour_escogido.css">
 
 
 
@@ -40,10 +46,12 @@
         <nav class="navbar">
             <div class="container-fluid">
                 <div class="logo">
-                    <img src="../turista/img/logo nav.png" alt="Logo Aventura Go" class="navbar-logo">
+                    <img src="public/assets/website_externos/tour_escogido/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
                 </div>
 
-                <h1 class="page-title">Tu reserva de tours en Villeta</h1>
+                <h1 class="page-title">
+                    Tu reserva de tours en <?= htmlspecialchars($_GET['ciudad'] ?? 'tu destino') ?>
+                </h1>
 
                 <div class="actions">
 
@@ -261,7 +269,7 @@
                 <!-- Columna 1: Logo -->
                 <div class="col-md-2">
                     <div class="logo-section">
-                        <img src="../turista/img/logo nav.png" alt="logo Aventura Go">
+                        <img src="public/assets/website_externos/tour_escogido/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
                     </div>
                 </div>
 

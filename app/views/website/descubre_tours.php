@@ -3,8 +3,8 @@ require_once __DIR__ . '/../../models/proveedor_turistico/ActividadTuristica.php
 
 $actividadModel = new ActividadTuristica();
 $actividades = $actividadModel->listarActividadesPublicas();
-
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -142,6 +142,13 @@ $actividades = $actividadModel->listarActividadesPublicas();
                                         $<?= number_format($actividad['precio'], 0, ',', '.') ?>
                                     </span>
                                 </div>
+
+                                <div class="button">
+                                    <a href="<?= BASE_URL ?>/website/tour_escogido?id=<?= $actividad['id_actividad'] ?>" class="btn-ver-mas">
+                                        Ver más
+                                    </a>
+                                </div>
+
 
                             </div>
                         </div>
