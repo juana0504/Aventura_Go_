@@ -1,5 +1,5 @@
 <?php
-require_once BASE_PATH . '/app/helpers/session_proveedor.php';
+require_once BASE_PATH . '/app/helpers/session_turista.php';
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +31,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
     <!-- Componentes comunes -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_turista.css">
 
 
     <!-- CSS solo de esta vista (Siempre al final) -->
@@ -40,118 +40,31 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
 <body>
 
-    <section id="listado">
+    <section id="turista">
 
         <!-- Panel Lateral -->
         <?php
-        require_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php';
+        require_once __DIR__ . '/../../layouts/turista_panel_izq.php';
         ?>
 
         <div class="info">
 
             <!-- Barra de Búsqueda Superior -->
             <?php
-            require_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php';
+            require_once __DIR__ . '/../../../views/layouts/buscador_turista.php';
             ?>
-            <section id="listado">
 
-                <main class="container">
+            <div class="container">
 
-                    <!-- Encabezado -->
-                    <section class="mb-4">
-                        <h3 class="fw-bold">Panel del Proveedor Turístico</h3>
-                        <p class="text-muted">Gestiona tus experiencias, reservas e ingresos</p>
-                    </section>
+                <p>ACA VA TODO EL CONTENIDO DEL DASHBOARD</p>
 
-                    <!-- Tarjetas resumen -->
-                    <section class="row g-4 mb-4">
-                        <!-- Mis Servicios -->
-                        <div class="col-md-3 col-sm-6 col-12 d-flex">
-                            <div class="card shadow-sm p-3 w-100">
-                                <i class="bi bi-briefcase fs-3"></i>
-                                <p class="mt-2 mb-0">Mis Servicios</p>
-                                <h3>5</h3>
-                            </div>
-                        </div>
+                <!-- Encabezado -->
+                <div class="mb-4">
+                    <h1 class="fw-bold">Panel de Turísta</h1>
+                    <p class="text-muted">Gestiona tus experiencias, reservas e ingresos</p>
+                </div>
+            </div>
 
-                        <!-- Reservas -->
-                        <div class="col-md-3 col-sm-6 col-12 d-flex">
-                            <div class="card shadow-sm p-3 w-100">
-                                <i class="bi bi-calendar-check fs-3"></i>
-                                <p class="mt-2 mb-0">Reservas</p>
-                                <h3>12</h3>
-                            </div>
-                        </div>
-
-                        <!-- Ingresos -->
-                        <div class="col-md-3 col-sm-6 col-12 d-flex">
-                            <div class="card shadow-sm p-3 w-100">
-                                <i class="bi bi-cash-stack fs-3"></i>
-                                <p class="mt-2 mb-0">Ingresos</p>
-                                <h3>$1.250.000</h3>
-                            </div>
-                        </div>
-
-                        <!-- Estado -->
-                        <div class="col-md-3 col-sm-6 col-12 d-flex">
-                            <div class="card shadow-sm p-3 w-100">
-                                <i class="bi bi-check-circle fs-3 text-success"></i>
-                                <p class="mt-2 mb-0">Estado</p>
-                                <span class="badge bg-success">Activo</span>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Acciones rápidas -->
-                    <section class="mb-5">
-                        <h5 class="mb-3">Acciones rápidas</h5>
-                        <div class="d-flex gap-3 flex-wrap">
-                            <a href="#" class="btn btn-primary">
-                                <i class="bi bi-plus-circle"></i> Nuevo servicio
-                            </a>
-                            <a href="#" class="btn btn-outline-secondary">
-                                <i class="bi bi-calendar-event"></i> Ver reservas
-                            </a>
-                            <a href="#" class="btn btn-outline-secondary">
-                                <i class="bi bi-bar-chart-line"></i> Ver ingresos
-                            </a>
-                        </div>
-                    </section>
-
-                    <!-- Tabla de reservas -->
-                    <section class="bg-light p-3 rounded">
-                        <h5 class="mb-3">Últimas reservas</h5>
-                        <table class="table table-striped align-middle">
-                            <thead>
-                                <tr>
-                                    <th>Cliente</th>
-                                    <th>Fecha</th>
-                                    <th>Experiencia</th>
-                                    <th>Estado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Juan Pérez</td>
-                                    <td>20-Jul-2025</td>
-                                    <td>Canopy</td>
-                                    <td><span class="badge bg-success">Confirmada</span></td>
-                                </tr>
-                                <tr>
-                                    <td>María Gómez</td>
-                                    <td>18-Jul-2025</td>
-                                    <td>Rafting</td>
-                                    <td><span class="badge bg-warning text-dark">Pendiente</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </section>
-
-                </main>
-
-            </section>
-
-        </div>
 
     </section>
 
@@ -163,9 +76,6 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-
-    <!-- JavaScript -->
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/administrador/administrador.js"></script>
 
 </body>
 

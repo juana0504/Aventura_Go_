@@ -157,7 +157,7 @@ $usuario = mostrarPerfilproveedor($id);
 
 
 
-                    <form action="/aventura_go/administrador/cambiar-password" method="POST" class="cambiar">
+                    <form action="/aventura_go/proveedor/cambiar-password" method="POST" class="cambiar">
 
                         <input type="hidden" name="accion" value="cambiar_password">
 

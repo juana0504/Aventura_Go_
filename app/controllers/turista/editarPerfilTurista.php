@@ -24,7 +24,7 @@ switch ($method) {
 
 
 // ------------------------------------------------------------
-// MOSTRAR PERFIL DEL PROVEEDOR TURISITICO
+// MOSTRAR PERFIL DEL TURISTA
 // ------------------------------------------------------------
 
 function mostrarPerfilTurista()
@@ -56,7 +56,7 @@ function mostrarPerfilTurista()
 
 
 // ------------------------------------------------------------
-// ACTUALIZAR PERFIL DEL PROVEEDOR TURISTICO
+// ACTUALIZAR PERFIL DEL TURISTA
 // ------------------------------------------------------------
 
 function actualizarPerfilTurista()
@@ -127,7 +127,7 @@ function actualizarPerfilTurista()
         // Actualizamos la sesión
         $_SESSION['user'] = array_merge($_SESSION['user'], $data);
 
-        mostrarSweetAlert('success', 'Actualizado', 'Tu perfil ha sido actualizado.', '/aventura_go/proveedor/perfil');
+        mostrarSweetAlert('success', 'Actualizado', 'Tu perfil ha sido actualizado.', '/aventura_go/turista/perfil');
     } else {
         mostrarSweetAlert('error', 'Error', 'No se pudo actualizar el perfil.');
     }
