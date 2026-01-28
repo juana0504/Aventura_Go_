@@ -5,7 +5,6 @@ $actividadModel = new ActividadTuristica();
 $actividades = $actividadModel->listarActividadesPublicas();
 
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -133,7 +132,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
                                 <!-- Cupos -->
                                 <div class="activity-duration">
                                     <i class="fas fa-users"></i>
-                                    <span><?=htmlspecialchars($actividad['cupos']) ?> cupos disponibles</span>
+                                    <span><?= (int)$actividad['cupos'] ?> cupos disponibles</span>
                                 </div>
 
                                 <!-- Precio -->
