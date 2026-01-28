@@ -293,8 +293,25 @@ switch ($request) {
         break;
 
     case '/turista/registrar-actividad':
-        require BASE_PATH . '/app/views/dashboard/turista/registrar_actividad_turistica.php';
+        require BASE_PATH . '/app/views/dashboard/turista/registrar_reserva.php';
         break;
+
+    case '/turista/confirmar-reserva':
+        require_once BASE_PATH . '/app/controllers/turista/confirmarReservaController.php';
+        break;
+
+    case '/turista/registrar-reserva':
+        require_once BASE_PATH . '/app/controllers/turista/registrarReservaController.php';
+        break;
+
+    case '/seleccionar-actividad':
+        require_once BASE_PATH . '/app/controllers/website/seleccionarActividadController.php';
+        break;
+
+
+
+
+
 
 
 
