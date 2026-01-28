@@ -251,4 +251,16 @@ class ActividadTuristica
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
+
+    public function obtenerPorId($idActividad)
+    {
+        $sql = "SELECT * FROM actividad WHERE id_actividad = :id";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':id', $idActividad, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
