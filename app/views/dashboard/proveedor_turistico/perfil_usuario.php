@@ -45,7 +45,7 @@ $usuario = mostrarPerfilproveedor($id);
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
     <!-- Estilos CSS (siempre al final)-->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/perfil.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/perfil_usuario/perfil.css">
 
 </head>
 
