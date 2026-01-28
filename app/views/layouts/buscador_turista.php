@@ -10,7 +10,7 @@ $usuario = mostrarPerfilTurista($id);
 ?>
 
 
-<form id="busqueda" class="ag-buscador-turista" action="busqueda">
+<div id="busqueda" class="ag-buscador-turista" action="busqueda">
     <div class="busqueda-wrapper">
         <input type="text" placeholder="Buscar..">
         <i class="bi bi-search"></i>
@@ -41,4 +41,4 @@ $usuario = mostrarPerfilTurista($id);
             </li>
         </ul>
     </div>
-</form>
+</div>
