@@ -25,11 +25,11 @@ class Proveedor
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Verifica correo en la tabla PROVEEDOR_HOTELERO (empresa)
-    public function emailHotelExiste($email)
+    // Verifica correo en la tabla PROVEEDOR_Turistico (empresa)
+    public function emailproveedorExiste($email)
     {
-        $sql = "SELECT id_proveedor_hotelero 
-            FROM proveedor_hotelero 
+        $sql = "SELECT id_proveedor 
+            FROM proveedor
             WHERE email = :email LIMIT 1";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':email', $email);

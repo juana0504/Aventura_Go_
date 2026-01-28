@@ -199,15 +199,16 @@ class ActividadTuristica
             a.nombre,
             a.precio,
             a.descripcion,
+            a.cupos,
             c.nombre AS ciudad,
             img.imagen
         FROM actividad a
-        INNER JOIN ciudad c 
+        INNER JOIN ciudades c 
             ON a.id_ciudad = c.id_ciudad
         LEFT JOIN actividad_imagen img 
             ON img.id_actividad = a.id_actividad 
            AND img.es_principal = 1
-        WHERE a.estado = 'activa'
+        WHERE a.estado = 'ACTIVO'
         ORDER BY a.created_at DESC
     ";
 

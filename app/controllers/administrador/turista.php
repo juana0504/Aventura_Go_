@@ -118,9 +118,9 @@ function registrarTurista()
     $resultado = $objTurista->registrar($data);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Registro exitoso', 'Proveedor registrado.', '/aventura_go/login');
+        mostrarSweetAlert('success', 'Registro exitoso', 'Turista registrado.', '/aventura_go/login');
     } else {
-        mostrarSweetAlert('error', 'Error al registrar', 'No se pudo registrar el proveedor.');
+        mostrarSweetAlert('error', 'Error al registrar', 'No se pudo registrar el turista.');
     }
 }
 

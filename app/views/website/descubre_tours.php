@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php session_start();
+require_once __DIR__ . '/../../models/proveedor_turistico/ActividadTuristica.php';
+
+$actividadModel = new ActividadTuristica();
+$actividades = $actividadModel->listarActividadesPublicas();
+
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -127,7 +133,7 @@
                                 <!-- Cupos -->
                                 <div class="activity-duration">
                                     <i class="fas fa-users"></i>
-                                    <span><?= (int)$actividad['cupos'] ?> cupos disponibles</span>
+                                    <span><?=htmlspecialchars($actividad['cupos']) ?> cupos disponibles</span>
                                 </div>
 
                                 <!-- Precio -->

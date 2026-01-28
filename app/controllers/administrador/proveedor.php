@@ -158,7 +158,7 @@ function registrarProveedor()
     $objProveedor = new Proveedor();
 
     // correo de la empresa
-    if ($objProveedor->emailHotelExiste($email)) {
+    if ($objProveedor->emailproveedorExiste($email)) {
         mostrarSweetAlert('error', 'Correo duplicado', 'El correo del hotel ya existe.');
         exit();
     }
