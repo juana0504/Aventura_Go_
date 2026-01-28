@@ -56,6 +56,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mensaje = 'Bienvenido Proveedor Hotelero.';
             break;
         case 'turista':
+            // Si viene de seleccionar una actividad, continuar flujo de reserva
+            if (isset($_SESSION['actividad_pendiente'])) {
+                $redirectUrl = '/aventura_go/turista/confirmar-reserva';
+                $mensaje = 'Continúa con tu reserva.';
+                break;
+            }
             $redirectUrl = '/aventura_go/turista/dashboard';
             $mensaje = 'Bienvenido Turista.';
             break;
