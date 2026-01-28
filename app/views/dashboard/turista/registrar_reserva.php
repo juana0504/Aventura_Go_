@@ -68,47 +68,51 @@ $usuario = mostrarPerfilTurista($id);
 
             <div class="container">
 
-                <div class="info">
-                    <h2>ojo este solo es Formulario de prueba de reservar Actividad</h2>
 
-                    <form method="POST" action="<?= BASE_URL ?>/seleccionar-actividad">
+                <h2>ojo este solo es Formulario de prueba de reservar Actividad</h2>
+                <form method="POST" action="<?= BASE_URL ?>/seleccionar-actividad">
+                    <label>ID Actividad:</label><br>
+                    <input type="number" name="id_actividad" value="1" required><br><br>
 
-                        <label>ID Actividad:</label><br>
-                        <input type="number" name="id_actividad" value="1" required><br><br>
+                    <label>Fecha:</label><br>
+                    <input type="date" name="fecha" value="2025-10-01" required><br><br>
 
-                        <label>Fecha:</label><br>
-                        <input type="date" name="fecha" value="2025-10-01" required><br><br>
+                    <label>Personas:</label><br>
+                    <input type="number" name="personas" value="2" min="1" required><br><br>
 
-                        <label>Personas:</label><br>
-                        <input type="number" name="personas" value="2" min="1" required><br><br>
-
-                        <button type="submit">Probar Reserva</button>
-
-                    </form>
+                    <button type="submit">Probar Reserva</button>
+                </form>
 
 
 
+                <h2><br><br>formulario que viene, el real <br></h2>
+                <form method="POST" action="<?= BASE_URL ?>/seleccionar-actividad">
+                    <!-- ID REAL de la actividad -->
+                    <input type="hidden" name="id_actividad" value="<?= $actividad['id_actividad'] ?>">
 
-                    <form method="POST" action="<?= BASE_URL ?>/seleccionar-actividad">
-                        <h2><br> <br>formulario que viene, el real <br> <br></h2>
-                        <!-- ID REAL de la actividad -->
-                        <input type="hidden" name="id_actividad" value="<?= $actividad['id_actividad'] ?>">
+                    <!-- Estos valores vienen del filtro superior (JS o PHP) -->
+                    <input type="hidden" name="fecha" value="<?= $fechaSeleccionada ?>">
+                    <input type="hidden" name="personas" value="<?= $cantidadPersonas ?>">
 
-                        <!-- Estos valores vienen del filtro superior (JS o PHP) -->
-                        <input type="hidden" name="fecha" value="<?= $fechaSeleccionada ?>">
-                        <input type="hidden" name="personas" value="<?= $cantidadPersonas ?>">
+                    <button type="submit" class="btn btn-primary btn-reservar">
+                        Reservar
+                    </button>
+                </form>
 
-                        <button type="submit" class="btn btn-primary btn-reservar">
-                            Reservar
-                        </button>
-
-                    </form>
-
-
-                </div>
             </div>
+
+        </div>
 
     </section>
 
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 
 </body>
+
+</html>

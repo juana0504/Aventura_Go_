@@ -1,5 +1,5 @@
 /* ========== BARRA DE BÚSQUEDA ========== */
-form#busqueda {
+#busqueda {
     position: relative;
     padding: 10px 0 20px;
     display: flex;
@@ -8,7 +8,7 @@ form#busqueda {
 
 }
 
-form#busqueda input {
+#busqueda input {
 
     margin-bottom: 14px;
 }
@@ -61,15 +61,15 @@ form#busqueda input {
     cursor: pointer;
 }
 
-form#busqueda .bi-moon-fill,
-form#busqueda .bi-bell-fill {
+#busqueda .bi-moon-fill,
+#busqueda .bi-bell-fill {
     color: #000000;
     font-size: 20px;
     cursor: pointer;
 }
 
 /* Estilos del dropdown de perfil */
-form#busqueda #perfil {
+#busqueda #perfil {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -85,27 +85,27 @@ form#busqueda #perfil {
     margin-bottom: 10px;
 }
 
-form#busqueda #perfil span {
+#busqueda #perfil span {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 
-form#busqueda #perfil img {
+#busqueda #perfil img {
     width: 35px;
     height: 35px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-form#busqueda #perfil p {
+#busqueda #perfil p {
     font-weight: 600;
     font-size: 14px;
     margin: 0;
 }
 
-form#busqueda #perfil h6 {
+#busqueda #perfil h6 {
     font-weight: 600;
     font-size: 16px;
     margin: 0;
