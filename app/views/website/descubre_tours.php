@@ -33,7 +33,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
         <nav class="navbar">
             <div class="container-fluid">
                 <div class="logo">
-                    <img src="/public/assets/dashboard/turista/descubre_tours/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
+                    <img src="public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
                 </div>
 
                 <h1 class="page-title">Descubre Todo lo que Villeta Tiene para Ofrecerte</h1>
@@ -198,7 +198,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
                 <!-- Columna 1: Logo -->
                 <div class="col-md-2">
                     <div class="logo-section">
-                        <img src="../turista/img/LOGO-NEGATIVO.png" alt="logo Aventura Go">
+                        <img src="public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png" alt="logo Aventura Go">
                     </div>
                 </div>
 
