@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mensaje = 'Bienvenido Proveedor Hotelero.';
             break;
         case 'turista':
-            $redirectUrl = '/aventura_go/turista/tours';
+            $redirectUrl = '/aventura_go/turista/dashboard';
             $mensaje = 'Bienvenido Turista.';
             break;
 

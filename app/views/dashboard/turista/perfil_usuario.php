@@ -14,7 +14,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // ASIGNAMOS EL VALOR ID DEL REGISTRO SEGUN LA TABLA
 $id = $_SESSION['user']['id'];
 
-$usuario = mostrarPerfilproveedor($id);
+$usuario = mostrarPerfilTurista($id);
 
 ?>
 
@@ -42,10 +42,10 @@ $usuario = mostrarPerfilproveedor($id);
 
     <!-- Componentes comunes -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_turista.css">
 
     <!-- Estilos CSS (siempre al final)-->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/perfil.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/turista/perfil_usuario/perfil.css">
 
 </head>
 
@@ -55,14 +55,14 @@ $usuario = mostrarPerfilproveedor($id);
 
         <!-- Panel Lateral -->
         <?php
-        include_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php';
+        include_once __DIR__ . '/../../layouts/turista_panel_izq.php';
         ?>
 
 
         <div class="info">
             <!-- Barra de Búsqueda Superior -->
             <?php
-            include_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php'
+            include_once __DIR__ . '/../../../views/layouts/buscador_turista.php'
             ?>
 
             <div class="container">
@@ -70,7 +70,7 @@ $usuario = mostrarPerfilproveedor($id);
                 <div class="row">
 
                     <div class="usuario">
-                        <h2>Perfil de Proveedor Turistico</h2>
+                        <h2>Perfil de Turista</h2>
                         <img src="<?= BASE_URL ?>/public/uploads/usuario/<?= $usuario['foto'] ?>" alt="persona"></i>
                         <h3><?= $_SESSION['user']['nombre'] ?></h3>
                         <p><?= $_SESSION['user']['rol'] ?></p>
@@ -130,7 +130,7 @@ $usuario = mostrarPerfilproveedor($id);
 
                     <div class="editar">
 
-                        <form action="/aventura_go/proveedor/actualizar-perfil" method="POST" enctype="multipart/form-data">
+                        <form action="/aventura_go/turista/actualizar-perfil" method="POST" enctype="multipart/form-data">
 
                             <h4>Imagen Perfil</h4>
                             <input type="file" name="foto" value="<?= $usuario['foto'] ?>">
@@ -157,7 +157,7 @@ $usuario = mostrarPerfilproveedor($id);
 
 
 
-                    <form action="/aventura_go/administrador/cambiar-password" method="POST" class="cambiar">
+                    <form action="/aventura_go/turista/cambiar-password" method="POST" class="cambiar">
 
                         <input type="hidden" name="accion" value="cambiar_password">
 

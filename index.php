@@ -17,48 +17,6 @@ if ($request === '') $request = '/'; //si la ruta queda vacia, se interpreta com
 switch ($request) {
 
     // ===================================================================================================
-    //                                      RUTAS TURISTA (USUARIO)
-    // ===================================================================================================
-    case '/':
-        require BASE_PATH . '/app/views/website/index.php';
-        break;
-
-    // Ruta: descubre tours
-    case '/descubre-tours':
-        require BASE_PATH . '/app/views/website/descubre_tours.php';
-        break;
-
-    // Ruta: descubre hospedaje
-    case '/descubre-hospedaje':
-        require BASE_PATH . '/app/views/website/descubre_hospedaje.php';
-        break;
-
-    // Ruta: /destacados
-    case '/destacados':
-        require BASE_PATH . '/app/views/website/toursDestacados.php';
-        break;
-
-    // Ruta: /acerca-de-nosotros
-    case '/acerca-de-nosotros':
-        require BASE_PATH . '/app/views/website/acerca_de_nosotros.php';
-        break;
-
-    // Ruta: /contactanos
-    case '/contactanos':
-        require BASE_PATH . '/app/views/website/contactanos.php';
-        break;
-
-    case '/turista/tours':
-        require BASE_PATH . '/app/views/website/descubre_tours.php';
-        break;
-
-    case '/descubre-tours':
-        require BASE_PATH . '/app/controllers/website/descubreToursController.php';
-        break;
-
-
-
-    // ===================================================================================================
     //                                            RUTAS LOGIN
     // ===================================================================================================
     case '/login':
@@ -150,8 +108,6 @@ switch ($request) {
         break;
 
 
-
-
     // CRUD del Proveedor Hotelero
     case '/administrador/guardar-proveedor-hotelero':
         require BASE_PATH . '/app/controllers/administrador/hotelero.php';  //redirige al guardar proveedor
@@ -166,6 +122,7 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/administrador/hotelero.php';  //elimina el proveedor
         break;
     //Fin de Registrar y consultar el Proveedor Hotelero
+
 
     // Registrar y consultar el Turista
     case '/administrador/registrar-turista':
@@ -194,6 +151,7 @@ switch ($request) {
         break;
     //Fin de Registrar y consultar el Turista
 
+
     // Perfil del Administrador 
     case '/administrador/perfil':
         require BASE_PATH . '/app/views/dashboard/administrador/perfil_usuario.php';  //redirige al perfil del administradors
@@ -216,7 +174,6 @@ switch ($request) {
 
 
     //fin rutas administrador
-
 
 
     // ===================================================================================================
@@ -264,8 +221,6 @@ switch ($request) {
 
 
 
-
-
     // Perfil del proveedor turistico 
     case '/proveedor/perfil':
         require BASE_PATH . '/app/views/dashboard/proveedor_turistico/perfil_usuario.php';  //redirige al perfil del proveedor turisitico
@@ -273,6 +228,13 @@ switch ($request) {
 
     case '/proveedor/actualizar-perfil':
         require BASE_PATH . '/app/controllers/proveedor_turistico/editarPerfilProveedor.php';
+        break;
+
+    // Perfil proveedor 
+    case '/proveedor/cambiar-password':
+        require BASE_PATH . '/app/controllers/passwordChangeController.php';
+        $controller = new PasswordChangeController();
+        $controller->cambiarClave();
         break;
     // ================= FIN RUTAS PROVEEDOR TURISTICO =================
 
@@ -282,6 +244,76 @@ switch ($request) {
     // ===================================================================================================
     //                                      RUTAS PROVEEDOR HOTELERO
     // ===================================================================================================
+
+    // ACA VAN LAS RUTAS DEL PORVEEDOR HOTELERO ....
+
+
+    // ===================================================================================================
+    //                                      RUTAS TURISTA (USUARIO)
+    // ===================================================================================================
+    case '/':
+        require BASE_PATH . '/app/views/website/index.php';
+        break;
+
+    // Ruta: descubre tours
+    case '/descubre-tours':
+        require BASE_PATH . '/app/views/website/descubre_tours.php';
+        break;
+
+    // Ruta: descubre hospedaje
+    case '/descubre-hospedaje':
+        require BASE_PATH . '/app/views/website/descubre_hospedaje.php';
+        break;
+
+    // Ruta: /destacados
+    case '/destacados':
+        require BASE_PATH . '/app/views/website/toursDestacados.php';
+        break;
+
+    // Ruta: /acerca-de-nosotros
+    case '/acerca-de-nosotros':
+        require BASE_PATH . '/app/views/website/acerca_de_nosotros.php';
+        break;
+
+    // Ruta: /contactanos
+    case '/contactanos':
+        require BASE_PATH . '/app/views/website/contactanos.php';
+        break;
+
+    case '/turista/tours':
+        require BASE_PATH . '/app/views/website/descubre_tours.php';
+        break;
+
+    case '/descubre-tours':
+        require BASE_PATH . '/app/controllers/website/descubreToursController.php';
+        break;
+
+    case '/turista/dashboard':
+        require BASE_PATH . '/app/views/dashboard/turista/dashboard.php';
+        break;
+
+    case '/turista/registrar-actividad':
+        require BASE_PATH . '/app/views/dashboard/turista/registrar_actividad_turistica.php';
+        break;
+
+
+
+    // Perfil del turista 
+    case '/turista/perfil':
+        require BASE_PATH . '/app/views/dashboard/turista/perfil_usuario.php';  //redirige al perfil del turista
+        break;
+
+    case '/turista/actualizar-perfil':
+        require BASE_PATH . '/app/controllers/turista/editarPerfilTurista.php';
+        break;
+
+    // Perfil proveedor 
+    case '/turista/cambiar-password':
+        require BASE_PATH . '/app/controllers/passwordChangeController.php';
+        $controller = new PasswordChangeController();
+        $controller->cambiarClave();
+        break;
+
 
 
 
