@@ -93,10 +93,10 @@
         <img src="<?= BASE_URL ?>/public/assets/estilos_globales/img/LOGO-FINAL.png" alt="Logo Aventura Go">
     </div>
 
-    <h1>Listado de Actividades turisticas</h1>
+    <h1>Listado de Actividades Turísticas</h1>
 
     <p>
-        El presente documento contiene el registro consolidado de lass actividades turisticas inscritos en Aventura Go. Este reporte
+        El presente documento contiene el registro consolidado de lass actividades turisticas inscritas en Aventura Go. Este reporte
         permite evaluar la participación de prestadores turísticos, analizar el crecimiento de la plataforma y mantener
         actualizada la información relevante para la gestión administrativa.
     </p>
@@ -144,7 +144,7 @@
 
     <!-- Footer -->
     <footer>
-        © Aventura Go 2025 - Todos los derechos reservados
+        © Aventura Go <?= date('Y') ?> - Todos los derechos reservados
     </footer>
 
 </body>
