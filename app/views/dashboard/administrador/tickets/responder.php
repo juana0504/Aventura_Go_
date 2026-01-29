@@ -33,13 +33,13 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 <section id="admin-dashboard">
 
     <!-- PANEL IZQUIERDO -->
-    <?php require_once __DIR__ . '/../../layouts/panel_izq_administrador.php'; ?>
+    <?php require_once __DIR__ . '/../../../layouts/panel_izq_administrador.php'; ?>
 
     <!-- CONTENIDO PRINCIPAL -->
     <div class="info">
 
         <!-- BUSCADOR -->
-        <?php require_once __DIR__ . '/../../layouts/buscador_administrador.php'; ?>
+        <?php require_once __DIR__ . '/../../../layouts/buscador_administrador.php'; ?>
 
         <div class="container-fluid mt-4">
 

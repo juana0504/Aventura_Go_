@@ -223,6 +223,7 @@ switch ($request) {
         break;
 
 
+
     case '/administrador/tickets/responder':
         require BASE_PATH . '/app/controllers/administrador/TicketAdminController.php';
         $controller = new TicketAdminController();
