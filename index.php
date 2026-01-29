@@ -162,19 +162,53 @@ switch ($request) {
         break;
 
 
-    case '/administrador/guardar-ticket':
-        require BASE_PATH . '/app/controllers/ticketController.php';
-        $controller = new TicketController();
-        $controller->guardar();
+
+
+
+
+
+
+
+
+
+
+
+
+    // ===== TICKETS ADMIN =====
+    case '/administrador/tickets':
+        require BASE_PATH . '/app/controllers/administrador/TicketAdminController.php';
+        $controller = new TicketAdminController();
+        $controller->listar();
+        break;
+
+    case '/administrador/tickets/responder':
+        require BASE_PATH . '/app/controllers/administrador/TicketAdminController.php';
+        $controller = new TicketAdminController();
+        $controller->responderForm($_GET['id'] ?? null);
+        break;
+
+    case '/administrador/tickets/guardar-respuesta':
+        require BASE_PATH . '/app/controllers/administrador/TicketAdminController.php';
+        $controller = new TicketAdminController();
+        $controller->responder();
         break;
 
     case '/administrador/consultar-tickets':
         require BASE_PATH . '/app/views/dashboard/administrador/consultar_tickets.php'; //consultar tiquets enviados por el usuario
+    case '/administrador/tickets/cerrar':
+        require BASE_PATH . '/app/controllers/administrador/TicketAdminController.php';
+        $controller = new TicketAdminController();
+        $controller->cerrar();
         break;
 
 
     //fin rutas administrador
 
+
+
+
+
+    //fin rutas administrador
 
     // ===================================================================================================
     //                                     RUTAS PROVEEDOR TURISTICO
@@ -239,12 +273,42 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/proveedor_turistico/editarPerfilProveedor.php';
         break;
 
-    // Perfil proveedor 
-    case '/proveedor/cambiar-password':
-        require BASE_PATH . '/app/controllers/passwordChangeController.php';
-        $controller = new PasswordChangeController();
-        $controller->cambiarClave();
+
+
+
+
+
+    case '/proveedor_turistico/listar':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
+        $controller = new TicketProveedorController();
+        $controller->listar();
         break;
+
+    case '/proveedor_turistico/crear_ticket':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
+        $controller = new TicketProveedorController();
+        $controller->crear();
+        break;
+
+    case '/proveedor_turistico/guardar_ticket':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
+        $controller = new TicketProveedorController();
+        $controller->guardar();
+        break;
+
+    case '/proveedor/tickets':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
+        $controller = new TicketProveedorController();
+        $controller->listar();
+        break;
+
+    case '/proveedor_turistico/ticket/ver':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
+        $controller = new TicketProveedorController();
+        $controller->ver($_GET['id'] ?? null);
+        break;
+
+
     // ================= FIN RUTAS PROVEEDOR TURISTICO =================
 
 
@@ -294,7 +358,7 @@ switch ($request) {
         break;
 
     case '/website/tour_escogido':
-        require_once BASE_PATH . '/app/controllers//website/WebsiteController.php';
+        require_once BASE_PATH . '/app/controllers/website/WebsiteController.php';
         (new WebsiteController())->tourEscogido();
         break;
 

@@ -90,6 +90,8 @@ $actividades = $actividadModel->listarActividadesPublicas();
             </div>
         </nav>
     </header>
+
+
     <main>
         <div class="search-filters">
             <div class="filters-row">
@@ -147,6 +149,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
         <!-- Galería -->
         <div class="container my-5">
             <section class="galeria-container p-3 bg-white shadow-sm rounded-4">
+
                 <div class="row g-2">
 
                     <!-- Imágenes -->
@@ -170,13 +173,13 @@ $actividades = $actividadModel->listarActividadesPublicas();
                         <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 5">
                     </div>
 
-                    <div class="col-6 col-md-4 col-lg-2 position-relative">
+                    <!-- <div class="col-6 col-md-4 col-lg-2 position-relative">
                         <img src="../turista/img/imagen tour.png" class="img-fluid rounded overlay-img" alt="foto 6">
                         <div class="overlay-text">25 fotos más</div>
-                    </div>
+                    </div> -->
 
                     <!-- Segunda fila -->
-                    <div class="col-6 col-md-4 col-lg-2">
+                    <!-- <div class="col-6 col-md-4 col-lg-2">
                         <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 7">
                     </div>
 
@@ -198,7 +201,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
 
                     <div class="col-6 col-md-4 col-lg-2">
                         <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 12">
-                    </div>
+                    </div> -->
 
                 </div>
             </section>
@@ -230,11 +233,8 @@ $actividades = $actividadModel->listarActividadesPublicas();
 
 
 
-
-
-
     <!-- seccion mapa -->
-    <section id="mapa" class="mapa-section">
+    <section id="mapa1" class="mapa-section">
         <h2>Encuéntranos fácilmente</h2>
         <div class="mapa-contenedor">
             <iframe title="Mapa de Villeta, Cundinamarca"
@@ -243,6 +243,20 @@ $actividades = $actividadModel->listarActividadesPublicas();
             </iframe>
         </div>
     </section>
+
+
+    <!-- ejemplo para modificar mapa -->
+    <!-- <section id="mapa" class="mapa-section">
+        <h2>Encuéntranos fácilmente</h2>
+
+        <form id="formDireccion">
+            <input type="text" id="direccion" placeholder="Ingresa una dirección" required>
+            <button type="submit">Buscar</button>
+        </form>
+
+        <div id="map" style="width:100%; height:400px;"></div>
+    </section> -->
+
 
 
 
@@ -342,6 +356,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
 
     </footer>
 
+    <script src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&callback=initMap" async defer></script>
 
 
     <!-- Abootstrap -->
@@ -357,8 +372,8 @@ $actividades = $actividadModel->listarActividadesPublicas();
         AOS.init();
     </script>
 
-    <script src="../../assets/dashboard/turista/tour_escogido/tour_escogido.js"></script>
-
+    <script src="/public/assets/website_externos/tour_escogido/tour_escogido.js"></script>
+    <!-- ../../assets/dashboard/turista/tour_escogido/tour_escogido.js -->
 </body>
 
 </html>
