@@ -200,6 +200,7 @@ class ActividadTuristica
             a.precio,
             a.descripcion,
             a.cupos,
+            a.ubicacion,
             c.nombre AS ciudad,
             img.imagen
         FROM actividad a
