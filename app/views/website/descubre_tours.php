@@ -1,3 +1,10 @@
+<?php session_start();
+require_once __DIR__ . '/../../models/proveedor_turistico/ActividadTuristica.php';
+
+$actividadModel = new ActividadTuristica();
+$actividades = $actividadModel->listarActividadesPublicas();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -17,7 +24,7 @@
         href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/turista/descubre_tours/descubreTours.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/website_externos/descubre_tours/descubreTours.css">
 </head>
 
 <body>
@@ -25,16 +32,43 @@
         <nav class="navbar">
             <div class="container-fluid">
                 <div class="logo">
-                    <img src="/public/assets/dashboard/turista/descubre_tours/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
+                    <img src="public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
                 </div>
 
                 <h1 class="page-title">Descubre Todo lo que Villeta Tiene para Ofrecerte</h1>
 
                 <div class="actions">
-                    <a href="/aventura_go" class="btn-login">Atrás</a>
-                    <div class="menu-toggle" id="menu-toggle">
+
+                    <?php if (isset($_SESSION['user'])): ?>
+
+                        <span class="Bienvenido">
+                            Bienvenido, <?= htmlspecialchars(ucwords(explode(' ', $_SESSION['user']['nombre'])[0] . ' ' . (explode(' ', $_SESSION['user']['nombre'])[1] ?? ''))) ?>
+                        </span>
+
+                        <a href="/aventura_go/logout" class="btn-register">
+                            Salir
+                        </a>
+
+                    <?php else: ?>
+
+                        <a href="/aventura_go/login" class="btn-login">
+                            Ingresa
+                        </a>
+
+                        <a href="/aventura_go/registrarse" class="btn-register">
+                            Regístrate
+                        </a>
+
+                    <?php endif; ?>
+
+                    <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
                         <i class="fas fa-bars"></i>
                     </div>
+
+                </div>
+                <a href="/aventura_go" class="btn-login">Atrás</a>
+                <div class="menu-toggle" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
                 </div>
             </div>
         </nav>
@@ -109,6 +143,13 @@
                                     </span>
                                 </div>
 
+                                <div class="button">
+                                    <a href="<?= BASE_URL ?>/website/tour_escogido?id=<?= $actividad['id_actividad'] ?>" class="btn-ver-mas">
+                                        Ver más
+                                    </a>
+                                </div>
+
+
                             </div>
                         </div>
 
@@ -163,7 +204,7 @@
                 <!-- Columna 1: Logo -->
                 <div class="col-md-2">
                     <div class="logo-section">
-                        <img src="../turista/img/LOGO-NEGATIVO.png" alt="logo Aventura Go">
+                        <img src="public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png" alt="logo Aventura Go">
                     </div>
                 </div>
 

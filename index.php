@@ -17,48 +17,6 @@ if ($request === '') $request = '/'; //si la ruta queda vacia, se interpreta com
 switch ($request) {
 
     // ===================================================================================================
-    //                                      RUTAS TURISTA (USUARIO)
-    // ===================================================================================================
-    case '/':
-        require BASE_PATH . '/app/views/website/index.php';
-        break;
-
-    // Ruta: descubre tours
-    case '/descubre-tours':
-        require BASE_PATH . '/app/views/website/descubre_tours.php';
-        break;
-
-    // Ruta: descubre hospedaje
-    case '/descubre-hospedaje':
-        require BASE_PATH . '/app/views/website/descubre_hospedaje.php';
-        break;
-
-    // Ruta: /destacados
-    case '/destacados':
-        require BASE_PATH . '/app/views/website/toursDestacados.php';
-        break;
-
-    // Ruta: /acerca-de-nosotros
-    case '/acerca-de-nosotros':
-        require BASE_PATH . '/app/views/website/acerca_de_nosotros.php';
-        break;
-
-    // Ruta: /contactanos
-    case '/contactanos':
-        require BASE_PATH . '/app/views/website/contactanos.php';
-        break;
-
-    case '/turista/tours':
-        require BASE_PATH . '/app/views/website/descubre_tours.php';
-        break;
-
-    case '/descubre-tours':
-        require BASE_PATH . '/app/controllers/website/descubreToursController.php';
-        break;
-
-
-
-    // ===================================================================================================
     //                                            RUTAS LOGIN
     // ===================================================================================================
     case '/login':
@@ -150,8 +108,6 @@ switch ($request) {
         break;
 
 
-
-
     // CRUD del Proveedor Hotelero
     case '/administrador/guardar-proveedor-hotelero':
         require BASE_PATH . '/app/controllers/administrador/hotelero.php';  //redirige al guardar proveedor
@@ -166,6 +122,7 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/administrador/hotelero.php';  //elimina el proveedor
         break;
     //Fin de Registrar y consultar el Proveedor Hotelero
+
 
     // Registrar y consultar el Turista
     case '/administrador/registrar-turista':
@@ -193,6 +150,7 @@ switch ($request) {
         reportesPdfControlers();
         break;
     //Fin de Registrar y consultar el Turista
+
 
     // Perfil del Administrador 
     case '/administrador/perfil':
@@ -235,11 +193,18 @@ switch ($request) {
         $controller->responder();
         break;
 
+    case '/administrador/consultar-tickets':
+        require BASE_PATH . '/app/views/dashboard/administrador/consultar_tickets.php'; //consultar tiquets enviados por el usuario
     case '/administrador/tickets/cerrar':
         require BASE_PATH . '/app/controllers/administrador/TicketAdminController.php';
         $controller = new TicketAdminController();
         $controller->cerrar();
         break;
+
+
+    //fin rutas administrador
+
+
 
 
 
@@ -265,6 +230,12 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php'; //consulta la tabla con las actividades turisticas registradas
         break;
 
+    case '/proveedor/pdf-actividades':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/actividadPdfController.php';
+        generarPdfActividades();
+        break;
+
+
     case '/proveedor/editar-actividad':
         require BASE_PATH . '/app/views/dashboard/proveedor_turistico/editar_actividad_turistica.php'; //editar la actividad turisitica 
         break;
@@ -274,11 +245,21 @@ switch ($request) {
         break;
 
     case '/proveedor/consultar-reservas':
-        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/consultar_reservas.php';
+        require BASE_PATH . '/app/controllers/proveedor_turistico/reservaController.php';
         break;
 
+    case '/proveedor/reserva-detalle':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/reservaDetalle.php';
+        break;
 
+    case '/proveedor/pdf-reservas':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/reservaPdfController.php';
+        generarPdfReservas();
+        break;
 
+    case '/proveedor/crear-ticket':
+        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/crear_ticket.php'; //crear los tiquets
+        break;
 
 
 
@@ -336,6 +317,111 @@ switch ($request) {
     // ===================================================================================================
     //                                      RUTAS PROVEEDOR HOTELERO
     // ===================================================================================================
+
+    // ACA VAN LAS RUTAS DEL PORVEEDOR HOTELERO ....
+
+
+    // ===================================================================================================
+    //                                      RUTAS TURISTA (USUARIO)
+    // ===================================================================================================
+    case '/':
+        require BASE_PATH . '/app/views/website/index.php';
+        break;
+
+    // Ruta: descubre tours
+    case '/descubre-tours':
+        require BASE_PATH . '/app/views/website/descubre_tours.php';
+        break;
+
+    // Ruta: descubre hospedaje
+    case '/descubre-hospedaje':
+        require BASE_PATH . '/app/views/website/descubre_hospedaje.php';
+        break;
+
+    // Ruta: /destacados
+    case '/destacados':
+        require BASE_PATH . '/app/views/website/toursDestacados.php';
+        break;
+
+    // Ruta: /acerca-de-nosotros
+    case '/acerca-de-nosotros':
+        require BASE_PATH . '/app/views/website/acerca_de_nosotros.php';
+        break;
+
+    // Ruta: /contactanos
+    case '/contactanos':
+        require BASE_PATH . '/app/views/website/contactanos.php';
+        break;
+
+    case '/turista/tours':
+        require BASE_PATH . '/app/views/website/descubre_tours.php';
+        break;
+
+    case '/website/tour_escogido':
+        require_once BASE_PATH . '/app/controllers/website/WebsiteController.php';
+        (new WebsiteController())->tourEscogido();
+        break;
+
+
+    case '/turista/dashboard':
+        require BASE_PATH . '/app/views/dashboard/turista/dashboard.php';
+        break;
+
+    case '/turista/registrar-actividad':
+        require BASE_PATH . '/app/views/dashboard/turista/registrar_reserva.php';
+        break;
+
+    case '/turista/confirmar-reserva':
+        require_once BASE_PATH . '/app/controllers/turista/confirmarReservaController.php';
+        break;
+
+    case '/turista/registrar-reserva':
+        require_once BASE_PATH . '/app/controllers/turista/registrarReservaController.php';
+        break;
+
+    case '/turista/ver-reservas':
+        require BASE_PATH . '/app/controllers/turista/verReservaController.php';
+        break;
+
+    case '/turista/reserva-detalle':
+        require_once BASE_PATH . '/app/controllers/turista/verReservaDetalle.php';
+        break;
+
+    case '/turista/pdf-reservas':
+        require_once BASE_PATH . '/app/controllers/turista/verReservaPdfController.php';
+        generarPdfReservasTurista();
+        break;
+
+    case '/seleccionar-actividad':
+        require_once BASE_PATH . '/app/controllers/website/seleccionarActividadController.php';
+        break;
+
+        
+
+
+
+
+
+
+
+
+
+    // Perfil del turista 
+    case '/turista/perfil':
+        require BASE_PATH . '/app/views/dashboard/turista/perfil_usuario.php';  //redirige al perfil del turista
+        break;
+
+    case '/turista/actualizar-perfil':
+        require BASE_PATH . '/app/controllers/turista/editarPerfilTurista.php';
+        break;
+
+    // Perfil proveedor 
+    case '/turista/cambiar-password':
+        require BASE_PATH . '/app/controllers/passwordChangeController.php';
+        $controller = new PasswordChangeController();
+        $controller->cambiarClave();
+        break;
+
 
 
 

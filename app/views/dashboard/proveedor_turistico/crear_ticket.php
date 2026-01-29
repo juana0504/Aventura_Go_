@@ -98,10 +98,11 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
         </div>
 
-    </div>
-</section>
+        </div>
+    </section>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>

@@ -45,7 +45,7 @@ $usuario = mostrarPerfilproveedor($id);
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
     <!-- Estilos CSS (siempre al final)-->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/perfil.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/perfil_usuario/perfil.css">
 
 </head>
 
@@ -157,7 +157,7 @@ $usuario = mostrarPerfilproveedor($id);
 
 
 
-                    <form action="/aventura_go/administrador/cambiar-password" method="POST" class="cambiar">
+                    <form action="/aventura_go/proveedor/cambiar-password" method="POST" class="cambiar">
 
                         <input type="hidden" name="accion" value="cambiar_password">
 
