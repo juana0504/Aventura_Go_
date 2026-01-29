@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,13 +7,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hospedaje Escogido</title>
+
+    <link rel="shortcut icon" href="../../assets/dashboard/turista/hospedaje_escogido/img/FAVICON.png">
     <!-- Bootstrap Icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../assets/dashboard/turista/hospedaje_escogido/hospedaje_escogido.css">
-    <link rel="shortcut icon" href="../../assets/dashboard/turista/hospedaje_escogido/img/FAVICON.png">
+
+    <link rel="stylesheet" href="public/assets/website_externos/hospedaje_escogido/hospedaje_escogido.css">
+
+
 </head>
 
 <body>
@@ -24,7 +30,35 @@
                 <ul class="navbar-nav">
                     <h1>Tu hospedaje en la vega</h1>
                 </ul>
+
                 <div class="actions">
+
+                    <?php if (isset($_SESSION['user'])): ?>
+
+                        <span class="Bienvenido">
+                            Bienvenido, <?= htmlspecialchars(ucwords(explode(' ', $_SESSION['user']['nombre'])[0] . ' ' . (explode(' ', $_SESSION['user']['nombre'])[1] ?? ''))) ?>
+                        </span>
+
+                        <a href="/aventura_go/logout" class="btn-register">
+                            Salir
+                        </a>
+
+                    <?php else: ?>
+
+                        <a href="/aventura_go/login" class="btn-login">
+                            Ingresa
+                        </a>
+
+                        <a href="/aventura_go/registrarse" class="btn-register">
+                            Regístrate
+                        </a>
+
+                    <?php endif; ?>
+
+                    <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+                        <i class="fas fa-bars"></i>
+                    </div>
+
                     <button class="principal">Atrás</button>
                     <button class="secundario">Salir</button>
                 </div>

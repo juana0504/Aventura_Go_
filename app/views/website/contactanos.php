@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -52,17 +54,34 @@
 
                 <!-- Botones y menú móvil -->
                 <div class="actions">
-                    <div class="actions">
-                        <a href="login" class="btn-login">Ingresa</a>
-                        <a href="registrarse" class="btn-register">Regístrate</a>
 
-                        <!-- menu hambirguesa en responsive -->
-                        <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
-                            <i class="fas fa-bars"></i>
-                        </div>
+                    <?php if (isset($_SESSION['user'])): ?>
+
+                        <span class="Bienvenido">
+                            Bienvenido, <?= htmlspecialchars(ucwords(explode(' ', $_SESSION['user']['nombre'])[0] . ' ' . (explode(' ', $_SESSION['user']['nombre'])[1] ?? ''))) ?>
+                        </span>
+
+                        <a href="/aventura_go/logout" class="btn-register">
+                            Salir
+                        </a>
+
+                    <?php else: ?>
+
+                        <a href="/aventura_go/login" class="btn-login">
+                            Ingresa
+                        </a>
+
+                        <a href="/aventura_go/registrarse" class="btn-register">
+                            Regístrate
+                        </a>
+
+                    <?php endif; ?>
+
+                    <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+                        <i class="fas fa-bars"></i>
                     </div>
-                </div>
 
+                </div>
             </div>
         </nav>
     </header>
@@ -86,38 +105,9 @@
                         </div>
                     </div>
 
-                    <!-- <div class="carousel-item">
-                        <img src="public/assets/website_externos/contactanos/img/Hero_contactanos.png" class="d-block w-100"
-                            alt="...">
-                        <div class="carousel-caption">
-                            <h1>El mundo te espera,</h1>
-                            <h2>atrévete a vivirlo</h2>
-                            <p class="parrafo1">Sumérgete en nuevas aventuras, desde montañas imponentes hasta mares
-                                cristalinos.</p>
-                        </div>
-                    </div>
-
-                    <div class="carousel-item">
-                        <img src="public/assets/website_externos/contactanos/img/Hero_contactanos.png" class="d-block w-100"
-                            alt="...">
-                        <div class="carousel-caption">
-                            <h1>Destinos que inspiran,</h1>
-                            <h2>aventuras que transforman</h2>
-                            <p class="parrafo1">Viaja a lugares mágicos donde cada paso cuenta una historia y cada
-                                paisaje
-                                deja huella.</p>
-
-                        </div>
-                    </div> -->
 
                 </div>
 
-                <!-- <div class="search-box">
-                    <div class="search-item">
-                        <strong>Busca tu destino</strong>
-                    </div>
-                    <a href="website_externos/destinos.html" class="search-btn bi bi-search "></a>
-                </div> -->
 
                 <h2 class="marca">AVENTURA<br>GO</h2>
 

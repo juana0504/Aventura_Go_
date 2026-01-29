@@ -1,3 +1,10 @@
+<?php session_start();
+require_once __DIR__ . '/../../models/proveedor_turistico/ActividadTuristica.php';
+
+$actividadModel = new ActividadTuristica();
+$actividades = $actividadModel->listarActividadesPublicas();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -25,7 +32,8 @@
     <!-- LIBRERIA AOS ANIMATE -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <!-- CSS personalizado -->
-    <link rel="stylesheet" href="../../assets/dashboard/turista/tour_escogido/tour-escogido.css">
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/website_externos/tour_escogido/tour_escogido.css">
 
 
 
@@ -38,20 +46,52 @@
         <nav class="navbar">
             <div class="container-fluid">
                 <div class="logo">
-                    <img src="../turista/img/logo nav.png" alt="Logo Aventura Go" class="navbar-logo">
+                    <img src="public/assets/website_externos/tour_escogido/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
                 </div>
 
-                <h1 class="page-title">Tu reserva de tours en Villeta</h1>
+                <h1 class="page-title">
+                    Tu reserva de tours en <?= htmlspecialchars($_GET['ciudad'] ?? 'tu destino') ?>
+                </h1>
 
                 <div class="actions">
-                    <a href="#" class="btn-login">Atrás</a>
-                    <div class="menu-toggle" id="menu-toggle">
+
+                    <?php if (isset($_SESSION['user'])): ?>
+
+                        <span class="Bienvenido">
+                            Bienvenido, <?= htmlspecialchars(ucwords(explode(' ', $_SESSION['user']['nombre'])[0] . ' ' . (explode(' ', $_SESSION['user']['nombre'])[1] ?? ''))) ?>
+                        </span>
+
+                        <a href="/aventura_go/logout" class="btn-register">
+                            Salir
+                        </a>
+
+                    <?php else: ?>
+
+                        <a href="/aventura_go/login" class="btn-login">
+                            Ingresa
+                        </a>
+
+                        <a href="/aventura_go/registrarse" class="btn-register">
+                            Regístrate
+                        </a>
+
+                    <?php endif; ?>
+
+                    <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
                         <i class="fas fa-bars"></i>
                     </div>
+
                 </div>
+                <a href="#" class="btn-login">Atrás</a>
+                <div class="menu-toggle" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
             </div>
         </nav>
     </header>
+
+
     <main>
         <div class="search-filters">
             <div class="filters-row">
@@ -109,6 +149,7 @@
         <!-- Galería -->
         <div class="container my-5">
             <section class="galeria-container p-3 bg-white shadow-sm rounded-4">
+
                 <div class="row g-2">
 
                     <!-- Imágenes -->
@@ -132,13 +173,13 @@
                         <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 5">
                     </div>
 
-                    <div class="col-6 col-md-4 col-lg-2 position-relative">
+                    <!-- <div class="col-6 col-md-4 col-lg-2 position-relative">
                         <img src="../turista/img/imagen tour.png" class="img-fluid rounded overlay-img" alt="foto 6">
                         <div class="overlay-text">25 fotos más</div>
-                    </div>
+                    </div> -->
 
                     <!-- Segunda fila -->
-                    <div class="col-6 col-md-4 col-lg-2">
+                    <!-- <div class="col-6 col-md-4 col-lg-2">
                         <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 7">
                     </div>
 
@@ -160,7 +201,7 @@
 
                     <div class="col-6 col-md-4 col-lg-2">
                         <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 12">
-                    </div>
+                    </div> -->
 
                 </div>
             </section>
@@ -192,11 +233,8 @@
 
 
 
-
-
-
     <!-- seccion mapa -->
-    <section id="mapa" class="mapa-section">
+    <section id="mapa1" class="mapa-section">
         <h2>Encuéntranos fácilmente</h2>
         <div class="mapa-contenedor">
             <iframe title="Mapa de Villeta, Cundinamarca"
@@ -205,6 +243,20 @@
             </iframe>
         </div>
     </section>
+
+
+    <!-- ejemplo para modificar mapa -->
+    <!-- <section id="mapa" class="mapa-section">
+        <h2>Encuéntranos fácilmente</h2>
+
+        <form id="formDireccion">
+            <input type="text" id="direccion" placeholder="Ingresa una dirección" required>
+            <button type="submit">Buscar</button>
+        </form>
+
+        <div id="map" style="width:100%; height:400px;"></div>
+    </section> -->
+
 
 
 
@@ -231,7 +283,7 @@
                 <!-- Columna 1: Logo -->
                 <div class="col-md-2">
                     <div class="logo-section">
-                        <img src="../turista/img/logo nav.png" alt="logo Aventura Go">
+                        <img src="public/assets/website_externos/tour_escogido/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
                     </div>
                 </div>
 
@@ -304,6 +356,7 @@
 
     </footer>
 
+    <script src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&callback=initMap" async defer></script>
 
 
     <!-- Abootstrap -->
@@ -319,8 +372,8 @@
         AOS.init();
     </script>
 
-    <script src="../../assets/dashboard/turista/tour_escogido/tour_escogido.js"></script>
-
+    <script src="/public/assets/website_externos/tour_escogido/tour_escogido.js"></script>
+    <!-- ../../assets/dashboard/turista/tour_escogido/tour_escogido.js -->
 </body>
 
 </html>
