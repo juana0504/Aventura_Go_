@@ -18,7 +18,8 @@ h1, h2, h3, h4, h5, h6 {
     --text-muted: #6c757d; /* Texto apagado */
     --badge-success: #198754; /* Color de badge de éxito */
     --badge-warning: #ffc107; /* Color de badge de advertencia */
-    --radius: 10px; /* Radio de bordes */
+    --radius: 12px; /* Radio de bordes */
+    --transition-duration: 0.3s; /* Duración de las transiciones */
 }
 
 /* ===============================
@@ -59,32 +60,36 @@ section p {
     border-radius: var(--radius);
     background: white;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform var(--transition-duration), box-shadow var(--transition-duration);
+    overflow: hidden;
 }
 
 .card:hover {
-    transform: translateY(-5px); /* Desplazamiento al hacer hover */
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    transform: translateY(-8px); /* Desplazamiento más fuerte */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2); /* Sombra más profunda */
 }
 
 .card i {
     font-size: 35px;
     color: var(--primary);
-    transition: color 0.3s ease;
+    transition: color var(--transition-duration), transform var(--transition-duration);
 }
 
 .card:hover i {
     color: #fff;
+    transform: scale(1.2); /* Agrandar ícono al hacer hover */
 }
 
 .card h3 {
     font-weight: 700;
+    font-size: 1.5rem;
 }
 
 .card .badge {
     font-size: 1rem;
     padding: 8px 14px;
     border-radius: 25px;
+    background-color: var(--primary);
 }
 
 /* ===============================
@@ -99,8 +104,9 @@ section h5 {
     padding: 12px 25px;
     border-radius: 8px;
     font-weight: 600;
-    transition: background-color 0.3s, transform 0.2s ease;
+    transition: background-color var(--transition-duration), transform var(--transition-duration);
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .btn-primary {
