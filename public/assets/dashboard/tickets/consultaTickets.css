@@ -1,0 +1,189 @@
+/* =====================================================
+   TABLA DE GESTIÓN DE REPORTES – AVENTURA GO
+   Idioma visual: Azul institucional + Naranja acción
+   ===================================================== */
+
+/* Contenedor de la tabla */
+.table-container {
+    max-width: 1100px;
+    margin: 30px auto;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 18px 50px rgba(45, 64, 89, 0.25);
+    overflow: hidden;
+    border: 2px solid rgba(45, 64, 89, 0.2);
+}
+
+/* Header superior de la tabla */
+.table-container .ticket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 35px;
+    background: linear-gradient(135deg, #2D4059 0%, #1a2838 100%);
+    position: relative;
+}
+
+.table-container .ticket-header h2 {
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+/* Botón Nuevo Reporte */
+.table-container .btn-nuevo {
+    background: linear-gradient(135deg, #EA8217 0%, #d97315 100%);
+    color: #fff !important;
+    padding: 12px 22px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.6px;
+    box-shadow: 0 6px 20px rgba(234, 130, 23, 0.45);
+    transition: all 0.35s ease;
+}
+
+.table-container .btn-nuevo:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(234, 130, 23, 0.6);
+}
+
+/* =======================
+   TABLA
+   ======================= */
+
+.ticket-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Lato', sans-serif;
+}
+
+/* Encabezado */
+.ticket-table thead {
+    background: #F1F3F6;
+}
+
+.ticket-table th {
+    padding: 16px 18px;
+    font-size: 14px;
+    font-weight: 800;
+    color: #2D4059;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    border-bottom: 2px solid #E0E0E0;
+    text-align: left;
+}
+
+/* Filas */
+.ticket-table td {
+    padding: 16px 18px;
+    font-size: 15px;
+    color: #2b2b2b;
+    border-bottom: 1px solid #ECECEC;
+    vertical-align: middle;
+}
+
+/* Hover elegante */
+.ticket-table tbody tr {
+    transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.ticket-table tbody tr:hover {
+    background: rgba(234, 130, 23, 0.08);
+    transform: scale(1.005);
+}
+
+/* =======================
+   TAG CATEGORÍA
+   ======================= */
+
+.tag-category {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    background: rgba(45, 64, 89, 0.1);
+    color: #2D4059;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* =======================
+   ESTADOS
+   ======================= */
+
+[class^="status-"] {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+/* Estados específicos */
+.status-pendiente {
+    background: rgba(234, 130, 23, 0.15);
+    color: #EA8217;
+}
+
+.status-resuelto {
+    background: rgba(40, 167, 69, 0.15);
+    color: #28a745;
+}
+
+.status-cerrado {
+    background: rgba(108, 117, 125, 0.15);
+    color: #6c757d;
+}
+
+/* =======================
+   BOTÓN ACCIÓN
+   ======================= */
+
+.btn-action.view {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #2D4059 0%, #1a2838 100%);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 18px rgba(45, 64, 89, 0.4);
+}
+
+.btn-action.view:hover {
+    background: linear-gradient(135deg, #EA8217 0%, #d97315 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(234, 130, 23, 0.6);
+}
+
+/* =======================
+   RESPONSIVE
+   ======================= */
+
+@media (max-width: 768px) {
+    .table-container {
+        margin: 20px 10px;
+    }
+
+    .ticket-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .ticket-table th,
+    .ticket-table td {
+        padding: 14px 12px;
+        font-size: 14px;
+    }
+}

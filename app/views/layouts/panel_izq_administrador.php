@@ -1,4 +1,15 @@
-            <div class="panel">
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+require_once __DIR__ . '/../../helpers/auth.php';
+auth('administrador');
+?>
+
+
+
+<div class="panel">
 
                 <img src="<?= BASE_URL ?>/public/assets/dashboard/administrador/administrador/img/LOGO-POSITIVO 2 (1).png" alt="logo">
 
