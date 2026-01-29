@@ -15,7 +15,7 @@ class TicketProveedorController
     // 📋 LISTAR tickets del proveedor
     public function listar()
     {
-        session_start();
+        
         $id_usuario = $_SESSION['user']['id'];
 
         $tickets = $this->ticketModel->listarPorUsuario($id_usuario);

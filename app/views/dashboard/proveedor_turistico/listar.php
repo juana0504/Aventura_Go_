@@ -30,9 +30,10 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1>Mis Tickets de Soporte</h1>
-    <a href="<?= BASE_URL ?>/proveedor_turistico/tickets/crear" class="btn btn-primary">
+    <a href="<?= BASE_URL ?>/proveedor/tickets/crear" class="btn btn-primary">
         <i class="fa fa-plus"></i> Crear Ticket
     </a>
+
 </div>
 
 <div class="table-responsive">

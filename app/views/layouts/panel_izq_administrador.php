@@ -50,12 +50,10 @@ auth('administrador');
                     </div>
 
                     <div class="dropdown">
-                        <a class="btn btn-secondary dropdown-toggle" id="btn-panel" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Soporte y Reportes
+                        <a href="<?= BASE_URL ?>/administrador/tickets">
+                            Consultar Tickets
                         </a>
-                        <ul class="dropdown-menu" id="menu-panel">
-                            <li><a class="dropdown-item" href="<?= BASE_URL ?>/administrador/consultar-tickets">Consultar Tickets</a></li>
-                        </ul>
+
                     </div>
 
                 </div>
