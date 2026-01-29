@@ -239,8 +239,20 @@ switch ($request) {
         break;
 
     case '/proveedor/consultar-actividad':
-        require BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php';
+        require BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php'; //consulta la tabla con las actividades turisticas registradas
         break;
+
+    case '/proveedor/editar-actividad':
+        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/editar_actividad_turistica.php'; //editar la actividad turisitica 
+        break;
+
+    case '/proveedor/eliminar-actividad':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php';  //elimina el proveedor
+        break;
+
+
+
+
 
 
 
@@ -267,7 +279,9 @@ switch ($request) {
 
 
 
-
+    // ===================================================================================================
+    //                                    pagina ERROR 404
+    // ===================================================================================================
     default:
         require BASE_PATH . '/app/views/auth/error404.html';
         break;

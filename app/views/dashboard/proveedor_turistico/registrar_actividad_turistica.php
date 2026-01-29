@@ -36,86 +36,112 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
 <body>
 
-    <?php include_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php'; ?>
-    <?php include_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php'; ?>
 
-    <div class="contenido-principal">
 
-        <h2>Registrar actividad turística</h2>
+    <section id="registrar-actividades">
 
-        <form id="formActividad" action="<?= BASE_URL ?>/proveedor/guardar-actividad" method="POST" enctype="multipart/form-data">
+        <!-- Panel Lateral -->
+        <?php
+        include_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php';
+        ?>
 
-            <input type="hidden" name="accion" value="registrar">
+        <!-- Contenido Principal -->
+        <div class="contenido-principal">
 
-            <!-- ================= PASO 1 ================= -->
-            <div class="wizard-step active" id="step-1">
-                <h3>Paso 1: Información básica</h3>
-
-                <label>Nombre de la actividad</label>
-                <input type="text" name="nombre" required>
-
-                <!-- 🔥 NUEVO: DEPARTAMENTO -->
-                <label>Departamento</label>
-                <select name="id_departamento" id="id_departamento" required>
-                    <option value="">Seleccione departamento</option>
-                </select>
-
-                <!-- 🔥 NUEVO: CIUDAD (DESTINO REAL) -->
-                <label>Destino (Ciudad)</label>
-                <select name="id_ciudad" id="id_ciudad" required>
-                    <option value="">Seleccione ciudad</option>
-                </select>
-
-                <label>Ubicación</label>
-                <input type="text" name="ubicacion" required>
-
-                <div class="wizard-actions">
-                    <span></span>
-                    <button type="button" onclick="nextStep(2)">Siguiente</button>
-                </div>
+            <!-- Barra de Búsqueda Superior -->
+            <div id="barra">
+                <?php
+                include_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php';
+                ?>
             </div>
 
-            <!-- ================= PASO 2 ================= -->
-            <div class="wizard-step" id="step-2">
-                <h3>Paso 2: Detalles de la actividad</h3>
 
-                <label>Descripción</label>
-                <textarea type="text" name="descripcion" required></textarea>
+            <!-- Formulario Wizard -->
+            <form id="formActividad" action="<?= BASE_URL ?>/proveedor/guardar-actividad" method="POST" enctype="multipart/form-data">
 
-                <label>Cupos disponibles</label>
-                <input type="number" name="cupos" required>
+                <input type="hidden" name="accion" value="registrar">
 
-                <div class="wizard-actions">
-                    <button type="button" onclick="prevStep(1)">Atrás</button>
-                    <button type="button" onclick="nextStep(3)">Siguiente</button>
+                <div class="wizard-header">
+                    <h1 class="mb-0">Registro de actividades turisticas</p>
                 </div>
-            </div>
 
-            <!-- ================= PASO 3 ================= -->
-            <div class="wizard-step" id="step-3">
-                <h3>Paso 3: Precio y estado</h3>
 
-                <label>Precio</label>
-                <input type="number" name="precio" required>
+                <!-- ================= PASO 1 ================= -->
+                <div class="wizard-step active" id="step-1">
+                    <h3>Paso 1 de 3: Información básica</h3>
 
-                <label>Estado</label>
-                <select name="estado">
-                    <option value="activa">Activa</option>
-                    <option value="pausada">Pausada</option>
-                </select>
+                    <label>Nombre de la actividad</label>
+                    <input type="text" name="nombre" required>
 
-                <label>Imágenes de la actividad (máx. 5)</label>
-                <input type="file" name="imagenes[]" multiple required>
-                <small>Selecciona hasta 5 imágenes (JPG o PNG)</small>
+                    <!-- 🔥 NUEVO: DEPARTAMENTO -->
+                    <label>Departamento</label>
+                    <select name="id_departamento" id="id_departamento" required>
+                        <option value="">Seleccione departamento</option>
+                    </select>
 
-                <div class="wizard-actions">
-                    <button type="button" onclick="prevStep(2)">Atrás</button>
-                    <button type="submit">Guardar actividad</button>
+                    <!-- 🔥 NUEVO: CIUDAD (DESTINO REAL) -->
+                    <label>Destino (Ciudad)</label>
+                    <select name="id_ciudad" id="id_ciudad" required>
+                        <option value="">Seleccione ciudad</option>
+                    </select>
+
+                    <label>Ubicación</label>
+                    <input type="text" name="ubicacion" required>
+
+                    <div class="wizard-actions">
+                        <span></span>
+                        <button type="button" onclick="nextStep(2)">Siguiente</button>
+                    </div>
                 </div>
-            </div>
 
-        </form>
-    </div>
+                <!-- ================= PASO 2 ================= -->
+                <div class="wizard-step" id="step-2">
+                    <h3>Paso 2 de 3: Detalles de la actividad</h3>
+
+                    <label>Descripción</label>
+                    <textarea type="text" name="descripcion" required></textarea>
+
+                    <label>Cupos disponibles</label>
+                    <input type="number" name="cupos" required>
+
+                    <div class="wizard-actions">
+                        <button type="button" onclick="prevStep(1)">Atrás</button>
+                        <button type="button" onclick="nextStep(3)">Siguiente</button>
+                    </div>
+                </div>
+
+                <!-- ================= PASO 3 ================= -->
+                <div class="wizard-step" id="step-3">
+                    <h3>Paso 3: Precio y estado</h3>
+
+                    <label>Precio</label>
+                    <input type="number" name="precio" required>
+
+                    <label>Estado</label>
+                    <select name="estado">
+                        <option value="activa">Activa</option>
+                        <option value="pausada">Pausada</option>
+                    </select>
+
+                    <label>Imágenes de la actividad (máx. 5)</label>
+                    <input type="file" name="imagenes[]" multiple required>
+                    <small>Selecciona hasta 5 imágenes (JPG o PNG)</small>
+
+                    <div class="wizard-actions">
+                        <button type="button" onclick="prevStep(2)">Atrás</button>
+                        <button type="submit">Guardar actividad</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </section>
+
+
+
+
+
 
     <!-- WIZARD JS (TUYO, SIN TOCAR) -->
     <script>
