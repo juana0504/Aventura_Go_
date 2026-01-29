@@ -23,7 +23,7 @@
                 <ul id="menu-panel">
                     <a href="<?= BASE_URL ?>/turista/dashboard" class="bi-speedometer2">Dashboard</a>
                     <a href="<?= BASE_URL ?>/turista/registrar-actividad" class="bi bi-layout-text-sidebar-reverse">Registrar actividad turistica</a>
-                    <a href="<?= BASE_URL ?>/turista/consultar-actividad" class="bi bi-table">Consultar actividades reservadas</a>
+                    <a href="<?= BASE_URL ?>/turista/ver-reservas" class="bi bi-table">Ver reservas</a>
                     <a href="<?= BASE_URL ?>/turista/crear-ticket" class="bi bi-ticket-perforated">Generar Reporte</a>
 
                 </ul>

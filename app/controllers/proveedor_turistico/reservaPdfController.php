@@ -31,8 +31,8 @@ function generarPdfReservas() {
     $estadisticas_pdf = $estadisticas;
     $filtro_actual = $filtro;
     
-    // Cargar la vista del PDF
-    require_once BASE_PATH . '/app/views/pdf/reservas_pdf.php';
+    // Cargar la vista del PDF con estilos de actividades
+    require_once BASE_PATH . '/app/views/pdf/reservas_proveedor_pdf.php';
     
     $html = ob_get_clean();
     

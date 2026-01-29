@@ -313,9 +313,25 @@ switch ($request) {
         require_once BASE_PATH . '/app/controllers/turista/registrarReservaController.php';
         break;
 
+    case '/turista/ver-reservas':
+        require BASE_PATH . '/app/controllers/turista/verReservaController.php';
+        break;
+
+    case '/turista/reserva-detalle':
+        require_once BASE_PATH . '/app/controllers/turista/verReservaDetalle.php';
+        break;
+
+    case '/turista/pdf-reservas':
+        require_once BASE_PATH . '/app/controllers/turista/verReservaPdfController.php';
+        generarPdfReservasTurista();
+        break;
+
     case '/seleccionar-actividad':
         require_once BASE_PATH . '/app/controllers/website/seleccionarActividadController.php';
         break;
+
+        
+
 
 
 
