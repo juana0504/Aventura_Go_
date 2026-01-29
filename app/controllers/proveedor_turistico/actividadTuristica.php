@@ -328,7 +328,7 @@ function activarActividad($id)
             'success',
             'Actividad activada',
             'La actividad fue activada correctamente',
-            '/aventura_go/proveedor/consultar-actividades'
+            '/aventura_go/proveedor/consultar-actividad'
         );
     } else {
         mostrarSweetAlert(
@@ -338,8 +338,6 @@ function activarActividad($id)
         );
     }
 }
-
-
 
 
 function desactivarActividad($id)
@@ -352,7 +350,7 @@ function desactivarActividad($id)
             'success',
             'Actividad desactivada',
             'La actividad fue desactivada correctamente',
-            '/aventura_go/proveedor/consultar-actividades'
+            '/aventura_go/proveedor/consultar-actividad'
         );
     } else {
         mostrarSweetAlert(
@@ -373,6 +371,6 @@ function eliminaractividad($id)
     if ($resultado === true) {
         mostrarSweetAlert('success', 'Eliminación exitosa', 'actividad eliminada.', '/aventura_go/proveedor/consultar-turista');
     } else {
-        mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el turista.');
+        mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar la actividad.');
     }
 }

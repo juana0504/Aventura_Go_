@@ -138,10 +138,11 @@ class ActividadTuristica
 
 
 
+
     /** Activar actividad turística*/
     public function activar($id)
     {
-        $sql = "UPDATE actividad SET estado = 'activa' WHERE id_actividad = :id";
+        $sql = "UPDATE actividad SET estado = 'ACTIVO' WHERE id_actividad = :id";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
@@ -153,7 +154,7 @@ class ActividadTuristica
     /** Desactivar actividad turística*/
     public function desactivar($id)
     {
-        $sql = "UPDATE actividad SET estado = 'pausada' WHERE id_actividad = :id";
+        $sql = "UPDATE actividad SET estado = 'INACTIVO' WHERE id_actividad = :id";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
@@ -262,5 +263,64 @@ class ActividadTuristica
         $stmt->execute();
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+
+
+    //OBTENER DETALLES DE ACTIVIDADES PARA EL MODAL
+    public function obtenerDetalleActividad($id)
+    {
+        $sql = "
+        SELECT 
+            a.id_actividad,
+            a.nombre,
+            a.descripcion,
+            a.ubicacion,
+            a.cupos,
+            a.precio,
+            a.estado,
+            a.created_at,
+
+            c.nombre AS ciudad,
+            d.nombre AS departamento,
+
+            img_principal.imagen AS imagen_principal
+        FROM actividad a
+        INNER JOIN ciudades c 
+            ON a.id_ciudad = c.id_ciudad
+        INNER JOIN departamentos d
+            ON c.id_departamento = d.id_departamento
+        LEFT JOIN actividad_imagen img_principal
+            ON img_principal.id_actividad = a.id_actividad
+           AND img_principal.es_principal = 1
+        WHERE a.id_actividad = :id
+        LIMIT 1
+    ";
+
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $actividad = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$actividad) {
+            return null;
+        }
+
+        // 🔹 Galería de imágenes
+        $sqlImgs = "
+        SELECT imagen 
+        FROM actividad_imagen 
+        WHERE id_actividad = :id
+        ORDER BY es_principal DESC
+    ";
+
+        $stmtImgs = $this->conexion->prepare($sqlImgs);
+        $stmtImgs->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmtImgs->execute();
+
+        $actividad['imagenes'] = $stmtImgs->fetchAll(PDO::FETCH_COLUMN);
+
+        return $actividad;
     }
 }

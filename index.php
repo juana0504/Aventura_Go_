@@ -196,6 +196,15 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php'; //consulta la tabla con las actividades turisticas registradas
         break;
 
+    case '/proveedor/consultar-actividad-id':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/actividadDetalle.php';
+        break;
+
+    case '/proveedor/actividadTuristica':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php';
+        break;
+
+
     case '/proveedor/pdf-actividades':
         require_once BASE_PATH . '/app/controllers/proveedor_turistico/actividadPdfController.php';
         generarPdfActividades();
