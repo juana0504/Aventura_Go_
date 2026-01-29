@@ -1,3 +1,14 @@
+/* fuente para titulos*/
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
+
+/*fuente para textos*/
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+h1 h2 h3 h4 h5 h6 {
+    --font-titles: 'Raleway', sans-serif;
+    /*tipografia titulos*/
+}
+
 /* ===============================
    VARIABLES
 ================================ */
@@ -26,16 +37,17 @@ body {
     /* Color de texto estándar */
     background-color: var(--bg-light);
     /* Fondo claro */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'lato', sans-serif;
     /* Tipografía moderna */
     margin: 0;
     padding: 0;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+.info {
+    max-width: 1300px;
+    margin-left: 280px;
+    padding-top: 20px;
+    padding-left: 53px;
 }
 
 /* ===============================
@@ -47,7 +59,6 @@ section h3 {
 }
 
 section p {
-    color: var(--text-muted);
     font-size: 1rem;
 }
 

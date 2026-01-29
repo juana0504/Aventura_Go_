@@ -82,6 +82,36 @@ button.secundario {
   border: none;
 }
 
+/* ===============================
+   BIENVENIDA USUARIO - HEADER
+   =============================== */
+
+.Bienvenido {
+  background-color: #2D4059;
+  /* azul Aventura Go */
+  color: #FFFFFF;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 10px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* Ajuste para que no se pegue al botón salir */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bienvenido strong {
+  font-weight: 700;
+}
+
 /* CONTENIDO PRINCIPAL */
 .hospedaje-container {
   padding-top: 120px;
@@ -146,7 +176,8 @@ button.secundario {
 
 /* Estilos para tarjeta en búsqueda, más pequeña y compacta */
 .busqueda-tarjeta {
-  max-width: 600px !important; /* compacta y centrada */
+  max-width: 600px !important;
+  /* compacta y centrada */
   margin: 0 auto !important;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
   border-radius: 16px;
@@ -196,12 +227,15 @@ button.secundario {
   .busqueda-tarjeta {
     max-width: 90% !important;
   }
+
   .busqueda-tarjeta img {
     height: 140px !important;
   }
+
   .busqueda-tarjeta .card-title {
     font-size: 16px !important;
   }
+
   .busqueda-tarjeta .precio {
     font-size: 14px !important;
   }
@@ -312,6 +346,7 @@ button.secundario {
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

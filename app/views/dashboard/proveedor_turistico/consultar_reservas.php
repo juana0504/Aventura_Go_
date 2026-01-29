@@ -33,7 +33,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
     <!-- CSS propio de reservas -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/reservas/consultar_reservas.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/consultar_reservas/consultar_reservas.css">
 </head>
 
 <body>
@@ -52,37 +52,36 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
         <!-- Header -->
         <div class="header-section">
             <h1>Consultar Reservas</h1>
-            <p class="text-muted">Listado de reservas realizadas en tus actividades</p>
+           
         </div>
 
-        <!-- Filtros rápidos -->
-        <div class="filtros-rapidos">
-            <button class="filtro-btn active" data-filter="all">
-                <i class="bi bi-grid"></i> Todas
-            </button>
-            <button class="filtro-btn" data-filter="pendiente">
-                <i class="bi bi-clock"></i> Pendientes
-            </button>
-            <button class="filtro-btn" data-filter="confirmada">
-                <i class="bi bi-check-circle"></i> Confirmadas
-            </button>
-            <button class="filtro-btn" data-filter="cancelada">
-                <i class="bi bi-x-circle"></i> Canceladas
-            </button>
-        </div>
+        
+          <!-- Filtros Rápidos -->
+            <div class="filtros-rapidos">
+                <button class="filtro-btn active" data-filter="all">
+                    <i class="bi bi-grid"></i> Todos
+                </button>
+                <button class="filtro-btn" data-filter="pendiente">
+                    <i class="bi bi-clock"></i> Pendientes
+                </button>
+                <button class="filtro-btn" data-filter="confirmada">
+                    <i class="bi bi-check-circle"></i> Confirmadas
+                </button>
+                <button class="filtro-btn" data-filter="cancelada">
+                    <i class="bi bi-x-circle"></i> Canceladas
+                </button>
+                <a href="<?= BASE_URL ?>/proveedor/pdf-reservas?filtro=<?= urlencode($filtro ?? 'all') ?>" class="btn-pdf" target="_blank">
+                    <i class="bi bi-file-earmark-pdf"></i>Generar Reportes
+                </a>
+            </div>
 
         <!-- Tabla -->
         <div class="card shadow-sm mt-4">
-            <div class="card-header bg-white">
-                <h5 class="mb-0">Listado de Reservas</h5>
-            </div>
-
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-hover align-middle">
                         <thead class="table-light">
                             <tr>
-                                <th>#</th>
                                 <th>Turista</th>
                                 <th>Actividad</th>
                                 <th>Fecha</th>
@@ -93,60 +92,70 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                         </thead>
 
                         <tbody>
-                            <!-- EJEMPLO -->
-                            <tr>
-                                <td>1</td>
-                                <td>Ana Sofía</td>
-                                <td>Rafting</td>
-                                <td>2026-02-10</td>
-                                <td>3</td>
-                                <td>
-                                    <span class="badge bg-warning text-dark">Pendiente</span>
-                                </td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#modalReserva">
-                                        <i class="bi bi-eye"></i>
-                                    </button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>2</td>
-                                <td>Juan Pérez</td>
-                                <td>Senderismo</td>
-                                <td>2026-02-15</td>
-                                <td>2</td>
-                                <td>
-                                    <span class="badge bg-success">Confirmada</span>
-                                </td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary">
-                                        <i class="bi bi-eye"></i>
-                                    </button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>3</td>
-                                <td>María Gómez</td>
-                                <td>Camping</td>
-                                <td>2026-02-20</td>
-                                <td>4</td>
-                                <td>
-                                    <span class="badge bg-danger">Cancelada</span>
-                                </td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary">
-                                        <i class="bi bi-eye"></i>
-                                    </button>
-                                </td>
-                            </tr>
-
+                            <?php if (!empty($reservas)): ?>
+                                <?php foreach ($reservas as $reserva): ?>
+                                <tr>
+                                    <td>
+                                        <strong><?= htmlspecialchars($reserva['nombre_turista']) ?></strong>
+                                        <?php if ($reserva['email_turista']): ?>
+                                        <br><small class="text-muted"><?= htmlspecialchars($reserva['email_turista']) ?></small>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <strong><?= htmlspecialchars($reserva['nombre_actividad']) ?></strong>
+                                        <br><small class="text-muted"><?= htmlspecialchars($reserva['ubicacion']) ?></small>
+                                    </td>
+                                    <td>
+                                        <?= date('Y-m-d', strtotime($reserva['fecha'])) ?>
+                                        <br><small class="text-muted">Reserva: <?= date('d/m/Y', strtotime($reserva['fecha_reserva'])) ?></small>
+                                    </td>
+                                    <td class="text-center">
+                                        <strong><?= $reserva['cantidad_personas'] ?></strong>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        $estadoClass = $reserva['estado'] === 'pendiente' ? 'bg-warning text-dark' : 
+                                                      ($reserva['estado'] === 'confirmada' ? 'bg-success' : 'bg-danger');
+                                        echo "<span class='badge $estadoClass'>" . ucfirst($reserva['estado']) . "</span>";
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <button class="btn-accion btn-ver" 
+                                                data-id="<?= $reserva['id_reserva'] ?>"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modalReserva"
+                                                title="Ver detalles">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
+                                        <?php if ($reserva['estado'] === 'pendiente'): ?>
+                                            <button class="btn-accion btn-confirmar" 
+                                                    onclick="confirmarReserva(<?= $reserva['id_reserva'] ?>)"
+                                                    title="Confirmar reserva">
+                                                <i class="bi bi-check"></i>
+                                            </button>
+                                            <button class="btn-accion btn-cancelar" 
+                                                    onclick="cancelarReserva(<?= $reserva['id_reserva'] ?>)"
+                                                    title="Cancelar reserva">
+                                                <i class="bi bi-x"></i>
+                                            </button>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted py-4">
+                                        <i class="bi bi-calendar-x" style="font-size: 2rem;"></i>
+                                        <br><strong>No hay reservas registradas</strong>
+                                        <br><small>Las reservas aparecerán aquí cuando los turistas realicen reservas en sus actividades</small>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
             </div>
         </div>
 
@@ -164,21 +173,151 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
             </div>
 
             <div class="modal-body">
-                <p><strong>Turista:</strong> Ana Sofía</p>
-                <p><strong>Actividad:</strong> Rafting</p>
-                <p><strong>Fecha:</strong> 2026-02-10</p>
-                <p><strong>Personas:</strong> 3</p>
-                <p><strong>Estado:</strong> Pendiente</p>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p><strong>ID Reserva:</strong> <span id="modal-id"></span></p>
+                        <p><strong>Turista:</strong> <span id="modal-turista"></span></p>
+                        <p><strong>Email:</strong> <span id="modal-email"></span></p>
+                        <p><strong>Teléfono:</strong> <span id="modal-telefono"></span></p>
+                        <p><strong>Fecha Reserva:</strong> <span id="modal-fecha-reserva"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Actividad:</strong> <span id="modal-actividad"></span></p>
+                        <p><strong>Ubicación:</strong> <span id="modal-ubicacion"></span></p>
+                        <p><strong>Fecha Actividad:</strong> <span id="modal-fecha"></span></p>
+                        <p><strong>Personas:</strong> <span id="modal-personas"></span></p>
+                        <p><strong>Precio Unitario:</strong> $<span id="modal-precio"></span></p>
+                        <p><strong>Total:</strong> $<span id="modal-total"></span></p>
+                        <p><strong>Estado:</strong> <span id="modal-estado"></span></p>
+                    </div>
+                </div>
+                <div>
+                    <strong>Descripción de la Actividad:</strong>
+                    <p id="modal-descripcion"></p>
+                </div>
             </div>
 
             <div class="modal-footer">
-                <button class="btn btn-success">Confirmar</button>
-                <button class="btn btn-danger">Cancelar</button>
+                <button id="btn-confirmar-modal" class="btn btn-success" style="display: none;">
+                    <i class="bi bi-check"></i> Confirmar Reserva
+                </button>
+                <button id="btn-cancelar-modal" class="btn btn-danger" style="display: none;">
+                    <i class="bi bi-x"></i> Cancelar Reserva
+                </button>
+                <button class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle"></i> Cerrar
+                </button>
             </div>
 
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Cargar detalles en modal
+    document.querySelectorAll('.btn-ver').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const id = btn.dataset.id;
+            
+            // Mostrar indicador de carga
+            const modalBody = document.querySelector('#modalReserva .modal-body');
+            modalBody.innerHTML = '<div class="text-center py-4"><i class="bi bi-hourglass-split"></i> Cargando detalles...</div>';
+            
+            fetch(`<?= BASE_URL ?>/proveedor/reserva-detalle?id=${id}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.success) {
+                        modalBody.innerHTML = `<div class="alert alert-danger">${data.message}</div>`;
+                        return;
+                    }
+                    
+                    const r = data.data;
+                    
+                    // Restaurar el contenido original del modal
+                    document.getElementById('modal-id').textContent = r.id_reserva;
+                    document.getElementById('modal-turista').textContent = r.nombre_turista;
+                    document.getElementById('modal-email').textContent = r.email_turista;
+                    document.getElementById('modal-telefono').textContent = r.telefono_turista || 'No disponible';
+                    document.getElementById('modal-actividad').textContent = r.nombre_actividad;
+                    document.getElementById('modal-ubicacion').textContent = r.ubicacion;
+                    document.getElementById('modal-fecha').textContent = r.fecha;
+                    document.getElementById('modal-fecha-reserva').textContent = new Date(r.created_at).toLocaleDateString('es-CO');
+                    document.getElementById('modal-personas').textContent = r.cantidad_personas;
+                    document.getElementById('modal-precio').textContent = number_format(r.precio, 0, ',', '.');
+                    document.getElementById('modal-total').textContent = number_format(r.total, 0, ',', '.');
+                    document.getElementById('modal-estado').textContent = r.estado;
+                    document.getElementById('modal-descripcion').textContent = r.descripcion_actividad || 'Sin descripción';
+                    
+                    // Configurar botones del modal según el estado
+                    const btnConfirmar = document.getElementById('btn-confirmar-modal');
+                    const btnCancelar = document.getElementById('btn-cancelar-modal');
+                    
+                    if (r.estado === 'pendiente') {
+                        btnConfirmar.style.display = 'inline-block';
+                        btnCancelar.style.display = 'inline-block';
+                        btnConfirmar.onclick = () => confirmarReserva(r.id_reserva);
+                        btnCancelar.onclick = () => cancelarReserva(r.id_reserva);
+                    } else {
+                        btnConfirmar.style.display = 'none';
+                        btnCancelar.style.display = 'none';
+                    }
+                    
+                    // Restaurar el HTML del modal-body si fue modificado
+                    if (modalBody.querySelector('.alert')) {
+                        location.reload(); // Recargar para restaurar el modal
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    modalBody.innerHTML = '<div class="alert alert-danger">Error al cargar los detalles. Por favor, intente nuevamente.</div>';
+                });
+        });
+    });
+    
+    // Filtros rápidos
+    document.querySelectorAll('.filtro-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            const filtro = this.dataset.filter;
+            window.location.href = `<?= BASE_URL ?>/proveedor/consultar-reservas?filtro=${filtro}`;
+        });
+    });
+    
+    // Restaurar filtro activo basado en la URL
+    const currentFilter = '<?= $filtro ?? 'all' ?>';
+    document.querySelectorAll('.filtro-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.filter === currentFilter) {
+            btn.classList.add('active');
+        }
+    });
+});
+
+// Funciones de acción
+function confirmarReserva(id) {
+    if (confirm('¿Está seguro de confirmar esta reserva?\n\nUna vez confirmada, el turista será notificado y se esperará su asistencia.')) {
+        window.location.href = `<?= BASE_URL ?>/proveedor/consultar-reservas?accion=confirmar&id=${id}`;
+    }
+}
+
+function cancelarReserva(id) {
+    if (confirm('¿Está seguro de cancelar esta reserva?\n\nEsta acción no se puede deshacer y el turista será notificado.')) {
+        window.location.href = `<?= BASE_URL ?>/proveedor/consultar-reservas?accion=cancelar&id=${id}`;
+    }
+}
+
+// Helper para formatear números (moneda colombiana)
+function number_format(number, decimals, dec_point, thousands_sep) {
+    if (typeof number === 'string') number = parseFloat(number);
+    return new Intl.NumberFormat('es-CO', {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+    }).format(number);
+}
+</script>
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>

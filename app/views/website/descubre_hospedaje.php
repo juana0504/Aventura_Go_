@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -10,7 +12,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Estilos personalizados -->
-  <link rel="stylesheet" href="../../assets/dashboard/turista/hospedaje_vega/hospedajeVega.css">
+  <link rel="stylesheet" href="public/assets/website_externos/hospedaje_vega/hospedajeVega.css">
+
 </head>
 
 <body>
@@ -24,10 +27,38 @@
           <li><a href="#" class="nav-link active">Tours y Aventura</a></li>
           <li><a href="#" class="nav-link">Hospedaje</a></li>
         </ul>
+
         <div class="actions">
-          <button class="principal">Atrás</button>
+
+          <?php if (isset($_SESSION['user'])): ?>
+
+            <span class="Bienvenido">
+              Bienvenido, <?= htmlspecialchars(ucwords(explode(' ', $_SESSION['user']['nombre'])[0] . ' ' . (explode(' ', $_SESSION['user']['nombre'])[1] ?? ''))) ?>
+            </span>
+
+            <a href="/aventura_go/logout" class="btn-register">
+              Salir
+            </a>
+
+          <?php else: ?>
+
+            <a href="/aventura_go/login" class="btn-login">
+              Ingresa
+            </a>
+
+            <a href="/aventura_go/registrarse" class="btn-register">
+              Regístrate
+            </a>
+
+          <?php endif; ?>
+
+          <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+            <i class="fas fa-bars"></i>
+          </div>
 
         </div>
+        <button class="principal">Atrás</button>
+
       </div>
     </nav>
   </header>
