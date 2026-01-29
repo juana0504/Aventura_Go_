@@ -293,9 +293,11 @@ switch ($request) {
         require BASE_PATH . '/app/views/website/descubre_tours.php';
         break;
 
-    case '/descubre-tours':
-        require BASE_PATH . '/app/controllers/website/descubreToursController.php';
+    case '/website/tour_escogido':
+        require_once BASE_PATH . '/app/controllers//website/WebsiteController.php';
+        (new WebsiteController())->tourEscogido();
         break;
+
 
     case '/turista/dashboard':
         require BASE_PATH . '/app/views/dashboard/turista/dashboard.php';

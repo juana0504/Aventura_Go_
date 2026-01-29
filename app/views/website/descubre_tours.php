@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php session_start();
+require_once __DIR__ . '/../../models/proveedor_turistico/ActividadTuristica.php';
+
+$actividadModel = new ActividadTuristica();
+$actividades = $actividadModel->listarActividadesPublicas();
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -27,7 +32,7 @@
         <nav class="navbar">
             <div class="container-fluid">
                 <div class="logo">
-                    <img src="/public/assets/dashboard/turista/descubre_tours/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
+                    <img src="public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
                 </div>
 
                 <h1 class="page-title">Descubre Todo lo que Villeta Tiene para Ofrecerte</h1>
@@ -138,6 +143,13 @@
                                     </span>
                                 </div>
 
+                                <div class="button">
+                                    <a href="<?= BASE_URL ?>/website/tour_escogido?id=<?= $actividad['id_actividad'] ?>" class="btn-ver-mas">
+                                        Ver más
+                                    </a>
+                                </div>
+
+
                             </div>
                         </div>
 
@@ -192,7 +204,7 @@
                 <!-- Columna 1: Logo -->
                 <div class="col-md-2">
                     <div class="logo-section">
-                        <img src="../turista/img/LOGO-NEGATIVO.png" alt="logo Aventura Go">
+                        <img src="public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png" alt="logo Aventura Go">
                     </div>
                 </div>
 
