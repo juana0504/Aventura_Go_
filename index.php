@@ -294,7 +294,7 @@ switch ($request) {
         break;
 
     case '/website/tour_escogido':
-        require_once BASE_PATH . '/app/controllers//website/WebsiteController.php';
+        require_once BASE_PATH . '/app/controllers/website/WebsiteController.php';
         (new WebsiteController())->tourEscogido();
         break;
 
