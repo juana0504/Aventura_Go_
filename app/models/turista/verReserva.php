@@ -11,47 +11,54 @@ class Reserva {
     /**
      * Listar reservas de un turista con filtros
      */
-    public function listarPorturista($id_turista, $filtro = '') {
-        $sql = "SELECT 
-                    r.id_reserva,
-                    r.fecha,
-                    r.estado,
-                    r.cantidad_personas,
-                    r.created_at as fecha_reserva,
-                    a.nombre as nombre_actividad,
-                    a.precio,
-                    a.ubicacion,
-                    u.nombre as nombre_turista,
-                    u.email as email_turista,
-                    u.telefono as telefono_turista
-                FROM reserva r
-                JOIN reserva_actividad ra ON r.id_reserva = ra.id_reserva
-                JOIN actividad a ON ra.id_actividad = a.id_actividad
-                JOIN usuario u ON r.id_turista = u.id_usuario
-                WHERE a.id_turista = :id_turista";
+   public function listarPorturista($id_turista, $filtro = '') {
+    $sql = "SELECT 
+                r.id_reserva,
+                r.fecha,
+                r.estado,
+                r.cantidad_personas,
+                r.created_at,
+                
+                a.id_actividad,
+                a.nombre AS nombre_actividad,
+                a.precio,
+                a.ubicacion,
+                a.imagen,
+                
+                u.nombre AS nombre_turista,
+                u.email AS email_turista,
+                u.telefono AS telefono_turista,
+                
+                (r.cantidad_personas * a.precio) AS total
+            FROM reserva r
+            INNER JOIN reserva_actividad ra ON r.id_reserva = ra.id_reserva
+            INNER JOIN actividad a ON ra.id_actividad = a.id_actividad
+            INNER JOIN usuario u ON r.id_turista = u.id_usuario
+            WHERE r.id_turista = :id_turista";
+    
+    if ($filtro && $filtro !== 'all') {
+        $sql .= " AND r.estado = :estado";
+    }
+    
+    $sql .= " ORDER BY r.created_at DESC";
+
+    try {
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':id_turista', $id_turista, PDO::PARAM_INT);
         
         if ($filtro && $filtro !== 'all') {
-            $sql .= " AND r.estado = :estado";
+            $stmt->bindParam(':estado', $filtro);
         }
-        
-        $sql .= " ORDER BY r.created_at DESC";
-        
-        try {
-            $stmt = $this->conexion->prepare($sql);
-            $stmt->bindParam(':id_turista', $id_turista);
-            
-            if ($filtro && $filtro !== 'all') {
-                $stmt->bindParam(':estado', $filtro);
-            }
-            
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
-        } catch (PDOException $e) {
-            error_log("Error en listarPorturista: " . $e->getMessage());
-            return [];
-        }
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    } catch (PDOException $e) {
+        error_log("Error en listarPorturista: " . $e->getMessage());
+        return [];
     }
+}
+
     
     /**
      * Obtener detalles completos de una reserva específica
