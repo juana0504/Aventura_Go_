@@ -164,16 +164,6 @@ switch ($request) {
 
 
 
-
-
-
-
-
-
-
-
-
-
     // ===== TICKETS ADMIN =====
     case '/administrador/tickets':
         require BASE_PATH . '/app/controllers/administrador/TicketAdminController.php';
@@ -405,7 +395,7 @@ switch ($request) {
         require_once BASE_PATH . '/app/controllers/website/seleccionarActividadController.php';
         break;
 
-        
+
 
 
 
