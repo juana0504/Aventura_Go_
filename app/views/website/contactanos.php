@@ -119,7 +119,7 @@
                             alt="Turismo en bote">
                         <div class="carousel-caption">
                             <h1>Contacta con nosotros</h1>
-                            <h2>y descubre tu próximo destino</h2>
+                            <h2>inscribe o descubre tu próximo destino</h2>
                         </div>
                     </div>
 
@@ -200,11 +200,11 @@
                         <div class="fila-campos">
                             <div class="campo">
                                 <label for="nombre">Nombre completo</label>
-                                <input type="text" id="nombre" placeholder="Ej: María Pérez" required>
+                                <input type="text" name="nombre" id="nombre" placeholder="Ej: María Pérez" required>
                             </div>
                             <div class="campo">
                                 <label for="telefono">Teléfono</label>
-                                <input type="tel" id="telefono" placeholder="Ej: +57 320 123 4567" required>
+                                <input type="tel" name="telefono" id="telefono" placeholder="Ej: +57 320 123 4567" required>
                             </div>
                         </div>
 
@@ -212,7 +212,7 @@
                         <div class="fila-campos">
                             <div class="campo">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" placeholder="Ej: sucorreo@correo.com" required>
+                                <input type="email" name="email" id="email" placeholder="Ej: sucorreo@correo.com" required>
                             </div>
                             <div class="campo">
                                 <label for="objeto">Objeto de la pregunta</label>
@@ -224,7 +224,7 @@
                         <div class="fila-campos">
                             <div class="campo-full">
                                 <label for="mensaje">Mensaje</label>
-                                <textarea id="mensaje" rows="4" placeholder="Ej: El siguiente mensaje es para..."
+                                <textarea name="mensaje" id="mensaje" rows="4" placeholder="Ej: El siguiente mensaje es para..."
                                     required></textarea>
                             </div>
                         </div>
