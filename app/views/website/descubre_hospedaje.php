@@ -59,7 +59,7 @@
           </div>
 
         </div>
-        <button class="principal">Atrás</button>
+        <a href="/aventura_go/descubre-hospedaje" class="btn-login">Atrás</a>
 
       </div>
     </nav>

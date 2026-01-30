@@ -42,15 +42,33 @@ $actividades = $actividadModel->listarActividadesPublicas();
                 <div class="actions">
 
                     <?php if (isset($_SESSION['user'])): ?>
+                        <div class="profile-dropdown">
+                            <button class="profile-btn" id="profileToggle">
+                                <i class="fas fa-user-circle"></i>
+                                <span class="profile-name">
+                                    <?= htmlspecialchars(
+                                        ucwords(
+                                            explode(' ', $_SESSION['user']['nombre'])[0] . ' ' .
+                                                (explode(' ', $_SESSION['user']['nombre'])[1] ?? '')
+                                        )
+                                    ) ?>
+                                </span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
 
-                        <span class="Bienvenido">
-                            Bienvenido, <?= htmlspecialchars(ucwords(explode(' ', $_SESSION['user']['nombre'])[0] . ' ' . (explode(' ', $_SESSION['user']['nombre'])[1] ?? ''))) ?>
-                        </span>
-
-                        <a href="/aventura_go/logout" class="btn-register">
-                            Salir
-                        </a>
-
+                            <ul class="profile-menu" id="profileMenu">
+                                <li>
+                                    <a href="/aventura_go/turista/perfil">Mi perfil</a>
+                                </li>
+                                <li>
+                                    <a href="/aventura_go/turista/dashboard">Dashboard</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="/aventura_go/logout" class="logout">Cerrar sesión</a>
+                                </li>
+                            </ul>
+                        </div>
                     <?php else: ?>
 
                         <a href="/aventura_go/login" class="btn-login">
@@ -68,10 +86,9 @@ $actividades = $actividadModel->listarActividadesPublicas();
                     </div>
 
                 </div>
+
                 <a href="/aventura_go" class="btn-login">Atrás</a>
-                <div class="menu-toggle" id="menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </div>
+
             </div>
         </nav>
     </header>
@@ -279,13 +296,27 @@ $actividades = $actividadModel->listarActividadesPublicas();
 
     </footer>
 
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/turista/tour_escogido/tour_escogido.js"></script>
+    <script src="<?= BASE_URL ?>/public/assets/website_externos/descubre_tours/descubre_tours.js"></script>
 
     <script>
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            document.getElementById('navbarNav').classList.toggle('show');
-        });
+        const profileToggle = document.getElementById('profileToggle');
+        const profileMenu = document.getElementById('profileMenu');
+
+        if (profileToggle && profileMenu) {
+            profileToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                profileMenu.style.display =
+                    profileMenu.style.display === 'block' ? 'none' : 'block';
+            });
+
+            document.addEventListener('click', function() {
+                profileMenu.style.display = 'none';
+            });
+        }
     </script>
+
+
+
 </body>
 
 </html>
