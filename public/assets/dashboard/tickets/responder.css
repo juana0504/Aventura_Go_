@@ -1,0 +1,151 @@
+/* =========================
+   CONTENEDOR GENERAL
+========================= */
+#admin-dashboard {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f6f9;
+}
+
+/* CONTENIDO DERECHO */
+#admin-dashboard .info {
+    flex: 1;
+    padding: 20px 30px;
+    margin-left: 260px; /* ancho panel izquierdo */
+}
+
+/* =========================
+   TITULO
+========================= */
+.info h2 {
+    font-weight: 700;
+    color: #1f2937;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info h2 i {
+    color: #2563eb;
+}
+
+/* =========================
+   TARJETAS
+========================= */
+.card {
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* =========================
+   INFO TICKET
+========================= */
+.card-body p {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #374151;
+}
+
+.card-body strong {
+    color: #111827;
+}
+
+/* DESCRIPCION */
+.card-body .bg-light {
+    background-color: #f9fafb !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #1f2937;
+}
+
+/* =========================
+   BADGE ESTADO
+========================= */
+.badge {
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.badge.bg-warning {
+    background-color: #fde68a !important;
+    color: #92400e !important;
+}
+
+/* =========================
+   HEADER RESPUESTA
+========================= */
+.card-header {
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.card-header.bg-primary {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+}
+
+/* =========================
+   FORMULARIO
+========================= */
+.form-label {
+    font-weight: 600;
+    color: #374151;
+}
+
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+    padding: 12px;
+}
+
+.form-control:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* =========================
+   BOTONES
+========================= */
+.btn {
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+/* VOLVER */
+.btn-secondary {
+    background-color: #e5e7eb;
+    color: #1f2937;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #d1d5db;
+}
+
+/* ENVIAR */
+.btn-success {
+    background-color: #16a34a;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #15803d;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 992px) {
+    #admin-dashboard .info {
+        margin-left: 0;
+        padding: 15px;
+    }
+}

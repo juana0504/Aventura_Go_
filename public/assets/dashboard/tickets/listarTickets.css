@@ -1,0 +1,90 @@
+/* ===============================
+   LISTAR TICKETS – PROVEEDOR
+================================ */
+
+/* Contenedor principal */
+#listar-tickets {
+    background-color: #f5f7fb;
+    min-height: 100vh;
+}
+
+/* Ajuste del contenido a la derecha (panel izquierdo) */
+#listar-tickets .info {
+    margin-left: 280px; /* ajusta si tu panel es más ancho */
+    padding: 20px 30px;
+}
+
+/* Título */
+#listar-tickets h1 {
+    font-weight: 700;
+    color: #1f2937;
+}
+
+/* Botón crear ticket */
+#listar-tickets .btn-primary {
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-weight: 600;
+}
+
+/* Tabla */
+#listar-tickets .table {
+    background: #ffffff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+}
+
+/* Encabezado tabla */
+#listar-tickets .table thead {
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    color: #fff;
+}
+
+/* Filas */
+#listar-tickets .table tbody tr {
+    transition: background .2s ease, transform .15s ease;
+}
+
+#listar-tickets .table tbody tr:hover {
+    background-color: #f1f5ff;
+    transform: scale(1.002);
+}
+
+/* Badges de estado */
+#listar-tickets .badge {
+    font-size: .8rem;
+    padding: 6px 10px;
+    border-radius: 999px;
+}
+
+/* Botón ver respuesta */
+#listar-tickets .btn-outline-primary {
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+/* Modal respuesta */
+#listar-tickets .modal-content {
+    border-radius: 14px;
+}
+
+#listar-tickets .modal-header {
+    background-color: #1e3a8a;
+    color: #fff;
+}
+
+/* Texto sin respuesta */
+#listar-tickets .text-muted {
+    font-style: italic;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 992px) {
+    #listar-tickets .info {
+        margin-left: 0;
+        padding: 15px;
+    }
+}

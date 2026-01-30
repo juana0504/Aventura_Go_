@@ -279,26 +279,24 @@ switch ($request) {
 
 
 
-    // ================= TICKETS PROVEEDOR TURISTICO =================
-
-
+    // ===== TICKETS PROVEEDOR =====
     case '/proveedor/tickets':
         require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
-        $controller = new TicketProveedorController();
-        $controller->listar();
+        (new TicketProveedorController())->listar();
         break;
 
     case '/proveedor/tickets/crear':
         require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
-        $controller = new TicketProveedorController();
-        $controller->crear();
+        (new TicketProveedorController())->crear();
         break;
 
     case '/proveedor/tickets/guardar':
         require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
-        $controller = new TicketProveedorController();
-        $controller->guardar();
+        (new TicketProveedorController())->guardar();
         break;
+
+
+
 
 
 
