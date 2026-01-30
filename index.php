@@ -164,16 +164,7 @@ switch ($request) {
 
 
 
-
-
-
-
-
-
-
-
-
-
+    // ===== TICKETS ADMIN =====
     case '/administrador/tickets':
         require BASE_PATH . '/app/controllers/administrador/TicketAdminController.php';
         $controller = new TicketAdminController();
@@ -297,26 +288,24 @@ switch ($request) {
 
 
 
-    // ================= TICKETS PROVEEDOR TURISTICO =================
-
-
+    // ===== TICKETS PROVEEDOR =====
     case '/proveedor/tickets':
         require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
-        $controller = new TicketProveedorController();
-        $controller->listar();
+        (new TicketProveedorController())->listar();
         break;
 
     case '/proveedor/tickets/crear':
         require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
-        $controller = new TicketProveedorController();
-        $controller->crear();
+        (new TicketProveedorController())->crear();
         break;
 
     case '/proveedor/tickets/guardar':
         require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
-        $controller = new TicketProveedorController();
-        $controller->guardar();
+        (new TicketProveedorController())->guardar();
         break;
+
+
+
 
 
 
@@ -378,8 +367,13 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/turista/dashboard.php';
         break;
 
+
     case '/turista/registrar-actividad':
         require BASE_PATH . '/app/views/dashboard/turista/registrar_reserva.php';
+        break;
+
+    case '/turista/preparar-reserva':
+        require_once BASE_PATH . '/app/controllers/turista/prepararReservaController.php'; //prepara para entrar a reservar al dashboard(alberth)
         break;
 
     case '/turista/confirmar-reserva':
@@ -404,7 +398,7 @@ switch ($request) {
         break;
 
     case '/seleccionar-actividad':
-        require_once BASE_PATH . '/app/controllers/website/seleccionarActividadController.php';
+        require_once BASE_PATH . '/app/controllers/website/websiteController.php';
         break;
 
 
@@ -444,6 +438,6 @@ switch ($request) {
     //                                    pagina ERROR 404
     // ===================================================================================================
     default:
-        require BASE_PATH . '/app/views/auth/error404.html';
+        require BASE_PATH . '/app/views/auth/error404.php';
         break;
 }

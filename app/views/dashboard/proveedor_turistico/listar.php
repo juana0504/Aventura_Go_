@@ -8,13 +8,31 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <meta charset="UTF-8">
     <title>Mis Tickets</title>
 
+    <!-- favicon -->
     <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- Layout global -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
+
+    <!-- Componentes comunes -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
+
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/tickets/listarTickets.css">
+
 </head>
 
 <body>
@@ -72,31 +90,35 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <td><?= date('d/m/Y H:i', strtotime($ticket['fecha_creacion'])) ?></td>
 
     <td>
-        <?php if (!empty($ticket['respuesta'])): ?>
-            <button class="btn btn-sm btn-outline-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#respuesta<?= $ticket['id_ticket'] ?>">
-                Ver
-            </button>
+            <?php if (!empty($ticket['respuesta'])): ?>
+                <button class="btn btn-sm btn-outline-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#respuesta<?= $ticket['id_ticket'] ?>">
+                    Ver
+                </button>
+            <?php else: ?>
+                <span class="text-muted">Sin respuesta</span>
+            <?php endif; ?>
+        </td>
 
-            <div class="modal fade" id="respuesta<?= $ticket['id_ticket'] ?>">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Respuesta del Administrador</h5>
-                            <button class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body">
-                            <?= nl2br(htmlspecialchars($ticket['respuesta'])) ?>
+        <?php foreach ($tickets as $ticket): ?>
+            <?php if (!empty($ticket['respuesta'])): ?>
+                <div class="modal fade" id="respuesta<?= $ticket['id_ticket'] ?>" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Respuesta del Administrador</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <?= nl2br(htmlspecialchars($ticket['respuesta'])) ?>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        <?php else: ?>
-            <span class="text-muted">Sin respuesta</span>
-        <?php endif; ?>
-    </td>
-</tr>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </tr>
 <?php endforeach; ?>
 <?php endif; ?>
 </tbody>

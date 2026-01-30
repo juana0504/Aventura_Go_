@@ -43,6 +43,7 @@ class TicketAdminController
         require BASE_PATH . '/app/views/dashboard/administrador/tickets/responder.php';
     }
 
+
     // 💾 GUARDAR RESPUESTA
     public function responder()
     {

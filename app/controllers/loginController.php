@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $mensaje = 'Continúa con tu reserva.';
                 break;
             }
-            $redirectUrl = '/aventura_go/turista/dashboard';
+            $redirectUrl = '/aventura_go';
             $mensaje = 'Bienvenido Turista.';
             break;
 

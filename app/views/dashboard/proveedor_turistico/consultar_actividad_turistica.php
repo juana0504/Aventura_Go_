@@ -179,15 +179,13 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
             <div class="modal-content aventura-modal">
 
                 <!-- HEADER -->
-                <div class="modal-header aventura-modal-header d-flex">
+                <div class="modal-header aventura-modal-header d-flex justify-content-between align-items-start">
 
-                    <!-- IZQUIERDA -->
                     <div>
                         <h5 class="modal-title" id="modal-nombre"></h5>
                     </div>
 
-                    <!-- DERECHA -->
-                    <div class="text-end">
+                    <div>
                         <span id="modal-estado-header" class="badge mb-1"></span>
                         <div>
                             <small id="modal-fecha-registro" class="text-muted"></small>
@@ -204,6 +202,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                     <div class="row mb-4">
                         <!-- IMAGEN PRINCIPAL -->
                         <div class="col-md-5 text-center">
+
                             <img id="modal-imagen-principal"
                                 class="img-fluid rounded mb-2"
                                 alt="Imagen actividad">
@@ -215,7 +214,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                         </div>
 
                         <!-- INFO -->
-                        <div class="col-md-7">
+                        <div class="col-md-7 informacion">
                             <p><strong>Departamento:</strong> <span id="modal-departamento"></span></p>
                             <p><strong>Ciudad:</strong> <span id="modal-ciudad"></span></p>
                             <p><strong>Ubicación:</strong> <span id="modal-ubicacion"></span></p>
@@ -226,6 +225,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                     </div>
 
                     <!-- DESCRIPCIÓN -->
+                    <hr>
                     <div>
                         <h6>Descripción</h6>
                         <p id="modal-descripcion" class="mb-0"></p>

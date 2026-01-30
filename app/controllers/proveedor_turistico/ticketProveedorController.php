@@ -53,46 +53,35 @@ class TicketProveedorController
         require_once __DIR__ . '/../../views/dashboard/proveedor_turistico/crear_ticket.php';
     }
 
-    // 💾 GUARDAR ticket
     public function guardar()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            http_response_code(405);
-            exit('Método no permitido');
+            header('Location: ' . BASE_URL . '/proveedor/tickets');
+            exit();
         }
 
-        session_start();
         $id_usuario = $_SESSION['user']['id'];
+        $asunto = trim($_POST['asunto']);
+        $descripcion = trim($_POST['descripcion']);
 
-        $asunto = trim($_POST['asunto'] ?? '');
-        $descripcion = trim($_POST['descripcion'] ?? '');
-
-        if (empty($asunto) || empty($descripcion)) {
+        if (!$asunto || !$descripcion) {
             mostrarSweetAlert(
                 'error',
                 'Campos obligatorios',
-                'Debes completar todos los campos',
-                BASE_URL . '/proveedor_turistico/crear_ticket'
+                'Completa todos los campos',
+                BASE_URL . '/proveedor/tickets/crear'
             );
             exit();
         }
 
-        $ok = $this->ticketModel->crear($id_usuario, $asunto, $descripcion);
+        $this->ticketModel->crear($id_usuario, $asunto, $descripcion);
 
-        if ($ok) {
-            mostrarSweetAlert(
-                'success',
-                'Ticket enviado',
-                'Tu reporte fue enviado correctamente',
-                BASE_URL . '/proveedor_turistico/listar'
-            );
-        } else {
-            mostrarSweetAlert(
-                'error',
-                'Error',
-                'No se pudo enviar el ticket',
-                BASE_URL . '/proveedor_turistico/crear_ticket'
-            );
-        }
+        mostrarSweetAlert(
+            'success',
+            'Ticket enviado',
+            'Tu ticket fue creado correctamente',
+            BASE_URL . '/proveedor/tickets'
+        );
     }
+
 }

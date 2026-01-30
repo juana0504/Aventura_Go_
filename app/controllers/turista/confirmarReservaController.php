@@ -18,7 +18,7 @@ require_once BASE_PATH . '/app/models/proveedor_turistico/ActividadTuristica.php
 $actividadModel = new ActividadTuristica();
 
 // Consultamos la actividad real desde BD
-$actividad = $actividadModel->obtenerPorId($pendiente['id']);
+$actividad = $actividadModel->obtenerPorId($pendiente['id_actividad']);
 
 // Validación de seguridad
 if (!$actividad) {
