@@ -212,31 +212,14 @@ $actividades = $actividadModel->listarActividadesPublicas();
 
         <!-- Sección mapa____________________________________________________________________________________________________________ -->
         <section id="mapa" class="mapa-section">
-            <div class="row">
-
-                <?php if (!empty($actividades)): ?>
-                    <?php foreach ($actividades as $actividad): ?>
-
-                        <div class="col-md-8">
-                            <h1><?= htmlspecialchars($actividad['nombre']) ?></h1>
-                            <p><?= htmlspecialchars($actividad['ubicacion']) ?>, <?= htmlspecialchars($actividad['ciudad']) ?>, Cundinamarca,Colombia</p>
-                            <p>Después de reservar, encontrarás todos los datos de tu actividad con el número de teléfono y la
-                            dirección en tu confirmación de la reserva y en tu cuenta.</p>
-                        </div>
-                        <div class="col-md-3 stars">
-                            <p>1 Noche, 2 Días</p>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <span>(120 Review)</span> <br>
-                            <span> From $325000 <strong>$282000</strong></span>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                        <p>No hay actividades disponibles.</p>
-                <?php endif; ?>
+            <!-- seccion mapa -->
+            <div id="mapa" class="mapa-section">
+                <div class="mapa-contenedor">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.166972063625!2d-74.472745125039!3d5.013951139904496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4067dfb5f1a3e7%3A0xeca58a4d9a0f72cb!2sVilleta%2C%20Cundinamarca!5e0!3m2!1ses!2sco!4v1690391856678!5m2!1ses!2sco"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
             </div>
         </section>
 
