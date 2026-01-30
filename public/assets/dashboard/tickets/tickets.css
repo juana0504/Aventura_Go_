@@ -1,171 +1,163 @@
-/* ==================================================
-   AVENTURA GO – TICKETS / SOPORTE (PREMIUM)
-   Azul + Naranja corporativo
-   Bootstrap 5 Friendly
-================================================== */
+/* =====================================================
+   TICKETS – DASHBOARD PREMIUM (ADMIN / PROVEEDOR)
+   Estilo coherente con layouts y paneles
+===================================================== */
 
-#proveedor-actividades {
-    --azul: #1f3c88;
-    --azul-dark: #182f6b;
-    --naranja: #ea8217;
-    --naranja-dark: #d97315;
-    --gris-bg: #f4f6fa;
-    --borde: #e3e6ec;
-}
-
-/* CONTENIDO */
-#proveedor-actividades .info {
-    padding: 32px;
-    background: linear-gradient(180deg, #f7f9fc, #eef2f7);
+/* -------- CONTENEDOR GENERAL -------- */
+#crear-ticket {
     min-height: 100vh;
-}
-
-/* HEADER */
-#proveedor-actividades .header-section h1 {
-    font-weight: 800;
-    color: var(--azul);
-    letter-spacing: -0.5px;
-}
-
-#proveedor-actividades .header-section p {
-    font-size: 15px;
-    opacity: 0.85;
-}
-
-/* CARD */
-#proveedor-actividades .card {
-    border-radius: 18px;
-    border: 1px solid var(--borde);
-    box-shadow: 0 20px 45px rgba(31, 60, 136, 0.12);
-    background: #ffffff;
-    overflow: hidden;
-}
-
-/* CARD HEADER */
-#proveedor-actividades .card-header {
-    padding: 22px 26px;
-    background: linear-gradient(
-        135deg,
-        rgba(31, 60, 136, 0.04),
-        rgba(234, 130, 23, 0.08)
-    );
-    border-bottom: 1px solid var(--borde);
-}
-
-#proveedor-actividades .card-header h5 {
-    font-weight: 700;
-    color: var(--azul);
+    background-color: #f1f3f6;
     display: flex;
-    align-items: center;
-    gap: 10px;
 }
 
-/* CARD BODY */
-#proveedor-actividades .card-body {
-    padding: 34px;
+/* -------- CONTENIDO PRINCIPAL -------- */
+#crear-ticket .contenido-principal {
+    flex: 1;
+    padding: 24px 32px;
+    background-color: #f1f3f6;
 }
 
-/* LABEL */
-#proveedor-actividades .form-label {
+/* -------- ZONA DE INFO -------- */
+#crear-ticket .info {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* -------- CARD PRINCIPAL -------- */
+#crear-ticket .card {
+    border: none;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+}
+
+/* -------- CARD BODY -------- */
+#crear-ticket .card-body {
+    padding: 32px 36px;
+}
+
+/* -------- TITULO -------- */
+#crear-ticket h4 {
+    font-size: 1.35rem;
     font-weight: 700;
-    color: var(--azul-dark);
+    color: #1f2937;
+    margin-bottom: 28px;
+    padding-left: 14px;
+    border-left: 5px solid #0d6efd;
+}
+
+/* -------- FORMULARIO -------- */
+#crear-ticket .mb-3 {
+    margin-bottom: 22px;
+}
+
+#crear-ticket .form-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #374151;
     margin-bottom: 6px;
 }
 
-/* INPUTS */
-#proveedor-actividades .form-control,
-#proveedor-actividades .form-select {
-    border-radius: 14px;
-    padding: 13px 16px;
-    border: 2px solid var(--borde);
-    background-color: #f9fbff;
-    font-size: 15px;
-    transition: all 0.3s ease;
+/* -------- INPUTS -------- */
+#crear-ticket .form-control {
+    border-radius: 12px;
+    border: 1px solid #d1d5db;
+    padding: 12px 14px;
+    font-size: 0.95rem;
+    background-color: #fafafa;
+    transition: all 0.25s ease;
 }
 
-/* FOCUS */
-#proveedor-actividades .form-control:focus,
-#proveedor-actividades .form-select:focus {
-    border-color: var(--naranja);
+#crear-ticket .form-control:focus {
     background-color: #ffffff;
-    box-shadow: 0 0 0 0.25rem rgba(234, 130, 23, 0.2);
+    border-color: #2563eb;
+    box-shadow: 0 0 0 0.18rem rgba(37, 99, 235, 0.18);
 }
 
-/* PLACEHOLDER */
-#proveedor-actividades .form-control::placeholder {
-    color: #9aa3b2;
+/* -------- TEXTAREA -------- */
+#crear-ticket textarea.form-control {
+    resize: none;
+    min-height: 140px;
 }
 
-/* TEXTAREA */
-#proveedor-actividades textarea.form-control {
-    resize: vertical;
+/* -------- BOTONES -------- */
+#crear-ticket .d-flex.gap-2 {
+    margin-top: 30px;
 }
 
-/* BOTÓN PRINCIPAL */
-#proveedor-actividades .btn-primary {
-    background: linear-gradient(
-        135deg,
-        var(--azul),
-        var(--naranja)
-    );
+#crear-ticket .btn {
+    border-radius: 12px;
+    padding: 10px 22px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+/* Botón principal */
+#crear-ticket .btn-primary {
+    background: linear-gradient(135deg, #2563eb, #1e40af);
     border: none;
-    border-radius: 14px;
-    font-weight: 800;
-    letter-spacing: 0.3px;
-    padding: 12px 26px;
-    transition: all 0.35s ease;
-    position: relative;
-    overflow: hidden;
 }
 
-/* BRILLO SUAVE */
-#proveedor-actividades .btn-primary::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(255, 255, 255, 0.35),
-        transparent
-    );
-    transition: all 0.6s ease;
-}
-
-#proveedor-actividades .btn-primary:hover::after {
-    left: 140%;
-}
-
-/* HOVER */
-#proveedor-actividades .btn-primary:hover {
+#crear-ticket .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(234, 130, 23, 0.45);
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.35);
 }
 
-/* ACTIVE */
-#proveedor-actividades .btn-primary:active {
-    transform: scale(0.97);
+/* Botón secundario */
+#crear-ticket .btn-secondary {
+    background-color: #6b7280;
+    border: none;
 }
 
-/* ICONOS */
-#proveedor-actividades i.bi {
-    font-size: 1.1rem;
+#crear-ticket .btn-secondary:hover {
+    background-color: #4b5563;
+    transform: translateY(-2px);
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    #proveedor-actividades .info {
+/* -------- ANIMACION SUAVE -------- */
+#crear-ticket .card {
+    animation: ticketFade 0.35s ease-in-out;
+}
+
+/* ===== AJUSTE POSICIÓN A LA DERECHA ===== */
+#crear-ticket .info {
+    margin-left: 330px;   /* ajusta: 80px, 100px, 140px si quieres más */
+}
+
+
+@keyframes ticketFade {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* -------- RESPONSIVE -------- */
+@media (max-width: 992px) {
+    #crear-ticket .contenido-principal {
         padding: 20px;
     }
 
-    #proveedor-actividades .card-body {
-        padding: 24px;
+    #crear-ticket .card-body {
+        padding: 26px;
+    }
+}
+
+@media (max-width: 576px) {
+    #crear-ticket h4 {
+        font-size: 1.15rem;
     }
 
-    #proveedor-actividades .btn-primary {
+    #crear-ticket .btn {
         width: 100%;
+    }
+
+    #crear-ticket .d-flex.gap-2 {
+        flex-direction: column;
     }
 }
