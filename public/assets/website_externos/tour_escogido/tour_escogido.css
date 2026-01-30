@@ -482,7 +482,7 @@ header {
     font-weight: 600;
     font-family: 'Lato', sans-serif;
     color: #FFFFFF;
-    background-color: #2D4059;
+    background-color: #11dc65;
     border-radius: 6px;
     text-decoration: none;
     transition: background-color 0.3s ease, transform 0.2s ease;
@@ -500,6 +500,13 @@ header {
 /* Click (feedback visual) */
 .btn-ver-mas:active {
     transform: translateY(0);
+}
+
+.button {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 9999;
 }
 
 /* NO MODIFICAR ESTILOS DE ESTE BOTON */
