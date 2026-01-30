@@ -143,7 +143,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
     </section>
 
-    <!-- WIZARD JS (TUYO, SIN TOCAR) -->
+    <!-- WIZARD JS (NO TOCAR)-->
     <script>
         function nextStep(step) {
             document.querySelectorAll('.wizard-step').forEach(el => el.classList.remove('active'));
@@ -155,7 +155,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
         }
     </script>
 
-    <!-- 🔥 JS NUEVO: DEPARTAMENTO → CIUDAD -->
+    <!-- JS DEPARTAMENTO → CIUDAD (NO TOCAR) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
@@ -194,11 +194,6 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
         });
     </script>
 
-    <script>
-        const BASE_URL = "<?= BASE_URL ?>";
-    </script>
-
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/consultar_actividad_turistica/modal_actividad_detalle.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 

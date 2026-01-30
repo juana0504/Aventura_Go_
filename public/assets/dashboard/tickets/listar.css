@@ -1,0 +1,152 @@
+/* =========================
+   CONTENEDOR GENERAL
+========================= */
+#admin-dashboard {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f6f9;
+}
+
+/* CONTENIDO DERECHO */
+#admin-dashboard .info {
+    flex: 1;
+    padding: 20px 30px;
+}
+
+/* =========================
+   TITULO
+========================= */
+.info h2 {
+    font-weight: 700;
+    color: #1f2937;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info h2 i {
+    color: #2563eb;
+}
+
+/* =========================
+   TABLA
+========================= */
+.table-responsive {
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+    padding: 20px;
+}
+
+.table {
+    margin-bottom: 0;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+/* HEADER */
+.table thead th {
+    background-color: #111827 !important;
+    color: #ffffff;
+    font-size: 14px;
+    border: none;
+    padding: 14px;
+}
+
+/* FILAS */
+.table tbody tr {
+    background: #f9fafb;
+    border-radius: 10px;
+    transition: all 0.25s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #eef2ff;
+    transform: scale(1.01);
+}
+
+/* CELDAS */
+.table td {
+    vertical-align: middle;
+    padding: 14px;
+    font-size: 14px;
+    color: #374151;
+    border-top: none;
+}
+
+/* =========================
+   BADGES ESTADO
+========================= */
+.badge {
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.badge.bg-warning {
+    background-color: #fde68a !important;
+    color: #92400e !important;
+}
+
+.badge.bg-success {
+    background-color: #bbf7d0 !important;
+    color: #065f46 !important;
+}
+
+.badge.bg-secondary {
+    background-color: #e5e7eb !important;
+    color: #374151 !important;
+}
+
+/* =========================
+   ACCIONES
+========================= */
+.table td a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    margin-right: 8px;
+}
+
+.table td a:first-child {
+    color: #2563eb;
+}
+
+.table td a:first-child:hover {
+    text-decoration: underline;
+}
+
+/* BOTON CERRAR */
+.table .btn-danger {
+    background-color: #ef4444;
+    border: none;
+    border-radius: 8px;
+    padding: 4px 8px;
+}
+
+.table .btn-danger:hover {
+    background-color: #dc2626;
+}
+
+/* =========================
+   MENSAJE VACIO
+========================= */
+.table td.text-muted {
+    padding: 40px 0;
+    font-size: 15px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 992px) {
+    #admin-dashboard .info {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .table-responsive {
+        padding: 15px;
+    }
+}

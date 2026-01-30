@@ -13,6 +13,8 @@ $actividades = $actividadModel->listarActividadesPublicas();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tours y Aventura - Aventura Go</title>
 
+    <link rel="icon" type="image/png" href="public/assets/website_externos/index/img/FAVICON.png">
+
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -40,15 +42,33 @@ $actividades = $actividadModel->listarActividadesPublicas();
                 <div class="actions">
 
                     <?php if (isset($_SESSION['user'])): ?>
+                        <div class="profile-dropdown">
+                            <button class="profile-btn" id="profileToggle">
+                                <i class="fas fa-user-circle"></i>
+                                <span class="profile-name">
+                                    <?= htmlspecialchars(
+                                        ucwords(
+                                            explode(' ', $_SESSION['user']['nombre'])[0] . ' ' .
+                                                (explode(' ', $_SESSION['user']['nombre'])[1] ?? '')
+                                        )
+                                    ) ?>
+                                </span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
 
-                        <span class="Bienvenido">
-                            Bienvenido, <?= htmlspecialchars(ucwords(explode(' ', $_SESSION['user']['nombre'])[0] . ' ' . (explode(' ', $_SESSION['user']['nombre'])[1] ?? ''))) ?>
-                        </span>
-
-                        <a href="/aventura_go/logout" class="btn-register">
-                            Salir
-                        </a>
-
+                            <ul class="profile-menu" id="profileMenu">
+                                <li>
+                                    <a href="/aventura_go/turista/perfil">Mi perfil</a>
+                                </li>
+                                <li>
+                                    <a href="/aventura_go/turista/dashboard">Dashboard</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="/aventura_go/logout" class="logout">Cerrar sesión</a>
+                                </li>
+                            </ul>
+                        </div>
                     <?php else: ?>
 
                         <a href="/aventura_go/login" class="btn-login">
@@ -66,10 +86,9 @@ $actividades = $actividadModel->listarActividadesPublicas();
                     </div>
 
                 </div>
-                <a href="/aventura_go" class="btn-login">Atrás</a>
-                <div class="menu-toggle" id="menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </div>
+
+                <!-- <a href="/aventura_go" class="btn-login">Atrás</a> -->
+
             </div>
         </nav>
     </header>
@@ -185,105 +204,119 @@ $actividades = $actividadModel->listarActividadesPublicas();
     </main>
 
     <!-- F O O T E R_____________________________________________________________________________________________________________________________ -->
-    <footer id="footer" class="container-fluid">
+    <footer id="footer">
 
-        <!-- footer superior -->
-        <div class="footer-top">
-            <div class="row align-items-center">
-                <div class="col-md-12">
-                    <h2 class="palpitando">¿Quieres que tu negocio aparezca aquí?</h2>
-                    <a href="website_externos/contactanos.html">Publicate en Aventura Go</a>
+        <div class="container-fluid">
+            <!-- footer superior -->
+            <div class="footer-top">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <h2 class="palpitando">¿Quieres que tu negocio aparezca aquí?</h2>
+                        <a href="website_externos/contactanos.html">Publicate en Aventura Go</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Inferior -->
+            <div class="footer-bottom">
+                <div class="row">
+
+                    <!-- Columna 1: Logo -->
+                    <div class="col-md-2">
+                        <div class="logo-section">
+                            <img src="public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png" alt="logo Aventura Go">
+                        </div>
+                    </div>
+
+                    <!-- col 2 Descripción  -->
+                    <div class="col-md-2">
+                        <p class="description">
+                            Aventura Go conecta viajeros con experiencias de aventura,
+                            promoviendo el turismo sostenible y apoyando a prestadores locales en destinos naturales."
+                        </p>
+                    </div>
+
+
+                    <!-- Columna 3: Destinos -->
+                    <div class="col-md-2">
+                        <h5 class="dest-section">Destinos</h5>
+                        <ul class="list-unstyled">
+                            <li>Villeta</li>
+                            <li>Utica</li>
+                            <li>La Vega</li>
+                            <li>San Francisco</li>
+                            <li>Tobia</li>
+                        </ul>
+                    </div>
+
+                    <!-- Columna 4: Enlaces Útiles -->
+                    <div class="col-md-2">
+                        <h5 class="enlaces-section">Enlaces útiles</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Travel Blog</a></li>
+                            <li><a href="#">Be Our Partner</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Columna 5: Contacto -->
+                    <div class="col-md-2">
+                        <h5 class="contacto-section">Contactos</h5>
+                        <ul class="list-unstyled contact-list">
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <span>321 2263435</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span>aventurago2025@gmail.com</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Villeta Cundinamarca</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Columna 6: Redes Sociales -->
+                    <div class="col-md-2">
+                        <h5 class="redes-section">Síguenos</h5>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
-
-        <!-- Footer Inferior -->
-        <div class="footer-bottom">
-            <div class="row">
-
-                <!-- Columna 1: Logo -->
-                <div class="col-md-2">
-                    <div class="logo-section">
-                        <img src="public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png" alt="logo Aventura Go">
-                    </div>
-                </div>
-
-                <!-- col 2 Descripción  -->
-                <div class="col-md-2">
-                    <p class="description">
-                        Aventura Go conecta viajeros con experiencias de aventura,
-                        promoviendo el turismo sostenible y apoyando a prestadores locales en destinos naturales."
-                    </p>
-                </div>
-
-
-                <!-- Columna 3: Destinos -->
-                <div class="col-md-2">
-                    <h5 class="dest-section">Destinos</h5>
-                    <ul class="list-unstyled">
-                        <li>Villeta</li>
-                        <li>Utica</li>
-                        <li>La Vega</li>
-                        <li>San Francisco</li>
-                        <li>Tobia</li>
-                    </ul>
-                </div>
-
-                <!-- Columna 4: Enlaces Útiles -->
-                <div class="col-md-2">
-                    <h5 class="enlaces-section">Enlaces útiles</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Travel Blog</a></li>
-                        <li><a href="#">Be Our Partner</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
-
-                <!-- Columna 5: Contacto -->
-                <div class="col-md-2">
-                    <h5 class="contacto-section">Contactos</h5>
-                    <ul class="list-unstyled contact-list">
-                        <li>
-                            <i class="fas fa-phone"></i>
-                            <span>321 2263435</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <span>aventurago2025@gmail.com</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Villeta Cundinamarca</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Columna 6: Redes Sociales -->
-                <div class="col-md-2">
-                    <h5 class="redes-section">Síguenos</h5>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-
     </footer>
 
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/turista/tour_escogido/tour_escogido.js"></script>
+    <script src="<?= BASE_URL ?>/public/assets/website_externos/descubre_tours/descubre_tours.js"></script>
 
     <script>
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            document.getElementById('navbarNav').classList.toggle('show');
-        });
+        const profileToggle = document.getElementById('profileToggle');
+        const profileMenu = document.getElementById('profileMenu');
+
+        if (profileToggle && profileMenu) {
+            profileToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                profileMenu.style.display =
+                    profileMenu.style.display === 'block' ? 'none' : 'block';
+            });
+
+            document.addEventListener('click', function() {
+                profileMenu.style.display = 'none';
+            });
+        }
     </script>
+
+
+
 </body>
 
 </html>

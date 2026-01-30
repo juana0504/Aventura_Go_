@@ -8,6 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Descubre Tu Hospedaje</title>
 
+  <link rel="icon" type="image/png" href="public/assets/website_externos/index/img/FAVICON.png">
+
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -31,16 +33,35 @@
         <div class="actions">
 
           <?php if (isset($_SESSION['user'])): ?>
+            <div class="profile-dropdown">
+              <button class="profile-btn" id="profileToggle">
+                <i class="fas fa-user-circle"></i>
+                <span class="profile-name">
+                  <?= htmlspecialchars(
+                    ucwords(
+                      explode(' ', $_SESSION['user']['nombre'])[0] . ' ' .
+                        (explode(' ', $_SESSION['user']['nombre'])[1] ?? '')
+                    )
+                  ) ?>
+                </span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
 
-            <span class="Bienvenido">
-              Bienvenido, <?= htmlspecialchars(ucwords(explode(' ', $_SESSION['user']['nombre'])[0] . ' ' . (explode(' ', $_SESSION['user']['nombre'])[1] ?? ''))) ?>
-            </span>
-
-            <a href="/aventura_go/logout" class="btn-register">
-              Salir
-            </a>
-
+              <ul class="profile-menu" id="profileMenu">
+                <li>
+                  <a href="/aventura_go/turista/perfil">Mi perfil</a>
+                </li>
+                <li>
+                  <a href="/aventura_go/turista/dashboard">Dashboard</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <a href="/aventura_go/logout" class="logout">Cerrar sesión</a>
+                </li>
+              </ul>
+            </div>
           <?php else: ?>
+
 
             <a href="/aventura_go/login" class="btn-login">
               Ingresa
@@ -57,7 +78,6 @@
           </div>
 
         </div>
-        <button class="principal">Atrás</button>
 
       </div>
     </nav>
@@ -204,7 +224,25 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script src="../../assets/dashboard/turista/hospedaje_vega/hospedajeVega.js"></script>
+
+  <script src="<?= BASE_URL ?>/public/assets/website_externos/hospedaje_vega/hospedajeVega.js"></script>
+
+  <script>
+    const profileToggle = document.getElementById('profileToggle');
+    const profileMenu = document.getElementById('profileMenu');
+
+    if (profileToggle && profileMenu) {
+      profileToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        profileMenu.style.display =
+          profileMenu.style.display === 'block' ? 'none' : 'block';
+      });
+
+      document.addEventListener('click', function() {
+        profileMenu.style.display = 'none';
+      });
+    }
+  </script>
 </body>
 
 </html>

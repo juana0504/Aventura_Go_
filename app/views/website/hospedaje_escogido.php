@@ -59,17 +59,21 @@
                         <i class="fas fa-bars"></i>
                     </div>
 
-                    <button class="principal">Atrás</button>
-                    <button class="secundario">Salir</button>
                 </div>
             </div>
         </nav>
     </header>
 
+
+
+
     <main>
         <section id="info">
+
             <div class="container">
+
                 <div class="targeta">
+
                     <div class="row">
 
                         <div class="col-md-6 detalle">
@@ -84,6 +88,7 @@
                                 dirección en tu confirmación de la reserva y en tu cuenta.
                             </p>
                         </div>
+
                         <div class="col-md-6 datos">
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
@@ -96,95 +101,42 @@
                             <p><samp>From$325000</samp>$282000</p>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <img src="../../assets/dashboard/turista/hospedaje_escogido/img/hosp1.png" alt="">
-            <img src="../../assets/dashboard/turista/hospedaje_escogido/img/hosp2.png" alt="">
-            <img src="../../assets/dashboard/turista/hospedaje_escogido/img/hosp3.png" alt="">
-            <img src="../../assets/dashboard/turista/hospedaje_escogido/img/hosp4.png" alt="">
-            <img src="../../assets/dashboard/turista/hospedaje_escogido/img/hosp5.png" alt="">
-            <img src="../../assets/dashboard/turista/hospedaje_escogido/img/hosp6.png" alt="">
-
-            <div class="dato">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda molestiae quas illum odit
-                    maiores
-                    facilis laudantium quidem blanditiis, perspiciatis, perferendis neque libero iste architecto ab,
-                    voluptatem aut optio fugit quo. Voluptate ea maiores veniam est quo, totam qui quia? Explicabo
-                    sequi
-                    nostrum mollitia, asperiores omnis assumenda illo atque numquam. Veritatis necessitatibus
-                    voluptatibus
-                    soluta, sint temporibus modi architecto deleniti eos, asperiores laboriosam sunt? Optio, sed
-                    veritatis
-                    magni tenetur esse consequuntur officiis assumenda maxime modi? Mollitia illum, aspernatur
-                    eligendi,
-                    sapiente nisi in cumque ut quia corrupti facilis reprehenderit commodi! Placeat reprehenderit,
-                    tenetur
-                    commodi dolorem esse delectus fuga voluptas eaque aliquid ipsam voluptates expedita nobis
-                    aspernatur
-                    ab
-                    quos illum itaque quia pariatur? Natus, fugiat illum a, veritatis officiis obcaecati perferendis
-                    qui
-                    ea
-                    nihil sapiente cum suscipit maiores quo, voluptate necessitatibus? Doloribus, recusandae quam!
-                    Eum
-                    quo
-                    eius autem iure aperiam ipsum beatae fuga minima, aspernatur obcaecati voluptatem rem veniam
-                    alias
-                    saepe
-                    nulla ad veritatis dolor consequuntur voluptatum aliquid voluptas. Sunt dolorem perferendis,
-                    quod
-                    laborum iste, odio error temporibus at delectus eveniet unde blanditiis possimus, molestias
-                    deleniti
-                    fugiat! Ducimus rerum ad, vero voluptate exercitationem quibusdam consequatur numquam deserunt
-                    vitae
-                    reprehenderit nostrum laudantium nam dicta quis earum maiores quo reiciendis libero tempore!
-                    Iure
-                    minima
-                    est sed deserunt cum nulla temporibus, nesciunt quas ab laborum quia nostrum ipsam alias illo
-                    corporis.
-                    Adipisci, velit blanditiis deleniti incidunt maxime dignissimos sequi, possimus laboriosam cum
-                    minus
-                    nulla expedita accusamus. Non neque veritatis nam ut quibusdam suscipit, ipsa corrupti impedit
-                    aperiam
-                    quasi, corporis cupiditate, quidem ad. Facere fugit ipsam impedit provident! Aspernatur
-                    doloremque
-                    rerum, quo nobis adipisci necessitatibus suscipit illum doloribus quia, exercitationem modi cum
-                    iure
-                    maiores itaque commodi cumque facilis ad minus cupiditate aliquid voluptate laboriosam omnis?
-                    Ducimus
-                    eos quas molestiae, animi laudantium sequi quasi dicta quibusdam qui maxime. Dolorem cupiditate
-                    mollitia
-                    dolores debitis ea nihil quibusdam ad eveniet, eligendi iure iste explicabo pariatur obcaecati
-                    totam
-                    quae ab voluptates nam! Quibusdam magnam delectus eligendi tempore veniam voluptate nisi cum!
-                    Nemo
-                    enim
-                    fugiat, itaque ipsum animi maxime, odit inventore officiis, id ipsam cumque? Sit excepturi
-                    molestiae
-                    deleniti! Corporis deleniti atque et modi iure dolore consequatur ea dolor. At provident vitae
-                    accusamus
-                    minus, odit recusandae, ducimus eos suscipit alias distinctio rerum possimus veritatis
-                    voluptatem!
-                    Corrupti, sint. Ipsa corrupti doloremque quibusdam necessitatibus cumque molestiae vitae
-                    ducimus.
-                    Eveniet voluptatem quibusdam, mollitia eius blanditiis aut et porro, eum nostrum perspiciatis,
-                    ipsam
-                    obcaecati temporibus fuga hic cumque totam. Eum veritatis temporibus pariatur officiis suscipit
-                    nesciunt
-                    voluptate.</p>
 
 
-                <!-- seccion mapa -->
-                <section id="mapa" class="mapa-section">
-                    <div class="mapa-contenedor">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.166972063625!2d-74.472745125039!3d5.013951139904496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4067dfb5f1a3e7%3A0xeca58a4d9a0f72cb!2sVilleta%2C%20Cundinamarca!5e0!3m2!1ses!2sco!4v1690391856678!5m2!1ses!2sco"
-                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                    <div class="imagenes">
+                        <img src="../../assets/dashboard/turista/hospedaje_escogido/img/hosp1.png" alt="">
+                        <img src="../../assets/dashboard/turista/hospedaje_escogido/img/hosp2.png" alt="">
+                        <img src="../../assets/dashboard/turista/hospedaje_escogido/img/hosp3.png" alt="">
+                        <img src="../../assets/dashboard/turista/hospedaje_escogido/img/hosp4.png" alt="">
+                        <img src="../../assets/dashboard/turista/hospedaje_escogido/img/hosp5.png" alt="">
+                        <img src="../../assets/dashboard/turista/hospedaje_escogido/img/hosp6.png" alt="">
                     </div>
-                </section>
 
+
+
+                    <div class="dato">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda molestiae quas illum odit
+                            maiores
+                            facilis laudantium quidem blanditiis, perspiciatis, perferendis neque libero iste architecto ab,
+                            voluptatem aut optio fugit quo. Voluptate ea maiores veniam est quo, totam qui quia? Explicabo
+                            sequi
+                            nostrum mollitia, asperiores omnis assumenda illo atque numquam. Veritatis necessitatibus
+                            voluptatibus
+                        </p>
+                    </div>
+
+
+                    <!-- seccion mapa -->
+                    <div id="mapa" class="mapa-section">
+                        <div class="mapa-contenedor">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.166972063625!2d-74.472745125039!3d5.013951139904496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4067dfb5f1a3e7%3A0xeca58a4d9a0f72cb!2sVilleta%2C%20Cundinamarca!5e0!3m2!1ses!2sco!4v1690391856678!5m2!1ses!2sco"
+                                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </section>
     </main>

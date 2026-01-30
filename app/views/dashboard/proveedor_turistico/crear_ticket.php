@@ -4,11 +4,9 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Ticket de Reporte</title>
+    <title>Crear Ticket</title>
 
     <!-- favicon -->
     <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
@@ -25,39 +23,37 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <!-- Layouts -->
+    <!-- Layout global -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
+
+    <!-- Componentes comunes -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
-    <!-- CSS propio (puedes crear uno luego si quieres) -->
-    <!-- <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/tickets/crear_ticket.css"> -->
+    
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/tickets/tickets.css">
+
 </head>
 
 <body>
 
 <section id="crear-ticket">
 
-    <!-- Panel Lateral -->
     <?php require_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php'; ?>
 
-    <!-- Contenido Principal -->
     <div class="contenido-principal">
 
-        <!-- Barra de Búsqueda Superior -->
         <?php require_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php'; ?>
 
         <div class="info">
 
-            <div class="card shadow-sm">
+            <div class="card">
                 <div class="card-body">
 
-                    <h1 class="mb-4">
-                        <i class="bi bi-ticket-detailed"></i>
-                        Crear Ticket de Reporte
-                    </h1>
+                    <h4 class="mb-4">Crear Ticket de Soporte</h4>
 
-                    <form action="<?= BASE_URL ?>/proveedor_turistico/tickets?accion=guardar" method="POST">
+                    <form method="POST" action="<?= BASE_URL ?>/proveedor/tickets/guardar">
 
                         <div class="mb-3">
                             <label class="form-label">Asunto</label>
@@ -65,29 +61,27 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                                 type="text"
                                 name="asunto"
                                 class="form-control"
-                                placeholder="Ej: Problema con una actividad"
                                 required
                             >
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Descripción del problema</label>
+                            <label class="form-label">Descripción</label>
                             <textarea
                                 name="descripcion"
                                 class="form-control"
                                 rows="6"
-                                placeholder="Describe detalladamente el inconveniente"
                                 required
                             ></textarea>
                         </div>
 
-                        <div class="d-flex gap-2 mt-4">
+                        <div class="d-flex gap-2">
                             <button type="submit" class="btn btn-primary">
-                                <i class="bi bi-send"></i> Enviar Ticket
+                                Enviar Ticket
                             </button>
 
-                            <a href="<?= BASE_URL ?>/proveedor_turistico/tickets" class="btn btn-secondary">
-                                <i class="bi bi-arrow-left"></i> Volver
+                            <a href="<?= BASE_URL ?>/proveedor/tickets" class="btn btn-secondary">
+                                Volver
                             </a>
                         </div>
 
@@ -97,12 +91,10 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
             </div>
 
         </div>
+    </div>
 
-        </div>
-    </section>
+</section>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
-
 </html>
