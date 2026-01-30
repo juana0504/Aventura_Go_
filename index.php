@@ -371,6 +371,11 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/turista/registrar_reserva.php';
         break;
 
+    case '/turista/preparar-reserva':
+        require_once BASE_PATH . '/app/controllers/turista/prepararReservaController.php'; //prepara para entrar a reservar al dashboard(alberth)
+        break;
+
+
     case '/turista/confirmar-reserva':
         require_once BASE_PATH . '/app/controllers/turista/confirmarReservaController.php';
         break;
