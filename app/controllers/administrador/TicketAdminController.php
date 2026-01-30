@@ -1,7 +1,8 @@
 <?php
-require_once __DIR__ . '/../../models/Ticket.php';
-require_once __DIR__ . '/../../helpers/alert_helper.php';
-require_once __DIR__ . '/../../helpers/session_admin.php';
+
+require_once BASE_PATH . '/app/models/Ticket.php';
+require_once BASE_PATH . '/app/helpers/alert_helper.php';
+require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
 class TicketAdminController
 {
@@ -22,6 +23,11 @@ class TicketAdminController
     // ✍️ FORMULARIO RESPONDER
     public function responderForm($id_ticket)
     {
+        if (!$id_ticket) {
+            header('Location: ' . BASE_URL . '/administrador/tickets');
+            exit();
+        }
+
         $ticket = $this->ticketModel->buscarPorId($id_ticket);
 
         if (!$ticket) {
@@ -37,39 +43,17 @@ class TicketAdminController
         require BASE_PATH . '/app/views/dashboard/administrador/tickets/responder.php';
     }
 
-    public function buscarPorId($id_ticket)
-    {
-        $sql = "
-            SELECT t.*, u.nombre
-            FROM tickets t
-            INNER JOIN usuario u ON u.id_usuario = t.id_usuario
-            WHERE t.id_ticket = :id
-            LIMIT 1
-        ";
-        $stmt = $this->conexion->prepare($sql);
-        $stmt->bindParam(':id', $id_ticket, PDO::PARAM_INT);
-        $stmt->execute();
-
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
-
     // 💾 GUARDAR RESPUESTA
     public function responder()
     {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            http_response_code(405);
-            exit('Método no permitido');
-        }
-
         $id_ticket = $_POST['id_ticket'] ?? null;
         $respuesta = trim($_POST['respuesta'] ?? '');
 
-        if (empty($id_ticket) || empty($respuesta)) {
+        if (!$id_ticket || !$respuesta) {
             mostrarSweetAlert(
                 'error',
-                'Campos obligatorios',
-                'La respuesta no puede estar vacía',
+                'Error',
+                'Respuesta vacía',
                 BASE_URL . '/administrador/tickets'
             );
             exit();
@@ -79,8 +63,8 @@ class TicketAdminController
 
         mostrarSweetAlert(
             'success',
-            'Ticket respondido',
-            'La respuesta fue enviada correctamente',
+            'Respuesta enviada',
+            'El ticket fue respondido correctamente',
             BASE_URL . '/administrador/tickets'
         );
     }
@@ -88,24 +72,19 @@ class TicketAdminController
     // ❌ CERRAR TICKET
     public function cerrar()
     {
-        $id_ticket = $_GET['id'] ?? null;
+        $id = $_GET['id'] ?? null;
 
-        if (!$id_ticket) {
-            mostrarSweetAlert(
-                'error',
-                'Error',
-                'ID inválido',
-                BASE_URL . '/administrador/tickets'
-            );
+        if (!$id) {
+            header('Location: ' . BASE_URL . '/administrador/tickets');
             exit();
         }
 
-        $this->ticketModel->cerrar($id_ticket);
+        $this->ticketModel->cerrar($id);
 
         mostrarSweetAlert(
             'success',
             'Ticket cerrado',
-            'El ticket fue cerrado correctamente',
+            'El ticket fue cerrado',
             BASE_URL . '/administrador/tickets'
         );
     }
