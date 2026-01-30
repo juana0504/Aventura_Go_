@@ -1,39 +1,55 @@
 /* =========================
+   VARIABLES APLICADAS
+========================= */
+:root {
+    --color-primary: #2D4059;
+    --color-secondary: #EA8217;
+    --color-white: #FFFFFF;
+    --color-bg-light: #F8F9FA;
+    --color-border: #E0E0E0;
+    --color-text: #2b2b2b;
+    --font-titles: 'Raleway', sans-serif;
+    --font-text: 'Lato', sans-serif;
+}
+
+/* =========================
    CONTENEDOR GENERAL
 ========================= */
 #admin-dashboard {
     display: flex;
     min-height: 100vh;
-    background-color: #f4f6f9;
+    background-color: var(--color-bg-light);
+    font-family: var(--font-text);
 }
 
 /* CONTENIDO DERECHO */
 #admin-dashboard .info {
     flex: 1;
     padding: 20px 30px;
-    margin-left: 260px; /* ancho panel izquierdo */
+    margin-left: 0px; 
 }
 
 /* =========================
    TITULO
 ========================= */
 .info h2 {
+    font-family: var(--font-titles);
     font-weight: 700;
-    color: #1f2937;
+    color: var(--color-primary); /* Cambiado al azul de tu paleta */
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
 .info h2 i {
-    color: #2563eb;
+    color: var(--color-secondary); /* El icono resalta con tu naranja secundario */
 }
 
 /* =========================
    TARJETAS
 ========================= */
 .card {
-    border: none;
+    border: 1px solid var(--color-border);
     border-radius: 14px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
 }
@@ -44,20 +60,20 @@
 .card-body p {
     margin-bottom: 8px;
     font-size: 14px;
-    color: #374151;
+    color: var(--color-text);
 }
 
 .card-body strong {
-    color: #111827;
+    color: var(--color-primary);
 }
 
 /* DESCRIPCION */
 .card-body .bg-light {
-    background-color: #f9fafb !important;
-    border: 1px solid #e5e7eb !important;
+    background-color: var(--color-bg-light) !important;
+    border: 1px solid var(--color-border) !important;
     border-radius: 10px;
     font-size: 14px;
-    color: #1f2937;
+    color: var(--color-text);
 }
 
 /* =========================
@@ -70,11 +86,6 @@
     font-weight: 600;
 }
 
-.badge.bg-warning {
-    background-color: #fde68a !important;
-    color: #92400e !important;
-}
-
 /* =========================
    HEADER RESPUESTA
 ========================= */
@@ -83,10 +94,13 @@
     border-top-right-radius: 14px;
     font-weight: 600;
     font-size: 15px;
+    font-family: var(--font-titles);
 }
 
+/* Cambiado al gradiente con tu azul primario */
 .card-header.bg-primary {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    background: linear-gradient(135deg, var(--color-primary), #1a2a3d); 
+    color: var(--color-white);
 }
 
 /* =========================
@@ -94,19 +108,20 @@
 ========================= */
 .form-label {
     font-weight: 600;
-    color: #374151;
+    color: var(--color-text);
 }
 
 .form-control {
     border-radius: 10px;
-    border: 1px solid #d1d5db;
+    border: 1px solid var(--color-border);
     font-size: 14px;
     padding: 12px;
 }
 
+/* Foco con tu azul primario */
 .form-control:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(45, 64, 89, 0.15);
 }
 
 /* =========================
@@ -117,27 +132,26 @@
     font-weight: 600;
     padding: 8px 16px;
     font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+/* ENVIAR - Usando tu color secundario naranja para que destaque */
+.btn-success {
+    background-color: var(--color-secondary);
+    border: none;
+    color: var(--color-white);
+}
+
+.btn-success:hover {
+    background-color: #d17212; /* Un tono más oscuro del naranja */
+    transform: translateY(-1px);
 }
 
 /* VOLVER */
 .btn-secondary {
-    background-color: #e5e7eb;
-    color: #1f2937;
+    background-color: var(--color-border);
+    color: var(--color-text);
     border: none;
-}
-
-.btn-secondary:hover {
-    background-color: #d1d5db;
-}
-
-/* ENVIAR */
-.btn-success {
-    background-color: #16a34a;
-    border: none;
-}
-
-.btn-success:hover {
-    background-color: #15803d;
 }
 
 /* =========================
