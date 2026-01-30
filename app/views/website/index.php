@@ -66,16 +66,36 @@
                 <div class="actions">
 
                     <?php if (isset($_SESSION['user'])): ?>
+                        <div class="profile-dropdown">
+                            <button class="profile-btn" id="profileToggle">
+                                <i class="fas fa-user-circle"></i>
+                                <span class="profile-name">
+                                    <?= htmlspecialchars(
+                                        ucwords(
+                                            explode(' ', $_SESSION['user']['nombre'])[0] . ' ' .
+                                                (explode(' ', $_SESSION['user']['nombre'])[1] ?? '')
+                                        )
+                                    ) ?>
+                                </span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
 
-                        <span class="Bienvenido">
-                            Bienvenido, <?= htmlspecialchars(ucwords(explode(' ', $_SESSION['user']['nombre'])[0] . ' ' . (explode(' ', $_SESSION['user']['nombre'])[1] ?? ''))) ?>
-                        </span>
-
-                        <a href="/aventura_go/logout" class="btn-register">
-                            Salir
-                        </a>
-
+                            <ul class="profile-menu" id="profileMenu">
+                                <li>
+                                    <a href="/aventura_go/turista/perfil">Mi perfil</a>
+                                </li>
+                                <li>
+                                    <a href="/aventura_go/turista/dashboard">Dashboard</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="/aventura_go/logout" class="logout">Cerrar sesión</a>
+                                </li>
+                            </ul>
+                        </div>
                     <?php else: ?>
+
+
 
                         <a href="/aventura_go/login" class="btn-login">
                             Ingresa
@@ -475,7 +495,7 @@
         AOS.init();
     </script>
 
-    <script src="public/assets/website_externos/destinos/destinos.js"></script>
+    <script src="public/assets/website_externos/index/index.js"></script>
 
 
 </body>
