@@ -69,8 +69,8 @@ $usuario = mostrarPerfilTurista($id);
             <div class="container">
 
 
-                <h2>ojo este solo es Formulario de prueba de reservar Actividad</h2>
-                <form method="POST" action="<?= BASE_URL ?>/seleccionar-actividad">
+                <!-- <h2>ojo este solo es Formulario de prueba de reservar Actividad</h2> -->
+                <!-- <form method="POST" action="<?= BASE_URL ?>/seleccionar-actividad">
                     <label>ID Actividad:</label><br>
                     <input type="number" name="id_actividad" value="1" required><br><br>
 
@@ -81,7 +81,7 @@ $usuario = mostrarPerfilTurista($id);
                     <input type="number" name="personas" value="2" min="1" required><br><br>
 
                     <button type="submit">Probar Reserva</button>
-                </form>
+                </form> -->
 
 
 

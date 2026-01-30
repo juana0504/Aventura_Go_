@@ -1,10 +1,14 @@
-// menu hamburguesa
+// menu hamburguesa 
 const toggle = document.getElementById('menu-toggle');
 const nav = document.getElementById('navbarNav');
 
-toggle.addEventListener('click', () => {
-    nav.classList.toggle('show');
-});
+if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+        nav.classList.toggle('show');
+    });
+}
+
+
 
 // carrusel slick automatico
 $(document).ready(function () {
@@ -76,6 +80,5 @@ if (profileToggle && profileMenu) {
     document.addEventListener('click', function () {
         profileMenu.style.display = 'none';
     });
-
 }
 

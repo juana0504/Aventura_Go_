@@ -162,7 +162,15 @@
     <h1>¡Gracias por contactarnos!</h1>
     <p>Tu mensaje ha sido enviado con éxito.<br>En breve uno de nuestros asesores se comunicará contigo.</p>
 
-    <a href="../index.html" class="btn-volver">Volver al inicio</a>
+<script>
+    if (location.hostname.includes('github.io')) {
+        location.href = '../index.html';
+    }
+</script>
+
+<a href="http://localhost/aventura_go/" class="btn-volver">
+    Volver al inicio
+</a>
 
     <footer>
         © 2025 Aventura Go - Todos los derechos reservados

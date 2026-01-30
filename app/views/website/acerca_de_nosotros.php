@@ -581,7 +581,7 @@
         AOS.init();
     </script>
 
-    <script src="<?= BASE_URL ?>public/assets/website_externos/acerca_de_nosotros/acerca_de_nosotros.js"></script>
+    <script src="<?= BASE_URL ?>/public/assets/website_externos/acerca_de_nosotros/acerca_de_nosotros.js"></script>
 
     <script>
         const profileToggle = document.getElementById('profileToggle');
