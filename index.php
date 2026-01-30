@@ -164,12 +164,23 @@ switch ($request) {
 
 
 
-    // ===== TICKETS ADMIN =====
+
+
+
+
+
+
+
+
+
+
     case '/administrador/tickets':
         require BASE_PATH . '/app/controllers/administrador/TicketAdminController.php';
         $controller = new TicketAdminController();
         $controller->listar();
         break;
+
+
 
     case '/administrador/tickets/responder':
         require BASE_PATH . '/app/controllers/administrador/TicketAdminController.php';
@@ -229,6 +240,15 @@ switch ($request) {
         break;
 
 
+    case '/proveedor/consultar-actividad-id':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/actividadDetalle.php';
+        break;
+
+    case '/proveedor/actividadTuristica':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php';
+        break;
+
+
     case '/proveedor/pdf-actividades':
         require_once BASE_PATH . '/app/controllers/proveedor_turistico/actividadPdfController.php';
         generarPdfActividades();
@@ -277,23 +297,8 @@ switch ($request) {
 
 
 
-    case '/proveedor_turistico/listar':
-        require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
-        $controller = new TicketProveedorController();
-        $controller->listar();
-        break;
+    // ================= TICKETS PROVEEDOR TURISTICO =================
 
-    case '/proveedor_turistico/crear_ticket':
-        require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
-        $controller = new TicketProveedorController();
-        $controller->crear();
-        break;
-
-    case '/proveedor_turistico/guardar_ticket':
-        require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
-        $controller = new TicketProveedorController();
-        $controller->guardar();
-        break;
 
     case '/proveedor/tickets':
         require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
@@ -301,11 +306,18 @@ switch ($request) {
         $controller->listar();
         break;
 
-    case '/proveedor_turistico/ticket/ver':
+    case '/proveedor/tickets/crear':
         require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
         $controller = new TicketProveedorController();
-        $controller->ver($_GET['id'] ?? null);
+        $controller->crear();
         break;
+
+    case '/proveedor/tickets/guardar':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
+        $controller = new TicketProveedorController();
+        $controller->guardar();
+        break;
+
 
 
     // ================= FIN RUTAS PROVEEDOR TURISTICO =================

@@ -31,7 +31,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
     <!-- CSS propio (puedes crear uno luego si quieres) -->
-    <!-- <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/tickets/crear_ticket.css"> -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/tickets/crear_ticket.css">
 </head>
 
 <body>
@@ -40,6 +40,9 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
     <!-- Panel Lateral -->
     <?php require_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php'; ?>
+
+    
+
 
     <!-- Contenido Principal -->
     <div class="contenido-principal">
@@ -52,12 +55,12 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
             <div class="card shadow-sm">
                 <div class="card-body">
 
-                    <h1 class="mb-4">
-                        <i class="bi bi-ticket-detailed"></i>
-                        Crear Ticket de Reporte
-                    </h1>
+                    <a href="<?= BASE_URL ?>/proveedor/tickets/crear" class="btn btn-primary">
 
-                    <form action="<?= BASE_URL ?>/proveedor_turistico/tickets?accion=guardar" method="POST">
+
+                    <form method="POST" action="<?= BASE_URL ?>/proveedor/tickets/guardar">
+
+
 
                         <div class="mb-3">
                             <label class="form-label">Asunto</label>
@@ -86,9 +89,8 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                                 <i class="bi bi-send"></i> Enviar Ticket
                             </button>
 
-                            <a href="<?= BASE_URL ?>/proveedor_turistico/tickets" class="btn btn-secondary">
-                                <i class="bi bi-arrow-left"></i> Volver
-                            </a>
+                            <a href="<?= BASE_URL ?>/proveedor/tickets" class="btn btn-secondary">Volver</a>
+
                         </div>
 
                     </form>
