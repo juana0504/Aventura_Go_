@@ -164,16 +164,6 @@ switch ($request) {
 
 
 
-
-
-
-
-
-
-
-
-
-
     // ===== TICKETS ADMIN =====
     case '/administrador/tickets':
         require BASE_PATH . '/app/controllers/administrador/TicketAdminController.php';
@@ -229,6 +219,15 @@ switch ($request) {
     case '/proveedor/consultar-actividad':
         require BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php'; //consulta la tabla con las actividades turisticas registradas
         break;
+
+    case '/proveedor/consultar-actividad-id':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/actividadDetalle.php';
+        break;
+
+    case '/proveedor/actividadTuristica':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php';
+        break;
+
 
     case '/proveedor/pdf-actividades':
         require_once BASE_PATH . '/app/controllers/proveedor_turistico/actividadPdfController.php';
@@ -396,7 +395,7 @@ switch ($request) {
         require_once BASE_PATH . '/app/controllers/website/seleccionarActividadController.php';
         break;
 
-        
+
 
 
 
