@@ -59,8 +59,6 @@
                         <i class="fas fa-bars"></i>
                     </div>
 
-                    <button class="principal">Atrás</button>
-                    <button class="secundario">Salir</button>
                 </div>
             </div>
         </nav>

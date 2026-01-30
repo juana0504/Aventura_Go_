@@ -177,6 +177,70 @@ header {
 }
 
 
+/* INICIA no modificar, estilos del dropdown--------------------------------------------- */
+.profile-dropdown {
+    position: relative;
+}
+
+.profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #2D4059;
+    color: #FFFFFF;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.profile-btn i {
+    font-size: 16px;
+}
+
+.profile-menu {
+    position: absolute;
+    right: 0;
+    top: 46px;
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 10px;
+    min-width: 200px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    list-style: none;
+    padding: 8px 0;
+    display: none;
+    z-index: 999;
+}
+
+.profile-menu li a {
+    display: block;
+    padding: 10px 16px;
+    font-size: 14px;
+    color: #2B2B2B;
+    text-decoration: none;
+}
+
+.profile-menu li a:hover {
+    background-color: #F8F9FA;
+}
+
+.profile-menu .divider {
+    height: 1px;
+    background-color: #E0E0E0;
+    margin: 6px 0;
+}
+
+.profile-menu .logout {
+    color: #EA8217;
+    font-weight: 600;
+}
+
+/* termina no modificar, estilos del dropdown--------------------------------------------- */
+
+
 
 /* SECCIÓN HERO____________________________________________________________________________________________________   */
 #hero {

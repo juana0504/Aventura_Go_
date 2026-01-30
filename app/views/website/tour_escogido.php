@@ -104,8 +104,6 @@ $actividades = $actividadModel->listarActividadesPublicas();
 
                 </div>
 
-                <a href="/aventura_go/descubre-tours" class="btn-login">Atrás</a>
-
 
             </div>
         </nav>
