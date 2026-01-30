@@ -1,11 +1,10 @@
 <?php
-// =======================================================
-// Preparar reserva desde website
-// Crea la sesión y redirige al dashboard del turista
-// =======================================================
 
-// Protección de sesión por rol (si no está logueado, lo saca)
-require_once BASE_PATH . '/app/helpers/session_turista.php';
+// Preparar reserva desde website (PUBLICO)
+// Guarda la actividad y luego valida login
+
+
+// NO proteger aquí con session_turista
 
 // Validar que venga el id de la actividad
 if (!isset($_GET['id']) || empty($_GET['id'])) {
@@ -20,7 +19,16 @@ $_SESSION['actividad_pendiente'] = [
     'personas' => 1
 ];
 
+// Ahora sí: validar login
+if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['rol'] !== 'turista') {
 
-// Redirigimos al flujo correcto del dashboard
+    // guardamos a dónde debe volver luego del login
+    $_SESSION['redirect_after_login'] = '/turista/confirmar-reserva';
+
+    header('Location: ' . BASE_URL . '/login');
+    exit;
+}
+
+// Si ya está logueado, seguimos normal
 header('Location: ' . BASE_URL . '/turista/confirmar-reserva');
 exit;

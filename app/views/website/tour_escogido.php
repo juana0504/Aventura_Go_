@@ -96,6 +96,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
 
     <main>
 
+        <!-- Sección barra busqueda____________________________________________________________________________________________________________ -->
         <section id="filtros">
             <div class="container">
                 <div class="search-filters">
@@ -149,7 +150,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
             </div>
         </section>
 
-
+        <!-- Sección fotos____________________________________________________________________________________________________________ -->
         <section id="fotos">
             <div class="container">
                 <div class="galeria-container p-3 bg-white shadow-sm rounded-4">
@@ -180,7 +181,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
             </div>
         </section>
 
-
+        <!-- Sección descripcion____________________________________________________________________________________________________________ -->
         <section id="descripcion">
             <div class="container">
                 <h5 class="fw-bold">Explora las vías del tren y disfruta de la naturaleza en Villeta 🚞🌿</h5>
@@ -200,7 +201,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
         </section>
 
 
-        <!-- seccion mapa -->
+        <!-- Sección mapa____________________________________________________________________________________________________________ -->
         <section id="mapa" class="mapa-section">
             <div class="row">
                 <div class="col-md-8">
@@ -217,15 +218,13 @@ $actividades = $actividadModel->listarActividadesPublicas();
             </div>
         </section>
 
+        <!-- BOTON DE RESERVAR____________________________________________________________________________________________________________ -->
         <div class="button">
             <a href="<?= BASE_URL ?>/turista/preparar-reserva?id=<?= $actividad['id_actividad'] ?>"
                 class="btn-ver-mas">
                 RESERVAR
             </a>
         </div>
-
-
-
 
     </main>
 
@@ -323,7 +322,6 @@ $actividades = $actividadModel->listarActividadesPublicas();
 
     </footer>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&callback=initMap" async defer></script>
 
 
     <!-- Abootstrap -->
