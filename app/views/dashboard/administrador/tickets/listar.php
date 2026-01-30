@@ -15,13 +15,23 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- LIBRERIA AOS ANIMATE -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-    <!-- Layouts globales -->
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- Icono de bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
+
+    <!-- Componentes comunes -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/tickets/listar.css">
 </head>
 
 <body>
@@ -29,13 +39,13 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 <section id="admin-dashboard">
 
     <!-- Panel lateral -->
-    <?php require_once __DIR__ . '/../../layouts/panel_izq_administrador.php'; ?>
+    <?php require_once __DIR__ . '/../../../layouts/panel_izq_administrador.php'; ?>
 
     <!-- Contenido principal -->
     <div class="info">
 
         <!-- Buscador -->
-        <?php require_once __DIR__ . '/../../layouts/buscador_administrador.php'; ?>
+        <?php require_once __DIR__ . '/../../../layouts/buscador_administrador.php'; ?>
 
         <div class="container-fluid mt-4">
 
@@ -85,10 +95,10 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 <td><?= date('d/m/Y H:i', strtotime($ticket['fecha_creacion'])) ?></td>
 
                                 <td class="text-center">
-                                    <a href="<?= BASE_URL ?>/administrador/tickets/responder?id=<?= $ticket['id_ticket'] ?>"
-                                       class="btn btn-sm btn-primary">
-                                        <i class="fa fa-reply"></i>
+                                    <a href="<?= BASE_URL ?>/administrador/tickets/responder?id=<?= $ticket['id_ticket'] ?>">
+                                        Responder
                                     </a>
+
 
                                     <?php if ($ticket['estado'] !== 'cerrado'): ?>
                                         <a href="<?= BASE_URL ?>/administrador/tickets/cerrar?id=<?= $ticket['id_ticket'] ?>"

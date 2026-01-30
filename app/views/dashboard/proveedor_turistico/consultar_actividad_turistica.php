@@ -3,10 +3,6 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
 ?>
 
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,9 +35,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
     <!-- CSS SOLO DE ESTA VISTA (SIEMPRE AL FINAL) -->
-    <!-- <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_turistico.css"> -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/consultar_actividad_turistica/consultar_actividad_turistica.css">
-
 
 </head>
 
@@ -69,7 +63,6 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
             </div>
 
 
-
             <!-- Filtros Rápidos -->
             <div class="filtros-rapidos">
                 <button class="filtro-btn active" data-filter="all">
@@ -92,18 +85,14 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
             </div>
 
 
-
-
-
-
             <div class="card shadow-sm mt-4">
 
                 <div class="table-responsive">
                     <table id="tablaActividades" class="table table-hover align-middle">
                         <thead class="table-light">
                             <tr>
-                                <th>IMAGEN</th>
-                                <th>NOMBRE</th>
+                                <th>FOTO</th>
+                                <th>NOMBRE ACTIVIDAD</th>
                                 <th>DESTINO</th>
                                 <th>UBICACIÓN</th>
                                 <th>CUPOS</th>
@@ -142,7 +131,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
                                         <!-- Estado -->
                                         <td>
-                                            <?php if ($actividad['estado'] === 'activa'): ?>
+                                            <?php if ($actividad['estado'] === 'ACTIVO'): ?>
                                                 <span class="badge bg-success">Activa</span>
                                             <?php else: ?>
                                                 <span class="badge bg-secondary">Inactiva</span>
@@ -183,74 +172,85 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
             </div>
     </section>
 
+
+    <!-- MODAL DETALLE ACTIVIDAD -->
     <div class="modal fade" id="modalActividad" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content aventura-modal">
 
-                <div class="modal-header aventura-modal-header">
-                    <h5 class="modal-title">Detalle de la Actividad</h5>
-                    <button class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
+                <!-- HEADER -->
+                <div class="modal-header aventura-modal-header d-flex justify-content-between align-items-start">
 
-                <div class="modal-body">
-                    <div class="row mb-3">
-                        <div class="col-md-4 text-center">
-                            <img id="modal-imagen" class="img-fluid rounded">
-                        </div>
-
-                        <div class="col-md-8">
-                            <p><strong>Nombre:</strong> <span id="modal-nombre"></span></p>
-                            <p><strong>Ciudad:</strong> <span id="modal-destino"></span></p>
-                            <p><strong>Ubicación:</strong> <span id="modal-ubicacion"></span></p>
-                            <p><strong>Cupos:</strong> <span id="modal-cupos"></span></p>
-                            <p><strong>Precio:</strong> $<span id="modal-precio"></span></p>
-                            <p><strong>Estado:</strong> <span id="modal-estado"></span></p>
-                        </div>
+                    <div>
+                        <h5 class="modal-title" id="modal-nombre"></h5>
                     </div>
 
                     <div>
-                        <strong>Descripción:</strong>
-                        <p id="modal-descripcion"></p>
+                        <span id="modal-estado-header" class="badge mb-1"></span>
+                        <div>
+                            <small id="modal-fecha-registro" class="text-muted"></small>
+                        </div>
                     </div>
+
+                    <button class="btn-close ms-3" data-bs-dismiss="modal"></button>
                 </div>
 
-                <div class="modal-footer">
-                    <a id="btn-desactivar" class="btn btn-danger">Pausar</a>
-                    <a id="btn-activar" class="btn btn-success">Activar</a>
+
+                <!-- BODY -->
+                <div class="modal-body">
+
+                    <div class="row mb-4">
+                        <!-- IMAGEN PRINCIPAL -->
+                        <div class="col-md-5 text-center">
+
+                            <img id="modal-imagen-principal"
+                                class="img-fluid rounded mb-2"
+                                alt="Imagen actividad">
+
+                            <!-- GALERÍA -->
+                            <div id="modal-galeria" class="d-flex justify-content-center gap-2 flex-wrap">
+                                <!-- miniaturas aquí -->
+                            </div>
+                        </div>
+
+                        <!-- INFO -->
+                        <div class="col-md-7 informacion">
+                            <p><strong>Departamento:</strong> <span id="modal-departamento"></span></p>
+                            <p><strong>Ciudad:</strong> <span id="modal-ciudad"></span></p>
+                            <p><strong>Ubicación:</strong> <span id="modal-ubicacion"></span></p>
+                            <p><strong>Cupos disponibles:</strong> <span id="modal-cupos"></span></p>
+                            <p><strong>Precio:</strong> $<span id="modal-precio"></span></p>
+                            <p><strong>Estado:</strong> <span id="modal-estado-texto"></span></p>
+                        </div>
+                    </div>
+
+                    <!-- DESCRIPCIÓN -->
+                    <hr>
+                    <div>
+                        <h6>Descripción</h6>
+                        <p id="modal-descripcion" class="mb-0"></p>
+                    </div>
+
                 </div>
+
+                <!-- FOOTER -->
+                <div class="modal-footer">
+                    <button id="btn-desactivar" class="btn btn-danger">Pausar</button>
+                    <button id="btn-activar" class="btn btn-success">Activar</button>
+                </div>
+
             </div>
         </div>
     </div>
 
+
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-
-            document.querySelectorAll('.btn-ver').forEach(btn => {
-                btn.addEventListener('click', () => {
-
-                    const id = btn.dataset.id;
-
-                    fetch(`<?= BASE_URL ?>/app/controllers/proveedor_turistico/actividadDetalle.php?id=${id}`)
-                        .then(res => res.json())
-                        .then(data => {
-
-                            if (data.error) {
-                                alert(data.error);
-                                return;
-                            }
-
-                            document.getElementById('modal-nombre').textContent = data.nombre;
-                            document.getElementById('modal-descripcion').textContent = data.descripcion;
-                            document.getElementById('modal-ubicacion').textContent = data.ubicacion;
-                            document.getElementById('modal-cupos').textContent = data.cupos;
-                            document.getElementById('modal-precio').textContent = data.precio;
-                            document.getElementById('modal-estado').textContent = data.estado;
-                        });
-                });
-            });
-
-        });
+        const BASE_URL = "<?= BASE_URL ?>";
     </script>
+
+    <script src="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/consultar_actividad_turistica/modal_actividad.js"></script>
+
 
 
     <!-- Scripts -->

@@ -13,6 +13,8 @@ $actividades = $actividadModel->listarActividadesPublicas();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aventura Go - tour-escogido</title>
 
+    <link rel="icon" type="image/png" href="../public/assets/website_externos/index/img/FAVICON.png">
+
     <!-- bootstrap para el carrusel -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -43,10 +45,11 @@ $actividades = $actividadModel->listarActividadesPublicas();
 
     <!-- header________________________________________________________________________________________________________________________________ -->
     <header>
+
         <nav class="navbar">
             <div class="container-fluid">
                 <div class="logo">
-                    <img src="public/assets/website_externos/tour_escogido/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
+                    <img src="../public/assets/website_externos/tour_escogido/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
                 </div>
 
                 <?php if (!empty($actividades)): ?>
@@ -94,41 +97,121 @@ $actividades = $actividadModel->listarActividadesPublicas();
                         <i class="fas fa-bars"></i>
                     </div>
                 </div>
+
+
             </div>
         </nav>
+
     </header>
 
 
     <main>
-        <div class="search-filters">
-            <div class="filters-row">
-                <div class="filter-item">
-                    <i class="fas fa-calendar"></i>
-                    <input type="text" placeholder="01 oct 2025 - 02 oct 2025" readonly>
-                </div>
-                <div class="filter-item">
-                    <i class="fas fa-users"></i>
-                    <input type="text" placeholder="02 Adultos - 01 Niño - 00 Bebés" readonly>
-                </div>
-                <div class="filter-item">
-                    <i class="fas fa-car"></i>
-                    <input type="text" placeholder="01" readonly>
-                </div>
-            </div>
-        </div>
-    </main>
 
+        <?php if (!empty($actividades)): ?>
+            <?php foreach ($actividades as $actividad): ?>
 
+                <!-- Sección barra busqueda____________________________________________________________________________________________________________ -->
+                <section id="filtros">
+                    <div class="container">
+                        <div class="search-filters">
+                            <div class="row">
+                                <div class="filters-row">
+                                    <div class="col-md-4">
+                                        <div class="filter-item">
+                                            <i class="fas fa-calendar"></i>
+                                            <input type="text" placeholder="01 oct 2025 - 02 oct 2025" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="filter-item">
+                                            <i class="fas fa-users"></i>
+                                            <input type="text" placeholder="02 Adultos - 01 Niño - 00 Bebés" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="filter-item">
+                                            <i class="fas fa-car"></i>
+                                            <input type="text" placeholder="01" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
+                <!-- Sección Características____________________________________________________________________________________________________________ -->
+                <section id="datos">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <h1><?= htmlspecialchars($actividad['nombre']) ?></h1>
+                                <p><?= htmlspecialchars($actividad['ubicacion']) ?>, <?= htmlspecialchars($actividad['ciudad']) ?>, Cundinamarca, Colombia</p>
+                                <p>Después de reservar, encontrarás todos los datos de tu actividad con el número de teléfono y la
+                                    dirección en tu confirmación de la reserva y en tu cuenta.</p>
+                            </div>
+                            <div class="col-md-3 stars">
+                                <p>1 Noche, 2 Días</p>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <span>(120 Review)</span> <br>
+                                <span> From $325000 <strong>$282000</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-    <!-- Sección ________________________________________________________________________________________________________________________ -->
+                <!-- Sección fotos____________________________________________________________________________________________________________ -->
+                <section id="fotos">
+                    <div class="container">
+                        <div class="galeria-container p-3 bg-white shadow-sm rounded-4">
+                            <div class="row g-2">
+                                <!-- Imágenes -->
+                                <div class="col-6 col-md-4 col-lg-2">
+                                    <img src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $actividad['imagen'] ?>" class="img-fluid rounded" alt="foto 1">
+                                </div>
 
+                                <div class="col-6 col-md-4 col-lg-3">
+                                    <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 2">
+                                </div>
 
+                                <div class="col-6 col-md-4 col-lg-2">
+                                    <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 3">
+                                </div>
 
+                                <div class="col-6 col-md-4 col-lg-3">
+                                    <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 4">
+                                </div>
 
-    <!-- Sección Características____________________________________________________________________________________________________________ -->
-    <section>
-        <div class="container">
+                                <div class="col-6 col-md-4 col-lg-2">
+                                    <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 5">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sección descripcion____________________________________________________________________________________________________________ -->
+                <section id="descripcion">
+                    <div class="container">
+                        <h5 class="fw-bold"><?= htmlspecialchars($actividad['nombre']) ?></h5>
+                        <p>
+                            <?= htmlspecialchars($actividad['descripcion']) ?>
+                        </p>
+                    </div>
+                </section>
+        
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No hay actividades disponibles.</p>
+        <?php endif; ?>
+
+        <!-- Sección mapa____________________________________________________________________________________________________________ -->
+        <section id="mapa" class="mapa-section">
             <div class="row">
 
                 <?php if (!empty($actividades)): ?>
@@ -155,122 +238,17 @@ $actividades = $actividadModel->listarActividadesPublicas();
                         <p>No hay actividades disponibles.</p>
                 <?php endif; ?>
             </div>
+        </section>
+
+        <!-- BOTON DE RESERVAR____________________________________________________________________________________________________________ -->
+        <div class="button">
+            <a href="<?= BASE_URL ?>/turista/preparar-reserva?id=<?= $actividad['id_actividad'] ?>"
+                class="btn-ver-mas">
+                RESERVAR
+            </a>
         </div>
-    </section>
 
-
-    <!-- seccion fotos -->
-    <div class="container my-5">
-
-        <?php if (!empty($actividades)): ?>
-            <?php foreach ($actividades as $actividad): ?>
-                <!-- Galería -->
-                <div class="container my-5">
-                    <section class="galeria-container p-3 bg-white shadow-sm rounded-4">
-
-                        <div class="row g-2">
-
-                            <!-- Imágenes -->
-                            <div class="col-6 col-md-4 col-lg-2">
-                                <img src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $actividad['imagen'] ?>">
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-2">
-                                <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 2">
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-2">
-                                <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 3">
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-2">
-                                <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 4">
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-2">
-                                <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 5">
-                            </div>
-
-                            <!-- <div class="col-6 col-md-4 col-lg-2 position-relative">
-                                <img src="../turista/img/imagen tour.png" class="img-fluid rounded overlay-img" alt="foto 6">
-                                <div class="overlay-text">25 fotos más</div>
-                            </div> -->
-
-                            <!-- Segunda fila -->
-                            <!-- <div class="col-6 col-md-4 col-lg-2">
-                                <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 7">
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-2">
-                                <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 8">
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-2">
-                                <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 9">
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-2">
-                                <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 10">
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-2">
-                                <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 11">
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-2">
-                                <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 12">
-                            </div> -->
-
-                        </div>
-                    </section>
-                </div>
-
-
-                <!-- Sección de descripción -->
-                <section class="descripcion-container p-4 bg-white shadow rounded mt-4">
-                    <h5 class="fw-bold"><?= htmlspecialchars($actividad['nombre']) ?></h5>
-                    <p>
-                        <?= htmlspecialchars($actividad['descripcion']) ?>
-                    </p>
-                   
-                </section>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p>No hay actividades disponibles.</p>
-        <?php endif; ?>
-    </div>
-
-
-
-
-    <!-- seccion mapa -->
-    <section id="mapa1" class="mapa-section">
-        <h2>Encuéntranos fácilmente</h2>
-        <div class="mapa-contenedor">
-            <iframe title="Mapa de Villeta, Cundinamarca"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.166972063625!2d-74.472745125039!3d5.013951139904496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4067dfb5f1a3e7%3A0xeca58a4d9a0f72cb!2sVilleta%2C%20Cundinamarca!5e0!3m2!1ses!2sco!4v1690391856678!5m2!1ses!2sco"
-                allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-        </div>
-    </section>
-
-
-    <!-- ejemplo para modificar mapa -->
-    <!-- <section id="mapa" class="mapa-section">
-        <h2>Encuéntranos fácilmente</h2>
-
-        <form id="formDireccion">
-            <input type="text" id="direccion" placeholder="Ingresa una dirección" required>
-            <button type="submit">Buscar</button>
-        </form>
-
-        <div id="map" style="width:100%; height:400px;"></div>
-    </section> -->
-
-
-
-
-
+    </main>
 
 
     <!-- F O O T E R_____________________________________________________________________________________________________________________________ -->
@@ -293,7 +271,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
                 <!-- Columna 1: Logo -->
                 <div class="col-md-2">
                     <div class="logo-section">
-                        <img src="public/assets/website_externos/tour_escogido/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
+                        <img src="../public/assets/website_externos/tour_escogido/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
                     </div>
                 </div>
 
@@ -366,7 +344,6 @@ $actividades = $actividadModel->listarActividadesPublicas();
 
     </footer>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&callback=initMap" async defer></script>
 
 
     <!-- Abootstrap -->
@@ -382,8 +359,24 @@ $actividades = $actividadModel->listarActividadesPublicas();
         AOS.init();
     </script>
 
-    <script src="/public/assets/website_externos/tour_escogido/tour_escogido.js"></script>
-    <!-- ../../assets/dashboard/turista/tour_escogido/tour_escogido.js -->
+    <script src="<?= BASE_URL ?>/public/assets/website_externos/tour_escogido/tour_escogido.js"></script>
+
+    <script>
+        const profileToggle = document.getElementById('profileToggle');
+        const profileMenu = document.getElementById('profileMenu');
+
+        if (profileToggle && profileMenu) {
+            profileToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                profileMenu.style.display =
+                    profileMenu.style.display === 'block' ? 'none' : 'block';
+            });
+
+            document.addEventListener('click', function() {
+                profileMenu.style.display = 'none';
+            });
+        }
+    </script>
 </body>
 
 </html>

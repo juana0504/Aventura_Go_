@@ -6,14 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gracias por contactarnos | Aventura Go</title>
 
+    <link rel="icon" type="image/png" href="public/assets/website_externos/index/img/FAVICON.png">
+
     <!-- Fuentes -->
     <link
         href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Lato:wght@300;400;700&display=swap"
         rel="stylesheet">
 
 
-<!-- A T E N C I O N  ---------- A T E N C I O N  --------   A T E N C I O N  -- -- A T E N C I O N  --------   A T E N C I O N  -- -->
-<!-- PAGINA DE PRUEBA SOLO PARA QUE APAREZCA UN MENSAJE DE GRACIAS AL ENVIAR EL FORMULARIO POSTERIORMENTE SERA MODIFICADA O ELIMINADA -->
+    <!-- A T E N C I O N  ---------- A T E N C I O N  --------   A T E N C I O N  -- -- A T E N C I O N  --------   A T E N C I O N  -- -->
+    <!-- PAGINA DE PRUEBA SOLO PARA QUE APAREZCA UN MENSAJE DE GRACIAS AL ENVIAR EL FORMULARIO POSTERIORMENTE SERA MODIFICADA O ELIMINADA -->
 
 
 
