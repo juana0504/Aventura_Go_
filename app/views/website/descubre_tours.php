@@ -87,7 +87,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
 
                 </div>
 
-                <a href="/aventura_go" class="btn-login">Atrás</a>
+                <!-- <a href="/aventura_go" class="btn-login">Atrás</a> -->
 
             </div>
         </nav>
