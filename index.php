@@ -164,16 +164,7 @@ switch ($request) {
 
 
 
-
-
-
-
-
-
-
-
-
-
+    // ===== TICKETS ADMIN =====
     case '/administrador/tickets':
         require BASE_PATH . '/app/controllers/administrador/TicketAdminController.php';
         $controller = new TicketAdminController();
