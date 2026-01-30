@@ -1,33 +1,43 @@
+//menu hamburguesa
+document.addEventListener("DOMContentLoaded", function () {
 
-let map;
-let geocoder;
-let marker;
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navMenu = document.querySelector(".navbar-nav");
 
-function initMap() {
-    geocoder = new google.maps.Geocoder();
-
-    map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 5.0139, lng: -74.4727 }, // Villeta
-        zoom: 14
+    // Abrir / cerrar menú
+    menuToggle.addEventListener("click", function () {
+        navMenu.classList.toggle("active");
     });
 
-    marker = new google.maps.Marker({
-        map: map
+    // Cerrar menú al hacer clic en un enlace
+    const navLinks = document.querySelectorAll(".nav-link");
+    navLinks.forEach(link => {
+        link.addEventListener("click", () => {
+            navMenu.classList.remove("active");
+        });
     });
+
+});
+
+
+
+// Dropdown perfil
+const profileToggle = document.getElementById('profileToggle');
+const profileMenu = document.getElementById('profileMenu');
+
+if (profileToggle && profileMenu) {
+
+    profileToggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+
+        profileMenu.style.display =
+            profileMenu.style.display === 'block' ? 'none' : 'block';
+    });
+
+    document.addEventListener('click', function () {
+        profileMenu.style.display = 'none';
+    });
+
 }
 
-document.getElementById("formDireccion").addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const direccion = document.getElementById("direccion").value;
-
-    geocoder.geocode({ address: direccion }, function (results, status) {
-        if (status === "OK") {
-            map.setCenter(results[0].geometry.location);
-            marker.setPosition(results[0].geometry.location);
-        } else {
-            alert("No se pudo encontrar la dirección");
-        }
-    });
-});
 

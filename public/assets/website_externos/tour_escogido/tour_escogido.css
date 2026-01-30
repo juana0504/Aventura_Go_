@@ -185,6 +185,69 @@ header {
 }
 
 
+/* INICIA no modificar, estilos del dropdown--------------------------------------------- */
+.profile-dropdown {
+    position: relative;
+}
+
+.profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #2D4059;
+    color: #FFFFFF;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.profile-btn i {
+    font-size: 16px;
+}
+
+.profile-menu {
+    position: absolute;
+    right: 0;
+    top: 46px;
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 10px;
+    min-width: 200px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    list-style: none;
+    padding: 8px 0;
+    display: none;
+    z-index: 999;
+}
+
+.profile-menu li a {
+    display: block;
+    padding: 10px 16px;
+    font-size: 14px;
+    color: #2B2B2B;
+    text-decoration: none;
+}
+
+.profile-menu li a:hover {
+    background-color: #F8F9FA;
+}
+
+.profile-menu .divider {
+    height: 1px;
+    background-color: #E0E0E0;
+    margin: 6px 0;
+}
+
+.profile-menu .logout {
+    color: #EA8217;
+    font-weight: 600;
+}
+
+/* termina no modificar, estilos del dropdown--------------------------------------------- */
+
 
 /* ESTILOS PARA EL FILTRO DE BÚSQUEDA  */
 .search-filters {
@@ -655,4 +718,204 @@ header {
 
 .social-links a:hover {
     color: #EA8217;
+}
+
+
+
+
+/* ======================================================
+   RESPONSIVE DESIGN – AVENTURA GO
+   ====================================================== */
+
+/* =======================
+   TABLETS (≤ 992px)
+   ======================= */
+@media (max-width: 992px) {
+
+    /* NAV */
+    .navbar-nav {
+        gap: 18px;
+    }
+
+    .navbar-logo {
+        width: 130px;
+    }
+
+    /* FILTROS */
+    .filters-row {
+        padding: 15px 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .filter-item {
+        min-width: 220px;
+    }
+
+    /* TARJETA INFO */
+    .detalle span {
+        position: static;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+
+    .linea-gradiente {
+        display: none;
+    }
+
+    /* GALERÍA */
+    .img-grande {
+        min-height: 320px;
+    }
+
+    /* BOTÓN FLOTANTE */
+    .btn-ver-mas {
+        margin-left: 0;
+        font-size: 20px;
+        padding: 12px 20px;
+    }
+}
+
+
+/* =======================
+   MOBILE (≤ 768px)
+   ======================= */
+@media (max-width: 768px) {
+
+    /* HEADER */
+    .menu-toggle {
+        display: block;
+    }
+
+    .navbar-nav {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: #FFFFFF;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+        display: none;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .navbar-nav.active {
+        display: flex;
+    }
+
+    /* BIENVENIDA */
+    .Bienvenido {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+
+    /* FILTROS */
+    .search-filters {
+        padding: 10px;
+    }
+
+    .filters-row {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+        margin-top: 70px;
+    }
+
+    .filter-item {
+        width: 100%;
+        min-width: auto;
+    }
+
+    /* CONTENIDO */
+    .main-content {
+        padding: 20px 10px;
+    }
+
+    .page-title {
+        font-size: 26px;
+    }
+
+    .page-subtitle {
+        font-size: 16px;
+    }
+
+    /* TARJETA */
+    .targeta {
+        padding: 20px;
+    }
+
+    .detalle h2 {
+        font-size: 22px;
+    }
+
+    /* GALERÍA */
+    .img-grande {
+        min-height: 260px;
+    }
+
+    .img-mediana,
+    .img-pequena {
+        height: 160px;
+    }
+
+    /* BOTÓN FLOTANTE */
+    .button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        top: auto;
+    }
+
+    .btn-ver-mas {
+        font-size: 18px;
+        padding: 12px 18px;
+    }
+}
+
+
+/* =======================
+   SMALL MOBILE (≤ 480px)
+   ======================= */
+@media (max-width: 480px) {
+
+    /* TEXTO */
+    .page-title {
+        font-size: 22px;
+    }
+
+    .page-subtitle {
+        font-size: 14px;
+    }
+
+    /* TARJETA */
+    .detalle h2 {
+        font-size: 20px;
+    }
+
+    .datos p:last-child {
+        font-size: 20px;
+    }
+
+    /* MAPA */
+    .mapa-contenedor {
+        height: 280px;
+    }
+
+    /* FOOTER */
+    .footer-bottom .row {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .footer-top h2 {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .footer-top a {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
 }

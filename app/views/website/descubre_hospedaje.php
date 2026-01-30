@@ -8,6 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Descubre Tu Hospedaje</title>
 
+  <link rel="icon" type="image/png" href="public/assets/website_externos/index/img/FAVICON.png">
+
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -57,7 +59,7 @@
           </div>
 
         </div>
-        <button class="principal">Atrás</button>
+        <a href="/aventura_go/descubre-hospedaje" class="btn-login">Atrás</a>
 
       </div>
     </nav>
