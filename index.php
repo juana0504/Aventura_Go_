@@ -164,14 +164,22 @@ switch ($request) {
 
 
 
+
+
+
+
+
+
+
+
+
+
     // ===== TICKETS ADMIN =====
     case '/administrador/tickets':
         require BASE_PATH . '/app/controllers/administrador/TicketAdminController.php';
         $controller = new TicketAdminController();
         $controller->listar();
         break;
-
-
 
     case '/administrador/tickets/responder':
         require BASE_PATH . '/app/controllers/administrador/TicketAdminController.php';
@@ -187,20 +195,11 @@ switch ($request) {
 
     case '/administrador/consultar-tickets':
         require BASE_PATH . '/app/views/dashboard/administrador/consultar_tickets.php'; //consultar tiquets enviados por el usuario
-    case '/administrador/tickets/cerrar':
-        require BASE_PATH . '/app/controllers/administrador/TicketAdminController.php';
-        $controller = new TicketAdminController();
-        $controller->cerrar();
         break;
 
 
     //fin rutas administrador
 
-
-
-
-
-    //fin rutas administrador
 
     // ===================================================================================================
     //                                     RUTAS PROVEEDOR TURISTICO
@@ -221,24 +220,6 @@ switch ($request) {
     case '/proveedor/consultar-actividad':
         require BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php'; //consulta la tabla con las actividades turisticas registradas
         break;
-
-    case '/proveedor/consultar-actividad-id':
-        require BASE_PATH . '/app/controllers/proveedor_turistico/actividadDetalle.php';
-        break;
-
-    case '/proveedor/actividadTuristica':
-        require BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php';
-        break;
-
-
-    case '/proveedor/consultar-actividad-id':
-        require BASE_PATH . '/app/controllers/proveedor_turistico/actividadDetalle.php';
-        break;
-
-    case '/proveedor/actividadTuristica':
-        require BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php';
-        break;
-
 
     case '/proveedor/pdf-actividades':
         require_once BASE_PATH . '/app/controllers/proveedor_turistico/actividadPdfController.php';
@@ -288,25 +269,35 @@ switch ($request) {
 
 
 
-    // ===== TICKETS PROVEEDOR =====
+    case '/proveedor_turistico/listar':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
+        $controller = new TicketProveedorController();
+        $controller->listar();
+        break;
+
+    case '/proveedor_turistico/crear_ticket':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
+        $controller = new TicketProveedorController();
+        $controller->crear();
+        break;
+
+    case '/proveedor_turistico/guardar_ticket':
+        require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
+        $controller = new TicketProveedorController();
+        $controller->guardar();
+        break;
+
     case '/proveedor/tickets':
         require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
-        (new TicketProveedorController())->listar();
+        $controller = new TicketProveedorController();
+        $controller->listar();
         break;
 
-    case '/proveedor/tickets/crear':
+    case '/proveedor_turistico/ticket/ver':
         require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
-        (new TicketProveedorController())->crear();
+        $controller = new TicketProveedorController();
+        $controller->ver($_GET['id'] ?? null);
         break;
-
-    case '/proveedor/tickets/guardar':
-        require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
-        (new TicketProveedorController())->guardar();
-        break;
-
-
-
-
 
 
     // ================= FIN RUTAS PROVEEDOR TURISTICO =================
@@ -405,7 +396,7 @@ switch ($request) {
         require_once BASE_PATH . '/app/controllers/website/websiteController.php';
         break;
 
-
+        
 
 
 
@@ -432,6 +423,26 @@ switch ($request) {
         break;
 
 
+
+    
+
+    case '/turista/tickets':
+        require BASE_PATH . '/app/controllers/turista/TicketTuristaController.php';
+        $controller = new TicketTuristaController();
+        $controller->listar();
+        break;
+
+    case '/turista/crear_ticket':
+        require BASE_PATH . '/app/controllers/turista/TicketTuristaController.php';
+        $controller = new TicketTuristaController();
+        $controller->crear();
+        break;
+
+    case '/turista/guardar_ticket':
+        require BASE_PATH . '/app/controllers/turista/TicketTuristaController.php';
+        $controller = new TicketTuristaController();
+        $controller->guardar();
+        break;
 
 
 
