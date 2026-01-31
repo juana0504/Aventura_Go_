@@ -407,6 +407,26 @@ switch ($request) {
 
 
 
+    
+
+    case '/turista/tickets':
+        require BASE_PATH . '/app/controllers/turista/TicketTuristaController.php';
+        $controller = new TicketTuristaController();
+        $controller->listar();
+        break;
+
+    case '/turista/crear_ticket':
+        require BASE_PATH . '/app/controllers/turista/TicketTuristaController.php';
+        $controller = new TicketTuristaController();
+        $controller->crear();
+        break;
+
+    case '/turista/guardar_ticket':
+        require BASE_PATH . '/app/controllers/turista/TicketTuristaController.php';
+        $controller = new TicketTuristaController();
+        $controller->guardar();
+        break;
+
 
 
 
