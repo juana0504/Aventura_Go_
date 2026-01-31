@@ -324,4 +324,32 @@ class ActividadTuristica
 
         return $actividad;
     }
+
+
+
+    // SE OBTIENE 1 SOLA ACTIVIDAD PARA TOUR ESCOGIDO
+    public function obtenerActividadPorId($id)
+    {
+        $sql = "SELECT * FROM actividad WHERE id_actividad = :id LIMIT 1";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function descontarCupos($id_actividad, $cantidad)
+    {
+        $sql = "
+        UPDATE actividad
+        SET cupos = cupos - :cantidad
+        WHERE id_actividad = :id_actividad
+          AND cupos >= :cantidad
+    ";
+
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':cantidad', $cantidad, PDO::PARAM_INT);
+        $stmt->bindParam(':id_actividad', $id_actividad, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 }

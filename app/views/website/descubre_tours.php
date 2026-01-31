@@ -71,13 +71,9 @@ $actividades = $actividadModel->listarActividadesPublicas();
                         </div>
                     <?php else: ?>
 
-                        <a href="/aventura_go/login" class="btn-login">
-                            Ingresa
-                        </a>
+                        <a href="/aventura_go/login" class="btn-login">Ingresa</a>
 
-                        <a href="/aventura_go/registrarse" class="btn-register">
-                            Regístrate
-                        </a>
+                        <a href="/aventura_go/registrarse" class="btn-register">Regístrate</a>
 
                     <?php endif; ?>
 
@@ -86,9 +82,6 @@ $actividades = $actividadModel->listarActividadesPublicas();
                     </div>
 
                 </div>
-
-                <!-- <a href="/aventura_go" class="btn-login">Atrás</a> -->
-
             </div>
         </nav>
     </header>

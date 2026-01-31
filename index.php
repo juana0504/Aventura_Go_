@@ -348,16 +348,14 @@ switch ($request) {
         require BASE_PATH . '/app/views/website/descubre_tours.php';
         break;
 
-    case '/website/tour_escogido':
-        require_once BASE_PATH . '/app/controllers/website/WebsiteController.php';
-        (new WebsiteController())->tourEscogido();
-        break;
-
-
     case '/turista/dashboard':
         require BASE_PATH . '/app/views/dashboard/turista/dashboard.php';
         break;
 
+    case '/website/tour_escogido':
+        require_once BASE_PATH . '/app/controllers/website/WebsiteController.php';
+        (new WebsiteController())->tourEscogido();
+        break;
 
     case '/turista/registrar-actividad':
         require BASE_PATH . '/app/views/dashboard/turista/registrar_reserva.php';
@@ -373,6 +371,25 @@ switch ($request) {
 
     case '/turista/registrar-reserva':
         require_once BASE_PATH . '/app/controllers/turista/registrarReservaController.php';
+        break;
+
+    case '/turista/ver-reservas':
+        require BASE_PATH . '/app/controllers/turista/verReservaController.php';
+        break;
+
+    case '/turista/crear-reserva':
+        require_once BASE_PATH . '/app/controllers/turista/crearReservaController.php';
+        break;
+
+
+
+    case '/turista/reserva-detalle':
+        require_once BASE_PATH . '/app/controllers/turista/verReservaDetalle.php';
+        break;
+
+    case '/turista/pdf-reservas':
+        require_once BASE_PATH . '/app/controllers/turista/verReservaPdfController.php';
+        generarPdfReservasTurista();
         break;
 
     case '/seleccionar-actividad':
