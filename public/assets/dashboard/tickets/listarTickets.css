@@ -23,12 +23,27 @@
     color: var(--color-text);
 }
 
+
+
+/* BUSCA ESTO EN TU CSS Y REEMPLÁZALO */
 #listar-tickets .info, #admin-dashboard .info {
-    padding: 40px;
-    /* Usamos un margin flexible para evitar colisiones con el sidebar */
-    max-width: 1095px;
-    margin: 0 auto;
-    margin-right: 3px;
+    padding: 20px 40px; /* Reducimos un poco el padding superior */
+    width: 100%;        /* Que ocupe todo el espacio disponible */
+    margin: 0;          /* Quitamos el centrado automático */
+}
+
+/* ASEGÚRATE DE QUE EL CONTENEDOR PRINCIPAL SEA FLEX */
+#listar-tickets {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--color-bg-light) !important;
+}
+
+.contenido-principal {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
 }
 
 /* =========================================
@@ -168,3 +183,28 @@ h1::after, h2::after {
     border-top-right-radius: 25px !important;
     padding: 25px !important;
 }
+
+
+
+
+        /* ESTO ES LO QUE SOLUCIONA EL DESPLAZAMIENTO */
+        .layout-wrapper {
+            display: flex;
+            width: 100%;
+        }
+
+        .main-content {
+        flex-grow: 1;
+        /* CAMBIA ESTE VALOR: Prueba con 280px, 300px o más hasta que quede perfecto */
+        margin-left: 280px; 
+        min-height: 100vh;
+        background-color: #F4F7F9;
+        transition: margin-left 0.3s ease; /* Esto hará que el cambio se vea suave */
+    }
+
+        /* Ajuste para móviles: si la pantalla es pequeña, quitamos el margen */
+        @media (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+            }
+        }
