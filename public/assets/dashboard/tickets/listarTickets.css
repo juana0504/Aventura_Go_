@@ -186,25 +186,38 @@ h1::after, h2::after {
 
 
 
+/* =========================================
+   RESETEO Y CONTENEDOR (AJUSTE DE POSICIÓN)
+========================================= */
+#listar-tickets {
+    display: flex; /* Establece el panel y el contenido como columnas */
+    min-height: 100vh;
+    background-color: var(--color-bg-light) !important;
+}
 
-        /* ESTO ES LO QUE SOLUCIONA EL DESPLAZAMIENTO */
-        .layout-wrapper {
-            display: flex;
-            width: 100%;
-        }
+.contenido-principal {
+    flex-grow: 1; /* Ocupa el resto de la pantalla */
+    display: flex;
+    flex-direction: column; /* Apila el buscador y luego la info (tabla) */
+    
+    /* IMPORTANTE: Ajusta este margen al ancho de tu panel izquierdo. 
+       Si tu panel es más ancho, sube este valor (ej. 280px o 300px).
+    */
+    margin-left: 260px; 
+    
+    width: calc(100% - 260px); /* Asegura que el ancho no exceda la pantalla */
+    overflow-x: hidden;
+}
 
-        .main-content {
-        flex-grow: 1;
-        /* CAMBIA ESTE VALOR: Prueba con 280px, 300px o más hasta que quede perfecto */
-        margin-left: 280px; 
-        min-height: 100vh;
-        background-color: #F4F7F9;
-        transition: margin-left 0.3s ease; /* Esto hará que el cambio se vea suave */
-    }
+#listar-tickets .info, #admin-dashboard .info {
+    padding: 20px 40px;
+    width: 100%;
+    margin: 0; /* Elimina el margin: 0 auto para que no se centre y choque con el panel */
+}
 
-        /* Ajuste para móviles: si la pantalla es pequeña, quitamos el margen */
-        @media (max-width: 768px) {
-            .main-content {
-                margin-left: 0;
-            }
-        }
+/* Asegura que el buscador no tenga posiciones absolutas que lo saquen del flujo */
+.buscador-turista {
+    width: 100%;
+    position: relative; 
+    margin: 0;
+}
