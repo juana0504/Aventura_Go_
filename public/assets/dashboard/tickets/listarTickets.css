@@ -23,12 +23,27 @@
     color: var(--color-text);
 }
 
+
+
+/* BUSCA ESTO EN TU CSS Y REEMPLÁZALO */
 #listar-tickets .info, #admin-dashboard .info {
-    padding: 40px;
-    /* Usamos un margin flexible para evitar colisiones con el sidebar */
-    max-width: 1095px;
-    margin: 0 auto;
-    margin-right: 3px;
+    padding: 20px 40px; /* Reducimos un poco el padding superior */
+    width: 100%;        /* Que ocupe todo el espacio disponible */
+    margin: 0;          /* Quitamos el centrado automático */
+}
+
+/* ASEGÚRATE DE QUE EL CONTENEDOR PRINCIPAL SEA FLEX */
+#listar-tickets {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--color-bg-light) !important;
+}
+
+.contenido-principal {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
 }
 
 /* =========================================
@@ -167,4 +182,42 @@ h1::after, h2::after {
     border-top-left-radius: 25px !important;
     border-top-right-radius: 25px !important;
     padding: 25px !important;
+}
+
+
+
+/* =========================================
+   RESETEO Y CONTENEDOR (AJUSTE DE POSICIÓN)
+========================================= */
+#listar-tickets {
+    display: flex; /* Establece el panel y el contenido como columnas */
+    min-height: 100vh;
+    background-color: var(--color-bg-light) !important;
+}
+
+.contenido-principal {
+    flex-grow: 1; /* Ocupa el resto de la pantalla */
+    display: flex;
+    flex-direction: column; /* Apila el buscador y luego la info (tabla) */
+    
+    /* IMPORTANTE: Ajusta este margen al ancho de tu panel izquierdo. 
+       Si tu panel es más ancho, sube este valor (ej. 280px o 300px).
+    */
+    margin-left: 260px; 
+    
+    width: calc(100% - 260px); /* Asegura que el ancho no exceda la pantalla */
+    overflow-x: hidden;
+}
+
+#listar-tickets .info, #admin-dashboard .info {
+    padding: 20px 40px;
+    width: 100%;
+    margin: 0; /* Elimina el margin: 0 auto para que no se centre y choque con el panel */
+}
+
+/* Asegura que el buscador no tenga posiciones absolutas que lo saquen del flujo */
+.buscador-turista {
+    width: 100%;
+    position: relative; 
+    margin: 0;
 }

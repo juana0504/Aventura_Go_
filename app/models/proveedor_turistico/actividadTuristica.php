@@ -168,27 +168,31 @@ class ActividadTuristica
     public function actualizarActividad($data)
     {
         $sql = "UPDATE actividad SET
-                    nombre      = :nombre,
-                    id_ciudad   = :id_ciudad,
-                    ubicacion   = :ubicacion,
-                    descripcion = :descripcion,
-                    cupos       = :cupos,
-                    precio      = :precio,
-                    estado      = :estado
-                WHERE id_actividad = :id_actividad";
+            nombre      = :nombre,
+            id_ciudad   = :id_ciudad,
+            ubicacion   = :ubicacion,
+            descripcion = :descripcion,
+            cupos       = :cupos,
+            precio      = :precio,
+            estado      = :estado
+        WHERE id_actividad = :id_actividad
+        AND id_proveedor = :id_proveedor";
+    
 
         $stmt = $this->conexion->prepare($sql);
 
         return $stmt->execute([
             ':nombre'        => $data['nombre'],
-            ':id_ciudad'    => $data['id_ciudad'],
+            ':id_ciudad'     => $data['id_ciudad'],
             ':ubicacion'     => $data['ubicacion'],
             ':descripcion'   => $data['descripcion'],
             ':cupos'         => $data['cupos'],
             ':precio'        => $data['precio'],
             ':estado'        => $data['estado'],
-            ':id_actividad'  => $data['id_actividad']
+            ':id_actividad'  => $data['id_actividad'],
+            ':id_proveedor'  => $data['id_proveedor']
         ]);
+
     }
 
 
@@ -212,7 +216,7 @@ class ActividadTuristica
            AND img.es_principal = 1
         WHERE a.estado = 'ACTIVO'
         ORDER BY a.created_at DESC
-    ";
+        ";
 
         $stmt = $this->conexion->prepare($sql);
         $stmt->execute();
@@ -227,7 +231,7 @@ class ActividadTuristica
             $sql = "DELETE FROM actividad WHERE id_actividad = :id_actividad";
 
             $stmt = $this->conexion->prepare($sql);
-            $stmt->bindParam(':id_actividad', $id, PDO::PARAM_INT);
+            $stmt->bindParam(':id_actividad', $id);
 
             return $stmt->execute();
         } catch (PDOException $e) {
@@ -236,23 +240,34 @@ class ActividadTuristica
         }
     }
 
-    public function listarTodas()
+    public function listar($id_proveedor)
     {
-        $sql = "
-        SELECT 
+        try {
+            $sql = "SELECT 
             a.*,
-            c.nombre AS ciudad
+            c.nombre AS destino,
+            img.imagen AS imagen_principal
         FROM actividad a
         INNER JOIN ciudades c 
             ON a.id_ciudad = c.id_ciudad
+        LEFT JOIN actividad_imagen img 
+            ON img.id_actividad = a.id_actividad
+           AND img.es_principal = 1
+        WHERE a.id_proveedor = :id_proveedor
         ORDER BY a.created_at DESC
-    ";
+        ";
 
-        $stmt = $this->conexion->prepare($sql);
-        $stmt->execute();
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':id_proveedor', $id_proveedor, PDO::PARAM_INT);
+            $stmt->execute();
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error en actividad::listar -> " . $e->getMessage());
+            return [];
+        }
     }
+
 
 
 

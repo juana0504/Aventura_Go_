@@ -1,5 +1,8 @@
 <?php
 require_once BASE_PATH . '/app/helpers/session_proveedor.php';
+require_once BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php';
+
+$datos =listarActividades();
 
 ?>
 
@@ -103,8 +106,8 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                         </thead>
 
                         <tbody>
-                            <?php if (!empty($actividades)): ?>
-                                <?php foreach ($actividades as $actividad): ?>
+                            <?php if (!empty($datos)): ?>
+                                <?php foreach ($datos as $actividad): ?>
                                     <tr>
                                         <!-- Imagen -->
                                         <td>
@@ -148,11 +151,11 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                                                 <i class="bi bi-eye"></i>
                                             </button>
 
-                                            <a href="<?= BASE_URL ?>/proveedor/editar-actividad?id=<?= $proveedor['id_actividad'] ?>" class="btn-accion btn-editar">
+                                            <a href="<?= BASE_URL ?>/proveedor/editar-actividad?id=<?= $actividad['id_actividad'] ?>" class="btn-accion btn-editar">
                                                 <i class="bi bi-pencil"></i>
                                             </a>
 
-                                            <a href="<?= BASE_URL ?>/proveedor/eliminar-actividad?accion=eliminar&id=<?= $proveedor['id_actividad'] ?>" class="btn-accion btn-eliminar">
+                                            <a href="<?= BASE_URL ?>/proveedor/eliminar-actividad?accion=eliminar&id=<?= $actividad['id_actividad'] ?>" class="btn-accion btn-eliminar">
                                                 <i class="bi bi-trash"></i>
                                             </a>
                                         </td>

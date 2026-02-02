@@ -34,6 +34,11 @@ switch ($method) {
 
         $accion = $_GET['accion'] ?? '';
 
+        if ($accion === 'eliminar') {
+            eliminaractividad($_GET['id']);
+            exit;
+        }
+
         if ($accion === 'activar') {
             activarActividad($_GET['id']);
             exit;
@@ -51,14 +56,11 @@ switch ($method) {
             exit;
         }
 
-        // 👇 ESTA ES LA RUTA DE "CONSULTAR ACTIVIDADES"
-        listarActividadesProveedor();
-        exit;
-
+    
         if (isset($_GET['id'])) {
             listarActividadId($_GET['id']);
         } else {
-            listarActividadesProveedor();
+            listarActividades();
         }
 
         break;
@@ -229,7 +231,7 @@ function actualizarActividad()
 {
     // DATOS DEL FORMULARIO
     $id_actividad   = $_POST['id_actividad'] ?? '';
-    $id_proveedor   = $_SESSION['user']['id_proveedor'] ?? null;
+    $id_proveedor   = $_POST['id_proveedor'] ?? '';
     $nombre         = $_POST['nombre'] ?? '';
     $id_ciudad      = $_POST['id_ciudad'] ?? '';
     $ubicacion      = $_POST['ubicacion'] ?? '';
@@ -240,8 +242,6 @@ function actualizarActividad()
 
     // VALIDACIONES
     if (
-        empty($id_actividad) ||
-        empty($id_proveedor) ||
         empty($nombre) ||
         empty($id_ciudad) ||
         empty($ubicacion) ||
@@ -257,6 +257,7 @@ function actualizarActividad()
         exit;
     }
 
+    $actividadModel = new ActividadTuristica();
     // DATA PARA EL MODELO
     $data = [
         'id_actividad' => $id_actividad,
@@ -271,7 +272,6 @@ function actualizarActividad()
     ];
 
     // MODELO
-    $actividadModel = new ActividadTuristica();
     $resultado = $actividadModel->actualizarActividad($data);
 
     // RESPUESTA
@@ -293,20 +293,20 @@ function actualizarActividad()
 
 
 
-function listarActividadesProveedor()
+function listarActividades()
 {
-    require_once __DIR__ . '/../../models/proveedor_turistico/Proveedor.php';
-
+     require_once __DIR__ . '/../../models/proveedor_turistico/Proveedor.php';
     $proveedorModel = new Proveedor();
     $id_usuario = $_SESSION['user']['id_usuario'];
 
     $id_proveedor = $proveedorModel->obtenerIdProveedorPorUsuario($id_usuario);
 
     $actividadModel = new ActividadTuristica();
-    $actividades = $actividadModel->listarPorProveedor($id_proveedor);
+    $actividad = $actividadModel->listarPorProveedor($id_proveedor);
 
-    require_once __DIR__ . '/../../views/dashboard/proveedor_turistico/consultar_actividad_turistica.php';
+    return $actividad;
 }
+
 
 
 
@@ -369,7 +369,7 @@ function eliminaractividad($id)
     $resultado = $objActividad->eliminar($id);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Eliminación exitosa', 'actividad eliminada.', '/aventura_go/proveedor/consultar-turista');
+        mostrarSweetAlert('success', 'Eliminación exitosa', 'actividad eliminada.', '/aventura_go/proveedor/consultar-actividad');
     } else {
         mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar la actividad.');
     }
