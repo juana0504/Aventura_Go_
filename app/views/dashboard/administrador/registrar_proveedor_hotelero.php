@@ -28,10 +28,17 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     <!-- Icono de bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <!-- Estilos CSS -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_hotelero.css">
+    <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
 
+    <!-- Componentes comunes -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel.css">
+
+    <!-- Estilos CSS (siempre al final)-->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_hotelero.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_turistico.css">
+
 
 </head>
 
@@ -56,6 +63,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
             <form id="formProveedor" action="<?= BASE_URL ?>/administrador/guardar-proveedor-hotelero" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="accion" value="registrar">
 
+                <!-- botones indicadores superiores del wizard -->
                 <div class="wizard-container">
                     <div class="wizard-content">
                         <div class="wizard-header">
@@ -69,7 +77,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             </div>
                             <div class="step" data-step="2">
                                 <div class="step-circle">2</div>
-                                <div class="step-label">Servicios</div>
+                                <div class="step-label">Representante</div>
                             </div>
                             <div class="step" data-step="3">
                                 <div class="step-circle">3</div>
@@ -77,24 +85,22 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             </div>
                             <div class="step" data-step="4">
                                 <div class="step-circle">4</div>
-                                <div class="step-label">Representante</div>
+                                <div class="step-label">Tipo de habitación</div>
                             </div>
                             <div class="step" data-step="5">
                                 <div class="step-circle">5</div>
-                                <div class="step-label">Confirmación</div>
+                                <div class="step-label">Documentación</div>
                             </div>
                         </div>
 
+
+                        <!-- CONTENIUDO DE LOS FIRMULARIOS DE INGRESO -->
                         <div class="wizard-content">
                             <!-- Paso 1 -->
                             <div class="step-content active" data-step="1">
                                 <h4 class="mb-4"><i class="fas fa-building text-primary"></i> Información Básica del Proveedor Hotelero</h4>
 
                                 <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Logo</label>
-                                        <input type="file" accept=".jpg, .png, .jpeg" name="foto" class="form-control" id="foto" required>
-                                    </div>
                                     <div class="col-md-6 mb-3">
                                         <!-- Nombre establecimiento -->
                                         <label class="form-label" for="nombre_establecimiento">Nombre del establecimiento:</label>
@@ -108,6 +114,10 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Teléfono *</label>
                                         <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="+57 300 123 4567" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Logo</label>
+                                        <input type="file" accept=".jpg, .png, .jpeg" name="logo" class="form-control" id="logo" required>
                                     </div>
 
                                     <h4 class="mb-4"><i class="bi bi-file-earmark-medical-fill"></i> Tipo de establecimiento</h4>
@@ -138,6 +148,8 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 </div>
                             </div>
 
+
+
                             <div class="step-content" data-step="2">
                                 <h4 class="mb-4"><i class="bi bi-person-fill"></i> Representante</h4>
                                 <div class="row">
@@ -145,6 +157,16 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                         <label class="form-label">Nombre del Representante *</label>
                                         <input type="text" name="nombre_representante" class="form-control" id="nombre_repre" placeholder="Juan Pérez" required>
                                     </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Tipo de documento *</label>
+                                        <select name="tipo_documento" class="form-select" id="tipo_documento">
+                                            <option value="" disabled selected hidden>Tipo de documento</option>
+                                            <option value="CC">CC</option>
+                                            <option value="CE">CE</option>
+                                            <option value="Pasaporte">Pasaporte</option>
+                                        </select>
+                                    </div>
+
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Identificacion *</label>
                                         <input type="tel" name="identificacion_representante" class="form-control" id="identiificacion_repre" placeholder="N.°" required>
@@ -164,16 +186,23 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 </div>
                             </div>
 
+
+
                             <div class="step-content" data-step="3">
                                 <h4 class="mb-4"><i class="fas fa-map-marker-alt text-primary"></i> Ubicación</h4>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Departamento *</label>
-                                        <input type="text" name="departamento" class="form-control" id="departamento" placeholder="Juan Pérez" required>
+                                        <label for="departamento">Departamento *</label>
+                                        <select name="departamento" id="departamento" class="form-control" required>
+                                            <option value="">Seleccione un departamento</option>
+                                        </select>
+
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Ciudad *</label>
-                                        <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ej: Medellín" required>
+                                        <label for="ciudad">Ciudad *</label>
+                                        <select name="id_ciudad" id="id_ciudad" class="form-control" required>
+                                            <option value="">Seleccione una ciudad</option>
+                                        </select>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Dirección *</label>
@@ -181,6 +210,8 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     </div>
                                 </div>
                             </div>
+
+
 
                             <!-- Tipo establecimiento (ENUM) -->
                             <div class="step-content" data-step="4">
@@ -190,25 +221,25 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Estandar" value="Estandar">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_habitacion[]" id="Estandar" value="Estandar">
                                                     <label class="form-check-label">Estándar</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Doble" value="Doble">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_habitacion[]" id="Doble" value="Doble">
                                                     <label class="form-check-label">Doble</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Suite" value="Suite">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_habitacion[]" id="Suite" value="Suite">
                                                     <label class="form-check-label">Suite</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Familiar" value="Familiar">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_habitacion[]" id="Familiar" value="Familiar">
                                                     <label class="form-check-label">Familiar</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <input class="form-check-input" type="checkbox" name="tipo_habitacion[]" id="Premium" value="Premium">
                                                     <label class="form-check-label">Premium</label>
                                                 </div>
                                             </div>
@@ -216,86 +247,122 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Número máximo de huéspedes *</label>
-                                        <input type="tel" name="departamento" class="form-control" id="departamento" placeholder="Juan Pérez" required>
+                                        <input type="tel" name="max_huesped" class="form-control" id="max_huesped" placeholder="ej: 40" required>
                                     </div>
+
 
                                     <h4 class="mb-4"><i class="bi bi-file-earmark-medical-fill"></i> Servicios incluidos</h4>
                                     <div class="col-md-12 mb-4">
                                         <div class="row">
-                                            <div class="col-md-6">
+
+                                            <div class="col-md-4">
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Estandar" value="Estandar">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="WiFi" value="WiFi">
                                                     <label class="form-check-label">WiFi</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Doble" value="Doble">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Parqueadero" value="Parqueadero">
                                                     <label class="form-check-label">Parqueadero</label>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Suite" value="Suite">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Piscina" value="Piscina">
                                                     <label class="form-check-label">Piscina</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Familiar" value="Familiar">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Restaurante" value="Restaurante">
                                                     <label class="form-check-label">Restaurante</label>
                                                 </div>
+                                            </div>
+
+                                            <div class="col-md-4">
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Bar" value="Bar">
                                                     <label class="form-check-label">Bar</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Spa" value="Spa">
                                                     <label class="form-check-label">Spa</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Pet Friendly" value="Pet Friendly">
                                                     <label class="form-check-label">Pet Friendly</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Servicio al cuarto" value="Servicio al cuarto">
                                                     <label class="form-check-label">Servicio al cuarto</label>
                                                 </div>
+                                            </div>
+
+                                            <div class="col-md-4">
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Transporte" value="Transporte">
                                                     <label class="form-check-label">Transporte</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Desayuno incluido" value="Desayuno incluido">
                                                     <label class="form-check-label">Desayuno incluido</label>
                                                 </div>
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" name="tipo_establecimiento[]" id="Premium" value="Premium">
+                                                    <input class="form-check-input" type="checkbox" name="servicio_incluido[]" id="Accesibilidad" value="Accesibilidad">
                                                     <label class="form-check-label">Accesibilidad</label>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>  
+                                    </div>
                                 </div>
                             </div>
+
+
 
                             <div class="step-content" data-step="5">
                                 <h4 class="mb-4"><i class="fas fa-map-marker-alt text-primary"></i> Documentación obligatoria</h4>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Departamento *</label>
-                                        <input type="text" name="departamento" class="form-control" id="departamento" placeholder="Juan Pérez" required>
+                                        <label class="form-label">NIT/RUT *</label>
+                                        <input type="text" name="nit_rut" class="form-control" id="nit" placeholder="123456789-0" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Ciudad *</label>
-                                        <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ej: Medellín" required>
+                                        <label class="form-label">Camara de Comercio *</label>
+                                        <input type="text" name="camara_comercio" class="form-control" id="camara_comercio" required>
                                     </div>
-                                    <div class="col-md-12 mb-3">
-                                        <label class="form-label">Dirección *</label>
-                                        <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Calle 123 #45-67" required>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Licencia *</label>
+                                        <input type="text" name="licencia" class="form-control" id="licencia" required>
+                                    </div>
+
+                                    <h4 class="mb-4"><i class="bi bi-file-earmark-medical-fill"></i> Tipo de pago</h4>
+                                    <div class="col-md-12 mb-4">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="metodo_pago[]" id="Tarjeta de Crédito" value="Tarjeta de Crédito">
+                                                    <label class="form-check-label">Tarjeta de Crédito</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="metodo_pago[]" id="Tarjeta Débito" value="Tarjeta Débito">
+                                                    <label class="form-check-label">Tarjeta Débito</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="metodo_pago[]" id="PSE" value="PSE">
+                                                    <label class="form-check-label">PSE</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" name="metodo_pago[]" id="Nequi" value="Nequi">
+                                                    <label class="form-check-label">Nequi</label>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
+
+
                         <div class="wizard-actions">
-                            <button class="btn btn-secondary-wizard" id="prevBtn" style="display:none;" onclick="changeStep(-1)">
+                            <button class="btn btn-secondary-wizard1" id="prevBtn" style="display:none;" onclick="changeStep(-1)">
                                 <i class="fas fa-arrow-left"></i> Anterior
                             </button>
 
@@ -311,6 +378,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
     <!-- Bootstrap -->
     <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor.js"></script>
+    <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/departamento.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>

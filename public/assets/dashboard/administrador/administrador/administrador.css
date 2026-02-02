@@ -9,10 +9,6 @@ h1 h2 h3 h4 h5 h6 {
     /*tipografia titulos*/
 }
 
-p a button input {
-    --font-text: 'Lato', sans-serif;
-    /*tipografia textos*/
-}
 
 * {
     margin: 0;
@@ -24,216 +20,13 @@ body {
     background-color: #f5f5f5;
 }
 
-/* Layout principal */
-#listado {
-    display: flex;
-    min-height: 100vh;
-}
-
-/* ========== PANEL LATERAL ========== */
-.panel {
-    width: 280px;
-    background-color: #2D4059;
-    padding: 30px 20px;
-    display: block;
-}
-
-.panel>img {
-    width: 150px;
-    margin: 0 auto 40px auto;
-    display: block;
-}
-
-/* Items del menú */
-.items{
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-#btn-panel {
-    background: transparent;
-    color: #ffffff;
-    padding: 12px 15px;
-    border-radius: 8px;
-    transition: all .3s ease;
-    border: none;
-}
-
-.dropdown-toggle-aventura::after{
-    display: inline-block;
-    margin-bottom: 20px;
-    margin-left: 10px;
-    vertical-align: .255em;
-    content: "";
-    border-top: .3em solid;
-    border-right: .3em solid transparent;
-    border-bottom: 0;
-    border-left: .3em solid transparent;
-}
-
-#menu-panel a{
-    color: #2D4059;
-    text-decoration: none;
-    padding: 10px 20px;
-    font-size: 14px;
-    color: #2D4059;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-#menu-panel a:hover{
-    color: #EA8217;
-    background: #ffffff;
-}
-
-.items a {
-    display: flex;
-    gap: 15px;
-    padding: 12px 15px;
-    color: #ecf0f1;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-.items a:hover {
-    background-color: #34495e;
-}
-
-.items a img {
-    width: 23px;
-    height: 23px;
-}
-
-.items a p {
-    font-size: 14px;
-    font-weight: 600;
-    color: #ffffff;
-}
-
-/* ========== CONTENIDO PRINCIPAL ========== */
-.info {
-    flex-grow: 1;
-    padding: 15px 40px;
-    background-color: #ffffff;
-}
 
 .info #usuario #datos {
     display: inline-block;
     vertical-align: top;
 }
 
-/* ========== BARRA DE BÚSQUEDA ========== */
-form#busqueda {
-    position: relative;
-    padding: 10px 0 20px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-form#busqueda input {
-    background-color: #DEE6F2;
-    height: 40px;
-    border-radius: 11px;
-    width: 600px;
-    border: none;
-    outline: none;
-    font-size: 14px;
-    padding: 8px 8px 8px 45px;
-    margin-bottom: 20px;
-}
-
-form#busqueda .bi-search {
-    position: absolute;
-    bottom: 54px;
-    left: 570px;
-    font-size: 18px;
-    pointer-events: none;
-    color: #95a5a6;
-}
-
-#modoOscuroBtn,
-#notificacionesBtn {
-    margin-bottom: 16px;
-    margin-left: 10px;
-    padding: 7px 20px;
-    background-color: #DEE6F2;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-form#busqueda .bi-moon-fill,
-form#busqueda .bi-bell-fill {
-    color: #000000;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-/* Estilos del dropdown de perfil */
-form#busqueda #perfil {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 20px;
-    background-color: #EA8217;
-    border-radius: 12px;
-    text-decoration: none;
-    color: #ffffff;
-    margin-left: 20px;
-    margin-bottom: 10px;
-}
-
-form#busqueda #perfil img {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-form#busqueda #perfil p {
-    font-weight: 600;
-    font-size: 14px;
-    margin: 0;
-}
-
-form#busqueda #perfil h6 {
-    font-weight: 600;
-    font-size: 16px;
-    margin: 0;
-}
-/* Estilos del dropdown */
-#perfil-dropdown .dropdown-menu {
-    border-radius: 0 0 12px;
-    border: none;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-
-#perfil-dropdown .dropdown-item {
-    padding: 10px 20px;
-    font-size: 14px;
-    color: #2D4059;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-#perfil-dropdown .dropdown-item:hover {
-    background-color: #ffffff;
-    color: #EA8217;
-}
-
-#perfil-dropdown .dropdown-item i {
-    font-size: 16px;
-}
-
-#perfil-dropdown .dropdown-divider {
-    margin: 5px 0;
-}
+/* ==========estilos de  BARRA DE BÚSQUEDA, LOS ESTILOS ESTAN EN PUBLIC/ASSETS/DASHBOARD/LAYOUTS/BUSCADOR_ADMIN.CSS========== */
 
 /* ========== FORMULARIO DE FILTROS ========== */
 .formulario {
@@ -391,6 +184,13 @@ form#busqueda #perfil h6 {
     cursor: pointer;
 }
 
+
+
+
+
+
+
+
 /* ========== RESPONSIVE ========== */
 @media (max-width: 1200px) {
     .formulario {
@@ -398,24 +198,7 @@ form#busqueda #perfil h6 {
     }
 }
 
-@media (max-width: 768px) {
-    #listado {
-        flex-direction: column;
-    }
 
-    .panel {
-        width: 100%;
-    }
-
-    .formulario {
-        grid-template-columns: 1fr;
-    }
-
-    .lista thead tr,
-    .lista tbody tr {
-        grid-template-columns: 1fr;
-    }
-}
 
 /* modo oscuro */
 .modo-oscuro .panel {
@@ -427,7 +210,7 @@ form#busqueda #perfil h6 {
     color: #000000c6;
 }
 
-.modo-oscuro .resumen-reservas{
+.modo-oscuro .resumen-reservas {
     background: #5f5f5f;
 }
 
@@ -757,6 +540,7 @@ form#busqueda #perfil h6 {
     color: #ffffff;
     cursor: pointer;
 }
+
 /* gastos */
 .gastos {
     width: 90%;

@@ -30,7 +30,7 @@ class Recoverypass
                 $nuevaClave = substr($random, 0, 6); // 6 caracteres
 
                 $claveHash = password_hash($nuevaClave, PASSWORD_BCRYPT);
-            
+
                 // Actualizamos la contraseña en la base de datos
                 $actualizar = "UPDATE usuario SET clave = :nuevaClave WHERE id_usuario = :id";
                 $stmtActualizar = $this->conexion->prepare($actualizar);
@@ -45,8 +45,8 @@ class Recoverypass
                 $mail->addAddress($user['email'], $user['nombre']);
 
                 $mail->Subject = "🔒 Tu Nueva Contraseña Temporal para Aventura GO";
-                $mail->isHTML(true); 
-                
+                $mail->isHTML(true);
+
                 // INICIO DEL BLOQUE HTML MEJORADO (Heredoc Corregido)
                 $mail->Body = <<<HTML
 <!DOCTYPE html>
@@ -117,7 +117,6 @@ HTML; // <-- ¡Este identificador debe estar pegado al margen izquierdo!
                 $mail->send();
 
                 return true;
-
             } else {
                 return ['error' => 'Usuario no encontrado o inactivo'];
             }

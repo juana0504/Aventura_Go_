@@ -28,7 +28,7 @@ body {
 }
 
 
-/*  NAVBAR ___________________________________________________________________________________________________________ */
+/*  HEADER NAVBAR ___________________________________________________________________________________________________________ */
 header {
     background-color: var(--color-white);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -52,6 +52,7 @@ header {
 /*LOGO  */
 .navbar-logo {
     margin-left: 0;
+    width: 150px;
 }
 
 /* LINKS PRINCIPALES */
@@ -145,64 +146,246 @@ header {
     cursor: pointer;
 }
 
+/* ===============================
+   BIENVENIDA USUARIO - HEADER
+   =============================== */
 
-
-/* Sección Hero Contactanos______________________________________________________________________________________________ */
-#hero-contactanos {
-    background-color: #ffffff;
-    padding: 60px 0;
+.Bienvenido {
+    background-color: #2D4059;
+    /* azul Aventura Go */
+    color: #FFFFFF;
+    padding: 8px 14px;
+    border-radius: 6px;
     font-family: 'Lato', sans-serif;
-    color: #2B2B2B;
+    font-size: 14px;
+    font-weight: 500;
+    margin-right: 10px;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
 }
 
-/* Contenedor principal de la imagen */
-#hero-contactanos .header-arriba {
+/* Ajuste para que no se pegue al botón salir */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bienvenido strong {
+    font-weight: 700;
+}
+
+.profile-dropdown {
     position: relative;
-    text-align: center;
-    border-radius: 20px;
-    overflow: hidden;
-    margin-bottom: 40px;
 }
 
-#hero-contactanos .header-arriba img {
-    width: 95%;
-    height: 500px;
-    border-radius: 20px;
-    filter: brightness(60%);
-    object-fit: cover;
-    margin-top: 10px;
+.profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #2D4059;
+    color: #FFFFFF;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
 }
 
-/* Título central sobre la imagen */
-#hero-contactanos .header-arriba h1 {
+.profile-btn i {
+    font-size: 16px;
+}
+
+.profile-menu {
     position: absolute;
-    top: 35%;
-    left: 39%;
+    right: 0;
+    top: 46px;
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 10px;
+    min-width: 200px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    list-style: none;
+    padding: 8px 0;
+    display: none;
+    z-index: 999;
+}
+
+.profile-menu li a {
+    display: block;
+    padding: 10px 16px;
+    font-size: 14px;
+    color: #2B2B2B;
+    text-decoration: none;
+}
+
+.profile-menu li a:hover {
+    background-color: #F8F9FA;
+}
+
+.profile-menu .divider {
+    height: 1px;
+    background-color: #E0E0E0;
+    margin: 6px 0;
+}
+
+.profile-menu .logout {
+    color: #EA8217;
+    font-weight: 600;
+}
+
+
+/* SECCIÓN HERO____________________________________________________________________________________________________   */
+#hero {
+    position: relative;
+    margin-left: 0;
+    padding-right: 0;
+    margin-top: 80px;
+}
+
+#hero .carousel {
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    margin: 0 40px;
+}
+
+/* Imágenes del carrusel */
+#hero .carousel-item img {
+    object-fit: cover;
+    filter: brightness(40%);
+    max-height: 700px;
+}
+
+/* Contenido superpuesto */
+#hero .carousel-caption {
+    position: absolute;
+    top: 43%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    text-align: left;
+    color: #FFFFFF;
+    width: 100%;
+    font-family: 'Lato', sans-serif;
+}
+
+/* Titulares principales */
+#hero .carousel-caption h1,
+#hero .carousel-caption h2 {
     font-family: 'Raleway', sans-serif;
     font-weight: 800;
+    line-height: 1.1;
+}
+
+#hero .carousel-caption h1 {
+    font-size: 78px;
+}
+
+#hero .carousel-caption h2 {
+    font-size: 78px;
+    margin-bottom: 20px;
+}
+
+/* Párrafos */
+#hero .carousel-caption p {
+    font-size: 20px;
+    margin-bottom: 10px;
+    line-height: 1.1;
+}
+
+/* === Estilos flechas del carrusel === */
+.carousel-control-prev {
+    width: 40px;
+    height: 20px;
+    top: 50%;
+    transition: all 0.3s ease;
+    font-size: 30px;
+}
+
+
+.carousel-control-next {
+    width: 40px;
+    height: 20px;
+    top: 50%;
+    transition: all 0.3s ease;
+    font-size: 30px;
+
+}
+
+/* Posicionamiento */
+.carousel-control-prev {
+    left: 5px;
+}
+
+.carousel-control-next {
+    right: 5px;
+}
+
+
+
+
+/* Caja de búsqueda */
+#hero .search-box {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 10px 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
+    width: fit-content;
+}
+
+#hero .search-box strong {
+    color: #2B2B2B;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Lato', sans-serif;
+}
+
+#hero .search-btn {
+    background-color: #2D4059;
     color: #FFFFFF;
+    font-size: 14px;
+    padding: 8px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+#hero .search-btn:hover {
+    background-color: #EA8217;
+}
+
+/* Controles del carrusel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(1);
+}
+
+/* Marca “AVENTURA GO” */
+#hero h2.marca {
     font-size: 48px;
-    letter-spacing: 2px;
+    font-weight: 700;
+    position: absolute;
+    bottom: 40px;
+    right: 140px;
+    text-align: right;
+    color: white;
 }
 
-@keyframes palpitar {
 
-    0%,
-    100% {
-        transform: scale(1);
-    }
 
-    50% {
-        transform: scale(1.1);
-    }
-}
 
-.palpitando {
-    animation: palpitar 1.5s infinite ease-in-out;
-}
 
 /* Bloques inferiores */
-#hero-contactanos .hero-info {
+.hero-info {
     background-color: #ffffff;
     border-radius: 2px;
     padding: 15px 0;
@@ -211,22 +394,22 @@ header {
 }
 
 /* Íconos */
-#hero-contactanos .hero-info .icono-email {
+.hero-info .icono-email {
     margin-left: 110px;
 }
 
-#hero-contactanos .hero-info img {
+.hero-info img {
     width: 40px;
     height: 40px;
     margin-left: 45px;
 }
 
 /* Títulos */
-#hero-contactanos .hero-info .h2-email {
+.hero-info .h2-email {
     margin-left: 97px;
 }
 
-#hero-contactanos .hero-info h2 {
+.hero-info h2 {
     font-family: 'Raleway', sans-serif;
     font-weight: 700;
     color: #2D4059;
@@ -236,7 +419,7 @@ header {
 }
 
 /* Texto */
-#hero-contactanos .hero-info h3 {
+.hero-info h3 {
     font-weight: 400;
     font-size: 15px;
     margin: 4px 0;
@@ -244,23 +427,9 @@ header {
     text-align: center;
 }
 
-#hero-contactanos .hero-info .h3-email {
+.hero-info .h3-email {
     margin-left: 45px;
 }
-
-.vibrar {
-    animation: vibrar 0.2s infinite;
-}
-
-@keyframes vibrar {
-    0% { transform: translate(0); }
-    25% { transform: translate(1px, 1px); }
-    50% { transform: translate(-1px, -1px); }
-    75% { transform: translate(1px, -1px); }
-    100% { transform: translate(0); }
-}
-
-
 
 
 
@@ -455,16 +624,12 @@ textarea {
 
 /* E S T I L O S    F O O T E R-_________________________________________________________________________________________ */
 /* footer superior */
-.container-fluid{
-    width: 100%;
-    padding: 0;
-}
-
 .footer-top {
     width: 100%;
     align-content: center;
     background-color: #2D4059;
     color: white;
+    padding: 5px 0;
 }
 
 
@@ -472,7 +637,7 @@ textarea {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0;
+    margin: 15px 0;
 }
 
 .footer-top h2 {
@@ -570,7 +735,7 @@ textarea {
     margin-bottom: 15px;
     text-transform: uppercase;
     color: var(--color-text);
-    margin-left: 60px;
+    margin-left: 35px;
 
 }
 
@@ -617,9 +782,6 @@ textarea {
 }
 
 
-
-
-/* termina estilos footer--------------------------------------------------------------------------------------------------- */
 
 
 
@@ -851,19 +1013,19 @@ textarea {
 
     @keyframes palpitar {
 
-    0%,
-    100% {
-        transform: scale(1);
+        0%,
+        100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.1);
+        }
     }
 
-    50% {
-        transform: scale(1.1);
+    .palpitando {
+        animation: palpitar 1.5s infinite ease-in-out;
     }
-}
-
-.palpitando {
-    animation: palpitar 1.5s infinite ease-in-out;
-}
 
 
 

@@ -128,7 +128,7 @@
                         <td><?= $proveedor['nombre_representante'] ?></td>
                         <td><?= $proveedor['email'] ?></td>
                         <td><?= $proveedor['telefono'] ?></td>
-                        <td><?= $proveedor['ciudad'] ?></td>
+                        <td><?= $proveedor['id_ciudad'] ?></td>
                         <td>Activo</td>
                     </tr>
                 <?php endforeach; ?>
@@ -142,7 +142,7 @@
 
     <!-- Footer -->
     <footer>
-        © Aventura Go 2025 - Todos los derechos reservados
+        © Aventura Go <?= date('Y') ?> - Todos los derechos reservados
     </footer>
 
 </body>

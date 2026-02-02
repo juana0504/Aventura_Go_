@@ -1,3 +1,10 @@
+<?php session_start();
+require_once __DIR__ . '/../../models/proveedor_turistico/ActividadTuristica.php';
+
+$actividadModel = new ActividadTuristica();
+$actividades = $actividadModel->listarActividadesPublicas();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -5,6 +12,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tours y Aventura - Aventura Go</title>
+
+    <link rel="icon" type="image/png" href="public/assets/website_externos/index/img/FAVICON.png">
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,7 +26,7 @@
         href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/turista/tour_escogido/tour-escogido.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/website_externos/descubre_tours/descubreTours.css">
 </head>
 
 <body>
@@ -25,16 +34,53 @@
         <nav class="navbar">
             <div class="container-fluid">
                 <div class="logo">
-                    <img src="/public/assets/turista/tour_escogido/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
+                    <img src="public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
                 </div>
 
                 <h1 class="page-title">Descubre Todo lo que Villeta Tiene para Ofrecerte</h1>
 
                 <div class="actions">
-                    <a href="#" class="btn-login">Atrás</a>
-                    <div class="menu-toggle" id="menu-toggle">
+
+                    <?php if (isset($_SESSION['user'])): ?>
+                        <div class="profile-dropdown">
+                            <button class="profile-btn" id="profileToggle">
+                                <i class="fas fa-user-circle"></i>
+                                <span class="profile-name">
+                                    <?= htmlspecialchars(
+                                        ucwords(
+                                            explode(' ', $_SESSION['user']['nombre'])[0] . ' ' .
+                                                (explode(' ', $_SESSION['user']['nombre'])[1] ?? '')
+                                        )
+                                    ) ?>
+                                </span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+
+                            <ul class="profile-menu" id="profileMenu">
+                                <li>
+                                    <a href="/aventura_go/turista/perfil">Mi perfil</a>
+                                </li>
+                                <li>
+                                    <a href="/aventura_go/turista/dashboard">Dashboard</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="/aventura_go/logout" class="logout">Cerrar sesión</a>
+                                </li>
+                            </ul>
+                        </div>
+                    <?php else: ?>
+
+                        <a href="/aventura_go/login" class="btn-login">Ingresa</a>
+
+                        <a href="/aventura_go/registrarse" class="btn-register">Regístrate</a>
+
+                    <?php endif; ?>
+
+                    <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
                         <i class="fas fa-bars"></i>
                     </div>
+
                 </div>
             </div>
         </nav>
@@ -44,7 +90,7 @@
         <div class="container">
             <div class="tabs-container">
                 <button class="tab-btn active">TOURS Y AVENTURA</button>
-                <button class="tab-btn">HOSPEDAJE</button>
+                <a href="<?= BASE_URL ?>/descubre-hospedaje" class="tab-btn"> HOSPEDAJE </a>
             </div>
 
             <div class="search-filters">
@@ -64,251 +110,206 @@
                 </div>
             </div>
 
+            <!-- aca va las actividdes -->
+
             <div class="activities-grid">
-                <div class="activity-card">
-                    <img src="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=400&h=300&fit=crop"
-                        alt="Cabalgata en Villeta" class="activity-image">
-                    <div class="activity-content">
-                        <div class="activity-category">villeta</div>
-                        <h3 class="activity-title">Explora y disfruta del campo a caballo en villeta</h3>
-                        <div class="activity-rating">
-                            <span class="stars">★★★★★</span>
-                            <span class="reviews">(1 Review)</span>
-                        </div>
-                        <div class="activity-duration">
-                            <i class="fas fa-clock"></i>
-                            <span>2 días, 1 noche</span>
-                        </div>
-                        <div class="activity-price">
-                            <span class="price-label">Desde</span>
-                            <span class="price-current">$450.000</span>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="activity-card">
-                    <img src="https://images.unsplash.com/photo-1571942676516-bcab84649e44?w=400&h=300&fit=crop"
-                        alt="Represa natural" class="activity-image">
-                    <div class="activity-content">
-                        <div class="activity-category">Villeta</div>
-                        <h3 class="activity-title">Conoce una represa natural y disfruta un buen sancocho en villeta
-                        </h3>
-                        <div class="activity-rating">
-                            <span class="stars">★★★★★</span>
-                            <span class="reviews">(1 Review)</span>
-                        </div>
-                        <div class="activity-duration">
-                            <i class="fas fa-clock"></i>
-                            <span>Pasadía</span>
-                        </div>
-                        <div class="activity-price">
-                            <span class="price-label">Desde</span>
-                            <span class="price-current">$130.000</span>
-                        </div>
-                    </div>
-                </div>
+                <?php if (!empty($actividades)): ?>
+                    <?php foreach ($actividades as $actividad): ?>
 
-                <div class="activity-card">
-                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop"
-                        alt="Vías del tren" class="activity-image">
-                    <div class="activity-content">
-                        <div class="activity-category">Villeta</div>
-                        <h3 class="activity-title">Explora las vías del tren y disfruta de la naturaleza en villeta</h3>
-                        <div class="activity-rating">
-                            <span class="stars">★★★★★</span>
-                            <span class="reviews">(1 Review)</span>
-                        </div>
-                        <div class="activity-duration">
-                            <i class="fas fa-clock"></i>
-                            <span>Pasadía</span>
-                        </div>
-                        <div class="activity-price">
-                            <span class="price-label">Desde</span>
-                            <span class="price-original">$95.000</span>
-                            <span class="price-current">$95.000</span>
-                        </div>
-                    </div>
-                </div>
+                        <div class="activity-card">
 
-                <div class="activity-card">
-                    <img src="https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?w=400&h=300&fit=crop"
-                        alt="Piscina Villeta" class="activity-image">
-                    <div class="activity-content">
-                        <div class="activity-category">Pasadía</div>
-                        <h3 class="activity-title">Pasadía en villeta, transporte desde bogotá</h3>
-                        <div class="activity-rating">
-                            <span class="stars">★★★★★</span>
-                            <span class="reviews">(1 Review)</span>
-                        </div>
-                        <div class="activity-duration">
-                            <i class="fas fa-clock"></i>
-                            <span>Pasadía</span>
-                        </div>
-                        <div class="activity-price">
-                            <span class="price-label">Desde</span>
-                            <span class="price-original">$120.000</span>
-                            <span class="price-current">$120.000</span>
-                        </div>
-                    </div>
-                </div>
+                            <img
+                                src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $actividad['imagen'] ?>"
+                                alt="<?= htmlspecialchars($actividad['nombre']) ?>"
+                                class="activity-image">
 
-                <div class="activity-card">
-                    <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&h=300&fit=crop"
-                        alt="Puente tibetano" class="activity-image">
-                    <div class="activity-content">
-                        <div class="activity-category">villeta</div>
-                        <h3 class="activity-title">Vive la experiencia del puente tibetano en villeta</h3>
-                        <div class="activity-rating">
-                            <span class="stars">★★★★☆</span>
-                            <span class="reviews">(1 Review)</span>
-                        </div>
-                        <div class="activity-duration">
-                            <i class="fas fa-clock"></i>
-                            <span>2 días, 1 noche</span>
-                        </div>
-                        <div class="activity-price">
-                            <span class="price-label">Desde</span>
-                            <span class="price-current">$99.000</span>
-                        </div>
-                    </div>
-                </div>
+                            <div class="activity-content">
 
-                <div class="activity-card">
-                    <img src="https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?w=400&h=300&fit=crop"
-                        alt="Piscina centro" class="activity-image">
-                    <div class="activity-content">
-                        <div class="activity-category">villeta</div>
-                        <h3 class="activity-title">Tarde de piscina en el centro de villeta (MUESTRA)</h3>
-                        <div class="activity-rating">
-                            <span class="stars">★★★★☆</span>
-                            <span class="reviews">(1 Review)</span>
+                                <!-- Ciudad -->
+                                <div class="activity-category">
+                                    <?= htmlspecialchars($actividad['ciudad']) ?>
+                                </div>
+
+                                <!-- Nombre -->
+                                <h3 class="activity-title">
+                                    <?= htmlspecialchars($actividad['nombre']) ?>
+                                </h3>
+
+                                <!-- Descripción corta -->
+                                <p class="activity-description">
+                                    <?= substr(htmlspecialchars($actividad['descripcion']), 0, 90) ?>...
+                                </p>
+
+                                <!-- Cupos -->
+                                <div class="activity-duration">
+                                    <i class="fas fa-users"></i>
+                                    <span><?= (int)$actividad['cupos'] ?> cupos disponibles</span>
+                                </div>
+
+                                <!-- Precio -->
+                                <div class="activity-price">
+                                    <span class="price-label">Desde</span>
+                                    <span class="price-current">
+                                        $<?= number_format($actividad['precio'], 0, ',', '.') ?>
+                                    </span>
+                                </div>
+
+                                <div class="button">
+                                    <a href="<?= BASE_URL ?>/website/tour_escogido?id=<?= $actividad['id_actividad'] ?>" class="btn-ver-mas">
+                                        Ver más
+                                    </a>
+                                </div>
+
+
+                            </div>
                         </div>
-                        <div class="activity-duration">
-                            <i class="fas fa-clock"></i>
-                            <span>10 Nights, 9 days</span>
-                        </div>
-                        <div class="activity-price">
-                            <span class="price-label">Desde</span>
-                            <span class="price-current">$85.000</span>
-                        </div>
-                    </div>
-                </div>
+
+
+
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>No hay actividades disponibles.</p>
+                <?php endif; ?>
+
             </div>
 
-            <div class="search-banner">
+
+
+            <!-- barra de busqyeda -->
+            <form class="search-banner" action="<?= BASE_URL ?>busqueda" method="GET">
                 <div class="search-banner-text">
                     <i class="fas fa-search"></i>
-                    <span>¿Buscas alguna actividad específica?</span>
+                    <input
+                        type="text"
+                        name="q"
+                        placeholder="¿Buscas alguna actividad específica?"
+                        required>
                 </div>
-                <button class="search-banner-btn">
+
+                <button type="submit" class="search-banner-btn">
                     <i class="fas fa-search"></i>
                     Buscar
                 </button>
-            </div>
+            </form>
+
         </div>
     </main>
 
     <!-- F O O T E R_____________________________________________________________________________________________________________________________ -->
-    <footer id="footer" class="container-fluid">
+    <footer id="footer">
 
-        <!-- footer superior -->
-        <div class="footer-top">
-            <div class="row align-items-center">
-                <div class="col-md-12">
-                    <h2 class="palpitando">¿Quieres que tu negocio aparezca aquí?</h2>
-                    <a href="website_externos/contactanos.html">Publicate en Aventura Go</a>
+        <div class="container-fluid">
+            <!-- footer superior -->
+            <div class="footer-top">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <h2 class="palpitando">¿Quieres que tu negocio aparezca aquí?</h2>
+                        <a href="website_externos/contactanos.html">Publicate en Aventura Go</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Inferior -->
+            <div class="footer-bottom">
+                <div class="row">
+
+                    <!-- Columna 1: Logo -->
+                    <div class="col-md-2">
+                        <div class="logo-section">
+                            <img src="public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png" alt="logo Aventura Go">
+                        </div>
+                    </div>
+
+                    <!-- col 2 Descripción  -->
+                    <div class="col-md-2">
+                        <p class="description">
+                            Aventura Go conecta viajeros con experiencias de aventura,
+                            promoviendo el turismo sostenible y apoyando a prestadores locales en destinos naturales."
+                        </p>
+                    </div>
+
+
+                    <!-- Columna 3: Destinos -->
+                    <div class="col-md-2">
+                        <h5 class="dest-section">Destinos</h5>
+                        <ul class="list-unstyled">
+                            <li>Villeta</li>
+                            <li>Utica</li>
+                            <li>La Vega</li>
+                            <li>San Francisco</li>
+                            <li>Tobia</li>
+                        </ul>
+                    </div>
+
+                    <!-- Columna 4: Enlaces Útiles -->
+                    <div class="col-md-2">
+                        <h5 class="enlaces-section">Enlaces útiles</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Travel Blog</a></li>
+                            <li><a href="#">Be Our Partner</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Columna 5: Contacto -->
+                    <div class="col-md-2">
+                        <h5 class="contacto-section">Contactos</h5>
+                        <ul class="list-unstyled contact-list">
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <span>321 2263435</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span>aventurago2025@gmail.com</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Villeta Cundinamarca</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Columna 6: Redes Sociales -->
+                    <div class="col-md-2">
+                        <h5 class="redes-section">Síguenos</h5>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
-
-        <!-- Footer Inferior -->
-        <div class="footer-bottom">
-            <div class="row">
-
-                <!-- Columna 1: Logo -->
-                <div class="col-md-2">
-                    <div class="logo-section">
-                        <img src="../turista/img/LOGO-NEGATIVO.png" alt="logo Aventura Go">
-                    </div>
-                </div>
-
-                <!-- col 2 Descripción  -->
-                <div class="col-md-2">
-                    <p class="description">
-                        Aventura Go, somos una plataforma de turismo que conecta viajeros con experiencias
-                        únicas de aventura. Promovemos el turismo sostenible, apoyamos a prestadores locales y
-                        ofrecemos actividades seguras y memorables en destinos naturales.
-                    </p>
-                </div>
-
-
-                <!-- Columna 3: Destinos -->
-                <div class="col-md-2">
-                    <h5 class="dest-section">Destinos</h5>
-                    <ul class="list-unstyled">
-                        <li>Villeta</li>
-                        <li>Utica</li>
-                        <li>La Vega</li>
-                        <li>San Francisco</li>
-                        <li>Tobia</li>
-                    </ul>
-                </div>
-
-                <!-- Columna 4: Enlaces Útiles -->
-                <div class="col-md-2">
-                    <h5 class="enlaces-section">Enlaces útiles</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Travel Blog</a></li>
-                        <li><a href="#">Be Our Partner</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
-
-                <!-- Columna 5: Contacto -->
-                <div class="col-md-2">
-                    <h5 class="contacto-section">Contactos</h5>
-                    <ul class="list-unstyled contact-list">
-                        <li>
-                            <i class="fas fa-phone"></i>
-                            <span>321 2263435</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <span>aventurago2025@gmail.com</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Villeta Cundinamarca</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Columna 6: Redes Sociales -->
-                <div class="col-md-2">
-                    <h5 class="redes-section">Síguenos</h5>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-
     </footer>
 
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/turista/tour_escogido/tour_escogido.js"></script>
+    <script src="<?= BASE_URL ?>/public/assets/website_externos/descubre_tours/descubre_tours.js"></script>
 
     <script>
-        document.getElementById('menu-toggle').addEventListener('click', function () {
-            document.getElementById('navbarNav').classList.toggle('show');
-        });
+        const profileToggle = document.getElementById('profileToggle');
+        const profileMenu = document.getElementById('profileMenu');
+
+        if (profileToggle && profileMenu) {
+            profileToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                profileMenu.style.display =
+                    profileMenu.style.display === 'block' ? 'none' : 'block';
+            });
+
+            document.addEventListener('click', function() {
+                profileMenu.style.display = 'none';
+            });
+        }
     </script>
+
+
+
 </body>
 
 </html>

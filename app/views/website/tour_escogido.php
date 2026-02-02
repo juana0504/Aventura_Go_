@@ -1,0 +1,344 @@
+<?php
+session_start();
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aventura Go - tour-escogido</title>
+
+    <link rel="icon" type="image/png" href="../public/assets/website_externos/index/img/FAVICON.png">
+
+    <!-- bootstrap para el carrusel -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons (para las estrellas) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- Slick CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+
+    <!-- Tema opcional slick carrousel -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- LIBRERIA AOS ANIMATE -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- CSS personalizado -->
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/website_externos/tour_escogido/tour_escogido.css">
+
+
+
+</head>
+
+<body>
+    <!-- header________________________________________________________________________________________________________________________________ -->
+    <header>
+
+        <nav class="navbar">
+            <div class="container-fluid">
+                <div class="logo">
+                    <img src="../public/assets/website_externos/tour_escogido/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
+                </div>
+
+                <h1 class="page-title">Tu reserva de tours en tu destino </h1>
+
+                <div class="actions">
+
+                    <?php if (isset($_SESSION['user'])): ?>
+                        <div class="profile-dropdown">
+                            <button class="profile-btn" id="profileToggle">
+                                <i class="fas fa-user-circle"></i>
+                                <span class="profile-name">
+                                    <?= htmlspecialchars(
+                                        ucwords(
+                                            explode(' ', $_SESSION['user']['nombre'])[0] . ' ' .
+                                                (explode(' ', $_SESSION['user']['nombre'])[1] ?? '')
+                                        )
+                                    ) ?>
+                                </span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+
+                            <ul class="profile-menu" id="profileMenu">
+                                <li>
+                                    <a href="/aventura_go/turista/perfil">Mi perfil</a>
+                                </li>
+                                <li>
+                                    <a href="/aventura_go/turista/dashboard">Dashboard</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="/aventura_go/logout" class="logout">Cerrar sesión</a>
+                                </li>
+                            </ul>
+                        </div>
+                    <?php else: ?>
+
+                        <a href="/aventura_go/login" class="btn-login">
+                            Ingresa
+                        </a>
+
+                        <a href="/aventura_go/registrarse" class="btn-register">
+                            Regístrate
+                        </a>
+
+                    <?php endif; ?>
+
+                    <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+                        <i class="fas fa-bars"></i>
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <main>
+
+        <div class="activities-grid">
+
+            <?php if (!empty($actividad)): ?>
+
+                <div class="activity-card">
+
+                    <?php if (!empty($actividad['imagen_principal'])): ?>
+                        <!-- Imagen principal -->
+                        <div class="imagen-principal">
+                            <img
+                                src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $actividad['imagen_principal'] ?>"
+                                alt="<?= htmlspecialchars($actividad['nombre']) ?>">
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if (!empty($actividad['imagenes'])): ?>
+                        <!-- Galería (máx 5) -->
+                        <div class="galeria-actividad">
+                            <?php foreach ($actividad['imagenes'] as $img): ?>
+                                <img
+                                    src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $img ?>"
+                                    alt="<?= htmlspecialchars($actividad['nombre']) ?>">
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <h3><?= htmlspecialchars($actividad['nombre']) ?></h3>
+
+                    <p><?= htmlspecialchars($actividad['descripcion']) ?></p>
+
+
+
+
+
+                    <!-- BOTON DE RESERVAR____________________________________________________________________________________________________________ -->
+                    <div class="button">
+                        <a href="<?= BASE_URL ?>/turista/preparar-reserva?id=<?= $actividad['id_actividad'] ?>"
+                            class="btn-ver-mas">
+                            RESERVAR
+                        </a>
+                    </div>
+
+                </div>
+
+            <?php else: ?>
+                <p>No se encontró la actividad.</p>
+            <?php endif; ?>
+
+
+        </div>
+
+        <!-- Sección barra busqueda____________________________________________________________________________________________________________ -->
+        <!-- <section id="filtros">
+                    <div class="container">
+                        <div class="search-filters">
+                            <div class="row">
+                                <div class="filters-row">
+                                    <div class="col-md-4">
+                                        <div class="filter-item">
+                                            <i class="fas fa-calendar"></i>
+                                            <input type="text" placeholder="01 oct 2025 - 02 oct 2025" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="filter-item">
+                                            <i class="fas fa-users"></i>
+                                            <input type="text" placeholder="02 Adultos - 01 Niño - 00 Bebés" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="filter-item">
+                                            <i class="fas fa-car"></i>
+                                            <input type="text" placeholder="01" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section> -->
+
+
+
+
+
+        <!-- Sección mapa____________________________________________________________________________________________________________ -->
+        <section id="mapa" class="mapa-section">
+
+            <div id="mapa" class="mapa-section">
+                <div class="mapa-contenedor">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.166972063625!2d-74.472745125039!3d5.013951139904496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4067dfb5f1a3e7%3A0xeca58a4d9a0f72cb!2sVilleta%2C%20Cundinamarca!5e0!3m2!1ses!2sco!4v1690391856678!5m2!1ses!2sco"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+
+
+
+    </main>
+
+
+    <!-- F O O T E R_____________________________________________________________________________________________________________________________ -->
+    <footer id="footer" class="container-fluid">
+
+        <!-- footer superior -->
+        <div class="footer-top">
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <h2 class="palpitando">¿Quieres que tu negocio aparezca aquí?</h2>
+                    <a href="contactanos">Publicate en Aventura Go</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Inferior -->
+        <div class="footer-bottom">
+            <div class="row">
+
+                <!-- Columna 1: Logo -->
+                <div class="col-md-2">
+                    <div class="logo-section">
+                        <img src="../public/assets/website_externos/tour_escogido/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
+                    </div>
+                </div>
+
+                <!-- col 2 Descripción  -->
+                <div class="col-md-2">
+                    <p class="description">
+                        Aventura Go conecta viajeros con experiencias de aventura,
+                        promoviendo el turismo sostenible y apoyando a prestadores locales en destinos naturales."
+                    </p>
+                </div>
+
+
+                <!-- Columna 3: Destinos -->
+                <div class="col-md-2">
+                    <h5 class="dest-section">Destinos</h5>
+                    <ul class="list-unstyled">
+                        <li>Villeta</li>
+                        <li>Utica</li>
+                        <li>La Vega</li>
+                        <li>San Francisco</li>
+                        <li>Tobia</li>
+                    </ul>
+                </div>
+
+                <!-- Columna 4: Enlaces Útiles -->
+                <div class="col-md-2">
+                    <h5 class="enlaces-section">Enlaces útiles</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Travel Blog</a></li>
+                        <li><a href="#">Be Our Partner</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 5: Contacto -->
+                <div class="col-md-2">
+                    <h5 class="contacto-section">Contactos</h5>
+                    <ul class="list-unstyled contact-list">
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>321 2263435</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>aventurago2025@gmail.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Villeta Cundinamarca</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Columna 6: Redes Sociales -->
+                <div class="col-md-2">
+                    <h5 class="redes-section">Síguenos</h5>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </footer>
+
+
+
+    <!-- Abootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript de Slick -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    <!-- aos animate -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+    <script src="<?= BASE_URL ?>/public/assets/website_externos/tour_escogido/tour_escogido.js"></script>
+
+    <script>
+        const profileToggle = document.getElementById('profileToggle');
+        const profileMenu = document.getElementById('profileMenu');
+
+        if (profileToggle && profileMenu) {
+            profileToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                profileMenu.style.display =
+                    profileMenu.style.display === 'block' ? 'none' : 'block';
+            });
+
+            document.addEventListener('click', function() {
+                profileMenu.style.display = 'none';
+            });
+        }
+    </script>
+</body>
+
+</html>

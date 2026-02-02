@@ -1,13 +1,14 @@
 <?php
 
 require_once BASE_PATH . '/app/helpers/pdf_helper.php';
-require_once BASE_PATH . '/app/controllers/proveedor.php';
-require_once BASE_PATH . '/app/controllers/hotelero.php';
-require_once BASE_PATH . '/app/controllers/turista.php';
+require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';
+require_once BASE_PATH . '/app/controllers/administrador/hotelero.php';
+require_once BASE_PATH . '/app/controllers/administrador/turista.php';
 
 
 // ESTA FUNCION SE ENCARGA DE VALIDAR EL TIPO DE REPORTE Y EJECUTAR LA FUNCION CORRESPONDIENTE 
-function reportesPdfControlers(){
+function reportesPdfControlers()
+{
     // CAPTURAMOS EL TIPO DE REPORTE ENVIADO DESDE LA VISTA 
     $tipo = $_GET['tipo'];
     // SEGUN EL TIPO DE REPORTE EJECUTAMOS X FUNCION 
@@ -22,14 +23,18 @@ function reportesPdfControlers(){
         case 'turista':
             reporteTuristasPdf();
             break;
-        
+        // case 'actividades':
+        //     reporteActividadesTuristicasPdf();
+        //     break;
+
         default:
             # code...
             break;
     }
 }
 
-function reporteProveedoresPdf(){
+function reporteProveedoresPdf()
+{
 
     // CARGAR LA VISTA Y OBTENERLACOMO HTML
     ob_start();
@@ -44,7 +49,8 @@ function reporteProveedoresPdf(){
     generarPDF($html, 'reporte_proveedores.pdf', false);
 }
 
-function reporteHotelesPdf(){
+function reporteHotelesPdf()
+{
 
     // CARGAR LA VISTA Y OBTENERLACOMO HTML
     ob_start();
@@ -59,7 +65,8 @@ function reporteHotelesPdf(){
     generarPDF($html, 'reporte_proveedores.pdf', false);
 }
 
-function reporteTuristasPdf(){
+function reporteTuristasPdf()
+{
 
     // CARGAR LA VISTA Y OBTENERLACOMO HTML
     ob_start();

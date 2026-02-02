@@ -1,3 +1,8 @@
+<?php session_start(); ?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -45,7 +50,7 @@
             <div class="container-fluid">
                 <!-- Logo -->
                 <div class="logo">
-                    <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" width="150px" alt="Logo Aventura Go"
+                    <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
                         class="navbar-logo">
                 </div>
 
@@ -59,16 +64,55 @@
 
                 <!-- Botones y menú móvil -->
                 <div class="actions">
-                    <div class="actions">
-                        <a href="login" class="btn-login">Ingresa</a>
-                        <a href="registrarse" class="btn-register">Regístrate</a>
 
-                        <!-- menu hambirguesa en responsive -->
-                        <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
-                            <i class="fas fa-bars"></i>
+                    <?php if (isset($_SESSION['user'])): ?>
+                        <div class="profile-dropdown">
+                            <button class="profile-btn" id="profileToggle">
+                                <i class="fas fa-user-circle"></i>
+                                <span class="profile-name">
+                                    <?= htmlspecialchars(
+                                        ucwords(
+                                            explode(' ', $_SESSION['user']['nombre'])[0] . ' ' .
+                                                (explode(' ', $_SESSION['user']['nombre'])[1] ?? '')
+                                        )
+                                    ) ?>
+                                </span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+
+                            <ul class="profile-menu" id="profileMenu">
+                                <li>
+                                    <a href="/aventura_go/turista/perfil">Mi perfil</a>
+                                </li>
+                                <li>
+                                    <a href="/aventura_go/turista/dashboard">Dashboard</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="/aventura_go/logout" class="logout">Cerrar sesión</a>
+                                </li>
+                            </ul>
                         </div>
+                    <?php else: ?>
+
+
+
+                        <a href="/aventura_go/login" class="btn-login">
+                            Ingresa
+                        </a>
+
+                        <a href="/aventura_go/registrarse" class="btn-register">
+                            Regístrate
+                        </a>
+
+                    <?php endif; ?>
+
+                    <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+                        <i class="fas fa-bars"></i>
                     </div>
+
                 </div>
+
 
             </div>
         </nav>
@@ -92,8 +136,7 @@
                             <h1>Explora sin límites,</h1>
                             <h2>descubre tu próximo destino</h2>
                             <p class="parrafo1">Embárcate en rutas llenas de adrenalina, cultura y naturaleza que te
-                                harán
-                                vibrar.</p>
+                                harán vibrar.</p>
 
 
                         </div>
@@ -117,37 +160,35 @@
                             <h1>Destinos que inspiran,</h1>
                             <h2>aventuras que transforman</h2>
                             <p class="parrafo1">Viaja a lugares mágicos donde cada paso cuenta una historia y cada
-                                paisaje
-                                deja huella.</p>
+                                paisaje deja huella.</p>
 
                         </div>
                     </div>
 
                 </div>
 
-                <div class="search-box">
+                <!-- <div class="search-box">
                     <div class="search-item">
-                        <strong>Dinos a dónde vas</strong>
+                        <strong>Busca tu destino</strong>
                     </div>
-                    <a href="website_externos/destinos.html" class="search-btn">Busca tu destino</a>
-                </div>
+                    <a href="website_externos/destinos.html" class="search-btn bi bi-search "></a>
+                </div> -->
 
                 <h2 class="marca">AVENTURA<br>GO</h2>
 
 
 
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <button class="carousel-control-prev " type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                    <i class="bi bi-caret-left-fill"></i>
                 </button>
 
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                    <i class="bi bi-caret-right-fill"></i>
                 </button>
             </div>
         </div>
     </section>
+
 
 
     <!-- SECCIÓN DESTINOS POPULARES -->
@@ -196,15 +237,18 @@
 
             <!-- Tarjeta 2 -->
             <div class="col">
-                <div class="card destino-card shadow-sm">
-                    <img src="public/assets/website_externos/index/img/destinos_visitados_villeta.png"
-                        class="card-img-top" alt="Villeta">
-                    <div class="card-body">
-                        <h5 class="card-title">VILLETA</h5>
-                        <p class="card-text estrellas">★★★★★</p>
+                <a href="/aventura_go/descubre-tours" class="text-decoration-none">
+                    <div class="card destino-card shadow-sm">
+                        <img src="public/assets/website_externos/index/img/destinos_visitados_villeta.png"
+                            class="card-img-top" alt="Villeta">
+                        <div class="card-body">
+                            <h5 class="card-title">VILLETA</h5>
+                            <p class="card-text estrellas">★★★★★</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
+
 
             <!-- Tarjeta 3 -->
             <div class="col">
@@ -260,6 +304,8 @@
             <a href="#" class="btn-ver-mas">Más destinos </a>
         </div>
     </section>
+
+
 
     <!-- SECCIÓN DESTINOS MÁS VISITADOS -->
     <section class="destinos-visitados container my-5">
@@ -342,9 +388,6 @@
 
 
 
-
-
-
     <!-- _______________________________F O O T E R__________________________________________ -->
     <footer id="footer" class="container-fluid">
 
@@ -353,7 +396,7 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <h2 class="palpitando">¿Quieres que tu negocio aparezca aquí?</h2>
-                    <a href="website_externos/contactanos.html">Publicate en Aventura Go</a>
+                    <a href="contactanos">Publicate en Aventura Go</a>
                 </div>
             </div>
         </div>
@@ -366,16 +409,14 @@
                 <!-- Columna 1: Logo -->
                 <div class="col-md-2">
                     <div class="logo-section">
-                        <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="logo Aventura Go">
+                        <img src="public/assets/website_externos/index/img/LOGO-NEGATIVO.png" alt="logo Aventura Go">
                     </div>
                 </div>
 
                 <!-- col 2 Descripción  -->
                 <div class="col-md-2">
                     <p class="description">
-                        Aventura Go, somos una plataforma de turismo que conecta viajeros con experiencias
-                        únicas de aventura. Promovemos el turismo sostenible, apoyamos a prestadores locales y
-                        ofrecemos actividades seguras y memorables en destinos naturales.
+                        Aventuras únicas, seguras y confiables.
                     </p>
                 </div>
 
@@ -440,6 +481,7 @@
 
     </footer>
 
+
     <!-- Abootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -453,7 +495,7 @@
         AOS.init();
     </script>
 
-    <script src="public/assets/website_externos/destinos/destinos.js"></script>
+    <script src="public/assets/website_externos/index/index.js"></script>
 
 
 </body>

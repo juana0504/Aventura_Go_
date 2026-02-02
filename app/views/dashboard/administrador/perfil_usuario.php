@@ -9,7 +9,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
 // ASIGNAMOS EL VALOR ID DEL REGISTRO SEGUN LA TABLA
-$id = $_SESSION['user']['id'];
+$id = $_SESSION['user']['id_usuario'];
 
 $usuario = mostrarPerfilAdmin($id);
 
@@ -26,15 +26,27 @@ $usuario = mostrarPerfilAdmin($id);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil Usuario</title>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
     <!-- Icono de bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <!-- favicon -->
-    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
-    <!-- Estilos CSS -->
+
+    <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
+
+    <!-- Componentes comunes -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel.css">
+
+    <!-- Estilos CSS (siempre al final)-->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/perfil.css">
+
 </head>
 
 <body>
@@ -52,12 +64,12 @@ $usuario = mostrarPerfilAdmin($id);
             ?>
 
             <div class="container">
+
                 <div class="row">
 
                     <div class="usuario">
                         <h2>Perfil de Administrador</h2>
-                        <img src="<?= BASE_URL ?>/public/uploads/usuario/<?= $usuario['foto'] ?>"
-                            alt="persona"></i>
+                        <img src="<?= BASE_URL ?>/public/uploads/usuario/<?= $usuario['foto'] ?>" alt="persona"></i>
                         <h3><?= $_SESSION['user']['nombre'] ?></h3>
                         <p><?= $_SESSION['user']['rol'] ?></p>
 
@@ -93,8 +105,6 @@ $usuario = mostrarPerfilAdmin($id);
                                     <p><?= $usuario['telefono'] ?></p>
                                 </div>
 
-
-
                                 <div class="col-md-6">
                                     <h4>Rol:</h4>
                                 </div>
@@ -112,17 +122,16 @@ $usuario = mostrarPerfilAdmin($id);
                         </div>
                     </div>
 
+
+
+
+
                     <div class="editar">
 
                         <form action="/aventura_go/administrador/actualizar-perfil" method="POST" enctype="multipart/form-data">
 
                             <h4>Imagen Perfil</h4>
-                            <img src="<?= BASE_URL ?>/public/uploads/usuario/<?= $usuario['foto'] ?>" alt="persona">
-
-                            <div class="botones-imagen">
-                                <button id="descargar">EDITAR FOTO</button>
-                                <button id="eliminar">ELIMINAR</button>
-                            </div>
+                            <input type="file" name="foto" value="<?= $usuario['foto'] ?>">
 
                             <h4>Nombre Completo</h4>
                             <input type="text" name="nombre" value="<?= $usuario['nombre'] ?>">
@@ -141,6 +150,8 @@ $usuario = mostrarPerfilAdmin($id);
                         </form>
 
                     </div>
+
+
 
 
 

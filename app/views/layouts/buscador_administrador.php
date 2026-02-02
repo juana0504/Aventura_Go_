@@ -1,17 +1,26 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+require_once __DIR__ . '/../../helpers/auth.php';
+auth('administrador');
 
 require_once __DIR__ . '/../../helpers/alert_helper.php';
 require_once __DIR__ . '/../../controllers/perfil.php';
 
-
-$id = $_SESSION['user']['id'];
+$id = $_SESSION['user']['id_usuario'];
 
 $usuario = mostrarPerfilAdmin($id);
 ?>
 
-<form id="busqueda" action="busqueda">
-    <input type="text">
-    <i class="bi bi-search"></i>
+
+
+<form id="busqueda" class="ag-buscador-admin" action="busqueda">
+    <div class="busqueda-wrapper">
+        <input type="text" placeholder="Buscar..">
+        <i class="bi bi-search"></i>
+    </div>
 
     <button id="modoOscuroBtn"> <i class="bi bi-moon-fill"></i></button>
     <button id="notificacionesBtn"> <i class="bi bi-bell-fill"></i></button>
@@ -31,7 +40,7 @@ $usuario = mostrarPerfilAdmin($id);
             </li>
             <hr class="dropdown-divider">
             </li>
-             <li>
+            <li>
                 <a class="dropdown-item" href="<?= BASE_URL ?>/logout">
                     <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
                 </a>

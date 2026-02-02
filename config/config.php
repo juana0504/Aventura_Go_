@@ -16,5 +16,3 @@ define('BASE_URL', $protocol . $host . $baseFolder);
 
 //ruta base del proyecto (pra require o include)
 define('BASE_PATH', dirname(__DIR__));
-
-?>

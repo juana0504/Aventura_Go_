@@ -113,17 +113,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 // dentro del evento donde ya tienes modalEl
                 const btnActivar = modalEl.querySelector('#btn-activar-proveedor');
                 const btnDesactivar = modalEl.querySelector('#btn-desactivar-proveedor');
-console.log("Llegué a la parte del HREF");
+                
+                console.log("Llegué a la parte del HREF");
+                
                 btnActivar.setAttribute('href',
-                    `/aventura_go/administrador/cambiar-estado-proveedor-turistico?id=${id}&accion=activar`
+                    `/aventura_go/administrador/cambiar-estado-proveedor?id=${id}&accion=activar`
                 );
 
                 btnDesactivar.setAttribute('href',
-                    `/aventura_go/administrador/cambiar-estado-proveedor-turistico?id=${id}&accion=desactivar`
+                    `/aventura_go/administrador/cambiar-estado-proveedor?id=${id}&accion=desactivar`
                 );
 
                 console.log("HREF ACTIVAR:", btnActivar.href);
-console.log("HREF DESACTIVAR:", btnDesactivar.href);
+                console.log("HREF DESACTIVAR:", btnDesactivar.href);
 
                 // Mostrar/ocultar botón apropiado según estado actual
                 if ((data.estado ?? '').toLowerCase() === 'activo') {
@@ -152,7 +154,7 @@ document.addEventListener("click", function (e) {
 
     let nuevoEstado = estado === "activo" ? "inactivo" : "activo";
 
-    fetch("/aventura_go/administrador/cambiar-estado-proveedor-turistico", {
+    fetch("/aventura_go/administrador/cambiar-estado-proveedor", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"
@@ -181,9 +183,3 @@ document.addEventListener("click", function (e) {
     })
     .catch(err => alert("Error en la petición: " + err));
 });
-
- /* ---------- handlers globales para los botones del modal (pegarlos UNA VEZ al final del archivo) ---------- */
-
-
-
-/* ---------- función helper para actualizar la fila en la tabla ---------- */

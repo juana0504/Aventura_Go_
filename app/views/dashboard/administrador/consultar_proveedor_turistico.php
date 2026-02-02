@@ -1,6 +1,6 @@
 <?php
 require_once BASE_PATH . '/app/helpers/session_administrador.php';
-require_once BASE_PATH . '/app/controllers/proveedor.php';
+require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';
 
 $datos = listarProveedores();
 
@@ -8,11 +8,6 @@ require_once __DIR__ . '/../../layouts/header_administrador.php';
 
 ?>
 
-<?php
-
-require_once BASE_PATH . '/app/helpers/session_administrador.php';
-
-?>
 
 
 
@@ -40,7 +35,14 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     <!-- Icono de bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <!-- Estilos CSS -->
+    <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
+
+    <!-- Componentes comunes -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel.css">
+
+    <!-- CSS SOLO DE ESTA VISTA (SIEMPRE AL FINAL) -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_turistico.css">
 
 
@@ -116,7 +118,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     <td><?= $proveedor['nombre_representante'] ?></td>
                                     <td><?= $proveedor['email'] ?></td>
                                     <td><?= $proveedor['telefono'] ?></td>
-                                    <td><?= $proveedor['ciudad'] ?></td>
+                                    <td><?= $proveedor['nombre_ciudad'] ?? '—' ?></td>
 
                                     <!-- ESTADO -->
                                     <td class="col-estado">
@@ -315,9 +317,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
                 <!-- Footer del Modal -->
                 <div class="modal-footer aventura-modal-footer">
-                    <button type="button" class="btn btn-aventura-secondary" data-bs-dismiss="modal">
-                        <i class="fas fa-times"></i> Cerrar
-                    </button>
+
                     <div class="action-buttons">
 
                         <a class="btn btn-aventura-success" id="btn-activar-proveedor">

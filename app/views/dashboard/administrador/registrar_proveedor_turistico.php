@@ -31,8 +31,16 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     <!-- Icono de bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <!-- Estilos CSS -->
+    <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
+
+    <!-- Componentes comunes -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel.css">
+
+    <!-- Estilos CSS (siempre al final) -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_turistico.css">
+
 </head>
 
 <body>
@@ -90,10 +98,6 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <h4 class="mb-4"><i class="fas fa-building text-primary"></i> Información Básica del Proveedor</h4>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Logo</label>
-                                    <input type="file" accept=".jpg, .png, .jpeg" name="logo" class="form-control" id="logo" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
                                     <label class="form-label">Nombre de la Empresa *</label>
                                     <input type="text" name="nombre_empresa" class="form-control" id="empresa" placeholder="Ej: Aventuras Extremas SAS" required>
                                 </div>
@@ -108,6 +112,10 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Teléfono *</label>
                                     <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="+57 300 123 4567" required>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Logo</label>
+                                    <input type="file" accept=".jpg, .png, .jpeg" name="logo" class="form-control" id="logo" required>
                                 </div>
                             </div>
                         </div>
@@ -157,14 +165,6 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Foto Actividades</label>
-                                    <input type="file" accept=".jpg, .png, .jpeg" name="foto_actividades" class="form-control" id="foto_actividades" required>
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <label class="form-label">Descripción actividades*</label>
-                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="4" placeholder="Describe los servicios que ofreces..." required></textarea>
-                                </div>
                             </div>
                         </div>
 
@@ -173,13 +173,33 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <h4 class="mb-4"><i class="fas fa-map-marker-alt text-primary"></i> Ubicación</h4>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Departamento *</label>
-                                    <input type="text" name="departamento" class="form-control" id="departamento" placeholder="Juan Pérez" required>
+                                    <label for="departamento">Departamento *</label>
+                                    <select name="departamento" id="departamento" class="form-control" required>
+                                        <option value="">Seleccione un departamento</option>
+                                    </select>
                                 </div>
+
+                                <!-- <div class="col-md-6 mb-3">
+                                    <label for="ciudad">Ciudad *</label>
+                                    <select name="id_ciudad" id="id_ciudad" class="form-control" required>
+                                        <option value="">Seleccione una ciudad</option>
+                                    </select>
+                                </div> -->
+
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Ciudad *</label>
-                                    <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ej: Medellín" required>
+                                    <select name="id_ciudad" id="id_ciudad" class="form-control" required>
+                                        <option value="">Seleccione una ciudad</option>
+                                        <?php if (!empty($ciudades)): ?>
+                                            <?php foreach ($ciudades as $ciudad): ?>
+                                                <option value="<?= $ciudad['id_ciudad']; ?>">
+                                                    <?= $ciudad['nombre']; ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </select>
                                 </div>
+
+
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label">Dirección *</label>
                                     <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Calle 123 #45-67" required>
@@ -194,6 +214,15 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Nombre del Representante *</label>
                                     <input type="text" name="nombre_representante" class="form-control" id="nombre_repre" placeholder="Juan Pérez" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Tipo de documento *</label>
+                                    <select name="tipo_documento" class="form-select1" id="tipo_documento">
+                                        <option value="" disabled selected hidden>Tipo de documento</option>
+                                        <option value="CC">CC</option>
+                                        <option value="CE">CE</option>
+                                        <option value="Pasaporte">Pasaporte</option>
+                                    </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Identificacion *</label>
@@ -293,6 +322,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     </section>
 
     <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor.js"></script>
+    <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/departamento.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>

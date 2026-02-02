@@ -52,7 +52,7 @@ header {
 /*LOGO  */
 .navbar-logo {
     margin-left: 0;
-    width: 160px;
+    width: 150px;
 }
 
 /* LINKS PRINCIPALES */
@@ -146,6 +146,95 @@ header {
     cursor: pointer;
 }
 
+/* ===============================
+   BIENVENIDA USUARIO - HEADER
+   =============================== */
+
+.Bienvenido {
+    background-color: #2D4059;
+    /* azul Aventura Go */
+    color: #FFFFFF;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    margin-right: 10px;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+/* Ajuste para que no se pegue al botón salir */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bienvenido strong {
+    font-weight: 700;
+}
+
+.profile-dropdown {
+    position: relative;
+}
+
+.profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #2D4059;
+    color: #FFFFFF;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.profile-btn i {
+    font-size: 16px;
+}
+
+.profile-menu {
+    position: absolute;
+    right: 0;
+    top: 46px;
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 10px;
+    min-width: 200px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    list-style: none;
+    padding: 8px 0;
+    display: none;
+    z-index: 999;
+}
+
+.profile-menu li a {
+    display: block;
+    padding: 10px 16px;
+    font-size: 14px;
+    color: #2B2B2B;
+    text-decoration: none;
+}
+
+.profile-menu li a:hover {
+    background-color: #F8F9FA;
+}
+
+.profile-menu .divider {
+    height: 1px;
+    background-color: #E0E0E0;
+    margin: 6px 0;
+}
+
+.profile-menu .logout {
+    color: #EA8217;
+    font-weight: 600;
+}
 
 
 /* SECCIÓN HERO____________________________________________________________________________________________________   */
@@ -207,34 +296,22 @@ header {
 }
 
 /* === Estilos flechas del carrusel === */
-.carousel-control-prev,
+.carousel-control-prev {
+    width: 40px;
+    height: 20px;
+    top: 50%;
+    transition: all 0.3s ease;
+    font-size: 30px;
+}
+
+
 .carousel-control-next {
     width: 40px;
     height: 20px;
     top: 50%;
-    transform: translateY(-50%);
     transition: all 0.3s ease;
     font-size: 30px;
-    font-weight: bold;
-    background: rgba(255, 255, 255, 0);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-/* Quitar los íconos por defecto de Bootstrap */
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    display: none;
-}
-
-/* Insertar texto con pseudo-elementos */
-.carousel-control-prev::before {
-    content: "<";
-}
-
-.carousel-control-next::before {
-    content: ">";
 }
 
 /* Posicionamiento */
@@ -244,6 +321,12 @@ header {
 
 .carousel-control-next {
     right: 5px;
+}
+
+/* Controles del carrusel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(1);
 }
 
 /* Caja de búsqueda */
@@ -283,11 +366,6 @@ header {
     background-color: #EA8217;
 }
 
-/* Controles del carrusel */
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    filter: invert(1);
-}
 
 /* Marca “AVENTURA GO” */
 #hero h2.marca {
@@ -954,6 +1032,7 @@ header {
     .tarjeta-visitado {
         flex: 0 0 280px;
     }
+
     /* DESCRIPCIÓN 768px */
     .description {
         margin: 15px auto 0 !important;
@@ -972,6 +1051,7 @@ header {
    📌 576px — Celulares estándar
 ----------------------------------------------------- */
 @media (max-width: 576px) {
+
 
     .destinos-populares {
         padding: 0 10px;
@@ -1071,6 +1151,7 @@ header {
         justify-content: center;
         margin-left: 0;
     }
+
     /* DESCRIPCIÓN 576px */
     .description {
         margin: 15px auto 0 !important;

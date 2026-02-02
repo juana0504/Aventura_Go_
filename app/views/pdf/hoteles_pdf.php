@@ -108,8 +108,10 @@
                 <th>Logo</th>
                 <th>Empresa</th>
                 <th>Establecimiento</th>
-                <th>Habitaciones</th>
-                <th>Calificacion</th>
+                <th>Representante</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Ciudad</th>
                 <th>Estado</th>
             </tr>
         </thead>
@@ -118,12 +120,14 @@
             <?php if (!empty($hoteles)) : ?>
                 <?php foreach ($hoteles as $hotelero): ?>
                     <tr>
-                        <td><img src="<?= BASE_URL ?>/public/uploads/hoteles/<?= $hotelero['foto'] ?>" width="50px"></td>
+                        <td><img src="<?= BASE_URL ?>/public/uploads/hoteles/<?= $hotelero['logo'] ?>" width="50px"></td>
                         <td><?= $hotelero['nombre_establecimiento'] ?></td>
                         <td><?= $hotelero['tipo_establecimiento'] ?></td>
-                        <td><?= $hotelero['numero_habitaciones'] ?></td>
-                        <td><?= $hotelero['calificacion_promedio'] ?></td>
-                        <td><span class="badge-activo">Activo</span></td>
+                        <td><?= $hotelero['nombre_representante'] ?></td>
+                        <td><?= $hotelero['email'] ?></td>
+                        <td><?= $hotelero['telefono'] ?></td>
+                        <td><?= $hotelero['id_ciudad'] ?></td>
+                        <td><?= $hotelero['estado'] ?></td>
                     </tr>
                 <?php endforeach; ?>
             <?php else : ?>
@@ -137,7 +141,7 @@
 
     <!-- Footer -->
     <footer>
-        © Aventura Go 2025 - Todos los derechos reservados
+        © Aventura Go <?= date('Y') ?> - Todos los derechos reservados
     </footer>
 
 </body>

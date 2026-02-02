@@ -1,0 +1,214 @@
+/* ================= ESTILOS FORMULARIO PROVEEDOR TURISTICO ================= */
+
+/* Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+/* Paleta de colores */
+:root {
+    --color-primary: #2D4059;
+    --color-secondary: #EA8217;
+    --color-white: #FFFFFF;
+    --color-bg-light: #F8F9FA;
+    --color-border: #E0E0E0;
+    --color-text: #2b2b2b;
+    --font-titles: 'Raleway', sans-serif;
+    --font-text: 'Lato', sans-serif;
+}
+
+h1 h2 h3 h4 h5 h6 {
+    font-family: var(--font-titles);
+}
+
+p a button input {
+    font-family: var(--font-text);
+}
+
+/* da estilos a toda la seccion izquierda */
+.contenido-principal {
+    margin-left: 276px;
+    padding-top: 20px;
+    background-color: #FFFFFF;
+}
+
+/* da estilos a formulario */
+.info {
+    background: #FFFFFF;
+}
+
+.wizard-header {
+    width: 100%;
+    background: linear-gradient(135deg, #2D4059, #3E5C76);
+    border-radius: 20px;
+    padding: 35px 20px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.wizard-header h1 {
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.wizard-header {
+    max-width: 1100px;
+    margin: 0 auto 30px auto;
+}
+
+h3 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #2D4059;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 8px;
+    margin-bottom: 30px;
+    margin-left: 50px;
+}
+
+h3::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #EA8217;
+    border-radius: 2px;
+}
+
+
+
+/* Formulario */
+form {
+    background-color: #FFFFFF;
+    margin-left: 5px;
+    padding: 5px;
+    max-width: 1250px;
+}
+
+/* Wizard steps */
+.wizard-step {
+    display: none;
+}
+
+.wizard-step.active {
+    display: block;
+}
+
+/* Subtítulos de pasos */
+.wizard-step h3 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    color: #2D4059;
+    margin-bottom: 20px;
+}
+
+/* Labels */
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    margin-top: 15px;
+    color: #2B2B2B;
+    margin-left: 50px;
+}
+
+/* Inputs y selects */
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    width: 90%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #9f9e9e;
+    font-size: 14px;
+    margin-left: 50px;
+    background: #f9f9f9;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #EA8217;
+    box-shadow: 0 0 0 2px rgba(234, 130, 23, 0.15);
+}
+
+/* Textarea */
+textarea {
+    resize: vertical;
+}
+
+/* Acciones del wizard */
+.wizard-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+/* Botones */
+.wizard-actions button {
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Botón secundario */
+.wizard-actions button[type="button"] {
+    background-color: #2D4059;
+    color: #FFFFFF;
+    margin-right: 50px;
+
+}
+
+.wizard-actions button[type="button"]:hover {
+    background-color: #1f2f44;
+}
+
+/* Botón principal */
+.wizard-actions button[type="submit"] {
+    background-color: #EA8217;
+    color: #FFFFFF;
+    margin-right: 50px;
+}
+
+.wizard-actions button[type="submit"]:hover {
+    background-color: #d97314;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    margin-left: 50px;
+}
+
+
+
+
+
+/* Responsive */
+@media (max-width: 992px) {
+    .contenido-principal {
+        margin-left: 0;
+        padding: 20px;
+    }
+
+    form {
+        padding: 20px;
+    }
+}

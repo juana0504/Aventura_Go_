@@ -25,7 +25,7 @@ body {
   font-family: var(--font-text);
 }
 
-
+/*  NAVBAR ___________________________________________________________________________________________________________ */
 header {
   background-color: var(--color-white);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -46,12 +46,13 @@ header {
   justify-content: space-between;
 }
 
-/* Logo */
+/*LOGO  */
 .navbar-logo {
   margin-left: 0;
+  width: 150px;
 }
 
-/* Enlaces */
+/* LINKS PRINCIPALES */
 .navbar-nav {
   list-style: none;
   display: flex;
@@ -90,30 +91,7 @@ header {
   border-radius: 5px;
 }
 
-/* Input de búsqueda dentro de la barra */
-#input-busqueda {
-  border: none;
-  outline: none;
-  background: transparent;
-  color: #333;
-  font-size: 14px;
-  width: 100%;
-  font-family: inherit;
-}
-
-/* Placeholder más suave */
-#input-busqueda::placeholder {
-  color: #999;
-}
-
-/* Efecto al escribir */
-#input-busqueda:focus {
-  border-bottom: 1px solid #ff6600; /* línea naranja al enfocar */
-  transition: border-color 0.3s ease;
-}
-
-
-/* Botones */
+/* BOTONES */
 .actions {
   display: flex;
   align-items: center;
@@ -121,8 +99,9 @@ header {
   margin-right: 10px;
 }
 
-.btn-login,
-.btn-register {
+.btn-login {
+  background-color: var(--color-primary);
+  color: var(--color-white);
   font-family: var(--font-titles);
   font-weight: 600;
   border: none;
@@ -131,24 +110,32 @@ header {
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
-  color: var(--color-white);
 }
 
-.btn-login {
-  background-color: var(--color-primary);
+.btn-login:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .btn-register {
   background-color: var(--color-secondary);
+  color: var(--color-white);
+  font-family: var(--font-titles);
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
 }
 
-.btn-login:hover,
 .btn-register:hover {
   transform: scale(1.05);
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-/* Menú móvil */
+/* ICONO MENÚ MÓVIL  */
 .menu-toggle {
   display: none;
   font-size: 22px;
@@ -156,70 +143,241 @@ header {
   cursor: pointer;
 }
 
-.hero-destacados {
-  position: relative;
-  width: 100%;
-  height: 85vh;
-  background: url("../destacados/img/image\ 11\ \(1\).png") center/cover no-repeat;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-top: 90px;
+/* ===============================
+   BIENVENIDA USUARIO - HEADER
+   =============================== */
+
+.Bienvenido {
+  background-color: #2D4059;
+  /* azul Aventura Go */
+  color: #FFFFFF;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 10px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* Ajuste para que no se pegue al botón salir */
+.actions {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 8px;
+}
+
+.bienvenido strong {
+  font-weight: 700;
 }
 
 
-.hero-destacados::after {
-  content: "";
+/* INICIA no modificar, estilos del dropdown--------------------------------------------- */
+.profile-dropdown {
+  position: relative;
+}
+
+.profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #2D4059;
+  color: #FFFFFF;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.profile-btn i {
+  font-size: 16px;
+}
+
+.profile-menu {
   position: absolute;
-  top: 0;
-  left: 0;
+  right: 0;
+  top: 46px;
+  background-color: #FFFFFF;
+  border: 1px solid #E0E0E0;
+  border-radius: 10px;
+  min-width: 200px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  list-style: none;
+  padding: 8px 0;
+  display: none;
+  z-index: 999;
+}
+
+.profile-menu li a {
+  display: block;
+  padding: 10px 16px;
+  font-size: 14px;
+  color: #2B2B2B;
+  text-decoration: none;
+}
+
+.profile-menu li a:hover {
+  background-color: #F8F9FA;
+}
+
+.profile-menu .divider {
+  height: 1px;
+  background-color: #E0E0E0;
+  margin: 6px 0;
+}
+
+.profile-menu .logout {
+  color: #EA8217;
+  font-weight: 600;
+}
+
+/* termina no modificar, estilos del dropdown--------------------------------------------- */
+
+/* SECCIÓN HERO____________________________________________________________________________________________________   */
+#hero {
+  position: relative;
+  margin-left: 0;
+  padding-right: 0;
+  margin-top: 80px;
+}
+
+#hero .carousel {
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  margin: 0 40px;
+}
+
+/* Imágenes del carrusel */
+#hero .carousel-item img {
+  object-fit: cover;
+  filter: brightness(40%);
+  max-height: 700px;
+}
+
+/* Contenido superpuesto */
+#hero .carousel-caption {
+  position: absolute;
+  top: 43%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  text-align: left;
+  color: #FFFFFF;
   width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 1;
+  font-family: 'Lato', sans-serif;
 }
 
-.hero-search {
+/* Titulares principales */
+#hero .carousel-caption h1,
+#hero .carousel-caption h2 {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+#hero .carousel-caption h1 {
+  font-size: 78px;
+}
+
+#hero .carousel-caption h2 {
+  font-size: 78px;
+  margin-bottom: 20px;
+}
+
+/* Párrafos */
+#hero .carousel-caption p {
+  font-size: 20px;
+  margin-bottom: 10px;
+  line-height: 1.1;
+}
+
+/* === Estilos flechas del carrusel === */
+.carousel-control-prev {
+  width: 40px;
+  height: 20px;
+  top: 50%;
+  transition: all 0.3s ease;
+  font-size: 30px;
+}
+
+
+.carousel-control-next {
+  width: 40px;
+  height: 20px;
+  top: 50%;
+  transition: all 0.3s ease;
+  font-size: 30px;
+
+}
+
+/* Posicionamiento */
+.carousel-control-prev {
+  left: 5px;
+}
+
+.carousel-control-next {
+  right: 5px;
+}
+
+/* Controles del carrusel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1);
+}
+
+/* Caja de búsqueda */
+#hero .search-box {
   position: absolute;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  bottom: -36px;
-  z-index: 50;
-  width: 80%;
-  max-width: 920px;
-  background: #fff;
-  border-radius: 40px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 10px 25px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 22px;
+  gap: 20px;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
+  width: fit-content;
+}
+
+#hero .search-box strong {
+  color: #2B2B2B;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: 'Lato', sans-serif;
+}
+
+#hero .search-btn {
+  background-color: #2D4059;
+  color: #FFFFFF;
+  font-size: 14px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+#hero .search-btn:hover {
+  background-color: #EA8217;
 }
 
 
-.hero-overlay {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  color: white;
-}
 
 
-.titulo-hero {
-  font-family: var(--font-titles);
+/* Marca “AVENTURA GO” */
+#hero h2.marca {
   font-size: 48px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  margin-bottom: 10px;
-}
-
-.subtitulo-hero {
-  font-family: var(--font-titles);
-  font-size: 28px;
   font-weight: 700;
-  letter-spacing: 1px;
+  position: absolute;
+  bottom: 40px;
+  right: 140px;
+  text-align: right;
+  color: white;
 }
 
 /* Barra de búsqueda */
@@ -290,10 +448,13 @@ header {
   transform: scale(1.05);
   background: var(--color-secondary);
 }
+
 .fuera-hero {
   position: relative;
-  top: -29px; /* sube un poco para que toque el borde del hero */
-  margin: 0 auto; /* centra horizontalmente */
+  top: -29px;
+  /* sube un poco para que toque el borde del hero */
+  margin: 0 auto;
+  /* centra horizontalmente */
   width: 90%;
   max-width: 1000px;
   background: #fff;
@@ -306,7 +467,8 @@ header {
   padding: 12px 25px;
   z-index: 10;
   left: 27%;
-  transform: translateX(-50%); /* ✅ centra horizontalmente */
+  transform: translateX(-50%);
+  /* ✅ centra horizontalmente */
 }
 
 
@@ -405,7 +567,7 @@ header {
   gap: 8px;
 }
 
-.guest-panel .btn-menos, 
+.guest-panel .btn-menos,
 .guest-panel .btn-mas {
   width: 32px;
   height: 32px;
@@ -418,7 +580,7 @@ header {
   transition: all 0.2s ease;
 }
 
-.guest-panel .btn-menos:hover, 
+.guest-panel .btn-menos:hover,
 .guest-panel .btn-mas:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
@@ -709,6 +871,7 @@ header {
 .social-links a:hover {
   color: var(--color-secondary);
 }
+
 /* ======== CONTENEDOR GENERAL ======== */
 #contenedor-tours {
   display: grid;
@@ -716,12 +879,14 @@ header {
   gap: 25px;
   justify-content: center;
   padding: 50px 80px;
-  background-color: #fff; /* Fondo blanco como el ejemplo */
+  background-color: #fff;
+  /* Fondo blanco como el ejemplo */
 }
 
 .tours-populares {
   background-color: #fff;
-  padding-top: 80px; /* espacio para que no se tape con la barra */
+  padding-top: 80px;
+  /* espacio para que no se tape con la barra */
   padding-bottom: 60px;
   text-align: center;
   position: relative;
@@ -787,7 +952,8 @@ header {
 }
 
 .tour-rating {
-  color: #f8b400; /* color de las estrellas */
+  color: #f8b400;
+  /* color de las estrellas */
   font-size: 0.9rem;
 }
 
@@ -803,205 +969,205 @@ header {
 
 /* ==================== CONTENEDOR ==================== */
 .date-picker-container {
-    position: relative;
-    font-family: 'Lato', sans-serif;
+  position: relative;
+  font-family: 'Lato', sans-serif;
 }
 
 /* ================== BOTÓN PRINCIPAL ================= */
 .date-button {
-    background-color: transparent;
-    border: none;
-    color: #2B2B2B;
-    font-family: 'Lato', sans-serif;
-    padding: 0;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    font-size: 13px;
-    transition: all .2s ease;
-    width: fit-content;
-    text-align: left;
+  background-color: transparent;
+  border: none;
+  color: #2B2B2B;
+  font-family: 'Lato', sans-serif;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 13px;
+  transition: all .2s ease;
+  width: fit-content;
+  text-align: left;
 }
 
 .date-button:hover {
-    color: var(--color-secondary);
+  color: var(--color-secondary);
 }
 
 .date-button p {
-    margin: 0;
-    color: #888;
-    font-size: 13px;
+  margin: 0;
+  color: #888;
+  font-size: 13px;
 }
 
 .date-button span {
-    color: #888;
-    font-size: 13px;
+  color: #888;
+  font-size: 13px;
 }
 
 /* icono */
 .calendar-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ================== CALENDARIO PANEL ================= */
 .calendar {
-    position: absolute;
-    top: calc(100% + 10px);
-    left: 0;
-    background: #FFFFFF;
-    border: 1px solid #E0E0E0;
-    padding: 14px;
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-    width: 360px;
-    z-index: 999;
-    animation: fadeIn .15s ease-out;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  background: #FFFFFF;
+  border: 1px solid #E0E0E0;
+  padding: 14px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  width: 360px;
+  z-index: 999;
+  animation: fadeIn .15s ease-out;
 }
 
 /* animación entrada */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(4px);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 /* ============= ENCABEZADO MES/AÑO ============= */
 .calendar-header {
-    text-align: center;
-    font-weight: 700;
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #2D4059;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #2D4059;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .nav-btn {
-    cursor: pointer;
-    font-size: 18px;
-    padding: 4px 10px;
-    border-radius: 6px;
-    transition: background .2s;
-    border: none;
-    background: none;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: background .2s;
+  border: none;
+  background: none;
 }
 
 .nav-btn:hover {
-    background-color: #F0F0F0;
+  background-color: #F0F0F0;
 }
 
 /* clickable label */
 #currentLabel {
-    cursor: pointer;
-    padding: 10px 8px;
-    border-radius: 6px;
+  cursor: pointer;
+  padding: 10px 8px;
+  border-radius: 6px;
 }
 
 #currentLabel:hover {
-    background-color: #F0F0F0;
+  background-color: #F0F0F0;
 }
 
 /* ================== GRID DÍAS ================== */
 .week-names {
-    font-weight: bold;
-    color: #777;
-    font-size: 14px;
-    border-bottom: 1px solid #E0E0E0;
-    padding-bottom: 6px;
-    margin-bottom: 6px;
+  font-weight: bold;
+  color: #777;
+  font-size: 14px;
+  border-bottom: 1px solid #E0E0E0;
+  padding-bottom: 6px;
+  margin-bottom: 6px;
 }
 
 .calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    text-align: center;
-    font-size: 15px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  text-align: center;
+  font-size: 15px;
 }
 
 /* celdas */
 .calendar-grid div {
-    padding: 8px 0;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: all .15s ease;
+  padding: 8px 0;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all .15s ease;
 }
 
 /* días hover */
 .calendar-grid div:not(.disabled):hover {
-    background-color: #EA8217;
-    color: #FFFFFF;
+  background-color: #EA8217;
+  color: #FFFFFF;
 }
 
 /* deshabilitados (días pasados) */
 .disabled {
-    pointer-events: none;
-    opacity: 0.3;
+  pointer-events: none;
+  opacity: 0.3;
 }
 
 /* fecha seleccionada */
 .selected {
-    background-color: #2D4059 !important;
-    color: #FFFFFF !important;
-    font-weight: bold;
+  background-color: #2D4059 !important;
+  color: #FFFFFF !important;
+  font-weight: bold;
 }
 
 /* rango entre fechas (si luego activas eso) */
 .range {
-    background-color: #EA8217 !important;
-    color: #FFFFFF !important;
+  background-color: #EA8217 !important;
+  color: #FFFFFF !important;
 }
 
 /* ============= MESES & AÑOS VISTAS ============= */
 .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
-    text-align: center;
-    margin-top: 12px;
-    border-top: 1px solid #E0E0E0;
-    padding-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  text-align: center;
+  margin-top: 12px;
+  border-top: 1px solid #E0E0E0;
+  padding-top: 10px;
 }
 
 .grid div {
-    padding: 12px 0;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background .15s ease;
+  padding: 12px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .15s ease;
 }
 
 .grid div:hover:not(.disabled) {
-    background-color: #EA8217;
-    color: #FFFFFF;
+  background-color: #EA8217;
+  color: #FFFFFF;
 }
 
 /* Mes/Año seleccionado */
 .month-cell.selected,
 .year-cell.selected {
-    background-color: #2D4059;
-    color: #FFF;
+  background-color: #2D4059;
+  color: #FFF;
 }
 
 /* ================= SCROLL Si es muy pequeño el viewport =============== */
 @media(max-height: 500px) {
-    .calendar {
-        overflow-y: auto;
-        max-height: 350px;
-    }
+  .calendar {
+    overflow-y: auto;
+    max-height: 350px;
+  }
 }
 
 /* ======== RESPONSIVE ======== */
@@ -1021,8 +1187,15 @@ header {
    ANIMACIONES
    =========================================================== */
 @keyframes palpitar {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 .palpitando {
@@ -1036,24 +1209,28 @@ header {
   .titulo-hero {
     font-size: 32px;
   }
+
   .subtitulo-hero {
     font-size: 20px;
   }
+
   .search-box {
     flex-direction: column;
     gap: 10px;
     bottom: -45px;
     padding: 15px;
   }
+
   .search-item {
     border: none;
     padding: 0;
   }
+
   .btn-buscar {
     width: 100%;
     justify-content: center;
   }
-  
+
   .guest-panel {
     min-width: 320px;
     right: auto;
@@ -1067,6 +1244,7 @@ header {
   .navbar {
     padding: 8px 16px;
   }
+
   .menu-toggle {
     display: block;
   }
@@ -1084,15 +1262,18 @@ header {
     margin: 0;
     text-align: center;
   }
+
   .footer-top a {
     font-size: 14px;
     margin: 0;
   }
+
   .footer-bottom .row {
     flex-direction: column;
     align-items: center;
     gap: 25px;
   }
+
   .social-links {
     justify-content: center;
   }

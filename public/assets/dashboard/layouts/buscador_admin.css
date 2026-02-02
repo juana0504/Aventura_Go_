@@ -1,0 +1,154 @@
+/* ========== BARRA DE BÚSQUEDA ========== */
+form#busqueda {
+    position: relative;
+    padding: 10px 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+}
+
+form#busqueda input {
+
+    margin-bottom: 14px;
+}
+
+/* Contenedor del input + ícono */
+.busqueda-wrapper {
+    position: relative;
+    width: 100%;
+    /* ajusta si tu layout lo necesita */
+    max-width: 720px;
+
+}
+
+/* Input */
+.busqueda-wrapper input {
+    width: 100%;
+    /* espacio real para el ícono */
+    padding-left: 40px;
+    height: 42px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background-color: #e9eff6;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+}
+
+/* Ícono de búsqueda */
+.busqueda-wrapper .bi-search {
+    position: absolute;
+    left: 14px;
+    top: 40%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #95a5a6;
+    pointer-events: none;
+}
+
+#modoOscuroBtn,
+#notificacionesBtn {
+    margin-bottom: 16px;
+    margin-left: 10px;
+    padding: 7px 20px;
+    background-color: #DEE6F2;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+form#busqueda .bi-moon-fill,
+form#busqueda .bi-bell-fill {
+    color: #000000;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Estilos del dropdown de perfil */
+form#busqueda #perfil {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+    background-color: #EA8217;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #ffffff;
+    /* ancho fijo */
+    width: 260px;
+    box-sizing: border-box;
+    margin-left: 100px;
+    margin-bottom: 10px;
+}
+
+form#busqueda #perfil span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+form#busqueda #perfil img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+form#busqueda #perfil p {
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0;
+}
+
+form#busqueda #perfil h6 {
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0;
+}
+
+
+/* Estilos del dropdown */
+#perfil-dropdown .dropdown-menu {
+    border-radius: 0 0 12px;
+    border: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+#perfil-dropdown .dropdown-item {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #2D4059;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#perfil-dropdown .dropdown-item:hover {
+    background-color: #ffffff;
+    color: #EA8217;
+}
+
+#perfil-dropdown .dropdown-item i {
+    font-size: 16px;
+}
+
+#perfil-dropdown .dropdown-divider {
+    margin: 5px 0;
+}
+
+#perfil.dropdown-toggle {
+    position: relative;
+    padding-right: 40px;
+    /* espacio fijo para la flecha */
+}
+
+#perfil.dropdown-toggle::after {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 0;
+}
