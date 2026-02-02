@@ -26,6 +26,63 @@ body {
     font-family: var(--font-text);
 }
 
+/* ======================================================
+   FIXES (NO TOCA BLOQUES "NO MODIFICAR")
+   ====================================================== */
+
+/* Separación correcta del contenido por el header fixed */
+main {
+    padding-top: 95px; /* evita que el contenido quede debajo del header */
+}
+
+/* Ajuste para secciones nuevas */
+#datos .container,
+#fotos .container,
+#descripcion .container {
+    background: transparent;
+}
+
+/* Datos (título y texto) */
+#datos h1 {
+    font-family: var(--font-titles);
+    font-weight: 800;
+    color: var(--color-secondary);
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+#datos p {
+    color: #444;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Galería */
+.galeria-container img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+/* Descripción */
+#descripcion {
+    margin-top: 18px;
+}
+
+#descripcion .container {
+    background: #FFFFFF;
+    border-radius: 15px;
+    padding: 22px 24px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+#descripcion p {
+    margin-top: 10px;
+    color: #555;
+    line-height: 1.8;
+    font-size: 14px;
+}
+
 /*  HEADER  */
 header {
     background-color: var(--color-white);
@@ -60,7 +117,6 @@ header {
     flex-direction: row;
 }
 
-
 .nav-link {
     font-family: var(--font-titles);
     font-weight: 500;
@@ -89,7 +145,6 @@ header {
     background-color: var(--color-secondary);
     border-radius: 5px;
 }
-
 
 .btn-login,
 .btn-register {
@@ -184,7 +239,6 @@ header {
     font-weight: 700;
 }
 
-
 /* INICIA no modificar, estilos del dropdown--------------------------------------------- */
 .profile-dropdown {
     position: relative;
@@ -248,7 +302,6 @@ header {
 
 /* termina no modificar, estilos del dropdown--------------------------------------------- */
 
-
 /* ESTILOS PARA EL FILTRO DE BÚSQUEDA  */
 .search-filters {
     background-color: #f5f5f5;
@@ -309,12 +362,10 @@ header {
     font-size: 12px;
 }
 
-
 /* estilos de stars */
 .stars i {
     color: var(--color-secondary);
 }
-
 
 /*  MAIN - INFO SECTION  */
 #info {
@@ -329,18 +380,6 @@ header {
     margin-bottom: 20px;
     line-height: 1.6;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* Tarjeta de información */
 .targeta {
@@ -531,9 +570,6 @@ header {
 }
 
 
-
-
-
 /* NO MODIFICAR ESTILOS DE ESTE BOTON */
 /* NO MODIFICAR ESTILOS DE ESTE BOTON */
 /* NO MODIFICAR ESTILOS DE ESTE BOTON */
@@ -576,8 +612,6 @@ header {
 /* NO MODIFICAR ESTILOS DE ESTE BOTON */
 /* NO MODIFICAR ESTILOS DE ESTE BOTON */
 
-
-
 /* OJO EL FOOOOTER ESTA BIEN  NO LO MODIFIQUE */
 /*  FOOTER  */
 .container-fluid {
@@ -609,15 +643,8 @@ header {
 }
 
 @keyframes palpitar {
-
-    0%,
-    100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.05);
-    }
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
 .footer-top a {
@@ -720,9 +747,6 @@ header {
     color: #EA8217;
 }
 
-
-
-
 /* ======================================================
    RESPONSIVE DESIGN – AVENTURA GO
    ====================================================== */
@@ -775,7 +799,6 @@ header {
         padding: 12px 20px;
     }
 }
-
 
 /* =======================
    MOBILE (≤ 768px)
@@ -873,7 +896,6 @@ header {
         padding: 12px 18px;
     }
 }
-
 
 /* =======================
    SMALL MOBILE (≤ 480px)
