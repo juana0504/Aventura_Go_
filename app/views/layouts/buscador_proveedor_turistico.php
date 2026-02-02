@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../../helpers/alert_helper.php';
 require_once __DIR__ . '/../../controllers/perfil.php';
 
-$id = $_SESSION['user']['id'] ?? null;
+$id = $_SESSION['user']['id_usuario'] ?? null;
 
 $usuario = mostrarPerfilProveedor($id);
 

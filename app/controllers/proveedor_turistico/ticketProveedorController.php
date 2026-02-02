@@ -15,8 +15,8 @@ class TicketProveedorController
     // 📋 LISTAR tickets del proveedor
     public function listar()
     {
-        
-        $id_usuario = $_SESSION['user']['id'];
+
+        $id_usuario = $_SESSION['user']['id_usuario'];
 
         $tickets = $this->ticketModel->listarPorUsuario($id_usuario);
 
@@ -28,7 +28,7 @@ class TicketProveedorController
     public function ver($id_ticket)
     {
         session_start();
-        $id_usuario = $_SESSION['user']['id'];
+        $id_usuario = $_SESSION['user']['id_usuario'];
 
         $ticket = $this->ticketModel->buscarPorId($id_ticket);
 
@@ -60,7 +60,7 @@ class TicketProveedorController
             exit();
         }
 
-        $id_usuario = $_SESSION['user']['id'];
+        $id_usuario = $_SESSION['user']['id_usuario'];
         $asunto = trim($_POST['asunto']);
         $descripcion = trim($_POST['descripcion']);
 
@@ -83,5 +83,4 @@ class TicketProveedorController
             BASE_URL . '/proveedor/tickets'
         );
     }
-
 }

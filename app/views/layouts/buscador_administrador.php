@@ -9,7 +9,7 @@ auth('administrador');
 require_once __DIR__ . '/../../helpers/alert_helper.php';
 require_once __DIR__ . '/../../controllers/perfil.php';
 
-$id = $_SESSION['user']['id'];
+$id = $_SESSION['user']['id_usuario'];
 
 $usuario = mostrarPerfilAdmin($id);
 ?>

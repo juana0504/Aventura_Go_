@@ -30,13 +30,13 @@ switch ($method) {
 
         if ($accion === 'eliminar') {
             // esta funcion elimina el proveedor segun su id
-            eliminarProveedor($_GET['id']);
+            eliminarProveedor($_GET['id_usuario']);
         } else if ($accion === 'activar') {
             // esta funcion ACTIVA el proveedor segun su id
-            activarProveedorTuristico($_GET['id']);
+            activarProveedorTuristico($_GET['id_usuario']);
         } else if ($accion === 'desactivar') {
             // esta funcion DESACTIVA el proveedor segun su id
-            desactivarProveedorTuristico($_GET['id']);
+            desactivarProveedorTuristico($_GET['id_usuario']);
         }
 
         if ($accion === 'registrar') {
@@ -50,7 +50,7 @@ switch ($method) {
         }
 
 
-        if (isset($_GET['id'])) {
+        if (isset($_GET['id_usuario'])) {
             // esta funcion llena la tabla con el proveedor segun su id
             listarProveedorId($_GET['id']);
         } else {
