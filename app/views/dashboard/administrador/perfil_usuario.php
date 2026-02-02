@@ -9,7 +9,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
 // ASIGNAMOS EL VALOR ID DEL REGISTRO SEGUN LA TABLA
-$id = $_SESSION['user']['id'];
+$id = $_SESSION['user']['id_usuario'];
 
 $usuario = mostrarPerfilAdmin($id);
 
