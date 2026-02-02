@@ -342,7 +342,7 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
     </script> -->
 
 
-    <script>
+    <!-- <script>
         console.log('JS MODAL INLINE CARGADO');
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -443,10 +443,10 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
                     });
             }
         });
-    </script>
+    </script> -->
 
 
-    <!-- <script>
+    <script>
         console.log('JS MODAL INLINE CARGADO');
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -507,17 +507,24 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
                             }
 
                             // GUARDAR ID
-                            document.getElementById('btn-confirmar').dataset.id = data.id_reserva;
-                            document.getElementById('btn-cancelar').dataset.id = data.id_reserva;
+                            const btnConfirmar = document.getElementById('btn-confirmar');
+                            const btnCancelar = document.getElementById('btn-cancelar');
 
-                            // MOSTRAR / OCULTAR BOTONES
+                            // Reset
+                            btnConfirmar.style.display = 'none';
+                            btnCancelar.style.display = 'none';
+
+                            // Reglas de negocio
                             if (data.estado === 'pendiente') {
-                                document.getElementById('btn-confirmar').style.display = 'inline-block';
-                                document.getElementById('btn-cancelar').style.display = 'inline-block';
-                            } else {
-                                document.getElementById('btn-confirmar').style.display = 'none';
-                                document.getElementById('btn-cancelar').style.display = 'none';
+                                btnConfirmar.style.display = 'inline-block';
+                                btnCancelar.style.display = 'inline-block';
                             }
+
+                            if (data.estado === 'confirmada') {
+                                btnCancelar.style.display = 'inline-block';
+                            }
+
+                            // cancelada → no muestra ningún botón (fin)
 
                             modal.show();
                         });
@@ -577,7 +584,7 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
                     });
             }
         });
-    </script> -->
+    </script>
 
 
 
