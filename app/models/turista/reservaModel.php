@@ -187,4 +187,59 @@ class ReservaModel
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+
+
+
+
+    // public function actualizarEstado($idReserva, $estado)
+    // {
+    //     $sql = "UPDATE reserva 
+    //         SET estado = :estado 
+    //         WHERE id_reserva = :id";
+
+    //     $stmt = $this->db->prepare($sql);
+    //     $stmt->execute([
+    //         ':estado' => $estado,
+    //         ':id'     => $idReserva
+    //     ]);
+    // }
+
+    // public function actualizarEstado($idReserva, $estado)
+    // {
+    //     $sql = "UPDATE reserva 
+    //         SET estado = :estado 
+    //         WHERE id_reserva = :id";
+
+    //     $stmt = $this->db->prepare($sql);
+    //     return $stmt->execute([
+    //         ':estado' => $estado,
+    //         ':id'     => $idReserva
+    //     ]);
+    // }
+
+    public function actualizarEstado($idReserva, $estado)
+    {
+        $sql = "UPDATE reserva SET estado = :estado WHERE id_reserva = :id";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([
+            ':estado' => $estado,
+            ':id'     => $idReserva
+        ]);
+    }
+
+
+
+    public function descontarCupos($idActividad, $cantidad)
+    {
+        $sql = "UPDATE actividad 
+            SET cupos = cupos - :cantidad 
+            WHERE id_actividad = :id";
+
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([
+            ':cantidad' => $cantidad,
+            ':id'       => $idActividad
+        ]);
+    }
 }

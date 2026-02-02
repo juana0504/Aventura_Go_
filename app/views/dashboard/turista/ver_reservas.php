@@ -239,36 +239,27 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
+    <!-- <script>
         console.log('JS MODAL INLINE CARGADO');
 
         document.addEventListener('DOMContentLoaded', function() {
 
             const modalEl = document.getElementById('modalReserva');
-            if (!modalEl) {
-                console.error('No existe #modalReserva');
-                return;
-            }
+            if (!modalEl) return;
 
             const modal = new bootstrap.Modal(modalEl);
 
             document.querySelectorAll('.btn-ver-reserva').forEach(btn => {
-
                 btn.addEventListener('click', function() {
 
                     const idReserva = this.dataset.id;
                     if (!idReserva) return;
 
                     fetch(`<?= BASE_URL ?>/turista/reserva-detalle?id=${idReserva}`)
-                        .then(res => res.text()) // ⚠️ OJO: TEXTO, NO JSON
+                        .then(res => res.text())
                         .then(texto => {
 
-                            // DEBUG
-                            console.log('RESPUESTA RAW:', texto);
-
-                            // LIMPIAMOS cualquier Notice antes del JSON
                             const jsonLimpio = texto.substring(texto.indexOf('{'));
-
                             const data = JSON.parse(jsonLimpio);
 
                             // HEADER
@@ -291,7 +282,6 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
                             galeria.innerHTML = '';
 
                             if (data.imagenes && data.imagenes.length > 0) {
-
                                 imgPrincipal.src =
                                     `<?= BASE_URL ?>/public/uploads/turistico/actividades/${data.imagenes[0].imagen}`;
 
@@ -308,17 +298,286 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
                                 imgPrincipal.src = '';
                             }
 
+                            // GUARDAR ID PARA ACCIONES
+                            document.getElementById('btn-confirmar').dataset.id = data.id_reserva;
+                            document.getElementById('btn-cancelar').dataset.id = data.id_reserva;
+
+                            // MOSTRAR / OCULTAR BOTONES
+                            if (data.estado === 'pendiente') {
+                                document.getElementById('btn-confirmar').style.display = 'inline-block';
+                                document.getElementById('btn-cancelar').style.display = 'inline-block';
+                            } else {
+                                document.getElementById('btn-confirmar').style.display = 'none';
+                                document.getElementById('btn-cancelar').style.display = 'none';
+                            }
+
                             modal.show();
-                        })
-                        .catch(err => {
-                            console.error('Error modal:', err);
                         });
                 });
-
             });
+        });
 
+        // EVENTOS DE BOTONES DEL MODAL
+        document.addEventListener('click', function(e) {
+
+            if (e.target.id === 'btn-confirmar' || e.target.id === 'btn-cancelar') {
+
+                const accion = e.target.id === 'btn-confirmar' ? 'confirmar' : 'cancelar';
+                const idReserva = document.getElementById('btn-confirmar').dataset.id;
+                if (!idReserva) return;
+
+                fetch(`<?= BASE_URL ?>/turista/reserva-accion`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `id_reserva=${idReserva}&accion=${accion}`
+                    })
+                    .then(res => res.json())
+                    .then(resp => {
+                        if (resp.ok) location.reload();
+                    });
+            }
+        });
+    </script> -->
+
+
+    <script>
+        console.log('JS MODAL INLINE CARGADO');
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const modalEl = document.getElementById('modalReserva');
+            if (!modalEl) return;
+
+            const modal = new bootstrap.Modal(modalEl);
+
+            document.querySelectorAll('.btn-ver-reserva').forEach(btn => {
+                btn.addEventListener('click', function() {
+
+                    const idReserva = this.dataset.id;
+                    if (!idReserva) return;
+
+                    fetch(`<?= BASE_URL ?>/turista/reserva-detalle?id=${idReserva}`)
+                        .then(res => res.text())
+                        .then(texto => {
+
+                            const jsonLimpio = texto.substring(texto.indexOf('{'));
+                            const data = JSON.parse(jsonLimpio);
+
+                            // HEADER
+                            document.getElementById('modal-nombre-actividad').textContent = data.nombre_actividad;
+                            document.getElementById('modal-estado').textContent = data.estado;
+                            document.getElementById('modal-fecha-reserva').textContent = data.fecha;
+
+                            // INFO
+                            document.getElementById('modal-proveedor').textContent = data.proveedor;
+                            document.getElementById('modal-fecha').textContent = data.fecha;
+                            document.getElementById('modal-personas').textContent = data.cantidad_personas;
+                            document.getElementById('modal-total').textContent =
+                                Number(data.precio).toLocaleString('es-CO');
+                            document.getElementById('modal-estado-texto').textContent = data.estado;
+                            document.getElementById('modal-descripcion').textContent = data.descripcion ?? '';
+
+                            // IMÁGENES
+                            const imgPrincipal = document.getElementById('modal-imagen-principal');
+                            const galeria = document.getElementById('modal-galeria');
+                            galeria.innerHTML = '';
+
+                            if (data.imagenes && data.imagenes.length > 0) {
+                                imgPrincipal.src =
+                                    `<?= BASE_URL ?>/public/uploads/turistico/actividades/${data.imagenes[0].imagen}`;
+
+                                data.imagenes.forEach(img => {
+                                    const mini = document.createElement('img');
+                                    mini.src =
+                                        `<?= BASE_URL ?>/public/uploads/turistico/actividades/${img.imagen}`;
+                                    mini.style.width = '60px';
+                                    mini.style.cursor = 'pointer';
+                                    mini.onclick = () => imgPrincipal.src = mini.src;
+                                    galeria.appendChild(mini);
+                                });
+                            } else {
+                                imgPrincipal.src = '';
+                            }
+
+                            // 🔴 PASO 2 — AQUÍ EXACTAMENTE
+                            document.getElementById('btn-confirmar').dataset.id = data.id_reserva;
+                            document.getElementById('btn-cancelar').dataset.id = data.id_reserva;
+
+                            // MOSTRAR / OCULTAR BOTONES
+                            if (data.estado === 'pendiente') {
+                                document.getElementById('btn-confirmar').style.display = 'inline-block';
+                                document.getElementById('btn-cancelar').style.display = 'inline-block';
+                            } else {
+                                document.getElementById('btn-confirmar').style.display = 'none';
+                                document.getElementById('btn-cancelar').style.display = 'none';
+                            }
+
+                            modal.show();
+                        });
+                });
+            });
+        });
+
+        // ACCIONES DEL MODAL
+        document.addEventListener('click', function(e) {
+
+            if (e.target.id === 'btn-confirmar' || e.target.id === 'btn-cancelar') {
+
+                const accion = e.target.id === 'btn-confirmar' ? 'confirmar' : 'cancelar';
+                const idReserva = document.getElementById('btn-confirmar').dataset.id;
+
+                if (!idReserva) return;
+
+                fetch(`<?= BASE_URL ?>/turista/reserva-accion`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `id_reserva=${idReserva}&accion=${accion}`
+                    })
+                    .then(res => res.json())
+                    .then(resp => {
+                        if (resp.ok) location.reload();
+                    });
+            }
         });
     </script>
+
+
+    <!-- <script>
+        console.log('JS MODAL INLINE CARGADO');
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const modalEl = document.getElementById('modalReserva');
+            if (!modalEl) return;
+
+            const modal = new bootstrap.Modal(modalEl);
+
+            document.querySelectorAll('.btn-ver-reserva').forEach(btn => {
+
+                btn.addEventListener('click', function() {
+
+                    const idReserva = this.dataset.id;
+                    if (!idReserva) return;
+
+                    fetch(`<?= BASE_URL ?>/turista/reserva-detalle?id=${idReserva}`)
+                        .then(res => res.text())
+                        .then(texto => {
+
+                            const jsonLimpio = texto.substring(texto.indexOf('{'));
+                            const data = JSON.parse(jsonLimpio);
+
+                            // HEADER
+                            document.getElementById('modal-nombre-actividad').textContent = data.nombre_actividad;
+                            document.getElementById('modal-estado').textContent = data.estado;
+                            document.getElementById('modal-fecha-reserva').textContent = data.fecha;
+
+                            // INFO
+                            document.getElementById('modal-proveedor').textContent = data.proveedor;
+                            document.getElementById('modal-fecha').textContent = data.fecha;
+                            document.getElementById('modal-personas').textContent = data.cantidad_personas;
+                            document.getElementById('modal-total').textContent =
+                                Number(data.precio).toLocaleString('es-CO');
+                            document.getElementById('modal-estado-texto').textContent = data.estado;
+                            document.getElementById('modal-descripcion').textContent = data.descripcion ?? '';
+
+                            // IMÁGENES
+                            const imgPrincipal = document.getElementById('modal-imagen-principal');
+                            const galeria = document.getElementById('modal-galeria');
+                            galeria.innerHTML = '';
+
+                            if (data.imagenes && data.imagenes.length > 0) {
+                                imgPrincipal.src =
+                                    `<?= BASE_URL ?>/public/uploads/turistico/actividades/${data.imagenes[0].imagen}`;
+
+                                data.imagenes.forEach(img => {
+                                    const mini = document.createElement('img');
+                                    mini.src =
+                                        `<?= BASE_URL ?>/public/uploads/turistico/actividades/${img.imagen}`;
+                                    mini.style.width = '60px';
+                                    mini.style.cursor = 'pointer';
+                                    mini.onclick = () => imgPrincipal.src = mini.src;
+                                    galeria.appendChild(mini);
+                                });
+                            } else {
+                                imgPrincipal.src = '';
+                            }
+
+                            // GUARDAR ID
+                            document.getElementById('btn-confirmar').dataset.id = data.id_reserva;
+                            document.getElementById('btn-cancelar').dataset.id = data.id_reserva;
+
+                            // MOSTRAR / OCULTAR BOTONES
+                            if (data.estado === 'pendiente') {
+                                document.getElementById('btn-confirmar').style.display = 'inline-block';
+                                document.getElementById('btn-cancelar').style.display = 'inline-block';
+                            } else {
+                                document.getElementById('btn-confirmar').style.display = 'none';
+                                document.getElementById('btn-cancelar').style.display = 'none';
+                            }
+
+                            modal.show();
+                        });
+                });
+            });
+        });
+
+        // ACCIONES CONFIRMAR / CANCELAR
+        document.addEventListener('click', function(e) {
+
+            if (e.target.id === 'btn-confirmar' || e.target.id === 'btn-cancelar') {
+
+                const accion = e.target.id === 'btn-confirmar' ? 'confirmar' : 'cancelar';
+                const idReserva = document.getElementById('btn-confirmar').dataset.id;
+                if (!idReserva) return;
+
+                fetch(`<?= BASE_URL ?>/turista/reserva-accion`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `id_reserva=${idReserva}&accion=${accion}`
+                    })
+                    .then(res => res.json())
+                    .then(resp => {
+
+                        if (resp.ok) {
+
+                            // 🔥 CAMBIAR ESTADO EN MODAL
+                            document.getElementById('modal-estado').textContent = accion === 'confirmar' ?
+                                'confirmada' :
+                                'cancelada';
+
+                            document.getElementById('modal-estado-texto').textContent = accion === 'confirmar' ?
+                                'confirmada' :
+                                'cancelada';
+
+                            // 🔥 CAMBIAR ESTADO EN LA TABLA
+                            const fila = document.querySelector(
+                                `.btn-ver-reserva[data-id="${idReserva}"]`
+                            )?.closest('tr');
+
+                            if (fila) {
+                                const celdaEstado = fila.querySelector('td:nth-child(7)');
+                                if (celdaEstado) {
+                                    celdaEstado.textContent = accion === 'confirmar' ?
+                                        'Confirmada' :
+                                        'Cancelada';
+                                }
+                            }
+
+                            // 🔥 CERRAR MODAL
+                            bootstrap.Modal.getInstance(
+                                document.getElementById('modalReserva')
+                            ).hide();
+                        }
+                    });
+            }
+        });
+    </script> -->
 
 
 

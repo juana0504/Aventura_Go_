@@ -389,12 +389,22 @@ switch ($request) {
         break;
 
 
-
     case '/turista/confirmar-reserva':  //crud reservar modal 
         require_once BASE_PATH . '/app/controllers/turista/reservaController.php';
         (new ReservaController())->confirmarReserva();
         break;
 
+    // case 'turista/reserva-accion':
+    //     require_once BASE_PATH . '/app/controllers/turista/ReservaController.php';
+    //     $controller = new ReservaController();
+    //     $controller->accionReserva();
+    //     break;
+
+
+    case '/turista/reserva-accion':
+        require_once BASE_PATH . '/app/controllers/turista/reservaController.php';
+        (new ReservaController())->accionReserva();
+        break;
 
 
     case '/turista/pdf-reservas':

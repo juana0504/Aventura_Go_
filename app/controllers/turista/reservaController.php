@@ -153,4 +153,60 @@ class ReservaController
 
         exit;
     }
+
+
+    // public function accionReserva()
+    // {
+    //     require_once BASE_PATH . '/app/helpers/session_turista.php';
+    //     require_once BASE_PATH . '/app/models/turista/ReservaModel.php';
+
+    //     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    //         echo json_encode(['ok' => false]);
+    //         exit;
+    //     }
+
+    //     $idReserva = $_POST['id_reserva'] ?? null;
+    //     $accion    = $_POST['accion'] ?? null;
+
+    //     if (!$idReserva || !in_array($accion, ['confirmar', 'cancelar'])) {
+    //         echo json_encode(['ok' => false]);
+    //         exit;
+    //     }
+
+    //     $estado = $accion === 'confirmar' ? 'confirmada' : 'cancelada';
+
+    //     $model = new ReservaModel();
+    //     $model->actualizarEstado($idReserva, $estado);
+
+    //     echo json_encode(['ok' => true]);
+    //     exit;
+    // }
+
+    public function accionReserva()
+    {
+        session_start();
+
+        if (!isset($_SESSION['user']) || $_SESSION['user']['rol'] !== 'turista') {
+            echo json_encode(['ok' => false, 'error' => 'No autorizado']);
+            exit;
+        }
+
+        require_once BASE_PATH . '/app/models/turista/ReservaModel.php';
+
+        $idReserva = $_POST['id_reserva'] ?? null;
+        $accion    = $_POST['accion'] ?? null;
+
+        if (!$idReserva || !$accion) {
+            echo json_encode(['ok' => false, 'error' => 'Datos incompletos']);
+            exit;
+        }
+
+        $estado = ($accion === 'confirmar') ? 'confirmada' : 'cancelada';
+
+        $model = new ReservaModel();
+        $ok = $model->actualizarEstado($idReserva, $estado);
+
+        echo json_encode(['ok' => $ok]);
+        exit;
+    }
 }
