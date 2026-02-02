@@ -370,31 +370,32 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/turista/registrar_reserva.php';
         break;
 
-    case '/turista/preparar-reserva':
-        require_once BASE_PATH . '/app/controllers/turista/prepararReservaController.php'; //prepara para entrar a reservar al dashboard(alberth)
-        break;
 
-    case '/turista/confirmar-reserva':
-        require_once BASE_PATH . '/app/controllers/turista/confirmarReservaController.php';
-        break;
-
-    case '/turista/registrar-reserva':
-        require_once BASE_PATH . '/app/controllers/turista/registrarReservaController.php';
-        break;
-
-    case '/turista/ver-reservas':
-        require BASE_PATH . '/app/controllers/turista/verReservaController.php';
-        break;
-
-    case '/turista/crear-reserva':
-        require_once BASE_PATH . '/app/controllers/turista/crearReservaController.php';
+    case '/turista/preparar-reserva': //crud reservar
+        require_once BASE_PATH . '/app/controllers/turista/reservaController.php';
+        (new ReservaController())->prepararReserva();
         break;
 
 
-
-    case '/turista/reserva-detalle':
-        require_once BASE_PATH . '/app/controllers/turista/verReservaDetalle.php';
+    case '/turista/ver-reservas':  //crud confirmar reserva 
+        require_once BASE_PATH . '/app/controllers/turista/reservaController.php';
+        (new ReservaController())->verReservas();
         break;
+
+
+    case '/turista/reserva-detalle':  //crud confirmar reserva
+        require_once BASE_PATH . '/app/controllers/turista/reservaController.php';
+        (new ReservaController())->detalleReserva();
+        break;
+
+
+
+    case '/turista/confirmar-reserva':  //crud reservar modal 
+        require_once BASE_PATH . '/app/controllers/turista/reservaController.php';
+        (new ReservaController())->confirmarReserva();
+        break;
+
+
 
     case '/turista/pdf-reservas':
         require_once BASE_PATH . '/app/controllers/turista/verReservaPdfController.php';

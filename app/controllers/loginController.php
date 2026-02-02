@@ -1,5 +1,4 @@
 <?php
-die('ENTRÉ A crearReservaController');
 //impotamos las dependencias
 require_once __DIR__ . '/../helpers/alert_helper.php';
 require_once __DIR__ . '/../models/login.php';
@@ -33,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //si pasa esta linea el ususario es valido
     session_start();
     $_SESSION['user'] = [
-        'id' => $resultado['id_usuario'],
         'id_usuario' => $resultado['id_usuario'],
         'nombre' => $resultado['nombre'],
         'rol' => $resultado['rol']

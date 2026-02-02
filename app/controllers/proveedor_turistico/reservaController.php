@@ -5,14 +5,14 @@ require_once __DIR__ . '/../../models/proveedor_turistico/Reserva.php';
 
 // Inicializar modelo
 $reservaModel = new Reserva();
-$id_proveedor = $_SESSION['id_proveedor']?? null;
+$id_proveedor = $_SESSION['id_proveedor'] ?? null;
 
 
 // Manejar acciones GET para confirmar/cancelar reservas
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $accion = $_GET['accion'] ?? '';
     $id = $_GET['id'] ?? '';
-    
+
     if ($accion === 'confirmar' && $id) {
         // Verificar seguridad: la reserva debe pertenecer al proveedor
         if ($reservaModel->verificarReservaDeProveedor($id, $id_proveedor)) {
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         header("Location: " . BASE_URL . "/proveedor/consultar-reservas");
         exit;
     }
-    
+
     if ($accion === 'cancelar' && $id) {
         // Verificar seguridad: la reserva debe pertenecer al proveedor
         if ($reservaModel->verificarReservaDeProveedor($id, $id_proveedor)) {
@@ -55,4 +55,3 @@ $estadisticas = $reservaModel->obtenerEstadisticas($id_proveedor);
 
 // Cargar la vista con los datos
 require_once __DIR__ . '/../../views/dashboard/proveedor_turistico/consultar_reservas.php';
-?>

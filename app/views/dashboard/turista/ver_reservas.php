@@ -12,14 +12,17 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
 
     <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_turista.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_turista.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/consultar_actividad_turistica/consultar_actividad_turistica.css">
+
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/turista/ver_reservas/ver_reservas.css">
+
+
 </head>
 
 <body>
@@ -34,6 +37,28 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
 
             <div class="header-section">
                 <h1>Mis Reservas</h1>
+            </div>
+
+
+            <!-- Filtros Rápidos -->
+            <div class="filtros-rapidos">
+                <button class="filtro-btn active" data-filter="all">
+                    <i class="bi bi-grid"></i> Todos
+                </button>
+                <button class="filtro-btn" data-filter="activo">
+                    <i class="bi bi-check-circle"></i> Activos
+                </button>
+                <button class="filtro-btn" data-filter="inactivo">
+                    <i class="bi bi-x-circle"></i> Inactivos
+                </button>
+                <button class="filtro-btn" data-filter="pendiente">
+                    <i class="bi bi-clock"></i> Pendientes
+                </button>
+
+                <a href="<?= BASE_URL ?>/proveedor/pdf-actividades" class="btn-pdf" target="_blank">
+                    <i class="bi bi-file-earmark-pdf"></i>Generar Reportes
+                </a>
+
             </div>
 
             <div class="card shadow-sm mt-4">
@@ -55,105 +80,73 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
                             </thead>
 
                             <tbody>
+
                                 <?php if (!empty($reservas)): ?>
                                     <?php foreach ($reservas as $reserva): ?>
 
                                         <tr>
+
+                                            <!-- 1 Imagen + Actividad -->
                                             <td>
-                                                <div class="d-flex align-items-center">
-
-                                                    <?php if (!empty($reserva['imagen'])): ?>
-                                                        <img src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= htmlspecialchars($reserva['imagen']) ?>"
-                                                            class="rounded me-3" style="width:50px;height:50px;object-fit:cover;">
-                                                    <?php else: ?>
-                                                        <div class="rounded me-3 bg-secondary d-flex align-items-center justify-content-center"
-                                                            style="width:50px;height:50px;">
-                                                            <i class="bi bi-image text-white"></i>
-                                                        </div>
-                                                    <?php endif; ?>
-
-                                                    <div>
-                                                        <strong><?= htmlspecialchars($reserva['nombre_actividad'] ?? 'Actividad') ?></strong>
-                                                        <br>
-                                                        <small class="text-muted"><?= htmlspecialchars($reserva['nombre_ciudad'] ?? '') ?></small>
-                                                    </div>
-
-                                                </div>
+                                                <?php if (!empty($reserva['imagen'])): ?>
+                                                    <img src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= htmlspecialchars($reserva['imagen']) ?>">
+                                                <?php endif; ?>
                                             </td>
+
+
 
                                             <td>
-                                                <strong><?= htmlspecialchars($reserva['nombre_empresa'] ?? 'Proveedor') ?></strong>
-                                                <br>
-                                                <small class="text-muted"><?= htmlspecialchars($reserva['email_representante'] ?? '') ?></small>
+                                                <strong><?= htmlspecialchars($reserva['nombre_actividad']) ?></strong>
                                             </td>
 
+
+                                            <!--3  Proveedor -->
                                             <td>
-                                                <?= !empty($reserva['fecha']) ? date('d/m/Y', strtotime($reserva['fecha'])) : '--/--/----' ?>
-                                                <br>
-                                                <small class="text-muted">
-                                                    <?= !empty($reserva['created_at']) ? date('H:i', strtotime($reserva['created_at'])) : '--:--' ?>
-                                                </small>
+                                                <?= htmlspecialchars($reserva['proveedor']) ?>
                                             </td>
 
-                                            <td class="text-center">
-                                                <strong><?= (int)($reserva['cantidad_personas'] ?? 0) ?></strong>
+                                            <!--4  Fecha -->
+                                            <td>
+                                                <?= date('d/m/Y', strtotime($reserva['fecha'])) ?>
                                             </td>
 
-                                            <td class="text-end">
+                                            <!--5  Personas -->
+                                            <td>
+                                                <?= (int)$reserva['cantidad_personas'] ?>
+                                            </td>
+
+                                            <!-- 6  Total -->
+                                            <td>
                                                 <strong>
-                                                    $<?= number_format(
-                                                            ($reserva['precio'] ?? 0) * ($reserva['cantidad_personas'] ?? 0),
-                                                            0,
-                                                            ',',
-                                                            '.'
-                                                        ) ?>
+                                                    $<?= number_format($reserva['precio'], 0, ',', '.') ?>
                                                 </strong>
                                             </td>
 
+                                            <!--7  Estado -->
                                             <td>
                                                 <?php
-                                                $estado = $reserva['estado'] ?? 'pendiente';
-                                                $estadoClass =
-                                                    $estado === 'pendiente' ? 'bg-warning text-dark' : ($estado === 'confirmada' ? 'bg-success' : ($estado === 'cancelada' ? 'bg-danger' : 'bg-primary'));
+                                                $estado = $reserva['estado'];
+                                                $clase =
+                                                    $estado === 'pendiente' ? 'bg-warning text-dark' : ($estado === 'confirmada' ? 'bg-success' : ($estado === 'cancelada' ? 'bg-danger' : 'bg-secondary'));
                                                 ?>
-                                                <span class="badge <?= $estadoClass ?>">
+                                                <span class="badge <?= $clase ?>">
                                                     <?= ucfirst($estado) ?>
                                                 </span>
                                             </td>
 
-                                            <td>
+                                            <!--8  Acciones -->
                                             <td>
 
-                                                <!-- Botón ver -->
-                                                <button class="btn-accion btn-ver"
-                                                    data-id="<?= $reserva['id_reserva'] ?? 0 ?>"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#modalReserva">
+
+                                                <button
+                                                    class="btn btn-sm btn-outline-primary btn-ver-reserva"
+                                                    data-id="<?= $reserva['id_reserva'] ?>">
                                                     <i class="bi bi-eye"></i>
+                                                    Ver
                                                 </button>
 
-                                                <!-- Botón cancelar SOLO si está pendiente -->
-                                                <?php if (($reserva['estado'] ?? '') === 'pendiente'): ?>
-                                                    <a
-                                                        href="<?= BASE_URL ?>/turista/ver-reservas?accion=cancelar&id=<?= $reserva['id_reserva'] ?>"
-                                                        class="btn btn-sm btn-danger ms-1"
-                                                        onclick="return confirm('¿Desea cancelar esta reserva?');">
-                                                        Cancelar
-                                                    </a>
-                                                    <!-- Botón ACTIVAR LA RESERVA -->
 
-                                                    <?php if ($reserva['estado'] === 'pendiente'): ?>
-                                                        <a
-                                                            href="<?= BASE_URL ?>/turista/confirmar-reserva?id=<?= $reserva['id_reserva'] ?>"
-                                                            class="btn btn-success btn-sm mt-1"
-                                                            onclick="return confirm('¿Confirmar esta reserva? Se descontarán los cupos.')">
-                                                            Confirmar
-                                                        </a>
-                                                    <?php endif; ?>
 
-                                                <?php endif; ?>
-
-                                            </td>
 
                                             </td>
 
@@ -163,13 +156,14 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
                                 <?php else: ?>
 
                                     <tr>
-                                        <td colspan="7" class="text-center text-muted py-5">
+                                        <td colspan="8" class="text-center text-muted py-5">
                                             <i class="bi bi-calendar-x" style="font-size:3rem"></i>
                                             <h5 class="mt-3">No tienes reservas registradas</h5>
                                         </td>
                                     </tr>
 
                                 <?php endif; ?>
+
                             </tbody>
                         </table>
 
@@ -180,14 +174,162 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
         </div>
     </section>
 
+    <!-- MODAL DETALLE RESERVA -->
+    <div class="modal fade" id="modalReserva" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- HEADER -->
+                <div class="modal-header d-flex justify-content-between align-items-start">
+                    <div>
+                        <h5 id="modal-nombre-actividad"></h5>
+                    </div>
+
+                    <div class="text-end">
+                        <span id="modal-estado" class="badge"></span><br>
+                        <small id="modal-fecha-reserva" class="text-muted"></small>
+                    </div>
+
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- BODY -->
+                <div class="modal-body">
+
+                    <div class="row mb-4">
+
+                        <!-- IMÁGENES -->
+                        <div class="col-md-5 text-center">
+                            <img id="modal-imagen-principal" class="img-fluid rounded mb-2">
+
+                            <div id="modal-galeria" class="d-flex justify-content-center gap-2 flex-wrap">
+                                <!-- miniaturas -->
+                            </div>
+                        </div>
+
+                        <!-- INFO -->
+                        <div class="col-md-7">
+                            <p><strong>Proveedor:</strong> <span id="modal-proveedor"></span></p>
+                            <p><strong>Fecha:</strong> <span id="modal-fecha"></span></p>
+                            <p><strong>Personas:</strong> <span id="modal-personas"></span></p>
+                            <p><strong>Total:</strong> $<span id="modal-total"></span></p>
+                            <p><strong>Estado:</strong> <span id="modal-estado-texto"></span></p>
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <div>
+                        <h6>Descripción</h6>
+                        <p id="modal-descripcion"></p>
+                    </div>
+
+                </div>
+
+                <!-- FOOTER -->
+                <div class="modal-footer">
+                    <button id="btn-confirmar" class="btn btn-success">Confirmar</button>
+                    <button id="btn-cancelar" class="btn btn-danger">Cancelar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
     <script>
-        AOS.init({
-            duration: 800,
-            once: true
+        console.log('JS MODAL INLINE CARGADO');
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const modalEl = document.getElementById('modalReserva');
+            if (!modalEl) {
+                console.error('No existe #modalReserva');
+                return;
+            }
+
+            const modal = new bootstrap.Modal(modalEl);
+
+            document.querySelectorAll('.btn-ver-reserva').forEach(btn => {
+
+                btn.addEventListener('click', function() {
+
+                    const idReserva = this.dataset.id;
+                    if (!idReserva) return;
+
+                    fetch(`<?= BASE_URL ?>/turista/reserva-detalle?id=${idReserva}`)
+                        .then(res => res.text()) // ⚠️ OJO: TEXTO, NO JSON
+                        .then(texto => {
+
+                            // DEBUG
+                            console.log('RESPUESTA RAW:', texto);
+
+                            // LIMPIAMOS cualquier Notice antes del JSON
+                            const jsonLimpio = texto.substring(texto.indexOf('{'));
+
+                            const data = JSON.parse(jsonLimpio);
+
+                            // HEADER
+                            document.getElementById('modal-nombre-actividad').textContent = data.nombre_actividad;
+                            document.getElementById('modal-estado').textContent = data.estado;
+                            document.getElementById('modal-fecha-reserva').textContent = data.fecha;
+
+                            // INFO
+                            document.getElementById('modal-proveedor').textContent = data.proveedor;
+                            document.getElementById('modal-fecha').textContent = data.fecha;
+                            document.getElementById('modal-personas').textContent = data.cantidad_personas;
+                            document.getElementById('modal-total').textContent =
+                                Number(data.precio).toLocaleString('es-CO');
+                            document.getElementById('modal-estado-texto').textContent = data.estado;
+                            document.getElementById('modal-descripcion').textContent = data.descripcion ?? '';
+
+                            // IMÁGENES
+                            const imgPrincipal = document.getElementById('modal-imagen-principal');
+                            const galeria = document.getElementById('modal-galeria');
+                            galeria.innerHTML = '';
+
+                            if (data.imagenes && data.imagenes.length > 0) {
+
+                                imgPrincipal.src =
+                                    `<?= BASE_URL ?>/public/uploads/turistico/actividades/${data.imagenes[0].imagen}`;
+
+                                data.imagenes.forEach(img => {
+                                    const mini = document.createElement('img');
+                                    mini.src =
+                                        `<?= BASE_URL ?>/public/uploads/turistico/actividades/${img.imagen}`;
+                                    mini.style.width = '60px';
+                                    mini.style.cursor = 'pointer';
+                                    mini.onclick = () => imgPrincipal.src = mini.src;
+                                    galeria.appendChild(mini);
+                                });
+                            } else {
+                                imgPrincipal.src = '';
+                            }
+
+                            modal.show();
+                        })
+                        .catch(err => {
+                            console.error('Error modal:', err);
+                        });
+                });
+
+            });
+
         });
     </script>
+
+
+
+
+    <!-- <script>
+        const BASE_URL = "<?= BASE_URL ?>";
+    </script>
+
+    <script src="<?= BASE_URL ?>/public/assets/dashboard/turista/ver_reservas/modal_reserva.js"></script> -->
+
+
 
 </body>
 
