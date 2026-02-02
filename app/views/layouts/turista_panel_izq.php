@@ -22,10 +22,11 @@
 
                 <ul id="menu-panel">
                     <a href="<?= BASE_URL ?>/turista/dashboard" class="bi-speedometer2">Dashboard</a>
-                    <a href="<?= BASE_URL ?>/turista/registrar-actividad" class="bi bi-layout-text-sidebar-reverse">Confirmar reserva</a>
+                    <a href="<?= BASE_URL ?>/turista/confirmar-reserva" class="bi bi-layout-text-sidebar-reverse">Confirmar reserva</a>
                     <a href="<?= BASE_URL ?>/turista/ver-reservas" class="bi bi-table">Ver reservas</a>
-                    <a href="<?= BASE_URL ?>/turista/crear-ticket" class="bi bi-ticket-perforated">Generar Reporte</a>
-
+                    <a href="<?= BASE_URL ?>/turista/tickets">
+                        <i class="fa fa-ticket"></i> Tickets
+                    </a>
                 </ul>
 
             </div>

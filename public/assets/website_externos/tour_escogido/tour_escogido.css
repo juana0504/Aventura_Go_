@@ -576,7 +576,10 @@ header {
 /* NO MODIFICAR ESTILOS DE ESTE BOTON */
 /* NO MODIFICAR ESTILOS DE ESTE BOTON */
 
-
+.activities-grid {
+    margin-top: 150px;
+    margin-left: 25px;
+}
 
 /* OJO EL FOOOOTER ESTA BIEN  NO LO MODIFIQUE */
 /*  FOOTER  */

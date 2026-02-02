@@ -1,8 +1,10 @@
-<?php session_start();
-require_once __DIR__ . '/../../models/proveedor_turistico/ActividadTuristica.php';
+<?php
+session_start();
 
-$actividadModel = new ActividadTuristica();
-$actividades = $actividadModel->listarActividadesPublicas();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +44,6 @@ $actividades = $actividadModel->listarActividadesPublicas();
 </head>
 
 <body>
-
     <!-- header________________________________________________________________________________________________________________________________ -->
     <header>
 
@@ -52,66 +53,115 @@ $actividades = $actividadModel->listarActividadesPublicas();
                     <img src="../public/assets/website_externos/tour_escogido/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
                 </div>
 
-                <?php if (!empty($actividades)): ?>
-                    <?php foreach ($actividades as $actividad): ?>
-                        <h1 class="page-title">
-                            Tu reserva de tours en <?= htmlspecialchars($actividad['ciudad'] ?? 'tu destino') ?>
-                        </h1>
+                <h1 class="page-title">Tu reserva de tours en tu destino </h1>
 
-                        <div class="actions">
+                <div class="actions">
 
-                            <?php if (isset($_SESSION['user'])): ?>
-
-                                <span class="Bienvenido">
-                                    Bienvenido, <?= htmlspecialchars(ucwords(explode(' ', $_SESSION['user']['nombre'])[0] . ' ' . (explode(' ', $_SESSION['user']['nombre'])[1] ?? ''))) ?>
+                    <?php if (isset($_SESSION['user'])): ?>
+                        <div class="profile-dropdown">
+                            <button class="profile-btn" id="profileToggle">
+                                <i class="fas fa-user-circle"></i>
+                                <span class="profile-name">
+                                    <?= htmlspecialchars(
+                                        ucwords(
+                                            explode(' ', $_SESSION['user']['nombre'])[0] . ' ' .
+                                                (explode(' ', $_SESSION['user']['nombre'])[1] ?? '')
+                                        )
+                                    ) ?>
                                 </span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
 
-                                <a href="/aventura_go/logout" class="btn-register">
-                                    Salir
-                                </a>
+                            <ul class="profile-menu" id="profileMenu">
+                                <li>
+                                    <a href="/aventura_go/turista/perfil">Mi perfil</a>
+                                </li>
+                                <li>
+                                    <a href="/aventura_go/turista/dashboard">Dashboard</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="/aventura_go/logout" class="logout">Cerrar sesión</a>
+                                </li>
+                            </ul>
+                        </div>
+                    <?php else: ?>
 
-                            <?php else: ?>
+                        <a href="/aventura_go/login" class="btn-login">
+                            Ingresa
+                        </a>
 
-                                <a href="/aventura_go/login" class="btn-login">
-                                    Ingresa
-                                </a>
+                        <a href="/aventura_go/registrarse" class="btn-register">
+                            Regístrate
+                        </a>
 
-                                <a href="/aventura_go/registrarse" class="btn-register">
-                                    Regístrate
-                                </a>
+                    <?php endif; ?>
 
-                            <?php endif; ?>
-
-                            <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
-                                <i class="fas fa-bars"></i>
-                            </div>
-
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p>No hay actividades disponibles.</p>
-                <?php endif; ?>
-
-                </div>
-                    <a href="#" class="btn-login">Atrás</a>
-                    <div class="menu-toggle" id="menu-toggle">
+                    <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
                         <i class="fas fa-bars"></i>
                     </div>
+
                 </div>
-
-
             </div>
         </nav>
-
     </header>
 
 
     <main>
 
-        <?php if (!empty($actividades)): ?>
-            <?php foreach ($actividades as $actividad): ?>
+        <div class="activities-grid">
 
-                <!-- Sección barra busqueda____________________________________________________________________________________________________________ -->
-                <section id="filtros">
+            <?php if (!empty($actividad)): ?>
+
+                <div class="activity-card">
+
+                    <?php if (!empty($actividad['imagen_principal'])): ?>
+                        <!-- Imagen principal -->
+                        <div class="imagen-principal">
+                            <img
+                                src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $actividad['imagen_principal'] ?>"
+                                alt="<?= htmlspecialchars($actividad['nombre']) ?>">
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if (!empty($actividad['imagenes'])): ?>
+                        <!-- Galería (máx 5) -->
+                        <div class="galeria-actividad">
+                            <?php foreach ($actividad['imagenes'] as $img): ?>
+                                <img
+                                    src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $img ?>"
+                                    alt="<?= htmlspecialchars($actividad['nombre']) ?>">
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <h3><?= htmlspecialchars($actividad['nombre']) ?></h3>
+
+                    <p><?= htmlspecialchars($actividad['descripcion']) ?></p>
+
+
+
+
+
+                    <!-- BOTON DE RESERVAR____________________________________________________________________________________________________________ -->
+                    <div class="button">
+                        <a href="<?= BASE_URL ?>/turista/preparar-reserva?id=<?= $actividad['id_actividad'] ?>"
+                            class="btn-ver-mas">
+                            RESERVAR
+                        </a>
+                    </div>
+
+                </div>
+
+            <?php else: ?>
+                <p>No se encontró la actividad.</p>
+            <?php endif; ?>
+
+
+        </div>
+
+        <!-- Sección barra busqueda____________________________________________________________________________________________________________ -->
+        <!-- <section id="filtros">
                     <div class="container">
                         <div class="search-filters">
                             <div class="row">
@@ -138,81 +188,15 @@ $actividades = $actividadModel->listarActividadesPublicas();
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> -->
 
-                <!-- Sección Características____________________________________________________________________________________________________________ -->
-                <section id="datos">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-9">
-                                <h1><?= htmlspecialchars($actividad['nombre']) ?></h1>
-                                <p><?= htmlspecialchars($actividad['ubicacion']) ?>, <?= htmlspecialchars($actividad['ciudad']) ?>, Cundinamarca, Colombia</p>
-                                <p>Después de reservar, encontrarás todos los datos de tu actividad con el número de teléfono y la
-                                    dirección en tu confirmación de la reserva y en tu cuenta.</p>
-                            </div>
-                            <div class="col-md-3 stars">
-                                <p>1 Noche, 2 Días</p>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <span>(120 Review)</span> <br>
-                                <span> From $325000 <strong>$282000</strong></span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
 
-                <!-- Sección fotos____________________________________________________________________________________________________________ -->
-                <section id="fotos">
-                    <div class="container">
-                        <div class="galeria-container p-3 bg-white shadow-sm rounded-4">
-                            <div class="row g-2">
-                                <!-- Imágenes -->
-                                <div class="col-6 col-md-4 col-lg-2">
-                                    <img src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $actividad['imagen'] ?>" class="img-fluid rounded" alt="foto 1">
-                                </div>
 
-                                <div class="col-6 col-md-4 col-lg-3">
-                                    <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 2">
-                                </div>
 
-                                <div class="col-6 col-md-4 col-lg-2">
-                                    <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 3">
-                                </div>
-
-                                <div class="col-6 col-md-4 col-lg-3">
-                                    <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 4">
-                                </div>
-
-                                <div class="col-6 col-md-4 col-lg-2">
-                                    <img src="../turista/img/imagen tour.png" class="img-fluid rounded" alt="foto 5">
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Sección descripcion____________________________________________________________________________________________________________ -->
-                <section id="descripcion">
-                    <div class="container">
-                        <h5 class="fw-bold"><?= htmlspecialchars($actividad['nombre']) ?></h5>
-                        <p>
-                            <?= htmlspecialchars($actividad['descripcion']) ?>
-                        </p>
-                    </div>
-                </section>
-        
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p>No hay actividades disponibles.</p>
-        <?php endif; ?>
 
         <!-- Sección mapa____________________________________________________________________________________________________________ -->
         <section id="mapa" class="mapa-section">
-            <!-- seccion mapa -->
+
             <div id="mapa" class="mapa-section">
                 <div class="mapa-contenedor">
                     <iframe
@@ -223,13 +207,8 @@ $actividades = $actividadModel->listarActividadesPublicas();
             </div>
         </section>
 
-        <!-- BOTON DE RESERVAR____________________________________________________________________________________________________________ -->
-        <div class="button">
-            <a href="<?= BASE_URL ?>/turista/preparar-reserva?id=<?= $actividad['id_actividad'] ?>"
-                class="btn-ver-mas">
-                RESERVAR
-            </a>
-        </div>
+
+
 
     </main>
 

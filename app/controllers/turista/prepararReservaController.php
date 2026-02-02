@@ -1,34 +1,42 @@
 <?php
+session_start();
 
-// Preparar reserva desde website (PUBLICO)
-// Guarda la actividad y luego valida login
+require_once BASE_PATH . '/app/models/proveedor_turistico/ActividadTuristica.php';
 
-
-// NO proteger aquí con session_turista
-
-// Validar que venga el id de la actividad
+// Validar que venga el id
 if (!isset($_GET['id']) || empty($_GET['id'])) {
-    header('Location: ' . BASE_URL . '/descubre-tours');
+    header('Location: ' . BASE_URL . '/website/descubre_tours');
     exit;
 }
 
-// Guardamos la actividad pendiente en sesión
+$idActividad = (int) $_GET['id'];
+
+// Obtener datos reales de la actividad
+$model = new ActividadTuristica();
+$actividad = $model->obtenerDetalleActividad($idActividad);
+
+if (!$actividad) {
+    header('Location: ' . BASE_URL . '/website/descubre_tours');
+    exit;
+}
+
+// Guardar actividad pendiente en sesión
 $_SESSION['actividad_pendiente'] = [
-    'id_actividad' => (int) $_GET['id'],
-    'fecha' => date('Y-m-d'),
-    'personas' => 1
+    'id_actividad' => $actividad['id_actividad'],
+    'fecha'        => date('Y-m-d'),
+    'personas'     => 1,
+    'actividad'    => $actividad
 ];
 
-// Ahora sí: validar login
-if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['rol'] !== 'turista') {
+// Si NO está logueado como turista → login
+if (!isset($_SESSION['user']) || $_SESSION['user']['rol'] !== 'turista') {
 
-    // guardamos a dónde debe volver luego del login
     $_SESSION['redirect_after_login'] = '/turista/confirmar-reserva';
 
     header('Location: ' . BASE_URL . '/login');
     exit;
 }
 
-// Si ya está logueado, seguimos normal
+// Si ya está logueado → confirmar reserva
 header('Location: ' . BASE_URL . '/turista/confirmar-reserva');
 exit;

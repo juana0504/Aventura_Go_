@@ -43,6 +43,7 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
                         <table class="table table-hover align-middle">
                             <thead class="table-light">
                                 <tr>
+                                    <th>Imagen</th>
                                     <th>Actividad</th>
                                     <th>Proveedor</th>
                                     <th>Fecha</th>
@@ -121,12 +122,39 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
                                             </td>
 
                                             <td>
+                                            <td>
+
+                                                <!-- Botón ver -->
                                                 <button class="btn-accion btn-ver"
                                                     data-id="<?= $reserva['id_reserva'] ?? 0 ?>"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#modalReserva">
                                                     <i class="bi bi-eye"></i>
                                                 </button>
+
+                                                <!-- Botón cancelar SOLO si está pendiente -->
+                                                <?php if (($reserva['estado'] ?? '') === 'pendiente'): ?>
+                                                    <a
+                                                        href="<?= BASE_URL ?>/turista/ver-reservas?accion=cancelar&id=<?= $reserva['id_reserva'] ?>"
+                                                        class="btn btn-sm btn-danger ms-1"
+                                                        onclick="return confirm('¿Desea cancelar esta reserva?');">
+                                                        Cancelar
+                                                    </a>
+                                                    <!-- Botón ACTIVAR LA RESERVA -->
+
+                                                    <?php if ($reserva['estado'] === 'pendiente'): ?>
+                                                        <a
+                                                            href="<?= BASE_URL ?>/turista/confirmar-reserva?id=<?= $reserva['id_reserva'] ?>"
+                                                            class="btn btn-success btn-sm mt-1"
+                                                            onclick="return confirm('¿Confirmar esta reserva? Se descontarán los cupos.')">
+                                                            Confirmar
+                                                        </a>
+                                                    <?php endif; ?>
+
+                                                <?php endif; ?>
+
+                                            </td>
+
                                             </td>
 
                                         </tr>
