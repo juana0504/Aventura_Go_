@@ -33,10 +33,10 @@ switch ($method) {
             eliminarProveedor($_GET['id_usuario']);
         } else if ($accion === 'activar') {
             // esta funcion ACTIVA el proveedor segun su id
-            activarProveedorTuristico($_GET['id_usuario']);
+            activarProveedorTuristico($_GET['id']);
         } else if ($accion === 'desactivar') {
             // esta funcion DESACTIVA el proveedor segun su id
-            desactivarProveedorTuristico($_GET['id_usuario']);
+            desactivarProveedorTuristico($_GET['id']);
         }
 
         if ($accion === 'registrar') {

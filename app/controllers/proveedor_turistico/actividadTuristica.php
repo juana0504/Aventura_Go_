@@ -35,17 +35,17 @@ switch ($method) {
         $accion = $_GET['accion'] ?? '';
 
         if ($accion === 'eliminar') {
-            eliminaractividad($_GET['id']);
+            eliminaractividad($_GET['id_usuario']);
             exit;
         }
 
         if ($accion === 'activar') {
-            activarActividad($_GET['id']);
+            activarActividad($_GET['id_usuario']);
             exit;
         }
 
         if ($accion === 'desactivar') {
-            desactivarActividad($_GET['id']);
+            desactivarActividad($_GET['id_usuario']);
             exit;
         }
 
@@ -56,7 +56,7 @@ switch ($method) {
             exit;
         }
 
-    
+
         if (isset($_GET['id'])) {
             listarActividadId($_GET['id']);
         } else {
@@ -295,7 +295,7 @@ function actualizarActividad()
 
 function listarActividades()
 {
-     require_once __DIR__ . '/../../models/proveedor_turistico/Proveedor.php';
+    require_once __DIR__ . '/../../models/proveedor_turistico/Proveedor.php';
     $proveedorModel = new Proveedor();
     $id_usuario = $_SESSION['user']['id_usuario'];
 

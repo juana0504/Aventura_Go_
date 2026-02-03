@@ -2,29 +2,33 @@
 require_once __DIR__ . '/../../models/Ticket.php';
 require_once __DIR__ . '/../../helpers/alert_helper.php';
 // CAMBIO: Usar la sesión de turista
-require_once __DIR__ . '/../../helpers/session_turista.php'; 
+require_once __DIR__ . '/../../helpers/session_turista.php';
 
 class TicketTuristaController // NOMBRE NUEVO
 {
     private $ticketModel;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->ticketModel = new Ticket();
     }
 
-    public function listar() {
+    public function listar()
+    {
         $id_usuario = $_SESSION['user']['id_usuario'];
         $tickets = $this->ticketModel->listarPorUsuario($id_usuario);
-        
+
         // CAMBIO: Ruta a la carpeta de turista
         require_once __DIR__ . '/../../views/dashboard/turista/listar.php';
     }
 
-    public function crear() {
+    public function crear()
+    {
         require_once __DIR__ . '/../../views/dashboard/turista/crear_ticket.php';
     }
 
-    public function guardar() {
+    public function guardar()
+    {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: ' . BASE_URL . '/turista/tickets');
             exit();
