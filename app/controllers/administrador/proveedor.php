@@ -30,7 +30,7 @@ switch ($method) {
 
         if ($accion === 'eliminar') {
             // esta funcion elimina el proveedor segun su id
-            eliminarProveedor($_GET['id_usuario']);
+            eliminarProveedor($_GET['id']);
         } else if ($accion === 'activar') {
             // esta funcion ACTIVA el proveedor segun su id
             activarProveedorTuristico($_GET['id']);

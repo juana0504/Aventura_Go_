@@ -228,7 +228,6 @@
                         class="card-img-top" alt="Nimaima">
                     <div class="card-body">
                         <h5 class="card-title">NIMAIMA</h5>
-                        <p class="card-text estrellas">★★★★★</p>
                     </div>
                 </div>
             </div>
@@ -241,7 +240,6 @@
                             class="card-img-top" alt="Villeta">
                         <div class="card-body">
                             <h5 class="card-title">VILLETA</h5>
-                            <p class="card-text estrellas">★★★★★</p>
                         </div>
                     </div>
                 </a>
@@ -255,7 +253,6 @@
                         class="card-img-top" alt="La Vega">
                     <div class="card-body">
                         <h5 class="card-title">LA VEGA</h5>
-                        <p class="card-text estrellas">★★★★★</p>
                     </div>
                 </div>
             </div>
@@ -267,7 +264,6 @@
                         class="card-img-top" alt="San Francisco">
                     <div class="card-body">
                         <h5 class="card-title">SAN FRANCISCO</h5>
-                        <p class="card-text estrellas">★★★★★</p>
                     </div>
                 </div>
             </div>
@@ -279,7 +275,6 @@
                         class="card-img-top" alt="Sasaima">
                     <div class="card-body">
                         <h5 class="card-title">SASAIMA</h5>
-                        <p class="card-text estrellas">★★★★★</p>
                     </div>
                 </div>
             </div>
@@ -291,7 +286,6 @@
                         class="card-img-top" alt="Tobia">
                     <div class="card-body">
                         <h5 class="card-title">TOBIA</h5>
-                        <p class="card-text estrellas">★★★★★</p>
                     </div>
                 </div>
             </div>
