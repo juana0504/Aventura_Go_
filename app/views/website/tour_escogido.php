@@ -1,15 +1,21 @@
 <?php
-session_start();
-require_once __DIR__ . '/../../models/proveedor_turistico/ActividadTuristica.php';
+require_once BASE_PATH . '/app/models/turista/ActividadModel.php';
 
-$actividadModel = new ActividadTuristica();
-$actividades = $actividadModel->listarActividadesPublicas();
-
-/* Para el título del header: tomar ciudad de la primera actividad si existe */
-$ciudadHeader = 'tu destino';
-if (!empty($actividades) && isset($actividades[0]['ciudad'])) {
-    $ciudadHeader = $actividades[0]['ciudad'];
+$id = $_GET['id'] ?? null;
+if (!$id) {
+    header('Location: ' . BASE_URL . '/formulario-reserva');
+    exit;
 }
+
+$model = new ActividadModel();
+$actividad = $model->obtenerPorId($id);
+
+if (!$actividad) {
+    header('Location: ' . BASE_URL . '/descubre-tours');
+    exit;
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -45,132 +51,258 @@ if (!empty($actividades) && isset($actividades[0]['ciudad'])) {
 </head>
 
 <body>
-
     <!-- header________________________________________________________________________________________________________________________________ -->
     <header>
         <nav class="navbar">
-            <div class="container">
-                <img src="../../../public/assets/website_externos/tour_escogido/img/logo nav.png" alt="Logo Aventura Go"
-                    class="navbar-logo">
-                <ul class="navbar-nav">
-                    <h1>Tour escogido</h1>
-                </ul>
+            <div class="container-fluid">
+                <div class="logo">
+                    <img src="public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
+                </div>
+
+                <h1 class="page-title">Confirma Tu reserva</h1>
+
                 <div class="actions">
-                    <button class="principal">Atrás</button>
-                    <button class="secundario">Salir</button>
+
+                    <?php if (isset($_SESSION['user'])): ?>
+                        <div class="profile-dropdown">
+                            <button class="profile-btn" id="profileToggle">
+                                <i class="fas fa-user-circle"></i>
+                                <span class="profile-name">
+                                    <?= htmlspecialchars(
+                                        ucwords(
+                                            explode(' ', $_SESSION['user']['nombre'])[0] . ' ' .
+                                                (explode(' ', $_SESSION['user']['nombre'])[1] ?? '')
+                                        )
+                                    ) ?>
+                                </span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+
+                            <ul class="profile-menu" id="profileMenu">
+                                <li>
+                                    <a href="/aventura_go/turista/perfil">Mi perfil</a>
+                                </li>
+                                <li>
+                                    <a href="/aventura_go/turista/dashboard">Centro de ayuda</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="/aventura_go/logout" class="logout">Cerrar sesión</a>
+                                </li>
+                            </ul>
+                        </div>
+                    <?php else: ?>
+
+                        <a href="/aventura_go/login" class="btn-login">
+                            Ingresa
+                        </a>
+
+                        <a href="/aventura_go/registrarse" class="btn-register">
+                            Regístrate
+                        </a>
+
+                    <?php endif; ?>
+
+                    <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+                        <i class="fas fa-bars"></i>
+                    </div>
+
                 </div>
             </div>
         </nav>
     </header>
 
     <main>
-        <section id="info">
-            <div class="container">
-                <div class="row">
 
-                    <!-- TARJETA DEL TOUR -->
-                    <div class="col-md-8">
-                        <div class="targeta">
-                            <div class="row">
+        <div class="activities-grid">
 
-                                <div class="col-md-6 detalle">
-                                    <h2>Hotel luxury resort la Vega</h2>
-                                    <span class="badge bg-warning text-dark">20% off</span>
+            <?php if (!empty($actividad)): ?>
 
-                                    <p id="direccion">
-                                        <i class="bi bi-geo-alt"></i>
-                                        Dg. 2 Sur #11a-65, La Vega, Cundinamarca, 253610 Villeta, Colombia
-                                    </p>
+                <div class="activity-card">
 
-                                    <p>
-                                        Después de reservar, encontrarás todos los datos del alojamiento con el número de
-                                        teléfono y la dirección en tu confirmación de la reserva y en tu cuenta.
-                                    </p>
-                                </div>
-
-                                <div class="col-md-6 datos">
-                                    <div class="mb-2">
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <span>(120 Review)</span>
-                                    </div>
-
-                                    <p><i class="bi bi-clock"></i> 1 Noche, 2 Días</p>
-                                    <p>
-                                        <del>$325.000</del>
-                                        <strong class="text-warning fs-4">$282.000</strong>
-                                    </p>
-                                </div>
-
-                            </div>
+                    <?php if (!empty($actividad['imagen_principal'])): ?>
+                        <!-- Imagen principal -->
+                        <div class="imagen-principal">
+                            <img
+                                src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $actividad['imagen_principal'] ?>"
+                                alt="<?= htmlspecialchars($actividad['nombre']) ?>">
                         </div>
-                    </div>
+                    <?php endif; ?>
 
-                    <!-- PANEL FIJO DE RESERVA -->
-                    <div class="col-md-4">
-                        <div class="panel-reserva">
-                            <h4>Reserva tu tour</h4>
-                            <p>Precio final:</p>
-                            <h3>$282.000</h3>
-
-                            <button class="btn btn-warning w-100 mt-3">
-                                Reservar ahora
-                            </button>
+                    <?php if (!empty($actividad['imagenes'])): ?>
+                        <!-- Galería (máx 5) -->
+                        <div class="galeria-actividad">
+                            <?php foreach ($actividad['imagenes'] as $img): ?>
+                                <img
+                                    src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $img ?>"
+                                    alt="<?= htmlspecialchars($actividad['nombre']) ?>">
+                            <?php endforeach; ?>
                         </div>
-                    </div>
+                    <?php endif; ?>
+
+                    <h3><?= htmlspecialchars($actividad['nombre']) ?></h3>
+
+                    <p><?= htmlspecialchars($actividad['descripcion']) ?></p>
+
 
                 </div>
-            </div>
-        </section>
+
+            <?php else: ?>
+                <p>No se encontró la actividad.</p>
+            <?php endif; ?>
+
+            <!-- Sección mapa____________________________________________________________________________________________________________ -->
+            <section id="mapa" class="mapa-section">
+                <div class="mapa-contenedor">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.166972063625!2d-74.472745125039!3d5.013951139904496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4067dfb5f1a3e7%3A0xeca58a4d9a0f72cb!2sVilleta%2C%20Cundinamarca!5e0!3m2!1ses!2sco!4v1690391856678!5m2!1ses!2sco"
+                        allowfullscreen
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </section>
+
+
+            <!-- BOTON DE RESERVAR____________________________________________________________________________________________________________ -->
+            <form action="<?= BASE_URL ?>/formulario-reserva" method="POST">
+
+                <input type="hidden" name="id_actividad" value="<?= $actividad['id_actividad'] ?>">
+
+                <div class="mb-2">
+                    <label>Cantidad de personas</label>
+                    <input type="number"
+                        name="cantidad_personas"
+                        class="form-control"
+                        min="1"
+                        value="1"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <label>Fecha de la actividad</label>
+                    <input type="date"
+                        name="fecha"
+                        class="form-control"
+                        required>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">
+                    Reservar
+                </button>
+            </form>
+        </div>
 
 
 
     </main>
 
+    <!-- F O O T E R_____________________________________________________________________________________________________________________________ -->
+    <footer id="footer" class="container-fluid">
 
+        <!-- footer superior -->
+        <div class="footer-top">
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <h2 class="palpitando">¿Quieres que tu negocio aparezca aquí?</h2>
+                    <a href="contactanos">Publicate en Aventura Go</a>
+                </div>
+            </div>
+        </div>
 
+        <!-- Footer Inferior -->
+        <div class="footer-bottom">
+            <div class="row">
 
+                <!-- Columna 1: Logo -->
+                <div class="col-md-2">
+                    <div class="logo-section">
+                        <img src="../public/assets/website_externos/tour_escogido/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
+                    </div>
+                </div>
 
+                <!-- col 2 Descripción  -->
+                <div class="col-md-2">
+                    <p class="description">
+                        Aventura Go conecta viajeros con experiencias de aventura,
+                        promoviendo el turismo sostenible y apoyando a prestadores locales en destinos naturales."
+                    </p>
+                </div>
 
+                <!-- Columna 3: Destinos -->
+                <div class="col-md-2">
+                    <h5 class="dest-section">Destinos</h5>
+                    <ul class="list-unstyled">
+                        <li>Villeta</li>
+                        <li>Utica</li>
+                        <li>La Vega</li>
+                        <li>San Francisco</li>
+                        <li>Tobia</li>
+                    </ul>
+                </div>
 
+                <!-- Columna 4: Enlaces Útiles -->
+                <div class="col-md-2">
+                    <h5 class="enlaces-section">Enlaces útiles</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Travel Blog</a></li>
+                        <li><a href="#">Be Our Partner</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
 
+                <!-- Columna 5: Contacto -->
+                <div class="col-md-2">
+                    <h5 class="contacto-section">Contactos</h5>
+                    <ul class="list-unstyled contact-list">
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>321 2263435</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>aventurago2025@gmail.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Villeta Cundinamarca</span>
+                        </li>
+                    </ul>
+                </div>
 
+                <!-- Columna 6: Redes Sociales -->
+                <div class="col-md-2">
+                    <h5 class="redes-section">Síguenos</h5>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
 
+            </div>
+        </div>
 
-
-
-
-
-
+    </footer>
 
     <!-- Abootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- JavaScript de Slick -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
-    <!-- aos animate -->
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <!-- <script src="<?= BASE_URL ?>/public/assets/website_externos/tour_escogido/tour_escogido.js"></script> -->
+
     <script>
-        AOS.init();
-    </script>
-
-    <script src="<?= BASE_URL ?>/public/assets/website_externos/tour_escogido/tour_escogido.js"></script>
-
-    <!-- FIX: Evitar errores si no existen esos elementos -->
-    <script>
-        // Dropdown (tu código, pero protegido con if)
         const profileToggle = document.getElementById('profileToggle');
         const profileMenu = document.getElementById('profileMenu');
 
         if (profileToggle && profileMenu) {
             profileToggle.addEventListener('click', function(e) {
                 e.stopPropagation();
-                profileMenu.style.display = (profileMenu.style.display === 'block') ? 'none' : 'block';
+                profileMenu.style.display =
+                    profileMenu.style.display === 'block' ? 'none' : 'block';
             });
 
             document.addEventListener('click', function() {
@@ -178,6 +310,8 @@ if (!empty($actividades) && isset($actividades[0]['ciudad'])) {
             });
         }
     </script>
+
+
 
 </body>
 
