@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 require_once __DIR__ . '/../../models/proveedor_turistico/ActividadTuristica.php';
 
 $actividadModel = new ActividadTuristica();
@@ -62,7 +62,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
                                     <a href="/aventura_go/turista/perfil">Mi perfil</a>
                                 </li>
                                 <li>
-                                    <a href="/aventura_go/turista/dashboard">Dashboard</a>
+                                    <a href="/aventura_go/turista/dashboard">Centro de ayuda</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
@@ -72,9 +72,13 @@ $actividades = $actividadModel->listarActividadesPublicas();
                         </div>
                     <?php else: ?>
 
-                        <a href="/aventura_go/login" class="btn-login">Ingresa</a>
+                        <a href="/aventura_go/login" class="btn-login">
+                            Ingresa
+                        </a>
 
-                        <a href="/aventura_go/registrarse" class="btn-register">Regístrate</a>
+                        <a href="/aventura_go/registrarse" class="btn-register">
+                            Regístrate
+                        </a>
 
                     <?php endif; ?>
 
@@ -164,8 +168,6 @@ $actividades = $actividadModel->listarActividadesPublicas();
 
                             </div>
                         </div>
-
-
 
                     <?php endforeach; ?>
                 <?php else: ?>
