@@ -165,7 +165,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
         crossorigin="anonymous"></script>
 
     <!-- JavaScript -->
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/administrador/administrador.js"></script>
+    <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/administrador/dashboard_proveedor.js"></script>
 
 </body>
 

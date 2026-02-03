@@ -60,6 +60,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
             <!-- Contenedor principal del dashboard -->
             <div class="dashboard-content">
+
                 <main class="main-content">
                     <!-- Tarjetas de resumen -->
                     <section class="summary-cards">

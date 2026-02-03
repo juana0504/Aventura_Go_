@@ -1,9 +1,20 @@
 <?php
-session_start();
+require_once BASE_PATH . '/app/models/turista/ActividadModel.php';
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+$id = $_GET['id'] ?? null;
+if (!$id) {
+    header('Location: ' . BASE_URL . '/formulario-reserva');
+    exit;
 }
+
+$model = new ActividadModel();
+$actividad = $model->obtenerPorId($id);
+
+if (!$actividad) {
+    header('Location: ' . BASE_URL . '/descubre-tours');
+    exit;
+}
+
 
 ?>
 
@@ -50,7 +61,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <nav class="navbar">
             <div class="container-fluid">
                 <div class="logo">
-                    <img src="../public/assets/website_externos/tour_escogido/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
+                    <img src="public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
                 </div>
 
                 <h1 class="page-title">Tu reserva de tours en tu destino </h1>
@@ -143,13 +154,8 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
 
-                    <!-- BOTON DE RESERVAR____________________________________________________________________________________________________________ -->
-                    <div class="button">
-                        <a href="<?= BASE_URL ?>/turista/preparar-reserva?id=<?= $actividad['id_actividad'] ?>"
-                            class="btn-ver-mas">
-                            RESERVAR
-                        </a>
-                    </div>
+
+
 
                 </div>
 
@@ -157,7 +163,33 @@ if (session_status() === PHP_SESSION_NONE) {
                 <p>No se encontró la actividad.</p>
             <?php endif; ?>
 
+            <!-- BOTON DE RESERVAR____________________________________________________________________________________________________________ -->
+            <form action="<?= BASE_URL ?>/formulario-reserva" method="POST">
 
+                <input type="hidden" name="id_actividad" value="<?= $actividad['id_actividad'] ?>">
+
+                <div class="mb-2">
+                    <label>Cantidad de personas</label>
+                    <input type="number"
+                        name="cantidad_personas"
+                        class="form-control"
+                        min="1"
+                        value="1"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <label>Fecha de la actividad</label>
+                    <input type="date"
+                        name="fecha"
+                        class="form-control"
+                        required>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">
+                    Reservar
+                </button>
+            </form>
         </div>
 
         <!-- Sección barra busqueda____________________________________________________________________________________________________________ -->
@@ -311,17 +343,13 @@ if (session_status() === PHP_SESSION_NONE) {
     <!-- Abootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- JavaScript de Slick -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
     <!-- aos animate -->
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>
         AOS.init();
     </script>
 
-    <script src="<?= BASE_URL ?>/public/assets/website_externos/tour_escogido/tour_escogido.js"></script>
+    <!-- <script src="<?= BASE_URL ?>/public/assets/website_externos/tour_escogido/tour_escogido.js"></script> -->
 
     <script>
         const profileToggle = document.getElementById('profileToggle');
@@ -339,6 +367,8 @@ if (session_status() === PHP_SESSION_NONE) {
             });
         }
     </script>
+
+
 </body>
 
 </html>

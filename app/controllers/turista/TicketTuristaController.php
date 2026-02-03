@@ -15,7 +15,7 @@ class TicketTuristaController // NOMBRE NUEVO
 
     public function listar()
     {
-        $id_usuario = $_SESSION['user']['id'];
+        $id_usuario = $_SESSION['user']['id_usuario'];
         $tickets = $this->ticketModel->listarPorUsuario($id_usuario);
 
         // CAMBIO: Ruta a la carpeta de turista

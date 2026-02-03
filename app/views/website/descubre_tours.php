@@ -1,4 +1,5 @@
-<?php session_start();
+<?php
+// session_start();
 require_once __DIR__ . '/../../models/proveedor_turistico/ActividadTuristica.php';
 
 $actividadModel = new ActividadTuristica();
@@ -93,7 +94,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
                 <a href="<?= BASE_URL ?>/descubre-hospedaje" class="tab-btn"> HOSPEDAJE </a>
             </div>
 
-            <div class="search-filters">
+            <!-- <div class="search-filters">
                 <div class="filters-row">
                     <div class="filter-item">
                         <i class="fas fa-calendar"></i>
@@ -108,10 +109,9 @@ $actividades = $actividadModel->listarActividadesPublicas();
                         <input type="text" placeholder="01" readonly>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- aca va las actividdes -->
-
             <div class="activities-grid">
 
                 <?php if (!empty($actividades)): ?>
@@ -156,7 +156,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
                                 </div>
 
                                 <div class="button">
-                                    <a href="<?= BASE_URL ?>/website/tour_escogido?id=<?= $actividad['id_actividad'] ?>" class="btn-ver-mas">
+                                    <a href="<?= BASE_URL ?>/tour-escogido?id=<?= $actividad['id_actividad'] ?>" class="btn-ver-mas">
                                         Ver más
                                     </a>
                                 </div>
@@ -180,11 +180,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
             <form class="search-banner" action="<?= BASE_URL ?>busqueda" method="GET">
                 <div class="search-banner-text">
                     <i class="fas fa-search"></i>
-                    <input
-                        type="text"
-                        name="q"
-                        placeholder="¿Buscas alguna actividad específica?"
-                        required>
+                    <input type="text" name="q" placeholder="¿Buscas alguna actividad específica?" required>
                 </div>
 
                 <button type="submit" class="search-banner-btn">
@@ -289,7 +285,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
         </div>
     </footer>
 
-    <script src="<?= BASE_URL ?>/public/assets/website_externos/descubre_tours/descubre_tours.js"></script>
+    <!-- <script src="<?= BASE_URL ?>/public/assets/website_externos/descubre_tours/descubre_tours.js"></script> -->
 
     <script>
         const profileToggle = document.getElementById('profileToggle');

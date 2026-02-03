@@ -342,7 +342,7 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
     </script> -->
 
 
-    <!-- <script>
+    <script>
         console.log('JS MODAL INLINE CARGADO');
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -443,10 +443,10 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
                     });
             }
         });
-    </script> -->
+    </script>
 
 
-    <script>
+    <!-- <script>
         console.log('JS MODAL INLINE CARGADO');
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -584,7 +584,7 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
                     });
             }
         });
-    </script>
+    </script> -->
 
 
 

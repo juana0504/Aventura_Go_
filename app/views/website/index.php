@@ -1,8 +1,6 @@
 <?php session_start(); ?>
 
 
-
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -85,7 +83,7 @@
                                     <a href="/aventura_go/turista/perfil">Mi perfil</a>
                                 </li>
                                 <li>
-                                    <a href="/aventura_go/turista/dashboard">Dashboard</a>
+                                    <a href="/aventura_go/turista/dashboard">Centro de ayuda</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
