@@ -339,6 +339,18 @@ switch ($request) {
         require_once 'app/views/website/checkout.php';
         break;
 
+    // ======================= PAGO =======================
+    // PAGO (WEBSITE) 
+    case '/pago':
+        require_once BASE_PATH . '/app/controllers/website/PagoController.php';
+        break;
+
+    // PAYU 
+    case '/pago/payu':
+        require_once BASE_PATH . '/app/views/website/pago/payu.php';
+        break;
+
+
 
 
 

@@ -7,6 +7,11 @@ if (!isset($_SESSION['reserva_tmp'])) {
 }
 
 $reserva = $_SESSION['reserva_tmp'];
+
+// reference único por intento
+if (!isset($_SESSION['reference_code'])) {
+    $_SESSION['reference_code'] = 'RES-' . time() . '-' . rand(100, 999);
+}
 ?>
 
 
@@ -152,53 +157,53 @@ $reserva = $_SESSION['reserva_tmp'];
 
                             <div class="card-body">
 
-                                <!-- DATOS DEL TURISTA -->
-                                <h6 class="fw-bold mb-3">Datos del turista</h6>
+                                <form action="<?= BASE_URL ?>/pago" method="POST">
 
-                                <div class="mb-3">
-                                    <label class="form-label">Nombre completo</label>
-                                    <input type="text" class="form-control" placeholder="Ej: Juan Pérez">
-                                </div>
+                                    <h6 class="fw-bold mb-3">Datos del turista</h6>
 
-                                <div class="mb-3">
-                                    <label class="form-label">Correo electrónico</label>
-                                    <input type="email" class="form-control" placeholder="correo@email.com">
-                                </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Nombre completo</label>
+                                        <input type="text" class="form-control" name="nombre" placeholder="Ej: Juan Pérez">
+                                    </div>
 
-                                <div class="mb-4">
-                                    <label class="form-label">Teléfono</label>
-                                    <input type="text" class="form-control" placeholder="3001234567">
-                                </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Correo electrónico</label>
+                                        <input type="email" class="form-control" name="email" placeholder="correo@email.com">
+                                    </div>
 
-                                <!-- MÉTODOS DE PAGO -->
-                                <h6 class="fw-bold mb-3">Método de pago</h6>
+                                    <div class="mb-4">
+                                        <label class="form-label">Teléfono</label>
+                                        <input type="text" class="form-control" name="telefono" placeholder="3001234567">
+                                    </div>
 
-                                <div class="form-check border rounded p-3 mb-2">
-                                    <input class="form-check-input" type="radio" name="metodo_pago" id="payu" checked>
-                                    <label class="form-check-label fw-bold" for="payu">
-                                        PayU
-                                    </label>
-                                    <small class="d-block text-muted">
-                                        Tarjeta, PSE, Nequi, Daviplata
-                                    </small>
-                                </div>
+                                    <h6 class="fw-bold mb-3">Método de pago</h6>
 
-                                <div class="form-check border rounded p-3 mb-4">
-                                    <input class="form-check-input" type="radio" name="metodo_pago" id="mercadopago">
-                                    <label class="form-check-label fw-bold" for="mercadopago">
-                                        MercadoPago
-                                    </label>
-                                    <small class="d-block text-muted">
-                                        Tarjeta, PSE, Wallet MercadoPago
-                                    </small>
-                                </div>
+                                    <div class="form-check border rounded p-3 mb-2">
+                                        <input class="form-check-input" type="radio" name="metodo_pago" value="payu" checked>
+                                        <label class="form-check-label fw-bold">PayU</label>
+                                        <small class="d-block text-muted">Tarjeta, PSE, Nequi, Daviplata</small>
+                                    </div>
 
-                                <!-- BOTÓN FINAL -->
-                                <button class="btn btn-primary w-100 py-2">
-                                    Confirmar y pagar
-                                </button>
+                                    <div class="form-check border rounded p-3 mb-4">
+                                        <input class="form-check-input" type="radio" name="metodo_pago" value="mercadopago">
+                                        <label class="form-check-label fw-bold">MercadoPago</label>
+                                        <small class="d-block text-muted">Tarjeta, PSE, Wallet MercadoPago</small>
+                                    </div>
+
+                                    <!-- OCULTOS -->
+                                    <input type="hidden" name="reference" value="<?= $_SESSION['reference_code'] ?>">
+                                    <input type="hidden" name="total" value="<?= $reserva['total'] ?>">
+                                    <input type="hidden" name="currency" value="COP">
+                                    <input type="hidden" name="descripcion" value="Reserva tour Aventura Go">
+
+                                    <button type="submit" class="btn btn-primary w-100 py-2">
+                                        Confirmar y pagar
+                                    </button>
+
+                                </form>
 
                             </div>
+
                         </div>
                     </div>
 
