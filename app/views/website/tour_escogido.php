@@ -66,47 +66,68 @@ if (!empty($actividades) && isset($actividades[0]['ciudad'])) {
     <main>
         <section id="info">
             <div class="container">
-                <div class="targeta col-md-8">
-                    <div class="row">
+                <div class="row">
 
-                        <div class="col-md-6 detalle">
-                            <h2>Hotel luxury resort la Vega</h2>
-                            <span>20% off</span>
+                    <!-- TARJETA DEL TOUR -->
+                    <div class="col-md-8">
+                        <div class="targeta">
+                            <div class="row">
 
-                            <p id="direccion"><i class="bi bi-geo-alt"></i> Dg. 2 Sur #11a-65, La Vega, Cundinamarca, 253610 Villeta, Colombia <br></p>
-                            <p>Después de reservar, encontrarás todos los datos del alojamiento con el número de
-                                teléfono y
-                                la
-                                <br>
-                                dirección en tu confirmación de la reserva y en tu cuenta.
-                            </p>
-                        </div>
-                        <div class="col-md-6 datos">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <samp>(120 Review)</samp>
+                                <div class="col-md-6 detalle">
+                                    <h2>Hotel luxury resort la Vega</h2>
+                                    <span class="badge bg-warning text-dark">20% off</span>
 
-                            <p><i class="bi bi-clock"></i>1 Noche, 2 Dias</p>
-                            <p><samp>From$325000</samp>$282000</p>
+                                    <p id="direccion">
+                                        <i class="bi bi-geo-alt"></i>
+                                        Dg. 2 Sur #11a-65, La Vega, Cundinamarca, 253610 Villeta, Colombia
+                                    </p>
+
+                                    <p>
+                                        Después de reservar, encontrarás todos los datos del alojamiento con el número de
+                                        teléfono y la dirección en tu confirmación de la reserva y en tu cuenta.
+                                    </p>
+                                </div>
+
+                                <div class="col-md-6 datos">
+                                    <div class="mb-2">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <span>(120 Review)</span>
+                                    </div>
+
+                                    <p><i class="bi bi-clock"></i> 1 Noche, 2 Días</p>
+                                    <p>
+                                        <del>$325.000</del>
+                                        <strong class="text-warning fs-4">$282.000</strong>
+                                    </p>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                    <div class="dato">
-                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, sit impedit molestias voluptas ullam exercitationem dignissimos ratione ab beatae e</p>
-                          
-                   
 
+                    <!-- PANEL FIJO DE RESERVA -->
+                    <div class="col-md-4">
+                        <div class="panel-reserva">
+                            <h4>Reserva tu tour</h4>
+                            <p>Precio final:</p>
+                            <h3>$282.000</h3>
+
+                            <button class="btn btn-warning w-100 mt-3">
+                                Reservar ahora
+                            </button>
+                        </div>
                     </div>
 
                 </div>
             </div>
-
-
-
-
         </section>
+
+
+
     </main>
 
 
@@ -124,7 +145,7 @@ if (!empty($actividades) && isset($actividades[0]['ciudad'])) {
 
 
 
-    
+
     <!-- Abootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
