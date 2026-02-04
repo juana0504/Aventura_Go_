@@ -99,9 +99,10 @@
                             Ingresa
                         </a>
 
-                        <a href="/aventura_go/registrarse" class="btn-register">
+                        <a href="/aventura_go/registro" class="btn-register">
                             Regístrate
                         </a>
+
 
                     <?php endif; ?>
 
