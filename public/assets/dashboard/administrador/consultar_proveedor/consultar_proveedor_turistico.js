@@ -183,3 +183,70 @@ document.addEventListener("click", function (e) {
     })
     .catch(err => alert("Error en la petición: " + err));
 });
+
+
+
+
+
+/**
+ * Gestión de filtrado dinámico para la tabla de proveedores
+ */
+document.addEventListener('DOMContentLoaded', function () {
+    const filtrosBtn = document.querySelectorAll('.filtro-btn');
+    const filasTabla = document.querySelectorAll('#tablaAdmin tbody tr');
+
+    filtrosBtn.forEach(boton => {
+        boton.addEventListener('click', function () {
+            // 1. Gestionar estado visual de los botones
+            filtrosBtn.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+
+            // 2. Obtener el criterio de filtrado
+            const filtro = this.getAttribute('data-filter').toLowerCase();
+
+            // 3. Filtrar las filas de la tabla
+            filasTabla.forEach(fila => {
+                // Obtenemos el texto del badge de estado dentro de la fila
+                const celdaEstado = fila.querySelector('.col-estado');
+                
+                if (!celdaEstado) return; // Saltar si es la fila de "No hay registros"
+
+                const estadoTexto = celdaEstado.textContent.trim().toLowerCase();
+
+                // Lógica de visualización
+                if (filtro === 'all') {
+                    fila.style.display = ''; // Mostrar todos
+                } else {
+                    // Si el texto del estado coincide con el filtro, se muestra
+                    if (estadoTexto === filtro) {
+                        fila.style.display = '';
+                    } else {
+                        fila.style.display = 'none'; // Se oculta
+                    }
+                }
+            });
+            
+            // 4. Opcional: Mostrar mensaje si no hay resultados tras filtrar
+            verificarResultadosVisibles();
+        });
+    });
+
+    /**
+     * Función para mostrar un mensaje si al filtrar no queda ninguna fila visible
+     */
+    function verificarResultadosVisibles() {
+        const cuerpoTabla = document.querySelector('#tablaAdmin tbody');
+        const filasVisibles = Array.from(filasTabla).filter(f => f.style.display !== 'none');
+        
+        // Eliminar mensaje previo si existe
+        const mensajePrevio = document.getElementById('sin-resultados');
+        if (mensajePrevio) mensajePrevio.remove();
+
+        if (filasVisibles.length === 0) {
+            const tr = document.createElement('tr');
+            tr.id = 'sin-resultados';
+            tr.innerHTML = `<td colspan="8" class="text-center">No se encontraron proveedores con este estado.</td>`;
+            cuerpoTabla.appendChild(tr);
+        }
+    }
+});

@@ -140,6 +140,7 @@ $datos = listarTuristas();
     require_once __DIR__ . '/../../layouts/footer_administrador.php';
     ?>
 
+    <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_turista/consultar_turista.js"></script>
 
 </body>
 
