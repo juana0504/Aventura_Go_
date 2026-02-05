@@ -345,7 +345,7 @@ switch ($request) {
         (new WebsiteController())->formularioReserva();
         break;
 
-    // ruta confirmar en formulario checkout, ojo no cambiar nada ruta portegida 
+    // ruta confirmar en formulario checkout, ojo no cambiar nada ruta DE PAGO PROTEGIDA 
     case '/checkout':
         session_start();
         if (!isset($_SESSION['reserva_tmp'])) {
