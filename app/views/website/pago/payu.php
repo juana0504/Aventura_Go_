@@ -51,9 +51,10 @@ $reserva = $_SESSION['reserva_tmp'];
                             En este paso NO se conecta aún
                         -->
 
-                            <button type="submit" class="btn btn-success w-100 mt-3">
+                            <a href="<?= BASE_URL ?>/pago/payu-respuesta" class="btn btn-success">
                                 Continuar a PayU
-                            </button>
+                            </a>
+
                         </form>
 
                     </div>

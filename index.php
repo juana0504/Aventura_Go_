@@ -363,10 +363,22 @@ switch ($request) {
         require_once BASE_PATH . '/app/controllers/website/PagoController.php';
         break;
 
-    // PAYU 
+    // PAGOS EN PAYU 
     case '/pago/payu':
         require_once BASE_PATH . '/app/views/website/pago/payu.php';
         break;
+
+    //respuesta ticken a payu
+    case '/pago/payu-respuesta':
+        require BASE_PATH . '/app/controllers/website/payu_respuesta.php';
+        break;
+
+    //confirmacion pago payu
+    case '/confirmacion':
+        require BASE_PATH . '/app/views/website/confirmacion.php';
+        break;
+
+
 
 
 
