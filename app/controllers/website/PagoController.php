@@ -7,11 +7,15 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+
+
 /*| 2. Validar que exista la reserva temporal*/
 if (!isset($_SESSION['reserva_tmp'])) {
     header('Location: ' . BASE_URL . '/descubre-tours');
     exit;
 }
+
+
 
 /*| 3. Validar datos obligatorios del formulario*/
 $required = ['nombre', 'email', 'telefono', 'metodo_pago', 'reference', 'total'];
@@ -22,6 +26,8 @@ foreach ($required as $field) {
         exit;
     }
 }
+
+
 
 /*| 4. Limpiar y capturar datos*/
 $datosPago = [
@@ -38,10 +44,11 @@ $datosPago = [
     ]
 ];
 
+
+
 /* 5. Guardar datos de pago en sesión (TEMPORAL)
 |  OJO: aún NO es pago real */
 $_SESSION['pago_tmp'] = $datosPago;
-
 
 require_once BASE_PATH . '/config/database.php';
 
@@ -78,7 +85,44 @@ $idReserva = $pdo->lastInsertId();
 $_SESSION['id_reserva'] = $idReserva;
 
 
-/*| 6. Redirigir según el método de pago*/
+
+
+
+// 6: Crear registro en tabla pago (PENDIENTE)
+
+// Datos del pago desde sesión
+$pagoTmp = $_SESSION['pago_tmp'];
+
+// Si hay usuario logueado, usamos su id, si no, null
+$idUsuario = $_SESSION['user']['id_usuario'] ?? null;
+
+// Insertar pago en estado PENDIENTE
+$sqlPago = "INSERT INTO pago 
+    (id_reserva, id_usuario, monto, metodo_pago, referencia_pago, fecha, estado)
+    VALUES
+    (:id_reserva, :id_usuario, :monto, :metodo_pago, :referencia_pago, :fecha, :estado)";
+
+$stmtPago = $pdo->prepare($sqlPago);
+$stmtPago->execute([
+    ':id_reserva'      => $_SESSION['id_reserva'],
+    ':id_usuario'      => $idUsuario,
+    ':monto'           => $pagoTmp['total'],
+    ':metodo_pago'     => $pagoTmp['metodo_pago'],
+    ':referencia_pago' => $pagoTmp['reference'],
+    ':fecha'           => date('Y-m-d'),
+    ':estado'          => 'pendiente',
+]);
+
+// (Opcional por ahora) Guardar el id del pago si luego lo necesitas
+$_SESSION['id_pago'] = $pdo->lastInsertId();
+
+
+
+
+
+
+
+/*| 7. Redirigir según el método de pago*/
 switch ($datosPago['metodo_pago']) {
 
     case 'payu':
