@@ -1,22 +1,7 @@
 <?php
-require_once BASE_PATH . '/app/models/turista/ActividadModel.php';
-
-$id = $_GET['id'] ?? null;
-if (!$id) {
-    header('Location: ' . BASE_URL . '/formulario-reserva');
-    exit;
-}
-
-$model = new ActividadModel();
-$actividad = $model->obtenerPorId($id);
-
-if (!$actividad) {
-    header('Location: ' . BASE_URL . '/descubre-tours');
-    exit;
-}
-
-
+session_start();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -51,16 +36,18 @@ if (!$actividad) {
 </head>
 
 <body>
+
     <!-- header________________________________________________________________________________________________________________________________ -->
     <header>
         <nav class="navbar">
             <div class="container-fluid">
+                <!-- Logo -->
                 <div class="logo">
-                    <img src="public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
+                    <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
+                        class="navbar-logo">
                 </div>
 
-                <h1 class="page-title">Confirma Tu reserva</h1>
-
+                <!-- Botones y menú móvil -->
                 <div class="actions">
 
                     <?php if (isset($_SESSION['user'])): ?>
@@ -97,7 +84,7 @@ if (!$actividad) {
                             Ingresa
                         </a>
 
-                        <a href="/aventura_go/registrarse" class="btn-register">
+                        <a href="/aventura_go/registro" class="btn-register">
                             Regístrate
                         </a>
 
@@ -108,9 +95,12 @@ if (!$actividad) {
                     </div>
 
                 </div>
+
+
             </div>
         </nav>
     </header>
+
 
     <main>
 

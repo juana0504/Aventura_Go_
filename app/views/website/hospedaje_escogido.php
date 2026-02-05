@@ -22,34 +22,62 @@
 
 <body>
 
+    <!-- header________________________________________________________________________________________________________________________________ -->
     <header>
         <nav class="navbar">
-            <div class="container">
-                <img src="../../assets/dashboard/turista/hospedaje_escogido/img/LOGO-FINAL.png" alt="Logo Aventura Go"
-                    class="navbar-logo">
-                <ul class="navbar-nav">
-                    <h1>Tu hospedaje en la vega</h1>
+            <div class="container-fluid">
+                <!-- Logo -->
+                <div class="logo">
+                    <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
+                        class="navbar-logo">
+                </div>
+
+                <!-- Menú principal -->
+                <ul class="navbar-nav" id="navbarNav">
+                    <li><a class="nav-link" href="/aventura_go/">Inicio</a></li>
+                    <li><a class="nav-link" href="/aventura_go/destacados">Destacados</a></li>
+                    <li><a class="nav-link" href="/aventura_go/acerca-de-nosotros">Acerca de nosotros</a></li>
+                    <li><a class="nav-link" href="/aventura_go/contactanos">Contáctanos</a></li>
                 </ul>
 
+                <!-- Botones y menú móvil -->
                 <div class="actions">
 
                     <?php if (isset($_SESSION['user'])): ?>
+                        <div class="profile-dropdown">
+                            <button class="profile-btn" id="profileToggle">
+                                <i class="fas fa-user-circle"></i>
+                                <span class="profile-name">
+                                    <?= htmlspecialchars(
+                                        ucwords(
+                                            explode(' ', $_SESSION['user']['nombre'])[0] . ' ' .
+                                                (explode(' ', $_SESSION['user']['nombre'])[1] ?? '')
+                                        )
+                                    ) ?>
+                                </span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
 
-                        <span class="Bienvenido">
-                            Bienvenido, <?= htmlspecialchars(ucwords(explode(' ', $_SESSION['user']['nombre'])[0] . ' ' . (explode(' ', $_SESSION['user']['nombre'])[1] ?? ''))) ?>
-                        </span>
-
-                        <a href="/aventura_go/logout" class="btn-register">
-                            Salir
-                        </a>
-
+                            <ul class="profile-menu" id="profileMenu">
+                                <li>
+                                    <a href="/aventura_go/turista/perfil">Mi perfil</a>
+                                </li>
+                                <li>
+                                    <a href="/aventura_go/turista/dashboard">Centro de ayuda</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="/aventura_go/logout" class="logout">Cerrar sesión</a>
+                                </li>
+                            </ul>
+                        </div>
                     <?php else: ?>
 
                         <a href="/aventura_go/login" class="btn-login">
                             Ingresa
                         </a>
 
-                        <a href="/aventura_go/registrarse" class="btn-register">
+                        <a href="/aventura_go/registro" class="btn-register">
                             Regístrate
                         </a>
 
@@ -60,9 +88,12 @@
                     </div>
 
                 </div>
+
+
             </div>
         </nav>
     </header>
+
 
 
 

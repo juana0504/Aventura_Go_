@@ -20,16 +20,25 @@
 
 <body>
 
-  <!-- HEADER -->
+  <!-- header________________________________________________________________________________________________________________________________ -->
   <header>
     <nav class="navbar">
-      <div class="container">
-        <img src="../../assets/dashboard/turista/hospedaje_vega/img/LOGO-FINAL copy.png" alt="Logo Aventura Go" class="navbar-logo">
-        <ul class="navbar-nav">
-          <li><a href="#" class="nav-link active">Tours y Aventura</a></li>
-          <li><a href="#" class="nav-link">Hospedaje</a></li>
+      <div class="container-fluid">
+        <!-- Logo -->
+        <div class="logo">
+          <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
+            class="navbar-logo">
+        </div>
+
+        <!-- Menú principal -->
+        <ul class="navbar-nav" id="navbarNav">
+          <li><a class="nav-link" href="/aventura_go/">Inicio</a></li>
+          <li><a class="nav-link" href="/aventura_go/destacados">Destacados</a></li>
+          <li><a class="nav-link" href="/aventura_go/acerca-de-nosotros">Acerca de nosotros</a></li>
+          <li><a class="nav-link" href="/aventura_go/contactanos">Contáctanos</a></li>
         </ul>
 
+        <!-- Botones y menú móvil -->
         <div class="actions">
 
           <?php if (isset($_SESSION['user'])): ?>
@@ -62,12 +71,11 @@
             </div>
           <?php else: ?>
 
-
             <a href="/aventura_go/login" class="btn-login">
               Ingresa
             </a>
 
-            <a href="/aventura_go/registrarse" class="btn-register">
+            <a href="/aventura_go/registro" class="btn-register">
               Regístrate
             </a>
 
@@ -79,9 +87,11 @@
 
         </div>
 
+
       </div>
     </nav>
   </header>
+
 
   <!-- CONTENIDO PRINCIPAL -->
   <main class="container hospedaje-container">
