@@ -1,46 +1,8 @@
 <?php
-
-require_once BASE_PATH . '/app/models/turista/ActividadModel.php';
-
-if (
-    !isset($_POST['id_actividad']) ||
-    !isset($_POST['cantidad_personas']) ||
-    !isset($_POST['fecha'])
-) {
-    header('Location: ' . BASE_URL . '/descubre-tours');
-    exit;
-}
-
-$idActividad = (int) $_POST['id_actividad'];
-$cantidad    = (int) $_POST['cantidad_personas'];
-$fecha       = $_POST['fecha'];
-
-$actividadModel = new ActividadModel();
-$actividad = $actividadModel->obtenerPorId($idActividad);
-
-if (!$actividad || $actividad['estado'] !== 'ACTIVO') {
-    header('Location: ' . BASE_URL . '/descubre-tours');
-    exit;
-}
-
-$precioUnitario = (float) $actividad['precio'];
-$total = $precioUnitario * $cantidad;
-
-/*
- | Guardamos la reserva temporal
- | (se usará en checkout)
-*/
-$_SESSION['reserva_tmp'] = [
-    'id_actividad' => $idActividad,
-    'nombre'       => $actividad['nombre'],
-    'imagen'       => $actividad['imagen'],
-    'cantidad'     => $cantidad,
-    'fecha'        => $fecha,
-    'precio'       => $precioUnitario,
-    'total'        => $total
-];
-
+// Si necesitas sesión para el header
+session_start();
 ?>
+
 
 
 <!DOCTYPE html>
