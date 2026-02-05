@@ -4,7 +4,6 @@ require_once BASE_PATH . '/app/controllers/administrador/turista.php';
 
 $datos = listarTuristas();
 
-
 ?>
 
 <!DOCTYPE html>

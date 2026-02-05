@@ -93,8 +93,6 @@
                         </div>
                     <?php else: ?>
 
-
-
                         <a href="/aventura_go/login" class="btn-login">
                             Ingresa
                         </a>
@@ -102,7 +100,6 @@
                         <a href="/aventura_go/registro" class="btn-register">
                             Regístrate
                         </a>
-
 
                     <?php endif; ?>
 

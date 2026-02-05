@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/../../models/proveedor_turistico/ActividadTuristica.php';
+require_once __DIR__ . '/../../controllers/website/websiteController.php';
 
 $actividadModel = new ActividadTuristica();
 $actividades = $actividadModel->listarActividadesPublicas();
@@ -31,15 +31,18 @@ $actividades = $actividadModel->listarActividadesPublicas();
 </head>
 
 <body>
+
+    <!-- header________________________________________________________________________________________________________________________________ -->
     <header>
         <nav class="navbar">
             <div class="container-fluid">
+                <!-- Logo -->
                 <div class="logo">
-                    <img src="public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
+                    <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
+                        class="navbar-logo">
                 </div>
 
-                <h1 class="page-title">Descubre Todo lo que Villeta Tiene para Ofrecerte</h1>
-
+                <!-- Botones y menú móvil -->
                 <div class="actions">
 
                     <?php if (isset($_SESSION['user'])): ?>
@@ -76,7 +79,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
                             Ingresa
                         </a>
 
-                        <a href="/aventura_go/registrarse" class="btn-register">
+                        <a href="/aventura_go/registro" class="btn-register">
                             Regístrate
                         </a>
 
@@ -87,9 +90,12 @@ $actividades = $actividadModel->listarActividadesPublicas();
                     </div>
 
                 </div>
+
+
             </div>
         </nav>
     </header>
+
 
     <main class="main-content">
         <div class="container">
@@ -287,7 +293,6 @@ $actividades = $actividadModel->listarActividadesPublicas();
         </div>
     </footer>
 
-    <!-- <script src="<?= BASE_URL ?>/public/assets/website_externos/descubre_tours/descubre_tours.js"></script> -->
 
     <script>
         const profileToggle = document.getElementById('profileToggle');

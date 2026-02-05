@@ -26,13 +26,14 @@
 </head>
 
 <body>
-  <!-- HEADER -->
+
+  <!-- header________________________________________________________________________________________________________________________________ -->
   <header>
     <nav class="navbar">
       <div class="container-fluid">
         <!-- Logo -->
         <div class="logo">
-          <img src="public/assets/website_externos/destacados/img/LOGO-FINAL.png" alt="Logo Aventura Go"
+          <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
             class="navbar-logo">
         </div>
 
@@ -67,7 +68,7 @@
                   <a href="/aventura_go/turista/perfil">Mi perfil</a>
                 </li>
                 <li>
-                  <a href="/aventura_go/turista/dashboard">Dashboard</a>
+                  <a href="/aventura_go/turista/dashboard">Centro de ayuda</a>
                 </li>
                 <li class="divider"></li>
                 <li>
@@ -81,7 +82,7 @@
               Ingresa
             </a>
 
-            <a href="/aventura_go/registrarse" class="btn-register">
+            <a href="/aventura_go/registro" class="btn-register">
               Regístrate
             </a>
 
@@ -93,9 +94,11 @@
 
         </div>
 
+
       </div>
     </nav>
   </header>
+
 
   <!-- SECCIÓN DESTACADOS -->
   <section id="hero">

@@ -3,6 +3,8 @@
 
 require_once __DIR__ . '/config/config.php';
 
+require_once BASE_PATH . '/app/controllers/website/WebsiteController.php';
+
 $requestUri = $_SERVER['REQUEST_URI']; //OBTENER LA URI ACTUAL (por ejemplo: aventura_go/login)
 
 $request = str_replace('/aventura_go', '', $requestUri); //Quitar el prefijo de la carpeta del proyecto
@@ -330,23 +332,24 @@ switch ($request) {
 
     // Ruta: descubre tours
     case '/descubre-tours':
-        require BASE_PATH . '/app/views/website/descubre_tours.php';
+        (new WebsiteController())->descubreTours();
         break;
 
     // Ruta: /tour escogido
     case '/tour-escogido':
-        require BASE_PATH . '/app/views/website/tour_escogido.php';
+        (new WebsiteController())->tourEscogido();
         break;
 
     // Ruta: /formulario de reserva
     case '/formulario-reserva':
-        require BASE_PATH . '/app/views/website/formulario_reserva.php';
+        (new WebsiteController())->formularioReserva();
         break;
 
     // ruta confirmar en formulario checkout
     case '/checkout':
-        require_once 'app/views/website/checkout.php';
+        require BASE_PATH . '/app/views/website/checkout.php';
         break;
+
 
     // ======================= PAGO =======================
     // PAGO (WEBSITE) 
