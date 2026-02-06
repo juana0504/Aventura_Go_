@@ -1,4 +1,7 @@
 <?php
+session_start();
+?>
+
 require_once BASE_PATH . '/app/models/proveedor_turistico/ActividadTuristica.php';
 
 $id = $_GET['id'] ?? null;
@@ -26,7 +29,7 @@ if (!$actividad) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aventura Go - tour-escogido</title>
 
-    <link rel="icon" type="image/png" href="../public/assets/website_externos/index/img/FAVICON.png">
+    <link rel="icon" type="image/png" href="public/assets/website_externos/index/img/FAVICON.png">
 
     <!-- bootstrap para el carrusel -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -51,16 +54,18 @@ if (!$actividad) {
 </head>
 
 <body>
+
     <!-- header________________________________________________________________________________________________________________________________ -->
     <header>
         <nav class="navbar">
             <div class="container-fluid">
+                <!-- Logo -->
                 <div class="logo">
-                    <img src="public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
+                    <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
+                        class="navbar-logo">
                 </div>
 
-                <h1 class="page-title">Confirma Tu reserva</h1>
-
+                <!-- Botones y menú móvil -->
                 <div class="actions">
 
                     <?php if (isset($_SESSION['user'])): ?>
@@ -97,7 +102,7 @@ if (!$actividad) {
                             Ingresa
                         </a>
 
-                        <a href="/aventura_go/registrarse" class="btn-register">
+                        <a href="/aventura_go/registro" class="btn-register">
                             Regístrate
                         </a>
 
@@ -108,9 +113,12 @@ if (!$actividad) {
                     </div>
 
                 </div>
+
+
             </div>
         </nav>
     </header>
+
 
     <main>
         

@@ -23,9 +23,11 @@
                 <ul id="menu-panel">
                     <a href="<?= BASE_URL ?>/turista/dashboard" class="bi-speedometer2">Dashboard</a>
                     <a href="<?= BASE_URL ?>/turista/ver-reservas" class="bi bi-table">Ver reservas</a>
-                    <a href="<?= BASE_URL ?>/turista/tickets">
-                        <i class="fa fa-ticket"></i> Tickets
-                    </a>
+                    <a href="<?= BASE_URL ?>/turista/tickets" class="fa fa-ticket"> Tickets</a>
+                    <a href="<?= BASE_URL ?>/turista/" class="fa-solid fa-heart">Favoritos</a>
+                    <a href="<?= BASE_URL ?>/turista/" class="fa-solid fa-heart">Reseñas</a>
+
+
                 </ul>
 
             </div>

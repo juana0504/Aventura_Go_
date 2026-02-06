@@ -1,4 +1,4 @@
-console.log("modal_actividad.js cargado");
+// console.log("modal_actividad.js cargado");
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     document.getElementById('modal-estado-texto').textContent = data.estado;
 
-                    /* ===============================
+                /* ===============================
                 BOTONES ACTIVAR / PAUSAR
                 =============================== */
                 const btnActivar = document.getElementById('btn-activar');
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 btnActivar.dataset.id = data.id_actividad;
                 btnDesactivar.dataset.id = data.id_actividad;
 
-console.log('DATA COMPLETA →', data);
+                console.log('DATA COMPLETA →', data);
 
                 // 🔀 MOSTRAR SEGÚN ESTADO REAL
                 if (data.estado === 'ACTIVO') {

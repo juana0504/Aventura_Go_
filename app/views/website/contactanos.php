@@ -40,7 +40,7 @@
             <div class="container-fluid">
                 <!-- Logo -->
                 <div class="logo">
-                    <img src="public/assets/website_externos/contactanos/img/LOGO-FINAL.png" alt=" Logo Aventura Go"
+                    <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
                         class="navbar-logo">
                 </div>
 
@@ -89,7 +89,7 @@
                             Ingresa
                         </a>
 
-                        <a href="/aventura_go/registrarse" class="btn-register">
+                        <a href="/aventura_go/registro" class="btn-register">
                             Regístrate
                         </a>
 
@@ -100,9 +100,12 @@
                     </div>
 
                 </div>
+
+
             </div>
         </nav>
     </header>
+
 
 
     <!-- HERO CONTACTANOS_______________________________________________________________________________________________ -->
