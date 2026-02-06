@@ -2,6 +2,24 @@
 session_start();
 ?>
 
+require_once BASE_PATH . '/app/models/proveedor_turistico/ActividadTuristica.php';
+
+$id = $_GET['id'] ?? null;
+if (!$id) {
+    header('Location: ' . BASE_URL . '/formulario-reserva');
+    exit;
+}
+
+$actividadModel = new ActividadTuristica();
+$actividad = $actividadModel->obtenerDetalleActividad($id);
+
+if (!$actividad) {
+    header('Location: ' . BASE_URL . '/descubre-tours');
+    exit;
+}
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -103,87 +121,106 @@ session_start();
 
 
     <main>
+        
+        <section id="info">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
 
-        <div class="activities-grid">
+                        <?php if (!empty($actividad)): ?>
+                            <div class="targeta">
+                                <div class="col-md-6 detalle">
+                                    <h2><?= htmlspecialchars($actividad['nombre']) ?></h2>
 
-            <?php if (!empty($actividad)): ?>
+                                    <p id="direccion"><i class="bi bi-geo-alt"></i> <?= htmlspecialchars($actividad['ubicacion']) ?>, <?= htmlspecialchars($actividad['ciudad']) ?>,
+                                        <?= htmlspecialchars($actividad['departamento']) ?>,
+                                        253610 Villeta, Colombia <br></p>
+                                    <p>Después de reservar, encontrarás todos los datos del alojamiento con el número de
+                                        teléfono y la
+                                        <br>
+                                        dirección en tu confirmación de la reserva y en tu cuenta.
+                                    </p>
+                                </div>
+                                <div class="col-md-6 datos">
+                                    <!-- <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <samp>(120 Review)</samp>
 
-                <div class="activity-card">
+                                    <p><i class="bi bi-clock"></i>1 Noche, 2 Dias</p> -->
+                                    <p>$<?= htmlspecialchars($actividad['precio']) ?></p>
+                                </div>
+                            </div>
 
-                    <?php if (!empty($actividad['imagen_principal'])): ?>
-                        <!-- Imagen principal -->
-                        <div class="imagen-principal">
-                            <img
-                                src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $actividad['imagen_principal'] ?>"
-                                alt="<?= htmlspecialchars($actividad['nombre']) ?>">
-                        </div>
-                    <?php endif; ?>
+                            <section id="galeria-hotel">
+                                <div class="cont-img-principal">
+                                    <button class="btn prev">❮</button>
 
-                    <?php if (!empty($actividad['imagenes'])): ?>
-                        <!-- Galería (máx 5) -->
-                        <div class="galeria-actividad">
-                            <?php foreach ($actividad['imagenes'] as $img): ?>
-                                <img
-                                    src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $img ?>"
-                                    alt="<?= htmlspecialchars($actividad['nombre']) ?>">
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endif; ?>
-
-                    <h3><?= htmlspecialchars($actividad['nombre']) ?></h3>
-
-                    <p><?= htmlspecialchars($actividad['descripcion']) ?></p>
+                                    <div class="carousel-track">
+                                        <?php foreach ($actividad['imagenes'] as $img): ?>
+                                            <img src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $img ?>">
+                                        <?php endforeach; ?>
+                                    </div>
 
 
+                                    <button class="btn next">❯</button>
+                                </div>
+                                <div class="cont-items">
+                                    <?php foreach ($actividad['imagenes'] as $index => $img): ?>
+                                        <button type="button" class="item <?= $index === 0 ? 'active' : '' ?>">
+                                            <img src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $img ?>">
+                                        </button>
+                                    <?php endforeach; ?>
+                                </div>
+
+                            </section>
+
+                            <div class="dato">
+                                <h2><?= htmlspecialchars($actividad['nombre']) ?></h2>
+                                <p><?= htmlspecialchars($actividad['descripcion']) ?></p>
+
+
+                                <!-- seccion mapa -->
+                                <section id="mapa" class="mapa-section">
+                                    <div class="mapa-contenedor">
+                                        <iframe
+                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.166972063625!2d-74.472745125039!3d5.013951139904496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4067dfb5f1a3e7%3A0xeca58a4d9a0f72cb!2sVilleta%2C%20Cundinamarca!5e0!3m2!1ses!2sco!4v1690391856678!5m2!1ses!2sco"
+                                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                        </iframe>
+                                    </div>
+                                </section>
+                            </div>
+                        <?php else: ?>
+                            <p>No se encontró la actividad.</p>
+                        <?php endif; ?>
+                    </div>
+                    <div class="col-md-4">
+                        <!-- BOTON DE RESERVAR____________________________________________________________________________________________________________ -->
+                        <form class="form-reserva" action="<?= BASE_URL ?>/formulario-reserva" method="POST">
+
+                            <input type="hidden" name="id_actividad" value="<?= $actividad['id_actividad'] ?>">
+
+                            <div class="form-group">
+                                <label>Cantidad de personas</label>
+                                <input type="number" name="cantidad_personas" class="form-control" min="1" value="1"
+                                    required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Fecha de la actividad</label>
+                                <input type="date" name="fecha" class="form-control" required>
+                            </div>
+
+                            <button type="submit">
+                                Reservar
+                            </button>
+                        </form>
+                    </div>
                 </div>
-
-            <?php else: ?>
-                <p>No se encontró la actividad.</p>
-            <?php endif; ?>
-
-            <!-- Sección mapa____________________________________________________________________________________________________________ -->
-            <section id="mapa" class="mapa-section">
-                <div class="mapa-contenedor">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.166972063625!2d-74.472745125039!3d5.013951139904496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4067dfb5f1a3e7%3A0xeca58a4d9a0f72cb!2sVilleta%2C%20Cundinamarca!5e0!3m2!1ses!2sco!4v1690391856678!5m2!1ses!2sco"
-                        allowfullscreen
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
-            </section>
-
-
-            <!-- BOTON DE RESERVAR____________________________________________________________________________________________________________ -->
-            <form action="<?= BASE_URL ?>/formulario-reserva" method="POST">
-
-                <input type="hidden" name="id_actividad" value="<?= $actividad['id_actividad'] ?>">
-
-                <div class="mb-2">
-                    <label>Cantidad de personas</label>
-                    <input type="number"
-                        name="cantidad_personas"
-                        class="form-control"
-                        min="1"
-                        value="1"
-                        required>
-                </div>
-
-                <div class="mb-3">
-                    <label>Fecha de la actividad</label>
-                    <input type="date"
-                        name="fecha"
-                        class="form-control"
-                        required>
-                </div>
-
-                <button type="submit" class="btn btn-primary w-100">
-                    Reservar
-                </button>
-            </form>
-        </div>
-
-
+            </div>
+        </section>
 
     </main>
 
@@ -282,7 +319,7 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
-    <!-- <script src="<?= BASE_URL ?>/public/assets/website_externos/tour_escogido/tour_escogido.js"></script> -->
+    <script src="<?= BASE_URL ?>/public/assets/website_externos/tour_escogido/tour_escogido.js"></script>
 
     <script>
         const profileToggle = document.getElementById('profileToggle');
