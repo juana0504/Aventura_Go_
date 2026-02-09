@@ -803,3 +803,7 @@ div.dataTables_wrapper div.dataTables_scrollBody td {
         margin-right: 3px;
     }
 }
+
+#tablaAdmin tbody tr {
+    transition: opacity 0.3s ease;
+}
