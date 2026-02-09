@@ -595,6 +595,9 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
 
     <script src="<?= BASE_URL ?>/public/assets/dashboard/turista/ver_reservas/modal_reserva.js"></script> -->
 
+    <script src="<?= BASE_URL ?>/public/assets/dashboard/turista/ver_reservas/modal_reserva.js"></script> -->
+
+
 
 
 </body>
