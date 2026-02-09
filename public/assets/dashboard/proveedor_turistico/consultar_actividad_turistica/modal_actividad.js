@@ -137,3 +137,38 @@ document.addEventListener('DOMContentLoaded', () => {
             `${BASE_URL}/proveedor/actividadTuristica?accion=desactivar&id=${e.target.dataset.id}`;
     });
 });
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const tablaActividades = document.getElementById('tablaActividades');
+    const filtroBtns = document.querySelectorAll('.filtro-btn');
+
+    filtroBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            // 1. Cambiar la apariencia del botón activo
+            filtroBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+
+            // 2. Obtener el valor del filtro (activo, inactivo, pendiente)
+            const filtro = this.getAttribute('data-filter').toLowerCase();
+            const filas = tablaActividades.querySelectorAll('tbody tr');
+
+            filas.forEach(fila => {
+                // Si la tabla está vacía (fila de "No hay registros"), no hacer nada
+                if (fila.cells.length <= 1) return;
+
+                // 3. Obtener el texto de la celda de Estado (Índice 6 en tu tabla)
+                const estadoCelda = fila.cells[6].textContent.trim().toLowerCase();
+
+                // 4. Lógica de visibilidad
+                // Comparamos si el filtro es 'all' o si el texto del estado contiene la palabra del filtro
+                if (filtro === 'all' || estadoCelda.includes(filtro)) {
+                    fila.style.display = ''; // Mostrar
+                } else {
+                    fila.style.display = 'none'; // Ocultar
+                }
+            });
+        });
+    });
+});

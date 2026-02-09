@@ -127,3 +127,41 @@ document.addEventListener('click', function (e) {
     }
 
 });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const filtrosBtn = document.querySelectorAll('.filtro-btn');
+    const filasReservas = document.querySelectorAll('tbody tr');
+
+    filtrosBtn.forEach(btn => {
+        btn.addEventListener('click', function () {
+            // 1. Gestionar clase 'active' en los botones
+            filtrosBtn.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+
+            const filtro = this.getAttribute('data-filter').toLowerCase();
+
+            // 2. Lógica de filtrado
+            filasReservas.forEach(fila => {
+                // Obtenemos el texto de la columna de estado (columna 7)
+                const celdaEstado = fila.querySelector('td:nth-child(7)');
+                if (!celdaEstado) return; // Saltar si es la fila de "No hay reservas"
+
+                const estadoTexto = celdaEstado.textContent.trim().toLowerCase();
+
+                // Reglas de visualización
+                if (filtro === 'all') {
+                    fila.style.display = '';
+                } else if (filtro === 'activo') {
+                    // Se consideran activos los estados 'confirmada'
+                    fila.style.display = (estadoTexto === 'confirmada') ? '' : 'none';
+                } else if (filtro === 'inactivo') {
+                    // Se consideran inactivos los estados 'cancelada'
+                    fila.style.display = (estadoTexto === 'cancelada') ? '' : 'none';
+                } else if (filtro === 'pendiente') {
+                    fila.style.display = (estadoTexto === 'pendiente') ? '' : 'none';
+                }
+            });
+        });
+    });
+});
