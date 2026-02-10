@@ -1,0 +1,38 @@
+body {
+    font-family: 'Lato', sans-serif;
+    background: url("/public/assets/website_externos/index/img/destinos_header.png") no-repeat center center fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-size: cover;
+    position: relative;
+}
+
+h1 {
+    font-family: 'Raleway', sans-serif;
+    color: #2D4059;
+}
+
+.card {
+    border-radius: 12px;
+    border: 1px solid #E0E0E0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.card-title {
+    color: #2D4059;
+    font-family: 'Raleway', sans-serif;
+}
+
+.btn-aventura {
+    background-color: #EA8217;
+    color: #FFFFFF;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.btn-aventura:hover {
+    background-color: #2D4059;
+    color: #FFFFFF;
+}

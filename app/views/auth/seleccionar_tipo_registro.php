@@ -16,43 +16,13 @@
     <!-- Fuentes del proyecto -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&family=Lato:wght@400;600&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            background: #F8F9FA;
-            font-family: 'Lato', sans-serif;
-        }
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="public/assets/extras/seleccionar_tipo_registro/seleccionar_tipo_registro.css">
 
-        h1 {
-            font-family: 'Raleway', sans-serif;
-            color: #2D4059;
-        }
-
-        .card {
-            border-radius: 12px;
-            border: 1px solid #E0E0E0;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-        }
-
-        .card-title {
-            color: #2D4059;
-            font-family: 'Raleway', sans-serif;
-        }
-
-        .btn-aventura {
-            background-color: #EA8217;
-            color: #FFFFFF;
-            border-radius: 8px;
-            font-weight: 600;
-        }
-
-        .btn-aventura:hover {
-            background-color: #2D4059;
-            color: #FFFFFF;
-        }
-    </style>
 </head>
 
 <body>
+    <div id="bg-overlay"></div>
 
     <div class="container py-5">
         <div class="text-center mb-5">
