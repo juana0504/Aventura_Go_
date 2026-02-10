@@ -29,11 +29,6 @@ switch ($request) {
         require BASE_PATH . '/app/views/auth/registrarse.php'; //redirige a el login 
         break;
 
-    case '/registro':
-        require BASE_PATH . '/app/views/auth/seleccionar_tipo_registro.php';
-        break;
-
-
     case '/iniciar-sesion':
         require_once BASE_PATH . '/app/controllers/loginController.php'; //redirige al inicio de sesion
         break;
