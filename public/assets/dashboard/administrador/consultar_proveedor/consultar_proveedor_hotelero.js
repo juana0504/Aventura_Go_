@@ -211,3 +211,110 @@ document.addEventListener("click", function (e) {
     })
     .catch(err => alert("Error en la petición: " + err));
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const tablaAdmin = document.getElementById('tablaAdmin');
+    const filtroBtns = document.querySelectorAll('.filtro-btn');
+
+    // --- 1. LÓGICA DE FILTROS DE LA TABLA ---
+    filtroBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Quitar clase active de todos y poner al actual
+            filtroBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+
+            const filtro = this.getAttribute('data-filter').toLowerCase();
+            const filas = tablaAdmin.querySelectorAll('tbody tr');
+
+            filas.forEach(fila => {
+                // Si la tabla está vacía, ignorar
+                if (fila.cells.length <= 1) return;
+
+                const estadoTexto = fila.querySelector('.col-estado').textContent.trim().toLowerCase();
+                
+                if (filtro === 'all' || estadoTexto.includes(filtro)) {
+                    fila.style.display = '';
+                } else {
+                    fila.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    // --- 2. GESTIÓN DEL MODAL (VER DETALLES) ---
+    tablaAdmin.addEventListener('click', function (e) {
+        const btnVer = e.target.closest('.btn-ver');
+        if (btnVer) {
+            const idProveedor = btnVer.getAttribute('data-id');
+            cargarDatosProveedor(idProveedor);
+        }
+    });
+
+    async function cargarDatosProveedor(id) {
+        try {
+            // URL ajustada a tu estructura de controlador
+            const response = await fetch(`${BASE_URL}/app/controllers/administrador/hotelero.php?accion=obtener&id=${id}`);
+            if (!response.ok) throw new Error("Error en la comunicación con el servidor");
+
+            const data = await response.json();
+            llenarModal(data);
+        } catch (error) {
+            console.error("Error:", error);
+            alert("No se pudo obtener la información detallada.");
+        }
+    }
+
+    function llenarModal(p) {
+        // Cabecera e Imagen
+        const logoImg = document.getElementById('modal-logo');
+        logoImg.src = p.logo ? `${BASE_URL}/public/uploads/hoteles/${p.logo}` : `${BASE_URL}/public/assets/img/no-image.png`;
+        
+        document.getElementById('modal-nombre-establecimiento').textContent = p.nombre_establecimiento || 'N/A';
+        document.getElementById('modal-status').textContent = p.estado || 'PENDIENTE';
+        document.getElementById('modal-status').className = `status-badge badge-${(p.estado || 'pendiente').toLowerCase()}`;
+        document.getElementById('modal-fecha-registro').textContent = p.fecha_registro ? `Registrado el: ${p.fecha_registro}` : '';
+
+        // Sección 1: Información del Establecimiento
+        document.getElementById('modal-nombre-establecimiento-card').textContent = p.nombre_establecimiento || 'N/A';
+        document.getElementById('modal-email').textContent = p.email || 'N/A';
+        document.getElementById('modal-telefono').textContent = p.telefono || 'N/A';
+        document.getElementById('modal-tipo-establecimiento').textContent = p.tipo_establecimiento || 'N/A';
+
+        // Sección 2: Representante
+        document.getElementById('modal-representante').textContent = p.nombre_representante || 'No asignado';
+        document.getElementById('modal-identificacion').textContent = p.identificacion || 'N/A';
+        document.getElementById('modal-email-repre').textContent = p.email_representante || p.email || 'N/A';
+        document.getElementById('modal-telefono-repre').textContent = p.telefono_representante || 'N/A';
+
+        // Sección 3: Ubicación
+        document.getElementById('modal-departamento').textContent = p.nombre_departamento || 'N/A';
+        document.getElementById('modal-ciudad').textContent = p.nombre_ciudad || 'N/A';
+        document.getElementById('modal-direccion').textContent = p.direccion || 'N/A';
+
+        // Sección 4: Habitaciones y Servicios
+        document.getElementById('modal-tipo-habitacion').textContent = p.tipo_habitacion || 'N/A';
+        document.getElementById('modal-max-huesped').textContent = p.max_huespedes || 'N/A';
+        document.getElementById('modal-servicios').textContent = p.servicios_incluidos || 'Ninguno';
+
+        // Sección 5: Documentación
+        document.getElementById('modal-nit').textContent = p.nit || 'N/A';
+        document.getElementById('modal-camara').textContent = p.camara_comercio ? 'Cargado' : 'No disponible';
+        document.getElementById('modal-licencia').textContent = p.licencia_turismo || 'N/A';
+        document.getElementById('modal-metodos-pago').textContent = p.metodos_pago || 'No especificado';
+
+        // Configuración de Botones de Acción (Footer)
+        const btnActivar = document.getElementById('btn-activar-proveedor');
+        const btnDesactivar = document.getElementById('btn-desactivar-proveedor');
+
+        if (p.estado === 'ACTIVO') {
+            btnActivar.style.display = 'none';
+            btnDesactivar.style.display = 'inline-block';
+            btnDesactivar.href = `${BASE_URL}/administrador/cambiar-estado-hotelero?id=${p.id_proveedor_hotelero}&estado=INACTIVO`;
+        } else {
+            btnActivar.style.display = 'inline-block';
+            btnDesactivar.style.display = 'none';
+            btnActivar.href = `${BASE_URL}/administrador/cambiar-estado-hotelero?id=${p.id_proveedor_hotelero}&estado=ACTIVO`;
+        }
+    }
+});
