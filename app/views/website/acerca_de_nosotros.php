@@ -506,7 +506,7 @@
                                     </div>
                                     <div class="card-back p-4 shadow-sm">
                                         <h4>Stiven Aguilar</h4>
-                                        <p>Experto tanto en FrontEnd como en Backend yudando con el funcionamiento y la buena calidad visual del sistema</p>
+                                        <p>Experto tanto en FrontEnd como en Backend desarrollando el funcionamiento y la buena calidad visual del sistema</p>
                                         <hr>
                                         <a href="https://github.com/JOSETH-STIVEN" target="_blank" class="github-link">
                                             <i class="bi bi-github"></i> GitHub
