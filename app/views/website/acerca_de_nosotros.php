@@ -25,6 +25,7 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
     <!-- LIBRERIA AOS ANIMATE -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
@@ -89,7 +90,7 @@
                             Ingresa
                         </a>
 
-                        <a href="/aventura_go/registro" class="btn-register">
+                        <a href="#" class="btn-register" data-bs-toggle="modal" data-bs-target="#registroModal">
                             Regístrate
                         </a>
 
@@ -402,7 +403,7 @@
 
             <!-- Título-->
             <div class="col-12 d-flex align-items-center justify-content-center">
-                <h2>nuestro equipo de trabajo</h2>
+                <h2>NUESTRO EQUIPO DE TRABAJO</h2>
             </div>
 
             <div class="row">
@@ -410,58 +411,110 @@
                 <div class="col-12 col-md-10">
                     <div class="slider-equipo">
 
-
-                        <!-- Card 1 -->
                         <div class="equipo" data-aos="zoom-in" data-aos-duration="1500">
-                            <div class="card1 p-4 shadow-sm w-100">
-                                <img src="public/assets/website_externos/acerca_de_nosotros/img/foto_albert.png" alt="foto albert" class="foto">
-                                <h4>Albert gutierrez</h4>
-                                <p>Scrum master</p>
-                                <p>Frontend</p>
+                            <div class="card-container">
+                                <div class="card-inner">
+                                    <div class="card-front p-4 shadow-sm">
+                                        <img src="public/assets/website_externos/acerca_de_nosotros/img/foto_albert.png" alt="Albert" class="foto">
+                                        <h4>Albert Gutierrez</h4>
+                                        <p>Scrum Master</p>
+                                        <p>Full Stack</p>
+                                    </div>
+                                    <div class="card-back p-4 shadow-sm">
+                                        <h4>Albert Gutierrez</h4>
+                                        <p>Especialoista en FrontEnd desarrollando habilidades de Html, Css y Js, ayudando tambien con el funcionamiento Backend de la plataforma</p>
+                                        <hr>
+                                        <a href="https://github.com/Albert-Gutierrez" target="_blank" class="github-link">
+                                            <i class="bi bi-github"></i> GitHub
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-
-                        <!-- Card 2 -->
                         <div class="equipo" data-aos="zoom-in" data-aos-duration="1500">
-                            <div class="card2 p-4 shadow-sm w-100">
-                                <img src="public/assets/website_externos/acerca_de_nosotros/img/foto_sofia.png" alt="foto sofia" class="foto">
-                                <h4>Sofia Camelo</h4>
-                                <p>Scrum master</p>
-                                <p>Frontend</p>
+                            <div class="card-container">
+                                <div class="card-inner">
+                                    <div class="card-front p-4 shadow-sm">
+                                        <img src="public/assets/website_externos/acerca_de_nosotros/img/foto_sofia.png" alt="Sofia" class="foto">
+                                        <h4>Sofia Camelo</h4>
+                                        <p>Scrum Master</p>
+                                        <p>Frontend</p>
+                                    </div>
+                                    <div class="card-back p-4 shadow-sm">
+                                        <h4>Sofia Camelo</h4>
+                                        <p>Especialista en interfaces intuitivas desarrollando el Html y css para la vista del usuario</p>
+                                        <hr>
+                                        <a href="https://github.com/sofia0760" target="_blank" class="github-link">
+                                            <i class="bi bi-github"></i> GitHub
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Card 3 -->
                         <div class="equipo" data-aos="zoom-in" data-aos-duration="1500">
-                            <div class="card3 p-4 shadow-sm w-100">
-                                <img src="public/assets/website_externos/acerca_de_nosotros/img/foto_juan.png" alt="foto juan" class="foto">
-                                <h4>Juan mahecha</h4>
-                                <p>Development Team</p>
-                                <p>Frontend</p>
+                            <div class="card-container">
+                                <div class="card-inner">
+                                    <div class="card-front p-4 shadow-sm">
+                                        <img src="public/assets/website_externos/acerca_de_nosotros/img/foto_juan.png" alt="Juan" class="foto">
+                                        <h4>Juan Mahecha</h4>
+                                        <p>Development Team</p>
+                                        <p>Frontend</p>
+                                    </div>
+                                    <div class="card-back p-4 shadow-sm">
+                                        <h4>Juan Mahecha</h4>
+                                        <p>Desarrollador enfocado en rendimiento y buena visivilidad del proyecto</p>
+                                        <hr>
+                                        <a href="https://github.com/JUAN-MAHECHA1" target="_blank" class="github-link">
+                                            <i class="bi bi-github"></i> GitHub
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Card 4 -->
                         <div class="equipo" data-aos="zoom-in" data-aos-duration="1500">
-                            <div class="card4 p-4 shadow-sm w-100">
-                                <img src="public/assets/website_externos/acerca_de_nosotros/img/foto_juana.png" alt="foto juana" class="foto">
-                                <h4>juana rodriguez</h4>
-                                <p>Development Team</p>
-                                <p>Backend</p>
+                            <div class="card-container">
+                                <div class="card-inner">
+                                    <div class="card-front p-4 shadow-sm">
+                                        <img src="public/assets/website_externos/acerca_de_nosotros/img/foto_juana.png" alt="Juana" class="foto">
+                                        <h4>Juana Rodriguez</h4>
+                                        <p>Development Team</p>
+                                        <p>Backend</p>
+                                    </div>
+                                    <div class="card-back p-4 shadow-sm">
+                                        <h4>Juana Rodriguez</h4>
+                                        <p>Arquitecta de bases de datos y lógica de servidor, desarrollando el Backend para la logica y el funcionamiento de la platforma</p>
+                                        <hr>
+                                        <a href="https://github.com/juana0504" target="_blank" class="github-link">
+                                            <i class="bi bi-github"></i> GitHub
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Card 5 -->
                         <div class="equipo" data-aos="zoom-in" data-aos-duration="1500">
-                            <div class="card5 p-4 shadow-sm w-100">
-                                <img src="public/assets/website_externos/acerca_de_nosotros/img/foto_stiven.png" alt="foto stiven" class="foto">
-                                <h4>Stiven aguilar</h4>
-                                <p>Development Team</p>
-                                <p>Backend</p>
+                            <div class="card-container">
+                                <div class="card-inner">
+                                    <div class="card-front p-4 shadow-sm">
+                                        <img src="public/assets/website_externos/acerca_de_nosotros/img/foto_stiven.png" alt="Stiven" class="foto">
+                                        <h4>Stiven Aguilar</h4>
+                                        <p>Development Team</p>
+                                        <p>Full Stack</p>
+                                    </div>
+                                    <div class="card-back p-4 shadow-sm">
+                                        <h4>Stiven Aguilar</h4>
+                                        <p>Experto tanto en FrontEnd como en Backend desarrollando el funcionamiento y la buena calidad visual del sistema</p>
+                                        <hr>
+                                        <a href="https://github.com/JOSETH-STIVEN" target="_blank" class="github-link">
+                                            <i class="bi bi-github"></i> GitHub
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
 
                     </div>
                 </div>
@@ -602,6 +655,75 @@
             });
         }
     </script>
+
+
+    <!-- MODAL REGISTRO -->
+    <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registroModalLabel">¿Cómo quieres registrarte?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="container py-3">
+
+                        <div class="row g-4 justify-content-center">
+
+                            <!-- TURISTA -->
+                            <div class="col-md-4">
+                                <div class="card card-registro text-center p-4">
+                                    <div class="icono-registro">🎒</div>
+                                    <div class="card-body">
+                                        <h3 class="card-title">Turista</h3>
+                                        <p class="card-text">Quiero reservar actividades y experiencias.</p>
+                                        <a href="/aventura_go/registrarse?tipo=turista" class="btn btn-aventura">
+                                            Elegir
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PROVEEDOR TURÍSTICO -->
+                            <div class="col-md-4">
+                                <div class="card card-registro text-center p-4">
+                                    <div class="icono-registro">⛰️</div>
+                                    <div class="card-body">
+                                        <h3 class="card-title">Proveedor turístico</h3>
+                                        <p class="card-text">Quiero publicar actividades de aventura.</p>
+                                        <a href="/aventura_go/registrarse?tipo=proveedor_turistico" class="btn btn-aventura">
+                                            Elegir
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PROVEEDOR HOTELERO -->
+                            <div class="col-md-4">
+                                <div class="card card-registro text-center p-4">
+                                    <div class="icono-registro">🏨</div>
+                                    <div class="card-body">
+                                        <h3 class="card-title">Proveedor hotelero</h3>
+                                        <p class="card-text">Quiero publicar hospedajes.</p>
+                                        <a href="/aventura_go/registrarse?tipo=proveedor_hotelero" class="btn btn-aventura">
+                                            Elegir
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- FIN MODAL REGISTRO -->
 
 </body>
 

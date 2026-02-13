@@ -321,6 +321,8 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/consultar_reservas/consultar_reservas.js"></script>
+
 
 
 

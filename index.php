@@ -29,11 +29,6 @@ switch ($request) {
         require BASE_PATH . '/app/views/auth/registrarse.php'; //redirige a el login 
         break;
 
-    case '/registro':
-        require BASE_PATH . '/app/views/auth/seleccionar_tipo_registro.php';
-        break;
-
-
     case '/iniciar-sesion':
         require_once BASE_PATH . '/app/controllers/loginController.php'; //redirige al inicio de sesion
         break;
@@ -336,7 +331,7 @@ switch ($request) {
         break;
 
     // Ruta: /tour escogido
-    case '/tour-escogido':
+    case '/tour-escogido': //ojo se modifico aca para darle login
         (new WebsiteController())->tourEscogido();
         break;
 
@@ -377,6 +372,12 @@ switch ($request) {
     case '/confirmacion':
         require BASE_PATH . '/app/views/website/confirmacion.php';
         break;
+
+    //ESTA RUTA Y SU ARCHIVO SON VERSION DEMO SE ELIMINA CUANDO SE CONECTA AL PAGO REAL-
+    case '/pago/payu-demo':
+        require BASE_PATH . '/app/views/website/payu_demo.php';
+        break;
+
 
 
 
