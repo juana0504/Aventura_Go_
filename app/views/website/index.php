@@ -506,7 +506,7 @@
                             <!-- TURISTA -->
                             <div class="col-md-4">
                                 <div class="card card-registro text-center p-4">
-                                    <div class="icono-registro">🎒</div>
+                                    <!-- <div class="icono-registro">🎒</div> -->
                                     <div class="card-body">
                                         <h3 class="card-title">Turista</h3>
                                         <p class="card-text">Quiero reservar actividades y experiencias.</p>
@@ -520,7 +520,7 @@
                             <!-- PROVEEDOR TURÍSTICO -->
                             <div class="col-md-4">
                                 <div class="card card-registro text-center p-4">
-                                    <div class="icono-registro">⛰️</div>
+                                    <!-- <div class="icono-registro">⛰️</div> -->
                                     <div class="card-body">
                                         <h3 class="card-title">Proveedor turístico</h3>
                                         <p class="card-text">Quiero publicar actividades de aventura.</p>
@@ -534,7 +534,7 @@
                             <!-- PROVEEDOR HOTELERO -->
                             <div class="col-md-4">
                                 <div class="card card-registro text-center p-4">
-                                    <div class="icono-registro">🏨</div>
+                                    <!-- <div class="icono-registro">🏨</div> -->
                                     <div class="card-body">
                                         <h3 class="card-title">Proveedor hotelero</h3>
                                         <p class="card-text">Quiero publicar hospedajes.</p>
