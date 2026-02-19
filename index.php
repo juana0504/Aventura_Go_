@@ -1,5 +1,8 @@
 <?php
 //index.php - Router principal en larabel se tiene un archivo por cada carpeta de views
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 
 require_once __DIR__ . '/config/config.php';
 
@@ -36,6 +39,20 @@ switch ($request) {
     case '/guardar-registro-proveedor':
         require_once BASE_PATH . '/app/controllers/RegistroProveedorController.php'; //redirige al guardar el registro de proveedor turistico ALB 18/02/2026
         break;
+
+    case '/proveedor/pendiente':
+        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/pendiente_aprobacion.php'; //redirige a la pagina de pendiente de aprobacion del proveedor turistico ALB 19/02/2026
+        break;
+
+    case '/proveedor/completar-informacion':
+        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/completar_informacion.php'; //redirige a la pagina de completar informacion del proveedor turistico ALB 19/02/2026
+        break;
+
+    case '/proveedor/guardar-informacion':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/completarInformacion.php'; //redirige al guardar la informacion del proveedor turistico ALB 19/02/2026
+        break;
+
+
 
     case '/registrar-proveedor-hotelero':
         require BASE_PATH . '/app/views/auth/registrar_proveedor_hotelero.php'; //redirige a el registro de proveedor hotelero ALB 18/02/2026
