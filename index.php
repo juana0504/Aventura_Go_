@@ -29,10 +29,21 @@ switch ($request) {
         require BASE_PATH . '/app/views/auth/registrarse.php'; //redirige a el login 
         break;
 
-    case '/registro':
-        require BASE_PATH . '/app/views/auth/seleccionar_tipo_registro.php';
+    case '/registrar-proveedor':
+        require BASE_PATH . '/app/views/auth/registrar_proveedor.php'; //redirige a el registro de proveedor turistico ALB 18/02/2026 
         break;
 
+    case '/guardar-registro-proveedor':
+        require_once BASE_PATH . '/app/controllers/RegistroProveedorController.php'; //redirige al guardar el registro de proveedor turistico ALB 18/02/2026
+        break;
+
+    case '/registrar-proveedor-hotelero':
+        require BASE_PATH . '/app/views/auth/registrar_proveedor_hotelero.php'; //redirige a el registro de proveedor hotelero ALB 18/02/2026
+        break;
+
+    case '/guardar-registro-proveedor-hotelero':
+        require_once BASE_PATH . '/app/controllers/registroProveedorHoteleroController.php'; //redirige al guardar el registro de proveedor hotelero ALB 18/02/2026
+        break;
 
     case '/iniciar-sesion':
         require_once BASE_PATH . '/app/controllers/loginController.php'; //redirige al inicio de sesion
@@ -336,7 +347,7 @@ switch ($request) {
         break;
 
     // Ruta: /tour escogido
-    case '/tour-escogido':
+    case '/tour-escogido': //ojo se modifico aca para darle login
         (new WebsiteController())->tourEscogido();
         break;
 
@@ -378,6 +389,12 @@ switch ($request) {
     case '/confirmacion':
         require BASE_PATH . '/app/views/website/confirmacion.php';
         break;
+
+    //ESTA RUTA Y SU ARCHIVO SON VERSION DEMO SE ELIMINA CUANDO SE CONECTA AL PAGO REAL-
+    case '/pago/payu-demo':
+        require BASE_PATH . '/app/views/website/payu_demo.php';
+        break;
+
 
 
 

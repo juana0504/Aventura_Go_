@@ -82,3 +82,17 @@ if (profileToggle && profileMenu) {
     });
 }
 
+
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.card-container');
+
+    cards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Si el clic es en el enlace de GitHub, no hacemos el flip manual
+            if (e.target.closest('.github-link')) return;
+
+            // Alternamos el giro
+            this.classList.toggle('is-flipped');
+        });
+    });
+});

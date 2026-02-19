@@ -97,7 +97,7 @@
                             Ingresa
                         </a>
 
-                        <a href="/aventura_go/registro" class="btn-register">
+                        <a href="#" class="btn-register" data-bs-toggle="modal" data-bs-target="#registroModal">
                             Regístrate
                         </a>
 
@@ -487,6 +487,74 @@
 
     <script src="public/assets/website_externos/index/index.js"></script>
 
+
+    <!-- MODAL REGISTRO -->
+    <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registroModalLabel">¿Cómo quieres registrarte?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="container py-3">
+
+                        <div class="row g-4 justify-content-center">
+
+                            <!-- TURISTA -->
+                            <div class="col-md-4">
+                                <div class="card card-registro text-center p-4">
+                                    <!-- <div class="icono-registro">🎒</div> -->
+                                    <div class="card-body">
+                                        <h3 class="card-title">Turista</h3>
+                                        <p class="card-text">Quiero reservar actividades y experiencias.</p>
+                                        <a href="/aventura_go/registrarse?tipo=turista" class="btn btn-aventura">
+                                            Elegir
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PROVEEDOR TURÍSTICO -->
+                            <div class="col-md-4">
+                                <div class="card card-registro text-center p-4">
+                                    <!-- <div class="icono-registro">⛰️</div> -->
+                                    <div class="card-body">
+                                        <h3 class="card-title">Proveedor turístico</h3>
+                                        <p class="card-text">Quiero publicar actividades de aventura.</p>
+                                        <a href="/aventura_go/registrar-proveedor" class="btn btn-aventura">
+                                            Elegir
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PROVEEDOR HOTELERO -->
+                            <div class="col-md-4">
+                                <div class="card card-registro text-center p-4">
+                                    <!-- <div class="icono-registro">🏨</div> -->
+                                    <div class="card-body">
+                                        <h3 class="card-title">Proveedor hotelero</h3>
+                                        <p class="card-text">Quiero publicar hospedajes.</p>
+                                        <a href="/aventura_go/registrar-proveedor-hotelero" class="btn btn-aventura">
+                                            Elegir
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- FIN MODAL REGISTRO -->
 
 </body>
 

@@ -83,7 +83,7 @@ $actividad = $actividadModel->obtenerPorId($idActividad);
                             Ingresa
                         </a>
 
-                        <a href="/aventura_go/registro" class="btn-register">
+                        <a href="/aventura_go/registrarse" class="btn-register">
                             Regístrate
                         </a>
 

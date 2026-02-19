@@ -42,7 +42,7 @@ if (!isset($_SESSION['reference_code'])) {
 
                 <h1 class="page-title">Confirma Tu reserva</h1>
 
-                <div class="actions">
+                <!-- <div class="actions">
 
                     <?php if (isset($_SESSION['user'])): ?>
                         <div class="profile-dropdown">
@@ -88,7 +88,7 @@ if (!isset($_SESSION['reference_code'])) {
                         <i class="fas fa-bars"></i>
                     </div>
 
-                </div>
+                </div> -->
             </div>
         </nav>
     </header>
