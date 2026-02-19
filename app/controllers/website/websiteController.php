@@ -64,46 +64,60 @@ class WebsiteController
     {
         session_start();
 
-        // Validar POST mínimo
-        if (
-            !isset($_POST['id_actividad']) ||
-            !isset($_POST['cantidad_personas']) ||
-            !isset($_POST['fecha'])
-        ) {
+        // 🔥 CASO 1: viene del TOUR (POST)
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            if (
+                !isset($_POST['id_actividad']) ||
+                !isset($_POST['cantidad_personas']) ||
+                !isset($_POST['fecha'])
+            ) {
+                header('Location: ' . BASE_URL . '/descubre-tours');
+                exit;
+            }
+
+            $idActividad = (int) $_POST['id_actividad'];
+            $cantidad    = (int) $_POST['cantidad_personas'];
+            $fecha       = $_POST['fecha'];
+
+            $actividadModel = new ActividadTuristica();
+            $actividad = $actividadModel->obtenerActividadPorId($idActividad);
+
+            if (!$actividad || $actividad['estado'] !== 'ACTIVO') {
+                header('Location: ' . BASE_URL . '/descubre-tours');
+                exit;
+            }
+
+            $precioUnitario = (float) $actividad['precio'];
+            $total = $precioUnitario * $cantidad;
+
+            $_SESSION['reserva_tmp'] = [
+                'id_actividad' => $idActividad,
+                'nombre'       => $actividad['nombre'],
+                'imagen'       => $actividad['imagen'],
+                'cantidad'     => $cantidad,
+                'fecha'        => $fecha,
+                'precio'       => $precioUnitario,
+                'total'        => $total
+            ];
+        }
+
+        // 🔥 CASO 2: viene del LOGIN (GET)
+        if (!isset($_SESSION['reserva_tmp'])) {
             header('Location: ' . BASE_URL . '/descubre-tours');
             exit;
         }
 
-        $idActividad = (int) $_POST['id_actividad'];
-        $cantidad    = (int) $_POST['cantidad_personas'];
-        $fecha       = $_POST['fecha'];
+        $reserva = $_SESSION['reserva_tmp'];
 
-        // Usar el MISMO modelo que ya vienes usando para actividades públicas
-        require_once __DIR__ . '/../../models/proveedor_turistico/ActividadTuristica.php';
+        $idActividad   = $reserva['id_actividad'];
+        $cantidad      = $reserva['cantidad'];
+        $fecha         = $reserva['fecha'];
+        $precioUnitario = $reserva['precio'];
+        $total         = $reserva['total'];
+
         $actividadModel = new ActividadTuristica();
         $actividad = $actividadModel->obtenerActividadPorId($idActividad);
-
-        if (!$actividad || $actividad['estado'] !== 'ACTIVO') {
-            header('Location: ' . BASE_URL . '/descubre-tours');
-            exit;
-        }
-
-        $precioUnitario = (float) $actividad['precio'];
-        $total = $precioUnitario * $cantidad;
-
-        // Guardar reserva temporal para checkout
-        $_SESSION['reserva_tmp'] = [
-            'id_actividad' => $idActividad,
-            'nombre'       => $actividad['nombre'],
-            'imagen'       => $actividad['imagen'],
-            'cantidad'     => $cantidad,
-            'fecha'        => $fecha,
-            'precio'       => $precioUnitario,
-            'total'        => $total
-        ];
-
-        // Variables que usará la vista
-        // $actividad, $cantidad, $fecha, $precioUnitario, $total
 
         require BASE_PATH . '/app/views/website/formulario_reserva.php';
     }
