@@ -437,18 +437,7 @@ header {
     width: 100%;
 }
 
-.buscador i {
-    position: absolute;
-    right: 12px;
-    /* Ícono a la derecha */
-    top: 50%;
-    /* Centro vertical */
-    transform: translateY(-50%);
-    /* Ajuste perfecto */
-    color: #000;
-    font-size: 16px;
-    pointer-events: none;
-}
+
 
 /* Espacio entre subtítulo/buscador y las tarjetas */
 .fila-subtitulo-buscador {
@@ -1087,6 +1076,49 @@ header {
 
 
 
+
+.buscador {
+    display: inline-flex;
+    align-items: center;
+    background-color: #2D4059;
+    padding: 8px 14px;
+    border-radius: 50px; /* más pill, más elegante */
+    gap: 10px;
+    transition: all 0.3s ease;
+    border: 1.5px solid transparent;
+    width: 220px;
+}
+
+.buscador:focus-within,
+.buscador:hover {
+    border-color: #EA8217;
+    box-shadow: 0 0 0 3px rgba(234, 130, 23, 0.15);
+}
+
+.buscador input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #FFFFFF;
+    font-family: 'Lato', sans-serif;
+    font-size: 13.5px;
+    width: 100%;
+    order: 2; /* input siempre en el medio */
+}
+
+.buscador input::placeholder {
+    color: #aab4c2;
+    font-size: 13px;
+}
+
+.buscador i {
+    color: #EA8217;
+    font-size: 18px;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-left: auto;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.3s ease;
+}
 
 
 
