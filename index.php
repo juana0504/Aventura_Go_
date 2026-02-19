@@ -29,6 +29,22 @@ switch ($request) {
         require BASE_PATH . '/app/views/auth/registrarse.php'; //redirige a el login 
         break;
 
+    case '/registrar-proveedor':
+        require BASE_PATH . '/app/views/auth/registrar_proveedor.php'; //redirige a el registro de proveedor turistico ALB 18/02/2026 
+        break;
+
+    case '/guardar-registro-proveedor':
+        require_once BASE_PATH . '/app/controllers/RegistroProveedorController.php'; //redirige al guardar el registro de proveedor turistico ALB 18/02/2026
+        break;
+
+    case '/registrar-proveedor-hotelero':
+        require BASE_PATH . '/app/views/auth/registrar_proveedor_hotelero.php'; //redirige a el registro de proveedor hotelero ALB 18/02/2026
+        break;
+
+    case '/guardar-registro-proveedor-hotelero':
+        require_once BASE_PATH . '/app/controllers/registroProveedorHoteleroController.php'; //redirige al guardar el registro de proveedor hotelero ALB 18/02/2026
+        break;
+
     case '/iniciar-sesion':
         require_once BASE_PATH . '/app/controllers/loginController.php'; //redirige al inicio de sesion
         break;
