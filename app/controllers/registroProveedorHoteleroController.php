@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         VALUES (:id_usuario, 'PENDIENTE', 0)
     ";
 
-        $stmtProveedor_hotelero = $conexion->prepare($sqlProveedor);
+        $stmtProveedor_hotelero = $conexion->prepare($sqlProveedor_hotelero);
         $stmtProveedor_hotelero->bindParam(':id_usuario', $idUsuario);
         $stmtProveedor_hotelero->execute();
 
