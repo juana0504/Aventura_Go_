@@ -12,9 +12,48 @@ notificacionesBtn.addEventListener('click', (e) => {
     alert("Tienes nuevas reservas, verifica");
 });
 
+// filtrar tabla de reservas recientes
+const btnFiltrar = document.querySelector('.btn-filtrar');
+if (btnFiltrar) {
+    btnFiltrar.addEventListener('click', (e) => {
+        e.preventDefault();
+        const cont = document.getElementById('filtros-reservas');
+        if (cont) cont.style.display = cont.style.display === 'none' ? 'block' : 'none';
+    });
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
   const reservasCtx = document.getElementById('reservasChart');
   const gastosCtx = document.getElementById('gastosChart');
+
+  // aplica filtrado sobre tabla si se usa formulario
+  const aplicarBtn = document.getElementById('aplicar-filtros');
+  const limpiarBtn = document.getElementById('limpiar-filtros');
+  const tablaReservas = document.querySelector('.resumen-reservas table');
+
+  function filtrarTabla() {
+    if (!tablaReservas) return;
+    const año = document.getElementById('filtro-anio').value;
+    const filas = Array.from(tablaReservas.tBodies[0].rows);
+    filas.forEach(tr => {
+      const fecha = tr.cells[1].textContent.trim(); // suposición formato YYYY-MM-DD
+      if (año && fecha.indexOf(año) !== 0) {
+        tr.style.display = 'none';
+      } else {
+        tr.style.display = '';
+      }
+    });
+  }
+
+  function limpiarTabla() {
+    if (!tablaReservas) return;
+    document.getElementById('filtro-anio').value = '';
+    filtrarTabla();
+  }
+
+  if (aplicarBtn) aplicarBtn.addEventListener('click', filtrarTabla);
+  if (limpiarBtn) limpiarBtn.addEventListener('click', limpiarTabla);
 
   // obtén datos del servidor vía AJAX
   fetch('<?= BASE_URL ?>/administrador/dashboard/data')

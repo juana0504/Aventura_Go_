@@ -92,7 +92,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <i class="bi bi-tencent-qq"></i>
                             <div>
                                 <p>Inversión en Publicidad</p>
-                                <h3>$<?= number_format($inversionPublicidad,2) ?></h3>
+                                <h3>$<?= number_format($inversionPublicidad ?? 0,2) ?></h3>
                             </div>
                         </div>
                     </section>
@@ -103,11 +103,65 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <h3>Resumen de Reservas</h3>
                             <button class="btn-filtrar">Filtrar ▼</button>
                         </div>
+                        <!-- zona de filtros ocultos -->
+                        <div id="filtros-reservas" class="mt-2" style="display:none;">
+                            <form id="form-filtros">
+                                <div class="row g-2 align-items-center">
+                                    <div class="col-auto">
+                                        <label for="filtro-anio" class="col-form-label">Año:</label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <select id="filtro-anio" class="form-select">
+                                            <option value="">Todos</option>
+                                            <?php
+                                                // genera años desde 2020 hasta el actual
+                                                $anioActual = date('Y');
+                                                for ($a = $anioActual; $a >= 2020; $a--) {
+                                                    echo "<option value=\"$a\">$a</option>";
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="button" id="aplicar-filtros" class="btn btn-primary btn-sm">Aplicar</button>
+                                        <button type="button" id="limpiar-filtros" class="btn btn-secondary btn-sm">Limpiar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
 
                         <div class="grafico-container">
                             <canvas id="reservasChart"></canvas>
                         </div>
                         <!-- los datos necesarios para los gráficos se obtienen mediante AJAX desde /administrador/dashboard/data -->
+
+                        <!-- tabla de reservas recientes -->
+                        <div class="mt-4">
+                            <?php if (!empty($reservasRecientes)): ?>
+                                <table class="table table-sm table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Cliente</th>
+                                            <th>Fecha</th>
+                                            <th>Precio</th>
+                                            <th>Experiencia</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($reservasRecientes as $r): ?>
+                                            <tr>
+                                                <td><?= htmlspecialchars($r['cliente']) ?></td>
+                                                <td><?= htmlspecialchars($r['fecha']) ?></td>
+                                                <td><?= htmlspecialchars($r['precio']) ?></td>
+                                                <td><?= htmlspecialchars($r['experiencia']) ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            <?php else: ?>
+                                <p class="text-secondary">No se encontraron reservas recientes.</p>
+                            <?php endif; ?>
+                        </div>
                     </section>
 
 
@@ -149,29 +203,40 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                     <div class="ingresos">
                         <h4>$<?= number_format($ingresosDisponibles,2) ?></h4>
                         <p>Ingresos Disponibles</p>
-                        <!-- detalles adicionales podrían provenir del modelo si se requieren -->
-                        <button>Generar tarjeta digital</button>
                     </div>
 
                     <div class="pagos">
                         <h6>Próximos Pagos</h6>
-                        <ul>
-                            <?php foreach ($proximosPagos as $pago): ?>
-                                <li><span class="dot <?= $pago['color'] ?>"></span>
-                                    <?= htmlspecialchars($pago['texto']) ?>
-                                    <span class="amount">$<?= number_format($pago['cantidad'],2) ?></span>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
+                        <?php if (empty($proximosPagos)): ?>
+                            <p class="text-secondary">No hay pagos próximos.</p>
+                        <?php else: ?>
+                            <ul>
+                                <?php foreach ($proximosPagos as $pago): ?>
+                                    <?php
+                                        // si la base no guarda color, elegimos uno por palabra clave
+                                        $texto = strtolower($pago['texto'] ?? '');
+                                        if (strpos($texto, 'experiencia') !== false) {
+                                            $color = 'green_r';
+                                        } elseif (strpos($texto, 'operador') !== false) {
+                                            $color = 'blue_r';
+                                        } elseif (strpos($texto, 'reserva') !== false) {
+                                            $color = 'red_r';
+                                        } else {
+                                            $color = 'blue_r';
+                                        }
+                                    ?>
+                                    <li><span class="dot <?= $color ?>"></span>
+                                        <?= htmlspecialchars($pago['texto']) ?>
+                                        <span class="amount">$<?= number_format($pago['cantidad'] ?? 0,2) ?></span>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
                     </div>
 
                     <div class="gastos">
                         <h6>Estado de Gastos</h6>
                         <canvas id="gastosChart"></canvas>
-                        <script>
-                            // datos pasados por PHP a JS
-                            const gastosData = <?= json_encode($gastosChartData) ?>;
-                        </script>
                     </div>
                 </aside>
 
@@ -194,6 +259,11 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
+    <!-- JavaScript variables needed by scripts -->
+    <script>
+        // valores que necesita el JS, proporcionados por el servidor pero sin mezclar en el archivo estático
+        const DASHBOARD_DATA_URL = "<?= BASE_URL ?>/administrador/dashboard/data";
+    </script>
     <!-- JavaScript -->
     <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/administrador/administrador.js"></script>
 

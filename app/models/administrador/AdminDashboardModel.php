@@ -59,9 +59,51 @@ class AdminDashboardModel {
         return [];
     }
 
+    /**
+     * Obtiene las reservas más recientes, ordenadas por fecha.
+     * Devuelve array con cliente, fecha, precio y experiencia.
+     */
+    public function getReservasRecientes($limit = 10) {
+        $query = "SELECT r.id_reserva, u.nombre AS cliente, r.fecha, r.precio, a.nombre AS experiencia
+                  FROM reserva r
+                  JOIN usuario u ON r.id_turista = u.id_usuario
+                  JOIN actividad a ON r.id_actividad = a.id_actividad
+                  ORDER BY r.fecha DESC
+                  LIMIT :limit";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getInversionPublicidad() {
-        // si la inversión en publicidad proviene de una tabla específica, reemplazar
-        // este valor estático por una consulta. por ahora devolvemos el ejemplo usado
-        return 219.0;
+        // asumimos que los pagos relacionados con publicidad se distinguen
+        // por el método de pago que contenga la palabra "publicidad".
+        $stmt = $this->conexion->prepare(
+            "SELECT SUM(monto) FROM pago WHERE LOWER(metodo_pago) LIKE '%publicidad%'"
+        );
+        $stmt->execute();
+        $sum = $stmt->fetchColumn();
+        return $sum !== null ? (float) $sum : 0.0;
+    }
+
+    /**
+     * Obtiene los próximos pagos pendientes (hasta 3) ordenados por fecha.
+     * Devuelve arreglo con 'texto' y 'cantidad'.
+     */
+    public function getProximosPagos() {
+        $stmt = $this->conexion->prepare(
+            "SELECT metodo_pago AS texto, monto AS cantidad
+             FROM pago
+             WHERE estado IS NULL OR estado <> 'pagado'
+             ORDER BY fecha ASC
+             LIMIT 3"
+        );
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if (!$rows) {
+            return [];
+        }
+        return $rows;
     }
 }

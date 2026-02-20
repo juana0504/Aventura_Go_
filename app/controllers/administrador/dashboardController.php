@@ -25,13 +25,13 @@ class DashboardAdminController
         $ultimaReserva = $this->model->getUltimaReserva();
         $inversionPublicidad = $this->model->getInversionPublicidad();
 
-        // datos de ejemplo para el panel de "próximos pagos" (puede reemplasarse con consulta real)
-        $proximosPagos = [
-            ['texto'=>'Pago Experiencia','cantidad'=>2852.21,'color'=>'green_r'],
-            ['texto'=>'Pago a Operador','cantidad'=>910.00,'color'=>'blue_r'],
-            ['texto'=>'Pago de Reserva','cantidad'=>420.30,'color'=>'red_r'],
-        ];
+        // lista completa de reservas recientes para la tabla
+        $reservasRecientes = $this->model->getReservasRecientes(10);
 
+        // obtener próximos pagos desde la base de datos
+        $proximosPagos = $this->model->getProximosPagos();
+        // el arreglo puede quedar vacío si no se encuentran pagos pendientes
+        // la vista se encargará de mostrar el mensaje correspondiente.
         require BASE_PATH . '/app/views/dashboard/administrador/administrador.php';
     }
 
