@@ -45,7 +45,7 @@ switch ($request) {
         break;
 
     case '/proveedor/completar-informacion':
-        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/completar_informacion.php'; //redirige a la pagina de completar informacion del proveedor turistico ALB 19/02/2026
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/completarInformacion.php';
         break;
 
     case '/proveedor/guardar-informacion':
@@ -386,7 +386,7 @@ switch ($request) {
     // ruta confirmar en formulario checkout, ojo no cambiar nada ruta DE PAGO PROTEGIDA 
     case '/checkout':
         session_start();
-        
+
         if (!isset($_SESSION['reserva_tmp'])) {
             header('Location: ' . BASE_URL . '/descubre-tours');
             exit;

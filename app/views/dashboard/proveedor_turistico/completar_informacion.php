@@ -2,6 +2,12 @@
 
 require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
+// Obtener información de las actividades del proveedor para prellenar el formulario
+$actividadesSeleccionadas = [];
+if (!empty($proveedor['actividades'])) {
+    $actividadesSeleccionadas = array_map('trim', explode(',', $proveedor['actividades']));
+}
+
 ?>
 
 
@@ -60,9 +66,9 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
             ?>
 
             <!-- Formulario Wizard -->
-            <form action="<?= BASE_URL ?>/proveedor/guardar-informacion" method="POST" enctype="multipart/form-data">
+            <form id="formCompletarProveedor" action="<?= BASE_URL ?>/proveedor/guardar-informacion" method="POST" enctype="multipart/form-data">
 
-                <input type="hidden" name="accion" value="registrar">
+                <input type="hidden" name="accion" value="actualizar">
 
                 <div class="wizard-container">
                     <div class="wizard-header">
@@ -99,19 +105,19 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Nombre de la Empresa *</label>
-                                    <input type="text" name="nombre_empresa" class="form-control" id="empresa" placeholder="Ej: Aventuras Extremas SAS" required>
+                                    <input type="text" name="nombre_empresa" class="form-control" id="empresa" value="<?= $proveedor['nombre_empresa'] ?? '' ?>" placeholder="Ej: Aventuras Extremas SAS" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">NIT/RUT *</label>
-                                    <input type="text" name="nit_rut" class="form-control" id="nit" placeholder="123456789-0" required>
+                                    <input type="text" name="nit_rut" class="form-control" value="<?= $proveedor['nit_rut'] ?? '' ?>" id="nit" placeholder="123456789-0" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Email *</label>
-                                    <input type="email" name="email" class="form-control" id="email" placeholder="contacto@empresa.com" required>
+                                    <input type="email" name="email" class="form-control" id="email" value="<?= $proveedor['email'] ?? '' ?>" placeholder="contacto@empresa.com" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Teléfono *</label>
-                                    <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="+57 300 123 4567" required>
+                                    <input type="tel" name="telefono" class="form-control" id="telefono" value="<?= $proveedor['telefono'] ?? '' ?>" placeholder="+57 300 123 4567" required>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label">Logo</label>
@@ -129,41 +135,51 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="rafting" value="Rafting">
+                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="rafting" value="Rafting" <?= in_array('Rafting', $actividadesSeleccionadas) ? 'checked' : '' ?>>
                                                 <label class="form-check-label">🚣 Rafting</label>
                                             </div>
                                             <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="parapente" value="Parapente">
+                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="parapente" value="Parapente" <?= in_array('Parapente', $actividadesSeleccionadas) ? 'checked' : '' ?>>
                                                 <label class="form-check-label">🪂 Parapente</label>
                                             </div>
                                             <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="senderismo" value="Senderismo">
+                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="senderismo" value="Senderismo" <?= in_array('Senderismo', $actividadesSeleccionadas) ? 'checked' : '' ?>>
                                                 <label class="form-check-label">🥾 Senderismo</label>
                                             </div>
                                             <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="escalada" value="Escalada">
+                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="escalada" value="Escalada" <?= in_array('Escalada', $actividadesSeleccionadas) ? 'checked' : '' ?>>
                                                 <label class="form-check-label">🧗 Escalada</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="buceo" value="Buceo">
+                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="buceo" value="Buceo" <?= in_array('Buceo', $actividadesSeleccionadas) ? 'checked' : '' ?>>
                                                 <label class="form-check-label">🤿 Buceo</label>
                                             </div>
                                             <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="camping" value="Camping">
+                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="camping" value="Camping" <?= in_array('Camping', $actividadesSeleccionadas) ? 'checked' : '' ?>>
                                                 <label class="form-check-label">🏕 Camping</label>
                                             </div>
                                             <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="ciclismo" value="Ciclismo de Montaña">
+                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="ciclismo" value="Ciclismo de Montaña" <?= in_array('Ciclismo de Montaña', $actividadesSeleccionadas) ? 'checked' : '' ?>>
                                                 <label class="form-check-label">🚵 Ciclismo de Montaña</label>
                                             </div>
                                             <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="canopy" value="Canopy">
+                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="canopy" value="Canopy" <?= in_array('Canopy', $actividadesSeleccionadas) ? 'checked' : '' ?>>
                                                 <label class="form-check-label">🌲 Canopy</label>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Descripción de la empresa *</label>
+                                    <textarea
+                                        name="descripcion"
+                                        id="descripcion"
+                                        class="form-control"
+                                        rows="4"
+                                        placeholder="Describe brevemente tu empresa, experiencia y tipo de actividades que ofreces"
+                                        required><?= $proveedor['descripcion'] ?? '' ?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -195,7 +211,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label">Dirección *</label>
-                                    <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Calle 123 #45-67" required>
+                                    <input type="text" name="direccion" class="form-control" id="direccion" value="<?= $proveedor['direccion'] ?? '' ?>" placeholder="Calle 123 #45-67" required>
                                 </div>
                             </div>
                         </div>
@@ -206,20 +222,20 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Nombre del Representante *</label>
-                                    <input type="text" name="nombre_representante" class="form-control" id="nombre_repre" placeholder="Juan Pérez" required>
+                                    <input type="text" name="nombre_representante" class="form-control" id="nombre_repre" value="<?= $proveedor['nombre_representante'] ?? '' ?>" placeholder="Juan Pérez" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Tipo de documento *</label>
                                     <select name="tipo_documento" class="form-select1" id="tipo_documento">
                                         <option value="" disabled selected hidden>Tipo de documento</option>
-                                        <option value="CC">CC</option>
-                                        <option value="CE">CE</option>
-                                        <option value="Pasaporte">Pasaporte</option>
+                                        <option value="CC" <?= ($proveedor['tipo_documento'] ?? '') === 'CC' ? 'selected' : '' ?>>CC</option>
+                                        <option value="CE" <?= ($proveedor['tipo_documento'] ?? '') === 'CE' ? 'selected' : '' ?>>CE</option>
+                                        <option value="Pasaporte" <?= ($proveedor['tipo_documento'] ?? '') === 'Pasaporte' ? 'selected' : '' ?>>Pasaporte</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Identificacion *</label>
-                                    <input type="tel" name="identificacion_representante" class="form-control" id="identificacion_repre" placeholder="N.°" required>
+                                    <input type="tel" name="identificacion_representante" class="form-control" id="identificacion_repre" value="<?= $proveedor['identificacion_representante'] ?? '' ?>" placeholder="N.°" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Foto</label>
@@ -227,11 +243,12 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Email *</label>
-                                    <input type="email" name="email_representante" class="form-control" id="email_repre" placeholder="contacto@empresa.com" required>
+                                    <input type="email" name="email_representante" class="form-control" id="email_repre" value="<?= $proveedor['email_login'] ?? '' ?>" readonly>
+                                    <small class="text-muted"> Este es el correo de acceso. Para modificarlo ve a tu perfil.</small>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Teléfono *</label>
-                                    <input type="tel" name="telefono_representante" class="form-control" id="telefono_repre" placeholder="+57 300 123 4567" required>
+                                    <input type="tel" name="telefono_representante" class="form-control" id="telefono_repre" value="<?= $proveedor['telefono_representante'] ?? '' ?>" placeholder="+57 300 123 4567" required>
                                 </div>
                             </div>
                         </div>
@@ -292,8 +309,9 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                                     </div>
                                 </div>
                             </div>
+
                             <div class="preview-card">
-                                <h6 class="text-primary mb-3"><i class="fas fa-info-circle"></i> Descripción</h6>
+                                <h6 class="text-primary mb-3"><i class="fas fa-info-circle"></i>Descripción</h6>
                                 <div class="preview-value" id="prev-descripcion">-</div>
                             </div>
                         </div>
