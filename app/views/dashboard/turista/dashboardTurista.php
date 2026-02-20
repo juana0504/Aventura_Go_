@@ -1,20 +1,12 @@
 <?php
-require_once BASE_PATH . '/app/helpers/session_turista.php';
-
-// Datos ficticios para evitar errores
-$datos_turista = [
-    'nombre' => 'David',
-    'actividades' => [
-        ['actividad' => 'Paracaidismo', 'fecha' => '2026-02-10', 'veces' => 3],
-        ['actividad' => 'Bungee Jumping', 'fecha' => '2026-02-14', 'veces' => 2],
-        ['actividad' => 'Escalada en roca', 'fecha' => '2026-02-18', 'veces' => 1],
-    ],
-    'lugares_visitados' => [
-        ['lugar' => 'Cañón del río Colorado', 'visitas' => 3],
-        ['lugar' => 'Monte Everest', 'visitas' => 1],
-        ['lugar' => 'Playa de Waikiki', 'visitas' => 2],
-    ]
-];
+// La sesión y los datos del turista se preparan en el controlador
+// Si por alguna razón se carga la vista directamente sin pasar
+// por el controlador, hacemos una validación mínima:
+if (!isset($datos_turista)) {
+    // evitar errores y redirigir a dashboard vía controlador
+    header('Location: /aventura_go/turista/dashboard');
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +59,14 @@ $datos_turista = [
             <div class="container py-4">
 
                 <!-- Saludo -->
-                <p class="h4">¡Bienvenido, <?= $datos_turista['nombre'] ?>!</p>
+                <?php
+                // si por alguna razón el modelo no devolvió nombre, usamos la sesión
+                $nombreUsuario = $datos_turista['nombre'] ?? '';
+                if (empty($nombreUsuario) && isset($_SESSION['user']['nombre'])) {
+                    $nombreUsuario = $_SESSION['user']['nombre'];
+                }
+                ?>
+                <p class="h4">¡Bienvenido, <?= htmlspecialchars($nombreUsuario) ?>!</p>
                 <p class="text-muted">Gestiona tus actividades de deportes extremos y experiencias</p>
 
                 <!-- Nuevas Actividades -->
@@ -83,13 +82,12 @@ $datos_turista = [
                                         <?php foreach ($datos_turista['actividades'] as $actividad): ?>
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <div>
-                                                    <strong><?= $actividad['actividad'] ?></strong><br>
-                                                    <small class="text-muted"><?= $actividad['fecha'] ?></small>
+                                                    <strong><?= htmlspecialchars($actividad['actividad']) ?></strong><br>
+                                                    <small class="text-muted"><?= htmlspecialchars($actividad['fecha']) ?></small>
                                                 </div>
-                                                <!-- Mostrar cuántas veces se ha realizado la actividad sin colores -->
-                                                <span class="badge"><?= $actividad['veces'] ?> veces realizada</span>
+                                                <!-- Mostrar cuántas veces se ha realizado la actividad -->
+                                                <span class="badge"><?= htmlspecialchars($actividad['veces']) ?> veces realizada</span>
                                             </li>
-
                                         <?php endforeach; ?>
                                     </ul>
                                 <?php else: ?>
@@ -112,14 +110,13 @@ $datos_turista = [
                     </div>
                 </div>
 
-
                 <!-- 🧭 Lugares Visitados -->
                 <div class="mb-4">
                     <h5 class="fw-bold">📍 Lugares Visitados durante tus Actividades</h5>
 
                     <div class="row">
                         <?php
-                        // Solo mostramos 3 tarjetas
+                        // Solo mostramos 3 tarjetas de lugares visitados
                         $lugares = array_slice($datos_turista['lugares_visitados'], 0, 3);
                         foreach ($lugares as $lugar):
                         ?>
@@ -131,13 +128,13 @@ $datos_turista = [
                                         <div class="flip-card-front">
                                             <img
                                                 src="<?= BASE_URL ?>/public/assets/dashboard/turista/img/cañon_rosado.jpg"
-                                                alt="<?= $lugar['lugar'] ?>">
+                                                alt="<?= htmlspecialchars($lugar['lugar']) ?>">
                                         </div>
 
                                         <!-- Reverso -->
                                         <div class="flip-card-back">
-                                            <h6><?= $lugar['lugar'] ?></h6>
-                                            <p><?= $lugar['visitas'] ?> visitas</p>
+                                            <h6><?= htmlspecialchars($lugar['lugar']) ?></h6>
+                                            <p><?= htmlspecialchars($lugar['visitas']) ?> visitas</p>
                                         </div>
 
                                     </div>

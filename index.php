@@ -365,7 +365,9 @@ switch ($request) {
 
     // RUTAS DASHBOARD DE TURISTA
     case '/turista/dashboard':
-        require BASE_PATH . '/app/views/dashboard/turista/dashboard.php';
+        // Usamos el controlador para seguir el patrón MVC
+        require_once BASE_PATH . '/app/controllers/turista/dashboardControllerTurista.php';
+        // el propio controlador ejecuta la lógica según el método HTTP
         break;
 
     case '/turista/registrar-actividad':
