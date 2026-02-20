@@ -1,46 +1,11 @@
 <?php
+// session_start();
+require_once __DIR__ . '/../../controllers/website/websiteController.php';
 
-require_once BASE_PATH . '/app/models/turista/ActividadModel.php';
-
-if (
-    !isset($_POST['id_actividad']) ||
-    !isset($_POST['cantidad_personas']) ||
-    !isset($_POST['fecha'])
-) {
-    header('Location: ' . BASE_URL . '/descubre-tours');
-    exit;
-}
-
-$idActividad = (int) $_POST['id_actividad'];
-$cantidad    = (int) $_POST['cantidad_personas'];
-$fecha       = $_POST['fecha'];
-
-$actividadModel = new ActividadModel();
+$actividadModel = new ActividadTuristica();
 $actividad = $actividadModel->obtenerPorId($idActividad);
-
-if (!$actividad || $actividad['estado'] !== 'ACTIVO') {
-    header('Location: ' . BASE_URL . '/descubre-tours');
-    exit;
-}
-
-$precioUnitario = (float) $actividad['precio'];
-$total = $precioUnitario * $cantidad;
-
-/*
- | Guardamos la reserva temporal
- | (se usará en checkout)
-*/
-$_SESSION['reserva_tmp'] = [
-    'id_actividad' => $idActividad,
-    'nombre'       => $actividad['nombre'],
-    'imagen'       => $actividad['imagen'],
-    'cantidad'     => $cantidad,
-    'fecha'        => $fecha,
-    'precio'       => $precioUnitario,
-    'total'        => $total
-];
-
 ?>
+
 
 
 <!DOCTYPE html>
@@ -51,7 +16,8 @@ $_SESSION['reserva_tmp'] = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aventura Go - formulario de reserva</title>
 
-    <link rel="icon" type="image/png" href="/public/assets/website_externos/descubre_tours/img/FAVICON.png">
+    <link rel="icon" type="image/png" href="public/assets/website_externos/descubre_tours/img/FAVICON.png">
+
 
     <!-- bootstrap primero -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -63,21 +29,24 @@ $_SESSION['reserva_tmp'] = [
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/website_externos/formulario_reserva/formulario_reserva.css">
+    
 
 </head>
 
 
 <body>
+
     <!-- header________________________________________________________________________________________________________________________________ -->
     <header>
         <nav class="navbar">
             <div class="container-fluid">
+                <!-- Logo -->
                 <div class="logo">
-                    <img src="public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
+                    <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
+                        class="navbar-logo">
                 </div>
 
-                <h1 class="page-title">Confirma Tu reserva</h1>
-
+                <!-- Botones y menú móvil -->
                 <div class="actions">
 
                     <?php if (isset($_SESSION['user'])): ?>
@@ -125,9 +94,12 @@ $_SESSION['reserva_tmp'] = [
                     </div>
 
                 </div>
+
+
             </div>
         </nav>
     </header>
+
 
 
 
@@ -152,7 +124,7 @@ $_SESSION['reserva_tmp'] = [
                         <tbody>
                             <tr>
                                 <td>
-                                    <img src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= htmlspecialchars($actividad['imagen']) ?>" width="60" class="me-2">
+                                    <img src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= htmlspecialchars($actividad['imagen_principal']) ?>" width="60" class="me-2">
 
                                     <strong><?= htmlspecialchars($actividad['nombre']) ?></strong><br>
                                     <small class="text-muted"><?= htmlspecialchars($fecha) ?></small>
@@ -171,11 +143,22 @@ $_SESSION['reserva_tmp'] = [
                         <h5>Total a pagar</h5>
                         <h3 class="mb-3">$<?= number_format($total, 0, ',', '.') ?></h3>
 
-                        <form action="<?= BASE_URL ?>/checkout" method="POST">
-                            <button class="btn btn-danger w-100">
+                        <?php if (isset($_SESSION['user'])): ?>
+
+                            <form action="<?= BASE_URL ?>/checkout" method="POST">
+                                <button class="btn btn-danger w-100">
+                                    Confirmar Reserva
+                                </button>
+                            </form>
+
+                        <?php else: ?>
+
+                            <button class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#loginModal">
                                 Confirmar Reserva
                             </button>
-                        </form>
+
+                        <?php endif; ?>
+
 
                         <a href="<?= BASE_URL ?>/descubre-tours" class="btn btn-link mt-2">
                             ← Seguir explorando
@@ -216,6 +199,116 @@ $_SESSION['reserva_tmp'] = [
     </script>
 
 
+    <?php
+    if (!isset($_SESSION['user'])) {
+        $_SESSION['redirect_after_login'] = BASE_URL . '/formulario-reserva?id=' . $idActividad;
+    }
+
+    ?>
+
+
+    <!-- Modal Login -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-body text-center">
+                    <p>Debes iniciar sesión o registrarte para confirmar tu reserva.</p>
+
+                    <div class="form-section">
+                        <img src="public/assets/extras/login/img/REDES-LOGO 2.png" alt="Aventura GO" class="logo mb-3">
+
+                        <h2 class="fw-bold">INICIO DE SESIÓN</h2>
+                        <p>Por favor ingresa tu usuario y contraseña para iniciar sesión</p>
+
+                        <form action="iniciar-sesion" method="POST">
+                            <input type="email" name="email" class="form-control mb-3 rounded-pill" placeholder="Correo" required>
+
+                            <div class="password-container position-relative mb-3">
+                                <input type="password" name="contrasena" class="form-control rounded-pill" id="password" placeholder="Contraseña" required>
+                                <i class="bi bi-eye-fill position-absolute top-50 end-0 translate-middle-y me-3 text-secondary" id="togglePassword" style="cursor: pointer;"></i>
+                            </div>
+
+                            <p class="forgot-password">
+                                <a href="recoverpw">¿Olvidaste tu contraseña?</a>
+                            </p>
+
+                            <button type="submit" class="btn w-100 rounded-pill fw-bold text-white"
+                                style="background-color: #EA8217;">INGRESAR</button>
+                        </form>
+
+                        <div class="extra-links mt-4">
+                            <p>
+                                ¿Aún no tienes cuenta?
+                                <a href="#"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#registroModal"
+                                    data-bs-dismiss="modal">
+                                    Regístrate
+                                </a>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Registro -->
+    <div class="modal fade" id="registroModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-body text-center">
+                    <p>Debes iniciar sesión o registrarte para confirmar tu reserva.</p>
+
+                    <div class="form-section">
+                        <img src="public/assets/extras/login/img/REDES-LOGO 2.png" alt="Aventura GO" class="logo mb-3">
+
+                        <h2 class="fw-bold">REGISTRATE</h2>
+                        <h3>
+                            Preparate para vivir tu proxima aventura.<br>
+                            <span class="centered-line">Registrate y empieza el viaje.</span>
+                        </h3>
+
+
+
+                        <form action="<?= BASE_URL ?>/administrador/guardar-turista" method="POST" enctype="multipart/form-data">
+
+                            <input type="text" placeholder="Nombre" name="nombre">
+                            <div class="select-container">
+                                <select name="genero">
+                                    <option value="" disabled selected hidden>Genero</option>
+                                    <option value="Femenino">Femenino</option>
+                                    <option value="Masculino">Masculino</option>
+                                </select>
+                            </div>
+
+                            <input type="tel" placeholder="Teléfono" name="telefono">
+                            <input type="email" name="email" placeholder="Correo" required>
+                            <div class="password-container">
+                                <input type="password" name="clave" placeholder="Contraseña" id="password" required>
+                                <i class="bi bi-eye-fill" id="togglePassword"></i>
+                            </div>
+                            <div class="file-container">
+                                <input type="file" id="foto" name="foto" accept=".jpg, .png, .jpeg" required>
+                                <span class="file-placeholder">Foto</span>
+                            </div>
+
+
+
+                            <button type="submit">INICIO</button>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 
 

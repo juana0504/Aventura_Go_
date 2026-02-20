@@ -1,18 +1,11 @@
 <?php
-session_start();
-
-if (!isset($_SESSION['reserva_tmp'])) {
-    header('Location: ' . BASE_URL . '/descubre-tours');
-    exit;
-}
-
 $reserva = $_SESSION['reserva_tmp'];
-
 // reference único por intento
 if (!isset($_SESSION['reference_code'])) {
     $_SESSION['reference_code'] = 'RES-' . time() . '-' . rand(100, 999);
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -23,7 +16,7 @@ if (!isset($_SESSION['reference_code'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aventura Go - formulario de reserva</title>
 
-    <link rel="icon" type="image/png" href="/public/assets/website_externos/descubre_tours/img/FAVICON.png">
+    <link rel="icon" type="image/png" href="public/assets/website_externos/descubre_tours/img/FAVICON.png">
 
     <!-- bootstrap primero -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -49,7 +42,7 @@ if (!isset($_SESSION['reference_code'])) {
 
                 <h1 class="page-title">Confirma Tu reserva</h1>
 
-                <div class="actions">
+                <!-- <div class="actions">
 
                     <?php if (isset($_SESSION['user'])): ?>
                         <div class="profile-dropdown">
@@ -95,7 +88,7 @@ if (!isset($_SESSION['reference_code'])) {
                         <i class="fas fa-bars"></i>
                     </div>
 
-                </div>
+                </div> -->
             </div>
         </nav>
     </header>

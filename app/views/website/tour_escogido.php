@@ -1,5 +1,7 @@
 <?php
-require_once BASE_PATH . '/app/models/turista/ActividadModel.php';
+session_start();
+
+require_once BASE_PATH . '/app/models/proveedor_turistico/ActividadTuristica.php';
 
 $id = $_GET['id'] ?? null;
 if (!$id) {
@@ -7,8 +9,8 @@ if (!$id) {
     exit;
 }
 
-$model = new ActividadModel();
-$actividad = $model->obtenerPorId($id);
+$actividadModel = new ActividadTuristica();
+$actividad = $actividadModel->obtenerDetalleActividad($id);
 
 if (!$actividad) {
     header('Location: ' . BASE_URL . '/descubre-tours');
@@ -26,7 +28,7 @@ if (!$actividad) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aventura Go - tour-escogido</title>
 
-    <link rel="icon" type="image/png" href="../public/assets/website_externos/index/img/FAVICON.png">
+    <link rel="icon" type="image/png" href="public/assets/website_externos/index/img/FAVICON.png">
 
     <!-- bootstrap para el carrusel -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -51,16 +53,18 @@ if (!$actividad) {
 </head>
 
 <body>
+
     <!-- header________________________________________________________________________________________________________________________________ -->
     <header>
         <nav class="navbar">
             <div class="container-fluid">
+                <!-- Logo -->
                 <div class="logo">
-                    <img src="public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
+                    <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
+                        class="navbar-logo">
                 </div>
 
-                <h1 class="page-title">Confirma Tu reserva</h1>
-
+                <!-- Botones y menú móvil -->
                 <div class="actions">
 
                     <?php if (isset($_SESSION['user'])): ?>
@@ -97,7 +101,7 @@ if (!$actividad) {
                             Ingresa
                         </a>
 
-                        <a href="/aventura_go/registrarse" class="btn-register">
+                        <a href="#" class="btn-register" data-bs-toggle="modal" data-bs-target="#registroModal">
                             Regístrate
                         </a>
 
@@ -108,92 +112,114 @@ if (!$actividad) {
                     </div>
 
                 </div>
+
+
             </div>
         </nav>
     </header>
 
+
     <main>
 
-        <div class="activities-grid">
+        <section id="info">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
 
-            <?php if (!empty($actividad)): ?>
+                        <?php if (!empty($actividad)): ?>
+                            <div class="targeta">
+                                <div class="col-md-6 detalle">
+                                    <h2><?= htmlspecialchars($actividad['nombre']) ?></h2>
 
-                <div class="activity-card">
+                                    <p id="direccion"><i class="bi bi-geo-alt"></i> <?= htmlspecialchars($actividad['ubicacion']) ?>, <?= htmlspecialchars($actividad['ciudad']) ?>,
+                                        <?= htmlspecialchars($actividad['departamento']) ?>,
+                                        253610 Villeta, Colombia <br></p>
+                                    <p>Después de reservar, encontrarás todos los datos del alojamiento con el número de
+                                        teléfono y la
+                                        <br>
+                                        dirección en tu confirmación de la reserva y en tu cuenta.
+                                    </p>
+                                </div>
+                                <div class="col-md-6 datos">
+                                    <!-- <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <samp>(120 Review)</samp>
 
-                    <?php if (!empty($actividad['imagen_principal'])): ?>
-                        <!-- Imagen principal -->
-                        <div class="imagen-principal">
-                            <img
-                                src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $actividad['imagen_principal'] ?>"
-                                alt="<?= htmlspecialchars($actividad['nombre']) ?>">
-                        </div>
-                    <?php endif; ?>
+                                    <p><i class="bi bi-clock"></i>1 Noche, 2 Dias</p> -->
+                                    <p>$<?= htmlspecialchars($actividad['precio']) ?></p>
+                                </div>
+                            </div>
 
-                    <?php if (!empty($actividad['imagenes'])): ?>
-                        <!-- Galería (máx 5) -->
-                        <div class="galeria-actividad">
-                            <?php foreach ($actividad['imagenes'] as $img): ?>
-                                <img
-                                    src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $img ?>"
-                                    alt="<?= htmlspecialchars($actividad['nombre']) ?>">
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endif; ?>
+                            <section id="galeria-hotel">
+                                <div class="cont-img-principal">
+                                    <button class="btn prev">❮</button>
 
-                    <h3><?= htmlspecialchars($actividad['nombre']) ?></h3>
-
-                    <p><?= htmlspecialchars($actividad['descripcion']) ?></p>
+                                    <div class="carousel-track">
+                                        <?php foreach ($actividad['imagenes'] as $img): ?>
+                                            <img src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $img ?>">
+                                        <?php endforeach; ?>
+                                    </div>
 
 
+                                    <button class="btn next">❯</button>
+                                </div>
+                                <div class="cont-items">
+                                    <?php foreach ($actividad['imagenes'] as $index => $img): ?>
+                                        <button type="button" class="item <?= $index === 0 ? 'active' : '' ?>">
+                                            <img src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $img ?>">
+                                        </button>
+                                    <?php endforeach; ?>
+                                </div>
+
+                            </section>
+
+                            <div class="dato">
+                                <h2><?= htmlspecialchars($actividad['nombre']) ?></h2>
+                                <p><?= htmlspecialchars($actividad['descripcion']) ?></p>
+
+
+                                <!-- seccion mapa -->
+                                <section id="mapa" class="mapa-section">
+                                    <div class="mapa-contenedor">
+                                        <iframe
+                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.166972063625!2d-74.472745125039!3d5.013951139904496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4067dfb5f1a3e7%3A0xeca58a4d9a0f72cb!2sVilleta%2C%20Cundinamarca!5e0!3m2!1ses!2sco!4v1690391856678!5m2!1ses!2sco"
+                                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                        </iframe>
+                                    </div>
+                                </section>
+                            </div>
+                        <?php else: ?>
+                            <p>No se encontró la actividad.</p>
+                        <?php endif; ?>
+                    </div>
+                    <div class="col-md-4">
+                        <!-- BOTON DE RESERVAR____________________________________________________________________________________________________________ -->
+                        <form class="form-reserva" action="<?= BASE_URL ?>/formulario-reserva" method="POST">
+
+                            <input type="hidden" name="id_actividad" value="<?= $actividad['id_actividad'] ?>">
+
+                            <div class="form-group">
+                                <label>Cantidad de personas</label>
+                                <input type="number" name="cantidad_personas" class="form-control" min="1" value="1"
+                                    required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Fecha de la actividad</label>
+                                <input type="date" name="fecha" class="form-control" required>
+                            </div>
+
+                            <button type="submit">
+                                Reservar
+                            </button>
+                        </form>
+                    </div>
                 </div>
-
-            <?php else: ?>
-                <p>No se encontró la actividad.</p>
-            <?php endif; ?>
-
-            <!-- Sección mapa____________________________________________________________________________________________________________ -->
-            <section id="mapa" class="mapa-section">
-                <div class="mapa-contenedor">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.166972063625!2d-74.472745125039!3d5.013951139904496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4067dfb5f1a3e7%3A0xeca58a4d9a0f72cb!2sVilleta%2C%20Cundinamarca!5e0!3m2!1ses!2sco!4v1690391856678!5m2!1ses!2sco"
-                        allowfullscreen
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
-            </section>
-
-
-            <!-- BOTON DE RESERVAR____________________________________________________________________________________________________________ -->
-            <form action="<?= BASE_URL ?>/formulario-reserva" method="POST">
-
-                <input type="hidden" name="id_actividad" value="<?= $actividad['id_actividad'] ?>">
-
-                <div class="mb-2">
-                    <label>Cantidad de personas</label>
-                    <input type="number"
-                        name="cantidad_personas"
-                        class="form-control"
-                        min="1"
-                        value="1"
-                        required>
-                </div>
-
-                <div class="mb-3">
-                    <label>Fecha de la actividad</label>
-                    <input type="date"
-                        name="fecha"
-                        class="form-control"
-                        required>
-                </div>
-
-                <button type="submit" class="btn btn-primary w-100">
-                    Reservar
-                </button>
-            </form>
-        </div>
-
-
+            </div>
+        </section>
 
     </main>
 
@@ -217,7 +243,8 @@ if (!$actividad) {
                 <!-- Columna 1: Logo -->
                 <div class="col-md-2">
                     <div class="logo-section">
-                        <img src="../public/assets/website_externos/tour_escogido/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
+                       <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
+                        class="navbar-logo">
                     </div>
                 </div>
 
@@ -292,7 +319,7 @@ if (!$actividad) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
-    <!-- <script src="<?= BASE_URL ?>/public/assets/website_externos/tour_escogido/tour_escogido.js"></script> -->
+    <script src="<?= BASE_URL ?>/public/assets/website_externos/tour_escogido/tour_escogido.js"></script>
 
     <script>
         const profileToggle = document.getElementById('profileToggle');
@@ -311,7 +338,73 @@ if (!$actividad) {
         }
     </script>
 
+    <!-- MODAL REGISTRO -->
+    <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
 
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registroModalLabel">¿Cómo quieres registrarte?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="container py-3">
+
+                        <div class="row g-4 justify-content-center">
+
+                            <!-- TURISTA -->
+                            <div class="col-md-4">
+                                <div class="card card-registro text-center p-4">
+                                    <!-- <div class="icono-registro">🎒</div> -->
+                                    <div class="card-body">
+                                        <h3 class="card-title">Turista</h3>
+                                        <p class="card-text">Quiero reservar actividades y experiencias.</p>
+                                        <a href="/aventura_go/registrarse?tipo=turista" class="btn btn-aventura">
+                                            Elegir
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PROVEEDOR TURÍSTICO -->
+                            <div class="col-md-4">
+                                <div class="card card-registro text-center p-4">
+                                    <!-- <div class="icono-registro">⛰️</div> -->
+                                    <div class="card-body">
+                                        <h3 class="card-title">Proveedor turístico</h3>
+                                        <p class="card-text">Quiero publicar actividades de aventura.</p>
+                                        <a href="/aventura_go/registrar-proveedor" class="btn btn-aventura">
+                                            Elegir
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PROVEEDOR HOTELERO -->
+                            <div class="col-md-4">
+                                <div class="card card-registro text-center p-4">
+                                    <!-- <div class="icono-registro">🏨</div> -->
+                                    <div class="card-body">
+                                        <h3 class="card-title">Proveedor hotelero</h3>
+                                        <p class="card-text">Quiero publicar hospedajes.</p>
+                                        <a href="/aventura_go/registrar-proveedor-hotelero" class="btn btn-aventura">
+                                            Elegir
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- FIN MODAL REGISTRO -->
 
 </body>
 

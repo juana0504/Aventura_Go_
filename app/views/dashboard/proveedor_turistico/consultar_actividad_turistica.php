@@ -2,7 +2,7 @@
 require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 require_once BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php';
 
-$datos =listarActividades();
+$datos = listarActividades();
 
 ?>
 
@@ -34,7 +34,7 @@ $datos =listarActividades();
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
 
     <!-- Componentes comunes -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_proveedor.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
     <!-- CSS SOLO DE ESTA VISTA (SIEMPRE AL FINAL) -->
@@ -260,6 +260,9 @@ $datos =listarActividades();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+
+    <script src="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/consultar_actividad_turistica/modal_actividad.js"></script>
+
 
 
 

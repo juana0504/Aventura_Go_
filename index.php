@@ -1,7 +1,12 @@
 <?php
 //index.php - Router principal en larabel se tiene un archivo por cada carpeta de views
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 
 require_once __DIR__ . '/config/config.php';
+
+require_once BASE_PATH . '/app/controllers/website/WebsiteController.php';
 
 $requestUri = $_SERVER['REQUEST_URI']; //OBTENER LA URI ACTUAL (por ejemplo: aventura_go/login)
 
@@ -27,10 +32,35 @@ switch ($request) {
         require BASE_PATH . '/app/views/auth/registrarse.php'; //redirige a el login 
         break;
 
-    case '/registro':
-        require BASE_PATH . '/app/views/auth/seleccionar_tipo_registro.php';
+    case '/registrar-proveedor':
+        require BASE_PATH . '/app/views/auth/registrar_proveedor.php'; //redirige a el registro de proveedor turistico ALB 18/02/2026 
         break;
 
+    case '/guardar-registro-proveedor':
+        require_once BASE_PATH . '/app/controllers/RegistroProveedorController.php'; //redirige al guardar el registro de proveedor turistico ALB 18/02/2026
+        break;
+
+    case '/proveedor/pendiente':
+        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/pendiente_aprobacion.php'; //redirige a la pagina de pendiente de aprobacion del proveedor turistico ALB 19/02/2026
+        break;
+
+    case '/proveedor/completar-informacion':
+        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/completar_informacion.php'; //redirige a la pagina de completar informacion del proveedor turistico ALB 19/02/2026
+        break;
+
+    case '/proveedor/guardar-informacion':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/completarInformacion.php'; //redirige al guardar la informacion del proveedor turistico ALB 19/02/2026
+        break;
+
+
+
+    case '/registrar-proveedor-hotelero':
+        require BASE_PATH . '/app/views/auth/registrar_proveedor_hotelero.php'; //redirige a el registro de proveedor hotelero ALB 18/02/2026
+        break;
+
+    case '/guardar-registro-proveedor-hotelero':
+        require_once BASE_PATH . '/app/controllers/registroProveedorHoteleroController.php'; //redirige al guardar el registro de proveedor hotelero ALB 18/02/2026
+        break;
 
     case '/iniciar-sesion':
         require_once BASE_PATH . '/app/controllers/loginController.php'; //redirige al inicio de sesion
@@ -330,23 +360,31 @@ switch ($request) {
 
     // Ruta: descubre tours
     case '/descubre-tours':
-        require BASE_PATH . '/app/views/website/descubre_tours.php';
+        (new WebsiteController())->descubreTours();
         break;
 
     // Ruta: /tour escogido
-    case '/tour-escogido':
-        require BASE_PATH . '/app/views/website/tour_escogido.php';
+    case '/tour-escogido': //ojo se modifico aca para darle login
+        (new WebsiteController())->tourEscogido();
         break;
 
     // Ruta: /formulario de reserva
     case '/formulario-reserva':
-        require BASE_PATH . '/app/views/website/formulario_reserva.php';
+        (new WebsiteController())->formularioReserva();
         break;
 
-    // ruta confirmar en formulario checkout
+    // ruta confirmar en formulario checkout, ojo no cambiar nada ruta DE PAGO PROTEGIDA 
     case '/checkout':
-        require_once 'app/views/website/checkout.php';
+        session_start();
+        
+        if (!isset($_SESSION['reserva_tmp'])) {
+            header('Location: ' . BASE_URL . '/descubre-tours');
+            exit;
+        }
+        require BASE_PATH . '/app/views/website/checkout.php';
         break;
+
+
 
     // ======================= PAGO =======================
     // PAGO (WEBSITE) 
@@ -354,10 +392,28 @@ switch ($request) {
         require_once BASE_PATH . '/app/controllers/website/PagoController.php';
         break;
 
-    // PAYU 
+    // PAGOS EN PAYU 
     case '/pago/payu':
         require_once BASE_PATH . '/app/views/website/pago/payu.php';
         break;
+
+    //respuesta ticken a payu
+    case '/pago/payu-respuesta':
+        require BASE_PATH . '/app/controllers/website/payu_respuesta.php';
+        break;
+
+    //confirmacion pago payu
+    case '/confirmacion':
+        require BASE_PATH . '/app/views/website/confirmacion.php';
+        break;
+
+    //ESTA RUTA Y SU ARCHIVO SON VERSION DEMO SE ELIMINA CUANDO SE CONECTA AL PAGO REAL-
+    case '/pago/payu-demo':
+        require BASE_PATH . '/app/views/website/payu_demo.php';
+        break;
+
+
+
 
 
 
