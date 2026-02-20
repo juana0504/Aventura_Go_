@@ -1,258 +1,445 @@
-/* Fuentes */
+/* ============================================================
+   CHECKOUT - AVENTURA GO
+   ============================================================ */
+
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
 
-/* Paleta de colores */
 :root {
-    --color-primary: #2D4059;
-    --color-secondary: #EA8217;
-    --color-white: #FFFFFF;
-    --color-bg-light: #F8F9FA;
-    --color-border: #E0E0E0;
-    --color-text: #2b2b2b;
-    --font-titles: 'Raleway', sans-serif;
-    --font-text: 'Lato', sans-serif;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    --primary:       #2D4059;
+    --primary-light: #3a5070;
+    --secondary:     #EA8217;
+    --white:         #FFFFFF;
+    --bg:            #F0F2F5;
+    --text:          #2b2b2b;
+    --text-muted:    #7a8694;
+    --border:        #E2E8F0;
+    --success:       #0a8a4f;
+    --radius:        16px;
+    --radius-sm:     10px;
 }
 
 body {
-    background: #f5f5f5;
+    background: var(--bg) !important;
+    font-family: 'Lato', sans-serif !important;
+    color: var(--text) !important;
     overflow-x: hidden;
-    width: 100%;
-    font-family: var(--font-text);
-}
-
-/*  HEADER  */
-header {
-    background-color: var(--color-white);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-.navbar {
-    padding: 12px 0px;
-}
-
-.navbar .container-fluid {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.navbar-logo {
-    width: 150px;
-    height: auto;
-}
-
-.navbar-nav {
-    list-style: none;
-    display: flex;
-    gap: 28px;
-    margin: 0;
-    padding: 0;
-    flex-direction: row;
-}
-
-
-.nav-link {
-    font-family: var(--font-titles);
-    font-weight: 500;
-    color: var(--color-text);
-    text-decoration: none;
+    min-height: 100vh;
     position: relative;
-    transition: color 0.3s ease;
+}
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 15% 15%, rgba(45,64,89,0.04) 0%, transparent 50%),
+        radial-gradient(circle at 85% 80%, rgba(234,130,23,0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
 }
 
-.nav-link:hover {
-    color: var(--color-secondary);
+/* ── HEADER ── */
+header {
+    background: var(--white) !important;
+    box-shadow: 0 1px 0 var(--border), 0 2px 12px rgba(45,64,89,0.08) !important;
+    position: fixed !important;
+    top: 0 !important;
+    width: 100% !important;
+    z-index: 1000 !important;
+}
+header::after {
+    content: "";
+    display: block;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 60%, transparent 100%);
+}
+header .navbar {
+    padding: 0 !important;
+}
+header .navbar .container-fluid {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 32px !important;
+    height: 68px !important;
+    position: relative !important;
+}
+.navbar-logo {
+    width: 130px !important;
+    height: auto !important;
+}
+header .page-title {
+    font-family: 'Raleway', sans-serif !important;
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+    letter-spacing: 0.5px !important;
+    margin: 0 !important;
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
 }
 
-.nav-link.active {
-    color: var(--color-black);
-    font-weight: 700;
+/* ── MAIN ── */
+main {
+    padding-top: 68px !important;
+    position: relative;
+    z-index: 1;
+}
+#formulario_confirmacion {
+    padding: 48px 0 64px !important;
+}
+#formulario_confirmacion .my-5 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
 }
 
-.nav-link.active::after {
+/* ── CARDS ── */
+#formulario_confirmacion .card {
+    background: var(--white) !important;
+    border: none !important;
+    border-radius: var(--radius) !important;
+    box-shadow: 0 8px 32px rgba(45,64,89,0.12) !important;
+    overflow: hidden !important;
+    transition: box-shadow 0.3s ease !important;
+}
+#formulario_confirmacion .card:hover {
+    box-shadow: 0 20px 60px rgba(45,64,89,0.18) !important;
+}
+#formulario_confirmacion .card-header {
+    background: var(--white) !important;
+    border-bottom: 1px solid var(--border) !important;
+    padding: 20px 28px !important;
+    position: relative !important;
+}
+#formulario_confirmacion .card-header::before {
     content: "";
     position: absolute;
-    bottom: -6px;
     left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--color-secondary);
-    border-radius: 5px;
+    top: 20%;
+    height: 60%;
+    width: 4px;
+    background: linear-gradient(180deg, var(--secondary), var(--primary));
+    border-radius: 0 4px 4px 0;
+}
+#formulario_confirmacion .card-header h1 {
+    font-family: 'Raleway', sans-serif !important;
+    font-size: 20px !important;
+    font-weight: 800 !important;
+    color: var(--primary) !important;
+    margin: 0 !important;
+}
+#formulario_confirmacion .card-header h5 {
+    font-family: 'Raleway', sans-serif !important;
+    font-size: 18px !important;
+    font-weight: 800 !important;
+    color: var(--primary) !important;
+    margin: 0 !important;
+}
+#formulario_confirmacion .card-body {
+    padding: 28px !important;
 }
 
-
-.btn-login,
-.btn-register {
-    font-family: var(--font-titles);
-    font-weight: 600;
-    color: var(--color-white);
-    border: none;
-    border-radius: 8px;
-    padding: 8px 18px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
+/* ── IMAGEN ── */
+#formulario_confirmacion .img-fluid.rounded {
+    border-radius: var(--radius-sm) !important;
+    width: 100% !important;
+    height: 160px !important;
+    object-fit: cover !important;
+    box-shadow: 0 2px 12px rgba(45,64,89,0.08) !important;
 }
 
-.btn-login {
-    background-color: var(--color-primary);
+/* ── INFO TOUR ── */
+#formulario_confirmacion .col-md-8 h5 {
+    font-family: 'Raleway', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: var(--text-muted) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.2px !important;
+    margin-bottom: 6px !important;
+}
+#formulario_confirmacion .col-md-8 h6 {
+    font-family: 'Raleway', sans-serif !important;
+    font-size: 18px !important;
+    font-weight: 800 !important;
+    color: var(--primary) !important;
+    margin-bottom: 14px !important;
+    line-height: 1.3 !important;
+}
+#formulario_confirmacion .col-md-8 p {
+    font-size: 14px !important;
+    color: var(--text-muted) !important;
+    margin-bottom: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+#formulario_confirmacion .col-md-8 p strong {
+    color: var(--text) !important;
+    font-weight: 700 !important;
 }
 
-.btn-register {
-    background-color: var(--color-secondary);
+/* ── SEPARADOR ── */
+#formulario_confirmacion hr {
+    border: none !important;
+    border-top: 1px solid var(--border) !important;
+    margin: 20px 0 !important;
+    opacity: 1 !important;
 }
 
-.btn-login:hover,
-.btn-register:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
-    color: var(--color-white);
+/* ── PRECIOS ── */
+#formulario_confirmacion .d-flex.justify-content-between {
+    background: linear-gradient(135deg, #f8fafc, #f0f4f8) !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 16px 20px !important;
+    border: 1px solid var(--border) !important;
+    align-items: center !important;
+}
+#formulario_confirmacion .d-flex.justify-content-between p {
+    margin: 0 !important;
+    font-size: 14px !important;
+    color: var(--text-muted) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3px !important;
+}
+#formulario_confirmacion .d-flex.justify-content-between p strong {
+    color: var(--text) !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+#formulario_confirmacion .fs-4.fw-bold,
+#formulario_confirmacion .text-success {
+    font-family: 'Raleway', sans-serif !important;
+    font-size: 28px !important;
+    font-weight: 800 !important;
+    color: var(--secondary) !important;
+    line-height: 1 !important;
 }
 
-.menu-toggle {
-    display: none;
-    font-size: 22px;
-    color: var(--color-primary);
-    cursor: pointer;
+/* ── LABELS ── */
+#formulario_confirmacion .form-label {
+    font-family: 'Lato', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: var(--text) !important;
+    margin-bottom: 6px !important;
 }
 
-.main-content {
-    margin-top: 80px;
-    padding: 40px 20px;
+/* ── INPUTS ── */
+#formulario_confirmacion .form-control {
+    border: 1.5px solid var(--border) !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 11px 14px !important;
+    font-family: 'Lato', sans-serif !important;
+    font-size: 14px !important;
+    color: var(--text) !important;
+    background: #fafbfc !important;
+    box-shadow: none !important;
+    transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease !important;
+}
+#formulario_confirmacion .form-control::placeholder {
+    color: #b0bac5 !important;
+    font-weight: 300 !important;
+}
+#formulario_confirmacion .form-control:focus {
+    border-color: var(--secondary) !important;
+    background: var(--white) !important;
+    box-shadow: 0 0 0 3px rgba(234,130,23,0.12) !important;
+    outline: none !important;
 }
 
-.page-title {
-    text-align: center;
-    font-family: var(--font-titles);
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--color-primary);
-    margin-bottom: 10px;
+/* ── SECCIÓN TÍTULOS DEL FORM ── */
+#formulario_confirmacion h6.fw-bold {
+    font-family: 'Raleway', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: var(--text-muted) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.2px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin-bottom: 14px !important;
 }
-
-.page-subtitle {
-    text-align: center;
-    font-size: 18px;
-    color: var(--color-text);
-    margin-bottom: 40px;
-}
-
-.tabs-container {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 30px;
-    justify-content: center;
-}
-
-/* ===============================
-   BIENVENIDA USUARIO - HEADER
-   =============================== */
-
-.Bienvenido {
-    background-color: #2D4059;
-    /* azul Aventura Go */
-    color: #FFFFFF;
-    padding: 8px 14px;
-    border-radius: 6px;
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    margin-right: 10px;
-    display: inline-flex;
-    align-items: center;
-    white-space: nowrap;
-}
-
-/* Ajuste para que no se pegue al botón salir */
-.actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.bienvenido strong {
-    font-weight: 700;
-}
-
-
-/* INICIA no modificar, estilos del dropdown--------------------------------------------- */
-.profile-dropdown {
-    position: relative;
-}
-
-.profile-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background-color: #2D4059;
-    color: #FFFFFF;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.profile-btn i {
-    font-size: 16px;
-}
-
-.profile-menu {
-    position: absolute;
-    right: 0;
-    top: 46px;
-    background-color: #FFFFFF;
-    border: 1px solid #E0E0E0;
-    border-radius: 10px;
-    min-width: 200px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-    list-style: none;
-    padding: 8px 0;
-    display: none;
-    z-index: 999;
-}
-
-.profile-menu li a {
-    display: block;
-    padding: 10px 16px;
-    font-size: 14px;
-    color: #2B2B2B;
-    text-decoration: none;
-}
-
-.profile-menu li a:hover {
-    background-color: #F8F9FA;
-}
-
-.profile-menu .divider {
+#formulario_confirmacion h6.fw-bold::after {
+    content: "";
+    flex: 1;
     height: 1px;
-    background-color: #E0E0E0;
-    margin: 6px 0;
+    background: var(--border);
 }
 
-.profile-menu .logout {
-    color: #EA8217;
-    font-weight: 600;
+/* ── MÉTODOS DE PAGO ── */
+#formulario_confirmacion .form-check.border {
+    border: 1.5px solid var(--border) !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 14px 16px 14px 48px !important;
+    cursor: pointer !important;
+    position: relative !important;
+    background: #fafbfc !important;
+    margin-bottom: 10px !important;
+    transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease !important;
+}
+#formulario_confirmacion .form-check.border:hover {
+    border-color: var(--secondary) !important;
+    background: #fff8f2 !important;
+    box-shadow: 0 4px 12px rgba(234,130,23,0.1) !important;
+}
+#formulario_confirmacion .form-check:has(.form-check-input:checked) {
+    border-color: var(--secondary) !important;
+    background: #fff8f2 !important;
+    box-shadow: 0 4px 16px rgba(234,130,23,0.12) !important;
+}
+#formulario_confirmacion .form-check-input[type="radio"] {
+    position: absolute !important;
+    left: 14px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 18px !important;
+    height: 18px !important;
+    border: 2px solid var(--border) !important;
+    cursor: pointer !important;
+    margin: 0 !important;
+    accent-color: var(--secondary) !important;
+    flex-shrink: 0 !important;
+}
+#formulario_confirmacion .form-check-label {
+    font-family: 'Raleway', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+    cursor: pointer !important;
+    display: block !important;
+    margin-bottom: 2px !important;
+}
+#formulario_confirmacion .form-check small.text-muted {
+    font-size: 12px !important;
+    color: var(--text-muted) !important;
+    margin-top: 2px !important;
+    display: block !important;
+}
+#formulario_confirmacion .form-check.border[data-badge]::after {
+    content: attr(data-badge) !important;
+    position: absolute !important;
+    right: 14px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: var(--secondary) !important;
+    background: rgba(234,130,23,0.1) !important;
+    padding: 3px 8px !important;
+    border-radius: 20px !important;
+    letter-spacing: 0.5px !important;
+    font-family: 'Lato', sans-serif !important;
 }
 
-/* termina no modificar, estilos del dropdown--------------------------------------------- */
-/* #formulario_confirmacion {
-    margin-top: 3rem !important;
-    margin-bottom: 3rem !important;
-} */
+/* ── BOTÓN PAGAR ── */
+#formulario_confirmacion .btn.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%) !important;
+    border: none !important;
+    border-radius: var(--radius-sm) !important;
+    font-family: 'Raleway', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    letter-spacing: 1.5px !important;
+    color: var(--white) !important;
+    padding: 15px 20px !important;
+    width: 100% !important;
+    cursor: pointer !important;
+    position: relative !important;
+    overflow: hidden !important;
+    transition: transform 0.25s ease, box-shadow 0.3s ease !important;
+    box-shadow: 0 6px 24px rgba(45,64,89,0.35) !important;
+    margin-top: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+}
+#formulario_confirmacion .btn.btn-primary::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 55%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+    z-index: 0;
+}
+#formulario_confirmacion .btn.btn-primary::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: var(--secondary);
+    transition: width 0.3s ease;
+    border-radius: 3px 3px 0 0;
+}
+#formulario_confirmacion .btn.btn-primary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 12px 36px rgba(45,64,89,0.45) !important;
+    color: var(--white) !important;
+}
+#formulario_confirmacion .btn.btn-primary:hover::before { left: 150%; }
+#formulario_confirmacion .btn.btn-primary:hover::after  { width: 80%; }
+#formulario_confirmacion .btn.btn-primary:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 4px 16px rgba(45,64,89,0.3) !important;
+}
 
+/* ── BADGE SEGURIDAD ── */
+.secure-badge {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    margin-top: 14px !important;
+    font-size: 12px !important;
+    color: var(--text-muted) !important;
+    font-family: 'Lato', sans-serif !important;
+}
+.secure-badge i {
+    color: var(--success) !important;
+    font-size: 14px !important;
+}
 
-.my-5 {
-    margin-top: 10rem !important;
+/* ── ANIMACIONES DE ENTRADA ── */
+#formulario_confirmacion .col-md-7 .card {
+    animation: slideInLeft 0.6s cubic-bezier(0.22,1,0.36,1) both;
+}
+#formulario_confirmacion .col-md-5 .card {
+    animation: slideInRight 0.6s 0.15s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-24px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(24px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+    header .navbar .container-fluid {
+        padding: 0 16px !important;
+        height: 60px !important;
+    }
+    header .page-title { font-size: 13px !important; }
+    .navbar-logo { width: 100px !important; }
+    #formulario_confirmacion { padding: 24px 0 48px !important; }
+    #formulario_confirmacion .card-body { padding: 18px !important; }
+    #formulario_confirmacion .card-header { padding: 14px 18px !important; }
+    #formulario_confirmacion .d-flex.justify-content-between {
+        flex-direction: column !important;
+        gap: 14px !important;
+    }
+    #formulario_confirmacion .img-fluid.rounded { height: 200px !important; }
 }
