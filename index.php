@@ -1,7 +1,9 @@
 <?php
 //index.php - Router principal en larabel se tiene un archivo por cada carpeta de views
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+
+//HABILITAR LA VISUALIZACION DE ERRORES EN PHP (PARA DESARROLLO, NO USAR EN PRODUCCION)
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
 
 
 require_once __DIR__ . '/config/config.php';
@@ -45,12 +47,13 @@ switch ($request) {
         break;
 
     case '/proveedor/completar-informacion':
-        require_once BASE_PATH . '/app/controllers/proveedor_turistico/completarInformacion.php';
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/completarInformacion.php'; //redirige a completar la informacion del proveedor turistico ALB 19/02/2026
         break;
 
     case '/proveedor/guardar-informacion':
         require_once BASE_PATH . '/app/controllers/proveedor_turistico/completarInformacion.php'; //redirige al guardar la informacion del proveedor turistico ALB 19/02/2026
         break;
+
 
 
 
@@ -109,29 +112,37 @@ switch ($request) {
     case '/administrador/registrar-proveedor':
         require BASE_PATH . '/app/views/dashboard/administrador/registrar_proveedor_turistico.php';  //redirige al perfil de usuario de administrador
         break;
+
     case '/administrador/consultar-proveedor':
         require BASE_PATH . '/app/views/dashboard/administrador/consultar_proveedor_turistico.php';  //redirige al perfil de usuario de administrador
         break;
+
     case '/administrador/guardar-proveedor':
         require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';  //redirige al guardar proveedor
         break;
+
     case '/administrador/editar-proveedor':
         require BASE_PATH . '/app/views/dashboard/administrador/editar_proveedor_turistico.php';  //redirige al guardar proveedor
         break;
+
     case '/administrador/actualizar-proveedor':
         require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';  //redirige al actualizar el proveedor
         break;
+
     case '/administrador/eliminar-proveedor':
         require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';  //elimina el proveedor
         break;
+
     case '/administrador/reporte':
         require_once BASE_PATH . '/app/controllers/reportesPdfController.php';  //elimina el proveedor
         reportesPdfControlers();
         break;
+
     case '/administrador/consultar-proveedor-id':
         require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';
         consultarProveedorOjo(); // Llama a la función que devuelve JSON
         break;
+
     case '/administrador/cambiar-estado-proveedor':
         require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';
         break;

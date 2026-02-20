@@ -4,6 +4,7 @@
 require_once __DIR__ . '/../../helpers/alert_helper.php';
 require_once __DIR__ . '/../../models/administrador/proveedor.php';
 require_once __DIR__ . '/../../models/Ciudad.php';
+// require_once __DIR__ . '/../../config/database.php';
 
 
 $ciudadModel = new Ciudad();
