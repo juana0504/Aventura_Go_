@@ -68,14 +68,8 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("prev-email_repre").innerText = document.getElementById("email_repre").value || "-";
         document.getElementById("prev-telefono_repre").innerText = document.getElementById("telefono_repre").value || "-";
         document.getElementById("prev-representante").innerText = document.getElementById("nombre_repre").value || "-";
-        
-        // const descripcion = document.getElementById("descripcion");
-        // const prevDescripcion = document.getElementById("prev-descripcion");
-
-        // if (prevDescripcion && descripcion) {
-        //     prevDescripcion.textContent = descripcion.value.trim() !== "" ? descripcion.value : "-";
-        // }
-
+        document.getElementById("prev-descripcion").innerText = document.getElementById("descripcion").value || "-";
+    
         // Actividades
         const actividades = [];
         document.querySelectorAll('input[name="actividades[]"]:checked').forEach(cb => {
