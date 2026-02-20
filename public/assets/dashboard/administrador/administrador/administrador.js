@@ -16,13 +16,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const ctx = document.getElementById('reservasChart');
 
   if (ctx) { // Verifica que exista el canvas antes de crear el gráfico
+    // preparar etiquetas y datos a partir de reservasData
+    let labels = [];
+    let data = [];
+    if (typeof reservasData !== 'undefined' && Array.isArray(reservasData)) {
+      reservasData.forEach(r => {
+        labels.push(r.dia);
+        data.push(r.total);
+      });
+    }
     new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        labels: labels,
         datasets: [{
           label: 'Reservas',
-          data: [10, 20, 15, 25, 30, 28, 40, 35, 45, 50, 48, 70],
+          data: data,
           borderColor: '#EA8217',
           backgroundColor: 'rgba(255, 132, 0, 0.15)',
           tension: 0.4,
@@ -62,13 +71,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const ctx = document.getElementById('gastosChart');
 
   if (ctx) {
+    // preparar etiquetas y datos a partir de gastosData si existe
+    let labelsG = [];
+    let dataG = [];
+    if (typeof gastosData !== 'undefined' && Array.isArray(gastosData)) {
+      gastosData.forEach(g => {
+        labelsG.push(g.categoria || g.dia || '');
+        dataG.push(g.total || g.monto || 0);
+      });
+    }
     new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        labels: labelsG.length ? labelsG : ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
         datasets: [{
           label: 'Gastos',
-          data: [5, 10, 8, 12, 15, 13, 17, 19, 22, 20, 18, 25],
+          data: dataG.length ? dataG : [5, 10, 8, 12, 15, 13, 17, 19, 22, 20, 18, 25],
           borderColor: '#EA8217',
           backgroundColor: 'rgba(211, 218, 225, 0.2)',
           tension: 0.4,

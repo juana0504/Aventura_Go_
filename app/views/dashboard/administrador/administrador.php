@@ -68,7 +68,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <i class="bi bi-graph-up-arrow"></i>
                             <div>
                                 <p>Total de Reservas</p>
-                                <h3>2,780</h3>
+                                <h3><?= number_format($totalReservas) ?></h3>
                             </div>
                         </div>
 
@@ -76,7 +76,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <i class="bi bi-person-circle"></i>
                             <div>
                                 <p>Reservas Diarias</p>
-                                <h3>421</h3>
+                                <h3><?= number_format($reservasDiarias) ?></h3>
                             </div>
                         </div>
 
@@ -84,7 +84,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <i class="bi bi-globe-central-south-asia-fill"></i>
                             <div>
                                 <p>Experiencias Activas</p>
-                                <h3>548</h3>
+                                <h3><?= number_format($experienciasActivas) ?></h3>
                             </div>
                         </div>
 
@@ -107,6 +107,10 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                         <div class="grafico-container">
                             <canvas id="reservasChart"></canvas>
                         </div>
+                        <script>
+                            const reservasData = <?= json_encode($graficoReservas) ?>;
+                            const gastosData = <?= json_encode($gastosChartData) ?>;
+                        </script>
                     </section>
 
 
@@ -126,18 +130,18 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Juan Perez</td>
-                                    <td>12-Jul-2025</td>
-                                    <td>Ruta Ecológica</td>
-                                    <td>Rafting</td>
-                                </tr>
-                                <tr>
-                                    <td>Pepito Mahecha</td>
-                                    <td>12-Jul-2025</td>
-                                    <td>Ruta Ecológica</td>
-                                    <td>Rafting</td>
-                                </tr>
+                                        <?php if (!empty($ultimaReserva)): ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($ultimaReserva['cliente']) ?></td>
+                                        <td><?= htmlspecialchars($ultimaReserva['fecha']) ?></td>
+                                        <td><?= htmlspecialchars($ultimaReserva['precio']) ?></td>
+                                        <td><?= htmlspecialchars($ultimaReserva['experiencia']) ?></td>
+                                    </tr>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="4" class="text-center">Sin reservas recientes</td>
+                                    </tr>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </section>
@@ -146,29 +150,31 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                 <!-- Panel derecho -->
                 <aside class="summary-panel">
                     <div class="ingresos">
-                        <h4>$9,470</h4>
+                        <h4>$<?= number_format($ingresosDisponibles,2) ?></h4>
                         <p>Ingresos Disponibles</p>
-                        <ul>
-                            <li>Reservas: $1,699</li>
-                            <li>Comisiones: $799</li>
-                            <li>Impuestos: $199</li>
-                        </ul>
+                        <!-- detalles adicionales podrían provenir del modelo si se requieren -->
                         <button>Generar tarjeta digital</button>
                     </div>
 
                     <div class="pagos">
                         <h6>Próximos Pagos</h6>
                         <ul>
-                            <li><span class="dot green_r"></span> Pago Experiencia <span class="amount">$2,852.21</span>
-                            </li>
-                            <li><span class="dot blue_r"></span> Pago a Operador <span class="amount">$910.00</span></li>
-                            <li><span class="dot red_r"></span> Pago de Reserva <span class="amount">$420.30</span></li>
+                            <?php foreach ($proximosPagos as $pago): ?>
+                                <li><span class="dot <?= $pago['color'] ?>"></span>
+                                    <?= htmlspecialchars($pago['texto']) ?>
+                                    <span class="amount">$<?= number_format($pago['cantidad'],2) ?></span>
+                                </li>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
 
                     <div class="gastos">
                         <h6>Estado de Gastos</h6>
                         <canvas id="gastosChart"></canvas>
+                        <script>
+                            // datos pasados por PHP a JS
+                            const gastosData = <?= json_encode($gastosChartData) ?>;
+                        </script>
                     </div>
                 </aside>
 

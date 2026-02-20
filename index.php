@@ -84,7 +84,10 @@ switch ($request) {
     //                                   RUTAS DASBOARD ADMINISTRADOR
     // ===================================================================================================
     case '/administrador/dashboard':
-        require BASE_PATH . '/app/views/dashboard/administrador/administrador.php';  //redirige al panel de administrador
+        // Enrutamos al controlador del dashboard del administrador
+        require_once BASE_PATH . '/app/controllers/administrador/dashboardController.php';
+        $controller = new DashboardAdminController();
+        $controller->index();
         break;
 
     // Perfil administrador 
