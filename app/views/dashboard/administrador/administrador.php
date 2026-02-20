@@ -92,7 +92,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <i class="bi bi-tencent-qq"></i>
                             <div>
                                 <p>Inversión en Publicidad</p>
-                                <h3>$219.0</h3>
+                                <h3>$<?= number_format($inversionPublicidad,2) ?></h3>
                             </div>
                         </div>
                     </section>
@@ -107,10 +107,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                         <div class="grafico-container">
                             <canvas id="reservasChart"></canvas>
                         </div>
-                        <script>
-                            const reservasData = <?= json_encode($graficoReservas) ?>;
-                            const gastosData = <?= json_encode($gastosChartData) ?>;
-                        </script>
+                        <!-- los datos necesarios para los gráficos se obtienen mediante AJAX desde /administrador/dashboard/data -->
                     </section>
 
 

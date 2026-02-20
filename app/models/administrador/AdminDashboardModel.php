@@ -55,6 +55,13 @@ class AdminDashboardModel {
 
     public function getGastosPorCategoria() {
         // placeholder: en este esquema no hay gastos separados, devolvemos un array vacío
+        // en el futuro podría construirse desde una tabla de transacciones
         return [];
+    }
+
+    public function getInversionPublicidad() {
+        // si la inversión en publicidad proviene de una tabla específica, reemplazar
+        // este valor estático por una consulta. por ahora devolvemos el ejemplo usado
+        return 219.0;
     }
 }

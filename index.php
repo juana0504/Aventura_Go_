@@ -90,6 +90,13 @@ switch ($request) {
         $controller->index();
         break;
 
+    // Endpoint JSON para datos de gráficos del dashboard
+    case '/administrador/dashboard/data':
+        require_once BASE_PATH . '/app/controllers/administrador/dashboardController.php';
+        $controller = new DashboardAdminController();
+        $controller->data();
+        break;
+
     // Perfil administrador 
     case '/administrador/cambiar-password':
         require_once BASE_PATH . '/app/controllers/passwordChangeController.php';
