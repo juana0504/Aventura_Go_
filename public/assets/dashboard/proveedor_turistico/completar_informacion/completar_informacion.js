@@ -7,8 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const stepContents = document.querySelectorAll(".step-content");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
-    const form = document.querySelector("form");
-
+    const form = document.getElementById("formCompletarProveedor");
     function showStep(step) {
         // Ocultar todo
         stepContents.forEach(c => c.classList.remove("active"));
@@ -69,6 +68,13 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("prev-email_repre").innerText = document.getElementById("email_repre").value || "-";
         document.getElementById("prev-telefono_repre").innerText = document.getElementById("telefono_repre").value || "-";
         document.getElementById("prev-representante").innerText = document.getElementById("nombre_repre").value || "-";
+        
+        // const descripcion = document.getElementById("descripcion");
+        // const prevDescripcion = document.getElementById("prev-descripcion");
+
+        // if (prevDescripcion && descripcion) {
+        //     prevDescripcion.textContent = descripcion.value.trim() !== "" ? descripcion.value : "-";
+        // }
 
         // Actividades
         const actividades = [];
