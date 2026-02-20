@@ -84,7 +84,17 @@ switch ($request) {
     //                                   RUTAS DASBOARD ADMINISTRADOR
     // ===================================================================================================
     case '/administrador/dashboard':
-        require BASE_PATH . '/app/views/dashboard/administrador/administrador.php';  //redirige al panel de administrador
+        // Enrutamos al controlador del dashboard del administrador
+        require_once BASE_PATH . '/app/controllers/administrador/dashboardController.php';
+        $controller = new DashboardAdminController();
+        $controller->index();
+        break;
+
+    // Endpoint JSON para datos de gráficos del dashboard
+    case '/administrador/dashboard/data':
+        require_once BASE_PATH . '/app/controllers/administrador/dashboardController.php';
+        $controller = new DashboardAdminController();
+        $controller->data();
         break;
 
     // Perfil administrador 
@@ -421,7 +431,9 @@ switch ($request) {
 
     // RUTAS DASHBOARD DE TURISTA
     case '/turista/dashboard':
-        require BASE_PATH . '/app/views/dashboard/turista/dashboard.php';
+        // Usamos el controlador para seguir el patrón MVC
+        require_once BASE_PATH . '/app/controllers/turista/dashboardControllerTurista.php';
+        // el propio controlador ejecuta la lógica según el método HTTP
         break;
 
     case '/turista/registrar-actividad':
