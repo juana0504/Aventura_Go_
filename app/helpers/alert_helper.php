@@ -37,7 +37,7 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null)
                         radial-gradient(ellipse at 80% 20%, rgba(234,130,23,0.25) 0%, transparent 50%),
                         radial-gradient(ellipse at 60% 80%, rgba(45,64,89,0.7) 0%, transparent 55%),
                         linear-gradient(135deg, #0f1e2d 0%, #1a2e42 50%, #0d1a26 100%);
-                    z-index: 0;
+                    z-index: -1;
                 }
 
                 /* ── PARTÍCULAS ── */
@@ -46,40 +46,41 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null)
                     inset: 0;
                     z-index: 1;
                     pointer-events: none;
-                    overflow: hidden;
+                    overflow: visible;
                 }
 
                 .particle {
                     position: absolute;
                     border-radius: 50%;
                     animation: floatUp linear infinite;
+                    bottom: 0;
                     opacity: 0;
                 }
 
-                .particle:nth-child(1)  { width:6px;  height:6px;  left:8%;   background:rgba(234,130,23,0.6);  animation-duration:12s; animation-delay:0s;   }
-                .particle:nth-child(2)  { width:4px;  height:4px;  left:15%;  background:rgba(255,255,255,0.3); animation-duration:15s; animation-delay:1.5s; }
-                .particle:nth-child(3)  { width:8px;  height:8px;  left:25%;  background:rgba(234,130,23,0.4);  animation-duration:10s; animation-delay:3s;   }
-                .particle:nth-child(4)  { width:3px;  height:3px;  left:35%;  background:rgba(255,255,255,0.5); animation-duration:18s; animation-delay:0.8s; }
-                .particle:nth-child(5)  { width:5px;  height:5px;  left:42%;  background:rgba(234,130,23,0.5);  animation-duration:13s; animation-delay:2.2s; }
-                .particle:nth-child(6)  { width:7px;  height:7px;  left:55%;  background:rgba(255,255,255,0.2); animation-duration:16s; animation-delay:4s;   }
-                .particle:nth-child(7)  { width:4px;  height:4px;  left:63%;  background:rgba(234,130,23,0.7);  animation-duration:11s; animation-delay:1s;   }
-                .particle:nth-child(8)  { width:6px;  height:6px;  left:72%;  background:rgba(255,255,255,0.35);animation-duration:14s; animation-delay:3.5s; }
-                .particle:nth-child(9)  { width:9px;  height:9px;  left:80%;  background:rgba(234,130,23,0.3);  animation-duration:17s; animation-delay:0.5s; }
-                .particle:nth-child(10) { width:3px;  height:3px;  left:90%;  background:rgba(255,255,255,0.4); animation-duration:12s; animation-delay:2.8s; }
-                .particle:nth-child(11) { width:5px;  height:5px;  left:5%;   background:rgba(234,130,23,0.5);  animation-duration:20s; animation-delay:6s;   }
-                .particle:nth-child(12) { width:4px;  height:4px;  left:48%;  background:rgba(255,255,255,0.25);animation-duration:9s;  animation-delay:1.2s; }
-                .particle:nth-child(13) { width:7px;  height:7px;  left:30%;  background:rgba(234,130,23,0.45); animation-duration:14s; animation-delay:5s;   }
-                .particle:nth-child(14) { width:3px;  height:3px;  left:68%;  background:rgba(255,255,255,0.5); animation-duration:11s; animation-delay:3.8s; }
-                .particle:nth-child(15) { width:6px;  height:6px;  left:22%;  background:rgba(234,130,23,0.6);  animation-duration:16s; animation-delay:7s;   }
-                .particle:nth-child(16) { width:4px;  height:4px;  left:85%;  background:rgba(255,255,255,0.3); animation-duration:13s; animation-delay:2s;   }
-                .particle:nth-child(17) { width:8px;  height:8px;  left:58%;  background:rgba(234,130,23,0.35); animation-duration:18s; animation-delay:4.5s; }
-                .particle:nth-child(18) { width:5px;  height:5px;  left:40%;  background:rgba(255,255,255,0.4); animation-duration:10s; animation-delay:0.3s; }
+                .particle:nth-child(1)  { width:6px;  height:6px;  left:8%;   background:rgba(234,130,23,0.6);  animation-duration:12s; animation-delay:-4s;   }
+                .particle:nth-child(2)  { width:4px;  height:4px;  left:15%;  background:rgba(255,255,255,0.3); animation-duration:15s; animation-delay:-10s;  }
+                .particle:nth-child(3)  { width:8px;  height:8px;  left:25%;  background:rgba(234,130,23,0.4);  animation-duration:10s; animation-delay:-6s;   }
+                .particle:nth-child(4)  { width:3px;  height:3px;  left:35%;  background:rgba(255,255,255,0.5); animation-duration:18s; animation-delay:-2s;   }
+                .particle:nth-child(5)  { width:5px;  height:5px;  left:42%;  background:rgba(234,130,23,0.5);  animation-duration:13s; animation-delay:-8s;   }
+                .particle:nth-child(6)  { width:7px;  height:7px;  left:55%;  background:rgba(255,255,255,0.2); animation-duration:16s; animation-delay:-12s;  }
+                .particle:nth-child(7)  { width:4px;  height:4px;  left:63%;  background:rgba(234,130,23,0.7);  animation-duration:11s; animation-delay:-5s;   }
+                .particle:nth-child(8)  { width:6px;  height:6px;  left:72%;  background:rgba(255,255,255,0.35);animation-duration:14s; animation-delay:-9s;   }
+                .particle:nth-child(9)  { width:9px;  height:9px;  left:80%;  background:rgba(234,130,23,0.3);  animation-duration:17s; animation-delay:-1s;   }
+                .particle:nth-child(10) { width:3px;  height:3px;  left:90%;  background:rgba(255,255,255,0.4); animation-duration:12s; animation-delay:-7s;   }
+                .particle:nth-child(11) { width:5px;  height:5px;  left:5%;   background:rgba(234,130,23,0.5);  animation-duration:20s; animation-delay:-14s;  }
+                .particle:nth-child(12) { width:4px;  height:4px;  left:48%;  background:rgba(255,255,255,0.25);animation-duration:9s;  animation-delay:-3s;   }
+                .particle:nth-child(13) { width:7px;  height:7px;  left:30%;  background:rgba(234,130,23,0.45); animation-duration:14s; animation-delay:-11s;  }
+                .particle:nth-child(14) { width:3px;  height:3px;  left:68%;  background:rgba(255,255,255,0.5); animation-duration:11s; animation-delay:-6s;   }
+                .particle:nth-child(15) { width:6px;  height:6px;  left:22%;  background:rgba(234,130,23,0.6);  animation-duration:16s; animation-delay:-13s;  }
+                .particle:nth-child(16) { width:4px;  height:4px;  left:85%;  background:rgba(255,255,255,0.3); animation-duration:13s; animation-delay:-4s;   }
+                .particle:nth-child(17) { width:8px;  height:8px;  left:58%;  background:rgba(234,130,23,0.35); animation-duration:18s; animation-delay:-8s;   }
+                .particle:nth-child(18) { width:5px;  height:5px;  left:40%;  background:rgba(255,255,255,0.4); animation-duration:10s; animation-delay:-2s;   }
 
                 @keyframes floatUp {
-                    0%   { transform: translateY(110vh) translateX(0px);  opacity: 0; }
+                    0%   { transform: translateY(0);      opacity: 0;   }
                     10%  { opacity: 1; }
                     90%  { opacity: 0.8; }
-                    100% { transform: translateY(-10vh) translateX(30px); opacity: 0; }
+                    100% { transform: translateY(-110vh) translateX(30px); opacity: 0; }
                 }
 
                 /* ── LÍNEAS DE LUZ ── */
@@ -112,6 +113,14 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null)
                 }
 
                 /* ── SWEETALERT2 ── */
+                .swal2-container {
+                    z-index: 100 !important;
+                }
+
+                .swal2-backdrop-show {
+                    background: rgba(0, 0, 0, 0) !important;
+                }
+
                 .swal2-popup {
                     font-family: 'Lato', sans-serif !important;
                     border-radius: 20px !important;
