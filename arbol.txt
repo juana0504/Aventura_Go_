@@ -1,0 +1,1397 @@
+Listado de rutas de carpetas para el volumen Acer
+El número de serie del volumen es 6A39-D53C
+C:.
+¦   .gitignore
+¦   .htaccess
+¦   arbol.txt
+¦   cerrarSesion.php
+¦   index.php
+¦   
++---app
+¦   +---controllers
+¦   ¦   ¦   ciudadController.php
+¦   ¦   ¦   departamentoController.php
+¦   ¦   ¦   loginController.php
+¦   ¦   ¦   logoutController.php
+¦   ¦   ¦   password copy.php
+¦   ¦   ¦   password.php
+¦   ¦   ¦   passwordChangeController.php
+¦   ¦   ¦   perfil.php
+¦   ¦   ¦   registroProveedorController.php
+¦   ¦   ¦   registroProveedorHoteleroController.php
+¦   ¦   ¦   reportesPdfController.php
+¦   ¦   ¦   
+¦   ¦   +---administrador
+¦   ¦   ¦       dashboardController.php
+¦   ¦   ¦       editarPerfilAdmin.php
+¦   ¦   ¦       hotelero.php
+¦   ¦   ¦       proveedor.php
+¦   ¦   ¦       TicketAdminController.php
+¦   ¦   ¦       turista.php
+¦   ¦   ¦       
+¦   ¦   +---proveedor_turistico
+¦   ¦   ¦       actividadDetalle.php
+¦   ¦   ¦       actividadPdfController.php
+¦   ¦   ¦       actividadTuristica.php
+¦   ¦   ¦       completarInformacion.php
+¦   ¦   ¦       editarPerfilProveedor.php
+¦   ¦   ¦       reservaController.php
+¦   ¦   ¦       reservaDetalle.php
+¦   ¦   ¦       reservaPdfController.php
+¦   ¦   ¦       ticketController.php
+¦   ¦   ¦       ticketProveedorController.php
+¦   ¦   ¦       
+¦   ¦   +---turista
+¦   ¦   ¦       dashboardControllerTurista.php
+¦   ¦   ¦       editarPerfilTurista.php
+¦   ¦   ¦       reservaController.php
+¦   ¦   ¦       TicketTuristaController.php
+¦   ¦   ¦       verReservaController.php
+¦   ¦   ¦       verReservaDetalle.php
+¦   ¦   ¦       verReservaPdfController.php
+¦   ¦   ¦       
+¦   ¦   +---website
+¦   ¦           PagoController.php
+¦   ¦           payu.php
+¦   ¦           payu_respuesta.php
+¦   ¦           seleccionarActividadController.php
+¦   ¦           websiteController.php
+¦   ¦           
+¦   +---helpers
+¦   ¦       alert_helper.php
+¦   ¦       auth.php
+¦   ¦       mailer_helper.php
+¦   ¦       pdf_helper.php
+¦   ¦       protectedLayout.php
+¦   ¦       session_administrador.php
+¦   ¦       session_proveedor.php
+¦   ¦       session_proveedor_hotelero.php
+¦   ¦       session_turista.php
+¦   ¦       
+¦   +---models
+¦   ¦   ¦   Ciudad.php
+¦   ¦   ¦   Departamento.php
+¦   ¦   ¦   login.php
+¦   ¦   ¦   passwordChange.php
+¦   ¦   ¦   perfil.php
+¦   ¦   ¦   recoverypass copy.php
+¦   ¦   ¦   recoverypass.php
+¦   ¦   ¦   ticket.php
+¦   ¦   ¦   
+¦   ¦   +---administrador
+¦   ¦   ¦       AdminDashboardModel.php
+¦   ¦   ¦       editarPerfilAdmin.php
+¦   ¦   ¦       hotelero.php
+¦   ¦   ¦       proveedor.php
+¦   ¦   ¦       turista.php
+¦   ¦   ¦       
+¦   ¦   +---proveedor_turistico
+¦   ¦   ¦       actividadTuristica.php
+¦   ¦   ¦       editarPerfilProveedor.php
+¦   ¦   ¦       Proveedor.php
+¦   ¦   ¦       Reserva.php
+¦   ¦   ¦       
+¦   ¦   +---turista
+¦   ¦           actividadModel.php
+¦   ¦           editarPerfilTurista.php
+¦   ¦           reserva.php
+¦   ¦           reservaModel.php
+¦   ¦           ReservaTurista.php
+¦   ¦           TuristaModel.php
+¦   ¦           verReserva.php
+¦   ¦           
+¦   +---views
+¦       +---auth
+¦       ¦       error404.php
+¦       ¦       login.php
+¦       ¦       registrarse.php
+¦       ¦       registrar_proveedor.php
+¦       ¦       registrar_proveedor_hotelero.php
+¦       ¦       resetPassword copy.php
+¦       ¦       resetPassword.php
+¦       ¦       
+¦       +---dashboard
+¦       ¦   +---administrador
+¦       ¦   ¦   ¦   administrador.php
+¦       ¦   ¦   ¦   consultar_proveedor_hotelero.php
+¦       ¦   ¦   ¦   consultar_proveedor_turistico.php
+¦       ¦   ¦   ¦   consultar_turista.php
+¦       ¦   ¦   ¦   editar_proveedor_hotelero.php
+¦       ¦   ¦   ¦   editar_proveedor_turistico.php
+¦       ¦   ¦   ¦   editar_turista.php
+¦       ¦   ¦   ¦   historial_reservas.html
+¦       ¦   ¦   ¦   perfil_usuario.php
+¦       ¦   ¦   ¦   registrar_proveedor_hotelero.php
+¦       ¦   ¦   ¦   registrar_proveedor_turistico.php
+¦       ¦   ¦   ¦   
+¦       ¦   ¦   +---tickets
+¦       ¦   ¦           listar.php
+¦       ¦   ¦           responder.php
+¦       ¦   ¦           
+¦       ¦   +---proveedor_hotelero
+¦       ¦   ¦       listado_reservas.html
+¦       ¦   ¦       
+¦       ¦   +---proveedor_turistico
+¦       ¦   ¦       completar_informacion.php
+¦       ¦   ¦       consultar_actividad_turistica.php
+¦       ¦   ¦       consultar_reservas.php
+¦       ¦   ¦       crear_ticket.php
+¦       ¦   ¦       dashboard.php
+¦       ¦   ¦       editar_actividad_turistica.php
+¦       ¦   ¦       listado_reservas.html
+¦       ¦   ¦       listar.php
+¦       ¦   ¦       pendiente_aprobacion.php
+¦       ¦   ¦       perfil_usuario.php
+¦       ¦   ¦       registrar_actividad_turistica.php
+¦       ¦   ¦       
+¦       ¦   +---turista
+¦       ¦           crear_ticket.php
+¦       ¦           dashboardTurista.php
+¦       ¦           listar.php
+¦       ¦           perfil_usuario.php
+¦       ¦           registrar_reserva.php
+¦       ¦           reserva.html
+¦       ¦           ver_reservas.php
+¦       ¦           
+¦       +---layouts
+¦       ¦       buscador_administrador.php
+¦       ¦       buscador_proveedor_turistico.php
+¦       ¦       buscador_turista.php
+¦       ¦       footer_administrador.php
+¦       ¦       header_administrador.php
+¦       ¦       panel_izq_administrador.php
+¦       ¦       proveedor_turistico_panel_izq.php
+¦       ¦       turista_panel_izq.php
+¦       ¦       
+¦       +---pdf
+¦       ¦       actividades_turisticas_pdf.php
+¦       ¦       hoteles_pdf.php
+¦       ¦       proveedor_pdf.php
+¦       ¦       reservas_pdf.php
+¦       ¦       reservas_proveedor_pdf.php
+¦       ¦       reservas_turista_pdf.php
+¦       ¦       turista_pdf.php
+¦       ¦       
+¦       +---website
+¦           ¦   acerca_de_nosotros.php
+¦           ¦   checkout.php
+¦           ¦   confirmacion.php
+¦           ¦   contactanos.php
+¦           ¦   contactanos_gracias.html
+¦           ¦   descubre_hospedaje.php
+¦           ¦   descubre_tours.php
+¦           ¦   formulario_reserva.php
+¦           ¦   hospedaje_escogido.php
+¦           ¦   index.php
+¦           ¦   payu_demo.php
+¦           ¦   toursDestacados.php
+¦           ¦   tour_escogido.php
+¦           ¦   
+¦           +---pago
+¦                   payu.php
+¦                   
++---config
+¦       config.php
+¦       database.php
+¦       
++---public
+¦   +---assets
+¦   ¦   +---dashboard
+¦   ¦   ¦   +---administrador
+¦   ¦   ¦   ¦   +---administrador
+¦   ¦   ¦   ¦   ¦   ¦   administrador.css
+¦   ¦   ¦   ¦   ¦   ¦   administrador.js
+¦   ¦   ¦   ¦   ¦   ¦   administrador.JSON
+¦   ¦   ¦   ¦   ¦   ¦   
+¦   ¦   ¦   ¦   ¦   +---img
+¦   ¦   ¦   ¦   ¦           Dashboard.png
+¦   ¦   ¦   ¦   ¦           destino 2.png
+¦   ¦   ¦   ¦   ¦           historial.png
+¦   ¦   ¦   ¦   ¦           image.png
+¦   ¦   ¦   ¦   ¦           inicio.png
+¦   ¦   ¦   ¦   ¦           listado.png
+¦   ¦   ¦   ¦   ¦           LOGO-POSITIVO 2 (1).png
+¦   ¦   ¦   ¦   ¦           LOGO-POSITIVO.png
+¦   ¦   ¦   ¦   ¦           perfil.png
+¦   ¦   ¦   ¦   ¦           tours.png
+¦   ¦   ¦   ¦   ¦           usuario.png
+¦   ¦   ¦   ¦   ¦           
+¦   ¦   ¦   ¦   +---consultar_proveedor
+¦   ¦   ¦   ¦   ¦       consultar_proveedor_hotelero.css
+¦   ¦   ¦   ¦   ¦       consultar_proveedor_hotelero.js
+¦   ¦   ¦   ¦   ¦       consultar_proveedor_turistico.css
+¦   ¦   ¦   ¦   ¦       consultar_proveedor_turistico.js
+¦   ¦   ¦   ¦   ¦       tabla.js
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---consultar_turista
+¦   ¦   ¦   ¦   ¦       consultar_turista.js
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---historial de reservas
+¦   ¦   ¦   ¦   ¦   ¦   historial_reservas.css
+¦   ¦   ¦   ¦   ¦   ¦   historial_reservas.js
+¦   ¦   ¦   ¦   ¦   ¦   
+¦   ¦   ¦   ¦   ¦   +---img historial de reservas
+¦   ¦   ¦   ¦   ¦           Dashboard.png
+¦   ¦   ¦   ¦   ¦           destino 2.png
+¦   ¦   ¦   ¦   ¦           historial.png
+¦   ¦   ¦   ¦   ¦           inicio.png
+¦   ¦   ¦   ¦   ¦           listado.png
+¦   ¦   ¦   ¦   ¦           LOGO-POSITIVO 2 (1).png
+¦   ¦   ¦   ¦   ¦           perfil-usuario.png
+¦   ¦   ¦   ¦   ¦           perfil.png
+¦   ¦   ¦   ¦   ¦           search.png
+¦   ¦   ¦   ¦   ¦           tours.png
+¦   ¦   ¦   ¦   ¦           usuario.png
+¦   ¦   ¦   ¦   ¦           
+¦   ¦   ¦   ¦   +---perfil_usuario
+¦   ¦   ¦   ¦   ¦   ¦   perfil.css
+¦   ¦   ¦   ¦   ¦   ¦   perfil.js
+¦   ¦   ¦   ¦   ¦   ¦   
+¦   ¦   ¦   ¦   ¦   +---img
+¦   ¦   ¦   ¦   ¦           Dashboard.png
+¦   ¦   ¦   ¦   ¦           destino 2.png
+¦   ¦   ¦   ¦   ¦           FAVICON.png
+¦   ¦   ¦   ¦   ¦           historial.png
+¦   ¦   ¦   ¦   ¦           inicio.png
+¦   ¦   ¦   ¦   ¦           listado.png
+¦   ¦   ¦   ¦   ¦           LOGO-POSITIVO 2 (1).png
+¦   ¦   ¦   ¦   ¦           perfil-usuario.png
+¦   ¦   ¦   ¦   ¦           perfil.png
+¦   ¦   ¦   ¦   ¦           tours.png
+¦   ¦   ¦   ¦   ¦           usuario.png
+¦   ¦   ¦   ¦   ¦           
+¦   ¦   ¦   ¦   +---registrar_proveedor
+¦   ¦   ¦   ¦           departamento.js
+¦   ¦   ¦   ¦           editar_proveedor.js
+¦   ¦   ¦   ¦           registrar_proveedor.js
+¦   ¦   ¦   ¦           registrar_proveedor_hotelero.css
+¦   ¦   ¦   ¦           registrar_proveedor_turistico.css
+¦   ¦   ¦   ¦           
+¦   ¦   ¦   +---layouts
+¦   ¦   ¦   ¦       buscador_admin.css
+¦   ¦   ¦   ¦       buscador_proveedor.css
+¦   ¦   ¦   ¦       buscador_turista.css
+¦   ¦   ¦   ¦       layout_admin.css
+¦   ¦   ¦   ¦       panel.css
+¦   ¦   ¦   ¦       panel_proveedor_turistico.css
+¦   ¦   ¦   ¦       panel_turista.css
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---proveedor_hotelero
+¦   ¦   ¦   ¦       proveedorHotelero.css
+¦   ¦   ¦   ¦       proveedorHotelero.js
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---proveedor_turistico
+¦   ¦   ¦   ¦   +---completar_informacion
+¦   ¦   ¦   ¦   ¦       completar_informacion.css
+¦   ¦   ¦   ¦   ¦       completar_informacion.js
+¦   ¦   ¦   ¦   ¦       departamento.js
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---consultar_actividad_turistica
+¦   ¦   ¦   ¦   ¦       consultar_actividad_turistica.css
+¦   ¦   ¦   ¦   ¦       modal_actividad.js
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---consultar_reservas
+¦   ¦   ¦   ¦   ¦       consultar_reservas.css
+¦   ¦   ¦   ¦   ¦       consultar_reservas.js
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---listado_de_reservas
+¦   ¦   ¦   ¦   ¦   ¦   listado.css
+¦   ¦   ¦   ¦   ¦   ¦   listado.js
+¦   ¦   ¦   ¦   ¦   ¦   
+¦   ¦   ¦   ¦   ¦   +---img
+¦   ¦   ¦   ¦   ¦           Dashboard.png
+¦   ¦   ¦   ¦   ¦           destino 2.png
+¦   ¦   ¦   ¦   ¦           historial.png
+¦   ¦   ¦   ¦   ¦           inicio.png
+¦   ¦   ¦   ¦   ¦           listado.png
+¦   ¦   ¦   ¦   ¦           LOGO-POSITIVO 2 (1).png
+¦   ¦   ¦   ¦   ¦           perfil.png
+¦   ¦   ¦   ¦   ¦           tours.png
+¦   ¦   ¦   ¦   ¦           usuario.png
+¦   ¦   ¦   ¦   ¦           
+¦   ¦   ¦   ¦   +---pendiente_aprobacion
+¦   ¦   ¦   ¦   ¦       pendiente_aprobacion.css
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---perfil_usuario
+¦   ¦   ¦   ¦   ¦       perfil.css
+¦   ¦   ¦   ¦   ¦       perfil.js
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---proveedorTuristico
+¦   ¦   ¦   ¦           dashboard_proveedor.js
+¦   ¦   ¦   ¦           proveedorTuristico.css
+¦   ¦   ¦   ¦           
+¦   ¦   ¦   +---tickets
+¦   ¦   ¦   ¦       listar.css
+¦   ¦   ¦   ¦       listarTickets.css
+¦   ¦   ¦   ¦       responder.css
+¦   ¦   ¦   ¦       tickets.css
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---turista
+¦   ¦   ¦       +---confirmar_reserva
+¦   ¦   ¦       ¦       confirmar_reserva.css
+¦   ¦   ¦       ¦       
+¦   ¦   ¦       +---img
+¦   ¦   ¦       ¦       cañon_rosado.jpg
+¦   ¦   ¦       ¦       monte_everest.jpg
+¦   ¦   ¦       ¦       playa_wikiki.jpg
+¦   ¦   ¦       ¦       
+¦   ¦   ¦       +---perfil_usuario
+¦   ¦   ¦       ¦       perfil.css
+¦   ¦   ¦       ¦       perfil.js
+¦   ¦   ¦       ¦       
+¦   ¦   ¦       +---reserva
+¦   ¦   ¦       ¦   ¦   reserva.css
+¦   ¦   ¦       ¦   ¦   reserva.js
+¦   ¦   ¦       ¦   ¦   
+¦   ¦   ¦       ¦   +---img
+¦   ¦   ¦       ¦           image 31 (1).png
+¦   ¦   ¦       ¦           image 32 (1).png
+¦   ¦   ¦       ¦           image 33 (1).png
+¦   ¦   ¦       ¦           image 34 (1).png
+¦   ¦   ¦       ¦           image 48 (1).png
+¦   ¦   ¦       ¦           LOGO-FINAL.png
+¦   ¦   ¦       ¦           
+¦   ¦   ¦       +---turista
+¦   ¦   ¦       ¦       turista.css
+¦   ¦   ¦       ¦       turista.js
+¦   ¦   ¦       ¦       
+¦   ¦   ¦       +---ver_reservas
+¦   ¦   ¦               modal_reserva.js
+¦   ¦   ¦               ver_reservas.css
+¦   ¦   ¦               
+¦   ¦   +---data
+¦   ¦   ¦       historial_reservas.json
+¦   ¦   ¦       hospedajeVega.json
+¦   ¦   ¦       tourYAventura.json
+¦   ¦   ¦       
+¦   ¦   +---estilos_globales
+¦   ¦   ¦   ¦   global .js
+¦   ¦   ¦   ¦   Global.css
+¦   ¦   ¦   ¦   globales_link_header_footer_script.html
+¦   ¦   ¦   ¦   
+¦   ¦   ¦   +---img
+¦   ¦   ¦           FAVICON.png
+¦   ¦   ¦           LOGO-FINAL (3).png
+¦   ¦   ¦           LOGO-FINAL.png
+¦   ¦   ¦           LOGO-NEGATIVO.png
+¦   ¦   ¦           LOGO-POSITIVO.png
+¦   ¦   ¦           LOGO-VERTICAL-CUADRADO.png
+¦   ¦   ¦           LOGO-VERTICAL-POSITIVO.png
+¦   ¦   ¦           LOGO-VERTICAL.png
+¦   ¦   ¦           REDES-LOGO.jpg
+¦   ¦   ¦           
+¦   ¦   +---extras
+¦   ¦   ¦   +---error_404
+¦   ¦   ¦   ¦   ¦   error404.css
+¦   ¦   ¦   ¦   ¦   
+¦   ¦   ¦   ¦   +---img
+¦   ¦   ¦   ¦           404 imagen.png
+¦   ¦   ¦   ¦           
+¦   ¦   ¦   +---login
+¦   ¦   ¦   ¦   ¦   login.css
+¦   ¦   ¦   ¦   ¦   login.js
+¦   ¦   ¦   ¦   ¦   
+¦   ¦   ¦   ¦   +---img
+¦   ¦   ¦   ¦           Rectangle 179.png
+¦   ¦   ¦   ¦           REDES-LOGO 2.png
+¦   ¦   ¦   ¦           
+¦   ¦   ¦   +---registrarse
+¦   ¦   ¦   ¦   ¦   registrarse.css
+¦   ¦   ¦   ¦   ¦   registrarse.js
+¦   ¦   ¦   ¦   ¦   registrar_proveedor.css
+¦   ¦   ¦   ¦   ¦   
+¦   ¦   ¦   ¦   +---img
+¦   ¦   ¦   ¦           REGISTRATE (2).png
+¦   ¦   ¦   ¦           
+¦   ¦   ¦   +---reset_pasword
+¦   ¦   ¦       ¦   resetPasword.css
+¦   ¦   ¦       ¦   resetPasword.js
+¦   ¦   ¦       ¦   
+¦   ¦   ¦       +---img
+¦   ¦   ¦               Rectangle 179.png
+¦   ¦   ¦               REDES-LOGO 1.png
+¦   ¦   ¦               
+¦   ¦   +---website_externos
+¦   ¦       +---acerca_de_nosotros
+¦   ¦       ¦   ¦   acerca_de_nosotros.css
+¦   ¦       ¦   ¦   acerca_de_nosotros.js
+¦   ¦       ¦   ¦   
+¦   ¦       ¦   +---img
+¦   ¦       ¦           alberth.jpeg
+¦   ¦       ¦           canopy.png
+¦   ¦       ¦           caracteristicas_icono_reserva.png
+¦   ¦       ¦           caracteristicas_icono_reserva2.png
+¦   ¦       ¦           caracteristicas_icono_reserva3.png
+¦   ¦       ¦           Facebook_black.png
+¦   ¦       ¦           foto_albert.png
+¦   ¦       ¦           foto_juan.png
+¦   ¦       ¦           foto_juana.png
+¦   ¦       ¦           foto_sofia.png
+¦   ¦       ¦           foto_stiven.png
+¦   ¦       ¦           header.png
+¦   ¦       ¦           indexDiferente3.png
+¦   ¦       ¦           index_diferente1.png
+¦   ¦       ¦           index_diferente2.png
+¦   ¦       ¦           index_foto_opiniones.png
+¦   ¦       ¦           Instagram_black.png
+¦   ¦       ¦           LOGO-FINAL.png
+¦   ¦       ¦           mail(3).png
+¦   ¦       ¦           map-pin(2) 1.png
+¦   ¦       ¦           montanismo.png
+¦   ¦       ¦           phone(1).png
+¦   ¦       ¦           Twitter_black.png
+¦   ¦       ¦           Youtube_black.png
+¦   ¦       ¦           
+¦   ¦       +---checkout
+¦   ¦       ¦       checkout.css
+¦   ¦       ¦       
+¦   ¦       +---contactanos
+¦   ¦       ¦   ¦   contactanos.css
+¦   ¦       ¦   ¦   contactanos.js
+¦   ¦       ¦   ¦   
+¦   ¦       ¦   +---img
+¦   ¦       ¦           contactanos_1.jpeg
+¦   ¦       ¦           Facebook_black.png
+¦   ¦       ¦           Hero_contactanos.png
+¦   ¦       ¦           hero_icon_email.png
+¦   ¦       ¦           hero_icon_lugar.png
+¦   ¦       ¦           hero_icon_phone.png
+¦   ¦       ¦           img_formulario.png
+¦   ¦       ¦           Instagram_black.png
+¦   ¦       ¦           LOGO-FINAL.png
+¦   ¦       ¦           mail(3).png
+¦   ¦       ¦           map-pin(2) 1.png
+¦   ¦       ¦           phone(1).png
+¦   ¦       ¦           Twitter_black.png
+¦   ¦       ¦           Youtube_black.png
+¦   ¦       ¦           
+¦   ¦       +---descubre_tours
+¦   ¦       ¦   ¦   descubreTours.css
+¦   ¦       ¦   ¦   descubreTours.js
+¦   ¦       ¦   ¦   
+¦   ¦       ¦   +---img
+¦   ¦       ¦           FAVICON.png
+¦   ¦       ¦           imagen tour.png
+¦   ¦       ¦           logo nav.png
+¦   ¦       ¦           LOGO-NEGATIVO.png
+¦   ¦       ¦           
+¦   ¦       +---destacados
+¦   ¦       ¦   ¦   destacados.css
+¦   ¦       ¦   ¦   destacados.js
+¦   ¦       ¦   ¦   tours.json
+¦   ¦       ¦   ¦   
+¦   ¦       ¦   +---img
+¦   ¦       ¦           caballos.png
+¦   ¦       ¦           canopy.png
+¦   ¦       ¦           caracteristicas_icono_reserva.png
+¦   ¦       ¦           caracteristicas_icono_reserva2.png
+¦   ¦       ¦           caracteristicas_icono_reserva3.png
+¦   ¦       ¦           Facebook_black.png
+¦   ¦       ¦           Frame 34.png
+¦   ¦       ¦           header.png
+¦   ¦       ¦           image_11.png
+¦   ¦       ¦           img.png
+¦   ¦       ¦           indexDiferente3.png
+¦   ¦       ¦           index_diferente1.png
+¦   ¦       ¦           index_diferente2.png
+¦   ¦       ¦           index_foto_opiniones.png
+¦   ¦       ¦           Instagram_black.png
+¦   ¦       ¦           LOGO-FINAL.png
+¦   ¦       ¦           mail(3).png
+¦   ¦       ¦           map-pin(2) 1.png
+¦   ¦       ¦           montanismo.png
+¦   ¦       ¦           pasadia.png
+¦   ¦       ¦           phone(1).png
+¦   ¦       ¦           puente.png
+¦   ¦       ¦           represa.png
+¦   ¦       ¦           Twitter_black.png
+¦   ¦       ¦           vias.png
+¦   ¦       ¦           villeta.png
+¦   ¦       ¦           Youtube_black.png
+¦   ¦       ¦           
+¦   ¦       +---formulario_reserva
+¦   ¦       ¦       confirmacion.css
+¦   ¦       ¦       formulario_reserva.css
+¦   ¦       ¦       formulario_reserva.js
+¦   ¦       ¦       
+¦   ¦       +---hospedaje_escogido
+¦   ¦       ¦   ¦   hospedaje_escogido.css
+¦   ¦       ¦   ¦   
+¦   ¦       ¦   +---img
+¦   ¦       ¦           FAVICON.png
+¦   ¦       ¦           hosp1.png
+¦   ¦       ¦           hosp2.png
+¦   ¦       ¦           hosp3.png
+¦   ¦       ¦           hosp4.png
+¦   ¦       ¦           hosp5.png
+¦   ¦       ¦           hosp6.png
+¦   ¦       ¦           hosp7.png
+¦   ¦       ¦           hosp8.png
+¦   ¦       ¦           LOGO-FINAL.png
+¦   ¦       ¦           
+¦   ¦       +---hospedaje_vega
+¦   ¦       ¦   ¦   hospedajeVega.css
+¦   ¦       ¦   ¦   hospedajeVega.js
+¦   ¦       ¦   ¦   
+¦   ¦       ¦   +---img
+¦   ¦       ¦           1.png
+¦   ¦       ¦           10.png
+¦   ¦       ¦           11.png
+¦   ¦       ¦           12.png
+¦   ¦       ¦           13.png
+¦   ¦       ¦           14.png
+¦   ¦       ¦           15.png
+¦   ¦       ¦           2.png
+¦   ¦       ¦           3.png
+¦   ¦       ¦           4.png
+¦   ¦       ¦           5.png
+¦   ¦       ¦           6.png
+¦   ¦       ¦           7.png
+¦   ¦       ¦           8.png
+¦   ¦       ¦           9.png
+¦   ¦       ¦           Instagram_black.png
+¦   ¦       ¦           LOGO-FINAL copy.png
+¦   ¦       ¦           LOGO-NEGATIVO.png
+¦   ¦       ¦           vias.png
+¦   ¦       ¦           villeta.png
+¦   ¦       ¦           Youtube_black.png
+¦   ¦       ¦           
+¦   ¦       +---index
+¦   ¦       ¦   ¦   index.css
+¦   ¦       ¦   ¦   index.js
+¦   ¦       ¦   ¦   
+¦   ¦       ¦   +---img
+¦   ¦       ¦           destinos_header.png
+¦   ¦       ¦           destinos_populares_lavega.png
+¦   ¦       ¦           destinos_populares_nimaima.png
+¦   ¦       ¦           destinos_populares_sanFrancisco.png
+¦   ¦       ¦           destinos_populares_sasaima.png
+¦   ¦       ¦           destinos_populares_tobia.png
+¦   ¦       ¦           destinos_populares_utica.png
+¦   ¦       ¦           destinos_visitados_laVega.png
+¦   ¦       ¦           destinos_visitados_villeta.png
+¦   ¦       ¦           destinos_visitados_villeta1.png
+¦   ¦       ¦           FAVICON.png
+¦   ¦       ¦           logo nav.png
+¦   ¦       ¦           LOGO-FINAL.png
+¦   ¦       ¦           LOGO-NEGATIVO.png
+¦   ¦       ¦           rafting1.jpg
+¦   ¦       ¦           senderismo1.jpg
+¦   ¦       ¦           torrentismo1.jpg
+¦   ¦       ¦           
+¦   ¦       +---tour_escogido
+¦   ¦           ¦   tour_escogido.css
+¦   ¦           ¦   tour_escogido.js
+¦   ¦           ¦   
+¦   ¦           +---img
+¦   ¦                   FAVICON.png
+¦   ¦                   imagen tour.png
+¦   ¦                   logo nav.png
+¦   ¦                   LOGO-NEGATIVO.png
+¦   ¦                   
+¦   +---uploads
+¦       +---hoteles
+¦       ¦       hoteles_69262482eff56.jpeg
+¦       ¦       hoteles_6928ad5f6c88c.jpg
+¦       ¦       hoteles_6928ad6e6aaca.jpg
+¦       ¦       hoteles_6928ade4a8a39.jpg
+¦       ¦       hoteles_6928bde6803a9.jpeg
+¦       ¦       hoteles_6931d1a136c75.jpg
+¦       ¦       hoteles_6931d1b3a3cd6.jpg
+¦       ¦       hoteles_6931d1ba8f712.jpg
+¦       ¦       hoteles_6931d1c17fa67.jpg
+¦       ¦       hoteles_6931d1da21e17.jpg
+¦       ¦       hoteles_6934a5255f05d.png
+¦       ¦       hoteles_6934a5348dc15.png
+¦       ¦       hoteles_6934bb7867a3b.png
+¦       ¦       logo_693c73febbee2.png
+¦       ¦       logo_693c74cdd7482.png
+¦       ¦       logo_693c75bbf2365.png
+¦       ¦       logo_693c75e2d5bd4.png
+¦       ¦       logo_693c762f2b237.png
+¦       ¦       logo_693c76c9b2f23.png
+¦       ¦       logo_693c76f8948ba.png
+¦       ¦       logo_693c770b61bf0.png
+¦       ¦       logo_693c77d40e023.png
+¦       ¦       logo_693c781847494.png
+¦       ¦       logo_693c781ea5170.png
+¦       ¦       logo_693c782c86d41.png
+¦       ¦       logo_693c78318fc12.png
+¦       ¦       logo_693c7834d0a53.png
+¦       ¦       logo_693c7962a1e97.png
+¦       ¦       logo_693c7c0ff2b04.png
+¦       ¦       logo_693c7c4645a4c.png
+¦       ¦       logo_693c7c6c22a07.png
+¦       ¦       logo_693c7c75e67b0.png
+¦       ¦       logo_693c7ce1f0fd6.png
+¦       ¦       logo_693c7d25ea78a.png
+¦       ¦       logo_693c7d365fd50.png
+¦       ¦       logo_693c7d3d45331.png
+¦       ¦       logo_693c7d521b1d0.png
+¦       ¦       logo_693c7eb329bec.png
+¦       ¦       logo_693c7ec56f60e.png
+¦       ¦       logo_693c80f3b9c38.png
+¦       ¦       logo_6940236f0b555.png
+¦       ¦       logo_6940238a27640.png
+¦       ¦       logo_694023a6f0483.png
+¦       ¦       logo_694029ef41218.png
+¦       ¦       logo_69402a25d7287.png
+¦       ¦       logo_69402a48d0fba.png
+¦       ¦       logo_69402c686ec33.png
+¦       ¦       logo_69404d32c3636.png
+¦       ¦       logo_69404d821b9f6.png
+¦       ¦       logo_69404da03ea15.png
+¦       ¦       logo_69404dbd144fe.png
+¦       ¦       logo_69404e0d1d5ba.jpeg
+¦       ¦       logo_69404f1ccdf9e.png
+¦       ¦       logo_69404f463b135.png
+¦       ¦       logo_6940518f51a01.png
+¦       ¦       logo_694051ded4255.jpg
+¦       ¦       logo_69405357b860e.png
+¦       ¦       logo_694055b32131d.jpeg
+¦       ¦       logo_694055b5d72ad.jpeg
+¦       ¦       logo_694055b7c4079.jpeg
+¦       ¦       logo_694055ca11991.jpeg
+¦       ¦       logo_6940564fb8f42.png
+¦       ¦       logo_6940565816959.jpeg
+¦       ¦       logo_6940567a39cf2.jpeg
+¦       ¦       logo_6940567a8913f.png
+¦       ¦       logo_694056860807d.jpeg
+¦       ¦       logo_6940570da0eca.png
+¦       ¦       logo_6940576c59ae1.jpeg
+¦       ¦       logo_6940584a9aadc.jpeg
+¦       ¦       logo_6940587f54789.png
+¦       ¦       logo_694059bd70a84.png
+¦       ¦       logo_694059eb8f817.png
+¦       ¦       logo_69405cbfc3268.png
+¦       ¦       logo_69405d8d1ea79.jpg
+¦       ¦       logo_69405e2fc87f8.jpg
+¦       ¦       logo_6940847b1bb93.png
+¦       ¦       logo_6940881b94f3d.png
+¦       ¦       logo_69488409cf51c.png
+¦       ¦       logo_69488424167a5.png
+¦       ¦       logo_69711b91ae2af.png
+¦       ¦       logo_6971407cadd3c.png
+¦       ¦       logo_6971458084ce3.png
+¦       ¦       logo_6973b3679f8df.png
+¦       ¦       logo_6973b37c38634.png
+¦       ¦       logo_6973b39312c6b.png
+¦       ¦       logo_6982407fd967a.png
+¦       ¦       logo_698240988868e.png
+¦       ¦       
+¦       +---proveedores
+¦       ¦       logo_6997d38304f4f.jpg
+¦       ¦       logo_6997dd69d4fc6.jpg
+¦       ¦       logo_6998a14b04140.jpg
+¦       ¦       repre_6997d38305afe.png
+¦       ¦       repre_6997dd69d5c30.png
+¦       ¦       repre_6998a14b04c7a.png
+¦       ¦       
+¦       +---turistico
+¦       ¦   +---actividades
+¦       ¦           actividad_696bc40335ddb.png
+¦       ¦           actividad_696bc5c4999f0.png
+¦       ¦           actividad_696bc6b54b0d9.png
+¦       ¦           actividad_696bcddb863b7.png
+¦       ¦           actividad_696bce48ef289.png
+¦       ¦           actividad_696bd09bc79cd.png
+¦       ¦           actividad_696bd0a45ffd4.png
+¦       ¦           actividad_696e5d66ebd3d.png
+¦       ¦           actividad_696e998ac2dac.png
+¦       ¦           actividad_696eab205c0f0.png
+¦       ¦           actividad_696eaea42bc1e.png
+¦       ¦           actividad_696eb4d9dfff9.png
+¦       ¦           actividad_696eb5044c782.png
+¦       ¦           actividad_69715661cf6e6.png
+¦       ¦           actividad_6971568eb67e4.png
+¦       ¦           actividad_6972a8deb409f.png
+¦       ¦           actividad_6972a9100e00c.png
+¦       ¦           actividad_6972aa65f1067.png
+¦       ¦           actividad_6973b46ed3417.png
+¦       ¦           actividad_69752bde3e144.png
+¦       ¦           actividad_6975537aa2145.png
+¦       ¦           actividad_697555348e79a.png
+¦       ¦           actividad_6975582d018cd.png
+¦       ¦           actividad_6977b20a789fe.png
+¦       ¦           actividad_6978f5a6b983a.png
+¦       ¦           actividad_697905f522652.png
+¦       ¦           actividad_69794b633f340.png
+¦       ¦           actividad_69796ff6216e1.png
+¦       ¦           actividad_697970a08a687.png
+¦       ¦           actividad_697a8cd0f0b7e.jpg
+¦       ¦           actividad_697b8f46d2721.png
+¦       ¦           actividad_697b8f46d38bd.png
+¦       ¦           actividad_697b8f46d4706.png
+¦       ¦           actividad_697b8f46d54b7.png
+¦       ¦           actividad_697b8f46d6211.png
+¦       ¦           actividad_697b927490259.png
+¦       ¦           actividad_697b927491798.png
+¦       ¦           actividad_697b9394471db.png
+¦       ¦           actividad_697befcf3489e.png
+¦       ¦           actividad_697befcf35736.png
+¦       ¦           actividad_697befcf36023.png
+¦       ¦           actividad_697d28b25e3c3.png
+¦       ¦           actividad_697d28b25f951.png
+¦       ¦           actividad_697d28b260d66.png
+¦       ¦           actividad_697d28b26214f.png
+¦       ¦           actividad_697da03463681.jpg
+¦       ¦           actividad_697da4a9785c3.png
+¦       ¦           actividad_697da4d595688.png
+¦       ¦           actividad_697da50b74d04.png
+¦       ¦           actividad_697da5519233c.png
+¦       ¦           actividad_697da55192ea7.png
+¦       ¦           actividad_697da55193cab.png
+¦       ¦           actividad_697da55194b76.png
+¦       ¦           actividad_697da5519594e.png
+¦       ¦           actividad_697fca124dab5.png
+¦       ¦           actividad_6982458e1fe21.png
+¦       ¦           actividad_6982458e20f96.png
+¦       ¦           actividad_6982458e21efa.png
+¦       ¦           actividad_6982458e22f7b.png
+¦       ¦           actividad_6982458e2458c.png
+¦       ¦           actividad_69824aa54eec7.jpg
+¦       ¦           actividad_69824aa54fa87.jpg
+¦       ¦           actividad_69824aa5501ce.jpg
+¦       ¦           actividad_69824aa550b8c.jpg
+¦       ¦           actividad_69824aa551611.jpg
+¦       ¦           actividad_69824fe1e2181.jpg
+¦       ¦           actividad_69824fe1e3247.jpg
+¦       ¦           actividad_69824fe1e3c18.jpg
+¦       ¦           actividad_6982509d720bd.jpg
+¦       ¦           actividad_6982509d728eb.jpg
+¦       ¦           actividad_6982509d730d5.jpg
+¦       ¦           actividad_6982509d73936.jpg
+¦       ¦           actividad_698250e14aaca.jpg
+¦       ¦           actividad_698250e14b810.jpg
+¦       ¦           actividad_6996654983026.jpg
+¦       ¦           actividad_69987a58c7b3d.jpg
+¦       ¦           actividad_699880238b019.jpg
+¦       ¦           actividad_6998804a0350d.jpg
+¦       ¦           actividad_6998a1e3e89fc.jpg
+¦       ¦           
+¦       +---usuario
+¦               fondo_de_pantalla.jpg
+¦               foto_694016fead6bf.jpg
+¦               foto_694022ce9b081.png
+¦               foto_694022ec0563b.png
+¦               foto_6940236f0c346.png
+¦               foto_6940238a27d4b.png
+¦               foto_694023a6f0b37.png
+¦               foto_694027430a1b6.png
+¦               foto_6940275db758e.png
+¦               foto_694029ef418cc.png
+¦               foto_69402a25d7a53.png
+¦               foto_69402a48d164a.png
+¦               foto_69402c686f535.png
+¦               foto_69402e75c289e.png
+¦               foto_69404d32c419f.png
+¦               foto_69404d821c3b3.png
+¦               foto_69404da03f2df.png
+¦               foto_69404dbd15bbd.png
+¦               foto_69404e0d1d764.jpg
+¦               foto_69404f1cce60b.png
+¦               foto_69404f463b6bb.png
+¦               foto_6940518f524de.png
+¦               foto_694051dedac41.jpg
+¦               foto_69405357b8c12.png
+¦               foto_694055b321c7a.jpg
+¦               foto_694055b5d7436.jpg
+¦               foto_694055b7c4254.jpg
+¦               foto_694055ca11b1b.jpg
+¦               foto_6940564fb98c4.png
+¦               foto_6940565816aa7.jpg
+¦               foto_6940567a39fff.jpg
+¦               foto_6940567a897be.png
+¦               foto_69405686081ed.jpg
+¦               foto_6940570da240d.png
+¦               foto_6940576c59c29.jpg
+¦               foto_6940584a9ac30.jpg
+¦               foto_6940587f566e0.png
+¦               foto_694059bd716a8.png
+¦               foto_694059eb90193.png
+¦               foto_69405cbfc3b7f.png
+¦               foto_69405d8d1f691.jpg
+¦               foto_69405e2fc8f3a.jpg
+¦               foto_69405e801fef5.jpg
+¦               foto_6940600a9153e.png
+¦               foto_694061c48bc5f.png
+¦               foto_6940678feaca4.png
+¦               foto_69407e861afef.jpeg
+¦               foto_69407ebac29dc.jpeg
+¦               foto_694083fb53494.png
+¦               foto_6940847b1c8b3.png
+¦               foto_694087729011d.png
+¦               foto_6940881b961ff.png
+¦               foto_69408e86051b4.png
+¦               foto_69488383f3349.png
+¦               foto_694883a7dad81.png
+¦               foto_69488409d0153.png
+¦               foto_6948842417207.png
+¦               foto_6949dffa215f3.png
+¦               foto_6949e01465a9d.png
+¦               foto_6949e363dc3b1.png
+¦               foto_6949e8c47db05.png
+¦               foto_6949eaffa1daa.png
+¦               foto_6949efd609e9d.png
+¦               foto_6949f306e229f.png
+¦               foto_694be7e08cb0b.png
+¦               foto_694d6b9f5798a.png
+¦               foto_6967b8b419425.png
+¦               foto_6967c6a70078e.png
+¦               foto_6967c86d69660.png
+¦               foto_6967c8aba8897.png
+¦               foto_6969122575e8a.png
+¦               foto_69691251c28b8.png
+¦               foto_69691465cb314.png
+¦               foto_696916c5930f5.png
+¦               foto_696e5731608ec.png
+¦               foto_69711401c647e.png
+¦               foto_69711671cb63c.png
+¦               foto_6971177740644.png
+¦               foto_697118803fcc3.png
+¦               foto_697118a0a323d.png
+¦               foto_697119798cbea.png
+¦               foto_69711b91ae8fc.png
+¦               foto_6971407cae5c7.png
+¦               foto_69714580856fb.png
+¦               foto_69715a7fb2719.png
+¦               foto_69715ec48f452.png
+¦               foto_69715edad0fa0.png
+¦               foto_69716c1b18e3e.png
+¦               foto_69726b8e0f4ec.png
+¦               foto_6972a3466c1d0.png
+¦               foto_6972a3aed5e06.png
+¦               foto_6973adb0de94e.png
+¦               foto_6973ae3e5c087.png
+¦               foto_6973ae73b288d.png
+¦               foto_6973ae73df3f6.png
+¦               foto_6973af3e1172c.png
+¦               foto_6973b0043879d.png
+¦               foto_6973b1c2aeb62.png
+¦               foto_6973b251e8f4f.png
+¦               foto_6973b2cbb57d6.png
+¦               foto_6973b2e0754ab.png
+¦               foto_6973b367a02d5.png
+¦               foto_6973b37c394d5.png
+¦               foto_6973b393185c4.png
+¦               foto_6973b81252e0a.png
+¦               foto_6973b82c2f4b9.png
+¦               foto_6973b8525e627.png
+¦               foto_6973c3376ea4f.png
+¦               foto_697a6447465c0.jpg
+¦               foto_697a654e34c87.jpg
+¦               foto_697a8bf9d6e35.jpg
+¦               foto_697bedda0537c.png
+¦               foto_697beec56b2ab.png
+¦               foto_697d281c0147c.png
+¦               foto_697fc98505162.png
+¦               foto_697fc99c22d3b.png
+¦               foto_69823ffa5a66a.png
+¦               foto_6982407fda33d.png
+¦               foto_6982409888de5.png
+¦               proveedor_691cd47725bf0.png
+¦               turista_69275bbe566eb.jpeg
+¦               turista_6928bf0cdd30f.jpeg
+¦               turista_6928bffd0aa99.png
+¦               turista_693893538865b.jpeg
+¦               turista_693893baa7fdb.jpeg
+¦               turista_694023f34996a.png
+¦               turista_69407a632b234.jpg
+¦               turista_69407a6f4359c.jpg
+¦               turista_69407a7f90f36.jpg
+¦               turista_69407ad2cfbfe.jpg
+¦               turista_69407ae0d4d9f.jpg
+¦               turista_694084b80e163.png
+¦               turista_694815194779a.png
+¦               turista_69481522a0266.png
+¦               turista_6967b9c7dd838.png
+¦               turista_6967b9e4735ba.png
+¦               turista_6969074846c49.png
+¦               turista_696e53fdc4165.png
+¦               turista_69710c051c8df.jpg
+¦               turista_69710c3de1912.jpg
+¦               turista_69710c6e63bdf.jpg
+¦               turista_697162520a5b1.png
+¦               turista_6972a08f403b5.png
+¦               turista_69962bae56ef7.png
+¦               turista_69965e5025fbe.jpg
+¦               user_692f391b99b8f.png
+¦               user_6931e723f1a3e.png
+¦               user_6931e75cd7100.png
+¦               user_6931e7de789c5.png
+¦               user_6931e7eb061f8.png
+¦               user_6931f6226c925.jpeg
+¦               user_6932023fd14e8.png
+¦               user_694bf9544d742.png
+¦               user_694bf98534ed7.png
+¦               user_694bfaa785750.png
+¦               user_694bfac1f30f0.png
+¦               user_6953ed6ece75b.png
+¦               user_6953f1aadb5bd.png
+¦               user_6953f1f38f8a1.png
+¦               user_696ab3e6886d0.png
+¦               user_696ab427da783.png
+¦               user_696ab461d12d3.png
+¦               user_696ab68d89e56.png
+¦               user_696abd4c6c939.png
+¦               user_696e50f437fc6.png
+¦               user_696e51001c262.png
+¦               user_696e5296a6c0d.png
+¦               user_696e579538cfc.png
+¦               user_6971504485d6c.jpg
+¦               user_697a3814105e1.jpg
+¦               user_697a8bb5a22d4.jpg
+¦               user_697d3680855f1.jpg
+¦               user_6982440c21ce4.png
+¦               user_6982525b4ce51.jpg
+¦               user_69825d1a1ddb0.jpg
+¦               user_69825e2a1e689.jpg
+¦               user_6996650d1e476.png
+¦               user_69978143f1be5.jpg
+¦               user_6997cf6f5aeda.jpg
+¦               user_6998a213d4615.png
+¦               
++---vendor
+    +---dompdf
+    ¦   ¦   .travis.yml
+    ¦   ¦   autoload.inc.php
+    ¦   ¦   composer.json
+    ¦   ¦   CONTRIBUTING.md
+    ¦   ¦   LICENSE.LGPL
+    ¦   ¦   phpcs.xml
+    ¦   ¦   phpunit.xml.dist
+    ¦   ¦   README.md
+    ¦   ¦   VERSION
+    ¦   ¦   
+    ¦   +---lib
+    ¦   ¦   ¦   Cpdf.php
+    ¦   ¦   ¦   
+    ¦   ¦   +---fonts
+    ¦   ¦   ¦       Courier-Bold.afm
+    ¦   ¦   ¦       Courier-BoldOblique.afm
+    ¦   ¦   ¦       Courier-Oblique.afm
+    ¦   ¦   ¦       Courier.afm
+    ¦   ¦   ¦       DejaVuSans-Bold.ttf
+    ¦   ¦   ¦       DejaVuSans-Bold.ufm
+    ¦   ¦   ¦       DejaVuSans-BoldOblique.ttf
+    ¦   ¦   ¦       DejaVuSans-BoldOblique.ufm
+    ¦   ¦   ¦       DejaVuSans-Oblique.ttf
+    ¦   ¦   ¦       DejaVuSans-Oblique.ufm
+    ¦   ¦   ¦       DejaVuSans.ttf
+    ¦   ¦   ¦       DejaVuSans.ufm
+    ¦   ¦   ¦       DejaVuSansMono-Bold.ttf
+    ¦   ¦   ¦       DejaVuSansMono-Bold.ufm
+    ¦   ¦   ¦       DejaVuSansMono-BoldOblique.ttf
+    ¦   ¦   ¦       DejaVuSansMono-BoldOblique.ufm
+    ¦   ¦   ¦       DejaVuSansMono-Oblique.ttf
+    ¦   ¦   ¦       DejaVuSansMono-Oblique.ufm
+    ¦   ¦   ¦       DejaVuSansMono.ttf
+    ¦   ¦   ¦       DejaVuSansMono.ufm
+    ¦   ¦   ¦       DejaVuSerif-Bold.ttf
+    ¦   ¦   ¦       DejaVuSerif-Bold.ufm
+    ¦   ¦   ¦       DejaVuSerif-BoldItalic.ttf
+    ¦   ¦   ¦       DejaVuSerif-BoldItalic.ufm
+    ¦   ¦   ¦       DejaVuSerif-Italic.ttf
+    ¦   ¦   ¦       DejaVuSerif-Italic.ufm
+    ¦   ¦   ¦       DejaVuSerif.ttf
+    ¦   ¦   ¦       DejaVuSerif.ufm
+    ¦   ¦   ¦       dompdf_font_family_cache.dist.php
+    ¦   ¦   ¦       Helvetica-Bold.afm
+    ¦   ¦   ¦       Helvetica-Bold.afm.php
+    ¦   ¦   ¦       Helvetica-BoldOblique.afm
+    ¦   ¦   ¦       Helvetica-Oblique.afm
+    ¦   ¦   ¦       Helvetica.afm
+    ¦   ¦   ¦       Helvetica.afm.php
+    ¦   ¦   ¦       mustRead.html
+    ¦   ¦   ¦       Symbol.afm
+    ¦   ¦   ¦       Times-Bold.afm
+    ¦   ¦   ¦       Times-Bold.afm.php
+    ¦   ¦   ¦       Times-BoldItalic.afm
+    ¦   ¦   ¦       Times-Italic.afm
+    ¦   ¦   ¦       Times-Roman.afm
+    ¦   ¦   ¦       Times-Roman.afm.php
+    ¦   ¦   ¦       ZapfDingbats.afm
+    ¦   ¦   ¦       
+    ¦   ¦   +---html5lib
+    ¦   ¦   ¦       Data.php
+    ¦   ¦   ¦       InputStream.php
+    ¦   ¦   ¦       named-character-references.ser
+    ¦   ¦   ¦       Parser.php
+    ¦   ¦   ¦       Tokenizer.php
+    ¦   ¦   ¦       TreeBuilder.php
+    ¦   ¦   ¦       
+    ¦   ¦   +---php-css-parser
+    ¦   ¦   ¦   ¦   .travis.yml
+    ¦   ¦   ¦   ¦   CHANGELOG.md
+    ¦   ¦   ¦   ¦   composer.json
+    ¦   ¦   ¦   ¦   composer.lock
+    ¦   ¦   ¦   ¦   Doxyfile
+    ¦   ¦   ¦   ¦   phpunit.xml
+    ¦   ¦   ¦   ¦   README.md
+    ¦   ¦   ¦   ¦   
+    ¦   ¦   ¦   +---lib
+    ¦   ¦   ¦   ¦   +---Sabberworm
+    ¦   ¦   ¦   ¦       +---CSS
+    ¦   ¦   ¦   ¦           ¦   OutputFormat.php
+    ¦   ¦   ¦   ¦           ¦   Parser.php
+    ¦   ¦   ¦   ¦           ¦   Renderable.php
+    ¦   ¦   ¦   ¦           ¦   Settings.php
+    ¦   ¦   ¦   ¦           ¦   
+    ¦   ¦   ¦   ¦           +---Comment
+    ¦   ¦   ¦   ¦           ¦       Comment.php
+    ¦   ¦   ¦   ¦           ¦       Commentable.php
+    ¦   ¦   ¦   ¦           ¦       
+    ¦   ¦   ¦   ¦           +---CSSList
+    ¦   ¦   ¦   ¦           ¦       AtRuleBlockList.php
+    ¦   ¦   ¦   ¦           ¦       CSSBlockList.php
+    ¦   ¦   ¦   ¦           ¦       CSSList.php
+    ¦   ¦   ¦   ¦           ¦       Document.php
+    ¦   ¦   ¦   ¦           ¦       KeyFrame.php
+    ¦   ¦   ¦   ¦           ¦       
+    ¦   ¦   ¦   ¦           +---Parsing
+    ¦   ¦   ¦   ¦           ¦       OutputException.php
+    ¦   ¦   ¦   ¦           ¦       ParserState.php
+    ¦   ¦   ¦   ¦           ¦       SourceException.php
+    ¦   ¦   ¦   ¦           ¦       UnexpectedTokenException.php
+    ¦   ¦   ¦   ¦           ¦       
+    ¦   ¦   ¦   ¦           +---Property
+    ¦   ¦   ¦   ¦           ¦       AtRule.php
+    ¦   ¦   ¦   ¦           ¦       Charset.php
+    ¦   ¦   ¦   ¦           ¦       CSSNamespace.php
+    ¦   ¦   ¦   ¦           ¦       Import.php
+    ¦   ¦   ¦   ¦           ¦       Selector.php
+    ¦   ¦   ¦   ¦           ¦       
+    ¦   ¦   ¦   ¦           +---Rule
+    ¦   ¦   ¦   ¦           ¦       Rule.php
+    ¦   ¦   ¦   ¦           ¦       
+    ¦   ¦   ¦   ¦           +---RuleSet
+    ¦   ¦   ¦   ¦           ¦       AtRuleSet.php
+    ¦   ¦   ¦   ¦           ¦       DeclarationBlock.php
+    ¦   ¦   ¦   ¦           ¦       RuleSet.php
+    ¦   ¦   ¦   ¦           ¦       
+    ¦   ¦   ¦   ¦           +---Value
+    ¦   ¦   ¦   ¦                   CalcFunction.php
+    ¦   ¦   ¦   ¦                   CalcRuleValueList.php
+    ¦   ¦   ¦   ¦                   Color.php
+    ¦   ¦   ¦   ¦                   CSSFunction.php
+    ¦   ¦   ¦   ¦                   CSSString.php
+    ¦   ¦   ¦   ¦                   LineName.php
+    ¦   ¦   ¦   ¦                   PrimitiveValue.php
+    ¦   ¦   ¦   ¦                   RuleValueList.php
+    ¦   ¦   ¦   ¦                   Size.php
+    ¦   ¦   ¦   ¦                   URL.php
+    ¦   ¦   ¦   ¦                   Value.php
+    ¦   ¦   ¦   ¦                   ValueList.php
+    ¦   ¦   ¦   ¦                   
+    ¦   ¦   ¦   +---tests
+    ¦   ¦   ¦       ¦   bootstrap.php
+    ¦   ¦   ¦       ¦   phpunit.xml
+    ¦   ¦   ¦       ¦   quickdump.php
+    ¦   ¦   ¦       ¦   
+    ¦   ¦   ¦       +---files
+    ¦   ¦   ¦       ¦       -calc-no-space-around-minus.css
+    ¦   ¦   ¦       ¦       -charset-after-rule.css
+    ¦   ¦   ¦       ¦       -charset-in-block.css
+    ¦   ¦   ¦       ¦       -empty-grid-linename.css
+    ¦   ¦   ¦       ¦       -empty.css
+    ¦   ¦   ¦       ¦       -end-token-2.css
+    ¦   ¦   ¦       ¦       -end-token.css
+    ¦   ¦   ¦       ¦       -fault-tolerance.css
+    ¦   ¦   ¦       ¦       -tobedone.css
+    ¦   ¦   ¦       ¦       1readme.css
+    ¦   ¦   ¦       ¦       2readme.css
+    ¦   ¦   ¦       ¦       atrules.css
+    ¦   ¦   ¦       ¦       calc-nested.css
+    ¦   ¦   ¦       ¦       calc.css
+    ¦   ¦   ¦       ¦       case-insensitivity.css
+    ¦   ¦   ¦       ¦       colortest.css
+    ¦   ¦   ¦       ¦       comments.css
+    ¦   ¦   ¦       ¦       create-shorthands.css
+    ¦   ¦   ¦       ¦       docuwiki.css
+    ¦   ¦   ¦       ¦       empty-grid-linename.css
+    ¦   ¦   ¦       ¦       expand-shorthands.css
+    ¦   ¦   ¦       ¦       functions.css
+    ¦   ¦   ¦       ¦       grid-linename.css
+    ¦   ¦   ¦       ¦       hex-alpha.css
+    ¦   ¦   ¦       ¦       ie-hacks.css
+    ¦   ¦   ¦       ¦       ie.css
+    ¦   ¦   ¦       ¦       important.css
+    ¦   ¦   ¦       ¦       inner-color.css
+    ¦   ¦   ¦       ¦       line-numbers.css
+    ¦   ¦   ¦       ¦       missing-property-value.css
+    ¦   ¦   ¦       ¦       ms-filter.css
+    ¦   ¦   ¦       ¦       namespaces.css
+    ¦   ¦   ¦       ¦       nested.css
+    ¦   ¦   ¦       ¦       slashed.css
+    ¦   ¦   ¦       ¦       specificity.css
+    ¦   ¦   ¦       ¦       trailing-whitespace.css
+    ¦   ¦   ¦       ¦       unicode-range.css
+    ¦   ¦   ¦       ¦       unicode.css
+    ¦   ¦   ¦       ¦       unmatched_braces.css
+    ¦   ¦   ¦       ¦       unopened-close-brackets.css
+    ¦   ¦   ¦       ¦       url.css
+    ¦   ¦   ¦       ¦       values.css
+    ¦   ¦   ¦       ¦       webkit.css
+    ¦   ¦   ¦       ¦       whitespace.css
+    ¦   ¦   ¦       ¦       
+    ¦   ¦   ¦       +---Sabberworm
+    ¦   ¦   ¦           +---CSS
+    ¦   ¦   ¦               ¦   OutputFormatTest.php
+    ¦   ¦   ¦               ¦   ParserTest.php
+    ¦   ¦   ¦               ¦   
+    ¦   ¦   ¦               +---CSSList
+    ¦   ¦   ¦               ¦       AtRuleBlockListTest.php
+    ¦   ¦   ¦               ¦       DocumentTest.php
+    ¦   ¦   ¦               ¦       
+    ¦   ¦   ¦               +---RuleSet
+    ¦   ¦   ¦                       DeclarationBlockTest.php
+    ¦   ¦   ¦                       LenientParsingTest.php
+    ¦   ¦   ¦                       
+    ¦   ¦   +---php-font-lib
+    ¦   ¦   ¦   ¦   .htaccess
+    ¦   ¦   ¦   ¦   .travis.yml
+    ¦   ¦   ¦   ¦   bower.json
+    ¦   ¦   ¦   ¦   composer.json
+    ¦   ¦   ¦   ¦   index.php
+    ¦   ¦   ¦   ¦   LICENSE
+    ¦   ¦   ¦   ¦   phpunit.xml.dist
+    ¦   ¦   ¦   ¦   README.md
+    ¦   ¦   ¦   ¦   
+    ¦   ¦   ¦   +---maps
+    ¦   ¦   ¦   ¦       adobe-standard-encoding.map
+    ¦   ¦   ¦   ¦       cp1250.map
+    ¦   ¦   ¦   ¦       cp1251.map
+    ¦   ¦   ¦   ¦       cp1252.map
+    ¦   ¦   ¦   ¦       cp1253.map
+    ¦   ¦   ¦   ¦       cp1254.map
+    ¦   ¦   ¦   ¦       cp1255.map
+    ¦   ¦   ¦   ¦       cp1257.map
+    ¦   ¦   ¦   ¦       cp1258.map
+    ¦   ¦   ¦   ¦       cp874.map
+    ¦   ¦   ¦   ¦       iso-8859-1.map
+    ¦   ¦   ¦   ¦       iso-8859-11.map
+    ¦   ¦   ¦   ¦       iso-8859-15.map
+    ¦   ¦   ¦   ¦       iso-8859-16.map
+    ¦   ¦   ¦   ¦       iso-8859-2.map
+    ¦   ¦   ¦   ¦       iso-8859-4.map
+    ¦   ¦   ¦   ¦       iso-8859-5.map
+    ¦   ¦   ¦   ¦       iso-8859-7.map
+    ¦   ¦   ¦   ¦       iso-8859-9.map
+    ¦   ¦   ¦   ¦       koi8-r.map
+    ¦   ¦   ¦   ¦       koi8-u.map
+    ¦   ¦   ¦   ¦       
+    ¦   ¦   ¦   +---sample-fonts
+    ¦   ¦   ¦   ¦       IntelClear-Light.ttf
+    ¦   ¦   ¦   ¦       NotoSansShavian-Regular.ttf
+    ¦   ¦   ¦   ¦       
+    ¦   ¦   ¦   +---src
+    ¦   ¦   ¦   ¦   +---FontLib
+    ¦   ¦   ¦   ¦       ¦   AdobeFontMetrics.php
+    ¦   ¦   ¦   ¦       ¦   Autoloader.php
+    ¦   ¦   ¦   ¦       ¦   BinaryStream.php
+    ¦   ¦   ¦   ¦       ¦   EncodingMap.php
+    ¦   ¦   ¦   ¦       ¦   Font.php
+    ¦   ¦   ¦   ¦       ¦   Header.php
+    ¦   ¦   ¦   ¦       ¦   
+    ¦   ¦   ¦   ¦       +---EOT
+    ¦   ¦   ¦   ¦       ¦       File.php
+    ¦   ¦   ¦   ¦       ¦       Header.php
+    ¦   ¦   ¦   ¦       ¦       
+    ¦   ¦   ¦   ¦       +---Exception
+    ¦   ¦   ¦   ¦       ¦       FontNotFoundException.php
+    ¦   ¦   ¦   ¦       ¦       
+    ¦   ¦   ¦   ¦       +---Glyph
+    ¦   ¦   ¦   ¦       ¦       Outline.php
+    ¦   ¦   ¦   ¦       ¦       OutlineComponent.php
+    ¦   ¦   ¦   ¦       ¦       OutlineComposite.php
+    ¦   ¦   ¦   ¦       ¦       OutlineSimple.php
+    ¦   ¦   ¦   ¦       ¦       
+    ¦   ¦   ¦   ¦       +---OpenType
+    ¦   ¦   ¦   ¦       ¦       File.php
+    ¦   ¦   ¦   ¦       ¦       TableDirectoryEntry.php
+    ¦   ¦   ¦   ¦       ¦       
+    ¦   ¦   ¦   ¦       +---Table
+    ¦   ¦   ¦   ¦       ¦   ¦   DirectoryEntry.php
+    ¦   ¦   ¦   ¦       ¦   ¦   Table.php
+    ¦   ¦   ¦   ¦       ¦   ¦   
+    ¦   ¦   ¦   ¦       ¦   +---Type
+    ¦   ¦   ¦   ¦       ¦           cmap.php
+    ¦   ¦   ¦   ¦       ¦           glyf.php
+    ¦   ¦   ¦   ¦       ¦           head.php
+    ¦   ¦   ¦   ¦       ¦           hhea.php
+    ¦   ¦   ¦   ¦       ¦           hmtx.php
+    ¦   ¦   ¦   ¦       ¦           kern.php
+    ¦   ¦   ¦   ¦       ¦           loca.php
+    ¦   ¦   ¦   ¦       ¦           maxp.php
+    ¦   ¦   ¦   ¦       ¦           name.php
+    ¦   ¦   ¦   ¦       ¦           nameRecord.php
+    ¦   ¦   ¦   ¦       ¦           os2.php
+    ¦   ¦   ¦   ¦       ¦           post.php
+    ¦   ¦   ¦   ¦       ¦           
+    ¦   ¦   ¦   ¦       +---TrueType
+    ¦   ¦   ¦   ¦       ¦       Collection.php
+    ¦   ¦   ¦   ¦       ¦       File.php
+    ¦   ¦   ¦   ¦       ¦       Header.php
+    ¦   ¦   ¦   ¦       ¦       TableDirectoryEntry.php
+    ¦   ¦   ¦   ¦       ¦       
+    ¦   ¦   ¦   ¦       +---WOFF
+    ¦   ¦   ¦   ¦               File.php
+    ¦   ¦   ¦   ¦               Header.php
+    ¦   ¦   ¦   ¦               TableDirectoryEntry.php
+    ¦   ¦   ¦   ¦               
+    ¦   ¦   ¦   +---tests
+    ¦   ¦   ¦       +---FontLib
+    ¦   ¦   ¦               FontTest.php
+    ¦   ¦   ¦               
+    ¦   ¦   +---php-svg-lib
+    ¦   ¦   ¦   ¦   .travis.yml
+    ¦   ¦   ¦   ¦   composer.json
+    ¦   ¦   ¦   ¦   COPYING
+    ¦   ¦   ¦   ¦   COPYING.GPL
+    ¦   ¦   ¦   ¦   phpunit.xml
+    ¦   ¦   ¦   ¦   README.md
+    ¦   ¦   ¦   ¦   
+    ¦   ¦   ¦   +---src
+    ¦   ¦   ¦   ¦   ¦   autoload.php
+    ¦   ¦   ¦   ¦   ¦   
+    ¦   ¦   ¦   ¦   +---Svg
+    ¦   ¦   ¦   ¦       ¦   DefaultStyle.php
+    ¦   ¦   ¦   ¦       ¦   Document.php
+    ¦   ¦   ¦   ¦       ¦   Style.php
+    ¦   ¦   ¦   ¦       ¦   
+    ¦   ¦   ¦   ¦       +---Gradient
+    ¦   ¦   ¦   ¦       ¦       Stop.php
+    ¦   ¦   ¦   ¦       ¦       
+    ¦   ¦   ¦   ¦       +---Surface
+    ¦   ¦   ¦   ¦       ¦       CPdf.php
+    ¦   ¦   ¦   ¦       ¦       SurfaceCpdf.php
+    ¦   ¦   ¦   ¦       ¦       SurfaceGmagick.php
+    ¦   ¦   ¦   ¦       ¦       SurfaceInterface.php
+    ¦   ¦   ¦   ¦       ¦       SurfacePDFLib.php
+    ¦   ¦   ¦   ¦       ¦       
+    ¦   ¦   ¦   ¦       +---Tag
+    ¦   ¦   ¦   ¦               AbstractTag.php
+    ¦   ¦   ¦   ¦               Anchor.php
+    ¦   ¦   ¦   ¦               Circle.php
+    ¦   ¦   ¦   ¦               ClipPath.php
+    ¦   ¦   ¦   ¦               Ellipse.php
+    ¦   ¦   ¦   ¦               Group.php
+    ¦   ¦   ¦   ¦               Image.php
+    ¦   ¦   ¦   ¦               Line.php
+    ¦   ¦   ¦   ¦               LinearGradient.php
+    ¦   ¦   ¦   ¦               Path.php
+    ¦   ¦   ¦   ¦               Polygon.php
+    ¦   ¦   ¦   ¦               Polyline.php
+    ¦   ¦   ¦   ¦               RadialGradient.php
+    ¦   ¦   ¦   ¦               Rect.php
+    ¦   ¦   ¦   ¦               Shape.php
+    ¦   ¦   ¦   ¦               Stop.php
+    ¦   ¦   ¦   ¦               StyleTag.php
+    ¦   ¦   ¦   ¦               Text.php
+    ¦   ¦   ¦   ¦               UseTag.php
+    ¦   ¦   ¦   ¦               
+    ¦   ¦   ¦   +---tests
+    ¦   ¦   ¦       +---Svg
+    ¦   ¦   ¦               StyleTest.php
+    ¦   ¦   ¦               
+    ¦   ¦   +---res
+    ¦   ¦           broken_image.png
+    ¦   ¦           broken_image.svg
+    ¦   ¦           html.css
+    ¦   ¦           
+    ¦   +---src
+    ¦       ¦   Autoloader.php
+    ¦       ¦   Canvas.php
+    ¦       ¦   CanvasFactory.php
+    ¦       ¦   Cellmap.php
+    ¦       ¦   Dompdf.php
+    ¦       ¦   Exception.php
+    ¦       ¦   FontMetrics.php
+    ¦       ¦   Frame.php
+    ¦       ¦   Helpers.php
+    ¦       ¦   JavascriptEmbedder.php
+    ¦       ¦   LineBox.php
+    ¦       ¦   Options.php
+    ¦       ¦   PhpEvaluator.php
+    ¦       ¦   Renderer.php
+    ¦       ¦   
+    ¦       +---Adapter
+    ¦       ¦       CPDF.php
+    ¦       ¦       GD.php
+    ¦       ¦       PDFLib.php
+    ¦       ¦       
+    ¦       +---Css
+    ¦       ¦       AttributeTranslator.php
+    ¦       ¦       Color.php
+    ¦       ¦       Style.php
+    ¦       ¦       Stylesheet.php
+    ¦       ¦       
+    ¦       +---Exception
+    ¦       ¦       ImageException.php
+    ¦       ¦       
+    ¦       +---Frame
+    ¦       ¦       Factory.php
+    ¦       ¦       FrameList.php
+    ¦       ¦       FrameListIterator.php
+    ¦       ¦       FrameTree.php
+    ¦       ¦       FrameTreeIterator.php
+    ¦       ¦       FrameTreeList.php
+    ¦       ¦       
+    ¦       +---FrameDecorator
+    ¦       ¦       AbstractFrameDecorator.php
+    ¦       ¦       Block.php
+    ¦       ¦       Image.php
+    ¦       ¦       Inline.php
+    ¦       ¦       ListBullet.php
+    ¦       ¦       ListBulletImage.php
+    ¦       ¦       NullFrameDecorator.php
+    ¦       ¦       Page.php
+    ¦       ¦       Table.php
+    ¦       ¦       TableCell.php
+    ¦       ¦       TableRow.php
+    ¦       ¦       TableRowGroup.php
+    ¦       ¦       Text.php
+    ¦       ¦       
+    ¦       +---FrameReflower
+    ¦       ¦       AbstractFrameReflower.php
+    ¦       ¦       Block.php
+    ¦       ¦       Image.php
+    ¦       ¦       Inline.php
+    ¦       ¦       ListBullet.php
+    ¦       ¦       NullFrameReflower.php
+    ¦       ¦       Page.php
+    ¦       ¦       Table.php
+    ¦       ¦       TableCell.php
+    ¦       ¦       TableRow.php
+    ¦       ¦       TableRowGroup.php
+    ¦       ¦       Text.php
+    ¦       ¦       
+    ¦       +---Image
+    ¦       ¦       Cache.php
+    ¦       ¦       
+    ¦       +---Positioner
+    ¦       ¦       Absolute.php
+    ¦       ¦       AbstractPositioner.php
+    ¦       ¦       Block.php
+    ¦       ¦       Fixed.php
+    ¦       ¦       Inline.php
+    ¦       ¦       ListBullet.php
+    ¦       ¦       NullPositioner.php
+    ¦       ¦       TableCell.php
+    ¦       ¦       TableRow.php
+    ¦       ¦       
+    ¦       +---Renderer
+    ¦               AbstractRenderer.php
+    ¦               Block.php
+    ¦               Image.php
+    ¦               Inline.php
+    ¦               ListBullet.php
+    ¦               TableCell.php
+    ¦               TableRowGroup.php
+    ¦               Text.php
+    ¦               
+    +---PHPMailer
+            Exception.php
+            PHPMailer.php
+            SMTP.php
+            
