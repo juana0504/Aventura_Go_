@@ -22,7 +22,7 @@
 
                 <ul id="menu-panel">
                     <a href="<?= BASE_URL ?>/proveedor/dashboard" class="bi-speedometer2">Dashboard</a>
-                    <a href="<?= BASE_URL ?>/proveedor/completar-informacion" class="bi bi-layout-text-sidebar-reverse"> Completar informacion de registro</a>
+                    <a href="<?= BASE_URL ?>/proveedor/completar-informacion" class="bi bi-layout-text-sidebar-reverse"> Completar y/o actualizar informacion de registro</a>
                     <a href="<?= BASE_URL ?>/proveedor/registrar-actividad" class="bi bi-layout-text-sidebar-reverse">Registrar actividad turistica</a>
                     <a href="<?= BASE_URL ?>/proveedor/consultar-actividad" class="bi bi-table">Consultar actividades turisiticas</a>
                     <a href="<?= BASE_URL ?>/proveedor/consultar-reservas" class="bi bi-calendar-check">Consultar reservas</a>

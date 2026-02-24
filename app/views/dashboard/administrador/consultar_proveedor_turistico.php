@@ -328,13 +328,7 @@ require_once __DIR__ . '/../../layouts/header_administrador.php';
                             <i class="fas fa-ban"></i> Desactivar
                         </a>
                     </div>
-                    <!-- <form action="<?= BASE_URL ?>/administrador/aprobar-proveedor" method="POST">
-                        <input type="hidden" name="accion" value="aprobar">
-                        <input type="hidden" name="id_proveedor" id="modal-id-proveedor">
-                        <button type="submit" class="btn btn-aventura-success">
-                            <i class="fas fa-check"></i> Aprobar Proveedor
-                        </button>
-                    </form> -->
+
                 </div>
 
 
