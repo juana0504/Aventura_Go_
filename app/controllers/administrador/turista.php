@@ -118,11 +118,44 @@ function registrarTurista()
     $resultado = $objTurista->registrar($data);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Registro exitoso', 'Turista registrado.', '/aventura_go/login');
+
+        session_start();
+
+        // 🔐 Iniciar sesión automáticamente
+        $_SESSION['user'] = [
+            'nombre' => $nombre,
+            'email'  => $email,
+            'rol'    => 'turista'
+        ];
+
+        // 🔄 Redirección inteligente
+        if (!empty($_SESSION['redirect_after_login'])) {
+
+            $redirect = $_SESSION['redirect_after_login'];
+            unset($_SESSION['redirect_after_login']);
+
+            mostrarSweetAlert(
+                'success',
+                'Registro exitoso',
+                'Continuando con tu reserva...',
+                $redirect
+            );
+
+        } else {
+
+            mostrarSweetAlert(
+                'success',
+                'Registro exitoso',
+                'Bienvenido a Aventura Go',
+                '/aventura_go/turista/dashboard'
+            );
+        }
+
     } else {
         mostrarSweetAlert('error', 'Error al registrar', 'No se pudo registrar el turista.');
     }
 }
+
 
 
 function listarTuristas()

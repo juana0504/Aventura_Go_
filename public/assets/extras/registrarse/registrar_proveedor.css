@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
+
+/* Variables globales */
+:root {
+  --color-primary: #2D4059;
+  --color-secondary: #EA8217;
+  --color-white: #FFFFFF;
+  --color-text: #333333;
+  --color-text-light: #666666;
+  --color-bg-light: #F8F9FA;
+  --color-border: #E0E0E0;
+  --shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+  --font-titles: 'Raleway', sans-serif;
+  --font-text: 'Lato', sans-serif;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-text);
+}
+
+/* Fondo y contenedor principal */
+body {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  background: url("../registrarse/img/REGISTRATE\ \(2\).png") no-repeat center center/cover;
+  background-attachment: fixed;
+}
+
+
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  filter: blur(2px);
+  z-index: 0;
+}
+
+
+.select-container {
+  position: relative;
+  width: 100%;
+}
+
+.select-container select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  background: white;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  font-size: 15px;
+}
+
+/* Flecha */
+.select-container::after {
+  content: "▼";
+  font-size: 12px;
+  color: #444;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+
+.login-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-box {
+  background-color: var(--color-white);
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-height: 700px;
+  backdrop-filter: blur(6px);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.login-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Formulario */
+.form-section {
+  flex: 1;
+  padding: 50px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  width: 80px;
+  position: relative;
+  bottom: 10px;
+}
+
+.form-section h2 {
+  font-family: var(--font-titles);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-family: var(--font-titles);
+  font-weight: 300;
+  color: var(--color-primary);
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 25px;
+
+}
+
+/* Centrar solo la segunda línea */
+h3 .centered-line {
+  display: block;
+  text-align: center;
+  margin-top: 5px;
+  /* Ajusta el espacio si quieres */
+}
+
+
+/* Formulario interno */
+form {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Inputs y selects */
+form input,
+form select {
+  width: 100%;
+  max-width: 800px;
+  padding: 12px 18px;
+  border: 1px solid #d1d5db;
+  border-radius: 20px;
+  background-color: #f9f9f9;
+  font-size: 15px;
+  color: var(--color-text);
+  transition: 0.3s;
+}
+
+option {
+  background-color: #f9f9f9;
+}
+
+form input::placeholder {
+  color: #999;
+}
+
+form input:focus,
+form select:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 8px rgba(234, 130, 23, 0.25);
+  background-color: #fff;
+}
+
+/* Campo contraseña con icono */
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-container input {
+  padding-right: 40px;
+}
+
+.password-container i {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #555;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.password-container i:hover {
+  color: var(--color-secondary);
+}
+
+/* Botón general */
+button {
+  width: 100%;
+  max-width: 300px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: 20px;
+  padding: 5px 50px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 5px;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+button:hover {
+  background-color: #142538;
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Imagen sección */
+.image-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.image-section img {
+  width: 492px;
+  height: 738px;
+  object-fit: cover;
+  transition: transform 0.5s ease, box-shadow 0.3s ease;
+  border-radius: 0 0 25px 25px;
+}
+
+.image-section img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Contenedor igual a los otros campos */
+.file-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Input tipo file con el mismo estilo que los otros */
+.file-container input[type="file"] {
+  width: 100%;
+  padding: 12px 18px;
+  border: 1px solid #d1d5db;
+  border-radius: 20px;
+  background-color: #f9f9f9;
+  font-size: 15px;
+  color: transparent;
+  /* Oculta el texto del archivo */
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Placeholder falso */
+.file-placeholder {
+  position: relative;
+  top: -39px;
+  left: 170px;
+  transform: translateY(-50%);
+  color: #838383;
+  pointer-events: none;
+  font-size: 15px;
+}
+
+/* Cuando se selecciona un archivo, ocultamos el placeholder */
+.file-container input[type="file"]:valid+.file-placeholder {
+  display: none;
+}
+
+/* Hover y focus */
+.file-container input[type="file"]:hover,
+.file-container input[type="file"]:focus {
+  border-color: var(--color-secondary);
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(234, 130, 23, 0.25);
+}
+
+
+
+
+/* Responsive */
+@media (max-width: 900px) {
+  .login-box {
+    flex-direction: column;
+    max-height: none;
+  }
+
+  .form-section {
+    padding: 30px;
+  }
+
+  .image-section {
+    height: 250px;
+  }
+
+  .image-section img {
+    border-radius: 0 0 25px 25px;
+  }
+}

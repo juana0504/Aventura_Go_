@@ -198,30 +198,34 @@ class ActividadTuristica
     public function listarActividadesPublicas()
     {
         $sql = "
-        SELECT 
-            a.id_actividad,
-            a.nombre,
-            a.precio,
-            a.descripcion,
-            a.cupos,
-            a.ubicacion,
-            c.nombre AS ciudad,
-            img.imagen
-        FROM actividad a
-        INNER JOIN ciudades c 
-            ON a.id_ciudad = c.id_ciudad
-        LEFT JOIN actividad_imagen img 
-            ON img.id_actividad = a.id_actividad 
-           AND img.es_principal = 1
-        WHERE a.estado = 'ACTIVO'
-        ORDER BY a.created_at DESC
-        ";
+    SELECT 
+        a.id_actividad,
+        a.nombre,
+        a.precio,
+        a.descripcion,
+        a.cupos,
+        a.ubicacion,
+        c.nombre AS ciudad,
+        img.imagen
+    FROM actividad a
+    INNER JOIN proveedor p
+        ON a.id_proveedor = p.id_proveedor
+    INNER JOIN ciudades c 
+        ON a.id_ciudad = c.id_ciudad
+    LEFT JOIN actividad_imagen img 
+        ON img.id_actividad = a.id_actividad 
+       AND img.es_principal = 1
+    WHERE a.estado = 'ACTIVO'
+      AND p.estado = 'ACTIVO'
+    ORDER BY a.created_at DESC
+    ";
 
         $stmt = $this->conexion->prepare($sql);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
 
 
     public function eliminar($id)
@@ -248,10 +252,10 @@ class ActividadTuristica
             img.imagen AS imagen_principal
         FROM actividad a
         INNER JOIN ciudades c 
-            ON a.id_ciudad = c.id_ciudad
+        ON a.id_ciudad = c.id_ciudad
         LEFT JOIN actividad_imagen img 
-            ON img.id_actividad = a.id_actividad
-           AND img.es_principal = 1
+        ON img.id_actividad = a.id_actividad
+        AND img.es_principal = 1
         WHERE a.id_proveedor = :id_proveedor
         ORDER BY a.created_at DESC
         ";
@@ -367,7 +371,17 @@ class ActividadTuristica
     // SE OBTIENE 1 SOLA ACTIVIDAD PARA TOUR ESCOGIDO
     public function obtenerActividadPorId($id)
     {
-        $sql = "SELECT * FROM actividad WHERE id_actividad = :id LIMIT 1";
+        $sql = "
+        SELECT a.*
+        FROM actividad a
+        INNER JOIN proveedor p
+        ON a.id_proveedor = p.id_proveedor
+        WHERE a.id_actividad = :id
+        AND a.estado = 'ACTIVO'
+        AND p.estado = 'ACTIVO'
+        LIMIT 1
+    ";
+
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();

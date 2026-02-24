@@ -11,7 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- CSS personalizado -->
-    <link rel="stylesheet" href="public/assets/extras/registrarse/registrarse.css">
+    <link rel="stylesheet" href="public/assets/extras/registrarse/registrar_proveedor.css">
 </head>
 
 <body>
@@ -23,17 +23,25 @@
             <div class="form-section">
                 <img src="public/assets/extras/login/img/REDES-LOGO 2.png" alt="Aventura GO" class="logo mb-3">
 
-                <h2 class="fw-bold">REGISTRATE</h2>
-                <h3>
-                    Preparate para vivir tu proxima aventura.<br>
-                    <span class="centered-line">Registrate y empieza el viaje.</span>
-                </h3>
+                <h2 class="fw-bold">REGISTRO PROVEEDOR HOTELERO</h2>
+                <h3 class="fw-bold">Registrate y publica tu hospedaje.</h3>
 
 
-
-                <form action="<?= BASE_URL ?>/administrador/guardar-turista" method="POST" enctype="multipart/form-data">
+                <form action="<?= BASE_URL ?>/guardar-registro-proveedor-hotelero" method="POST" enctype="multipart/form-data">
 
                     <input type="text" placeholder="Nombre" name="nombre">
+
+                    <div class="select-container">
+                        <select name="tipo_documento">
+                            <option value="" disabled selected hidden>Tipo de documento</option>
+                            <option value="cc">Cédula de ciudadanía</option>
+                            <option value="ce">Cedula extranjeria</option>
+                            <option value="Pasaporte">Pasaporte </option>
+                        </select>
+                    </div>
+
+                    <input type="number" placeholder="identificacion" name="identificacion">
+
                     <div class="select-container">
                         <select name="genero">
                             <option value="" disabled selected hidden>Genero</option>
@@ -43,19 +51,20 @@
                     </div>
 
                     <input type="tel" placeholder="Teléfono" name="telefono">
+
                     <input type="email" name="email" placeholder="Correo" required>
+
                     <div class="password-container">
                         <input type="password" name="clave" placeholder="Contraseña" id="password" required>
                         <i class="bi bi-eye-fill" id="togglePassword"></i>
                     </div>
-                    <div class="file-container">
+
+                    <!-- <div class="file-container">
                         <input type="file" id="foto" name="foto" accept=".jpg, .png, .jpeg" required>
                         <span class="file-placeholder">Foto</span>
-                    </div>
+                    </div> -->
 
-
-
-                    <button type="submit">REGISTRARME</button>
+                    <button type="submit">REGISTRARME COMO PROVEEDOR HOTELERO</button>
 
                 </form>
 

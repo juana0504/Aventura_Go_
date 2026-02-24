@@ -72,3 +72,28 @@ document.addEventListener("DOMContentLoaded", function() {
    });
 });
 
+// turista.js
+
+document.addEventListener("DOMContentLoaded", () => {
+    const ctx = document.getElementById('actividadesChart').getContext('2d');
+    const actividadesChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Paracaidismo', 'Bungee Jumping', 'Escalada en roca'],  // Ajusta las etiquetas según tus actividades
+            datasets: [{
+                label: 'Número de Actividades',
+                data: [3, 2, 1], // Ajusta los valores de tus actividades (pueden ser visitas, número de actividades, etc.)
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+});

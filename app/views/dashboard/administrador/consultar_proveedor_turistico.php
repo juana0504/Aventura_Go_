@@ -328,7 +328,10 @@ require_once __DIR__ . '/../../layouts/header_administrador.php';
                             <i class="fas fa-ban"></i> Desactivar
                         </a>
                     </div>
+
                 </div>
+
+
             </div>
         </div>
     </div>

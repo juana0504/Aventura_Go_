@@ -1,6 +1,11 @@
 <?php
 //index.php - Router principal en larabel se tiene un archivo por cada carpeta de views
 
+//HABILITAR LA VISUALIZACION DE ERRORES EN PHP (PARA DESARROLLO, NO USAR EN PRODUCCION)
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+
+
 require_once __DIR__ . '/config/config.php';
 
 require_once BASE_PATH . '/app/controllers/website/WebsiteController.php';
@@ -29,6 +34,37 @@ switch ($request) {
         require BASE_PATH . '/app/views/auth/registrarse.php'; //redirige a el login 
         break;
 
+    case '/registrar-proveedor':
+        require BASE_PATH . '/app/views/auth/registrar_proveedor.php'; //redirige a el registro de proveedor turistico ALB 18/02/2026 
+        break;
+
+    case '/guardar-registro-proveedor':
+        require_once BASE_PATH . '/app/controllers/RegistroProveedorController.php'; //redirige al guardar el registro de proveedor turistico ALB 18/02/2026
+        break;
+
+    case '/proveedor/pendiente':
+        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/pendiente_aprobacion.php'; //redirige a la pagina de pendiente de aprobacion del proveedor turistico ALB 19/02/2026
+        break;
+
+    case '/proveedor/completar-informacion':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/completarInformacion.php'; //redirige a completar la informacion del proveedor turistico ALB 19/02/2026
+        break;
+
+    case '/proveedor/guardar-informacion':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/completarInformacion.php'; //redirige al guardar la informacion del proveedor turistico ALB 19/02/2026
+        break;
+
+
+
+
+    case '/registrar-proveedor-hotelero':
+        require BASE_PATH . '/app/views/auth/registrar_proveedor_hotelero.php'; //redirige a el registro de proveedor hotelero ALB 18/02/2026
+        break;
+
+    case '/guardar-registro-proveedor-hotelero':
+        require_once BASE_PATH . '/app/controllers/registroProveedorHoteleroController.php'; //redirige al guardar el registro de proveedor hotelero ALB 18/02/2026
+        break;
+
     case '/iniciar-sesion':
         require_once BASE_PATH . '/app/controllers/loginController.php'; //redirige al inicio de sesion
         break;
@@ -51,7 +87,17 @@ switch ($request) {
     //                                   RUTAS DASBOARD ADMINISTRADOR
     // ===================================================================================================
     case '/administrador/dashboard':
-        require BASE_PATH . '/app/views/dashboard/administrador/administrador.php';  //redirige al panel de administrador
+        // Enrutamos al controlador del dashboard del administrador
+        require_once BASE_PATH . '/app/controllers/administrador/dashboardController.php';
+        $controller = new DashboardAdminController();
+        $controller->index();
+        break;
+
+    // Endpoint JSON para datos de gráficos del dashboard
+    case '/administrador/dashboard/data':
+        require_once BASE_PATH . '/app/controllers/administrador/dashboardController.php';
+        $controller = new DashboardAdminController();
+        $controller->data();
         break;
 
     // Perfil administrador 
@@ -66,29 +112,37 @@ switch ($request) {
     case '/administrador/registrar-proveedor':
         require BASE_PATH . '/app/views/dashboard/administrador/registrar_proveedor_turistico.php';  //redirige al perfil de usuario de administrador
         break;
+
     case '/administrador/consultar-proveedor':
         require BASE_PATH . '/app/views/dashboard/administrador/consultar_proveedor_turistico.php';  //redirige al perfil de usuario de administrador
         break;
+
     case '/administrador/guardar-proveedor':
         require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';  //redirige al guardar proveedor
         break;
+
     case '/administrador/editar-proveedor':
         require BASE_PATH . '/app/views/dashboard/administrador/editar_proveedor_turistico.php';  //redirige al guardar proveedor
         break;
+
     case '/administrador/actualizar-proveedor':
         require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';  //redirige al actualizar el proveedor
         break;
+
     case '/administrador/eliminar-proveedor':
         require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';  //elimina el proveedor
         break;
+
     case '/administrador/reporte':
         require_once BASE_PATH . '/app/controllers/reportesPdfController.php';  //elimina el proveedor
         reportesPdfControlers();
         break;
+
     case '/administrador/consultar-proveedor-id':
         require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';
         consultarProveedorOjo(); // Llama a la función que devuelve JSON
         break;
+
     case '/administrador/cambiar-estado-proveedor':
         require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';
         break;
@@ -343,6 +397,7 @@ switch ($request) {
     // ruta confirmar en formulario checkout, ojo no cambiar nada ruta DE PAGO PROTEGIDA 
     case '/checkout':
         session_start();
+
         if (!isset($_SESSION['reserva_tmp'])) {
             header('Location: ' . BASE_URL . '/descubre-tours');
             exit;
@@ -387,7 +442,9 @@ switch ($request) {
 
     // RUTAS DASHBOARD DE TURISTA
     case '/turista/dashboard':
-        require BASE_PATH . '/app/views/dashboard/turista/dashboard.php';
+        // Usamos el controlador para seguir el patrón MVC
+        require_once BASE_PATH . '/app/controllers/turista/dashboardControllerTurista.php';
+        // el propio controlador ejecuta la lógica según el método HTTP
         break;
 
     case '/turista/registrar-actividad':

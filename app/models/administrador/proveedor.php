@@ -296,7 +296,7 @@ class Proveedor
     public function activarProveedor($id)
     {
         try {
-            $activarEstado = "UPDATE proveedor SET estado= 'ACTIVO' WHERE id_proveedor = :id_proveedor";
+            $activarEstado = "UPDATE proveedor SET estado= 'ACTIVO', validado = 1 WHERE id_proveedor = :id_proveedor";
 
             $resultado = $this->conexion->prepare($activarEstado);
             $resultado->bindParam(':id_proveedor', $id);
@@ -310,7 +310,7 @@ class Proveedor
     public function desactivarProveedor($id)
     {
         try {
-            $desactivarEstado = "UPDATE proveedor SET estado= 'INACTIVO' WHERE id_proveedor = :id_proveedor";
+            $desactivarEstado = "UPDATE proveedor SET estado= 'INACTIVO', validado = 0 WHERE id_proveedor = :id_proveedor";
 
             $resultado = $this->conexion->prepare($desactivarEstado);
             $resultado->bindParam(':id_proveedor', $id);

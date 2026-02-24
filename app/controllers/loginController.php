@@ -41,6 +41,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $redirectUrl = '/aventura_go/login';
     $mensaje = 'Rol inexistente. Redirigiendo al inicio de sesión...';
 
+    // 🔥 PRIORIDAD: si existe redirección pendiente
+    if (!empty($_SESSION['redirect_after_login'])) {
+        $redirectUrl = $_SESSION['redirect_after_login'];
+        unset($_SESSION['redirect_after_login']);
+        mostrarSweetAlert('success', 'Ingreso exitoso', 'Continuando proceso...', $redirectUrl);
+        exit();
+    }
+
+
     switch ($resultado['rol']) {
         case 'administrador':
             $redirectUrl = '/aventura_go/administrador/dashboard';
@@ -55,12 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mensaje = 'Bienvenido Proveedor Hotelero.';
             break;
         case 'turista':
-            // Si viene de seleccionar una actividad, continuar flujo de reserva
-            if (isset($_SESSION['actividad_pendiente'])) {
-                $redirectUrl = '/aventura_go/turista/confirmar-reserva';
-                $mensaje = 'Continúa con tu reserva.';
-                break;
-            }
             $redirectUrl = '/aventura_go';
             $mensaje = 'Bienvenido Turista.';
             break;
