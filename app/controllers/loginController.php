@@ -40,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Redirección segun el rol 
     $redirectUrl = '/aventura_go/login';
     $mensaje = 'Rol inexistente. Redirigiendo al inicio de sesión...';
+    $bgImage = null; // imagen de fondo por defecto (ninguna)
 
     // 🔥 PRIORIDAD: si existe redirección pendiente
     if (!empty($_SESSION['redirect_after_login'])) {
@@ -54,18 +55,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'administrador':
             $redirectUrl = '/aventura_go/administrador/dashboard';
             $mensaje = 'Bienvenido Administrador.';
+            $bgImage = BASE_URL . '/public/assets/img/roles/bg_administrador.jpg';
             break;
         case 'proveedor':
             $redirectUrl = '/aventura_go/proveedor/dashboard';
             $mensaje = 'Bienvenido Proveedor Turistico.';
+            $bgImage = BASE_URL . '/public/assets/img/roles/bg_proveedor.jpg';
             break;
         case 'proveedor_hotelero':
             $redirectUrl = '/aventura_go/proveedor_hotelero/dashboard';
             $mensaje = 'Bienvenido Proveedor Hotelero.';
+            $bgImage = BASE_URL . '/public/assets/img/roles/bg_proveedor_hotelero.jpg';
             break;
         case 'turista':
             $redirectUrl = '/aventura_go';
             $mensaje = 'Bienvenido Turista.';
+            $bgImage = BASE_URL . '/public/assets/img/roles/bg_turista.jpg';
             break;
 
         default:
@@ -73,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
     }
 
-    mostrarSweetAlert('success', 'Ingreso exitoso', $mensaje, $redirectUrl);
+    mostrarSweetAlert('success', 'Ingreso exitoso', $mensaje, $redirectUrl, $bgImage);
     exit();
 } else {
     http_response_code(405);
