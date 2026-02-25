@@ -32,7 +32,7 @@ body {
 .info {
     flex-grow: 1;
     padding: 15px 40px;
-    background-color: #ffffff;
+    background-color:#b1b1b1;
 }
 
 .info #usuario #datos {
