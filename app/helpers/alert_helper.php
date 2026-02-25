@@ -7,15 +7,11 @@
  * @param string      $titulo    Título del modal
  * @param string      $mensaje   Mensaje del modal
  * @param string|null $redirect  URL de redirección al cerrar (null = history.back())
- * @param string|null $bgImage   URL de imagen de fondo según rol (null = fondo oscuro por defecto)
+ * @param string|null $bgVideo   URL del video de fondo según rol (null = fondo oscuro por defecto)
+ *                               Formatos soportados: .mp4 | .webm | .ogg
  */
-function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null, $bgImage = null)
+function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null, $bgVideo = null)
 {
-    /* ── Fondo y overlay según rol ── */
-    $backgroundStyle = $bgImage
-        ? "background-image: url('{$bgImage}'); background-size: cover; background-position: center; background-repeat: no-repeat;"
-        : "background: linear-gradient(135deg, #0f1e2d 0%, #1a2e42 50%, #0d1a26 100%);";
-
     /* ── Tokens de color según tipo de alerta ── */
     $iconColor = '#2e7d32';
     $iconBg    = 'linear-gradient(135deg, #e8f5e9, #c8e6c9)';
@@ -57,7 +53,25 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null, $bgImage 
         ? "window.location.href = " . json_encode($redirect) . ";"
         : "window.history.back();";
 
-    /* ── Salida del HTML completo ── */
+    /* ── Elemento <video> de fondo (solo si se pasa URL) ── */
+    $videoBg = '';
+    if ($bgVideo) {
+        // Detectar extensión para el type correcto
+        $ext = strtolower(pathinfo($bgVideo, PATHINFO_EXTENSION));
+        $mimeTypes = [
+            'mp4'  => 'video/mp4',
+            'webm' => 'video/webm',
+            'ogg'  => 'video/ogg',
+        ];
+        $mime = $mimeTypes[$ext] ?? 'video/mp4';
+
+        $videoBg = '
+        <video class="bg-video" autoplay muted loop playsinline>
+            <source src="' . htmlspecialchars($bgVideo) . '" type="' . $mime . '">
+        </video>
+        <div class="bg-video-overlay"></div>';
+    }
+
     ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -88,21 +102,46 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null, $bgImage 
             overflow: hidden;
             font-family: 'Lato', sans-serif;
             position: relative;
-            <?= $backgroundStyle ?>
+            <?php if (!$bgVideo): ?>
+            background: linear-gradient(135deg, #0f1e2d 0%, #1a2e42 50%, #0d1a26 100%);
+            <?php endif; ?>
         }
 
+        /* Fondo oscuro cuando NO hay video */
+        <?php if (!$bgVideo): ?>
         body::before {
             content: '';
             position: fixed;
             inset: 0;
+            background: radial-gradient(ellipse at 20% 50%, rgba(45,64,89,0.9) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(234,130,23,0.25) 0%, transparent 50%), radial-gradient(ellipse at 60% 80%, rgba(45,64,89,0.7) 0%, transparent 55%);
             z-index: 0;
+        }
+        <?php endif; ?>
+
+        /* ── VIDEO DE FONDO ── */
+        .bg-video {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;       /* cubre toda la pantalla sin deformar */
+            object-position: center;
+            z-index: 0;
+        }
+
+        /* Overlay oscuro sobre el video para que la tarjeta resalte */
+        .bg-video-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 20, 35, 0.55);
+            z-index: 1;
         }
 
         /* ── LÍNEAS DE LUZ ── */
         .light-lines {
             position: fixed;
             inset: 0;
-            z-index: 1;
+            z-index: 2;
             pointer-events: none;
             overflow: hidden;
         }
@@ -189,7 +228,6 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null, $bgImage 
             animation: iconPop 0.65s 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
         }
 
-        /* Anillo pulsante exterior */
         .av-icon-wrap::after {
             content: '';
             position: absolute;
@@ -211,7 +249,6 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null, $bgImage 
             100% { transform: scale(1.65); opacity: 0;   }
         }
 
-        /* SVG trazo animado */
         .av-icon-svg {
             width: 44px;
             height: 44px;
@@ -337,6 +374,7 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null, $bgImage 
 </head>
 
 <body>
+    <?= $videoBg ?>
     <div class="light-lines"></div>
 
     <script>
