@@ -49,7 +49,7 @@ if (!$actividad) {
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
     <!-- CSS personalizado -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/website_externos/tour_escogido/tour_escogido.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/website_externos/hospedaje_escogido/hospedaje_escogido.css">
 </head>
 
 <body>
