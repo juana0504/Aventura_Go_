@@ -5,7 +5,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 require_once BASE_PATH . '/app/controllers/administrador/hotelero.php';
 
 // le asignamos el valor id del registro segun la tabla 
-$id = $_GET['id'];
+$id = $_GET['id_usuario'];
 // llamamos la funcion expecifica del controlador y le pasamos los datos a una variable que podamos manipular en este archivo 
 $hotelero = listarHotelId($id);
 
