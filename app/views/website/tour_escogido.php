@@ -49,7 +49,7 @@ if (!$actividad) {
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
     <!-- CSS personalizado -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/website_externos/hospedaje_escogido/hospedaje_escogido.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/website_externos/tour_escogido/tour_escogido.css">
 </head>
 
 <body>
@@ -209,7 +209,7 @@ if (!$actividad) {
 
                             <div class="form-group">
                                 <label>Fecha de la actividad</label>
-                                <input type="date" name="fecha" class="form-control" required>
+                                <input type="date" name="fecha" class="form-control" min="<?= date('Y-m-d') ?>"  required>
                             </div>
 
                             <button type="submit">
@@ -224,7 +224,7 @@ if (!$actividad) {
     </main>
 
     <!-- F O O T E R_____________________________________________________________________________________________________________________________ -->
-    <footer id="footer" class="container-fluid">
+    <footer id="footer">
 
         <!-- footer superior -->
         <div class="footer-top">
