@@ -22,6 +22,13 @@ $reserva = $_SESSION['reserva_tmp'];
     <link rel="icon" type="image/png" href="../public/assets/website_externos/descubre_tours/img/FAVICON.png">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../public/assets/website_externos/descubre_tours/css/payU.css">
+
+    <!-- PRUEBA TEMPORAL -->
+    <style>
+        body { background-color: red !important; }
+        .btn-success { background: purple !important; }
+    </style>
 </head>
 
 <body class="bg-light">
@@ -35,10 +42,13 @@ $reserva = $_SESSION['reserva_tmp'];
 
                         <h4 class="fw-bold mb-3">Estás a punto de pagar con PayU</h4>
 
-                        <p class="mb-1"><strong>Referencia:</strong> <?= $pago['reference'] ?></p>
-                        <p class="mb-1"><strong>Total:</strong>
-                            $<?= number_format($pago['total'], 0, ',', '.') ?> COP
-                        </p>
+                        <!-- Bloque de datos de pago -->
+                        <div class="payment-info">
+                            <p class="mb-1"><strong>Referencia:</strong> <?= $pago['reference'] ?></p>
+                            <p class="mb-1"><strong>Total:</strong>
+                                $<?= number_format($pago['total'], 0, ',', '.') ?> COP
+                            </p>
+                        </div>
 
                         <p class="text-muted mt-3">
                             Serás redirigido a PayU para completar tu pago de forma segura.
