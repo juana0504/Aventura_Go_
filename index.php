@@ -55,8 +55,6 @@ switch ($request) {
         break;
 
 
-
-
     case '/registrar-proveedor-hotelero':
         require BASE_PATH . '/app/views/auth/registrar_proveedor_hotelero.php'; //redirige a el registro de proveedor hotelero ALB 18/02/2026
         break;
