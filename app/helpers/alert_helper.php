@@ -56,7 +56,6 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null, $bgVideo 
     /* ── Elemento <video> de fondo (solo si se pasa URL) ── */
     $videoBg = '';
     if ($bgVideo) {
-        // Detectar extensión para el type correcto
         $ext = strtolower(pathinfo($bgVideo, PATHINFO_EXTENSION));
         $mimeTypes = [
             'mp4'  => 'video/mp4',
@@ -66,10 +65,11 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null, $bgVideo 
         $mime = $mimeTypes[$ext] ?? 'video/mp4';
 
         $videoBg = '
-        <video class="bg-video" autoplay muted loop playsinline>
-            <source src="' . htmlspecialchars($bgVideo) . '" type="' . $mime . '">
-        </video>
-        <div class="bg-video-overlay"></div>';
+            <video class="bg-video" autoplay muted loop playsinline webkit-playsinline>
+                <source src="' . htmlspecialchars($bgVideo) . '" type="' . $mime . '">
+                Tu navegador no soporta videos.
+            </video>
+            <div class="bg-video-overlay"></div>';
     }
 
     ?>
@@ -102,18 +102,20 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null, $bgVideo 
             overflow: hidden;
             font-family: 'Lato', sans-serif;
             position: relative;
-            <?php if (!$bgVideo): ?>
+            /* Fondo oscuro de respaldo: visible cuando no hay video o mientras carga */
             background: linear-gradient(135deg, #0f1e2d 0%, #1a2e42 50%, #0d1a26 100%);
-            <?php endif; ?>
         }
 
-        /* Fondo oscuro cuando NO hay video */
         <?php if (!$bgVideo): ?>
+        /* Radial overlays decorativos cuando NO hay video */
         body::before {
             content: '';
             position: fixed;
             inset: 0;
-            background: radial-gradient(ellipse at 20% 50%, rgba(45,64,89,0.9) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(234,130,23,0.25) 0%, transparent 50%), radial-gradient(ellipse at 60% 80%, rgba(45,64,89,0.7) 0%, transparent 55%);
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(45,64,89,0.9)  0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(234,130,23,0.25) 0%, transparent 50%),
+                radial-gradient(ellipse at 60% 80%, rgba(45,64,89,0.7)  0%, transparent 55%);
             z-index: 0;
         }
         <?php endif; ?>
@@ -122,18 +124,19 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null, $bgVideo 
         .bg-video {
             position: fixed;
             inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;       /* cubre toda la pantalla sin deformar */
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
             object-position: center;
             z-index: 0;
+            filter: brightness(0.6);
         }
 
-        /* Overlay oscuro sobre el video para que la tarjeta resalte */
+        /* Overlay semitransparente sobre el video */
         .bg-video-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(10, 20, 35, 0.55);
+            background: rgba(10, 20, 35, 0.45);
             z-index: 1;
         }
 
@@ -169,8 +172,7 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null, $bgVideo 
         /* ══════════════════════════════════════════
            SWEETALERT2 — TARJETA
            ══════════════════════════════════════════ */
-        .swal2-container { z-index: 100 !important; }
-
+        .swal2-container   { z-index: 100 !important; }
         .swal2-backdrop-show { background: rgba(0,0,0,0) !important; }
 
         /* Popup */
@@ -183,7 +185,9 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null, $bgVideo 
                 0 0 0 1px rgba(255,255,255,0.1) !important;
             padding: 0 !important;
             border: none !important;
-            background: rgba(255,255,255,0.97) !important;
+            background: rgba(255,255,255,0.95) !important;
+            backdrop-filter: blur(14px) !important;
+            -webkit-backdrop-filter: blur(14px) !important;
             position: relative;
             z-index: 10;
             animation: cardEntrance 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
@@ -385,7 +389,7 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null, $bgVideo 
             showCancelButton:  false,
             timer: 6000,
             timerProgressBar: true,
-            background: 'rgba(255,255,255,0.97)',
+            background: 'transparent',
             color: '#2D4059',
             allowOutsideClick: false,
             allowEscapeKey:    false,
