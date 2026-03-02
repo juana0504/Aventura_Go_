@@ -209,7 +209,7 @@ if (!$actividad) {
 
                             <div class="form-group">
                                 <label>Fecha de la actividad</label>
-                                <input type="date" name="fecha" class="form-control" required>
+                                <input type="date" name="fecha" class="form-control" min="<?= date('Y-m-d') ?>"  required>
                             </div>
 
                             <button type="submit">
@@ -224,7 +224,7 @@ if (!$actividad) {
     </main>
 
     <!-- F O O T E R_____________________________________________________________________________________________________________________________ -->
-    <footer id="footer" class="container-fluid">
+    <footer id="footer">
 
         <!-- footer superior -->
         <div class="footer-top">

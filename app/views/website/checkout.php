@@ -6,19 +6,17 @@ if (!isset($_SESSION['reference_code'])) {
 }
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aventura Go - formulario de reserva</title>
+    <title>Aventura Go - Confirma tu reserva</title>
 
     <link rel="icon" type="image/png" href="public/assets/website_externos/descubre_tours/img/FAVICON.png">
 
-    <!-- bootstrap primero -->
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Bootstrap Icons -->
@@ -27,23 +25,24 @@ if (!isset($_SESSION['reference_code'])) {
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+    <!-- Checkout CSS -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/website_externos/checkout/checkout.css">
-
 </head>
 
 <body>
-    <!-- header________________________________________________________________________________________________________________________________ -->
+
+    <!-- HEADER -->
     <header>
         <nav class="navbar">
             <div class="container-fluid">
                 <div class="logo">
-                    <img src="public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png" alt="Logo Aventura Go" class="navbar-logo">
+                    <img src="public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png"
+                        alt="Logo Aventura Go" class="navbar-logo">
                 </div>
 
-                <h1 class="page-title">Confirma Tu reserva</h1>
+                <h1 class="page-title">Confirma tu reserva</h1>
 
-                <!-- <div class="actions">
-
+                <div class="actions">
                     <?php if (isset($_SESSION['user'])): ?>
                         <div class="profile-dropdown">
                             <button class="profile-btn" id="profileToggle">
@@ -52,62 +51,42 @@ if (!isset($_SESSION['reference_code'])) {
                                     <?= htmlspecialchars(
                                         ucwords(
                                             explode(' ', $_SESSION['user']['nombre'])[0] . ' ' .
-                                                (explode(' ', $_SESSION['user']['nombre'])[1] ?? '')
+                                            (explode(' ', $_SESSION['user']['nombre'])[1] ?? '')
                                         )
                                     ) ?>
                                 </span>
                                 <i class="fas fa-chevron-down"></i>
                             </button>
-
                             <ul class="profile-menu" id="profileMenu">
-                                <li>
-                                    <a href="/aventura_go/turista/perfil">Mi perfil</a>
-                                </li>
-                                <li>
-                                    <a href="/aventura_go/turista/dashboard">Centro de ayuda</a>
-                                </li>
+                                <li><a href="/aventura_go/turista/perfil">Mi perfil</a></li>
+                                <li><a href="/aventura_go/turista/dashboard">Centro de ayuda</a></li>
                                 <li class="divider"></li>
-                                <li>
-                                    <a href="/aventura_go/logout" class="logout">Cerrar sesión</a>
-                                </li>
+                                <li><a href="/aventura_go/logout" class="logout">Cerrar sesión</a></li>
                             </ul>
                         </div>
                     <?php else: ?>
-
-                        <a href="/aventura_go/login" class="btn-login">
-                            Ingresa
-                        </a>
-
-                        <a href="/aventura_go/registrarse" class="btn-register">
-                            Regístrate
-                        </a>
-
+                        <a href="/aventura_go/login" class="btn-login">Ingresa</a>
+                        <a href="/aventura_go/registrarse" class="btn-register">Regístrate</a>
                     <?php endif; ?>
-
-                    <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
-                        <i class="fas fa-bars"></i>
-                    </div>
-
-                </div> -->
+                </div>
             </div>
         </nav>
     </header>
 
     <main>
-
         <section id="formulario_confirmacion">
             <div class="container my-5">
                 <div class="row g-4">
 
-                    <!-- ================== RESUMEN RESERVA ================== -->
+                    <!-- ── RESUMEN DE RESERVA ── -->
                     <div class="col-md-7">
                         <div class="card shadow-sm">
-                            <div class="card-header bg-white">
+                            <div class="card-header">
                                 <h1 class="mb-0">Resumen de tu reserva</h1>
                             </div>
 
                             <div class="card-body">
-                                <div class="row g-3">
+                                <div class="row g-3 align-items-start">
                                     <div class="col-md-4">
                                         <img src="<?= BASE_URL ?>/public/uploads/actividades/<?= $reserva['imagen'] ?>"
                                             class="img-fluid rounded"
@@ -115,11 +94,16 @@ if (!isset($_SESSION['reference_code'])) {
                                     </div>
 
                                     <div class="col-md-8">
-                                        <h5 class="fw-bold">Nombre de la actividad que reservaste</h5>
-                                        <h6 class="fw-bold"><?= htmlspecialchars($reserva['nombre']) ?></h6>
-                                        <p class="mb-1"><strong>Fecha:</strong> <?= $reserva['fecha'] ?></p>
-                                        <p class="mb-1"><strong>Personas:</strong> <?= $reserva['cantidad'] ?></p>
-
+                                        <h5>Actividad seleccionada</h5>
+                                        <h6><?= htmlspecialchars($reserva['nombre']) ?></h6>
+                                        <p>
+                                            <i class="bi bi-calendar3" style="color:#EA8217"></i>
+                                            <strong>Fecha:</strong> <?= $reserva['fecha'] ?>
+                                        </p>
+                                        <p>
+                                            <i class="bi bi-people-fill" style="color:#EA8217"></i>
+                                            <strong>Personas:</strong> <?= $reserva['cantidad'] ?>
+                                        </p>
                                     </div>
                                 </div>
 
@@ -127,12 +111,12 @@ if (!isset($_SESSION['reference_code'])) {
 
                                 <div class="d-flex justify-content-between align-items-center">
                                     <p class="mb-1">
-                                        <strong>Precio por persona:</strong>
+                                        <strong>Precio por persona</strong>
                                         $<?= number_format($reserva['precio'], 0, ',', '.') ?>
                                     </p>
-                                    <p class="mb-1">
-                                        <strong>Total a pagar: </strong>
-                                        <span class="fs-4 fw-bold text-success">
+                                    <p class="mb-1 text-end">
+                                        <strong>Total a pagar</strong>
+                                        <span class="fs-4 fw-bold text-success d-block">
                                             $<?= number_format($reserva['total'], 0, ',', '.') ?>
                                         </span>
                                     </p>
@@ -141,45 +125,49 @@ if (!isset($_SESSION['reference_code'])) {
                         </div>
                     </div>
 
-                    <!-- ================== CHECKOUT / PAGO ================== -->
+                    <!-- ── CHECKOUT / PAGO ── -->
                     <div class="col-md-5">
                         <div class="card shadow-sm">
-                            <div class="card-header bg-white">
+                            <div class="card-header">
                                 <h5 class="mb-0">Datos y método de pago</h5>
                             </div>
 
                             <div class="card-body">
-
                                 <form action="<?= BASE_URL ?>/pago" method="POST">
 
                                     <h6 class="fw-bold mb-3">Datos del turista</h6>
 
                                     <div class="mb-3">
                                         <label class="form-label">Nombre completo</label>
-                                        <input type="text" class="form-control" name="nombre" placeholder="Ej: Juan Pérez">
+                                        <input type="text" class="form-control" name="nombre"
+                                            placeholder="Ej: Juan Pérez">
                                     </div>
 
                                     <div class="mb-3">
                                         <label class="form-label">Correo electrónico</label>
-                                        <input type="email" class="form-control" name="email" placeholder="correo@email.com">
+                                        <input type="email" class="form-control" name="email"
+                                            placeholder="correo@email.com">
                                     </div>
 
                                     <div class="mb-4">
                                         <label class="form-label">Teléfono</label>
-                                        <input type="text" class="form-control" name="telefono" placeholder="3001234567">
+                                        <input type="text" class="form-control" name="telefono"
+                                            placeholder="3001234567">
                                     </div>
 
                                     <h6 class="fw-bold mb-3">Método de pago</h6>
 
-                                    <div class="form-check border rounded p-3 mb-2">
-                                        <input class="form-check-input" type="radio" name="metodo_pago" value="payu" checked>
-                                        <label class="form-check-label fw-bold">PayU</label>
+                                    <div class="form-check border rounded p-3 mb-2" data-badge="PSE · Nequi">
+                                        <input class="form-check-input" type="radio"
+                                            name="metodo_pago" value="payu" id="payu" checked>
+                                        <label class="form-check-label" for="payu">PayU</label>
                                         <small class="d-block text-muted">Tarjeta, PSE, Nequi, Daviplata</small>
                                     </div>
 
-                                    <div class="form-check border rounded p-3 mb-4">
-                                        <input class="form-check-input" type="radio" name="metodo_pago" value="mercadopago">
-                                        <label class="form-check-label fw-bold">MercadoPago</label>
+                                    <div class="form-check border rounded p-3 mb-4" data-badge="Wallet">
+                                        <input class="form-check-input" type="radio"
+                                            name="metodo_pago" value="mercadopago" id="mp">
+                                        <label class="form-check-label" for="mp">MercadoPago</label>
                                         <small class="d-block text-muted">Tarjeta, PSE, Wallet MercadoPago</small>
                                     </div>
 
@@ -190,28 +178,31 @@ if (!isset($_SESSION['reference_code'])) {
                                     <input type="hidden" name="descripcion" value="Reserva tour Aventura Go">
 
                                     <button type="submit" class="btn btn-primary w-100 py-2">
+                                        <i class="bi bi-lock-fill me-2"></i>
                                         Confirmar y pagar
                                     </button>
 
+                                    <!-- Badge de seguridad -->
+                                    <div class="secure-badge">
+                                        <i class="bi bi-shield-check-fill"></i>
+                                        Pago 100% seguro y encriptado
+                                    </div>
+
                                 </form>
-
                             </div>
-
                         </div>
                     </div>
 
                 </div>
             </div>
-
         </section>
-
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
         const profileToggle = document.getElementById('profileToggle');
-        const profileMenu = document.getElementById('profileMenu');
+        const profileMenu   = document.getElementById('profileMenu');
 
         if (profileToggle && profileMenu) {
             profileToggle.addEventListener('click', function(e) {
@@ -227,5 +218,4 @@ if (!isset($_SESSION['reference_code'])) {
     </script>
 
 </body>
-
 </html>

@@ -43,8 +43,32 @@ class DashboardAdminController
     public function data()
     {
         header('Content-Type: application/json');
+        $tipo = $_GET['tipo'] ?? 'dias'; // 'anio', 'mes' o por defecto últimos días
+        $graficoReservas = [];
+        switch ($tipo) {
+            case 'anio':
+                if (isset($_GET['anio']) && is_numeric($_GET['anio'])) {
+                    $graficoReservas = $this->model->getReservasPorAnios((int)$_GET['anio']);
+                } else {
+                    $graficoReservas = $this->model->getReservasPorAnios();
+                }
+                break;
+            case 'mes':
+                // si hay año, filtrar por ese año; si no, mostrar meses globales
+                if (isset($_GET['anio']) && is_numeric($_GET['anio'])) {
+                    $anio = (int) $_GET['anio'];
+                    $graficoReservas = $this->model->getReservasPorMes($anio);
+                } else {
+                    $graficoReservas = $this->model->getReservasPorMesGlobal();
+                }
+                break;
+            default:
+                // modo por defecto: últimos 7 días
+                $graficoReservas = $this->model->getReservasPorDia(7);
+                break;
+        }
         $respuesta = [
-            'graficoReservas' => $this->model->getReservasPorDia(7),
+            'graficoReservas' => $graficoReservas,
             'gastosChartData' => $this->model->getGastosPorCategoria()
         ];
         echo json_encode($respuesta);
