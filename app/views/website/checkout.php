@@ -27,6 +27,8 @@ if (!isset($_SESSION['reference_code'])) {
 
     <!-- Checkout CSS -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/website_externos/checkout/checkout.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/website_externos/formulario_reserva/formulario_reserva.css">
+
 </head>
 
 <body>
