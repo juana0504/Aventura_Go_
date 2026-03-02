@@ -387,7 +387,7 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null, $bgVideo 
             html:  <?= json_encode($htmlModal, JSON_UNESCAPED_UNICODE) ?>,
             showConfirmButton: false,
             showCancelButton:  false,
-            timer: 6000,
+            timer: 3000,
             timerProgressBar: true,
             background: 'transparent',
             color: '#2D4059',
