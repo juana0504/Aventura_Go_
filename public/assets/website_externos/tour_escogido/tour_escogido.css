@@ -701,14 +701,12 @@ header {
 }
 
 /* Estilos del formulario de reserva */
-
 .form-reserva {
     background: #ffffff;
     padding: 20px;
     border-radius: 14px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    position: sticky;
-    /* Cambiado de fixed a sticky */
+    position: sticky; /* Cambiado de fixed a sticky */
     top: 100px;
     display: flex;
     flex-direction: column;
@@ -716,8 +714,16 @@ header {
     width: 100%;
     min-height: 300px;
     max-width: 400px;
-    z-index: 10;
-    /* Aumentado para que esté sobre el contenido */
+    z-index: 10; /* Aumentado para que esté sobre el contenido */
+}
+
+/* Agregado: responsividad */
+@media (max-width: 768px) {
+    .form-reserva {
+        position: static; /* Quita el fixed en móviles */
+        width: 100%;
+        margin-top: 20px;
+    }
 }
 
 .form-reserva .form-group {
