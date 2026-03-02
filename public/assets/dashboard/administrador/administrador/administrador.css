@@ -191,6 +191,22 @@ body {
 
 
 
+/* estilos para contenedor de tabla con scroll */
+.tabla-scroll {
+    max-height: 300px; /* ajustable según preferencia */
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+/* estilos para el formulario de filtros */
+#filtros-reservas .form-select {
+    min-width: 100px;
+}
+#filtros-reservas .col-auto {
+    display: flex;
+    align-items: center;
+}
+
 /* ========== RESPONSIVE ========== */
 @media (max-width: 1200px) {
     .formulario {
