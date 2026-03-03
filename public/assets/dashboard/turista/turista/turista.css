@@ -11,24 +11,22 @@ h1, h2, h3, h4, h5, h6 {
    VARIABLES
 ================================ */
 :root {
-    --primary: #FFD700; /* Dorado para detalles premium */
-    --secondary: #3498db; /* Color secundario */
-    --bg-dark: #2C2F38; /* Fondo oscuro premium */
-    --bg-light: #f5f5f5; /* Fondo claro */
-    --text-muted: #000000; /* Texto apagado */
-    --badge-success: #198754; /* Color de badge de éxito */
-    --badge-warning: #f39c12; /* Color de badge de advertencia */
-    --badge-danger: #e74c3c; /* Color de badge de error */
-    --radius: 12px; /* Radio de bordes */
-    --transition-duration: 0.4s; /* Duración de las transiciones */
+    --primary: #EA8217;
+    --secondary: #3498db;
+    --azul-oscuro: #2D4059;
+    --bg-light: #f5f5f5;
+    --text-muted: #6c757d;
+    --badge-success: #198754;
+    --badge-warning: #ffc107;
+    --radius: 10px;
 }
 
 /* ===============================
    LAYOUT GENERAL
 ================================ */
 body {
-    color: #000000; /* Color de texto claro */
-    background-color: var(--bg-dark);
+    color: #333;
+    background-color: var(--bg-light);
     font-family: 'Lato', sans-serif;
     margin: 0;
     padding: 0;
@@ -45,61 +43,55 @@ body {
    ENCABEZADO
 ================================ */
 section h3 {
-    color: var(--text-muted);
-    font-size: 2.2rem;
-    font-weight: 700;
+    color: var(--primary);
+    font-size: 2rem;
 }
 
 section p {
-    font-size: 1.1rem;
-    color: var(--text-muted);
+    font-size: 1rem;
 }
 
 /* ===============================
    TARJETAS RESUMEN
 ================================ */
 .card {
-    border: none;
+    border: 1px solid rgba(234, 130, 23, 0.3);
     border-radius: var(--radius);
-    background: #ffffff;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Sombras para dar profundidad */
-    transition: transform var(--transition-duration), box-shadow var(--transition-duration);
-    overflow: hidden;
-    height: 400px; /* Ajustar la altura de las tarjetas */
+    background: linear-gradient(225deg, rgba(255, 255, 255, 1) 0%, rgba(234, 130, 23, 0.08) 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-10px); /* Efecto de elevación */
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-}
-
-.card-body {
-    padding: 15px;
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    background-color: var(--azul-oscuro);
+    color: #FFFFFF;
 }
 
 .card i {
-    font-size: 40px;
-    color: var(--text-muted);
-    transition: color var(--transition-duration), transform var(--transition-duration);
+    font-size: 35px;
+    color: var(--primary);
+    transition: color 0.3s ease;
 }
 
 .card:hover i {
-    color: #ffffff;
-    transform: scale(1.3); /* Agrandar ícono al hacer hover */
+    color: #FFFFFF !important;
 }
 
 .card h3 {
     font-weight: 700;
-    font-size: 1.6rem;
-    color: #000000;
+    transition: color 0.3s ease;
+}
+
+.card:hover h3 {
+    color: #FFFFFF;
 }
 
 .card .badge {
     font-size: 1rem;
     padding: 8px 14px;
     border-radius: 25px;
-    background-color: var(--text-muted);
-    color: #000000;
 }
 
 /* ===============================
@@ -143,34 +135,47 @@ section h5 {
 }
 
 /* ===============================
-   TABLA DE ACTIVIDADES
+   TABLA DE RESERVAS
 ================================ */
+.resumen-turista table {
+    width: 100%;
+}
+
 table {
-    background: #444;
+    background: white;
     border-radius: var(--radius);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     width: 100%;
 }
 
 table thead th {
-    color: var(--primary);
+    color: var(--text-muted);
     font-weight: 600;
-    background-color: #333;
+    background-color: #f7f7f7;
     padding: 12px 15px;
 }
 
 table tbody tr {
-    border-bottom: 1px solid #666;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 table tbody tr:hover {
-    background-color: #555;
+    background-color: #f1f4f9;
     cursor: pointer;
 }
 
 table td .badge {
     padding: 5px 12px;
     font-size: 0.85rem;
+}
+
+.badge.bg-success {
+    background-color: var(--badge-success) !important;
+}
+
+.badge.bg-warning {
+    background-color: var(--badge-warning) !important;
+    color: #000;
 }
 
 
