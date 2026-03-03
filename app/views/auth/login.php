@@ -19,7 +19,7 @@
     <div class="login-container">
         <div class="login-box">
 
-            <!-- 🧩 Sección del formulario -->
+            <!-- Sección del formulario -->
             <div class="form-section">
                 <img src="public/assets/extras/login/img/REDES-LOGO 2.png" alt="Aventura GO" class="logo mb-3">
 
@@ -27,27 +27,30 @@
                 <p>Por favor ingresa tu usuario y contraseña para iniciar sesión</p>
 
                 <form action="iniciar-sesion" method="POST">
-                    <input type="email" name="email" class="form-control mb-3 rounded-pill" placeholder="Correo" required>
 
-                    <div class="password-container position-relative mb-3">
-                        <input type="password" name="contrasena" class="form-control rounded-pill" id="password" placeholder="Contraseña" required>
-                        <i class="bi bi-eye-fill position-absolute top-50 end-0 translate-middle-y me-3 text-secondary" id="togglePassword" style="cursor: pointer;"></i>
+                    <input type="email" name="email" placeholder="Correo" required>
+
+                    <div class="password-container">
+                        <input type="password" name="contrasena" id="password" placeholder="Contraseña" required>
+                        <i class="bi bi-eye-fill" id="togglePassword"></i>
                     </div>
 
                     <p class="forgot-password">
                         <a href="recoverpw">¿Olvidaste tu contraseña?</a>
                     </p>
 
-                    <button type="submit" class="btn w-100 rounded-pill fw-bold text-white"
-                        style="background-color: #EA8217;">INGRESAR</button>
+                    <button type="submit">INGRESAR</button>
+
                 </form>
 
                 <div class="extra-links mt-4">
-                    <p>¿Aún no tienes cuenta? <a href="#"> Regístrate </a></p>
+                    <p>¿Aún no tienes cuenta? <a href="#" class="btn-register" data-bs-toggle="modal" data-bs-target="#registroModal">
+                            Regístrate
+                        </a></p>
                 </div>
             </div>
 
-            <!-- 🖼️ Sección de la imagen -->
+            <!-- Sección de la imagen -->
             <div class="image-section">
                 <img src="public/assets/extras/login/img/Rectangle 179.png" alt="Aventura en el río">
             </div>
@@ -57,6 +60,74 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="public/assets/extras/login/login.js"></script>
+
+    <!-- MODAL REGISTRO -->
+    <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registroModalLabel">¿Cómo quieres registrarte?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="container py-3">
+
+                        <div class="row g-4 justify-content-center">
+
+                            <!-- TURISTA -->
+                            <div class="col-md-4">
+                                <div class="card card-registro text-center p-4">
+                                    <!-- <div class="icono-registro">🎒</div> -->
+                                    <div class="card-body">
+                                        <h3 class="card-title">Turista</h3>
+                                        <p class="card-text">Quiero reservar actividades y experiencias.</p>
+                                        <a href="/aventura_go/registrarse?tipo=turista" class="btn btn-aventura">
+                                            Elegir
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PROVEEDOR TURÍSTICO -->
+                            <div class="col-md-4">
+                                <div class="card card-registro text-center p-4">
+                                    <!-- <div class="icono-registro">⛰️</div> -->
+                                    <div class="card-body">
+                                        <h3 class="card-title">Proveedor turístico</h3>
+                                        <p class="card-text">Quiero publicar actividades de aventura.</p>
+                                        <a href="/aventura_go/registrar-proveedor" class="btn btn-aventura">
+                                            Elegir
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PROVEEDOR HOTELERO -->
+                            <div class="col-md-4">
+                                <div class="card card-registro text-center p-4">
+                                    <!-- <div class="icono-registro">🏨</div> -->
+                                    <div class="card-body">
+                                        <h3 class="card-title">Proveedor hotelero</h3>
+                                        <p class="card-text">Quiero publicar hospedajes.</p>
+                                        <a href="/aventura_go/registrar-proveedor-hotelero" class="btn btn-aventura">
+                                            Elegir
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- FIN MODAL REGISTRO -->
 </body>
 
 </html>
