@@ -1,0 +1,681 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&family=Lato:wght@300;400;700&family=Space+Mono:wght@400;700&display=swap');
+
+/* ─────────────────────────────────────────────
+   payu_demo.css | Aventura Go — PayU Demo
+   Variables idénticas a la web principal
+───────────────────────────────────────────── */
+
+:root {
+    --primary:       #2D4059;
+    --secondary:     #EA8217;
+    --sec-light:     #f49535;
+    --white:         #FFFFFF;
+    --bg:            #F8F9FA;
+    --muted:         #6b7280;
+    --border:        #e2e8f0;
+    --success:       #16a34a;
+    --font-title:    'Raleway', sans-serif;
+    --font-body:     'Lato', sans-serif;
+    --font-mono:     'Space Mono', monospace;
+    --radius-card:   24px;
+    --radius-input:  12px;
+    --transition:    all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ════════════════════════════════════
+   BODY — fondo oscuro consistente
+════════════════════════════════════ */
+body {
+    font-family: var(--font-body);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    position: relative;
+    background: linear-gradient(135deg, #0f1e2d 0%, #1a2e42 60%, #0d1a26 100%);
+}
+
+/* Patrón de puntos */
+body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none; z-index: 0;
+}
+
+/* ════════════════════════════════════
+   ORBS DECORATIVOS
+════════════════════════════════════ */
+.pd-orb {
+    position: fixed; border-radius: 50%;
+    filter: blur(90px);
+    pointer-events: none; z-index: 0;
+}
+
+.pd-orb--1 {
+    width: 520px; height: 520px;
+    top: -160px; left: -130px;
+    background: radial-gradient(circle, rgba(45,64,89,0.6) 0%, transparent 70%);
+    animation: pdOrbFloat 14s ease-in-out infinite alternate;
+}
+
+.pd-orb--2 {
+    width: 440px; height: 440px;
+    bottom: -120px; right: -110px;
+    background: radial-gradient(circle, rgba(234,130,23,0.22) 0%, transparent 70%);
+    animation: pdOrbFloat 18s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes pdOrbFloat {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(25px, 18px) scale(1.07); }
+}
+
+/* Líneas de luz */
+.pd-lines {
+    position: fixed; inset: 0;
+    z-index: 0; pointer-events: none; overflow: hidden;
+}
+
+.pd-lines::before,
+.pd-lines::after {
+    content: '';
+    position: absolute; width: 130%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(234,130,23,0.22), transparent);
+    animation: pdScan 9s ease-in-out infinite;
+}
+
+.pd-lines::before { top: 28%; left: -15%; animation-delay: 0s; }
+.pd-lines::after  { top: 68%; left: -15%; animation-delay: 4.5s; }
+
+@keyframes pdScan {
+    0%   { transform: translateX(-100%) skewX(-12deg); opacity: 0; }
+    30%  { opacity: 1; }
+    70%  { opacity: 1; }
+    100% { transform: translateX(110%) skewX(-12deg); opacity: 0; }
+}
+
+/* ════════════════════════════════════
+   WRAPPER
+════════════════════════════════════ */
+.pd-wrapper {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 560px;
+    padding: 24px 16px;
+}
+
+/* ════════════════════════════════════
+   TARJETA PRINCIPAL
+════════════════════════════════════ */
+.pd-card {
+    background: rgba(255,255,255,0.97);
+    border-radius: var(--radius-card);
+    box-shadow:
+        0 32px 80px rgba(0,0,0,0.45),
+        0 0 0 1px rgba(255,255,255,0.08);
+    overflow: hidden;
+    animation: pdCardIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes pdCardIn {
+    from { opacity: 0; transform: translateY(36px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Franja top animada */
+.pd-card::before {
+    content: ''; display: block; height: 5px;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--primary) 100%);
+    background-size: 200% auto;
+    animation: pdStripe 3s linear infinite;
+}
+
+@keyframes pdStripe {
+    0%   { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+.pd-body { padding: 36px 40px 40px; }
+
+/* ════════════════════════════════════
+   INDICADOR DE PASOS
+════════════════════════════════════ */
+.pd-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 28px;
+    animation: pdFadeUp 0.5s 0.2s ease both;
+}
+
+.pd-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.pd-step__circle {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--border);
+    color: var(--muted);
+    font-family: var(--font-title);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    transition: var(--transition);
+}
+
+.pd-step span {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+/* Paso completado */
+.pd-step--done .pd-step__circle {
+    background: var(--success);
+    color: var(--white);
+    box-shadow: 0 4px 12px rgba(22,163,74,0.3);
+}
+.pd-step--done span { color: var(--success); }
+
+/* Paso activo */
+.pd-step--active .pd-step__circle {
+    background: var(--secondary);
+    color: var(--white);
+    box-shadow: 0 4px 16px rgba(234,130,23,0.4);
+    animation: pdPulseStep 2s ease-in-out infinite;
+}
+.pd-step--active span { color: var(--secondary); font-weight: 700; }
+
+@keyframes pdPulseStep {
+    0%, 100% { box-shadow: 0 4px 16px rgba(234,130,23,0.4); }
+    50%       { box-shadow: 0 4px 24px rgba(234,130,23,0.65); }
+}
+
+/* Líneas entre pasos */
+.pd-step__line {
+    width: 40px; height: 2px;
+    background: var(--border);
+    margin: 0 4px;
+    margin-bottom: 16px;
+    border-radius: 99px;
+    transition: var(--transition);
+}
+
+.pd-step__line--done {
+    background: linear-gradient(90deg, var(--success), var(--success));
+}
+
+/* ════════════════════════════════════
+   CABECERA
+════════════════════════════════════ */
+.pd-header {
+    text-align: center;
+    margin-bottom: 24px;
+    animation: pdFadeUp 0.5s 0.3s ease both;
+}
+
+.pd-header__title {
+    font-family: var(--font-title);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: 0.2px;
+}
+
+.pd-header__title::after {
+    content: '';
+    display: block; width: 44px; height: 3px;
+    background: linear-gradient(90deg, var(--secondary), var(--sec-light));
+    border-radius: 99px;
+    margin: 10px auto 0;
+}
+
+.pd-header__sub {
+    font-size: 13px; color: var(--muted);
+    margin-top: 8px;
+}
+
+.pd-header__sub strong { color: var(--secondary); }
+
+/* ════════════════════════════════════
+   TARJETA VISUAL ANIMADA
+════════════════════════════════════ */
+.pd-scene {
+    perspective: 1200px;
+    width: 100%; max-width: 340px;
+    margin: 0 auto 28px;
+    height: 195px;
+    animation: pdFadeUp 0.5s 0.4s ease both;
+}
+
+.pd-credit-card {
+    width: 100%; height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pd-credit-card.pd-flipped {
+    transform: rotateY(180deg);
+}
+
+.pd-card-face {
+    position: absolute; inset: 0;
+    border-radius: 18px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    overflow: hidden;
+}
+
+/* ── Frente ── */
+.pd-card-front {
+    background: linear-gradient(135deg, #1e2f45 0%, var(--primary) 50%, #1e3a5f 100%);
+    padding: 22px 24px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+}
+
+/* Destellos internos */
+.pd-card-front::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+        radial-gradient(circle at 85% 15%, rgba(234,130,23,0.22) 0%, transparent 50%),
+        radial-gradient(circle at 15% 85%, rgba(255,255,255,0.04) 0%, transparent 40%);
+}
+
+/* Círculo decorativo */
+.pd-card-front::after {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+    box-shadow: 0 0 0 40px rgba(255,255,255,0.02);
+}
+
+.pd-card-top {
+    display: flex; justify-content: space-between; align-items: center;
+    position: relative; z-index: 1;
+}
+
+/* Chip */
+.pd-chip {
+    width: 40px; height: 30px;
+    background: linear-gradient(135deg, #f0c060, #c8902a);
+    border-radius: 5px;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.pd-chip::before {
+    content: '';
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 28px; height: 20px;
+    border: 1.5px solid rgba(0,0,0,0.18);
+    border-radius: 3px;
+}
+
+.pd-chip::after {
+    content: '';
+    position: absolute; top: 50%; left: 0; right: 0;
+    height: 1.5px; background: rgba(0,0,0,0.18);
+    transform: translateY(-50%);
+}
+
+.pd-card-brand {
+    font-family: var(--font-title);
+    font-size: 12px; font-weight: 700;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 1px; text-transform: uppercase;
+    position: relative; z-index: 1;
+}
+
+/* Número */
+.pd-card-number {
+    font-family: var(--font-mono);
+    font-size: 19px; font-weight: 700;
+    color: var(--white);
+    letter-spacing: 3px; text-align: center;
+    position: relative; z-index: 1;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+    transition: all 0.2s ease;
+}
+
+/* Parte inferior */
+.pd-card-bottom {
+    display: flex; align-items: flex-end;
+    justify-content: space-between;
+    position: relative; z-index: 1;
+}
+
+.pd-card-group { display: flex; flex-direction: column; gap: 2px; }
+
+.pd-card-label {
+    font-size: 9px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase; letter-spacing: 0.8px;
+}
+
+.pd-card-value {
+    font-family: var(--font-mono);
+    font-size: 12px; color: var(--white);
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+}
+
+/* Logo tipo Mastercard */
+.pd-card-logo { width: 52px; height: 32px; position: relative; }
+
+.pd-card-logo__c1,
+.pd-card-logo__c2 {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    position: absolute; top: 1px;
+}
+
+.pd-card-logo__c1 { left: 0;   background: rgba(234,130,23,0.9); }
+.pd-card-logo__c2 { left: 18px; background: rgba(234,87,23,0.75); }
+
+/* ── Reverso ── */
+.pd-card-back {
+    background: linear-gradient(135deg, #1a2e42 0%, var(--primary) 100%);
+    transform: rotateY(180deg);
+}
+
+.pd-card-stripe {
+    width: 100%; height: 44px;
+    background: #111;
+    margin-top: 28px;
+}
+
+.pd-card-cvv-wrap {
+    margin: 14px 24px 0;
+    display: flex; flex-direction: column;
+    align-items: flex-end; gap: 5px;
+}
+
+.pd-card-cvv-box {
+    background: var(--white);
+    border-radius: 6px;
+    padding: 8px 20px;
+    min-width: 80px; text-align: center;
+    font-family: var(--font-mono);
+    font-size: 16px; font-weight: 700;
+    color: var(--primary); letter-spacing: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* ════════════════════════════════════
+   MÉTODOS DE PAGO
+════════════════════════════════════ */
+.pd-methods-label {
+    font-family: var(--font-title);
+    font-size: 11px; font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.8px;
+    margin-bottom: 10px;
+    animation: pdFadeUp 0.5s 0.5s ease both;
+}
+
+.pd-methods {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 24px;
+    animation: pdFadeUp 0.5s 0.55s ease both;
+}
+
+.pd-method {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 6px; padding: 12px 6px;
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    cursor: pointer;
+    background: var(--white);
+    position: relative;
+    transition: var(--transition);
+    user-select: none;
+}
+
+.pd-method:hover {
+    border-color: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(234,130,23,0.15);
+}
+
+.pd-method--active {
+    border-color: var(--secondary);
+    background: rgba(234,130,23,0.05);
+    box-shadow: 0 4px 16px rgba(234,130,23,0.2);
+}
+
+/* Check tick */
+.pd-method--active::after {
+    content: '✓';
+    position: absolute; top: -8px; right: -8px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--secondary);
+    color: var(--white);
+    font-size: 10px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 8px rgba(234,130,23,0.4);
+}
+
+.pd-method__icon { font-size: 22px; line-height: 1; }
+
+.pd-method__name {
+    font-family: var(--font-title);
+    font-size: 11px; font-weight: 700;
+    color: var(--primary);
+}
+
+/* ════════════════════════════════════
+   SECCIONES DE FORMULARIO
+════════════════════════════════════ */
+.pd-form { display: none; }
+.pd-form--active {
+    display: block;
+    animation: pdFadeUp 0.35s ease both;
+}
+
+/* ════════════════════════════════════
+   CAMPOS
+════════════════════════════════════ */
+.pd-field { margin-bottom: 18px; }
+
+.pd-label {
+    display: block;
+    font-family: var(--font-title);
+    font-size: 11px; font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.7px;
+    margin-bottom: 7px;
+}
+
+/* Input con borde animado en focus */
+.pd-input {
+    width: 100%; padding: 13px 16px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-input);
+    font-family: var(--font-body);
+    font-size: 14px; color: var(--primary);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+}
+
+.pd-input::placeholder { color: #bcc3cc; }
+
+.pd-input:focus {
+    border-color: var(--secondary);
+    box-shadow:
+        0 0 0 4px rgba(234,130,23,0.12),
+        0 2px 8px rgba(234,130,23,0.1);
+}
+
+/* Select */
+.pd-select {
+    width: 100%; padding: 13px 40px 13px 16px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-input);
+    font-family: var(--font-body);
+    font-size: 14px; color: var(--primary);
+    background: var(--white);
+    outline: none; cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pd-select:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 4px rgba(234,130,23,0.12);
+}
+
+/* Fila de 3 columnas */
+.pd-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+}
+
+/* ════════════════════════════════════
+   ALERTA DEMO
+════════════════════════════════════ */
+.pd-alert {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: rgba(234,130,23,0.07);
+    border: 1px dashed rgba(234,130,23,0.32);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 13px; color: #92400e;
+    margin-bottom: 22px;
+}
+
+.pd-alert svg { flex-shrink: 0; margin-top: 1px; }
+.pd-alert strong { color: var(--secondary); }
+
+/* ════════════════════════════════════
+   BOTÓN PAGAR
+════════════════════════════════════ */
+.pd-btn {
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px; width: 100%; padding: 15px 28px;
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--sec-light) 100%);
+    color: var(--white);
+    font-family: var(--font-title);
+    font-size: 15px; font-weight: 700;
+    letter-spacing: 0.5px;
+    border: none; border-radius: 12px; cursor: pointer;
+    box-shadow: 0 8px 28px rgba(234,130,23,0.4);
+    position: relative; overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Brillo animado */
+.pd-btn::after {
+    content: '';
+    position: absolute; top: -50%; left: -65%;
+    width: 38%; height: 200%;
+    background: rgba(255,255,255,0.2);
+    transform: skewX(-20deg);
+    animation: pdBtnShine 3.5s ease-in-out 1.2s infinite;
+}
+
+@keyframes pdBtnShine {
+    0%   { left: -65%; opacity: 0; }
+    20%  { opacity: 1; }
+    45%  { left: 115%; opacity: 0; }
+    100% { left: 115%; opacity: 0; }
+}
+
+.pd-btn svg {
+    width: 18px; height: 18px;
+    flex-shrink: 0; display: block;
+    transition: transform 0.3s ease;
+}
+
+.pd-btn:hover {
+    background: linear-gradient(135deg, #d97413 0%, var(--secondary) 100%);
+    box-shadow: 0 14px 36px rgba(234,130,23,0.5);
+    transform: translateY(-3px) scale(1.015);
+}
+
+.pd-btn:hover svg { transform: translateX(5px); }
+.pd-btn:active { transform: translateY(0) scale(0.99); }
+
+/* ════════════════════════════════════
+   BADGE SSL
+════════════════════════════════════ */
+.pd-ssl {
+    display: flex; align-items: center;
+    justify-content: center; gap: 5px;
+    margin-top: 16px;
+    font-family: var(--font-body);
+    font-size: 11.5px; color: var(--muted);
+}
+
+.pd-ssl svg { width: 11px; height: 11px; flex-shrink: 0; display: block; }
+
+/* ════════════════════════════════════
+   ANIMACIÓN COMPARTIDA
+════════════════════════════════════ */
+@keyframes pdFadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ════════════════════════════════════
+   RESPONSIVE — 600px
+════════════════════════════════════ */
+@media (max-width: 600px) {
+    .pd-wrapper { padding: 16px 12px; }
+    .pd-card { border-radius: 20px; }
+    .pd-body { padding: 28px 20px 32px; }
+
+    .pd-step span { display: none; }
+    .pd-step__line { width: 24px; }
+
+    .pd-scene { height: 170px; }
+    .pd-card-number { font-size: 15px; letter-spacing: 2px; }
+
+    .pd-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    .pd-row .pd-field:last-child { grid-column: 1 / -1; }
+
+    .pd-methods { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ════════════════════════════════════
+   RESPONSIVE — 390px
+════════════════════════════════════ */
+@media (max-width: 390px) {
+    .pd-body { padding: 24px 16px 28px; }
+    .pd-header__title { font-size: 18px; }
+    .pd-card-number { font-size: 13px; letter-spacing: 1.5px; }
+    .pd-orb--1, .pd-orb--2 { display: none; }
+}
