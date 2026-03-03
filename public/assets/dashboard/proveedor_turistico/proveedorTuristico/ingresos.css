@@ -1,0 +1,100 @@
+/* ========== ESTILOS DE INGRESOS ========== */
+
+.ingresos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 35px;
+    gap: 20px;
+}
+
+.ingresos-header .header-content h3 {
+    color: #EA8217;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.ingresos-header .header-content p {
+    color: #6c757d;
+    font-size: 0.95rem;
+}
+
+.btn-volver {
+    background-color: white;
+    border: 2px solid #3498db;
+    color: #3498db;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.btn-volver:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+.ingresos-card {
+    background: white;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.ingresos-table {
+    margin-bottom: 0;
+}
+
+.ingresos-table thead {
+    background-color: #f7f7f7;
+}
+
+.ingresos-table thead th {
+    color: #6c757d;
+    font-weight: 600;
+    padding: 15px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.ingresos-table tbody td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.ingresos-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.ingresos-table tbody tr.total-row {
+    background-color: #f7f7f7;
+    font-weight: 600;
+    border-top: 2px solid #e0e0e0;
+}
+
+.ingresos-table .badge {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+
+.text-currency {
+    color: #EA8217;
+    font-weight: 600;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6c757d;
+}
+
+.empty-state i {
+    font-size: 48px;
+    color: #dee2e6;
+    margin-bottom: 15px;
+}

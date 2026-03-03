@@ -71,6 +71,17 @@
     background-color: #34495e;
 }
 
+.items a.active {
+    background-color: #EA8217;
+    color: #fff;
+}
+
+.items a.active i,
+.items a.active .fa,
+.items a.active .bi {
+    color: #fff !important;
+}
+
 .items a img {
     width: 23px;
     height: 23px;

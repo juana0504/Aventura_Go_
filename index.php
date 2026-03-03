@@ -100,6 +100,28 @@ switch ($request) {
         $controller->data();
         break;
 
+    // dashboard proveedor turístico (página y datos JSON)
+    case '/proveedor/dashboard':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/dashboardController.php';
+        $controller = new DashboardProveedorController();
+        $controller->index();
+        break;
+    case '/proveedor/dashboard/data':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/dashboardController.php';
+        $controller = new DashboardProveedorController();
+        $controller->data();
+        break;
+    case '/proveedor/dashboard/filtrarReservas':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/dashboardController.php';
+        $controller = new DashboardProveedorController();
+        $controller->filtrarReservas();
+        break;
+    case '/proveedor/ingresos':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/ingresosController.php';
+        $controller = new IngresosProveedorController();
+        $controller->index();
+        break;
+
     // Perfil administrador 
     case '/administrador/cambiar-password':
         require_once BASE_PATH . '/app/controllers/passwordChangeController.php';
