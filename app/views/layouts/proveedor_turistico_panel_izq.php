@@ -29,7 +29,26 @@
                     <a href="<?= BASE_URL ?>/proveedor/tickets">
                         <i class="fa fa-ticket"></i> Tickets
                     </a>
+                    <a href="<?= BASE_URL ?>/proveedor/ingresos" class="bi bi-cash-stack" id="menu-ingresos">Ingresos</a>
                 </ul>
+
+                <script>
+                    (function(){
+                        try {
+                            var links = document.querySelectorAll('#menu-panel a');
+                            var path = window.location.pathname.replace(/\/+$/,'');
+                            links.forEach(function(link){
+                                var href = link.getAttribute('href') || '';
+                                var linkPath = href.replace(window.location.origin, '').replace(/\/+$/,'');
+                                if(linkPath === path){
+                                    link.classList.add('active');
+                                }
+                            });
+                        } catch(e) {
+                            console && console.error(e);
+                        }
+                    })();
+                </script>
 
             </div>
 
