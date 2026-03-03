@@ -506,7 +506,6 @@
                             <!-- TURISTA -->
                             <div class="col-md-4">
                                 <div class="card card-registro text-center p-4">
-                                    <!-- <div class="icono-registro">🎒</div> -->
                                     <div class="card-body">
                                         <h3 class="card-title">Turista</h3>
                                         <p class="card-text">Quiero reservar actividades y experiencias.</p>
