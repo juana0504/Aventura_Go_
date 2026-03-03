@@ -271,19 +271,29 @@ class ActividadTuristica
         }
     }
 
-
-
+    /**
+     * Cuenta las actividades registradas por un proveedor.
+     */
+    public function contarPorProveedor($id_proveedor)
+    {
+        try {
+            $sql = "SELECT COUNT(*) AS total FROM actividad WHERE id_proveedor = :id_proveedor";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':id_proveedor', $id_proveedor, PDO::PARAM_INT);
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row ? (int) $row['total'] : 0;
+        } catch (PDOException $e) {
+            error_log("Error en actividad::contarPorProveedor -> " . $e->getMessage());
+            return 0;
+        }
+    }
 
     public function obtenerPorId($idActividad)
     {
         $sql = "SELECT 
             a.id_actividad,
             a.nombre,
-            a.descripcion,
-            a.ubicacion,
-            a.cupos,
-            a.precio,
-            a.estado,
             a.created_at,
 
             c.nombre AS ciudad,

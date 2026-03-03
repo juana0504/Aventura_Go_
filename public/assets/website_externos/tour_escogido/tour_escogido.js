@@ -40,6 +40,8 @@ if (profileToggle && profileMenu) {
 
 }
 
+// Carrusel de las imagenes
+
 const track = document.querySelector(".carousel-track");
 const images = document.querySelectorAll(".carousel-track img");
 const items = document.querySelectorAll(".item");
@@ -92,6 +94,6 @@ carousel.addEventListener("mouseenter", () => {
 carousel.addEventListener("mouseleave", () => {
     autoPlayInterval = setInterval(nextSlide, 4000);
 });
-
+S
 
 
