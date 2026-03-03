@@ -1,0 +1,166 @@
+/* ================================
+   AVENTURA GO - REGISTRAR ACTIVIDAD
+   Identidad Oficial
+================================ */
+
+/* ===== Variables oficiales ===== */
+:root {
+    --primary: #2D4059;
+    --secondary: #EA8217;
+    --white: #FFFFFF;
+    --bg-light: #F8F9FA;
+    --border: #E0E0E0;
+    --text: #2B2B2B;
+}
+
+/* ===== Reset básico ===== */
+body {
+    background-color: var(--bg-light);
+    font-family: 'Lato', sans-serif;
+    color: var(--text);
+    margin: 0;
+}
+
+/* ===== Contenedor principal ===== */
+.contenido-principal {
+    padding: 40px;
+    min-height: 100vh;
+}
+
+/* ===== Card principal del formulario ===== */
+.info {
+    background-color: var(--white);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    max-width: 900px;
+    margin: 30px auto;
+}
+
+/* ===== Header del Wizard ===== */
+.wizard-header h1 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 30px;
+}
+
+/* ===== Pasos ===== */
+.wizard-step {
+    display: none;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.wizard-step.active {
+    display: block;
+}
+
+.wizard-step h3 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--secondary);
+    margin-bottom: 25px;
+}
+
+/* ===== Labels ===== */
+label {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* ===== Inputs y Select ===== */
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin-bottom: 18px;
+    transition: all 0.3s ease;
+    font-family: 'Lato', sans-serif;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(234, 130, 23, 0.15);
+}
+
+/* ===== Textarea ===== */
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* ===== File input ===== */
+input[type="file"] {
+    padding: 10px;
+    background-color: var(--bg-light);
+    border: 1px dashed var(--border);
+    cursor: pointer;
+}
+
+small {
+    font-size: 12px;
+    color: #777;
+}
+
+/* ===== Botones ===== */
+.wizard-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 24px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+/* Botón primario */
+button[type="submit"],
+.wizard-actions button:last-child {
+    background-color: var(--secondary);
+    color: var(--white);
+}
+
+button[type="submit"]:hover,
+.wizard-actions button:last-child:hover {
+    background-color: #cf6f13;
+}
+
+/* Botón secundario */
+.wizard-actions button:first-child {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.wizard-actions button:first-child:hover {
+    background-color: #1f2f44;
+}
+
+/* ===== Animación ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
