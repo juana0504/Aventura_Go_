@@ -101,16 +101,14 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                     <section class="resumen-reservas">
                         <div class="resumen-header">
                             <h3>Resumen de Reservas</h3>
-                            <button class="btn-filtrar">Filtrar ▼</button>
+                            <button class="btn-filtrar"><i class="bi bi-funnel"></i> Filtrar</button>
                         </div>
                         <!-- zona de filtros ocultos -->
-                        <div id="filtros-reservas" class="mt-2" style="display:none;">
+                        <div id="filtros-reservas" style="display:none;">
                             <form id="form-filtros">
-                                <div class="row g-2 align-items-center">
+                                <div class="row g-3 align-items-end">
                                     <div class="col-auto">
-                                        <label for="filtro-tipo" class="col-form-label">Periodo:</label>
-                                    </div>
-                                    <div class="col-auto">
+                                        <label for="filtro-tipo" class="form-label">Período:</label>
                                         <select id="filtro-tipo" class="form-select">
                                             <option value="anio" selected>Año</option>
                                             <option value="mes">Mes</option>
@@ -118,7 +116,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     </div>
 
                                     <div class="col-auto" id="filtro-anio-container">
-                                        <label for="filtro-anio" class="col-form-label">Año:</label>
+                                        <label for="filtro-anio" class="form-label">Año:</label>
                                         <select id="filtro-anio" class="form-select">
                                             <option value="">Todos</option>
                                             <?php
@@ -132,7 +130,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     </div>
 
                                     <div class="col-auto" id="filtro-mes-container" style="display:none;">
-                                        <label for="filtro-mes" class="col-form-label">Mes:</label>
+                                        <label for="filtro-mes" class="form-label">Mes:</label>
                                         <select id="filtro-mes" class="form-select">
                                             <option value="">Todos</option>
                                             <?php
@@ -146,8 +144,8 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     </div>
 
                                     <div class="col-auto">
-                                        <button type="button" id="aplicar-filtros" class="btn btn-primary btn-sm">Aplicar</button>
-                                        <button type="button" id="limpiar-filtros" class="btn btn-secondary btn-sm">Limpiar</button>
+                                        <button type="button" id="aplicar-filtros" class="btn btn-primary btn-sm"><i class="bi bi-check-circle"></i> Aplicar</button>
+                                        <button type="button" id="limpiar-filtros" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-counterclockwise"></i> Limpiar</button>
                                     </div>
                                 </div>
                             </form>

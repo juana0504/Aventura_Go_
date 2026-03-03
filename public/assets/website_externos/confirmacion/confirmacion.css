@@ -1,0 +1,462 @@
+        /* ── Variables ── */
+        :root {
+            --primary:         #2D4059;
+            --secondary:       #EA8217;
+            --secondary-light: #f49535;
+            --white:           #FFFFFF;
+            --bg:              #F4F6F9;
+            --text-muted:      #6b7280;
+            --border:          #e2e8f0;
+            --font-title:      'Raleway', sans-serif;
+            --font-body:       'Lato', sans-serif;
+        }
+
+        /* ── Reset ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* ── Body ── */
+        body {
+            font-family: var(--font-body);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #0f1e2d 0%, #1a2e42 60%, #0d1a26 100%);
+        }
+
+        /* ── Patrón de puntos ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-size: 28px 28px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── Orbs de fondo ── */
+        .pay-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(90px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .pay-orb--1 {
+            width: 520px; height: 520px;
+            top: -160px; left: -130px;
+            background: radial-gradient(circle, rgba(45,64,89,0.6) 0%, transparent 70%);
+            animation: orbFloat 14s ease-in-out infinite alternate;
+        }
+        .pay-orb--2 {
+            width: 440px; height: 440px;
+            bottom: -120px; right: -110px;
+            background: radial-gradient(circle, rgba(234,130,23,0.25) 0%, transparent 70%);
+            animation: orbFloat 18s ease-in-out infinite alternate-reverse;
+        }
+        .pay-orb--3 {
+            width: 300px; height: 300px;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(45,64,89,0.2) 0%, transparent 70%);
+            animation: orbFloat 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes orbFloat {
+            from { transform: translate(0, 0) scale(1); }
+            to   { transform: translate(25px, 18px) scale(1.07); }
+        }
+
+        /* ── Líneas de luz ── */
+        .pay-lines {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .pay-lines::before,
+        .pay-lines::after {
+            content: '';
+            position: absolute;
+            width: 130%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(234,130,23,0.25), transparent);
+            animation: scanLine 9s ease-in-out infinite;
+        }
+        .pay-lines::before { top: 28%; left: -15%; animation-delay: 0s; }
+        .pay-lines::after  { top: 68%; left: -15%; animation-delay: 4.5s; }
+
+        @keyframes scanLine {
+            0%   { transform: translateX(-100%) skewX(-12deg); opacity: 0; }
+            30%  { opacity: 1; }
+            70%  { opacity: 1; }
+            100% { transform: translateX(110%)  skewX(-12deg); opacity: 0; }
+        }
+
+        /* ════════════════════════════
+           WRAPPER
+        ════════════════════════════ */
+        .pay-wrapper {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 460px;
+            padding: 24px 16px;
+        }
+
+        /* ════════════════════════════
+           TARJETA
+        ════════════════════════════ */
+        .pay-card {
+            background: rgba(255,255,255,0.97);
+            border-radius: 24px;
+            box-shadow:
+                0 32px 80px rgba(0,0,0,0.45),
+                0 0 0 1px rgba(255,255,255,0.08);
+            overflow: hidden;
+            position: relative;
+            animation: cardEntrance 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: translateY(36px) scale(0.97); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Franja top animada */
+        .pay-card::before {
+            content: '';
+            display: block;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--primary) 100%);
+            background-size: 200% auto;
+            animation: stripeShift 3s linear infinite;
+        }
+
+        @keyframes stripeShift {
+            0%   { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* ════════════════════════════
+           CARD BODY
+        ════════════════════════════ */
+        .pay-card__body {
+            padding: 44px 44px 40px;
+            text-align: center;
+        }
+
+        /* ════════════════════════════
+           ÍCONO
+        ════════════════════════════ */
+        .pay-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 22px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e8f0fb 0%, #dde8f7 100%);
+            box-shadow: 0 8px 24px rgba(45,64,89,0.15);
+            animation: iconPop 0.65s 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+            position: relative;
+        }
+
+        /* Anillo pulsante */
+        .pay-icon::after {
+            content: '';
+            position: absolute;
+            inset: -7px;
+            border-radius: 50%;
+            border: 2px solid rgba(45,64,89,0.15);
+            animation: ringPulse 2.4s ease-out 1.2s infinite;
+        }
+
+        @keyframes ringPulse {
+            0%   { transform: scale(1);    opacity: 0.7; }
+            100% { transform: scale(1.55); opacity: 0; }
+        }
+
+        .pay-icon svg {
+            width: 32px !important;
+            height: 32px !important;
+            display: block;
+        }
+
+        @keyframes iconPop {
+            from { opacity: 0; transform: scale(0.3) rotate(-15deg); }
+            to   { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+
+        /* ════════════════════════════
+           TÍTULO
+        ════════════════════════════ */
+        .pay-card__title {
+            font-family: var(--font-title);
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1.35;
+            letter-spacing: 0.2px;
+            margin-bottom: 6px;
+            animation: fadeUp 0.5s 0.5s ease both;
+        }
+
+        /* Línea decorativa bajo el título */
+        .pay-card__title::after {
+            content: '';
+            display: block;
+            width: 44px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--secondary-light));
+            border-radius: 99px;
+            margin: 10px auto 0;
+        }
+
+        /* ════════════════════════════
+           DIVISOR
+        ════════════════════════════ */
+        .pay-divider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 18px auto 20px;
+            max-width: 200px;
+            animation: fadeUp 0.5s 0.58s ease both;
+        }
+        .pay-divider span {
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        .pay-divider svg {
+            width: 12px !important;
+            height: 12px !important;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        /* ════════════════════════════
+           BLOQUE DE DATOS
+        ════════════════════════════ */
+        .pay-info {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 18px;
+            text-align: left;
+            position: relative;
+            animation: fadeUp 0.5s 0.65s ease both;
+        }
+
+        .pay-info::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+        }
+
+        .pay-info__row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px 14px 22px;
+            gap: 12px;
+        }
+
+        .pay-info__separator {
+            height: 1px;
+            background: var(--border);
+            margin: 0 18px 0 22px;
+        }
+
+        .pay-info__label {
+            font-family: var(--font-body);
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            flex-shrink: 0;
+        }
+
+        .pay-info__value {
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary);
+            text-align: right;
+            word-break: break-all;
+        }
+
+        .pay-info__total {
+            font-family: var(--font-title);
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+            text-align: right;
+            line-height: 1;
+        }
+
+        .pay-info__total small {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        /* ════════════════════════════
+           AVISO SEGURIDAD
+        ════════════════════════════ */
+        .pay-notice {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-family: var(--font-body);
+            font-size: 12.5px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            text-align: left;
+            background: rgba(234,130,23,0.06);
+            border: 1px dashed rgba(234,130,23,0.28);
+            border-radius: 12px;
+            padding: 11px 14px;
+            margin-bottom: 22px;
+            animation: fadeUp 0.5s 0.72s ease both;
+        }
+
+        .pay-notice svg {
+            width: 14px !important;
+            height: 14px !important;
+            flex-shrink: 0;
+            margin-top: 1px;
+            display: block;
+        }
+
+        /* ════════════════════════════
+           BOTÓN
+        ════════════════════════════ */
+        .pay-form {
+            animation: fadeUp 0.5s 0.8s ease both;
+        }
+
+        .pay-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 15px 28px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
+            color: var(--white);
+            font-family: var(--font-title);
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            border-radius: 12px;
+            box-shadow: 0 8px 28px rgba(234,130,23,0.4);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Brillo deslizante */
+        .pay-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -65%;
+            width: 38%; height: 200%;
+            background: rgba(255,255,255,0.2);
+            transform: skewX(-20deg);
+            animation: btnShine 3.5s ease-in-out 1.2s infinite;
+        }
+
+        @keyframes btnShine {
+            0%   { left: -65%; opacity: 0; }
+            20%  { opacity: 1; }
+            45%  { left: 115%; opacity: 0; }
+            100% { left: 115%; opacity: 0; }
+        }
+
+        .pay-btn svg {
+            width: 18px !important;
+            height: 18px !important;
+            flex-shrink: 0;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .pay-btn:hover {
+            background: linear-gradient(135deg, #d97413 0%, var(--secondary) 100%);
+            box-shadow: 0 14px 36px rgba(234,130,23,0.5);
+            transform: translateY(-3px) scale(1.015);
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .pay-btn:hover svg {
+            transform: translateX(5px);
+        }
+
+        .pay-btn:active {
+            transform: translateY(0) scale(0.99);
+        }
+
+        /* ════════════════════════════
+           BADGE SSL
+        ════════════════════════════ */
+        .pay-ssl {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 16px;
+            font-family: var(--font-body);
+            font-size: 11.5px;
+            color: var(--text-muted);
+            animation: fadeUp 0.5s 0.9s ease both;
+        }
+
+        .pay-ssl svg {
+            width: 11px !important;
+            height: 11px !important;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        /* ════════════════════════════
+           ANIMACIÓN COMPARTIDA
+        ════════════════════════════ */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ════════════════════════════
+           RESPONSIVE 480px
+        ════════════════════════════ */
+        @media (max-width: 480px) {
+            .pay-wrapper { padding: 16px 12px; }
+            .pay-card { border-radius: 20px; }
+            .pay-card__body { padding: 34px 22px 28px; }
+            .pay-icon { width: 60px; height: 60px; }
+            .pay-card__title { font-size: 17px; }
+            .pay-info__row { flex-direction: column; align-items: flex-start; gap: 3px; padding: 12px 14px 12px 18px; }
+            .pay-info__separator { margin: 0 14px 0 18px; }
+            .pay-info__total { font-size: 20px; }
+            .pay-btn { padding: 13px 20px; font-size: 14px; }
+        }
+
+        @media (max-width: 390px) {
+            .pay-card__body { padding: 28px 16px 24px; }
+            .pay-card__title { font-size: 16px; }
+            .pay-orb--1, .pay-orb--2, .pay-orb--3 { display: none; }
+        }

@@ -18,7 +18,14 @@ if (btnFiltrar) {
     btnFiltrar.addEventListener('click', (e) => {
         e.preventDefault();
         const cont = document.getElementById('filtros-reservas');
-        if (cont) cont.style.display = cont.style.display === 'none' ? 'block' : 'none';
+        if (cont) {
+            const isHidden = cont.style.display === 'none';
+            cont.style.display = isHidden ? 'block' : 'none';
+            // siempre aplicar filtros al mostrar el panel para refrescar gráfica y tabla
+            if (isHidden) {
+                filtrarTabla();
+            }
+        }
     });
 }
 
@@ -26,6 +33,10 @@ if (btnFiltrar) {
 document.addEventListener('DOMContentLoaded', () => {
   const reservasCtx = document.getElementById('reservasChart');
   const gastosCtx = document.getElementById('gastosChart');
+  
+  // Variables para almacenar referencias de gráficos
+  let reservasChart = null;
+  let gastosChart = null;
 
   // aplica filtrado sobre tabla si se usa formulario
   const aplicarBtn = document.getElementById('aplicar-filtros');
@@ -83,6 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!tablaReservas) return;
     document.getElementById('filtro-anio').value = '';
     document.getElementById('filtro-mes').value = '';
+    const mesContainer = document.getElementById('filtro-mes-container');
+    if (mesContainer) mesContainer.style.display = 'none';
     filtrarTabla();
   }
 
@@ -99,12 +112,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let url = DASHBOARD_DATA_URL;
     const params = [];
     if (tipo) params.push('tipo=' + encodeURIComponent(tipo));
-    if (anio) params.push('anio=' + encodeURIComponent(anio));
-    if (mes) params.push('mes=' + encodeURIComponent(mes));
+    if (anio !== undefined && anio !== null) params.push('anio=' + encodeURIComponent(anio));
+    if (mes !== undefined && mes !== null) params.push('mes=' + encodeURIComponent(mes));
     if (params.length) url += '?' + params.join('&');
+    
+    console.log('Fetcheando:', url); // Debug
+    
     fetch(url)
       .then(res => res.json())
       .then(datos => {
+        console.log('Datos recibidos:', datos); // Debug
         buildCharts(datos, tipo);
       })
       .catch(err => console.error('Error cargando datos de dashboard:', err));
@@ -135,13 +152,13 @@ document.addEventListener('DOMContentLoaded', () => {
             plugins: {
               legend: { display: false },
               tooltip: { 
-                backgroundColor: '#007bff', 
+                backgroundColor: '#2c3e50', 
                 titleColor: '#fff', 
                 bodyColor: '#fff',
-                padding: 12,
-                cornerRadius: 4,
-                titleFont: { size: 14, weight: 'bold' },
-                bodyFont: { size: 13 }
+                padding: 10,
+                cornerRadius: 6,
+                titleFont: { size: 13, weight: 'bold' },
+                bodyFont: { size: 12 }
               },
               title: { display: false }
             }
@@ -167,8 +184,8 @@ document.addEventListener('DOMContentLoaded', () => {
             chartConfig.type = 'bar';
             // Mantener eje X normal (años abajo, reservas arriba)
             chartConfig.data.datasets[0].backgroundColor = '#EA8217';
-            chartConfig.data.datasets[0].borderColor = '#D97016';
-            chartConfig.data.datasets[0].borderWidth = 2;
+            chartConfig.data.datasets[0].borderColor = '#d97107';
+            chartConfig.data.datasets[0].borderWidth = 0;
             
             // Configuración mejorada con más detalles
             chartOptions.scales = {
@@ -176,58 +193,72 @@ document.addEventListener('DOMContentLoaded', () => {
                     beginAtZero: true,
                     title: { display: true, text: 'Cantidad de Reservas' },
                     ticks: { 
-                        color: '#000000ff',
+                        color: '#6c757d',
                         callback: function(value) { return value.toLocaleString('es-CO'); }
                     },
-                    grid: { color: '#DEE6F2', drawBorder: true }
+                    grid: { color: '#e9ecef', drawBorder: false }
                 },
                 x: {
                     title: { display: true, text: 'Año' },
-                    ticks: { color: '#000000ff' },
-                    grid: { display: false, drawBorder: true }
+                    ticks: { color: '#6c757d' },
+                    grid: { display: false, drawBorder: false }
                 }
             };
             chartOptions.plugins.tooltip.callbacks = {
                 label: function(context) {
-                    return 'Reservas: ' + context.parsed.y.toLocaleString('es-CO');
+                    return context.parsed.y.toLocaleString('es-CO');
                 }
             };
         } else if (tipo === 'mes') {
             chartConfig.type = 'line';
-            // interpretar etiquetas como nombres de mes si son números
-            labels.forEach((lab, idx) => {
-                const num = parseInt(lab, 10);
-                if (!isNaN(num)) {
-                    const mesesNombres = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-                    labels[idx] = mesesNombres[num-1] || lab;
-                }
+            
+            // Crear mapa de datos por mes
+            const datosPorMes = {};
+            reservasData.forEach(r => {
+                const mesNum = parseInt(r.periodo, 10);
+                datosPorMes[mesNum] = r.total;
             });
             
+            // Crear array con todos los 12 meses, incluso los sin datos
+            const mesesNombres = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+            labels = [];
+            data = [];
+            for (let i = 1; i <= 12; i++) {
+                labels.push(mesesNombres[i-1]);
+                data.push(datosPorMes[i] || 0);
+            }
+            
+            // Actualizar los datasets data
+            chartConfig.data.labels = labels;
+            chartConfig.data.datasets[0].data = data;
+            
             // Configuración mejorada con más detalles
-            chartConfig.data.datasets[0].pointRadius = 6;
-            chartConfig.data.datasets[0].pointHoverRadius = 8;
-            chartConfig.data.datasets[0].pointBorderWidth = 2;
+            chartConfig.data.datasets[0].pointRadius = 5;
+            chartConfig.data.datasets[0].pointHoverRadius = 7;
+            chartConfig.data.datasets[0].pointBorderWidth = 1.5;
             chartConfig.data.datasets[0].pointBorderColor = '#D97016';
+            chartConfig.data.datasets[0].borderWidth = 2.5;
+            chartConfig.data.datasets[0].backgroundColor = 'rgba(234, 130, 23, 0.08)';
             
             chartOptions.scales = {
                 y: {
                     beginAtZero: true,
                     title: { display: true, text: 'Cantidad de Reservas' },
                     ticks: { 
-                        color: '#000000ff',
+                        color: '#6c757d',
                         callback: function(value) { return value.toLocaleString('es-CO'); }
                     },
-                    grid: { color: '#DEE6F2', drawBorder: true }
+                    grid: { color: '#e9ecef', drawBorder: false }
                 },
                 x: {
                     title: { display: true, text: 'Mes' },
-                    ticks: { color: '#000000ff' },
-                    grid: { display: false, drawBorder: true }
+                    ticks: { color: '#6c757d' },
+                    grid: { display: false, drawBorder: false }
                 }
             };
             chartOptions.plugins.tooltip.callbacks = {
                 label: function(context) {
-                    return 'Reservas: ' + context.parsed.y.toLocaleString('es-CO');
+                    return context.parsed.y.toLocaleString('es-CO');
                 }
             };
         } else {
@@ -235,35 +266,41 @@ document.addEventListener('DOMContentLoaded', () => {
             chartConfig.type = 'line';
             
             // Mejoras para modo por defecto
-            chartConfig.data.datasets[0].pointRadius = 6;
-            chartConfig.data.datasets[0].pointHoverRadius = 8;
-            chartConfig.data.datasets[0].pointBorderWidth = 2;
+            chartConfig.data.datasets[0].pointRadius = 5;
+            chartConfig.data.datasets[0].pointHoverRadius = 7;
+            chartConfig.data.datasets[0].pointBorderWidth = 1.5;
             chartConfig.data.datasets[0].pointBorderColor = '#D97016';
-            chartConfig.data.datasets[0].borderWidth = 3;
+            chartConfig.data.datasets[0].borderWidth = 2.5;
+            chartConfig.data.datasets[0].backgroundColor = 'rgba(234, 130, 23, 0.08)';
             
             chartOptions.scales = {
                 y: {
                     beginAtZero: true,
                     title: { display: true, text: 'Cantidad de Reservas' },
                     ticks: { 
-                        color: '#000000ff',
+                        color: '#6c757d',
                         callback: function(value) { return value.toLocaleString('es-CO'); }
                     },
-                    grid: { color: '#DEE6F2', drawBorder: true }
+                    grid: { color: '#e9ecef', drawBorder: false }
                 },
                 x: {
                     title: { display: true, text: 'Fecha (Últimos 7 días)' },
-                    ticks: { color: '#000000ff' },
-                    grid: { display: false, drawBorder: true }
+                    ticks: { color: '#6c757d' },
+                    grid: { display: false, drawBorder: false }
                 }
             };
             chartOptions.plugins.tooltip.callbacks = {
                 label: function(context) {
-                    return 'Reservas: ' + context.parsed.y.toLocaleString('es-CO');
+                    return context.parsed.y.toLocaleString('es-CO');
                 }
             };
         }
-        new Chart(reservasCtx, chartConfig);
+        // Destruir gráfico anterior si existe
+        if (reservasChart) {
+            reservasChart.destroy();
+        }
+        // Crear nuevo gráfico
+        reservasChart = new Chart(reservasCtx, chartConfig);
       }
 
       // --- gráfico de gastos ---
@@ -281,7 +318,12 @@ document.addEventListener('DOMContentLoaded', () => {
           labelsG = ['Sin datos'];
           dataG = [0];
         }
-        new Chart(gastosCtx, {
+        // Destruir gráfico anterior si existe
+        if (gastosChart) {
+            gastosChart.destroy();
+        }
+        // Crear nuevo gráfico
+        gastosChart = new Chart(gastosCtx, {
           type: 'line',
           data: {
             labels: labelsG,
@@ -289,13 +331,14 @@ document.addEventListener('DOMContentLoaded', () => {
               label: 'Gastos',
               data: dataG,
               borderColor: '#EA8217',
-              backgroundColor: 'rgba(211, 218, 225, 0.2)',
+              backgroundColor: 'rgba(234, 130, 23, 0.08)',
               tension: 0.4,
               pointBackgroundColor: '#EA8217',
-              pointBorderColor: '#D97016',
-              pointBorderWidth: 2,
-              pointRadius: 5,
-              pointHoverRadius: 7,
+              pointBorderColor: '#d97107',
+              pointBorderWidth: 1.5,
+              pointRadius: 4,
+              pointHoverRadius: 6,
+              borderWidth: 2,
               fill: true
             }]
           },
@@ -305,28 +348,30 @@ document.addEventListener('DOMContentLoaded', () => {
             scales: {
               x: { 
                 grid: { display: false }, 
-                ticks: { color: '#000000ff' },
+                ticks: { color: '#6c757d' },
                 title: { display: true, text: 'Categoría/Período' }
               },
               y: { 
                 beginAtZero: true,
-                grid: { color: '#DEE6F2' }, 
+                grid: { color: '#e9ecef' }, 
                 ticks: { 
-                  color: '#000000ff',
+                  color: '#6c757d',
                   callback: function(value) { return '$' + value.toLocaleString('es-CO'); }
                 },
                 title: { display: true, text: 'Monto ($)' }
               }
             },
             plugins: {
-              legend: { display: true, labels: { color: '#000000ff' } },
+              legend: { display: true, labels: { color: '#6c757d' } },
               tooltip: { 
-                backgroundColor: '#000000ff', 
+                backgroundColor: '#2c3e50', 
                 titleColor: '#ffffff',
                 bodyColor: '#ffffff',
+                padding: 10,
+                cornerRadius: 6,
                 callbacks: {
                   label: function(context) {
-                    return 'Gasto: $' + context.parsed.y.toLocaleString('es-CO');
+                    return '$' + context.parsed.y.toLocaleString('es-CO');
                   }
                 }
               }

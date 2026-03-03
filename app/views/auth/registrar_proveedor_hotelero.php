@@ -6,11 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register- Aventura GO</title>
 
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- CSS personalizado -->
     <link rel="stylesheet" href="public/assets/extras/registrarse/registrar_proveedor.css">
 </head>
 
@@ -19,58 +16,67 @@
     <div class="login-container">
         <div class="login-box">
 
-            <!-- Sección del formulario -->
             <div class="form-section">
                 <img src="public/assets/extras/login/img/REDES-LOGO 2.png" alt="Aventura GO" class="logo mb-3">
 
                 <h2 class="fw-bold">REGISTRO PROVEEDOR HOTELERO</h2>
                 <h3 class="fw-bold">Registrate y publica tu hospedaje.</h3>
 
+                <form action="<?= BASE_URL ?>/guardar-registro-proveedor-hotelero" method="POST" enctype="multipart/form-data" id="registerForm">
 
-                <form action="<?= BASE_URL ?>/guardar-registro-proveedor-hotelero" method="POST" enctype="multipart/form-data">
+                    <div class="form-grid">
 
-                    <input type="text" placeholder="Nombre" name="nombre">
+                        <!-- Fila 1 -->
+                        <input type="text" placeholder="Nombre" name="nombre" required>
 
-                    <div class="select-container">
-                        <select name="tipo_documento">
-                            <option value="" disabled selected hidden>Tipo de documento</option>
-                            <option value="cc">Cédula de ciudadanía</option>
-                            <option value="ce">Cedula extranjeria</option>
-                            <option value="Pasaporte">Pasaporte </option>
-                        </select>
+                        <div class="select-container">
+                            <select name="tipo_documento" required>
+                                <option value="" disabled selected hidden>Tipo de documento</option>
+                                <option value="cc">Cédula de ciudadanía</option>
+                                <option value="ce">Cédula extranjería</option>
+                                <option value="Pasaporte">Pasaporte</option>
+                            </select>
+                        </div>
+
+                        <!-- Fila 2 -->
+                        <input type="number" placeholder="Identificación" name="identificacion" required>
+
+                        <div class="select-container">
+                            <select name="genero" required>
+                                <option value="" disabled selected hidden>Género</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Masculino">Masculino</option>
+                            </select>
+                        </div>
+
+                        <!-- Fila 3 -->
+                        <input type="tel" placeholder="Teléfono" name="telefono">
+
+                        <input type="email" name="email" placeholder="Correo" required>
+
+                        <!-- Fila 4 -->
+                        <div class="password-container">
+                            <input type="password" name="clave" placeholder="Contraseña" id="password" required>
+                            <i class="bi bi-eye-fill" id="togglePassword"></i>
+                        </div>
+
+                        <div class="password-container">
+                            <input type="password" placeholder="Confirmar contraseña" id="confirmPassword" required>
+                            <i class="bi bi-eye-fill" id="toggleConfirmPassword"></i>
+                        </div>
+
+                        <!-- Error contraseñas -->
+                        <span class="error-msg" id="passwordError" style="display:none;">
+                            ⚠ Las contraseñas no coinciden.
+                        </span>
+
                     </div>
 
-                    <input type="number" placeholder="identificacion" name="identificacion">
-
-                    <div class="select-container">
-                        <select name="genero">
-                            <option value="" disabled selected hidden>Genero</option>
-                            <option value="Femenino">Femenino</option>
-                            <option value="Masculino">Masculino</option>
-                        </select>
-                    </div>
-
-                    <input type="tel" placeholder="Teléfono" name="telefono">
-
-                    <input type="email" name="email" placeholder="Correo" required>
-
-                    <div class="password-container">
-                        <input type="password" name="clave" placeholder="Contraseña" id="password" required>
-                        <i class="bi bi-eye-fill" id="togglePassword"></i>
-                    </div>
-
-                    <!-- <div class="file-container">
-                        <input type="file" id="foto" name="foto" accept=".jpg, .png, .jpeg" required>
-                        <span class="file-placeholder">Foto</span>
-                    </div> -->
-
-                    <button type="submit">REGISTRARME COMO PROVEEDOR HOTELERO</button>
+                    <button type="submit">REGISTRARME</button>
 
                 </form>
-
             </div>
 
-            <!-- Sección de la imagen -->
             <div class="image-section">
                 <img src="public/assets/extras/registrarse/img/REGISTRATE (2).png" alt="Aventura en el río">
             </div>

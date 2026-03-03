@@ -58,17 +58,41 @@
 #menu-panel a:hover {
     background-color: #FFFFFF;
     color: #EA8217;
-    transform: translateX(5px);
+    background: #ffffff;
 }
 
-/* Iconos */
-#menu-panel a i,
-#menu-panel a::before {
-    margin-right: 8px;
+.items a {
+    display: flex;
+    gap: 15px;
+    padding: 12px 15px;
+    color: #ecf0f1;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
-/* Link activo (opcional si agregas clase active) */
-#menu-panel a.active {
+.items a:hover {
+    background-color: #34495e;
+}
+
+.items a.active {
     background-color: #EA8217;
-    color: #FFFFFF;
+    color: #fff;
+}
+
+.items a.active i,
+.items a.active .fa,
+.items a.active .bi {
+    color: #fff !important;
+}
+
+.items a img {
+    width: 23px;
+    height: 23px;
+}
+
+.items a p {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
 }

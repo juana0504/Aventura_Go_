@@ -1,12 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
 
-/* Variables globales */
 :root {
   --color-primary: #2D4059;
   --color-secondary: #EA8217;
   --color-white: #FFFFFF;
   --color-text: #333333;
-  --color-text-light: #666666;
   --color-bg-light: #F8F9FA;
   --color-border: #E0E0E0;
   --shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
@@ -14,7 +12,6 @@
   --font-text: 'Lato', sans-serif;
 }
 
-/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -22,69 +19,38 @@
   font-family: var(--font-text);
 }
 
-/* Fondo y contenedor principal */
+/* Fondo con imagen visible alrededor del card */
 body {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  overflow: hidden;
-  background: url("../registrarse/img/REGISTRATE\ \(2\).png") no-repeat center center/cover;
+  background: url("../registrarse/img/REGISTRATE\ \(2\).png") no-repeat center center / cover;
   background-attachment: fixed;
+  padding: 40px 20px;
 }
-
 
 body::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  filter: blur(2px);
+  background: rgba(0, 0, 0, 0.45);
   z-index: 0;
 }
 
-
-.select-container {
-  position: relative;
-  width: 100%;
-}
-
-.select-container select {
-  width: 100%;
-  padding: 12px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  background: white;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  font-size: 15px;
-}
-
-/* Flecha */
-.select-container::after {
-  content: "▼";
-  font-size: 12px;
-  color: #444;
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-}
-
-
+/* Contenedor: más estrecho para que el fondo se vea a los lados */
 .login-container {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 1100px;
+  max-width: 950px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* Card blanco flotante */
 .login-box {
   background-color: var(--color-white);
   display: flex;
@@ -94,8 +60,7 @@ body::before {
   overflow: hidden;
   box-shadow: var(--shadow);
   width: 100%;
-  max-height: 700px;
-  backdrop-filter: blur(6px);
+  max-height: 640px;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
@@ -104,10 +69,10 @@ body::before {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* Formulario */
+/* Sección formulario */
 .form-section {
   flex: 1;
-  padding: 50px 60px;
+  padding: 35px 45px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -115,10 +80,8 @@ body::before {
 }
 
 .logo {
-  width: 110px;
-  margin-bottom: 15px;
-  position: relative;
-  bottom: -10px;
+  width: 100px;
+  margin-bottom: 10px;
 }
 
 .form-section h2 {
@@ -126,81 +89,131 @@ body::before {
   font-weight: 700;
   text-transform: uppercase;
   color: var(--color-primary);
-  font-size: 26px;
-  margin-bottom: 10px;
+  font-size: 24px;
+  margin-bottom: 8px;
 }
 
 h3 {
-    font-family: var(--font-titles);
-    font-weight: 300;
-    color: var(--color-primary);
-    font-size: 14px;
-    line-height: 1.4;
-  margin-bottom: 25px;
-
+  font-family: var(--font-titles);
+  font-weight: 300;
+  color: var(--color-primary);
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 18px;
+  text-align: center;
 }
 
-/* Centrar solo la segunda línea */
 h3 .centered-line {
-    display: block;
-    text-align: center;
-    margin-top: 5px; /* Ajusta el espacio si quieres */
+  display: block;
+  text-align: center;
+  margin-top: 4px;
 }
 
-
-/* Formulario interno */
 form {
   width: 100%;
-  max-width: 320px;
+  max-width: 560px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
-/* Inputs y selects */
-form input,
-form select {
+/* Grid de 2 columnas */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
   width: 100%;
-  max-width: 800px;
-  padding: 12px 18px;
-  border: 1px solid #d1d5db;
+}
+
+.form-grid input,
+.select-container select {
+  width: 100%;
+  padding: 11px 16px;
+  border: 1px solid var(--color-primary);
   border-radius: 20px;
   background-color: #f9f9f9;
-  font-size: 15px;
+  font-size: 14px;
   color: var(--color-text);
   transition: 0.3s;
 }
 
-option {
-  background-color: #f9f9f9;
-}
-
-form input::placeholder {
+.form-grid input::placeholder {
   color: #999;
 }
 
-form input:focus,
-form select:focus {
+.form-grid input:focus,
+.select-container select:focus {
   outline: none;
   border-color: var(--color-secondary);
   box-shadow: 0 0 8px rgba(234, 130, 23, 0.25);
   background-color: #fff;
 }
 
-/* Campo contraseña con icono */
+option {
+  background-color: #f9f9f9;
+}
+
+/* Select con flecha */
+.select-container {
+  position: relative;
+  width: 100%;
+  
+}
+
+.select-container select {
+  appearance: none;
+  -webkit-appearance: none;
+  color: #999;
+}
+
+.select-container select:valid,
+.select-container select option:not([disabled]) {
+  color: var(--color-text);
+}
+
+.select-container::after {
+  content: "▼";
+  font-size: 11px;
+  color:var(--color-secondary); 
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Campo contraseña */
 .password-container {
   position: relative;
   width: 100%;
 }
 
 .password-container input {
-  padding-right: 40px;
+  width: 100%;
+  padding: 11px 40px 11px 16px;
+  border: 1px solid var(--color-primary);
+  border-radius: 20px;
+  background-color: #f9f9f9;
+  font-size: 14px;
+  color: var(--color-text);
+  transition: 0.3s;
+}
+
+.password-container input::placeholder {
+  color: #999;
+}
+
+.password-container input:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 8px rgba(234, 130, 23, 0.25);
+  background-color: #fff;
 }
 
 .password-container i {
   position: absolute;
-  right: 15px;
+  right: 14px;
   top: 50%;
   transform: translateY(-50%);
   color: #555;
@@ -212,32 +225,49 @@ form select:focus {
   color: var(--color-secondary);
 }
 
-/* Botón general */
+/* Error */
+.error-msg {
+  font-size: 11px;
+  color: #e74c3c;
+  grid-column: span 2;
+  padding-left: 10px;
+  margin-top: -4px;
+}
+
+.input-error {
+  border-color: #e74c3c !important;
+  box-shadow: 0 0 8px rgba(231, 76, 60, 0.25) !important;
+}
+
+/* Botón naranja igual a inicio de sesión */
 button {
   width: 85%;
-  max-width: 300px;
-  background-color: var(--color-primary);
+  max-width: 280px;
+  background-color: var(--color-secondary);
   color: var(--color-white);
   border: none;
   border-radius: 20px;
-  padding: 12px 50px;
+  padding: 11px 40px;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   cursor: pointer;
-  margin-top: -18px;
+  margin-top: 6px;
   transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 20px rgba(9, 28, 152, 0.3);
 }
 
 button:hover {
-  background-color: #142538;
+  background-color: #d4711a;
   transform: scale(1.05);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 25px rgba(234, 130, 23, 0.4);
 }
 
-/* Imagen sección */
+/* Imagen lado derecho */
 .image-section {
-  flex: 1;
+  width: 400px;
+  flex-shrink: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -245,77 +275,43 @@ button:hover {
 }
 
 .image-section img {
-  width: 492px;
-  height: 738px;
+  width: 100%;
+  height: 150%;
   object-fit: cover;
-  transition: transform 0.5s ease, box-shadow 0.3s ease;
-  border-radius: 0 0 25px 25px;
+  transition: transform 0.5s ease;
 }
 
 .image-section img:hover {
   transform: scale(1.05);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
-
-/* Contenedor igual a los otros campos */
-.file-container {
-  position: relative;
-  width: 100%;
-}
-
-/* Input tipo file con el mismo estilo que los otros */
-.file-container input[type="file"] {
-  width: 100%;
-  padding: 12px 18px;
-  border: 1px solid #d1d5db;
-  border-radius: 20px;
-  background-color: #f9f9f9;
-  font-size: 15px;
-  color: transparent; /* Oculta el texto del archivo */
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-/* Placeholder falso */
-.file-placeholder {
-  position: relative;
-  top: -39px;
-  left: 170px;
-  transform: translateY(-50%);
-  color: #838383;
-  pointer-events: none;
-  font-size: 15px;
-}
-
-/* Cuando se selecciona un archivo, ocultamos el placeholder */
-.file-container input[type="file"]:valid + .file-placeholder {
-  display: none;
-}
-
-/* Hover y focus */
-.file-container input[type="file"]:hover,
-.file-container input[type="file"]:focus {
-  border-color: var(--color-secondary);
-  background-color: #fff;
-  box-shadow: 0 0 8px rgba(234, 130, 23, 0.25);
-}
-
-
-
 
 /* Responsive */
 @media (max-width: 900px) {
+  body {
+    padding: 20px 15px;
+  }
+
   .login-box {
     flex-direction: column;
     max-height: none;
   }
 
   .form-section {
-    padding: 30px;
+    padding: 30px 25px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .error-msg {
+    grid-column: span 1;
   }
 
   .image-section {
-    height: 250px;
+    width: 100%;
+    height: 220px;
+    flex-shrink: 1;
   }
 
   .image-section img {
