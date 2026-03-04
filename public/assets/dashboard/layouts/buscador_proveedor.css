@@ -4,7 +4,6 @@
 
 .ag-buscador-proveedor {
     height: 80px;
-    margin-left: 280px;
     background-color: #FFFFFF;
     display: flex;
     align-items: center;
@@ -16,6 +15,12 @@
     z-index: 100;
     gap: 20px;
     font-family: 'Lato', sans-serif;
+    margin-left: 0;
+    /* IMPORTANTE */
+    width: 100%;
+    /* IMPORTANTE */
+    margin-left: -20px;
+    width: calc(100% + 40px);
 }
 
 
@@ -23,7 +28,8 @@
 
 .busqueda-wrapper {
     position: relative;
-    width: 350px;
+    width: 550px;
+    margin-right: auto;
 }
 
 .busqueda-wrapper input {

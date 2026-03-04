@@ -173,6 +173,7 @@ $datos = listarActividades();
                     </table>
                 </div>
             </div>
+        </div>
     </section>
 
 

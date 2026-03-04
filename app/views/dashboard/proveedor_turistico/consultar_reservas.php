@@ -156,9 +156,6 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                 </div>
             </div>
         </div>
-        </div>
-
-        </div>
     </section>
 
     <!-- MODAL DETALLE RESERVA -->

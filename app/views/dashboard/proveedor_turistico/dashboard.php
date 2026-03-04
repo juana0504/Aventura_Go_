@@ -36,7 +36,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
 
     <!-- CSS solo de esta vista (Siempre al final) -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/proveedorTuristico/proveedorTuristico.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/dashboard/dashboard.css">
 </head>
 
 <body>
@@ -140,10 +140,10 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                                         <select id="filtro-anio-proveedor" class="form-select">
                                             <option value="">Todos</option>
                                             <?php
-                                                $anioActual = date('Y');
-                                                for ($a = $anioActual; $a >= 2020; $a--) {
-                                                    echo "<option value=\"$a\">$a</option>";
-                                                }
+                                            $anioActual = date('Y');
+                                            for ($a = $anioActual; $a >= 2020; $a--) {
+                                                echo "<option value=\"$a\">$a</option>";
+                                            }
                                             ?>
                                         </select>
                                     </div>
@@ -152,11 +152,11 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                                         <select id="filtro-mes-proveedor" class="form-select">
                                             <option value="">Todos</option>
                                             <?php
-                                                $meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-                                                foreach ($meses as $i => $m) {
-                                                    $num = $i + 1;
-                                                    echo "<option value=\"$num\">$m</option>";
-                                                }
+                                            $meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+                                            foreach ($meses as $i => $m) {
+                                                $num = $i + 1;
+                                                echo "<option value=\"$num\">$m</option>";
+                                            }
                                             ?>
                                         </select>
                                     </div>
@@ -189,11 +189,13 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                                                 <td><?= htmlspecialchars($r['nombre_actividad']) ?></td>
                                                 <td><?= htmlspecialchars($r['cantidad_personas']) ?></td>
                                                 <td>$<?= number_format($r['precio'], 2) ?></td>
-                                                <td><span class="badge <?= $r['estado']=='confirmada' ? 'bg-success' : ($r['estado']=='pendiente' ? 'bg-warning text-dark' : 'bg-secondary') ?>"><?= htmlspecialchars($r['estado']) ?></span></td>
+                                                <td><span class="badge <?= $r['estado'] == 'confirmada' ? 'bg-success' : ($r['estado'] == 'pendiente' ? 'bg-warning text-dark' : 'bg-secondary') ?>"><?= htmlspecialchars($r['estado']) ?></span></td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php else: ?>
-                                        <tr><td colspan="6" class="text-center">No hay reservas recientes.</td></tr>
+                                        <tr>
+                                            <td colspan="6" class="text-center">No hay reservas recientes.</td>
+                                        </tr>
                                     <?php endif; ?>
                                 </tbody>
                             </table>
