@@ -1,156 +1,146 @@
-/* ========== BARRA DE BÚSQUEDA ========== */
-#busqueda {
-    position: relative;
-    padding: 10px 0 20px;
+/* ==========================================
+   AVENTURA GO - BARRA SUPERIOR PROVEEDOR
+========================================== */
+
+.ag-buscador-proveedor {
+    height: 80px;
+    background-color: #FFFFFF;
     display: flex;
     align-items: center;
-    gap: 15px;
-
+    justify-content: flex-end;
+    padding: 0 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    gap: 20px;
+    font-family: 'Lato', sans-serif;
+    margin-left: 0;
+    /* IMPORTANTE */
+    width: 100%;
+    /* IMPORTANTE */
+    margin-left: -20px;
+    width: calc(100% + 40px);
 }
 
-#busqueda input {
 
-    margin-bottom: 14px;
-}
+/* ================= BUSCADOR ================= */
 
-/* Contenedor del input + ícono */
 .busqueda-wrapper {
     position: relative;
-    width: 100%;
-    /* ajusta si tu layout lo necesita */
-    max-width: 720px;
-
+    width: 550px;
+    margin-right: auto;
 }
 
-/* Input */
 .busqueda-wrapper input {
     width: 100%;
-    /* espacio real para el ícono */
-    padding-left: 40px;
-    height: 42px;
-    border-radius: 10px;
-    border: none;
-    outline: none;
-    background-color: #e9eff6;
-    font-family: 'Lato', sans-serif;
+    padding: 12px 45px 12px 18px;
+    border-radius: 30px;
+    border: 1px solid #E0E0E0;
     font-size: 14px;
+    background-color: #F8F9FA;
+    transition: all 0.3s ease;
 }
 
-/* Ícono de búsqueda */
-.busqueda-wrapper .bi-search {
+.busqueda-wrapper input:focus {
+    outline: none;
+    border-color: #EA8217;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 4px rgba(234, 130, 23, 0.15);
+}
+
+.busqueda-wrapper i {
     position: absolute;
-    left: 14px;
-    top: 40%;
+    right: 15px;
+    top: 50%;
     transform: translateY(-50%);
-    font-size: 18px;
-    color: #95a5a6;
-    pointer-events: none;
+    color: #2D4059;
+    font-size: 16px;
 }
 
-
+/* ================= BOTONES ICONO ================= */
 
 #modoOscuroBtn,
 #notificacionesBtn {
-    margin-bottom: 16px;
-    margin-left: 10px;
-    padding: 7px 20px;
-    background-color: #DEE6F2;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-#busqueda .bi-moon-fill,
-#busqueda .bi-bell-fill {
-    color: #000000;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-/* Estilos del dropdown de perfil */
-#busqueda #perfil {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 20px;
-    background-color: #EA8217;
+    width: 45px;
+    height: 45px;
     border-radius: 12px;
-    text-decoration: none;
-    color: #ffffff;
-    /* ancho fijo */
-    width: 260px;
-    box-sizing: border-box;
-    margin-left: 100px;
-    margin-bottom: 10px;
-}
-
-#busqueda #perfil span {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-
-#busqueda #perfil img {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-#busqueda #perfil p {
-    font-weight: 600;
-    font-size: 14px;
-    margin: 0;
-}
-
-#busqueda #perfil h6 {
-    font-weight: 600;
-    font-size: 16px;
-    margin: 0;
-}
-
-
-/* Estilos del dropdown */
-#perfil-dropdown .dropdown-menu {
-    border-radius: 0 0 12px;
     border: none;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-
-#perfil-dropdown .dropdown-item {
-    padding: 10px 20px;
-    font-size: 14px;
+    background-color: #F8F9FA;
     color: #2D4059;
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    transition: 0.25s ease;
+    font-size: 18px;
+    cursor: pointer;
 }
 
-#perfil-dropdown .dropdown-item:hover {
-    background-color: #ffffff;
+#modoOscuroBtn:hover,
+#notificacionesBtn:hover {
+    background-color: #EA8217;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+}
+
+/* ================= PERFIL ================= */
+
+#perfil {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    background-color: #EA8217;
+    padding: 8px 18px;
+    border-radius: 40px;
+    color: #FFFFFF;
+    transition: 0.3s ease;
+}
+
+#perfil:hover {
+    background-color: #cf6f13;
+}
+
+/* Imagen usuario */
+#perfil img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #FFFFFF;
+}
+
+/* Info usuario */
+.info-usuario p {
+    margin: 0;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.info-usuario h6 {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+/* ================= DROPDOWN ================= */
+
+.dropdown-menu {
+    border-radius: 15px;
+    border: 1px solid #E0E0E0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    padding: 10px;
+    font-size: 14px;
+}
+
+.dropdown-item {
+    border-radius: 10px;
+    padding: 10px 12px;
+    transition: 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #F8F9FA;
     color: #EA8217;
-}
-
-#perfil-dropdown .dropdown-item i {
-    font-size: 16px;
-}
-
-#perfil-dropdown .dropdown-divider {
-    margin: 5px 0;
-}
-
-#perfil.dropdown-toggle {
-    position: relative;
-    padding-right: 40px;
-    /* espacio fijo para la flecha */
-}
-
-#perfil.dropdown-toggle::after {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    margin-left: 0;
 }

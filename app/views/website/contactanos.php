@@ -259,16 +259,31 @@
         <div class="container-fluid">
             <div class="mapa-section">
                 <h2>Encuéntranos fácilmente</h2>
+
                 <div class="mapa-contenedor">
+
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.166972063625!2d-74.472745125039!3d5.013951139904496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4067dfb5f1a3e7%3A0xeca58a4d9a0f72cb!2sVilleta%2C%20Cundinamarca!5e0!3m2!1ses!2sco!4v1690391856678!5m2!1ses!2sco"
-                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        width="100%"
+                        height="450"
+                        style="border:0;"
+                        loading="lazy"
+                        allowfullscreen
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Ubicación de Aventura Go en Villeta, Cundinamarca"
+                        src="https://www.google.com/maps?q=5.011562,-74.468666(Cl.4%20%234-01%20Villeta)&hl=es&z=18&output=embed">
                     </iframe>
+
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=5.011562,-74.468666"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn-como-llegar">
+                        <i class="fas fa-directions"></i> Cómo llegar
+                    </a>
+
                 </div>
             </div>
         </div>
     </section>
-
 
 
     <!-- F O O T E R_____________________________________________________________________________________________________________________________ -->

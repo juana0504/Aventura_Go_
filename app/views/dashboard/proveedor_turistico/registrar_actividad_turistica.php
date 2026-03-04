@@ -26,8 +26,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- Layouts -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_proveedor.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
     <!-- CSS propio -->
@@ -46,101 +45,95 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
         ?>
 
         <!-- Contenido Principal -->
-        <div class="contenido-principal">
+        <div class="info">
 
             <!-- Barra de Búsqueda Superior -->
             <?php
             require_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php';
             ?>
 
-            <div class="info">
-                <!-- Formulario Wizard -->
-                <form id="formActividad" action="<?= BASE_URL ?>/proveedor/guardar-actividad" method="POST" enctype="multipart/form-data">
+            <!-- Formulario Wizard -->
+            <form id="formActividad" action="<?= BASE_URL ?>/proveedor/guardar-actividad" method="POST" enctype="multipart/form-data">
 
-                    <input type="hidden" name="accion" value="registrar">
+                <input type="hidden" name="accion" value="registrar">
 
-                    <div class="wizard-header">
-                        <h1 class="mb-0">Registro de actividades turisticas</p>
-                    </div>
+                <div class="wizard-header">
+                    <h1 class="mb-0">Registro de actividades turisticas</h1>
+                </div>
 
 
-                    <!-- ================= PASO 1 ================= -->
-                    <div class="wizard-step active" id="step-1">
-                        <h3>Paso 1 de 3: Información básica</h3>
+                <!-- ================= PASO 1 ================= -->
+                <div class="wizard-step active" id="step-1">
+                    <h3>Paso 1 de 3: Información básica</h3>
 
-                        <label>Nombre de la actividad</label>
-                        <input type="text" name="nombre" required>
-                        <div class="row">
-                            <div class="col-md-5 mb-3">
-                                <!-- 🔥 NUEVO: DEPARTAMENTO -->
-                                <label>Departamento</label>
-                                <select name="id_departamento" id="id_departamento" required>
-                                    <option value="">Seleccione departamento</option>
-                                </select>
-                            </div>
-                            <div class="col-md-5 mb-3">
-                                <!-- 🔥 NUEVO: CIUDAD (DESTINO REAL) -->
-                                <label>Destino (Ciudad)</label>
-                                <select name="id_ciudad" id="id_ciudad" required>
-                                    <option value="">Seleccione ciudad</option>
-                                </select>
-                            </div>
-
+                    <label>Nombre de la actividad</label>
+                    <input type="text" name="nombre" required>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <!--  DEPARTAMENTO -->
+                            <label>Departamento</label>
+                            <select name="id_departamento" id="id_departamento" required>
+                                <option value="">Seleccione departamento</option>
+                            </select>
                         </div>
-                        <label>Ubicación</label>
-                        <input type="text" name="ubicacion" required>
-
-                        <div class="wizard-actions">
-                            <span></span>
-                            <button type="button" onclick="nextStep(2)">Siguiente</button>
+                        <div class="col-md-6 mb-3">
+                            <!-- CIUDAD (DESTINO REAL) -->
+                            <label>Destino (Ciudad)</label>
+                            <select name="id_ciudad" id="id_ciudad" required>
+                                <option value="">Seleccione ciudad</option>
+                            </select>
                         </div>
+
                     </div>
+                    <label>Ubicación</label>
+                    <input type="text" name="ubicacion" required>
 
-                    <!-- ================= PASO 2 ================= -->
-                    <div class="wizard-step" id="step-2">
-                        <h3>Paso 2 de 3: Detalles de la actividad</h3>
-
-                        <label>Descripción</label>
-                        <textarea type="text" name="descripcion" required></textarea>
-
-                        <label>Cupos disponibles</label>
-                        <input type="number" name="cupos" required>
-
-                        <div class="wizard-actions">
-                            <button type="button" onclick="prevStep(1)">Atrás</button>
-                            <button type="button" onclick="nextStep(3)">Siguiente</button>
-                        </div>
+                    <div class="wizard-actions">
+                        <span></span>
+                        <button type="button" onclick="nextStep(2)">Siguiente</button>
                     </div>
+                </div>
 
-                    <!-- ================= PASO 3 ================= -->
-                    <div class="wizard-step" id="step-3">
-                        <h3>Paso 3: Precio y estado</h3>
+                <!-- ================= PASO 2 ================= -->
+                <div class="wizard-step" id="step-2">
+                    <h3>Paso 2 de 3: Descripcion y cupos</h3>
 
-                        <label>Precio</label>
-                        <input type="number" name="precio" required>
+                    <label>Descripción</label>
+                    <textarea type="text" name="descripcion" required></textarea>
 
-                        <label>Estado</label>
-                        <select name="estado">
-                            <option value="ACTIVO">Activa</option>
-                            <option value="INACTIVO">Inactiva</option>
-                        </select>
+                    <label>Cupos disponibles</label>
+                    <input type="number" name="cupos" required>
 
-                        <label>Imágenes de la actividad (máx. 5)</label>
-                        <input type="file" name="imagenes[]" multiple required>
-                        <small>Selecciona hasta 5 imágenes (JPG o PNG)</small>
-
-                        <div class="wizard-actions">
-                            <button type="button" onclick="prevStep(2)">Atrás</button>
-                            <button type="submit">Guardar actividad</button>
-                        </div>
+                    <div class="wizard-actions">
+                        <button type="button" onclick="prevStep(1)">Atrás</button>
+                        <button type="button" onclick="nextStep(3)">Siguiente</button>
                     </div>
+                </div>
 
-                </form>
+                <!-- ================= PASO 3 ================= -->
+                <div class="wizard-step" id="step-3">
+                    <h3>Paso 3: Precio y estado</h3>
 
-            </div>
+                    <label>Precio</label>
+                    <input type="number" name="precio" required>
 
+                    <label>Estado</label>
+                    <select name="estado">
+                        <option value="ACTIVO">Activa</option>
+                        <option value="INACTIVO">Inactiva</option>
+                    </select>
+
+                    <label>Imágenes de la actividad (máx. 5)</label>
+                    <input type="file" name="imagenes[]" multiple required>
+                    <small>Selecciona hasta 5 imágenes (JPG o PNG) no deben exeder 1 mp cada una</small>
+
+                    <div class="wizard-actions">
+                        <button type="button" onclick="prevStep(2)">Atrás</button>
+                        <button type="submit">Guardar actividad</button>
+                    </div>
+                </div>
+            </form>
         </div>
-
     </section>
 
     <!-- WIZARD JS (NO TOCAR)-->

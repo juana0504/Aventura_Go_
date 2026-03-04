@@ -4,6 +4,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Mis Tickets</title>
@@ -27,7 +28,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
 
     <!-- Componentes comunes -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_proveedor.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
 
@@ -37,99 +38,100 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
 <body>
 
-<section id="listar-tickets">
+    <section id="listar-tickets">
 
-<?php require_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php'; ?>
+        <?php require_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php'; ?>
 
-<div class="contenido-principal">
-<?php require_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php'; ?>
+        <div class="contenido-principal">
+            <?php require_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php'; ?>
 
-<div class="info">
+            <div class="info">
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Mis Tickets de Soporte</h1>
-    <a href="<?= BASE_URL ?>/proveedor/tickets/crear" class="btn btn-primary">
-        <i class="fa fa-plus"></i> Crear Ticket
-    </a>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1>Mis Tickets de Soporte</h1>
+                    <a href="<?= BASE_URL ?>/proveedor/tickets/crear" class="btn btn-primary">
+                        <i class="fa fa-plus"></i> Crear Ticket
+                    </a>
 
-</div>
-
-<div class="table-responsive">
-<table class="table table-hover align-middle">
-<thead class="table-dark">
-<tr>
-    <th>#</th>
-    <th>Asunto</th>
-    <th>Estado</th>
-    <th>Fecha</th>
-    <th>Respuesta</th>
-</tr>
-</thead>
-
-<tbody>
-<?php if (empty($tickets)): ?>
-<tr>
-    <td colspan="5" class="text-center">No has creado tickets aún</td>
-</tr>
-<?php else: ?>
-<?php foreach ($tickets as $ticket): ?>
-<tr>
-    <td><?= $ticket['id_ticket'] ?></td>
-    <td><?= htmlspecialchars($ticket['asunto']) ?></td>
-
-    <td>
-        <?php if ($ticket['estado'] === 'abierto'): ?>
-            <span class="badge bg-warning text-dark">Abierto</span>
-        <?php elseif ($ticket['estado'] === 'respondido'): ?>
-            <span class="badge bg-success">Respondido</span>
-        <?php else: ?>
-            <span class="badge bg-secondary">Cerrado</span>
-        <?php endif; ?>
-    </td>
-
-    <td><?= date('d/m/Y H:i', strtotime($ticket['fecha_creacion'])) ?></td>
-
-    <td>
-            <?php if (!empty($ticket['respuesta'])): ?>
-                <button class="btn btn-sm btn-outline-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#respuesta<?= $ticket['id_ticket'] ?>">
-                    Ver
-                </button>
-            <?php else: ?>
-                <span class="text-muted">Sin respuesta</span>
-            <?php endif; ?>
-        </td>
-
-        <?php foreach ($tickets as $ticket): ?>
-            <?php if (!empty($ticket['respuesta'])): ?>
-                <div class="modal fade" id="respuesta<?= $ticket['id_ticket'] ?>" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Respuesta del Administrador</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <?= nl2br(htmlspecialchars($ticket['respuesta'])) ?>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            <?php endif; ?>
-        <?php endforeach; ?>
-    </tr>
-<?php endforeach; ?>
-<?php endif; ?>
-</tbody>
 
-</table>
-</div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Asunto</th>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                                <th>Respuesta</th>
+                            </tr>
+                        </thead>
 
-</div>
-</div>
-</section>
+                        <tbody>
+                            <?php if (empty($tickets)): ?>
+                                <tr>
+                                    <td colspan="5" class="text-center">No has creado tickets aún</td>
+                                </tr>
+                            <?php else: ?>
+                                <?php foreach ($tickets as $ticket): ?>
+                                    <tr>
+                                        <td><?= $ticket['id_ticket'] ?></td>
+                                        <td><?= htmlspecialchars($ticket['asunto']) ?></td>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+                                        <td>
+                                            <?php if ($ticket['estado'] === 'abierto'): ?>
+                                                <span class="badge bg-warning text-dark">Abierto</span>
+                                            <?php elseif ($ticket['estado'] === 'respondido'): ?>
+                                                <span class="badge bg-success">Respondido</span>
+                                            <?php else: ?>
+                                                <span class="badge bg-secondary">Cerrado</span>
+                                            <?php endif; ?>
+                                        </td>
+
+                                        <td><?= date('d/m/Y H:i', strtotime($ticket['fecha_creacion'])) ?></td>
+
+                                        <td>
+                                            <?php if (!empty($ticket['respuesta'])): ?>
+                                                <button class="btn btn-sm btn-outline-primary"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#respuesta<?= $ticket['id_ticket'] ?>">
+                                                    Ver
+                                                </button>
+                                            <?php else: ?>
+                                                <span class="text-muted">Sin respuesta</span>
+                                            <?php endif; ?>
+                                        </td>
+
+                                        <?php foreach ($tickets as $ticket): ?>
+                                            <?php if (!empty($ticket['respuesta'])): ?>
+                                                <div class="modal fade" id="respuesta<?= $ticket['id_ticket'] ?>" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Respuesta del Administrador</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <?= nl2br(htmlspecialchars($ticket['respuesta'])) ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

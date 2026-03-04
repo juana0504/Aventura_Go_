@@ -50,7 +50,7 @@ if (!empty($proveedor['actividades'])) {
 
 <body>
     <!-- Layout Principal con Panel y Contenido -->
-    <section id="proveedor-dashboard">
+    <section id="proveedor">
 
         <!-- Panel Lateral -->
         <?php
@@ -196,6 +196,7 @@ if (!empty($proveedor['actividades'])) {
                                 </div>
 
                                 <div class="col-md-6 mb-3">
+                                    <label for="departamento">Ciudad *</label>
                                     <select name="id_ciudad" id="id_ciudad" class="form-control" required>
                                         <option value="">Seleccione una ciudad</option>
                                         <?php if (!empty($ciudades)): ?>
