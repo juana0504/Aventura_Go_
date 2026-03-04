@@ -346,6 +346,9 @@ if (!empty($proveedor['actividades'])) {
                             </form>
                         </div>
                         <div class="col-lg-3 col-md-4 parrafos-informativos">
+
+                            <img src="../public/assets/dashboard/proveedor_turistico/completar_informacion/img/image.png" alt="logo aventura go" class="mb-3">
+
                             <p>
                                 <strong>¿Por qué registrar tu empresa?</strong> <br>
                                 En Aventura Go conectamos viajeros con experiencias auténticas de turismo de aventura.

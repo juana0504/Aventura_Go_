@@ -87,6 +87,16 @@ textarea {
     padding: 20px 20px;
 }
 
+.parrafos-informativos img {
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    display: block;
+}
+
+
+
 /* ================= WIZARD ================= */
 
 .wizard-container {
