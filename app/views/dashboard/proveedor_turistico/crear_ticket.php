@@ -4,6 +4,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Crear Ticket</title>
@@ -27,10 +28,10 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
 
     <!-- Componentes comunes -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_proveedor.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
-    
+
 
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/tickets/tickets.css">
 
@@ -38,63 +39,62 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
 <body>
 
-<section id="crear-ticket">
+    <section id="crear-ticket">
 
-    <?php require_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php'; ?>
+        <?php require_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php'; ?>
 
-    <div class="contenido-principal">
+        <div class="contenido-principal">
 
-        <?php require_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php'; ?>
+            <?php require_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php'; ?>
 
-        <div class="info">
+            <div class="info">
 
-            <div class="card">
-                <div class="card-body">
+                <div class="card">
+                    <div class="card-body">
 
-                    <h4 class="mb-4">Crear Ticket de Soporte</h4>
+                        <h4 class="mb-4">Crear Ticket de Soporte</h4>
 
-                    <form method="POST" action="<?= BASE_URL ?>/proveedor/tickets/guardar">
+                        <form method="POST" action="<?= BASE_URL ?>/proveedor/tickets/guardar">
 
-                        <div class="mb-3">
-                            <label class="form-label">Asunto</label>
-                            <input
-                                type="text"
-                                name="asunto"
-                                class="form-control"
-                                required
-                            >
-                        </div>
+                            <div class="mb-3">
+                                <label class="form-label">Asunto</label>
+                                <input
+                                    type="text"
+                                    name="asunto"
+                                    class="form-control"
+                                    required>
+                            </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Descripción</label>
-                            <textarea
-                                name="descripcion"
-                                class="form-control"
-                                rows="6"
-                                required
-                            ></textarea>
-                        </div>
+                            <div class="mb-3">
+                                <label class="form-label">Descripción</label>
+                                <textarea
+                                    name="descripcion"
+                                    class="form-control"
+                                    rows="6"
+                                    required></textarea>
+                            </div>
 
-                        <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-primary">
-                                Enviar Ticket
-                            </button>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primary">
+                                    Enviar Ticket
+                                </button>
 
-                            <a href="<?= BASE_URL ?>/proveedor/tickets" class="btn btn-secondary">
-                                Volver
-                            </a>
-                        </div>
+                                <a href="<?= BASE_URL ?>/proveedor/tickets" class="btn btn-secondary">
+                                    Volver
+                                </a>
+                            </div>
 
-                    </form>
+                        </form>
 
+                    </div>
                 </div>
+
             </div>
-
         </div>
-    </div>
 
-</section>
+    </section>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
