@@ -1,64 +1,83 @@
 /* ==========================================
-   AVENTURA GO - BARRA SUPERIOR PROVEEDOR
+   TOPBAR PROVEEDOR TURISTICO
+   AVENTURA GO
 ========================================== */
 
 .ag-buscador-proveedor {
     height: 80px;
-    background-color: #FFFFFF;
+    background: #FFFFFF;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    gap: 20px;
     padding: 0 40px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     position: sticky;
     top: 0;
     z-index: 100;
-    gap: 20px;
-    font-family: 'Lato', sans-serif;
-    margin-left: 0;
-    /* IMPORTANTE */
-    width: 100%;
-    /* IMPORTANTE */
-    margin-left: -20px;
-    width: calc(100% + 40px);
 }
 
 
-/* ================= BUSCADOR ================= */
+/* ==========================================
+   BUSCADOR
+========================================== */
 
 .busqueda-wrapper {
-    position: relative;
-    width: 550px;
     margin-right: auto;
+    position: relative;
+    width: 450px;
+    max-width: 450px;
+    flex: 0 0 450px;
 }
+
 
 .busqueda-wrapper input {
     width: 100%;
     padding: 12px 45px 12px 18px;
     border-radius: 30px;
     border: 1px solid #E0E0E0;
+    background: #F8F9FA;
     font-size: 14px;
-    background-color: #F8F9FA;
-    transition: all 0.3s ease;
+    transition: 0.3s;
+    font-family: 'Lato', sans-serif;
 }
+
 
 .busqueda-wrapper input:focus {
     outline: none;
     border-color: #EA8217;
-    background-color: #FFFFFF;
+    background: #FFFFFF;
     box-shadow: 0 0 0 4px rgba(234, 130, 23, 0.15);
 }
 
-.busqueda-wrapper i {
+
+/* BOTON LUPA */
+
+.btn-buscar {
     position: absolute;
-    right: 15px;
+    right: 6px;
     top: 50%;
     transform: translateY(-50%);
-    color: #2D4059;
-    font-size: 16px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: #EA8217;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.25s;
 }
 
-/* ================= BOTONES ICONO ================= */
+.btn-buscar:hover {
+    background: #cf6f13;
+}
+
+
+/* ==========================================
+   BOTONES (modo oscuro / notificaciones)
+========================================== */
 
 #modoOscuroBtn,
 #notificacionesBtn {
@@ -66,81 +85,94 @@
     height: 45px;
     border-radius: 12px;
     border: none;
-    background-color: #F8F9FA;
+    background: #F8F9FA;
     color: #2D4059;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 0.25s ease;
     font-size: 18px;
     cursor: pointer;
+    transition: 0.25s;
 }
 
 #modoOscuroBtn:hover,
 #notificacionesBtn:hover {
-    background-color: #EA8217;
+    background: #EA8217;
     color: #FFFFFF;
     transform: translateY(-2px);
 }
 
-/* ================= PERFIL ================= */
 
+/* ==========================================
+   PERFIL USUARIO
+========================================== */
 #perfil {
     display: flex;
     align-items: center;
     gap: 12px;
-    text-decoration: none;
-    background-color: #EA8217;
-    padding: 8px 18px;
-    border-radius: 40px;
+    background: #EA8217;
     color: #FFFFFF;
-    transition: 0.3s ease;
+    padding: 8px 18px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: .25s;
 }
 
 #perfil:hover {
-    background-color: #cf6f13;
+    background: #2D4059;
+    color: #FFFFFF;
 }
 
-/* Imagen usuario */
+
+
+/* FOTO PERFIL */
+
 #perfil img {
     width: 42px;
     height: 42px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #FFFFFF;
+    border: 2px solid #E0E0E0;
 }
 
-/* Info usuario */
+
+
+/* INFO USUARIO */
+
 .info-usuario p {
     margin: 0;
-    font-weight: 600;
     font-size: 14px;
+    font-weight: 600;
+    font-family: 'Raleway', sans-serif;
 }
 
 .info-usuario h6 {
     margin: 0;
     font-size: 12px;
-    font-weight: 400;
-    opacity: 0.9;
+    color: #FFFFFF;
+    font-weight: 500;
 }
 
-/* ================= DROPDOWN ================= */
+
+/* ==========================================
+   DROPDOWN BOOTSTRAP
+========================================== */
 
 .dropdown-menu {
-    border-radius: 15px;
+    border-radius: 12px;
     border: 1px solid #E0E0E0;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    padding: 10px;
-    font-size: 14px;
+    padding: 8px 0;
 }
 
 .dropdown-item {
-    border-radius: 10px;
-    padding: 10px 12px;
-    transition: 0.2s ease;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
 }
 
 .dropdown-item:hover {
-    background-color: #F8F9FA;
-    color: #EA8217;
+    background: #F8F9FA;
 }

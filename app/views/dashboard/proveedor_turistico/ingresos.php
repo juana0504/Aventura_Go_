@@ -87,7 +87,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                                             <td class="text-end"><span class="text-currency">$<?= number_format($row['precio'], 2) ?></span></td>
                                             <td class="text-end"><span class="text-currency">$<?= number_format($row['total'], 2) ?></span></td>
                                             <td>
-                                                <span class="badge <?= $row['estado']=='confirmada' ? 'bg-success' : ($row['estado']=='pendiente' ? 'bg-warning text-dark' : 'bg-secondary') ?>">
+                                                <span class="badge <?= $row['estado'] == 'confirmada' ? 'bg-success' : ($row['estado'] == 'pendiente' ? 'bg-warning text-dark' : 'bg-secondary') ?>">
                                                     <?= htmlspecialchars($row['estado']) ?>
                                                 </span>
                                             </td>
