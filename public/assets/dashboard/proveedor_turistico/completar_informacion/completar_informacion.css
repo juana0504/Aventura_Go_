@@ -241,14 +241,68 @@ textarea {
 
 /* ================= RESPONSIVE ================= */
 
-@media (max-width:992px) {
 
-    .sidebar {
-        display: none;
+@media (max-width: 992px) {
+
+    .informacion-main {
+        width: 100%;
     }
 
-    .formulario {
+    .parrafos-informativos {
+        margin-top: 20px;
+    }
+
+    #informacion-proveedor {
+        flex-direction: column;
+    }
+
+    .wizard-container {
+        max-width: 100%;
+    }
+
+}
+
+@media (max-width:768px) {
+
+    #informacion-proveedor {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .informacion-main {
+        width: 100%;
+    }
+
+    .wizard-steps {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .step {
+        flex: 0 0 45%;
+    }
+
+    .parrafos-informativos {
+        margin-top: 25px;
+    }
+
+}
+
+
+@media (max-width:576px) {
+
+    .wizard-header {
+        font-size: 18px;
         padding: 20px;
+    }
+
+    .wizard-steps {
+        display: none;
     }
 
 }
