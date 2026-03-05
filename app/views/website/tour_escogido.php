@@ -127,31 +127,6 @@ if (!$actividad) {
                     <div class="col-md-8">
 
                         <?php if (!empty($actividad)): ?>
-                            <div class="targeta">
-                                <div class="col-md-6 detalle">
-                                    <h2><?= htmlspecialchars($actividad['nombre']) ?></h2>
-
-                                    <p id="direccion"><i class="bi bi-geo-alt"></i> <?= htmlspecialchars($actividad['ubicacion']) ?>, <?= htmlspecialchars($actividad['ciudad']) ?>,
-                                        <?= htmlspecialchars($actividad['departamento']) ?>,
-                                        253610 Villeta, Colombia <br></p>
-                                    <p>Después de reservar, encontrarás todos los datos del alojamiento con el número de
-                                        teléfono y la
-                                        <br>
-                                        dirección en tu confirmación de la reserva y en tu cuenta.
-                                    </p>
-                                </div>
-                                <div class="col-md-6 datos">
-                                    <!-- <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <samp>(120 Review)</samp>
-
-                                    <p><i class="bi bi-clock"></i>1 Noche, 2 Dias</p> -->
-                                    <p>$<?= htmlspecialchars($actividad['precio']) ?></p>
-                                </div>
-                            </div>
 
                             <section id="galeria-hotel">
                                 <div class="cont-img-principal">
@@ -176,26 +151,51 @@ if (!$actividad) {
 
                             </section>
 
-                            <div class="dato">
-                                <h2><?= htmlspecialchars($actividad['nombre']) ?></h2>
-                                <p><?= htmlspecialchars($actividad['descripcion']) ?></p>
+                            <div class="tarjeta">
+                                <div class="col-md-12 detalle">
+                                    <h2><?= htmlspecialchars($actividad['nombre']) ?></h2>
 
+                                    <p id="direccion"><i class="bi bi-geo-alt"></i> <?= htmlspecialchars($actividad['ubicacion']) ?>, <?= htmlspecialchars($actividad['ciudad']) ?>,
+                                        <?= htmlspecialchars($actividad['departamento']) ?>,
+                                        253610 Villeta, Colombia <br></p>
+                                    <p><?= htmlspecialchars($actividad['descripcion']) ?></p>
+                                    <p>$<?= htmlspecialchars($actividad['precio']) ?></p>
 
-                                <!-- seccion mapa -->
-                                <section id="mapa" class="mapa-section">
-                                    <div class="mapa-contenedor">
-                                        <iframe
-                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.166972063625!2d-74.472745125039!3d5.013951139904496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4067dfb5f1a3e7%3A0xeca58a4d9a0f72cb!2sVilleta%2C%20Cundinamarca!5e0!3m2!1ses!2sco!4v1690391856678!5m2!1ses!2sco"
-                                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                                        </iframe>
-                                    </div>
-                                </section>
+                                </div>
+                                <!-- <div class="col-md-6 datos"> -->
+                                <!-- <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <samp>(120 Review)</samp>
+
+                                    <p><i class="bi bi-clock"></i>1 Noche, 2 Dias</p> -->
+
+                                <!-- </div> -->
+
+                                <div class="dato">
+
+                                    <!-- seccion mapa -->
+                                    <section id="mapa" class="mapa-section">
+                                        <div class="mapa-contenedor">
+                                            <iframe
+                                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.166972063625!2d-74.472745125039!3d5.013951139904496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4067dfb5f1a3e7%3A0xeca58a4d9a0f72cb!2sVilleta%2C%20Cundinamarca!5e0!3m2!1ses!2sco!4v1690391856678!5m2!1ses!2sco"
+                                                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                            </iframe>
+                                        </div>
+                                    </section>
+                                </div>
+
                             </div>
+
+
                         <?php else: ?>
                             <p>No se encontró la actividad.</p>
                         <?php endif; ?>
                     </div>
                     <div class="col-md-4">
+
                         <!-- BOTON DE RESERVAR____________________________________________________________________________________________________________ -->
                         <form class="form-reserva" action="<?= BASE_URL ?>/formulario-reserva" method="POST">
 
@@ -209,13 +209,14 @@ if (!$actividad) {
 
                             <div class="form-group">
                                 <label>Fecha de la actividad</label>
-                                <input type="date" name="fecha" class="form-control" min="<?= date('Y-m-d') ?>"  required>
+                                <input type="date" name="fecha" class="form-control" min="<?= date('Y-m-d') ?>" required>
                             </div>
 
                             <button type="submit">
                                 Reservar
                             </button>
                         </form>
+                        
                     </div>
                 </div>
             </div>
@@ -243,8 +244,8 @@ if (!$actividad) {
                 <!-- Columna 1: Logo -->
                 <div class="col-md-2">
                     <div class="logo-section">
-                       <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
-                        class="navbar-logo">
+                        <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
+                            class="navbar-logo">
                     </div>
                 </div>
 

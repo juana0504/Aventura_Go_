@@ -316,7 +316,7 @@ if (!isset($_SESSION['id_reserva']) || !isset($_SESSION['id_pago'])) {
         card.classList.remove('pd-flipped');
     });
     inputCvv.addEventListener('input', e => {
-        const v = e.target.value.replace(/\D/g, '').slice(0, 4);
+        const v = e.target.value.replace(/\D/g, '').slice(0, 3);
         e.target.value = v;
         pdCvv.textContent = v.padEnd(v.length, '•') || '•••';
     });
