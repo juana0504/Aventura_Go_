@@ -78,11 +78,11 @@ class ActividadTuristica
         id_actividad,
         imagen,
         es_principal
-    ) VALUES (
-        :id_actividad,
-        :imagen,
-        :es_principal
-    )";
+        ) VALUES (
+            :id_actividad,
+            :imagen,
+            :es_principal
+        )";
 
         $stmt = $this->conexion->prepare($sql);
 
@@ -120,9 +120,6 @@ class ActividadTuristica
     }
 
 
-
-
-
     /** Listar una actividad por su ID */
     public function listarPorId($id)
     {
@@ -137,8 +134,6 @@ class ActividadTuristica
     }
 
 
-
-
     /** Activar actividad turística*/
     public function activar($id)
     {
@@ -150,7 +145,6 @@ class ActividadTuristica
     }
 
 
-
     /** Desactivar actividad turística*/
     public function desactivar($id)
     {
@@ -160,8 +154,6 @@ class ActividadTuristica
 
         return $stmt->execute();
     }
-
-
 
 
     /** Actualizar actividad turística(para futuro uso: edición) */
@@ -198,27 +190,27 @@ class ActividadTuristica
     public function listarActividadesPublicas()
     {
         $sql = "
-    SELECT 
-        a.id_actividad,
-        a.nombre,
-        a.precio,
-        a.descripcion,
-        a.cupos,
-        a.ubicacion,
-        c.nombre AS ciudad,
-        img.imagen
-    FROM actividad a
-    INNER JOIN proveedor p
-        ON a.id_proveedor = p.id_proveedor
-    INNER JOIN ciudades c 
-        ON a.id_ciudad = c.id_ciudad
-    LEFT JOIN actividad_imagen img 
-        ON img.id_actividad = a.id_actividad 
-       AND img.es_principal = 1
-    WHERE a.estado = 'ACTIVO'
-      AND p.estado = 'ACTIVO'
-    ORDER BY a.created_at DESC
-    ";
+        SELECT 
+            a.id_actividad,
+            a.nombre,
+            a.precio,
+            a.descripcion,
+            a.cupos,
+            a.ubicacion,
+            c.nombre AS ciudad,
+            img.imagen
+        FROM actividad a
+        INNER JOIN proveedor p
+            ON a.id_proveedor = p.id_proveedor
+        INNER JOIN ciudades c 
+            ON a.id_ciudad = c.id_ciudad
+        LEFT JOIN actividad_imagen img 
+            ON img.id_actividad = a.id_actividad 
+        AND img.es_principal = 1
+        WHERE a.estado = 'ACTIVO'
+        AND p.estado = 'ACTIVO'
+        ORDER BY a.created_at DESC
+        ";
 
         $stmt = $this->conexion->prepare($sql);
         $stmt->execute();
@@ -337,17 +329,17 @@ class ActividadTuristica
             d.nombre AS departamento,
 
             img_principal.imagen AS imagen_principal
-        FROM actividad a
-        INNER JOIN ciudades c 
-            ON a.id_ciudad = c.id_ciudad
-        INNER JOIN departamentos d
-            ON c.id_departamento = d.id_departamento
-        LEFT JOIN actividad_imagen img_principal
-            ON img_principal.id_actividad = a.id_actividad
-           AND img_principal.es_principal = 1
-        WHERE a.id_actividad = :id
-        LIMIT 1
-    ";
+            FROM actividad a
+            INNER JOIN ciudades c 
+                ON a.id_ciudad = c.id_ciudad
+            INNER JOIN departamentos d
+                ON c.id_departamento = d.id_departamento
+            LEFT JOIN actividad_imagen img_principal
+                ON img_principal.id_actividad = a.id_actividad
+            AND img_principal.es_principal = 1
+            WHERE a.id_actividad = :id
+            LIMIT 1
+            ";
 
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -365,7 +357,7 @@ class ActividadTuristica
         FROM actividad_imagen 
         WHERE id_actividad = :id
         ORDER BY es_principal DESC
-    ";
+        ";
 
         $stmtImgs = $this->conexion->prepare($sqlImgs);
         $stmtImgs->bindParam(':id', $id, PDO::PARAM_INT);
@@ -390,7 +382,7 @@ class ActividadTuristica
         AND a.estado = 'ACTIVO'
         AND p.estado = 'ACTIVO'
         LIMIT 1
-    ";
+        ";
 
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -406,11 +398,54 @@ class ActividadTuristica
         SET cupos = cupos - :cantidad
         WHERE id_actividad = :id_actividad
           AND cupos >= :cantidad
-    ";
+        ";
 
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':cantidad', $cantidad, PDO::PARAM_INT);
         $stmt->bindParam(':id_actividad', $id_actividad, PDO::PARAM_INT);
         return $stmt->execute();
+    }
+
+    public function obtenerFechasLlenas($id_actividad)
+    {
+        $sql = "SELECT r.fecha FROM reserva r JOIN actividad a ON a.id_actividad = r.id_actividad WHERE r.id_actividad = ? AND r.estado = 'Confirmada' GROUP BY r.fecha, a.cupos HAVING SUM(r.cantidad_personas) >= a.cupos";
+
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->execute([$id_actividad]);
+
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+    public function hayCuposDisponibles($idActividad, $fecha, $cantidad)
+    {
+        $sql = "SELECT cupos FROM actividad WHERE id_actividad = :id";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':id', $idActividad, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $actividad = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$actividad) {
+            return false;
+        }
+
+        $cuposTotales = (int)$actividad['cupos'];
+
+        $sql = "SELECT SUM(cantidad_personas) as reservadas
+            FROM reserva
+            WHERE id_actividad = :id
+            AND fecha = :fecha
+            AND estado = 'Confirmada'";
+
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':id', $idActividad, PDO::PARAM_INT);
+        $stmt->bindParam(':fecha', $fecha);
+        $stmt->execute();
+
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $reservadas = (int)($resultado['reservadas'] ?? 0);
+
+        return ($reservadas + $cantidad) <= $cuposTotales;
     }
 }

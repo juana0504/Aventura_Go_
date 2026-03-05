@@ -60,40 +60,4 @@ function moveCarousel(i) {
     index = i;
 }
 
-// Flechas
-next.addEventListener("click", () => {
-    index = (index + 1) % images.length;
-    moveCarousel(index);
-});
-
-prev.addEventListener("click", () => {
-    index = (index - 1 + images.length) % images.length;
-    moveCarousel(index);
-});
-
-// Botones / miniaturas
-items.forEach((btn, i) => {
-    btn.addEventListener("click", () => {
-        moveCarousel(i);
-    });
-});
-
-// AUTOPLAY
-function nextSlide() {
-    index = (index + 1) % images.length;
-    moveCarousel(index);
-}
-
-let autoPlayInterval = setInterval(nextSlide, 2000);
-
-// Pausa al interactuar
-carousel.addEventListener("mouseenter", () => {
-    clearInterval(autoPlayInterval);
-});
-
-carousel.addEventListener("mouseleave", () => {
-    autoPlayInterval = setInterval(nextSlide, 4000);
-});
-S
-
 
