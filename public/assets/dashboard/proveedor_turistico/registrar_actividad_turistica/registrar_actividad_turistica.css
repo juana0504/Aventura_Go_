@@ -40,31 +40,23 @@ textarea {
     font-family: var(--font-text);
 }
 
-/* ========================================
-   ESTRUCTURA DASHBOARD
-======================================== */
+/*ESTRUCTURA DASHBOARD*/
 
 #registrar-actividades {
     display: flex;
     min-height: 100vh;
 }
 
-/* SIDEBAR */
-
 .sidebar {
     width: 280px;
     flex-shrink: 0;
 }
-
-/* CONTENIDO PRINCIPAL */
 
 .registrar-main {
     flex: 1;
     display: flex;
     flex-direction: column;
 }
-
-/* TOPBAR */
 
 .registrar-topbar {
     height: 80px;
@@ -82,6 +74,21 @@ textarea {
     align-items: flex-start;
 }
 
+.parrafos-informativos {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 20px 20px;
+}
+
+.parrafos-informativos img {
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    display: block;
+}
+
 /* =========================================
 CONTENEDOR PRINCIPAL
 ========================================= */
@@ -91,7 +98,7 @@ CONTENEDOR PRINCIPAL
     border-radius: 10px;
     padding: 40px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    width: 1080px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 

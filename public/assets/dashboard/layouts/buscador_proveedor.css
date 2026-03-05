@@ -24,9 +24,8 @@
 .busqueda-wrapper {
     margin-right: auto;
     position: relative;
-    width: 450px;
+    flex: 1;
     max-width: 450px;
-    flex: 0 0 450px;
 }
 
 
