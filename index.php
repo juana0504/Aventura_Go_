@@ -55,8 +55,6 @@ switch ($request) {
         break;
 
 
-
-
     case '/registrar-proveedor-hotelero':
         require BASE_PATH . '/app/views/auth/registrar_proveedor_hotelero.php'; //redirige a el registro de proveedor hotelero ALB 18/02/2026
         break;
@@ -98,6 +96,28 @@ switch ($request) {
         require_once BASE_PATH . '/app/controllers/administrador/dashboardController.php';
         $controller = new DashboardAdminController();
         $controller->data();
+        break;
+
+    // dashboard proveedor turístico (página y datos JSON)
+    case '/proveedor/dashboard':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/dashboardController.php';
+        $controller = new DashboardProveedorController();
+        $controller->index();
+        break;
+    case '/proveedor/dashboard/data':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/dashboardController.php';
+        $controller = new DashboardProveedorController();
+        $controller->data();
+        break;
+    case '/proveedor/dashboard/filtrarReservas':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/dashboardController.php';
+        $controller = new DashboardProveedorController();
+        $controller->filtrarReservas();
+        break;
+    case '/proveedor/ingresos':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/ingresosController.php';
+        $controller = new IngresosProveedorController();
+        $controller->index();
         break;
 
     // Perfil administrador 

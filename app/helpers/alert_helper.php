@@ -72,332 +72,433 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null, $bgVideo 
             <div class="bg-video-overlay"></div>';
     }
 
-    ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($titulo) ?> | Aventura Go</title>
+?>
+    <!DOCTYPE html>
+    <html lang="es">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><?= htmlspecialchars($titulo) ?> | Aventura Go</title>
 
-    <style>
-        /* ── RESET ── */
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        :root {
-            --primary:   #2D4059;
-            --secondary: #EA8217;
-        }
+        <style>
+            /* ── RESET ── */
+            *,
+            *::before,
+            *::after {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
 
-        /* ── BODY ── */
-        body {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            font-family: 'Lato', sans-serif;
-            position: relative;
-            /* Fondo oscuro de respaldo: visible cuando no hay video o mientras carga */
-            background: linear-gradient(135deg, #0f1e2d 0%, #1a2e42 50%, #0d1a26 100%);
-        }
+            :root {
+                --primary: #2D4059;
+                --secondary: #EA8217;
+            }
 
-        <?php if (!$bgVideo): ?>
-        /* Radial overlays decorativos cuando NO hay video */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background:
-                radial-gradient(ellipse at 20% 50%, rgba(45,64,89,0.9)  0%, transparent 60%),
-                radial-gradient(ellipse at 80% 20%, rgba(234,130,23,0.25) 0%, transparent 50%),
-                radial-gradient(ellipse at 60% 80%, rgba(45,64,89,0.7)  0%, transparent 55%);
-            z-index: 0;
-        }
-        <?php endif; ?>
+            /* ── BODY ── */
+            body {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                font-family: 'Lato', sans-serif;
+                position: relative;
+                /* Fondo oscuro de respaldo: visible cuando no hay video o mientras carga */
+                background: linear-gradient(135deg, #0f1e2d 0%, #1a2e42 50%, #0d1a26 100%);
+            }
 
-        /* ── VIDEO DE FONDO ── */
-        .bg-video {
-            position: fixed;
-            inset: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            object-position: center;
-            z-index: 0;
-            filter: brightness(0.6);
-        }
+            <?php if (!$bgVideo): ?>
 
-        /* Overlay semitransparente sobre el video */
-        .bg-video-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(10, 20, 35, 0.45);
-            z-index: 1;
-        }
+            /* Radial overlays decorativos cuando NO hay video */
+            body::before {
+                content: '';
+                position: fixed;
+                inset: 0;
+                background:
+                    radial-gradient(ellipse at 20% 50%, rgba(45, 64, 89, 0.9) 0%, transparent 60%),
+                    radial-gradient(ellipse at 80% 20%, rgba(234, 130, 23, 0.25) 0%, transparent 50%),
+                    radial-gradient(ellipse at 60% 80%, rgba(45, 64, 89, 0.7) 0%, transparent 55%);
+                z-index: 0;
+            }
 
-        /* ── LÍNEAS DE LUZ ── */
-        .light-lines {
-            position: fixed;
-            inset: 0;
-            z-index: 2;
-            pointer-events: none;
-            overflow: hidden;
-        }
+            <?php endif; ?>
 
-        .light-lines::before,
-        .light-lines::after {
-            content: '';
-            position: absolute;
-            width: 120%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(234,130,23,0.3), transparent);
-            animation: scanLine 8s ease-in-out infinite;
-        }
+            /* ── VIDEO DE FONDO ── */
+            .bg-video {
+                position: fixed;
+                inset: 0;
+                width: 100vw;
+                height: 100vh;
+                object-fit: cover;
+                object-position: center;
+                z-index: 0;
+                filter: brightness(0.6);
+            }
 
-        .light-lines::before { top: 30%; left: -10%; animation-delay: 0s; }
-        .light-lines::after  { top: 65%; left: -10%; animation-delay: 4s; }
+            /* Overlay semitransparente sobre el video */
+            .bg-video-overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(10, 20, 35, 0.45);
+                z-index: 1;
+            }
 
-        @keyframes scanLine {
-            0%   { transform: translateX(-100%) skewX(-15deg); opacity: 0; }
-            30%  { opacity: 1; }
-            70%  { opacity: 1; }
-            100% { transform: translateX(100%) skewX(-15deg);  opacity: 0; }
-        }
+            /* ── LÍNEAS DE LUZ ── */
+            .light-lines {
+                position: fixed;
+                inset: 0;
+                z-index: 2;
+                pointer-events: none;
+                overflow: hidden;
+            }
 
-        /* ══════════════════════════════════════════
+            .light-lines::before,
+            .light-lines::after {
+                content: '';
+                position: absolute;
+                width: 120%;
+                height: 1px;
+                background: linear-gradient(90deg, transparent, rgba(234, 130, 23, 0.3), transparent);
+                animation: scanLine 8s ease-in-out infinite;
+            }
+
+            .light-lines::before {
+                top: 30%;
+                left: -10%;
+                animation-delay: 0s;
+            }
+
+            .light-lines::after {
+                top: 65%;
+                left: -10%;
+                animation-delay: 4s;
+            }
+
+            @keyframes scanLine {
+                0% {
+                    transform: translateX(-100%) skewX(-15deg);
+                    opacity: 0;
+                }
+
+                30% {
+                    opacity: 1;
+                }
+
+                70% {
+                    opacity: 1;
+                }
+
+                100% {
+                    transform: translateX(100%) skewX(-15deg);
+                    opacity: 0;
+                }
+            }
+
+            /* ══════════════════════════════════════════
            SWEETALERT2 — TARJETA
            ══════════════════════════════════════════ */
-        .swal2-container   { z-index: 100 !important; }
-        .swal2-backdrop-show { background: rgba(0,0,0,0) !important; }
+            .swal2-container {
+                z-index: 100 !important;
+            }
 
-        /* Popup */
-        .swal2-popup {
-            font-family: 'Lato', sans-serif !important;
-            border-radius: 24px !important;
-            overflow: hidden !important;
-            box-shadow:
-                0 30px 80px rgba(0,0,0,0.45),
-                0 0 0 1px rgba(255,255,255,0.1) !important;
-            padding: 0 !important;
-            border: none !important;
-            background: rgba(255,255,255,0.95) !important;
-            backdrop-filter: blur(14px) !important;
-            -webkit-backdrop-filter: blur(14px) !important;
-            position: relative;
-            z-index: 10;
-            animation: cardEntrance 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
-            opacity: 0;
-            transform: translateY(40px) scale(0.97);
-        }
+            .swal2-backdrop-show {
+                background: rgba(0, 0, 0, 0) !important;
+            }
 
-        @keyframes cardEntrance {
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
+            /* Popup */
+            .swal2-popup {
+                font-family: 'Lato', sans-serif !important;
+                border-radius: 24px !important;
+                overflow: hidden !important;
+                box-shadow:
+                    0 30px 80px rgba(0, 0, 0, 0.45),
+                    0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+                padding: 0 !important;
+                border: none !important;
+                background: rgba(255, 255, 255, 0.95) !important;
+                backdrop-filter: blur(14px) !important;
+                -webkit-backdrop-filter: blur(14px) !important;
+                position: relative;
+                z-index: 10;
+                animation: cardEntrance 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+                opacity: 0;
+                transform: translateY(40px) scale(0.97);
+            }
 
-        /* Franja superior animada */
-        .swal2-popup::before {
-            content: '';
-            display: block;
-            height: 6px;
-            width: 100%;
-            background: linear-gradient(90deg, #2D4059 0%, #EA8217 50%, #2D4059 100%);
-            background-size: 200% auto;
-            animation: gradientShift 3s linear infinite;
-        }
+            @keyframes cardEntrance {
+                to {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
 
-        @keyframes gradientShift {
-            0%   { background-position: 0%   center; }
-            100% { background-position: 200% center; }
-        }
+            /* Franja superior animada */
+            .swal2-popup::before {
+                content: '';
+                display: block;
+                height: 6px;
+                width: 100%;
+                background: linear-gradient(90deg, #2D4059 0%, #EA8217 50%, #2D4059 100%);
+                background-size: 200% auto;
+                animation: gradientShift 3s linear infinite;
+            }
 
-        /* Ocultar ícono nativo de SweetAlert2 */
-        .swal2-icon { display: none !important; }
+            @keyframes gradientShift {
+                0% {
+                    background-position: 0% center;
+                }
 
-        /* ── ÍCONO PERSONALIZADO ── */
-        .av-icon-wrap {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 88px;
-            height: 88px;
-            border-radius: 50%;
-            background: <?= $iconBg ?>;
-            margin: 36px auto 0;
-            position: relative;
-            animation: iconPop 0.65s 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-        }
+                100% {
+                    background-position: 200% center;
+                }
+            }
 
-        .av-icon-wrap::after {
-            content: '';
-            position: absolute;
-            inset: -8px;
-            border-radius: 50%;
-            border: 2px solid <?= $ringColor ?>;
-            animation: ringPulse 2.2s ease-out 1.1s infinite;
-        }
+            /* Ocultar ícono nativo de SweetAlert2 */
+            .swal2-icon {
+                display: none !important;
+            }
 
-        @keyframes iconPop {
-            0%   { transform: scale(0) rotate(-20deg); opacity: 0; }
-            55%  { transform: scale(1.15) rotate(5deg); opacity: 1; }
-            80%  { transform: scale(0.96) rotate(-2deg); }
-            100% { transform: scale(1) rotate(0deg); opacity: 1; }
-        }
+            /* ── ÍCONO PERSONALIZADO ── */
+            .av-icon-wrap {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 88px;
+                height: 88px;
+                border-radius: 50%;
+                background: <?= $iconBg ?>;
+                margin: 36px auto 0;
+                position: relative;
+                animation: iconPop 0.65s 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+            }
 
-        @keyframes ringPulse {
-            0%   { transform: scale(1);    opacity: 0.8; }
-            100% { transform: scale(1.65); opacity: 0;   }
-        }
+            .av-icon-wrap::after {
+                content: '';
+                position: absolute;
+                inset: -8px;
+                border-radius: 50%;
+                border: 2px solid <?= $ringColor ?>;
+                animation: ringPulse 2.2s ease-out 1.1s infinite;
+            }
 
-        .av-icon-svg {
-            width: 44px;
-            height: 44px;
-            overflow: visible;
-        }
+            @keyframes iconPop {
+                0% {
+                    transform: scale(0) rotate(-20deg);
+                    opacity: 0;
+                }
 
-        .av-icon-path {
-            fill: none;
-            stroke: <?= $iconColor ?>;
-            stroke-width: 3.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            stroke-dasharray: 80;
-            stroke-dashoffset: 80;
-            animation: drawIcon 0.55s 1.0s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-        }
+                55% {
+                    transform: scale(1.15) rotate(5deg);
+                    opacity: 1;
+                }
 
-        @keyframes drawIcon {
-            to { stroke-dashoffset: 0; }
-        }
+                80% {
+                    transform: scale(0.96) rotate(-2deg);
+                }
 
-        /* ── DIVISOR CON ESTRELLA ── */
-        .av-divider {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin: 20px auto 0;
-            max-width: 240px;
-            padding: 0 24px;
-            animation: fadeUp 0.45s 1.1s ease both;
-        }
+                100% {
+                    transform: scale(1) rotate(0deg);
+                    opacity: 1;
+                }
+            }
 
-        .av-divider::before,
-        .av-divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-        }
+            @keyframes ringPulse {
+                0% {
+                    transform: scale(1);
+                    opacity: 0.8;
+                }
 
-        .av-divider::before { background: linear-gradient(90deg, transparent, #DEDEDE); }
-        .av-divider::after  { background: linear-gradient(90deg, #DEDEDE, transparent); }
+                100% {
+                    transform: scale(1.65);
+                    opacity: 0;
+                }
+            }
 
-        .av-star {
-            font-size: 15px;
-            color: #EA8217;
-            flex-shrink: 0;
-            display: inline-block;
-            animation: starSpin 0.5s 1.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-        }
+            .av-icon-svg {
+                width: 44px;
+                height: 44px;
+                overflow: visible;
+            }
 
-        @keyframes starSpin {
-            from { transform: scale(0) rotate(-45deg); opacity: 0; }
-            to   { transform: scale(1) rotate(0deg);   opacity: 1; }
-        }
+            .av-icon-path {
+                fill: none;
+                stroke: <?= $iconColor ?>;
+                stroke-width: 3.5;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-dasharray: 80;
+                stroke-dashoffset: 80;
+                animation: drawIcon 0.55s 1.0s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+            }
 
-        /* ── TÍTULO ── */
-        .swal2-title {
-            font-family: 'Raleway', sans-serif !important;
-            font-size: 26px !important;
-            font-weight: 800 !important;
-            color: #2D4059 !important;
-            letter-spacing: 0.4px !important;
-            line-height: 1.3 !important;
-            padding: 20px 36px 0 !important;
-            margin: 0 !important;
-            animation: fadeUp 0.5s 1.05s ease both !important;
-        }
+            @keyframes drawIcon {
+                to {
+                    stroke-dashoffset: 0;
+                }
+            }
 
-        /* ── CONTENEDOR HTML SweetAlert2 ── */
-        .swal2-html-container {
-            padding: 0 !important;
-            margin: 0 !important;
-            overflow: visible !important;
-        }
+            /* ── DIVISOR CON ESTRELLA ── */
+            .av-divider {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                margin: 20px auto 0;
+                max-width: 240px;
+                padding: 0 24px;
+                animation: fadeUp 0.45s 1.1s ease both;
+            }
 
-        /* Párrafo del mensaje */
-        .av-msg {
-            font-family: 'Lato', sans-serif;
-            font-size: 15px;
-            color: #555;
-            line-height: 1.75;
-            margin: 18px 0 0;
-            padding: 0 36px 36px;
-            animation: fadeUp 0.5s 1.2s ease both;
-        }
+            .av-divider::before,
+            .av-divider::after {
+                content: '';
+                flex: 1;
+                height: 1px;
+            }
 
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(14px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
+            .av-divider::before {
+                background: linear-gradient(90deg, transparent, #DEDEDE);
+            }
 
-        /* ── SIN BOTONES ── */
-        .swal2-actions { display: none !important; }
-        .swal2-footer  { display: none !important; }
+            .av-divider::after {
+                background: linear-gradient(90deg, #DEDEDE, transparent);
+            }
 
-        /* ── BARRA DE PROGRESO ── */
-        .swal2-timer-progress-bar-container {
-            border-radius: 0 0 24px 24px;
-            overflow: hidden;
-        }
+            .av-star {
+                font-size: 15px;
+                color: #EA8217;
+                flex-shrink: 0;
+                display: inline-block;
+                animation: starSpin 0.5s 1.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+            }
 
-        .swal2-timer-progress-bar {
-            background: linear-gradient(90deg, #2D4059, #EA8217) !important;
-            height: 4px !important;
-        }
+            @keyframes starSpin {
+                from {
+                    transform: scale(0) rotate(-45deg);
+                    opacity: 0;
+                }
 
-        /* ── RESPONSIVE ── */
-        @media (max-width: 480px) {
+                to {
+                    transform: scale(1) rotate(0deg);
+                    opacity: 1;
+                }
+            }
+
+            /* ── TÍTULO ── */
             .swal2-title {
-                font-size: 20px !important;
-                padding: 16px 20px 0 !important;
+                font-family: 'Raleway', sans-serif !important;
+                font-size: 26px !important;
+                font-weight: 800 !important;
+                color: #2D4059 !important;
+                letter-spacing: 0.4px !important;
+                line-height: 1.3 !important;
+                padding: 20px 36px 0 !important;
+                margin: 0 !important;
+                animation: fadeUp 0.5s 1.05s ease both !important;
             }
 
+            /* ── CONTENEDOR HTML SweetAlert2 ── */
+            .swal2-html-container {
+                padding: 0 !important;
+                margin: 0 !important;
+                overflow: visible !important;
+            }
+
+            /* Párrafo del mensaje */
             .av-msg {
-                font-size: 14px;
-                padding: 0 20px 28px;
+                font-family: 'Lato', sans-serif;
+                font-size: 15px;
+                color: #555;
+                line-height: 1.75;
+                margin: 18px 0 0;
+                padding: 0 36px 36px;
+                animation: fadeUp 0.5s 1.2s ease both;
             }
 
-            .av-icon-wrap { width: 74px; height: 74px; }
-            .av-icon-svg  { width: 38px; height: 38px; }
-        }
-    </style>
-</head>
+            @keyframes fadeUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(14px);
+                }
 
-<body>
-    <?= $videoBg ?>
-    <div class="light-lines"></div>
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
 
-    <script>
-        Swal.fire({
-            title: <?= json_encode($titulo, JSON_UNESCAPED_UNICODE) ?>,
-            html:  <?= json_encode($htmlModal, JSON_UNESCAPED_UNICODE) ?>,
-            showConfirmButton: false,
-            showCancelButton:  false,
-            timer: 6000,
-            timerProgressBar: true,
-            background: 'transparent',
-            color: '#2D4059',
-            allowOutsideClick: false,
-            allowEscapeKey:    false,
-        }).then(function() {
-            <?= $redirectJs ?>
-        });
-    </script>
-</body>
-</html>
+            /* ── SIN BOTONES ── */
+            .swal2-actions {
+                display: none !important;
+            }
+
+            .swal2-footer {
+                display: none !important;
+            }
+
+            /* ── BARRA DE PROGRESO ── */
+            .swal2-timer-progress-bar-container {
+                border-radius: 0 0 24px 24px;
+                overflow: hidden;
+            }
+
+            .swal2-timer-progress-bar {
+                background: linear-gradient(90deg, #2D4059, #EA8217) !important;
+                height: 4px !important;
+            }
+
+            /* ── RESPONSIVE ── */
+            @media (max-width: 480px) {
+                .swal2-title {
+                    font-size: 20px !important;
+                    padding: 16px 20px 0 !important;
+                }
+
+                .av-msg {
+                    font-size: 14px;
+                    padding: 0 20px 28px;
+                }
+
+                .av-icon-wrap {
+                    width: 74px;
+                    height: 74px;
+                }
+
+                .av-icon-svg {
+                    width: 38px;
+                    height: 38px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <?= $videoBg ?>
+        <div class="light-lines"></div>
+
+        <script>
+            Swal.fire({
+                title: <?= json_encode($titulo, JSON_UNESCAPED_UNICODE) ?>,
+                html: <?= json_encode($htmlModal, JSON_UNESCAPED_UNICODE) ?>,
+                showConfirmButton: false,
+                showCancelButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: 'transparent',
+                color: '#2D4059',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+            }).then(function() {
+                <?= $redirectJs ?>
+            });
+        </script>
+    </body>
+
+    </html>
 <?php
 } // fin mostrarSweetAlert

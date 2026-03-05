@@ -18,7 +18,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -104,22 +104,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
                 <a href="<?= BASE_URL ?>/descubre-hospedaje" class="tab-btn"> HOSPEDAJE </a>
             </div>
 
-            <!-- <div class="search-filters">
-                <div class="filters-row">
-                    <div class="filter-item">
-                        <i class="fas fa-calendar"></i>
-                        <input type="text" placeholder="01 oct 2025 - 02 oct 2025" readonly>
-                    </div>
-                    <div class="filter-item">
-                        <i class="fas fa-users"></i>
-                        <input type="text" placeholder="02 Adultos - 01 Niño - 00 Bebés" readonly>
-                    </div>
-                    <div class="filter-item">
-                        <i class="fas fa-car"></i>
-                        <input type="text" placeholder="01" readonly>
-                    </div>
-                </div>
-            </div> -->
+
 
             <!-- aca va las actividdes -->
             <div class="activities-grid">
@@ -138,7 +123,9 @@ $actividades = $actividadModel->listarActividadesPublicas();
 
                                 <!-- Ciudad -->
                                 <div class="activity-category">
-                                    <?= htmlspecialchars($actividad['ciudad']) ?>
+                                    <h6>ubicación</h6>
+                                    <i class="bi bi-geo-alt-fill"></i>
+                                    <span> <?= htmlspecialchars($actividad['ciudad']) ?></span>
                                 </div>
 
                                 <!-- Nombre -->
@@ -148,6 +135,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
 
                                 <!-- Descripción corta -->
                                 <p class="activity-description">
+                                    <i class="bi bi-card-heading"></i>
                                     <?= substr(htmlspecialchars($actividad['descripcion']), 0, 90) ?>...
                                 </p>
 

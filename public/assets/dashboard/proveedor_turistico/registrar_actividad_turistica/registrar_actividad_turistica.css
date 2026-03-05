@@ -1,0 +1,304 @@
+/* ========================================
+   AVENTURA GO - REGISTRAR ACTIVIDAD
+======================================== */
+
+/* Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+/* ================= PALETA ================= */
+
+:root {
+    --color-primary: #2D4059;
+    --color-secondary: #EA8217;
+    --color-white: #FFFFFF;
+    --color-bg-light: #F8F9FA;
+    --color-border: #E0E0E0;
+    --color-text: #2B2B2B;
+    --font-titles: 'Raleway', sans-serif;
+    --font-text: 'Lato', sans-serif;
+}
+
+/* ================= TIPOGRAFÍA ================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-titles);
+}
+
+body,
+p,
+a,
+button,
+input,
+select,
+textarea {
+    font-family: var(--font-text);
+}
+
+/*ESTRUCTURA DASHBOARD*/
+
+#registrar-actividades {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 280px;
+    flex-shrink: 0;
+}
+
+.registrar-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.registrar-topbar {
+    height: 80px;
+    flex-shrink: 0;
+}
+
+/* CONTENIDO PAGINA */
+
+.formulario {
+    flex: 1;
+    padding: 20px;
+    background: var(--color-bg-light);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.parrafos-informativos {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 20px 20px;
+}
+
+.parrafos-informativos img {
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    display: block;
+}
+
+/* =========================================
+CONTENEDOR PRINCIPAL
+========================================= */
+
+.wizard-container {
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+
+/* =========================================
+HEADER
+========================================= */
+
+.wizard-header {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 35px;
+    background: #2D4059;
+    padding: 20px;
+    border-radius: 10px 10px 0 0;
+    margin-left: -40px;
+    margin-right: -40px;
+    margin-top: -40px;
+}
+
+.wizard-header p {
+    font-size: 24px;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+
+/* =========================================
+PASOS DEL WIZARD
+========================================= */
+
+.wizard-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.step {
+    text-align: center;
+    flex: 1;
+}
+
+.step-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #E0E0E0;
+    color: #777;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.step-label {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #777;
+}
+
+/* PASO ACTIVO */
+
+.step.active .step-circle {
+    background: #EA8217;
+    color: #FFFFFF;
+}
+
+.step.active .step-label {
+    color: #2D4059;
+    font-weight: 600;
+}
+
+
+/* =========================================
+CONTENIDO
+========================================= */
+
+.wizard-content {
+    margin-top: 20px;
+}
+
+.wizard-step {
+    display: none;
+}
+
+.wizard-step.active {
+    display: block;
+}
+
+
+/* =========================================
+INPUTS
+========================================= */
+
+.wizard-step label {
+    font-weight: 600;
+    color: #2B2B2B;
+    margin-top: 10px;
+    margin-bottom: 6px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.wizard-step input,
+.wizard-step textarea,
+.wizard-step select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #E0E0E0;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.wizard-step textarea {
+    min-height: 110px;
+}
+
+.wizard-step small {
+    color: #777;
+}
+
+
+/* =========================================
+BOTONES
+========================================= */
+
+.wizard-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.wizard-actions button {
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.wizard-actions button:first-child {
+    background: #6c757d;
+    color: #FFFFFF;
+}
+
+.wizard-actions button:last-child {
+    background: #EA8217;
+    color: #FFFFFF;
+}
+
+.wizard-actions button:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================================
+TARJETAS DE RESUMEN
+========================================= */
+
+.preview-card {
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: #F8F9FA;
+}
+
+.preview-card h6 {
+    font-weight: 600;
+}
+
+.preview-label {
+    font-size: 13px;
+    color: #777;
+}
+
+.preview-value {
+    font-weight: 600;
+    color: #2B2B2B;
+}
+
+
+/* =========================================
+RESPONSIVE
+========================================= */
+
+@media(max-width:768px) {
+
+    .wizard-container {
+        padding: 25px;
+    }
+
+    .wizard-steps {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+}

@@ -50,286 +50,343 @@ if (!empty($proveedor['actividades'])) {
 
 <body>
     <!-- Layout Principal con Panel y Contenido -->
-    <section id="proveedor-dashboard">
+    <section id="informacion-proveedor">
 
-        <!-- Panel Lateral -->
-        <?php
-        include_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php';
-        ?>
+        <!-- PANEL LATERAL -->
+        <aside class="sidebar">
+            <?php
+            include_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php';
+            ?>
+        </aside>
 
         <!-- Contenido Principal -->
-        <div class="info">
+        <main class="informacion-main">
 
-            <!-- Barra de Búsqueda Superior -->
-            <?php
-            include_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php';
-            ?>
+            <!-- BARRA SUPERIOR -->
+            <header class="informacion-topbar">
+                <?php
+                include_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php';
+                ?>
+            </header>
 
-            <!-- Formulario Wizard -->
-            <form id="formCompletarProveedor" action="<?= BASE_URL ?>/proveedor/guardar-informacion" method="POST" enctype="multipart/form-data">
+            <!-- CONTENIDO DE LA PAGINA -->
 
-                <input type="hidden" name="accion" value="actualizar">
+            <section class="formulario">
 
-                <div class="wizard-container">
-                    <div class="wizard-header">
-                        <p class="mb-0">Registro de Proveedor de Turismo</p>
-                    </div>
+                <div class="container-fluid">
 
-                    <div class="wizard-steps">
-                        <div class="step active" data-step="1">
-                            <div class="step-circle">1</div>
-                            <div class="step-label">Información Básica</div>
-                        </div>
-                        <div class="step" data-step="2">
-                            <div class="step-circle">2</div>
-                            <div class="step-label">Servicios</div>
-                        </div>
-                        <div class="step" data-step="3">
-                            <div class="step-circle">3</div>
-                            <div class="step-label">Ubicación</div>
-                        </div>
-                        <div class="step" data-step="4">
-                            <div class="step-circle">4</div>
-                            <div class="step-label">Representante</div>
-                        </div>
-                        <div class="step" data-step="5">
-                            <div class="step-circle">5</div>
-                            <div class="step-label">Confirmación</div>
-                        </div>
-                    </div>
+                    <div class="row">
 
-                    <div class="wizard-content">
-                        <!-- Paso 1 -->
-                        <div class="step-content active" data-step="1">
-                            <h4 class="mb-4"><i class="fas fa-building text-primary"></i> Información Básica del Proveedor</h4>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Nombre de la Empresa *</label>
-                                    <input type="text" name="nombre_empresa" class="form-control" id="empresa" value="<?= $proveedor['nombre_empresa'] ?? '' ?>" placeholder="Ej: Aventuras Extremas SAS" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">NIT/RUT *</label>
-                                    <input type="text" name="nit_rut" class="form-control" value="<?= $proveedor['nit_rut'] ?? '' ?>" id="nit" placeholder="123456789-0" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Email *</label>
-                                    <input type="email" name="email" class="form-control" id="email" value="<?= $proveedor['email'] ?? '' ?>" placeholder="contacto@empresa.com" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Teléfono *</label>
-                                    <input type="tel" name="telefono" class="form-control" id="telefono" value="<?= $proveedor['telefono'] ?? '' ?>" placeholder="+57 300 123 4567" required>
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <label class="form-label">Logo</label>
-                                    <input type="file" accept=".jpg, .png, .jpeg" name="logo" class="form-control" id="logo" required>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="col-md-9 col-md-8 col-lg-9">
+                            <!-- Formulario Wizard -->
+                            <form id="formCompletarProveedor" action="<?= BASE_URL ?>/proveedor/guardar-informacion" method="POST" enctype="multipart/form-data">
 
-                        <!-- Paso 2 -->
-                        <div class="step-content" data-step="2">
-                            <h4 class="mb-4"><i class="fas fa-hiking text-primary"></i> Servicios Ofrecidos</h4>
-                            <div class="row">
-                                <div class="col-md-12 mb-4">
-                                    <label class="form-label">Tipo de Actividades</label>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="rafting" value="Rafting" <?= in_array('Rafting', $actividadesSeleccionadas) ? 'checked' : '' ?>>
-                                                <label class="form-check-label">🚣 Rafting</label>
-                                            </div>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="parapente" value="Parapente" <?= in_array('Parapente', $actividadesSeleccionadas) ? 'checked' : '' ?>>
-                                                <label class="form-check-label">🪂 Parapente</label>
-                                            </div>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="senderismo" value="Senderismo" <?= in_array('Senderismo', $actividadesSeleccionadas) ? 'checked' : '' ?>>
-                                                <label class="form-check-label">🥾 Senderismo</label>
-                                            </div>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="escalada" value="Escalada" <?= in_array('Escalada', $actividadesSeleccionadas) ? 'checked' : '' ?>>
-                                                <label class="form-check-label">🧗 Escalada</label>
-                                            </div>
+                                <input type="hidden" name="accion" value="actualizar">
+
+                                <div class="wizard-container">
+                                    <div class="wizard-header">
+                                        <p class="mb-0">Registro de Proveedor de Turismo</p>
+                                    </div>
+
+                                    <div class="wizard-steps">
+                                        <div class="step active" data-step="1">
+                                            <div class="step-circle">1</div>
+                                            <div class="step-label">Información Básica</div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="buceo" value="Buceo" <?= in_array('Buceo', $actividadesSeleccionadas) ? 'checked' : '' ?>>
-                                                <label class="form-check-label">🤿 Buceo</label>
-                                            </div>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="camping" value="Camping" <?= in_array('Camping', $actividadesSeleccionadas) ? 'checked' : '' ?>>
-                                                <label class="form-check-label">🏕 Camping</label>
-                                            </div>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="ciclismo" value="Ciclismo de Montaña" <?= in_array('Ciclismo de Montaña', $actividadesSeleccionadas) ? 'checked' : '' ?>>
-                                                <label class="form-check-label">🚵 Ciclismo de Montaña</label>
-                                            </div>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="canopy" value="Canopy" <?= in_array('Canopy', $actividadesSeleccionadas) ? 'checked' : '' ?>>
-                                                <label class="form-check-label">🌲 Canopy</label>
-                                            </div>
+                                        <div class="step" data-step="2">
+                                            <div class="step-circle">2</div>
+                                            <div class="step-label">Servicios</div>
+                                        </div>
+                                        <div class="step" data-step="3">
+                                            <div class="step-circle">3</div>
+                                            <div class="step-label">Ubicación</div>
+                                        </div>
+                                        <div class="step" data-step="4">
+                                            <div class="step-circle">4</div>
+                                            <div class="step-label">Representante</div>
+                                        </div>
+                                        <div class="step" data-step="5">
+                                            <div class="step-circle">5</div>
+                                            <div class="step-label">Confirmación</div>
                                         </div>
                                     </div>
+
+                                    <div class="wizard-content">
+                                        <!-- Paso 1 -->
+                                        <div class="step-content active" data-step="1">
+                                            <h4 class="mb-4"><i class="fas fa-building text-primary"></i> Información Básica del Proveedor</h4>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label">Nombre de la Empresa *</label>
+                                                    <input type="text" name="nombre_empresa" class="form-control" id="empresa" value="<?= $proveedor['nombre_empresa'] ?? '' ?>" placeholder="Ej: Aventuras Extremas SAS" required>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label">NIT/RUT *</label>
+                                                    <input type="text" name="nit_rut" class="form-control" value="<?= $proveedor['nit_rut'] ?? '' ?>" id="nit" placeholder="123456789-0" required>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label">Email *</label>
+                                                    <input type="email" name="email" class="form-control" id="email" value="<?= $proveedor['email'] ?? '' ?>" placeholder="contacto@empresa.com" required>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label">Teléfono *</label>
+                                                    <input type="tel" name="telefono" class="form-control" id="telefono" value="<?= $proveedor['telefono'] ?? '' ?>" placeholder="+57 300 123 4567" required>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <label class="form-label">Logo</label>
+                                                    <input type="file" accept=".jpg, .png, .jpeg" name="logo" class="form-control" id="logo" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Paso 2 -->
+                                        <div class="step-content" data-step="2">
+                                            <h4 class="mb-4"><i class="fas fa-hiking text-primary"></i> Servicios Ofrecidos</h4>
+                                            <div class="row">
+                                                <div class="col-md-12 mb-4">
+                                                    <label class="form-label">Tipo de Actividades</label>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-check mb-2">
+                                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="rafting" value="Rafting" <?= in_array('Rafting', $actividadesSeleccionadas) ? 'checked' : '' ?>>
+                                                                <label class="form-check-label">🚣 Rafting</label>
+                                                            </div>
+                                                            <div class="form-check mb-2">
+                                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="parapente" value="Parapente" <?= in_array('Parapente', $actividadesSeleccionadas) ? 'checked' : '' ?>>
+                                                                <label class="form-check-label">🪂 Parapente</label>
+                                                            </div>
+                                                            <div class="form-check mb-2">
+                                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="senderismo" value="Senderismo" <?= in_array('Senderismo', $actividadesSeleccionadas) ? 'checked' : '' ?>>
+                                                                <label class="form-check-label">🥾 Senderismo</label>
+                                                            </div>
+                                                            <div class="form-check mb-2">
+                                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="escalada" value="Escalada" <?= in_array('Escalada', $actividadesSeleccionadas) ? 'checked' : '' ?>>
+                                                                <label class="form-check-label">🧗 Escalada</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-check mb-2">
+                                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="buceo" value="Buceo" <?= in_array('Buceo', $actividadesSeleccionadas) ? 'checked' : '' ?>>
+                                                                <label class="form-check-label">🤿 Buceo</label>
+                                                            </div>
+                                                            <div class="form-check mb-2">
+                                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="camping" value="Camping" <?= in_array('Camping', $actividadesSeleccionadas) ? 'checked' : '' ?>>
+                                                                <label class="form-check-label">🏕 Camping</label>
+                                                            </div>
+                                                            <div class="form-check mb-2">
+                                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="ciclismo" value="Ciclismo de Montaña" <?= in_array('Ciclismo de Montaña', $actividadesSeleccionadas) ? 'checked' : '' ?>>
+                                                                <label class="form-check-label">🚵 Ciclismo de Montaña</label>
+                                                            </div>
+                                                            <div class="form-check mb-2">
+                                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="canopy" value="Canopy" <?= in_array('Canopy', $actividadesSeleccionadas) ? 'checked' : '' ?>>
+                                                                <label class="form-check-label">🌲 Canopy</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <label class="form-label">Descripción de la empresa *</label>
+                                                    <textarea
+                                                        name="descripcion"
+                                                        id="descripcion"
+                                                        class="form-control"
+                                                        rows="4"
+                                                        placeholder="Describe brevemente tu empresa, experiencia y tipo de actividades que ofreces"
+                                                        required><?= $proveedor['descripcion'] ?? '' ?></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Paso 3 -->
+                                        <div class="step-content" data-step="3">
+                                            <h4 class="mb-4"><i class="fas fa-map-marker-alt text-primary"></i> Ubicación</h4>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="departamento">Departamento *</label>
+                                                    <select name="departamento" id="departamento" class="form-control" required>
+                                                        <option value="">Seleccione un departamento</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="departamento">Ciudad *</label>
+                                                    <select name="id_ciudad" id="id_ciudad" class="form-control" required>
+                                                        <option value="">Seleccione una ciudad</option>
+                                                        <?php if (!empty($ciudades)): ?>
+                                                            <?php foreach ($ciudades as $ciudad): ?>
+                                                                <option value="<?= $ciudad['id_ciudad']; ?>">
+                                                                    <?= $ciudad['nombre']; ?>
+                                                                </option>
+                                                            <?php endforeach; ?>
+                                                        <?php endif; ?>
+                                                    </select>
+                                                </div>
+
+
+                                                <div class="col-md-12 mb-3">
+                                                    <label class="form-label">Dirección *</label>
+                                                    <input type="text" name="direccion" class="form-control" id="direccion" value="<?= $proveedor['direccion'] ?? '' ?>" placeholder="Calle 123 #45-67" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Paso 4 -->
+                                        <div class="step-content" data-step="4">
+                                            <h4 class="mb-4"><i class="fas fa-map-marker-alt text-primary"></i> Representante</h4>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label">Nombre del Representante *</label>
+                                                    <input type="text" name="nombre_representante" class="form-control" id="nombre_repre" value="<?= $proveedor['nombre_representante'] ?? '' ?>" placeholder="Juan Pérez" required>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label">Tipo de documento *</label> <br>
+                                                    <select name="tipo_documento" class="form-select1" id="tipo_documento">
+                                                        <option value="" disabled selected hidden>Tipo de documento</option>
+                                                        <option value="CC" <?= ($proveedor['tipo_documento'] ?? '') === 'CC' ? 'selected' : '' ?>>CC</option>
+                                                        <option value="CE" <?= ($proveedor['tipo_documento'] ?? '') === 'CE' ? 'selected' : '' ?>>CE</option>
+                                                        <option value="Pasaporte" <?= ($proveedor['tipo_documento'] ?? '') === 'Pasaporte' ? 'selected' : '' ?>>Pasaporte</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label">Identificacion *</label>
+                                                    <input type="tel" name="identificacion_representante" class="form-control" id="identificacion_repre" value="<?= $proveedor['identificacion_representante'] ?? '' ?>" placeholder="N.°" required>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label">Foto</label>
+                                                    <input type="file" accept=".jpg, .png, .jpeg" name="foto_representante" class="form-control" id="foto_representante" required>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label">Email *</label>
+                                                    <input type="email" name="email_representante" class="form-control" id="email_repre" value="<?= $proveedor['email_login'] ?? '' ?>" readonly>
+                                                    <small class="text-muted"> Este es el correo de acceso. Para modificarlo ve a tu perfil.</small>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label">Teléfono *</label>
+                                                    <input type="tel" name="telefono_representante" class="form-control" id="telefono_repre" value="<?= $proveedor['telefono_representante'] ?? '' ?>" placeholder="+57 300 123 4567" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Paso 5 -->
+                                        <div class="step-content" data-step="5">
+                                            <div class="text-center">
+                                                <i class="fas fa-check-circle success-icon"></i>
+                                                <h4>Confirma tu Registro</h4>
+                                            </div>
+                                            <div class="preview-card">
+                                                <h6 class="text-primary mb-3"><i class="fas fa-building"></i> Información Básica</h6>
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-2">
+                                                        <div class="preview-label">Empresa</div>
+                                                        <div class="preview-value" id="prev-empresa">-</div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-2">
+                                                        <div class="preview-label">NIT/RUT</div>
+                                                        <div class="preview-value" id="prev-nit">-</div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-2">
+                                                        <div class="preview-label">Representante</div>
+                                                        <div class="preview-value" id="prev-representante">-</div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-2">
+                                                        <div class="preview-label">Email</div>
+                                                        <div class="preview-value" id="prev-email">-</div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-2">
+                                                        <div class="preview-label">Telefono</div>
+                                                        <div class="preview-value" id="prev-telefono">-</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="preview-card">
+                                                <h6 class="text-primary mb-3"><i class="fas fa-hiking"></i> Servicios</h6>
+                                                <div id="prev-actividades">-</div>
+                                            </div>
+                                            <div class="preview-card">
+                                                <h6 class="text-primary mb-3"><i class="fas fa-map-marker-alt"></i> Ubicación</h6>
+                                                <div class="preview-value" id="prev-ubicacion">-</div>
+                                            </div>
+                                            <div class="preview-card">
+                                                <h6 class="text-primary mb-3"><i class="fas fa-building"></i> Representante</h6>
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-2">
+                                                        <div class="preview-label">Nombre del Representante</div>
+                                                        <div class="preview-value" id="prev-nombre_repre">-</div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-2">
+                                                        <div class="preview-label">Email del Representante</div>
+                                                        <div class="preview-value" id="prev-email_repre">-</div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-2">
+                                                        <div class="preview-label">Telefono del Representante</div>
+                                                        <div class="preview-value" id="prev-telefono_repre">-</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="preview-card">
+                                                <h6 class="text-primary mb-3"><i class="fas fa-info-circle"></i>Descripción</h6>
+                                                <div class="preview-value" id="prev-descripcion">-</div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="wizard-actions">
+                                        <button type="button" class="btn btn-secondary-wizard" id="prevBtn" style="display:none;">
+                                            <i class="fas fa-arrow-left"></i> Anterior
+                                        </button>
+
+                                        <button type="button" class="btn btn-primary-wizard" id="nextBtn">
+                                            Siguiente <i class="fas fa-arrow-right"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="col-md-12 mb-3">
-                                    <label class="form-label">Descripción de la empresa *</label>
-                                    <textarea
-                                        name="descripcion"
-                                        id="descripcion"
-                                        class="form-control"
-                                        rows="4"
-                                        placeholder="Describe brevemente tu empresa, experiencia y tipo de actividades que ofreces"
-                                        required><?= $proveedor['descripcion'] ?? '' ?></textarea>
-                                </div>
-                            </div>
+                            </form>
                         </div>
 
-                        <!-- Paso 3 -->
-                        <div class="step-content" data-step="3">
-                            <h4 class="mb-4"><i class="fas fa-map-marker-alt text-primary"></i> Ubicación</h4>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="departamento">Departamento *</label>
-                                    <select name="departamento" id="departamento" class="form-control" required>
-                                        <option value="">Seleccione un departamento</option>
-                                    </select>
-                                </div>
+                        <div class="col-lg-3 col-md-4 parrafos-informativos">
 
-                                <div class="col-md-6 mb-3">
-                                    <select name="id_ciudad" id="id_ciudad" class="form-control" required>
-                                        <option value="">Seleccione una ciudad</option>
-                                        <?php if (!empty($ciudades)): ?>
-                                            <?php foreach ($ciudades as $ciudad): ?>
-                                                <option value="<?= $ciudad['id_ciudad']; ?>">
-                                                    <?= $ciudad['nombre']; ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        <?php endif; ?>
-                                    </select>
-                                </div>
+                            <img src="../public/assets/dashboard/proveedor_turistico/completar_informacion/img/image.png" alt="logo aventura go" class="mb-3">
 
+                            <p>
+                                <strong>¿Por qué registrar tu empresa?</strong> <br>
+                                En Aventura Go conectamos viajeros con experiencias auténticas de turismo de aventura.
+                            </p>
 
-                                <div class="col-md-12 mb-3">
-                                    <label class="form-label">Dirección *</label>
-                                    <input type="text" name="direccion" class="form-control" id="direccion" value="<?= $proveedor['direccion'] ?? '' ?>" placeholder="Calle 123 #45-67" required>
-                                </div>
-                            </div>
+                            <hr>
+
+                            <p>
+                                <strong>📋 Información clara</strong><br>
+                                Completa los datos de tu empresa para mostrar tus actividades de forma profesional.
+                            </p>
+
+                            <hr>
+
+                            <p>
+                                <strong>🌎 Mayor visibilidad</strong> <br>
+                                Los viajeros podrán descubrir y reservar tus experiencias desde la plataforma.
+                            </p>
+
+                            <hr>
+
+                            <p>
+                                <strong>🤝 Turismo responsable</strong> <br>
+                                Promovemos el turismo sostenible, apoyando a prestadores locales y experiencias seguras en la naturaleza.
+                            </p>
+
+                            <hr>
+
+                            <p>
+                                <strong>🎉 Registro rápido</strong> <br>
+                                ¡Registra tu empresa hoy mismo y comienza a atraer a más aventureros a tus experiencias únicas!
+                            </p>
                         </div>
 
-                        <!-- Paso 4 -->
-                        <div class="step-content" data-step="4">
-                            <h4 class="mb-4"><i class="fas fa-map-marker-alt text-primary"></i> Representante</h4>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Nombre del Representante *</label>
-                                    <input type="text" name="nombre_representante" class="form-control" id="nombre_repre" value="<?= $proveedor['nombre_representante'] ?? '' ?>" placeholder="Juan Pérez" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Tipo de documento *</label>
-                                    <select name="tipo_documento" class="form-select1" id="tipo_documento">
-                                        <option value="" disabled selected hidden>Tipo de documento</option>
-                                        <option value="CC" <?= ($proveedor['tipo_documento'] ?? '') === 'CC' ? 'selected' : '' ?>>CC</option>
-                                        <option value="CE" <?= ($proveedor['tipo_documento'] ?? '') === 'CE' ? 'selected' : '' ?>>CE</option>
-                                        <option value="Pasaporte" <?= ($proveedor['tipo_documento'] ?? '') === 'Pasaporte' ? 'selected' : '' ?>>Pasaporte</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Identificacion *</label>
-                                    <input type="tel" name="identificacion_representante" class="form-control" id="identificacion_repre" value="<?= $proveedor['identificacion_representante'] ?? '' ?>" placeholder="N.°" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Foto</label>
-                                    <input type="file" accept=".jpg, .png, .jpeg" name="foto_representante" class="form-control" id="foto_representante" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Email *</label>
-                                    <input type="email" name="email_representante" class="form-control" id="email_repre" value="<?= $proveedor['email_login'] ?? '' ?>" readonly>
-                                    <small class="text-muted"> Este es el correo de acceso. Para modificarlo ve a tu perfil.</small>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Teléfono *</label>
-                                    <input type="tel" name="telefono_representante" class="form-control" id="telefono_repre" value="<?= $proveedor['telefono_representante'] ?? '' ?>" placeholder="+57 300 123 4567" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Paso 5 -->
-                        <div class="step-content" data-step="5">
-                            <div class="text-center">
-                                <i class="fas fa-check-circle success-icon"></i>
-                                <h4>Confirma tu Registro</h4>
-                            </div>
-                            <div class="preview-card">
-                                <h6 class="text-primary mb-3"><i class="fas fa-building"></i> Información Básica</h6>
-                                <div class="row">
-                                    <div class="col-md-6 mb-2">
-                                        <div class="preview-label">Empresa</div>
-                                        <div class="preview-value" id="prev-empresa">-</div>
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <div class="preview-label">NIT/RUT</div>
-                                        <div class="preview-value" id="prev-nit">-</div>
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <div class="preview-label">Representante</div>
-                                        <div class="preview-value" id="prev-representante">-</div>
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <div class="preview-label">Email</div>
-                                        <div class="preview-value" id="prev-email">-</div>
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <div class="preview-label">Telefono</div>
-                                        <div class="preview-value" id="prev-telefono">-</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="preview-card">
-                                <h6 class="text-primary mb-3"><i class="fas fa-hiking"></i> Servicios</h6>
-                                <div id="prev-actividades">-</div>
-                            </div>
-                            <div class="preview-card">
-                                <h6 class="text-primary mb-3"><i class="fas fa-map-marker-alt"></i> Ubicación</h6>
-                                <div class="preview-value" id="prev-ubicacion">-</div>
-                            </div>
-                            <div class="preview-card">
-                                <h6 class="text-primary mb-3"><i class="fas fa-building"></i> Representante</h6>
-                                <div class="row">
-                                    <div class="col-md-6 mb-2">
-                                        <div class="preview-label">Nombre del Representante</div>
-                                        <div class="preview-value" id="prev-nombre_repre">-</div>
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <div class="preview-label">Email del Representante</div>
-                                        <div class="preview-value" id="prev-email_repre">-</div>
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <div class="preview-label">Telefono del Representante</div>
-                                        <div class="preview-value" id="prev-telefono_repre">-</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="preview-card">
-                                <h6 class="text-primary mb-3"><i class="fas fa-info-circle"></i>Descripción</h6>
-                                <div class="preview-value" id="prev-descripcion">-</div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="wizard-actions">
-                        <button type="button" class="btn btn-secondary-wizard" id="prevBtn" style="display:none;">
-                            <i class="fas fa-arrow-left"></i> Anterior
-                        </button>
-
-                        <button type="button" class="btn btn-primary-wizard" id="nextBtn">
-                            Siguiente <i class="fas fa-arrow-right"></i>
-                        </button>
                     </div>
                 </div>
-            </form>
-        </div>
+            </section>
+        </main>
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

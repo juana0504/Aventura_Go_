@@ -101,16 +101,22 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                     <section class="resumen-reservas">
                         <div class="resumen-header">
                             <h3>Resumen de Reservas</h3>
-                            <button class="btn-filtrar">Filtrar ▼</button>
+                            <button class="btn-filtrar"><i class="bi bi-funnel"></i> Filtrar</button>
                         </div>
                         <!-- zona de filtros ocultos -->
-                        <div id="filtros-reservas" class="mt-2" style="display:none;">
+                        <div id="filtros-reservas" style="display:none;">
                             <form id="form-filtros">
-                                <div class="row g-2 align-items-center">
+                                <div class="row g-3 align-items-end">
                                     <div class="col-auto">
-                                        <label for="filtro-anio" class="col-form-label">Año:</label>
+                                        <label for="filtro-tipo" class="form-label">Período:</label>
+                                        <select id="filtro-tipo" class="form-select">
+                                            <option value="anio" selected>Año</option>
+                                            <option value="mes">Mes</option>
+                                        </select>
                                     </div>
-                                    <div class="col-auto">
+
+                                    <div class="col-auto" id="filtro-anio-container">
+                                        <label for="filtro-anio" class="form-label">Año:</label>
                                         <select id="filtro-anio" class="form-select">
                                             <option value="">Todos</option>
                                             <?php
@@ -122,9 +128,24 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                             ?>
                                         </select>
                                     </div>
+
+                                    <div class="col-auto" id="filtro-mes-container" style="display:none;">
+                                        <label for="filtro-mes" class="form-label">Mes:</label>
+                                        <select id="filtro-mes" class="form-select">
+                                            <option value="">Todos</option>
+                                            <?php
+                                                $meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+                                                foreach ($meses as $i => $m) {
+                                                    $num = $i + 1;
+                                                    echo "<option value=\"$num\">$m</option>";
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+
                                     <div class="col-auto">
-                                        <button type="button" id="aplicar-filtros" class="btn btn-primary btn-sm">Aplicar</button>
-                                        <button type="button" id="limpiar-filtros" class="btn btn-secondary btn-sm">Limpiar</button>
+                                        <button type="button" id="aplicar-filtros" class="btn btn-primary btn-sm"><i class="bi bi-check-circle"></i> Aplicar</button>
+                                        <button type="button" id="limpiar-filtros" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-counterclockwise"></i> Limpiar</button>
                                     </div>
                                 </div>
                             </form>
@@ -138,26 +159,29 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                         <!-- tabla de reservas recientes -->
                         <div class="mt-4">
                             <?php if (!empty($reservasRecientes)): ?>
-                                <table class="table table-sm table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Cliente</th>
-                                            <th>Fecha</th>
-                                            <th>Precio</th>
-                                            <th>Experiencia</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($reservasRecientes as $r): ?>
+                                <!-- contenedor con altura máxima para habilitar scroll cuando hay muchas filas -->
+                                <div class="tabla-scroll">
+                                    <table class="table table-sm table-striped">
+                                        <thead>
                                             <tr>
-                                                <td><?= htmlspecialchars($r['cliente']) ?></td>
-                                                <td><?= htmlspecialchars($r['fecha']) ?></td>
-                                                <td><?= htmlspecialchars($r['precio']) ?></td>
-                                                <td><?= htmlspecialchars($r['experiencia']) ?></td>
+                                                <th>Cliente</th>
+                                                <th>Fecha</th>
+                                                <th>Precio</th>
+                                                <th>Experiencia</th>
                                             </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($reservasRecientes as $r): ?>
+                                                <tr>
+                                                    <td><?= htmlspecialchars($r['cliente']) ?></td>
+                                                    <td><?= htmlspecialchars($r['fecha']) ?></td>
+                                                    <td><?= htmlspecialchars($r['precio']) ?></td>
+                                                    <td><?= htmlspecialchars($r['experiencia']) ?></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             <?php else: ?>
                                 <p class="text-secondary">No se encontraron reservas recientes.</p>
                             <?php endif; ?>

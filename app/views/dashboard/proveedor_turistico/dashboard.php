@@ -31,12 +31,12 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
 
     <!-- Componentes comunes -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_proveedor.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
 
     <!-- CSS solo de esta vista (Siempre al final) -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/proveedorTuristico/proveedorTuristico.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/dashboard/dashboard.css">
 </head>
 
 <body>
@@ -71,7 +71,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                             <div class="card shadow-sm p-3 w-100">
                                 <i class="bi bi-briefcase fs-3"></i>
                                 <p class="mt-2 mb-0">Mis Servicios</p>
-                                <h3>5</h3>
+                                <h3><?= number_format($totalServicios ?? 0) ?></h3>
                             </div>
                         </div>
 
@@ -80,7 +80,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                             <div class="card shadow-sm p-3 w-100">
                                 <i class="bi bi-calendar-check fs-3"></i>
                                 <p class="mt-2 mb-0">Reservas</p>
-                                <h3>12</h3>
+                                <h3><?= number_format($totalReservas ?? 0) ?></h3>
                             </div>
                         </div>
 
@@ -89,7 +89,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                             <div class="card shadow-sm p-3 w-100">
                                 <i class="bi bi-cash-stack fs-3"></i>
                                 <p class="mt-2 mb-0">Ingresos</p>
-                                <h3>$1.250.000</h3>
+                                <h3>$<?= number_format($ingresosPotenciales ?? 0, 2) ?></h3>
                             </div>
                         </div>
 
@@ -98,7 +98,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                             <div class="card shadow-sm p-3 w-100">
                                 <i class="bi bi-check-circle fs-3 text-success"></i>
                                 <p class="mt-2 mb-0">Estado</p>
-                                <span class="badge bg-success">Activo</span>
+                                <span class="badge bg-success"><?= htmlspecialchars($estado) ?></span>
                             </div>
                         </div>
                     </section>
@@ -107,45 +107,99 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                     <section class="mb-5">
                         <h5 class="mb-3">Acciones rápidas</h5>
                         <div class="d-flex gap-3 flex-wrap">
-                            <a href="#" class="btn btn-primary">
-                                <i class="bi bi-plus-circle"></i> Nuevo servicio
+                            <a href="registrar-actividad" class="btn btn-primary">
+                                <i class="bi bi-plus-circle"></i> Nuevo actividad
                             </a>
-                            <a href="#" class="btn btn-outline-secondary">
+                            <a href="consultar-reservas" class="btn btn-outline-secondary">
                                 <i class="bi bi-calendar-event"></i> Ver reservas
                             </a>
-                            <a href="#" class="btn btn-outline-secondary">
+                            <a href="<?= BASE_URL ?>/proveedor/ingresos" class="btn btn-outline-secondary">
                                 <i class="bi bi-bar-chart-line"></i> Ver ingresos
                             </a>
                         </div>
                     </section>
 
-                    <!-- Tabla de reservas -->
-                    <section class="bg-light p-3 rounded">
-                        <h5 class="mb-3">Últimas reservas</h5>
-                        <table class="table table-striped align-middle">
-                            <thead>
-                                <tr>
-                                    <th>Cliente</th>
-                                    <th>Fecha</th>
-                                    <th>Experiencia</th>
-                                    <th>Estado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Juan Pérez</td>
-                                    <td>20-Jul-2025</td>
-                                    <td>Canopy</td>
-                                    <td><span class="badge bg-success">Confirmada</span></td>
-                                </tr>
-                                <tr>
-                                    <td>María Gómez</td>
-                                    <td>18-Jul-2025</td>
-                                    <td>Rafting</td>
-                                    <td><span class="badge bg-warning text-dark">Pendiente</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <!-- Section de resumen de reservas con tabla -->
+                    <section class="resumen-proveedor mb-5">
+                        <div class="resumen-header d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="mb-0">Listado de Reservas</h5>
+                            <button id="btn-filtrar" class="btn-filtrar"><i class="bi bi-funnel"></i> Filtrar</button>
+                        </div>
+                        <div id="filtros-reservas" style="display:none;">
+                            <form id="form-filtros-proveedor" class="mb-3">
+                                <div class="row g-3 align-items-end">
+                                    <div class="col-auto">
+                                        <label for="filtro-tipo-proveedor" class="form-label">Periodo:</label>
+                                        <select id="filtro-tipo-proveedor" class="form-select">
+                                            <option value="anio" selected>Año</option>
+                                            <option value="mes">Mes</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-auto" id="filtro-anio-container-proveedor">
+                                        <label for="filtro-anio-proveedor" class="form-label">Año:</label>
+                                        <select id="filtro-anio-proveedor" class="form-select">
+                                            <option value="">Todos</option>
+                                            <?php
+                                            $anioActual = date('Y');
+                                            for ($a = $anioActual; $a >= 2020; $a--) {
+                                                echo "<option value=\"$a\">$a</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-auto" id="filtro-mes-container-proveedor" style="display:none;">
+                                        <label for="filtro-mes-proveedor" class="form-label">Mes:</label>
+                                        <select id="filtro-mes-proveedor" class="form-select">
+                                            <option value="">Todos</option>
+                                            <?php
+                                            $meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+                                            foreach ($meses as $i => $m) {
+                                                $num = $i + 1;
+                                                echo "<option value=\"$num\">$m</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="button" id="aplicar-filtros-proveedor" class="btn btn-primary btn-sm"><i class="bi bi-check-circle"></i> Aplicar</button>
+                                        <button type="button" id="limpiar-filtros-proveedor" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-counterclockwise"></i> Limpiar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="tabla-reservas">
+                            <table class="table table-striped align-middle" id="tabla-reservas-proveedor">
+                                <thead>
+                                    <tr>
+                                        <th>Cliente</th>
+                                        <th>Fecha</th>
+                                        <th>Experiencia</th>
+                                        <th>Cantidad Personas</th>
+                                        <th>Precio</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php if (!empty($reservasRecientes)): ?>
+                                        <?php foreach ($reservasRecientes as $r): ?>
+                                            <tr>
+                                                <td><?= htmlspecialchars($r['nombre_turista']) ?></td>
+                                                <td><?= htmlspecialchars($r['fecha']) ?></td>
+                                                <td><?= htmlspecialchars($r['nombre_actividad']) ?></td>
+                                                <td><?= htmlspecialchars($r['cantidad_personas']) ?></td>
+                                                <td>$<?= number_format($r['precio'], 2) ?></td>
+                                                <td><span class="badge <?= $r['estado'] == 'confirmada' ? 'bg-success' : ($r['estado'] == 'pendiente' ? 'bg-warning text-dark' : 'bg-secondary') ?>"><?= htmlspecialchars($r['estado']) ?></span></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <tr>
+                                            <td colspan="6" class="text-center">No hay reservas recientes.</td>
+                                        </tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </section>
 
                 </main>
@@ -157,16 +211,17 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     </section>
 
     <!-- Scripts -->
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
+    <!-- JavaScript variables -->
+    <script>
+        const PROVEEDOR_DASHBOARD_DATA_URL = "<?= BASE_URL ?>/proveedor/dashboard/data";
+    </script>
     <!-- JavaScript -->
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/administrador/dashboard_proveedor.js"></script>
+    <script src="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/proveedorTuristico/dashboard_proveedor.js"></script>
 
 </body>
 
