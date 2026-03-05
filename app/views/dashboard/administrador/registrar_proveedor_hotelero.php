@@ -37,7 +37,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
     <!-- Estilos CSS (siempre al final)-->
     <!-- <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_hotelero.css"> -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_turistico.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_hotelero.css">
 
 
 </head>
@@ -108,11 +108,11 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                         <br><br>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Email *</label>
+                                        <label class="form-label">Email:</label>
                                         <input type="email" name="email" class="form-control" id="email" placeholder="contacto@empresa.com" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Teléfono *</label>
+                                        <label class="form-label">Teléfono:</label>
                                         <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="+57 300 123 4567" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -154,11 +154,11 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 <h4 class="mb-4"><i class="bi bi-person-fill"></i> Representante</h4>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Nombre del Representante *</label>
+                                        <label class="form-label">Nombre del Representante:</label>
                                         <input type="text" name="nombre_representante" class="form-control" id="nombre_repre" placeholder="Juan Pérez" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Tipo de documento *</label>
+                                        <label class="form-label">Tipo de documento:</label>
                                         <select name="tipo_documento" class="form-select" id="tipo_documento">
                                             <option value="" disabled selected hidden>Tipo de documento</option>
                                             <option value="CC">CC</option>
@@ -168,19 +168,19 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     </div>
 
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Identificacion *</label>
+                                        <label class="form-label">Identificacion:</label>
                                         <input type="tel" name="identificacion_representante" class="form-control" id="identiificacion_repre" placeholder="N.°" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Foto</label>
+                                        <label class="form-label">Foto:</label>
                                         <input type="file" accept=".jpg, .png, .jpeg" name="foto_representante" class="form-control" id="foto_representante" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Email *</label>
+                                        <label class="form-label">Email:</label>
                                         <input type="email" name="email_representante" class="form-control" id="email_repre" placeholder="contacto@empresa.com" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Teléfono *</label>
+                                        <label class="form-label">Teléfono:</label>
                                         <input type="tel" name="telefono_representante" class="form-control" id="telefono_repre" placeholder="+57 300 123 4567" required>
                                     </div>
                                 </div>
@@ -192,20 +192,20 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 <h4 class="mb-4"><i class="fas fa-map-marker-alt text-primary"></i> Ubicación</h4>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="departamento">Departamento *</label>
+                                        <label for="departamento">Departamento:</label>
                                         <select name="departamento" id="departamento" class="form-control" required>
                                             <option value="">Seleccione un departamento</option>
                                         </select>
 
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="ciudad">Ciudad *</label>
+                                        <label for="ciudad">Ciudad:</label>
                                         <select name="id_ciudad" id="id_ciudad" class="form-control" required>
                                             <option value="">Seleccione una ciudad</option>
                                         </select>
                                     </div>
                                     <div class="col-md-12 mb-3">
-                                        <label class="form-label">Dirección *</label>
+                                        <label class="form-label">Dirección:</label>
                                         <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Calle 123 #45-67" required>
                                     </div>
                                 </div>
@@ -246,7 +246,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Número máximo de huéspedes *</label>
+                                        <label class="form-label">Número máximo de huéspedes:</label>
                                         <input type="tel" name="max_huesped" class="form-control" id="max_huesped" placeholder="ej: 40" required>
                                     </div>
 
@@ -318,15 +318,15 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 <h4 class="mb-4"><i class="fas fa-map-marker-alt text-primary"></i> Documentación obligatoria</h4>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">NIT/RUT *</label>
+                                        <label class="form-label">NIT/RUT:</label>
                                         <input type="text" name="nit_rut" class="form-control" id="nit" placeholder="123456789-0" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Camara de Comercio *</label>
+                                        <label class="form-label">Camara de Comercio:</label>
                                         <input type="text" name="camara_comercio" class="form-control" id="camara_comercio" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Licencia *</label>
+                                        <label class="form-label">Licencia:</label>
                                         <input type="text" name="licencia" class="form-control" id="licencia" required>
                                     </div>
 
