@@ -2,9 +2,19 @@
 require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 require_once BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php';
 
-$id = $_GET['id'];
+$id = $_GET['id'] ?? null;
+
+if (!$id) {
+    header("Location: " . BASE_URL . "/proveedor/actividades");
+    exit;
+}
 
 $actividadController = listarActividadId($id);
+
+if (!$actividadController) {
+    header("Location: " . BASE_URL . "/proveedor/actividades");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +23,7 @@ $actividadController = listarActividadId($id);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Actividad Turística</title>
+    <title>Editar Actividad Turística</title>
 
     <!-- favicon -->
     <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
@@ -35,122 +45,149 @@ $actividadController = listarActividadId($id);
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
     <!-- CSS propio -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/registrar_actividad_turistica/registrar_actividad_turistica.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/editar_actividad_turistica/editar_actividad_turistica.css">
 </head>
 
 <body>
 
 
 
-    <section id="registrar-actividades">
+    <section id="editar-actividades">
 
-        <!-- Panel Lateral -->
-        <?php
-        require_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php';
-        ?>
+        <!-- PANEL LATERAL -->
+        <aside class="sidebar">
+            <?php
+            include_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php';
+            ?>
+        </aside>
 
         <!-- Contenido Principal -->
-        <div class="contenido-principal">
+        <main class="editar-main">
 
-            <!-- Barra de Búsqueda Superior -->
-            <?php
-            require_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php';
-            ?>
+            <!-- BARRA SUPERIOR -->
+            <header class="informacion-topbar">
+                <?php
+                include_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php';
+                ?>
+            </header>
 
-            <div class="info">
-                <!-- Formulario Wizard -->
-                <form id="formActividad" action="<?= BASE_URL ?>/proveedor/actualizar-actividad" method="POST" enctype="multipart/form-data">
+            <!-- CONTENIDO DE LA PAGINA -->
+            <section class="tabla-editar-actividad">
 
-                    <input type="hidden" name="accion" value="actualizar">
-                    <input type="hidden" name="id_actividad" value="<?= $actividadController['id_actividad'] ?>">
-                    <input type="hidden" name="id_proveedor" value="<?= $actividadController['id_proveedor'] ?>">
+                <div class="container">
 
-
-                    <div class="wizard-header">
-                        <h1 class="mb-0">Editar actividad turística</h1>
+                    <!-- Título y Acciones -->
+                    <div class="header-section">
+                        <h1>Editar Actividades turisticas</h1>
                     </div>
 
+                    <div class="info">
+                        <!-- Formulario Wizard -->
+                        <form id="formActividad" action="<?= BASE_URL ?>/proveedor/actualizar-actividad" method="POST" enctype="multipart/form-data">
 
-                    <!-- ================= PASO 1 ================= -->
-                    <div class="wizard-step active" id="step-1">
-                        <h3>Paso 1 de 3: Información básica</h3>
+                            <input type="hidden" name="accion" value="actualizar">
+                            <input type="hidden" name="id_actividad" value="<?= $actividadController['id_actividad'] ?>">
+                            <input type="hidden" name="id_proveedor" value="<?= $actividadController['id_proveedor'] ?>">
 
-                        <label>Nombre de la actividad</label>
-                        <input type="text" name="nombre" value="<?= $actividadController['nombre'] ?>" required>
-                        <div class="row">
-                            <div class="col-md-5 mb-3">
-                                <!-- 🔥 NUEVO: DEPARTAMENTO -->
-                                <label>Departamento</label>
-                                <select name="id_departamento" id="id_departamento" value="<?= $actividadController['departamento'] ?>" required>
-                                    <option value="">Seleccione departamento</option>
-                                </select>
-                            </div>
-                            <div class="col-md-5 mb-3">
-                                <!-- 🔥 NUEVO: CIUDAD (DESTINO REAL) -->
-                                <label>Destino (Ciudad)</label>
-                                <select name="id_ciudad" id="id_ciudad" value="<?= $actividadController['ciudad'] ?>" required>
-                                    <option value="">Seleccione ciudad</option>
-                                </select>
+
+                            <div class="wizard-header">
+                                <h2 class="mb-0">Editar actividad turística</h2>
                             </div>
 
-                        </div>
-                        <label>Ubicación</label>
-                        <input type="text" name="ubicacion" value="<?= $actividadController['ubicacion'] ?>" required>
 
-                        <div class="wizard-actions">
-                            <span></span>
-                            <button type="button" onclick="nextStep(2)">Siguiente</button>
-                        </div>
+                            <!-- ================= PASO 1 ================= -->
+                            <div class="wizard-step active" id="step-1">
+                                <h3>Paso 1 de 3: Información básica</h3>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Nombre de la actividad</label>
+                                    <input type="text" class="form-control" name="nombre" value="<?= htmlspecialchars($actividadController['nombre']) ?>" required>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <!-- 🔥 NUEVO: DEPARTAMENTO -->
+                                        <label class="form-label">Departamento</label>
+                                        <select name="id_departamento" id="id_departamento" class="form-select" required>
+                                            <option value="">Seleccione departamento</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <!-- 🔥 NUEVO: CIUDAD (DESTINO REAL) -->
+                                        <label class="form-label">Destino (Ciudad)</label>
+                                        <select name="id_ciudad" id="id_ciudad" class="form-select" required>
+                                            <option value="">Seleccione ciudad</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Ubicación</label>
+                                    <input type="text" name="ubicacion" class="form-control"
+                                        value="<?= htmlspecialchars($actividadController['ubicacion']) ?>" required>
+                                </div>
+
+                                <div class="wizard-actions">
+                                    <span></span>
+                                    <button type="button" onclick="nextStep(2)">Siguiente</button>
+                                </div>
+                            </div>
+
+                            <!-- ================= PASO 2 ================= -->
+                            <div class="wizard-step" id="step-2">
+                                <h3>Paso 2 de 3: Detalles de la actividad</h3>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Descripción</label>
+                                    <textarea name="descripcion" class="form-control" required><?= htmlspecialchars($actividadController['descripcion']) ?></textarea>
+                                </div>
+
+
+                                <div class="mb-3">
+                                    <label class="form-label">Cupos disponibles</label>
+                                    <input type="number" name="cupos" class="form-control" value="<?= htmlspecialchars($actividadController['cupos']) ?>" required>
+                                </div>
+
+                                <div class="wizard-actions">
+                                    <button type="button" onclick="prevStep(1)">Atrás</button>
+                                    <button type="button" onclick="nextStep(3)">Siguiente</button>
+                                </div>
+                            </div>
+
+                            <!-- ================= PASO 3 ================= -->
+                            <div class="wizard-step" id="step-3">
+                                <h3>Paso 3: Precio y estado</h3>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Precio</label>
+                                    <input type="number" name="precio" class="form-control" value="<?= htmlspecialchars($actividadController['precio']) ?>" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Estado</label>
+                                    <select class="form-select" name="estado">
+                                        <option value="ACTIVO" <?= $actividadController['estado'] === 'ACTIVO' ? 'selected' : '' ?>>Activa</option>
+                                        <option value="INACTIVO" <?= $actividadController['estado'] === 'INACTIVO' ? 'selected' : '' ?>>Inactiva</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <small class="text-muted">Selecciona hasta 5 imágenes (JPG o PNG)</small>
+                                    <input type="file" name="imagenes[]" class="form-control" multiple accept="image/jpeg,image/png"> <small>Selecciona hasta 5 imágenes (JPG o PNG)</small>
+                                </div>
+
+                                <div class="wizard-actions">
+                                    <button type="button" onclick="prevStep(2)">Atrás</button>
+                                    <button type="submit">Actualizar actividad</button>
+                                </div>
+                            </div>
+
+                        </form>
+
                     </div>
-
-                    <!-- ================= PASO 2 ================= -->
-                    <div class="wizard-step" id="step-2">
-                        <h3>Paso 2 de 3: Detalles de la actividad</h3>
-
-                        <label>Descripción</label>
-                        <textarea name="descripcion" required>
-                            <?= htmlspecialchars($actividadController['descripcion']) ?>
-                        </textarea>
-
-
-                        <label>Cupos disponibles</label>
-                        <input type="number" name="cupos" value="<?= $actividadController['cupos'] ?>" required>
-
-                        <div class="wizard-actions">
-                            <button type="button" onclick="prevStep(1)">Atrás</button>
-                            <button type="button" onclick="nextStep(3)">Siguiente</button>
-                        </div>
-                    </div>
-
-                    <!-- ================= PASO 3 ================= -->
-                    <div class="wizard-step" id="step-3">
-                        <h3>Paso 3: Precio y estado</h3>
-
-                        <label>Precio</label>
-                        <input type="number" name="precio" value="<?= $actividadController['precio'] ?>" required>
-
-                        <label>Estado</label>
-                        <select name="estado">
-                            <option value="ACTIVO" <?= $actividadController['estado'] === 'ACTIVO' ? 'selected' : '' ?>>Activa</option>
-                            <option value="INACTIVO" <?= $actividadController['estado'] === 'INACTIVO' ? 'selected' : '' ?>>Inactiva</option>
-                        </select>
-
-                        <label>Imágenes de la actividad (máx. 5)</label>
-                        <input type="file" name="imagenes[]" multiple required>
-                        <small>Selecciona hasta 5 imágenes (JPG o PNG)</small>
-
-                        <div class="wizard-actions">
-                            <button type="button" onclick="prevStep(2)">Atrás</button>
-                            <button type="submit">Actualizar actividad</button>
-                        </div>
-                    </div>
-
-                </form>
-
-            </div>
-
-        </div>
-
+                </div>
+            </section>
+        </main>
     </section>
 
     <!-- WIZARD JS (NO TOCAR)-->
