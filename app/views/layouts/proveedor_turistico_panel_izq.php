@@ -22,7 +22,7 @@
 
                 <ul id="menu-panel">
                     <a href="<?= BASE_URL ?>/proveedor/dashboard" class="bi-speedometer2">Dashboard</a>
-                    <a href="<?= BASE_URL ?>/proveedor/completar-informacion" class="bi bi-layout-text-sidebar-reverse"> Completar y/o actualizar informacion de registro</a>
+                    <a href="<?= BASE_URL ?>/proveedor/completar-informacion" class="bi bi-layout-text-sidebar-reverse"> Registrar/Actualizar informacion</a>
                     <a href="<?= BASE_URL ?>/proveedor/registrar-actividad" class="bi bi-layout-text-sidebar-reverse">Registrar actividad turistica</a>
                     <a href="<?= BASE_URL ?>/proveedor/consultar-actividad" class="bi bi-table">Consultar actividades turisiticas</a>
                     <a href="<?= BASE_URL ?>/proveedor/consultar-reservas" class="bi bi-calendar-check">Consultar reservas</a>
@@ -33,18 +33,18 @@
                 </ul>
 
                 <script>
-                    (function(){
+                    (function() {
                         try {
                             var links = document.querySelectorAll('#menu-panel a');
-                            var path = window.location.pathname.replace(/\/+$/,'');
-                            links.forEach(function(link){
+                            var path = window.location.pathname.replace(/\/+$/, '');
+                            links.forEach(function(link) {
                                 var href = link.getAttribute('href') || '';
-                                var linkPath = href.replace(window.location.origin, '').replace(/\/+$/,'');
-                                if(linkPath === path){
+                                var linkPath = href.replace(window.location.origin, '').replace(/\/+$/, '');
+                                if (linkPath === path) {
                                     link.classList.add('active');
                                 }
                             });
-                        } catch(e) {
+                        } catch (e) {
                             console && console.error(e);
                         }
                     })();

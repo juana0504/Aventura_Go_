@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../../helpers/session_proveedor.php';
 require_once __DIR__ . '/../../../config/database.php';
+require_once __DIR__ . '/../../helpers/alert_helper.php';
 
 $db = new conexion();
 $conexion = $db->getConexion();
@@ -44,7 +45,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     ) {
-        die("Todos los campos obligatorios deben completarse.");
+        mostrarSweetAlert(
+            'error',
+            'Campos incompletos',
+            'Por favor completa todos los campos obligatorios.',
+            '/aventura_go/proveedor/completar-informacion'
+        );
+
+        exit;
     }
 
     // Procesar actividades para que aparezcan como una cadena separada por comas en la base de datos
@@ -147,8 +155,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bindParam(':foto_representante', $nombreFoto);
 
     if ($stmt->execute()) {
-
-        header('Location: /aventura_go/proveedor/dashboard');
+        mostrarSweetAlert(
+            'success',
+            'Información actualizada',
+            'La información del proveedor ha sido actualizada correctamente.',
+            '/aventura_go/proveedor/completar-informacion'
+        );
         exit;
     } else {
         die("Error al actualizar la información.");

@@ -1,44 +1,75 @@
 /* Fuentes */
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
 
-/* Paleta de colores */
+/* ══════════════════════════════════════════
+   VARIABLES — idénticas a la web principal
+══════════════════════════════════════════ */
 :root {
-    --color-primary: #2D4059;
-    --color-secondary: #EA8217;
-    --color-white: #FFFFFF;
-    --color-bg-light: #F8F9FA;
-    --color-border: #E0E0E0;
-    --color-text: #2b2b2b;
-    --font-titles: 'Raleway', sans-serif;
-    --font-text: 'Lato', sans-serif;
+    --color-primary:      #2D4059;
+    --color-secondary:    #EA8217;
+    --color-secondary-lt: #f49535;
+    --color-white:        #FFFFFF;
+    --color-bg-light:     #F8F9FA;
+    --color-border:       #E0E0E0;
+    --color-text:         #2b2b2b;
+    --color-muted:        #6b7280;
+    --font-titles:        'Raleway', sans-serif;
+    --font-text:          'Lato', sans-serif;
+    --radius-card:        20px;
+    --radius-sm:          12px;
+    --shadow-card:        0 20px 60px rgba(45,64,89,0.10), 0 4px 16px rgba(45,64,89,0.06);
+    --shadow-btn:         0 8px 24px rgba(234,130,23,0.38);
+    --transition:         all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* ══════════════════════════════════════════
+   RESET
+══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ══════════════════════════════════════════
+   BODY — fondo con patrón y gradiente sutil
+══════════════════════════════════════════ */
 body {
-    background: #f5f5f5;
+    background-color: #F0F4F8;
+    background-image:
+        radial-gradient(ellipse 80% 50% at 10% 10%, rgba(45,64,89,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 90% 90%, rgba(234,130,23,0.05) 0%, transparent 55%),
+        radial-gradient(circle, rgba(45,64,89,0.04) 1px, transparent 1px);
+    background-size: auto, auto, 26px 26px;
+    min-height: 100vh;
     overflow-x: hidden;
     width: 100%;
     font-family: var(--font-text);
+    position: relative;
 }
 
-/*  HEADER  */
+/* Orb decorativo fondo */
+body::after {
+    content: '';
+    position: fixed;
+    bottom: -100px; right: -100px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(234,130,23,0.07) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ══════════════════════════════════════════
+   HEADER
+══════════════════════════════════════════ */
 header {
     background-color: var(--color-white);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 16px rgba(45,64,89,0.08);
     position: fixed;
-    top: 0;
-    width: 100%;
+    top: 0; width: 100%;
     z-index: 1000;
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-primary)) 1;
 }
 
-.navbar {
-    padding: 12px 0px;
-}
+.navbar { padding: 12px 0; }
 
 .navbar .container-fluid {
     display: flex;
@@ -46,20 +77,15 @@ header {
     justify-content: space-between;
 }
 
-.navbar-logo {
-    width: 150px;
-    height: auto;
-}
+.navbar-logo { width: 150px; height: auto; }
 
 .navbar-nav {
     list-style: none;
     display: flex;
     gap: 28px;
-    margin: 0;
-    padding: 0;
+    margin: 0; padding: 0;
     flex-direction: row;
 }
-
 
 .nav-link {
     font-family: var(--font-titles);
@@ -70,29 +96,23 @@ header {
     transition: color 0.3s ease;
 }
 
-.nav-link:hover {
-    color: var(--color-secondary);
-}
+.nav-link:hover { color: var(--color-secondary); }
 
 .nav-link.active {
-    color: var(--color-black);
+    color: var(--color-primary);
     font-weight: 700;
 }
 
 .nav-link.active::after {
     content: "";
     position: absolute;
-    bottom: -6px;
-    left: 0;
-    width: 100%;
-    height: 2px;
+    bottom: -6px; left: 0;
+    width: 100%; height: 2px;
     background-color: var(--color-secondary);
     border-radius: 5px;
 }
 
-
-.btn-login,
-.btn-register {
+.btn-login, .btn-register {
     font-family: var(--font-titles);
     font-weight: 600;
     color: var(--color-white);
@@ -100,22 +120,16 @@ header {
     border-radius: 8px;
     padding: 8px 18px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition);
     text-decoration: none;
 }
 
-.btn-login {
-    background-color: var(--color-primary);
-}
+.btn-login  { background-color: var(--color-primary); }
+.btn-register { background-color: var(--color-secondary); }
 
-.btn-register {
-    background-color: var(--color-secondary);
-}
-
-.btn-login:hover,
-.btn-register:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+.btn-login:hover, .btn-register:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     color: var(--color-white);
 }
 
@@ -126,45 +140,357 @@ header {
     cursor: pointer;
 }
 
-.main-content {
-    margin-top: 80px;
-    padding: 40px 20px;
+.actions { display: flex; align-items: center; gap: 8px; }
+
+/* ══════════════════════════════════════════
+   SECCIÓN PRINCIPAL
+══════════════════════════════════════════ */
+#formulario_confirmacion {
+    position: relative;
+    z-index: 1;
 }
 
-.page-title {
-    text-align: center;
+.mt-5 { margin-top: 9rem !important; }
+
+/* ══════════════════════════════════════════
+   TÍTULO DE PÁGINA
+══════════════════════════════════════════ */
+#formulario_confirmacion h2.mb-4 {
     font-family: var(--font-titles);
-    font-size: 32px;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--color-primary);
+    letter-spacing: 0.3px;
+    margin-bottom: 28px !important;
+    position: relative;
+    animation: frConfFadeUp 0.6s 0.1s ease both;
+}
+
+#formulario_confirmacion h2.mb-4::after {
+    content: '';
+    display: block;
+    width: 52px; height: 3px;
+    background: linear-gradient(90deg, var(--color-secondary), var(--color-secondary-lt));
+    border-radius: 99px;
+    margin-top: 10px;
+}
+
+/* ══════════════════════════════════════════
+   TARJETA DE LA TABLA (col-md-8)
+══════════════════════════════════════════ */
+#formulario_confirmacion .col-md-8 {
+    animation: frConfFadeUp 0.6s 0.2s ease both;
+}
+
+/* Tabla Bootstrap mejorada */
+#formulario_confirmacion .table {
+    background: var(--color-white);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    border: none !important;
+    margin-bottom: 0;
+}
+
+#formulario_confirmacion .table thead.table-light th {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+    color: var(--color-primary);
+    font-family: var(--font-titles);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 16px 20px;
+    border-bottom: 2px solid var(--color-border) !important;
+    border-top: none !important;
+}
+
+#formulario_confirmacion .table tbody tr {
+    transition: background 0.2s ease;
+}
+
+#formulario_confirmacion .table tbody tr:hover {
+    background: rgba(234,130,23,0.04);
+}
+
+#formulario_confirmacion .table tbody td {
+    padding: 20px 20px;
+    font-family: var(--font-text);
+    font-size: 14px;
+    color: var(--color-text);
+    border-bottom: 1px solid rgba(224,224,224,0.5) !important;
+    vertical-align: middle !important;
+}
+
+/* Imagen de la actividad en la tabla */
+#formulario_confirmacion .table tbody td img {
+    width: 68px !important;
+    height: 52px;
+    object-fit: cover;
+    border-radius: 10px;
+    vertical-align: middle;
+    box-shadow: 0 4px 12px rgba(45,64,89,0.12);
+}
+
+#formulario_confirmacion .table tbody td strong {
+    font-family: var(--font-titles);
     font-weight: 700;
     color: var(--color-primary);
-    margin-bottom: 10px;
+    font-size: 15px;
 }
 
-.page-subtitle {
+#formulario_confirmacion .table tbody td small.text-muted {
+    font-size: 12px !important;
+    color: var(--color-muted) !important;
+    margin-top: 3px;
+    display: block;
+}
+
+/* Precio y total */
+#formulario_confirmacion .table tbody td:nth-child(2) {
+    font-family: var(--font-titles);
+    font-weight: 600;
+    color: var(--color-muted);
+    font-size: 14px;
+}
+
+#formulario_confirmacion .table tbody td:nth-child(3) {
+    font-weight: 600;
+    color: var(--color-primary);
     text-align: center;
-    font-size: 18px;
-    color: var(--color-text);
-    margin-bottom: 40px;
 }
 
-.tabs-container {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 30px;
-    justify-content: center;
+#formulario_confirmacion .table tbody td:nth-child(4) {
+    font-family: var(--font-titles);
+    font-weight: 800;
+    color: var(--color-primary);
+    font-size: 17px;
 }
 
-/* ===============================
-   BIENVENIDA USUARIO - HEADER
-   =============================== */
+/* ══════════════════════════════════════════
+   CARD RESUMEN (col-md-4)
+══════════════════════════════════════════ */
+#formulario_confirmacion .col-md-4 {
+    animation: frConfFadeUp 0.6s 0.35s ease both;
+}
 
+#formulario_confirmacion .col-md-4 .card {
+    border: none !important;
+    border-radius: var(--radius-card) !important;
+    box-shadow: var(--shadow-card) !important;
+    background: var(--color-white) !important;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Franja top animada */
+#formulario_confirmacion .col-md-4 .card::before {
+    content: '';
+    display: block;
+    height: 5px;
+    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 50%, var(--color-primary) 100%);
+    background-size: 200% auto;
+    animation: frConfStripe 3s linear infinite;
+}
+
+@keyframes frConfStripe {
+    0%   { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+#formulario_confirmacion .col-md-4 .card.p-3 {
+    padding: 28px 28px 24px !important;
+}
+
+/* Título "Total a pagar" */
+#formulario_confirmacion .col-md-4 .card h5 {
+    font-family: var(--font-text);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 8px !important;
+}
+
+/* Monto total */
+#formulario_confirmacion .col-md-4 .card h3 {
+    font-family: var(--font-titles);
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin-bottom: 24px !important;
+    line-height: 1;
+}
+
+#formulario_confirmacion .col-md-4 .card h3::after {
+    content: ' COP';
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-muted);
+    letter-spacing: 0.5px;
+}
+
+/* ══════════════════════════════════════════
+   BOTÓN CONFIRMAR — override total Bootstrap
+══════════════════════════════════════════ */
+#formulario_confirmacion .col-md-4 .card .btn.btn-danger,
+#formulario_confirmacion .col-md-4 .card form .btn.btn-danger {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    width: 100% !important;
+    padding: 15px 24px !important;
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-lt) 100%) !important;
+    background-image: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-lt) 100%) !important;
+    color: var(--color-white) !important;
+    font-family: var(--font-titles) !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.4px !important;
+    border: none !important;
+    border-radius: var(--radius-sm) !important;
+    box-shadow: var(--shadow-btn) !important;
+    cursor: pointer !important;
+    position: relative !important;
+    overflow: hidden !important;
+    transition: var(--transition) !important;
+    text-decoration: none !important;
+}
+
+/* Flecha en el botón */
+#formulario_confirmacion .col-md-4 .card .btn.btn-danger::before,
+#formulario_confirmacion .col-md-4 .card form .btn.btn-danger::before {
+    content: '→' !important;
+    font-size: 17px !important;
+    transition: transform 0.3s ease !important;
+}
+
+/* Brillo animado */
+#formulario_confirmacion .col-md-4 .card .btn.btn-danger::after,
+#formulario_confirmacion .col-md-4 .card form .btn.btn-danger::after {
+    content: '' !important;
+    position: absolute !important;
+    top: -50% !important; left: -65% !important;
+    width: 38% !important; height: 200% !important;
+    background: rgba(255,255,255,0.2) !important;
+    transform: skewX(-20deg) !important;
+    animation: frConfBtnShine 3.5s ease-in-out 1s infinite !important;
+}
+
+@keyframes frConfBtnShine {
+    0%   { left: -65%; opacity: 0; }
+    20%  { opacity: 1; }
+    45%  { left: 115%; opacity: 0; }
+    100% { left: 115%; opacity: 0; }
+}
+
+#formulario_confirmacion .col-md-4 .card .btn.btn-danger:hover,
+#formulario_confirmacion .col-md-4 .card form .btn.btn-danger:hover {
+    background: linear-gradient(135deg, #d97413 0%, var(--color-secondary) 100%) !important;
+    background-image: linear-gradient(135deg, #d97413 0%, var(--color-secondary) 100%) !important;
+    box-shadow: 0 14px 32px rgba(234,130,23,0.48) !important;
+    transform: translateY(-3px) scale(1.015) !important;
+    color: var(--color-white) !important;
+}
+
+#formulario_confirmacion .col-md-4 .card .btn.btn-danger:hover::before,
+#formulario_confirmacion .col-md-4 .card form .btn.btn-danger:hover::before {
+    transform: translateX(5px) !important;
+}
+
+#formulario_confirmacion .col-md-4 .card .btn.btn-danger:active,
+#formulario_confirmacion .col-md-4 .card form .btn.btn-danger:active {
+    transform: translateY(0) scale(0.99) !important;
+}
+
+/* ── Botón modal (sin sesión) ── */
+#formulario_confirmacion .col-md-4 .card > .btn.btn-danger {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    width: 100% !important;
+    padding: 15px 24px !important;
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-lt) 100%) !important;
+    color: var(--color-white) !important;
+    font-family: var(--font-titles) !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    border: none !important;
+    border-radius: var(--radius-sm) !important;
+    box-shadow: var(--shadow-btn) !important;
+    cursor: pointer !important;
+    position: relative !important;
+    overflow: hidden !important;
+    transition: var(--transition) !important;
+}
+
+/* ══════════════════════════════════════════
+   LINK "SEGUIR EXPLORANDO"
+══════════════════════════════════════════ */
+#formulario_confirmacion .col-md-4 .card .btn.btn-link,
+#formulario_confirmacion .col-md-4 .card a.btn-link {
+    font-family: var(--font-titles) !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: var(--color-primary) !important;
+    text-decoration: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    margin-top: 12px !important;
+    transition: color 0.25s ease !important;
+    border: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    padding: 6px 0 !important;
+}
+
+#formulario_confirmacion .col-md-4 .card .btn.btn-link:hover,
+#formulario_confirmacion .col-md-4 .card a.btn-link:hover {
+    color: var(--color-secondary) !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Separador encima del link */
+#formulario_confirmacion .col-md-4 .card .btn.btn-link {
+    border-top: 1px solid var(--color-border) !important;
+    padding-top: 14px !important;
+}
+
+/* Badge de seguridad bajo el botón */
+#formulario_confirmacion .col-md-4 .card form::after {
+    content: '🔐  Pago 100% seguro · SSL';
+    display: block;
+    font-family: var(--font-text);
+    font-size: 11px;
+    color: var(--color-muted);
+    text-align: center;
+    margin-top: 12px;
+    letter-spacing: 0.2px;
+}
+
+/* ══════════════════════════════════════════
+   ANIMACIONES
+══════════════════════════════════════════ */
+@keyframes frConfFadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════════════════
+   DROPDOWN PERFIL — sin tocar
+══════════════════════════════════════════ */
 .Bienvenido {
     background-color: #2D4059;
-    /* azul Aventura Go */
     color: #FFFFFF;
     padding: 8px 14px;
     border-radius: 6px;
-    font-family: 'Lato', sans-serif;
+    font-family: var(--font-text);
     font-size: 14px;
     font-weight: 500;
     margin-right: 10px;
@@ -173,50 +499,38 @@ header {
     white-space: nowrap;
 }
 
-/* Ajuste para que no se pegue al botón salir */
-.actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.bienvenido strong {
-    font-weight: 700;
-}
-
-
-/* INICIA no modificar, estilos del dropdown--------------------------------------------- */
-.profile-dropdown {
-    position: relative;
-}
+.profile-dropdown { position: relative; }
 
 .profile-btn {
     display: flex;
     align-items: center;
     gap: 8px;
-    background-color: #2D4059;
-    color: #FFFFFF;
+    background-color: var(--color-primary);
+    color: var(--color-white);
     border: none;
     padding: 8px 14px;
     border-radius: 8px;
-    font-family: 'Lato', sans-serif;
+    font-family: var(--font-text);
     font-size: 14px;
     cursor: pointer;
+    transition: var(--transition);
 }
 
-.profile-btn i {
-    font-size: 16px;
+.profile-btn:hover {
+    background-color: #1e2d3d;
+    box-shadow: 0 4px 12px rgba(45,64,89,0.25);
 }
+
+.profile-btn i { font-size: 16px; }
 
 .profile-menu {
     position: absolute;
-    right: 0;
-    top: 46px;
-    background-color: #FFFFFF;
-    border: 1px solid #E0E0E0;
-    border-radius: 10px;
+    right: 0; top: 46px;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
     min-width: 200px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 24px rgba(45,64,89,0.12);
     list-style: none;
     padding: 8px 0;
     display: none;
@@ -227,613 +541,127 @@ header {
     display: block;
     padding: 10px 16px;
     font-size: 14px;
-    color: #2B2B2B;
+    color: var(--color-text);
     text-decoration: none;
+    transition: background 0.2s ease;
 }
 
-.profile-menu li a:hover {
-    background-color: #F8F9FA;
-}
+.profile-menu li a:hover { background-color: #F8F9FA; }
 
 .profile-menu .divider {
     height: 1px;
-    background-color: #E0E0E0;
+    background-color: var(--color-border);
     margin: 6px 0;
 }
 
 .profile-menu .logout {
-    color: #EA8217;
+    color: var(--color-secondary);
     font-weight: 600;
 }
 
-/* termina no modificar, estilos del dropdown--------------------------------------------- */
-.mt-5 {
-    margin-top: 9rem !important;
-}
-
-
-
-/* ============================================
-   MODAL REGISTRO - AVENTURA GO
-   Paleta: #2D4059 (primary) | #EA8217 (secondary)
-   ============================================ */
-
-/* OVERLAY */
-#registroModal .modal-dialog {
-    max-width: 480px;
-}
-
+/* ══════════════════════════════════════════
+   MODALES LOGIN Y REGISTRO — intactos
+══════════════════════════════════════════ */
+#registroModal .modal-dialog { max-width: 480px; }
 #registroModal .modal-content {
     border: none;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.25);
     background: #ffffff;
     position: relative;
 }
-
-/* Franja decorativa superior */
 #registroModal .modal-content::before {
     content: "";
-    display: block;
-    height: 6px;
-    width: 100%;
+    display: block; height: 6px; width: 100%;
     background: linear-gradient(90deg, #2D4059 0%, #EA8217 50%, #2D4059 100%);
     background-size: 200% auto;
     animation: gradientShift 3s linear infinite;
 }
-
 @keyframes gradientShift {
     0%   { background-position: 0% center; }
     100% { background-position: 200% center; }
 }
-
-/* Elemento decorativo de fondo */
 #registroModal .modal-content::after {
     content: "";
-    position: absolute;
-    top: -60px;
-    right: -60px;
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, rgba(234, 130, 23, 0.08) 0%, transparent 70%);
+    position: absolute; top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(234,130,23,.08) 0%, transparent 70%);
     border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
+    pointer-events: none; z-index: 0;
 }
-
-/* BODY */
-#registroModal .modal-body {
-    padding: 36px 40px 40px;
-    position: relative;
-    z-index: 1;
-}
-
-/* LOGO */
-#registroModal .logo {
-    width: 130px;
-    height: auto;
-    display: block;
-    margin: 0 auto 20px;
-}
-
-/* TÍTULOS */
-#registroModal h2 {
-    font-family: 'Raleway', sans-serif;
-    font-size: 26px;
-    font-weight: 800;
-    color: #2D4059;
-    letter-spacing: 1.5px;
-    margin-bottom: 8px;
-    text-align: center;
-}
-
-#registroModal h2 span {
-    color: #EA8217;
-}
-
-#registroModal h3 {
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 28px;
-    text-align: center;
-}
-
-#registroModal .centered-line {
-    color: #EA8217;
-    font-weight: 600;
-}
-
-/* FORM */
-#registroModal form {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-/* INPUTS base */
+#registroModal .modal-body { padding: 36px 40px 40px; position: relative; z-index: 1; }
+#registroModal .logo { width: 130px; height: auto; display: block; margin: 0 auto 20px; }
+#registroModal h2 { font-family: 'Raleway', sans-serif; font-size: 26px; font-weight: 800; color: #2D4059; letter-spacing: 1.5px; margin-bottom: 8px; text-align: center; }
+#registroModal h3 { font-family: 'Lato', sans-serif; font-size: 14px; font-weight: 400; color: #666; line-height: 1.6; margin-bottom: 28px; text-align: center; }
+#registroModal .centered-line { color: #EA8217; font-weight: 600; }
+#registroModal form { display: flex; flex-direction: column; gap: 14px; }
 #registroModal input[type="text"],
 #registroModal input[type="tel"],
 #registroModal input[type="email"],
 #registroModal input[type="password"],
-#registroModal select {
-    width: 100%;
-    padding: 12px 16px;
-    border: 1.5px solid #E0E0E0;
-    border-radius: 10px;
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    color: #2b2b2b;
-    background-color: #F8F9FA;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-    outline: none;
-    appearance: none;
-    -webkit-appearance: none;
-}
+#registroModal select { width: 100%; padding: 12px 16px; border: 1.5px solid #E0E0E0; border-radius: 10px; font-family: 'Lato', sans-serif; font-size: 14px; color: #2b2b2b; background-color: #F8F9FA; transition: border-color .3s ease, box-shadow .3s ease; outline: none; appearance: none; }
+#registroModal input::placeholder { color: #aaa; }
+#registroModal input:focus, #registroModal select:focus { border-color: #EA8217; background-color: #fff; box-shadow: 0 0 0 3px rgba(234,130,23,.12); }
+#registroModal .select-container { position: relative; }
+#registroModal .select-container::after { content: "\F282"; font-family: "bootstrap-icons"; font-size: 14px; color: #EA8217; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+#registroModal .password-container { position: relative; }
+#registroModal .password-container input { padding-right: 44px; }
+#registroModal .password-container #togglePassword { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #EA8217; font-size: 16px; transition: color .2s; }
+#registroModal .password-container #togglePassword:hover { color: #2D4059; }
+#registroModal .file-container { position: relative; display: flex; align-items: center; border: 1.5px dashed #E0E0E0; border-radius: 10px; padding: 12px 16px; background-color: #F8F9FA; cursor: pointer; transition: border-color .3s, background-color .3s; gap: 10px; }
+#registroModal .file-container:hover { border-color: #EA8217; background-color: #fff8f2; }
+#registroModal .file-container::before { content: "\F30F"; font-family: "bootstrap-icons"; font-size: 18px; color: #EA8217; flex-shrink: 0; }
+#registroModal .file-container input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; border: none; background: transparent; box-shadow: none; padding: 0; }
+#registroModal .file-placeholder { font-family: 'Lato', sans-serif; font-size: 14px; color: #aaa; pointer-events: none; }
+#registroModal form button[type="submit"] { margin-top: 6px; padding: 13px; background: linear-gradient(135deg,#EA8217,#d4710f); color: #fff; border: none; border-radius: 10px; font-family: 'Raleway', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 1.5px; cursor: pointer; transition: transform .2s, box-shadow .3s; position: relative; overflow: hidden; }
+#registroModal form button[type="submit"]:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(234,130,23,.35); }
+#registroModal form button[type="submit"]:active { transform: translateY(0); }
+#registroModal .modal-body > p { font-family: 'Lato', sans-serif; font-size: 13px; color: #fff; background-color: #2D4059; border-radius: 8px; padding: 9px 14px; margin-bottom: 20px; text-align: center; letter-spacing: .3px; }
 
-#registroModal input::placeholder {
-    color: #aaa;
-}
-
-#registroModal input:focus,
-#registroModal select:focus {
-    border-color: #EA8217;
-    background-color: #fff;
-    box-shadow: 0 0 0 3px rgba(234, 130, 23, 0.12);
-}
-
-/* SELECT CONTAINER */
-#registroModal .select-container {
-    position: relative;
-}
-
-#registroModal .select-container::after {
-    content: "\F282"; /* bi-chevron-down */
-    font-family: "bootstrap-icons";
-    font-size: 14px;
-    color: #EA8217;
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-}
-
-#registroModal .select-container select {
-    width: 100%;
-    cursor: pointer;
-}
-
-/* PASSWORD CONTAINER */
-#registroModal .password-container {
-    position: relative;
-}
-
-#registroModal .password-container input {
-    padding-right: 44px;
-}
-
-#registroModal .password-container #togglePassword {
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #EA8217;
-    font-size: 16px;
-    transition: color 0.2s;
-}
-
-#registroModal .password-container #togglePassword:hover {
-    color: #2D4059;
-}
-
-/* FILE CONTAINER */
-#registroModal .file-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    border: 1.5px dashed #E0E0E0;
-    border-radius: 10px;
-    padding: 12px 16px;
-    background-color: #F8F9FA;
-    cursor: pointer;
-    transition: border-color 0.3s ease, background-color 0.3s ease;
-    gap: 10px;
-}
-
-#registroModal .file-container:hover {
-    border-color: #EA8217;
-    background-color: #fff8f2;
-}
-
-#registroModal .file-container::before {
-    content: "\F30F"; /* bi-image */
-    font-family: "bootstrap-icons";
-    font-size: 18px;
-    color: #EA8217;
-    flex-shrink: 0;
-}
-
-#registroModal .file-container input[type="file"] {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-    border: none;
-    background: transparent;
-    box-shadow: none;
-    padding: 0;
-}
-
-#registroModal .file-container input[type="file"]:focus {
-    border: none;
-    box-shadow: none;
-}
-
-#registroModal .file-placeholder {
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    color: #aaa;
-    pointer-events: none;
-}
-
-/* BOTÓN SUBMIT */
-#registroModal form button[type="submit"] {
-    margin-top: 6px;
-    padding: 13px;
-    background: linear-gradient(135deg, #EA8217 0%, #d4710f 100%);
-    color: #ffffff;
-    border: none;
-    border-radius: 10px;
-    font-family: 'Raleway', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-#registroModal form button[type="submit"]::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-#registroModal form button[type="submit"]:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(234, 130, 23, 0.35);
-}
-
-#registroModal form button[type="submit"]:hover::after {
-    opacity: 1;
-}
-
-#registroModal form button[type="submit"]:active {
-    transform: translateY(0);
-    box-shadow: 0 3px 8px rgba(234, 130, 23, 0.25);
-}
-
-/* TEXTO SECUNDARIO / LINK LOGIN */
-#registroModal .login-redirect {
-    text-align: center;
-    margin-top: 16px;
-    font-family: 'Lato', sans-serif;
-    font-size: 13px;
-    color: #888;
-}
-
-#registroModal .login-redirect a {
-    color: #2D4059;
-    font-weight: 700;
-    text-decoration: none;
-    border-bottom: 1.5px solid transparent;
-    transition: border-color 0.2s ease, color 0.2s ease;
-}
-
-#registroModal .login-redirect a:hover {
-    color: #EA8217;
-    border-bottom-color: #EA8217;
-}
-
-/* MENSAJE INTRO (el <p> inicial) */
-#registroModal .modal-body > p {
-    font-family: 'Lato', sans-serif;
-    font-size: 13px;
-    color: #fff;
-    background-color: #2D4059;
-    border-radius: 8px;
-    padding: 9px 14px;
-    margin-bottom: 20px;
-    text-align: center;
-    letter-spacing: 0.3px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 480px) {
-    #registroModal .modal-body {
-        padding: 28px 22px 32px;
-    }
-
-    #registroModal h2 {
-        font-size: 22px;
-    }
-}
-
-
-
-/* ============================================
-   MODAL LOGIN - AVENTURA GO
-   Paleta: #2D4059 (primary) | #EA8217 (secondary)
-   ============================================ */
-
-/* OVERLAY / DIALOG */
-#loginModal .modal-dialog {
-    max-width: 440px;
-}
-
-#loginModal .modal-content {
-    border: none;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
-    background: #ffffff;
-    position: relative;
-}
-
-/* Franja decorativa superior animada */
-#loginModal .modal-content::before {
-    content: "";
-    display: block;
-    height: 6px;
-    width: 100%;
-    background: linear-gradient(90deg, #2D4059 0%, #EA8217 50%, #2D4059 100%);
-    background-size: 200% auto;
-    animation: loginGradientShift 3s linear infinite;
-}
-
-@keyframes loginGradientShift {
-    0%   { background-position: 0% center; }
-    100% { background-position: 200% center; }
-}
-
-/* Orbe decorativo de fondo */
-#loginModal .modal-content::after {
-    content: "";
-    position: absolute;
-    bottom: -80px;
-    left: -60px;
-    width: 220px;
-    height: 220px;
-    background: radial-gradient(circle, rgba(45, 64, 89, 0.07) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* BODY */
-#loginModal .modal-body {
-    padding: 36px 40px 40px;
-    position: relative;
-    z-index: 1;
-}
-
-/* LOGO */
-#loginModal .logo {
-    width: 130px;
-    height: auto;
-    display: block;
-    margin: 0 auto 20px;
-}
-
-/* TÍTULO */
-#loginModal h2 {
-    font-family: 'Raleway', sans-serif;
-    font-size: 26px;
-    font-weight: 800;
-    color: #2D4059;
-    letter-spacing: 1.5px;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-/* SUBTÍTULO */
-#loginModal .form-section > p {
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    color: #888;
-    line-height: 1.6;
-    margin-bottom: 26px;
-    text-align: center;
-}
-
-/* MENSAJE INTRO SUPERIOR */
-#loginModal .modal-body > p:first-child {
-    font-family: 'Lato', sans-serif;
-    font-size: 13px;
-    color: #fff;
-    background-color: #2D4059;
-    border-radius: 8px;
-    padding: 9px 14px;
-    margin-bottom: 20px;
-    text-align: center;
-    letter-spacing: 0.3px;
-}
-
-/* FORM */
-#loginModal form {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-/* INPUTS */
+#loginModal .modal-dialog { max-width: 440px; }
+#loginModal .modal-content { border: none; border-radius: 20px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.25); background: #fff; position: relative; }
+#loginModal .modal-content::before { content: ""; display: block; height: 6px; width: 100%; background: linear-gradient(90deg,#2D4059,#EA8217 50%,#2D4059); background-size: 200% auto; animation: loginGradientShift 3s linear infinite; }
+@keyframes loginGradientShift { 0%{background-position:0% center} 100%{background-position:200% center} }
+#loginModal .modal-content::after { content: ""; position: absolute; bottom: -80px; left: -60px; width: 220px; height: 220px; background: radial-gradient(circle,rgba(45,64,89,.07) 0%,transparent 70%); border-radius: 50%; pointer-events: none; z-index: 0; }
+#loginModal .modal-body { padding: 36px 40px 40px; position: relative; z-index: 1; }
+#loginModal .logo { width: 130px; height: auto; display: block; margin: 0 auto 20px; }
+#loginModal h2 { font-family: 'Raleway', sans-serif; font-size: 26px; font-weight: 800; color: #2D4059; letter-spacing: 1.5px; margin-bottom: 10px; text-align: center; }
+#loginModal .form-section > p { font-family: 'Lato', sans-serif; font-size: 14px; color: #888; line-height: 1.6; margin-bottom: 26px; text-align: center; }
+#loginModal .modal-body > p:first-child { font-family: 'Lato', sans-serif; font-size: 13px; color: #fff; background-color: #2D4059; border-radius: 8px; padding: 9px 14px; margin-bottom: 20px; text-align: center; letter-spacing: .3px; }
+#loginModal form { display: flex; flex-direction: column; gap: 14px; }
 #loginModal input[type="email"],
-#loginModal input[type="password"] {
-    width: 100%;
-    padding: 12px 16px;
-    border: 1.5px solid #E0E0E0 !important;
-    border-radius: 10px !important;
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    color: #2b2b2b;
-    background-color: #F8F9FA !important;
-    box-shadow: none !important;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-    outline: none;
-    -webkit-appearance: none;
-    appearance: none;
+#loginModal input[type="password"] { width: 100%; padding: 12px 16px; border: 1.5px solid #E0E0E0 !important; border-radius: 10px !important; font-family: 'Lato', sans-serif; font-size: 14px; color: #2b2b2b; background-color: #F8F9FA !important; box-shadow: none !important; transition: border-color .3s, box-shadow .3s; outline: none; appearance: none; }
+#loginModal input::placeholder { color: #aaa; }
+#loginModal input:focus { border-color: #EA8217 !important; background-color: #fff !important; box-shadow: 0 0 0 3px rgba(234,130,23,.12) !important; }
+#loginModal .password-container { position: relative; margin-bottom: 0 !important; }
+#loginModal .password-container input { padding-right: 44px; }
+#loginModal #togglePassword { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #EA8217 !important; font-size: 16px; transition: color .2s; }
+#loginModal #togglePassword:hover { color: #2D4059 !important; }
+#loginModal .forgot-password { text-align: right; margin: 0; font-family: 'Lato', sans-serif; font-size: 13px; }
+#loginModal .forgot-password a { color: #2D4059; font-weight: 600; text-decoration: none; border-bottom: 1.5px solid transparent; transition: color .2s, border-color .2s; }
+#loginModal .forgot-password a:hover { color: #EA8217; border-bottom-color: #EA8217; }
+#loginModal form button[type="submit"] { margin-top: 4px; padding: 13px; background: linear-gradient(135deg,#EA8217,#d4710f) !important; color: #fff !important; border: none !important; border-radius: 10px !important; font-family: 'Raleway', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 1.5px; cursor: pointer; transition: transform .2s, box-shadow .3s; position: relative; overflow: hidden; width: 100%; }
+#loginModal form button[type="submit"]:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(234,130,23,.35); }
+#loginModal form button[type="submit"]:active { transform: translateY(0); }
+#loginModal .extra-links { margin-top: 20px !important; }
+#loginModal .extra-links p { font-family: 'Lato', sans-serif; font-size: 13px; color: #888; text-align: center; margin: 0; }
+#loginModal .extra-links a { color: #2D4059; font-weight: 700; text-decoration: none; border-bottom: 1.5px solid transparent; transition: color .2s, border-color .2s; }
+#loginModal .extra-links a:hover { color: #EA8217; border-bottom-color: #EA8217; }
+#loginModal .extra-links::before { content: ""; display: block; height: 1px; background: linear-gradient(90deg,transparent,#E0E0E0,transparent); margin-bottom: 16px; }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 768px) {
+    #formulario_confirmacion h2.mb-4 { font-size: 22px; }
+    #formulario_confirmacion .table tbody td { padding: 14px 12px; }
+    #formulario_confirmacion .col-md-4 .card.p-3 { padding: 22px 20px 20px !important; }
+    #formulario_confirmacion .col-md-4 .card h3 { font-size: 28px; }
+    .menu-toggle { display: block; }
 }
 
-#loginModal input::placeholder {
-    color: #aaa;
-}
-
-#loginModal input:focus {
-    border-color: #EA8217 !important;
-    background-color: #fff !important;
-    box-shadow: 0 0 0 3px rgba(234, 130, 23, 0.12) !important;
-}
-
-/* PASSWORD CONTAINER */
-#loginModal .password-container {
-    position: relative;
-    margin-bottom: 0 !important;
-}
-
-#loginModal .password-container input {
-    padding-right: 44px;
-}
-
-#loginModal #togglePassword {
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #EA8217 !important;
-    font-size: 16px;
-    transition: color 0.2s ease;
-}
-
-#loginModal #togglePassword:hover {
-    color: #2D4059 !important;
-}
-
-/* OLVIDÉ CONTRASEÑA */
-#loginModal .forgot-password {
-    text-align: right;
-    margin: 0;
-    font-family: 'Lato', sans-serif;
-    font-size: 13px;
-}
-
-#loginModal .forgot-password a {
-    color: #2D4059;
-    font-weight: 600;
-    text-decoration: none;
-    border-bottom: 1.5px solid transparent;
-    transition: color 0.2s ease, border-color 0.2s ease;
-}
-
-#loginModal .forgot-password a:hover {
-    color: #EA8217;
-    border-bottom-color: #EA8217;
-}
-
-/* BOTÓN INGRESAR */
-#loginModal form button[type="submit"] {
-    margin-top: 4px;
-    padding: 13px;
-    background: linear-gradient(135deg, #EA8217 0%, #d4710f 100%) !important;
-    color: #ffffff !important;
-    border: none !important;
-    border-radius: 10px !important;
-    font-family: 'Raleway', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-}
-
-#loginModal form button[type="submit"]::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-#loginModal form button[type="submit"]:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(234, 130, 23, 0.35);
-}
-
-#loginModal form button[type="submit"]:hover::after {
-    opacity: 1;
-}
-
-#loginModal form button[type="submit"]:active {
-    transform: translateY(0);
-    box-shadow: 0 3px 8px rgba(234, 130, 23, 0.25);
-}
-
-/* LINKS EXTRA */
-#loginModal .extra-links {
-    margin-top: 20px !important;
-}
-
-#loginModal .extra-links p {
-    font-family: 'Lato', sans-serif;
-    font-size: 13px;
-    color: #888;
-    text-align: center;
-    margin: 0;
-}
-
-#loginModal .extra-links a {
-    color: #2D4059;
-    font-weight: 700;
-    text-decoration: none;
-    border-bottom: 1.5px solid transparent;
-    transition: color 0.2s ease, border-color 0.2s ease;
-}
-
-#loginModal .extra-links a:hover {
-    color: #EA8217;
-    border-bottom-color: #EA8217;
-}
-
-#loginModal .extra-links::before {
-    content: "";
-    display: block;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #E0E0E0, transparent);
-    margin-bottom: 16px;
-}
-
-/* RESPONSIVE */
 @media (max-width: 480px) {
-    #loginModal .modal-body {
-        padding: 28px 22px 32px;
-    }
-
-    #loginModal h2 {
-        font-size: 22px;
-    }
+    #loginModal .modal-body, #registroModal .modal-body { padding: 28px 22px 32px; }
+    #loginModal h2, #registroModal h2 { font-size: 22px; }
 }
