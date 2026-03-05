@@ -244,8 +244,13 @@ textarea {
 
 @media (max-width: 992px) {
 
-    .informacion-main {
-        width: 100%;
+    .ag-buscador-proveedor {
+        gap: 10px;
+        padding: 0 20px;
+    }
+
+    .busqueda-wrapper {
+        display: none;
     }
 
     .parrafos-informativos {
@@ -259,6 +264,12 @@ textarea {
     .wizard-container {
         max-width: 100%;
     }
+
+    h4 {
+        margin-top: 15px;
+    }
+
+
 
 }
 
