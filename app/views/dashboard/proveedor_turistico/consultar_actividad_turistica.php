@@ -7,7 +7,7 @@ $datos = listarActividades();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -94,7 +94,6 @@ $datos = listarActividades();
                         <a href="<?= BASE_URL ?>/proveedor/pdf-actividades" class="btn-pdf" target="_blank">
                             <i class="bi bi-file-earmark-pdf"></i>Generar Reportes
                         </a>
-
                     </div>
 
 
@@ -154,10 +153,8 @@ $datos = listarActividades();
                                                 <!-- Acciones -->
                                                 <td>
                                                     <button
-                                                        class="btn-accion btn-ver"
-                                                        data-id="<?= $actividad['id_actividad'] ?>"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#modalActividad">
+                                                        class="btn-accion btn-ver" data-id="<?= $actividad['id_actividad'] ?>"
+                                                        data-bs-toggle="modal" data-bs-target="#modalActividad">
                                                         <i class="bi bi-eye"></i>
                                                     </button>
 
@@ -209,7 +206,7 @@ $datos = listarActividades();
                         </div>
                     </div>
 
-                    <button class="btn-close ms-3" data-bs-dismiss="modal"></button>
+                    <button class="btn-close ms-3" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
 
 
@@ -265,9 +262,6 @@ $datos = listarActividades();
     <script>
         const BASE_URL = "<?= BASE_URL ?>";
     </script>
-
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/consultar_actividad_turistica/modal_actividad.js"></script>
-
 
 
     <!-- Scripts -->
