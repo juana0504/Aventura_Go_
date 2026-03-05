@@ -1,385 +1,303 @@
-const modoOscuroBtn = document.getElementById('modoOscuroBtn');
-const notificacionesBtn = document.getElementById('notificacionesBtn');
+const byId = (id) => document.getElementById(id);
+const MONTH_NAMES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
-// Prevenir que los botones envíen el formulario
-modoOscuroBtn.addEventListener('click', (e) => {
-    e.preventDefault(); // ← IMPORTANTE: Previene el envío del form
-    document.body.classList.toggle('modo-oscuro');
+const createBaseTooltip = () => ({
+  backgroundColor: '#2c3e50',
+  titleColor: '#fff',
+  bodyColor: '#fff',
+  padding: 10,
+  cornerRadius: 6,
+  titleFont: { size: 13, weight: 'bold' },
+  bodyFont: { size: 12 },
+  callbacks: {
+    label: (context) => context.parsed.y.toLocaleString('es-CO'),
+  },
 });
 
-notificacionesBtn.addEventListener('click', (e) => {
-    e.preventDefault(); // ← IMPORTANTE: Previene el envío del form
-    alert("Tienes nuevas reservas, verifica");
-});
+const setupTopbarActions = () => {
+  const modoOscuroBtn = byId('modoOscuroBtn');
+  const notificacionesBtn = byId('notificacionesBtn');
 
-// filtrar tabla de reservas recientes
-const btnFiltrar = document.querySelector('.btn-filtrar');
-if (btnFiltrar) {
-    btnFiltrar.addEventListener('click', (e) => {
-        e.preventDefault();
-        const cont = document.getElementById('filtros-reservas');
-        if (cont) {
-            const isHidden = cont.style.display === 'none';
-            cont.style.display = isHidden ? 'block' : 'none';
-            // siempre aplicar filtros al mostrar el panel para refrescar gráfica y tabla
-            if (isHidden) {
-                filtrarTabla();
-            }
-        }
+  if (modoOscuroBtn) {
+    modoOscuroBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      document.body.classList.toggle('modo-oscuro');
     });
-}
+  }
 
+  if (notificacionesBtn) {
+    notificacionesBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      alert('Tienes nuevas reservas, verifica');
+    });
+  }
+};
 
-document.addEventListener('DOMContentLoaded', () => {
-  const reservasCtx = document.getElementById('reservasChart');
-  const gastosCtx = document.getElementById('gastosChart');
-  
-  // Variables para almacenar referencias de gráficos
+const getDataUrl = () => document.querySelector('.dashboard-content')?.dataset.dashboardUrl || '';
+
+const createChartManager = () => {
+  const reservasCtx = byId('reservasChart');
+  const gastosCtx = byId('gastosChart');
   let reservasChart = null;
   let gastosChart = null;
 
-  // aplica filtrado sobre tabla si se usa formulario
-  const aplicarBtn = document.getElementById('aplicar-filtros');
-  const limpiarBtn = document.getElementById('limpiar-filtros');
-  const tipoSelect = document.getElementById('filtro-tipo');
-  const mesContainer = document.getElementById('filtro-mes-container');
-  const anioContainer = document.getElementById('filtro-anio-container');
-  const tablaReservas = document.querySelector('.resumen-reservas table');
+  const destroyChart = (chart) => {
+    if (chart) chart.destroy();
+  };
 
-  // mostrar/ocultar mes y año según tipo
-  if (tipoSelect) {
-    tipoSelect.addEventListener('change', () => {
-      const tipo = tipoSelect.value;
-      if (tipo === 'mes') {
-        mesContainer.style.display = 'flex';
-        anioContainer.style.display = 'flex';
-      } else {
-        mesContainer.style.display = 'none';
-        anioContainer.style.display = 'flex';
-      }
+  const buildReservasDataset = (reservasData, tipo) => {
+    const labels = [];
+    const data = [];
+
+    (Array.isArray(reservasData) ? reservasData : []).forEach((item) => {
+      labels.push(item.periodo ?? item.dia ?? '');
+      data.push(item.total ?? 0);
     });
-  }
 
-  function filtrarTabla() {
-    if (!tablaReservas) return;
-    const tipo = tipoSelect ? tipoSelect.value : 'anio';
-    const año = document.getElementById('filtro-anio').value;
-    const mes = document.getElementById('filtro-mes').value;
-    const filas = Array.from(tablaReservas.tBodies[0].rows);
-    filas.forEach(tr => {
-      const fecha = tr.cells[1].textContent.trim(); // formato YYYY-MM-DD
-      let mostrar = true;
-      if (año && fecha.indexOf(año) !== 0) {
-        mostrar = false;
-      }
-      if (mostrar && tipo === 'mes' && mes) {
-        const partes = fecha.split('-');
-        if (partes[1] !== mes.padStart(2, '0')) {
-          mostrar = false;
-        }
-      }
-      tr.style.display = mostrar ? '' : 'none';
+    if (!labels.length) return { labels: ['Sin datos'], data: [0] };
+
+    if (tipo !== 'mes') return { labels, data };
+
+    const dataByMonth = {};
+    reservasData.forEach((item) => {
+      const month = Number.parseInt(item.periodo, 10);
+      if (!Number.isNaN(month)) dataByMonth[month] = item.total ?? 0;
     });
-    // recargar datos del gráfico
-    if (tipo === 'anio') {
-      fetchChartData('anio', año || undefined);
-    } else if (tipo === 'mes') {
-      fetchChartData('mes', año || undefined);
-    } else {
-      fetchChartData();
-    }
-  }
 
-  function limpiarTabla() {
-    if (!tablaReservas) return;
-    document.getElementById('filtro-anio').value = '';
-    document.getElementById('filtro-mes').value = '';
-    const mesContainer = document.getElementById('filtro-mes-container');
-    if (mesContainer) mesContainer.style.display = 'none';
-    filtrarTabla();
-  }
+    return {
+      labels: MONTH_NAMES,
+      data: Array.from({ length: 12 }, (_, index) => dataByMonth[index + 1] || 0),
+    };
+  };
 
-  if (aplicarBtn) aplicarBtn.addEventListener('click', filtrarTabla);
-  if (limpiarBtn) limpiarBtn.addEventListener('click', limpiarTabla);
+  const createReservasConfig = (reservasData, tipo) => {
+    const dataset = buildReservasDataset(reservasData, tipo);
+    const isYearMode = tipo === 'anio';
 
-  // función auxiliar que solicita datos de dashboard y construye los gráficos
-  // tipo puede ser 'anio' o 'mes'; año y mes son valores numéricos
-  function fetchChartData(tipo, anio, mes) {
-    if (typeof DASHBOARD_DATA_URL === 'undefined') {
-      console.error('La URL de datos del dashboard no está definida');
-      return;
-    }
-    let url = DASHBOARD_DATA_URL;
-    const params = [];
-    if (tipo) params.push('tipo=' + encodeURIComponent(tipo));
-    if (anio !== undefined && anio !== null) params.push('anio=' + encodeURIComponent(anio));
-    if (mes !== undefined && mes !== null) params.push('mes=' + encodeURIComponent(mes));
-    if (params.length) url += '?' + params.join('&');
-    
-    console.log('Fetcheando:', url); // Debug
-    
-    fetch(url)
-      .then(res => res.json())
-      .then(datos => {
-        console.log('Datos recibidos:', datos); // Debug
-        buildCharts(datos, tipo);
-      })
-      .catch(err => console.error('Error cargando datos de dashboard:', err));
-  }
-
-  // constructor de gráficos reutilizable
-  function buildCharts(datos, tipo) {
-    // --- gráfico de reservas ---
-    if (reservasCtx) {
-        let labels = [];
-        let data = [];
-        const reservasData = datos.graficoReservas || [];
-        if (Array.isArray(reservasData)) {
-          reservasData.forEach(r => {
-            // el servidor puede enviar 'periodo' (año/mes) o 'dia' cuando son últimos días
-            const label = r.periodo !== undefined ? r.periodo : (r.dia !== undefined ? r.dia : '');
-            labels.push(label);
-            data.push(r.total);
-          });
-        }
-        if (labels.length === 0) {
-          labels = ['Sin datos'];
-          data = [0];
-        }
-        const chartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: { display: false },
-              tooltip: { 
-                backgroundColor: '#2c3e50', 
-                titleColor: '#fff', 
-                bodyColor: '#fff',
-                padding: 10,
-                cornerRadius: 6,
-                titleFont: { size: 13, weight: 'bold' },
-                bodyFont: { size: 12 }
-              },
-              title: { display: false }
-            }
-        };
-        const chartConfig = {
-            data: {
-              labels: labels,
-              datasets: [{
-                label: 'Reservas',
-                data: data,
-                borderColor: '#EA8217',
-                backgroundColor: 'rgba(255, 132, 0, 0.15)',
-                tension: 0.4,
-                pointBackgroundColor: '#EA8217',
-                pointRadius: 5,
-                fill: true
-              }]
+    return {
+      type: isYearMode ? 'bar' : 'line',
+      data: {
+        labels: dataset.labels,
+        datasets: [{
+          label: 'Reservas',
+          data: dataset.data,
+          borderColor: '#EA8217',
+          backgroundColor: isYearMode ? '#EA8217' : 'rgba(234, 130, 23, 0.08)',
+          borderWidth: isYearMode ? 0 : 2.5,
+          tension: 0.4,
+          fill: true,
+          pointBackgroundColor: '#EA8217',
+          pointBorderColor: '#D97016',
+          pointBorderWidth: isYearMode ? 0 : 1.5,
+          pointRadius: isYearMode ? 0 : 5,
+          pointHoverRadius: isYearMode ? 0 : 7,
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: createBaseTooltip(),
+          title: { display: false },
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: { display: true, text: 'Cantidad de Reservas' },
+            ticks: {
+              color: '#6c757d',
+              callback: (value) => value.toLocaleString('es-CO'),
             },
-            options: chartOptions
-        };
-        // ajustar tipo y orientación según agrupación
-        if (tipo === 'anio') {
-            chartConfig.type = 'bar';
-            // Mantener eje X normal (años abajo, reservas arriba)
-            chartConfig.data.datasets[0].backgroundColor = '#EA8217';
-            chartConfig.data.datasets[0].borderColor = '#d97107';
-            chartConfig.data.datasets[0].borderWidth = 0;
-            
-            // Configuración mejorada con más detalles
-            chartOptions.scales = {
-                y: {
-                    beginAtZero: true,
-                    title: { display: true, text: 'Cantidad de Reservas' },
-                    ticks: { 
-                        color: '#6c757d',
-                        callback: function(value) { return value.toLocaleString('es-CO'); }
-                    },
-                    grid: { color: '#e9ecef', drawBorder: false }
-                },
-                x: {
-                    title: { display: true, text: 'Año' },
-                    ticks: { color: '#6c757d' },
-                    grid: { display: false, drawBorder: false }
-                }
-            };
-            chartOptions.plugins.tooltip.callbacks = {
-                label: function(context) {
-                    return context.parsed.y.toLocaleString('es-CO');
-                }
-            };
-        } else if (tipo === 'mes') {
-            chartConfig.type = 'line';
-            
-            // Crear mapa de datos por mes
-            const datosPorMes = {};
-            reservasData.forEach(r => {
-                const mesNum = parseInt(r.periodo, 10);
-                datosPorMes[mesNum] = r.total;
-            });
-            
-            // Crear array con todos los 12 meses, incluso los sin datos
-            const mesesNombres = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-            labels = [];
-            data = [];
-            for (let i = 1; i <= 12; i++) {
-                labels.push(mesesNombres[i-1]);
-                data.push(datosPorMes[i] || 0);
-            }
-            
-            // Actualizar los datasets data
-            chartConfig.data.labels = labels;
-            chartConfig.data.datasets[0].data = data;
-            
-            // Configuración mejorada con más detalles
-            chartConfig.data.datasets[0].pointRadius = 5;
-            chartConfig.data.datasets[0].pointHoverRadius = 7;
-            chartConfig.data.datasets[0].pointBorderWidth = 1.5;
-            chartConfig.data.datasets[0].pointBorderColor = '#D97016';
-            chartConfig.data.datasets[0].borderWidth = 2.5;
-            chartConfig.data.datasets[0].backgroundColor = 'rgba(234, 130, 23, 0.08)';
-            
-            chartOptions.scales = {
-                y: {
-                    beginAtZero: true,
-                    title: { display: true, text: 'Cantidad de Reservas' },
-                    ticks: { 
-                        color: '#6c757d',
-                        callback: function(value) { return value.toLocaleString('es-CO'); }
-                    },
-                    grid: { color: '#e9ecef', drawBorder: false }
-                },
-                x: {
-                    title: { display: true, text: 'Mes' },
-                    ticks: { color: '#6c757d' },
-                    grid: { display: false, drawBorder: false }
-                }
-            };
-            chartOptions.plugins.tooltip.callbacks = {
-                label: function(context) {
-                    return context.parsed.y.toLocaleString('es-CO');
-                }
-            };
-        } else {
-            // modo días por defecto
-            chartConfig.type = 'line';
-            
-            // Mejoras para modo por defecto
-            chartConfig.data.datasets[0].pointRadius = 5;
-            chartConfig.data.datasets[0].pointHoverRadius = 7;
-            chartConfig.data.datasets[0].pointBorderWidth = 1.5;
-            chartConfig.data.datasets[0].pointBorderColor = '#D97016';
-            chartConfig.data.datasets[0].borderWidth = 2.5;
-            chartConfig.data.datasets[0].backgroundColor = 'rgba(234, 130, 23, 0.08)';
-            
-            chartOptions.scales = {
-                y: {
-                    beginAtZero: true,
-                    title: { display: true, text: 'Cantidad de Reservas' },
-                    ticks: { 
-                        color: '#6c757d',
-                        callback: function(value) { return value.toLocaleString('es-CO'); }
-                    },
-                    grid: { color: '#e9ecef', drawBorder: false }
-                },
-                x: {
-                    title: { display: true, text: 'Fecha (Últimos 7 días)' },
-                    ticks: { color: '#6c757d' },
-                    grid: { display: false, drawBorder: false }
-                }
-            };
-            chartOptions.plugins.tooltip.callbacks = {
-                label: function(context) {
-                    return context.parsed.y.toLocaleString('es-CO');
-                }
-            };
-        }
-        // Destruir gráfico anterior si existe
-        if (reservasChart) {
-            reservasChart.destroy();
-        }
-        // Crear nuevo gráfico
-        reservasChart = new Chart(reservasCtx, chartConfig);
-      }
-
-      // --- gráfico de gastos ---
-      if (gastosCtx) {
-        let labelsG = [];
-        let dataG = [];
-        const gastosData = datos.gastosChartData || [];
-        if (Array.isArray(gastosData)) {
-          gastosData.forEach(g => {
-            labelsG.push(g.categoria || g.dia || 'Sin datos');
-            dataG.push(g.total || g.monto || 0);
-          });
-        }
-        if (labelsG.length === 0) {
-          labelsG = ['Sin datos'];
-          dataG = [0];
-        }
-        // Destruir gráfico anterior si existe
-        if (gastosChart) {
-            gastosChart.destroy();
-        }
-        // Crear nuevo gráfico
-        gastosChart = new Chart(gastosCtx, {
-          type: 'line',
-          data: {
-            labels: labelsG,
-            datasets: [{
-              label: 'Gastos',
-              data: dataG,
-              borderColor: '#EA8217',
-              backgroundColor: 'rgba(234, 130, 23, 0.08)',
-              tension: 0.4,
-              pointBackgroundColor: '#EA8217',
-              pointBorderColor: '#d97107',
-              pointBorderWidth: 1.5,
-              pointRadius: 4,
-              pointHoverRadius: 6,
-              borderWidth: 2,
-              fill: true
-            }]
+            grid: { color: '#e9ecef', drawBorder: false },
           },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-              x: { 
-                grid: { display: false }, 
-                ticks: { color: '#6c757d' },
-                title: { display: true, text: 'Categoría/Período' }
-              },
-              y: { 
-                beginAtZero: true,
-                grid: { color: '#e9ecef' }, 
-                ticks: { 
-                  color: '#6c757d',
-                  callback: function(value) { return '$' + value.toLocaleString('es-CO'); }
-                },
-                title: { display: true, text: 'Monto ($)' }
-              }
+          x: {
+            title: {
+              display: true,
+              text: tipo === 'anio' ? 'Año' : tipo === 'mes' ? 'Mes' : 'Fecha (Últimos 7 días)',
             },
-            plugins: {
-              legend: { display: true, labels: { color: '#6c757d' } },
-              tooltip: { 
-                backgroundColor: '#2c3e50', 
-                titleColor: '#ffffff',
-                bodyColor: '#ffffff',
-                padding: 10,
-                cornerRadius: 6,
-                callbacks: {
-                  label: function(context) {
-                    return '$' + context.parsed.y.toLocaleString('es-CO');
-                  }
-                }
-              }
-            }
-          }
-        });
-      }
+            ticks: { color: '#6c757d' },
+            grid: { display: false, drawBorder: false },
+          },
+        },
+      },
+    };
+  };
+
+  const createGastosConfig = (gastosData) => {
+    const labels = [];
+    const data = [];
+
+    (Array.isArray(gastosData) ? gastosData : []).forEach((item) => {
+      labels.push(item.categoria || item.dia || 'Sin datos');
+      data.push(item.total || item.monto || 0);
+    });
+
+    if (!labels.length) {
+      labels.push('Sin datos');
+      data.push(0);
+    }
+
+    return {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Gastos',
+          data,
+          borderColor: '#EA8217',
+          backgroundColor: 'rgba(234, 130, 23, 0.08)',
+          tension: 0.4,
+          pointBackgroundColor: '#EA8217',
+          pointBorderColor: '#d97107',
+          pointBorderWidth: 1.5,
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          borderWidth: 2,
+          fill: true,
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { color: '#6c757d' },
+            title: { display: true, text: 'Categoría/Período' },
+          },
+          y: {
+            beginAtZero: true,
+            grid: { color: '#e9ecef' },
+            ticks: {
+              color: '#6c757d',
+              callback: (value) => `$${value.toLocaleString('es-CO')}`,
+            },
+            title: { display: true, text: 'Monto ($)' },
+          },
+        },
+        plugins: {
+          legend: { display: true, labels: { color: '#6c757d' } },
+          tooltip: {
+            ...createBaseTooltip(),
+            callbacks: {
+              label: (context) => `$${context.parsed.y.toLocaleString('es-CO')}`,
+            },
+          },
+        },
+      },
+    };
+  };
+
+  const renderCharts = (data, tipo) => {
+    if (typeof Chart === 'undefined') return;
+
+    if (reservasCtx) {
+      destroyChart(reservasChart);
+      reservasChart = new Chart(reservasCtx, createReservasConfig(data.graficoReservas || [], tipo));
+    }
+
+    if (gastosCtx) {
+      destroyChart(gastosChart);
+      gastosChart = new Chart(gastosCtx, createGastosConfig(data.gastosChartData || []));
+    }
+  };
+
+  return { renderCharts };
+};
+
+const setupDashboardFilters = () => {
+  const dataUrl = getDataUrl();
+  if (!dataUrl) {
+    console.error('No se encontró la URL de datos del dashboard.');
+    return;
   }
-  // inicializa gráficos la primera vez en modo anual (show years)
-  fetchChartData('anio');
+
+  const chartManager = createChartManager();
+  const aplicarBtn = byId('aplicar-filtros');
+  const limpiarBtn = byId('limpiar-filtros');
+  const tipoSelect = byId('filtro-tipo');
+  const anioSelect = byId('filtro-anio');
+  const mesSelect = byId('filtro-mes');
+  const mesContainer = byId('filtro-mes-container');
+  const anioContainer = byId('filtro-anio-container');
+  const filtrosContainer = byId('filtros-reservas');
+  const btnFiltrar = document.querySelector('.btn-filtrar');
+  const tablaReservas = document.querySelector('.resumen-reservas table');
+  const tableRows = tablaReservas?.tBodies?.[0] ? Array.from(tablaReservas.tBodies[0].rows) : [];
+
+  const togglePeriodControls = () => {
+    const isMonthMode = tipoSelect?.value === 'mes';
+    if (mesContainer) mesContainer.style.display = isMonthMode ? 'flex' : 'none';
+    if (anioContainer) anioContainer.style.display = 'flex';
+  };
+
+  const buildRequestUrl = (tipo, anio, mes) => {
+    const url = new URL(dataUrl, window.location.origin);
+    if (tipo) url.searchParams.set('tipo', tipo);
+    if (anio) url.searchParams.set('anio', anio);
+    if (tipo === 'mes' && mes) url.searchParams.set('mes', mes);
+    return url.toString();
+  };
+
+  const requestDashboardData = async (tipo, anio, mes) => {
+    try {
+      const response = await fetch(buildRequestUrl(tipo, anio, mes));
+      if (!response.ok) throw new Error(`Error en la respuesta: ${response.status}`);
+      const data = await response.json();
+      chartManager.renderCharts(data, tipo);
+    } catch (error) {
+      console.error('Error cargando datos de dashboard:', error);
+    }
+  };
+
+  const filterTableRows = () => {
+    const tipo = tipoSelect?.value || 'anio';
+    const anio = anioSelect?.value || '';
+    const mes = mesSelect?.value || '';
+
+    tableRows.forEach((row) => {
+      const fecha = row.cells?.[1]?.textContent?.trim() || '';
+      let visible = true;
+
+      if (anio && !fecha.startsWith(anio)) visible = false;
+      if (visible && tipo === 'mes' && mes) {
+        const [, month] = fecha.split('-');
+        visible = month === mes.padStart(2, '0');
+      }
+
+      row.style.display = visible ? '' : 'none';
+    });
+
+    requestDashboardData(tipo, anio || undefined, mes || undefined);
+  };
+
+  const clearFilters = () => {
+    if (tipoSelect) tipoSelect.value = 'anio';
+    if (anioSelect) anioSelect.value = '';
+    if (mesSelect) mesSelect.value = '';
+    togglePeriodControls();
+    filterTableRows();
+  };
+
+  if (tipoSelect) tipoSelect.addEventListener('change', togglePeriodControls);
+  if (aplicarBtn) aplicarBtn.addEventListener('click', filterTableRows);
+  if (limpiarBtn) limpiarBtn.addEventListener('click', clearFilters);
+
+  if (btnFiltrar && filtrosContainer) {
+    btnFiltrar.addEventListener('click', (event) => {
+      event.preventDefault();
+      const isHidden = filtrosContainer.style.display === 'none';
+      filtrosContainer.style.display = isHidden ? 'block' : 'none';
+      if (isHidden) filterTableRows();
+    });
+  }
+
+  togglePeriodControls();
+  requestDashboardData('anio');
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  setupTopbarActions();
+  setupDashboardFilters();
 });

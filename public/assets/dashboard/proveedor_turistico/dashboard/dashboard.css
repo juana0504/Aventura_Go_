@@ -4,9 +4,13 @@
 /*fuente para textos*/
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
-h1 h2 h3 h4 h5 h6 {
-    --font-titles: 'Raleway', sans-serif;
-    /*tipografia titulos*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Raleway', sans-serif;
 }
 
 /* ===============================
@@ -45,21 +49,25 @@ body {
 }
 
 .info {
-    max-width: 1300px;
+    width: calc(100% - 280px);
     margin-left: 280px;
-    padding-top: 20px;
-    padding-left: 53px;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.dashboard-proveedor {
+    padding: 20px 53px 0;
 }
 
 /* ===============================
    ENCABEZADO
 ================================ */
-section h3 {
+.dashboard-proveedor h3 {
     color: var(--primary);
     font-size: 2rem;
 }
 
-section p {
+.dashboard-proveedor p {
     font-size: 1rem;
 }
 
@@ -120,7 +128,7 @@ section p {
 /* ===============================
    ACCIONES RÁPIDAS
 ================================ */
-section h5 {
+.dashboard-proveedor h5 {
     font-weight: 600;
     font-size: 1.2rem;
 }
@@ -239,6 +247,15 @@ table td .badge {
    RESPONSIVE
 ================================ */
 @media (max-width: 992px) {
+    .info {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .dashboard-proveedor {
+        padding: 20px;
+    }
+
     .container-fluid {
         padding: 20px;
     }
@@ -263,12 +280,12 @@ table td .badge {
     }
 
     /* Asegura que los títulos no se desborden */
-    section h5 {
+    .dashboard-proveedor h5 {
         font-size: 1rem;
     }
 
     /* Mejorar la disposición de los elementos en móvil */
-    section .row {
+    .dashboard-proveedor .row {
         flex-direction: column;
     }
 

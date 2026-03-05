@@ -1,12 +1,29 @@
 <?php
-// La sesión y los datos del turista se preparan en el controlador
-// Si por alguna razón se carga la vista directamente sin pasar
-// por el controlador, hacemos una validación mínima:
 if (!isset($datos_turista)) {
-    // evitar errores y redirigir a dashboard vía controlador
     header('Location: /aventura_go/turista/dashboard');
     exit;
 }
+
+$nombreUsuario = $datos_turista['nombre'] ?? ($_SESSION['user']['nombre'] ?? '');
+$estadisticas = $datos_turista['estadisticas'] ?? [];
+$reservas = $datos_turista['reservas'] ?? [];
+
+$totalReservas = $estadisticas['total_reservas'] ?? 0;
+$confirmadas = $estadisticas['confirmadas'] ?? 0;
+$pendientes = $estadisticas['pendientes'] ?? 0;
+$totalGastado = $estadisticas['total_gastado'] ?? 0;
+
+$estadoBadgeClass = static function (string $estado): string {
+    if ($estado === 'confirmada') {
+        return 'bg-success';
+    }
+
+    if ($estado === 'pendiente') {
+        return 'bg-warning text-dark';
+    }
+
+    return 'bg-secondary';
+};
 ?>
 
 <!DOCTYPE html>
@@ -46,113 +63,96 @@ if (!isset($datos_turista)) {
 
 <body>
 
-    <section id="turista">
+    <div id="turista">
 
-        <!-- Panel Lateral -->
         <?php require_once __DIR__ . '/../../layouts/turista_panel_izq.php'; ?>
 
         <div class="info">
 
-            <!-- Barra de Búsqueda -->
-            <?php require_once __DIR__ . '/../../../views/layouts/buscador_turista.php'; ?>
+            <?php require_once __DIR__ . '/../../layouts/buscador_turista.php'; ?>
 
-            <div class="container py-4">
-
-                <!-- Saludo -->
-                <?php
-                // si por alguna razón el modelo no devolvió nombre, usamos la sesión
-                $nombreUsuario = $datos_turista['nombre'] ?? '';
-                if (empty($nombreUsuario) && isset($_SESSION['user']['nombre'])) {
-                    $nombreUsuario = $_SESSION['user']['nombre'];
-                }
-                ?>
+            <main class="container py-4 dashboard-turista">
                 <p class="h4">¡Bienvenido, <?= htmlspecialchars($nombreUsuario) ?>!</p>
-                <p class="text-muted">Gestiona tus actividades de deportes extremos y experiencias</p>
+                <p class="text-muted">Gestiona tus reservas y experiencias de deportes extremos</p>
 
-                <!-- Nuevas Actividades -->
-                <div class="row mb-4">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="fw-bold">📌 Próximas Actividades de Deportes Extremos</h5>
-                            </div>
-                            <div class="card-body">
-                                <?php if (!empty($datos_turista['actividades'])): ?>
-                                    <ul class="list-group">
-                                        <?php foreach ($datos_turista['actividades'] as $actividad): ?>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <div>
-                                                    <strong><?= htmlspecialchars($actividad['actividad']) ?></strong><br>
-                                                    <small class="text-muted"><?= htmlspecialchars($actividad['fecha']) ?></small>
-                                                </div>
-                                                <!-- Mostrar cuántas veces se ha realizado la actividad -->
-                                                <span class="badge"><?= htmlspecialchars($actividad['veces']) ?> veces realizada</span>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    </ul>
+                <div class="row g-4 mb-4">
+                    <div class="col-md-3 col-sm-6 col-12 d-flex">
+                        <div class="card shadow-sm p-3 w-100">
+                            <i class="bi bi-calendar-check fs-3"></i>
+                            <p class="mt-2 mb-0">Mis Reservas</p>
+                            <h3><?= number_format($totalReservas) ?></h3>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6 col-12 d-flex">
+                        <div class="card shadow-sm p-3 w-100">
+                            <i class="bi bi-check-circle fs-3"></i>
+                            <p class="mt-2 mb-0">Confirmadas</p>
+                            <h3><?= number_format($confirmadas) ?></h3>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6 col-12 d-flex">
+                        <div class="card shadow-sm p-3 w-100">
+                            <i class="bi bi-clock-history fs-3"></i>
+                            <p class="mt-2 mb-0">Pendientes</p>
+                            <h3><?= number_format($pendientes) ?></h3>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6 col-12 d-flex">
+                        <div class="card shadow-sm p-3 w-100">
+                            <i class="bi bi-cash-stack fs-3"></i>
+                            <p class="mt-2 mb-0">Total Gastado</p>
+                            <h3>$<?= number_format($totalGastado, 2) ?></h3>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="resumen-turista mb-5">
+                    <div class="resumen-header d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="mb-0">Mis Reservas</h5>
+                    </div>
+
+                    <div class="tabla-reservas">
+                        <table class="table table-striped align-middle" id="tabla-reservas-turista">
+                            <thead>
+                                <tr>
+                                    <th>Actividad</th>
+                                    <th>Fecha</th>
+                                    <th>Ubicación</th>
+                                    <th>Personas</th>
+                                    <th>Precio</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($reservas)): ?>
+                                    <?php foreach ($reservas as $r): ?>
+                                        <tr>
+                                            <td><?= htmlspecialchars($r['nombre_actividad']) ?></td>
+                                            <td><?= htmlspecialchars($r['fecha']) ?></td>
+                                            <td><?= htmlspecialchars($r['ubicacion']) ?></td>
+                                            <td><?= htmlspecialchars($r['cantidad_personas']) ?></td>
+                                            <td>$<?= number_format($r['precio'], 2) ?></td>
+                                            <td><span class="badge <?= $estadoBadgeClass($r['estado'] ?? '') ?>"><?= htmlspecialchars($r['estado']) ?></span></td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 <?php else: ?>
-                                    <p class="text-secondary">Aún no tienes actividades programadas.</p>
+                                    <tr><td colspan="6" class="text-center">No tienes reservas aún.</td></tr>
                                 <?php endif; ?>
-                            </div>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
+                </section>
 
-                    <!-- Estadísticas visuales -->
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="fw-bold">📊 Estadísticas de Actividades</h5>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="actividadesChart" class="w-100"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </main>
+        </div>
 
-                <!-- 🧭 Lugares Visitados -->
-                <div class="mb-4">
-                    <h5 class="fw-bold">📍 Lugares Visitados durante tus Actividades</h5>
-
-                    <div class="row">
-                        <?php
-                        // Solo mostramos 3 tarjetas de lugares visitados
-                        $lugares = array_slice($datos_turista['lugares_visitados'], 0, 3);
-                        foreach ($lugares as $lugar):
-                        ?>
-                            <div class="col-md-4">
-                                <div class="flip-card">
-                                    <div class="flip-card-inner">
-
-                                        <!-- Frente -->
-                                        <div class="flip-card-front">
-                                            <img
-                                                src="<?= BASE_URL ?>/public/assets/dashboard/turista/img/cañon_rosado.jpg"
-                                                alt="<?= htmlspecialchars($lugar['lugar']) ?>">
-                                        </div>
-
-                                        <!-- Reverso -->
-                                        <div class="flip-card-back">
-                                            <h6><?= htmlspecialchars($lugar['lugar']) ?></h6>
-                                            <p><?= htmlspecialchars($lugar['visitas']) ?> visitas</p>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-
-            </div>
-        </div> <!-- Cierre de la clase "info" -->
-
-    </section>
+    </div>
 
     <!-- Scripts de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script src="<?= BASE_URL ?>/public/assets/dashboard/turista/turista/turista.js"></script>
 

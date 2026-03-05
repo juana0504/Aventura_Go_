@@ -1,5 +1,31 @@
 /* ========== ESTILOS DE INGRESOS ========== */
 
+ #ingresos-proveedor {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 280px;
+    flex-shrink: 0;
+}
+
+.ingresos-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.ingresos-topbar {
+    height: 80px;
+    flex-shrink: 0;
+}
+
+.ingresos-content {
+    flex: 1;
+    padding: 20px 53px 0;
+}
+
 .ingresos-header {
     display: flex;
     justify-content: space-between;
@@ -97,4 +123,10 @@
     font-size: 48px;
     color: #dee2e6;
     margin-bottom: 15px;
+}
+
+@media (max-width: 992px) {
+    .ingresos-content {
+        padding: 20px;
+    }
 }

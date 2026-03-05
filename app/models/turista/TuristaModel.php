@@ -16,7 +16,6 @@ class TuristaModel {
         $this->ensureTouristForUser($id_usuario);
 
         // Obtener el id_turista desde la tabla turista
-        // traemos también el id_turista para las consultas posteriores
         $query = "SELECT u.nombre AS nombre, t.id_turista, t.preferencias
               FROM usuario u
               JOIN turista t ON u.id_usuario = t.id_usuario
@@ -26,21 +25,64 @@ class TuristaModel {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!$row) {
-            // en teoría no puede ocurrir thanks a ensureTouristForUser,
-            // pero mantenemos compatibilidad con versiones anteriores.
             return null;
         }
 
         $id_turista = $row['id_turista'];
-        $actividades = $id_turista ? $this->getActividades($id_turista) : [];
-        $lugares = $id_turista ? $this->getLugaresVisitados($id_turista) : [];
-
+        
         return [
             'nombre' => $row['nombre'],
             'preferencias' => $row['preferencias'],
-            'actividades' => $actividades,
-            'lugares_visitados' => $lugares
+            'id_turista' => $id_turista,
+            'reservas' => $id_turista ? $this->getReservas($id_turista) : [],
+            'estadisticas' => $id_turista ? $this->getEstadisticas($id_turista) : [],
+            'actividades' => $id_turista ? $this->getActividades($id_turista) : [],
+            'lugares_visitados' => $id_turista ? $this->getLugaresVisitados($id_turista) : []
         ];
+    }
+
+    public function getReservas($id_turista) {
+        try {
+            $query = "SELECT 
+                        r.id_reserva,
+                        r.fecha,
+                        r.estado,
+                        r.cantidad_personas,
+                        r.precio,
+                        r.created_at as fecha_reserva,
+                        a.nombre as nombre_actividad,
+                        a.ubicacion,
+                        a.precio as precio_unitario
+                      FROM reserva r
+                      JOIN actividad a ON r.id_actividad = a.id_actividad
+                      WHERE r.id_turista = :id_turista
+                      ORDER BY r.fecha DESC";
+            $stmt = $this->conexion->prepare($query);
+            $stmt->execute([':id_turista' => $id_turista]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("[TuristaModel] getReservas error: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function getEstadisticas($id_turista) {
+        try {
+            $query = "SELECT 
+                        COUNT(*) as total_reservas,
+                        SUM(CASE WHEN estado = 'confirmada' THEN 1 ELSE 0 END) as confirmadas,
+                        SUM(CASE WHEN estado = 'pendiente' THEN 1 ELSE 0 END) as pendientes,
+                        SUM(CASE WHEN estado = 'cancelada' THEN 1 ELSE 0 END) as canceladas,
+                        SUM(r.precio) as total_gastado
+                      FROM reserva r
+                      WHERE r.id_turista = :id_turista";
+            $stmt = $this->conexion->prepare($query);
+            $stmt->execute([':id_turista' => $id_turista]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("[TuristaModel] getEstadisticas error: " . $e->getMessage());
+            return [];
+        }
     }
 
     private function getActividades($id_turista) {
