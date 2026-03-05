@@ -2,6 +2,24 @@
 
 require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
+$getPagoColorClass = static function (string $texto = ''): string {
+    $textoNormalizado = strtolower($texto);
+
+    if (strpos($textoNormalizado, 'experiencia') !== false) {
+        return 'green_r';
+    }
+
+    if (strpos($textoNormalizado, 'operador') !== false) {
+        return 'blue_r';
+    }
+
+    if (strpos($textoNormalizado, 'reserva') !== false) {
+        return 'red_r';
+    }
+
+    return 'blue_r';
+};
+
 ?>
 
 
@@ -44,31 +62,27 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
 <body>
 
-    <section id="listado">
+    <div id="listado">
 
-        <!-- aca va el menu o panel izq -->
         <?php
         include_once __DIR__ . '/../../layouts/panel_izq_administrador.php'
         ?>
 
         <div class="info">
 
-            <!-- aca va el buscador -->
             <?php
             include_once __DIR__ . '/../../layouts/buscador_administrador.php'
             ?>
 
-            <!-- Contenedor principal del dashboard -->
-            <div class="dashboard-content">
+            <div class="dashboard-content" data-dashboard-url="<?= BASE_URL ?>/administrador/dashboard/data">
 
                 <main class="main-content">
-                    <!-- Tarjetas de resumen -->
                     <section class="summary-cards">
                         <div class="card-item">
                             <i class="bi bi-graph-up-arrow"></i>
                             <div>
                                 <p>Total de Reservas</p>
-                                <h3><?= number_format($totalReservas) ?></h3>
+                                <h3><?= number_format($totalReservas ?? 0) ?></h3>
                             </div>
                         </div>
 
@@ -76,7 +90,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <i class="bi bi-person-circle"></i>
                             <div>
                                 <p>Reservas Diarias</p>
-                                <h3><?= number_format($reservasDiarias) ?></h3>
+                                <h3><?= number_format($reservasDiarias ?? 0) ?></h3>
                             </div>
                         </div>
 
@@ -84,7 +98,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <i class="bi bi-globe-central-south-asia-fill"></i>
                             <div>
                                 <p>Experiencias Activas</p>
-                                <h3><?= number_format($experienciasActivas) ?></h3>
+                                <h3><?= number_format($experienciasActivas ?? 0) ?></h3>
                             </div>
                         </div>
 
@@ -92,18 +106,17 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <i class="bi bi-tencent-qq"></i>
                             <div>
                                 <p>Inversión en Publicidad</p>
-                                <h3>$<?= number_format($inversionPublicidad ?? 0,2) ?></h3>
+                                <h3>$<?= number_format($inversionPublicidad ?? 0, 2) ?></h3>
                             </div>
                         </div>
                     </section>
 
-                    <!-- Resumen de reservas -->
                     <section class="resumen-reservas">
                         <div class="resumen-header">
                             <h3>Resumen de Reservas</h3>
                             <button class="btn-filtrar"><i class="bi bi-funnel"></i> Filtrar</button>
                         </div>
-                        <!-- zona de filtros ocultos -->
+
                         <div id="filtros-reservas" style="display:none;">
                             <form id="form-filtros">
                                 <div class="row g-3 align-items-end">
@@ -120,11 +133,10 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                         <select id="filtro-anio" class="form-select">
                                             <option value="">Todos</option>
                                             <?php
-                                                // genera años desde 2020 hasta el actual
-                                                $anioActual = date('Y');
-                                                for ($a = $anioActual; $a >= 2020; $a--) {
-                                                    echo "<option value=\"$a\">$a</option>";
-                                                }
+                                            $anioActual = date('Y');
+                                            for ($a = $anioActual; $a >= 2020; $a--) {
+                                                echo "<option value=\"$a\">$a</option>";
+                                            }
                                             ?>
                                         </select>
                                     </div>
@@ -134,11 +146,11 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                         <select id="filtro-mes" class="form-select">
                                             <option value="">Todos</option>
                                             <?php
-                                                $meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-                                                foreach ($meses as $i => $m) {
-                                                    $num = $i + 1;
-                                                    echo "<option value=\"$num\">$m</option>";
-                                                }
+                                            $meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+                                            foreach ($meses as $i => $m) {
+                                                $num = $i + 1;
+                                                echo "<option value=\"$num\">$m</option>";
+                                            }
                                             ?>
                                         </select>
                                     </div>
@@ -154,12 +166,9 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                         <div class="grafico-container">
                             <canvas id="reservasChart"></canvas>
                         </div>
-                        <!-- los datos necesarios para los gráficos se obtienen mediante AJAX desde /administrador/dashboard/data -->
 
-                        <!-- tabla de reservas recientes -->
                         <div class="mt-4">
                             <?php if (!empty($reservasRecientes)): ?>
-                                <!-- contenedor con altura máxima para habilitar scroll cuando hay muchas filas -->
                                 <div class="tabla-scroll">
                                     <table class="table table-sm table-striped">
                                         <thead>
@@ -188,8 +197,6 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                         </div>
                     </section>
 
-
-                    <!-- Última reserva -->
                     <section class="ultima-reserva bg-light p-3 rounded mb-4">
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <h6 class="fw-bold">Última Reserva</h6>
@@ -205,7 +212,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                 </tr>
                             </thead>
                             <tbody>
-                                        <?php if (!empty($ultimaReserva)): ?>
+                                <?php if (!empty($ultimaReserva)): ?>
                                     <tr>
                                         <td><?= htmlspecialchars($ultimaReserva['cliente']) ?></td>
                                         <td><?= htmlspecialchars($ultimaReserva['fecha']) ?></td>
@@ -225,7 +232,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                 <!-- Panel derecho -->
                 <aside class="summary-panel">
                     <div class="ingresos">
-                        <h4>$<?= number_format($ingresosDisponibles,2) ?></h4>
+                        <h4>$<?= number_format($ingresosDisponibles ?? 0, 2) ?></h4>
                         <p>Ingresos Disponibles</p>
                     </div>
 
@@ -236,22 +243,9 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                         <?php else: ?>
                             <ul>
                                 <?php foreach ($proximosPagos as $pago): ?>
-                                    <?php
-                                        // si la base no guarda color, elegimos uno por palabra clave
-                                        $texto = strtolower($pago['texto'] ?? '');
-                                        if (strpos($texto, 'experiencia') !== false) {
-                                            $color = 'green_r';
-                                        } elseif (strpos($texto, 'operador') !== false) {
-                                            $color = 'blue_r';
-                                        } elseif (strpos($texto, 'reserva') !== false) {
-                                            $color = 'red_r';
-                                        } else {
-                                            $color = 'blue_r';
-                                        }
-                                    ?>
-                                    <li><span class="dot <?= $color ?>"></span>
+                                    <li><span class="dot <?= $getPagoColorClass($pago['texto'] ?? '') ?>"></span>
                                         <?= htmlspecialchars($pago['texto']) ?>
-                                        <span class="amount">$<?= number_format($pago['cantidad'] ?? 0,2) ?></span>
+                                        <span class="amount">$<?= number_format($pago['cantidad'] ?? 0, 2) ?></span>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
@@ -269,26 +263,14 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
         </div>
 
-    </section>
+    </div>
 
-
-
-
-    <!-- aca va los script  -->
-    <!-- chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
-    <!-- JavaScript variables needed by scripts -->
-    <script>
-        // valores que necesita el JS, proporcionados por el servidor pero sin mezclar en el archivo estático
-        const DASHBOARD_DATA_URL = "<?= BASE_URL ?>/administrador/dashboard/data";
-    </script>
-    <!-- JavaScript -->
     <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/administrador/administrador.js"></script>
 
 
