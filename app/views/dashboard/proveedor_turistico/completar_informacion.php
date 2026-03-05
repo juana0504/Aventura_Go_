@@ -71,7 +71,6 @@ if (!empty($proveedor['actividades'])) {
 
             <!-- CONTENIDO DE LA PAGINA -->
 
-
             <section class="formulario">
 
                 <div class="container-fluid">
