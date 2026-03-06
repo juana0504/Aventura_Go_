@@ -30,7 +30,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
 
     <!-- Componentes comunes -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_proveedor.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
     <!-- CSS de proveedor -->
@@ -41,13 +41,19 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 </head>
 
 <body>
-    <section id="listado">
-        <?php require_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php'; ?>
+    <section id="ingresos-proveedor">
 
-        <div class="info">
-            <?php require_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php'; ?>
+        <aside class="sidebar">
+            <?php require_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php'; ?>
+        </aside>
 
-            <main class="container">
+        <main class="ingresos-main">
+            <header class="ingresos-topbar">
+                <?php require_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php'; ?>
+            </header>
+
+            <section class="ingresos-content">
+                <div class="container-fluid">
                 <div class="ingresos-header">
                     <div class="header-content flex-grow-1">
                         <h3><i class="bi bi-cash-stack"></i> Ingresos</h3>
@@ -114,8 +120,10 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                     </div>
                 </div>
 
-            </main>
-        </div>
+                </div>
+            </section>
+        </main>
+
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

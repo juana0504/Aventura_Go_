@@ -71,7 +71,6 @@ if (!empty($proveedor['actividades'])) {
 
             <!-- CONTENIDO DE LA PAGINA -->
 
-
             <section class="formulario">
 
                 <div class="container-fluid">
@@ -240,7 +239,7 @@ if (!empty($proveedor['actividades'])) {
                                                     <input type="text" name="nombre_representante" class="form-control" id="nombre_repre" value="<?= $proveedor['nombre_representante'] ?? '' ?>" placeholder="Juan Pérez" required>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
-                                                    <label class="form-label">Tipo de documento *</label>
+                                                    <label class="form-label">Tipo de documento *</label> <br>
                                                     <select name="tipo_documento" class="form-select1" id="tipo_documento">
                                                         <option value="" disabled selected hidden>Tipo de documento</option>
                                                         <option value="CC" <?= ($proveedor['tipo_documento'] ?? '') === 'CC' ? 'selected' : '' ?>>CC</option>
@@ -345,6 +344,7 @@ if (!empty($proveedor['actividades'])) {
                                 </div>
                             </form>
                         </div>
+
                         <div class="col-lg-3 col-md-4 parrafos-informativos">
 
                             <img src="../public/assets/dashboard/proveedor_turistico/completar_informacion/img/image.png" alt="logo aventura go" class="mb-3">
@@ -382,14 +382,10 @@ if (!empty($proveedor['actividades'])) {
                                 ¡Registra tu empresa hoy mismo y comienza a atraer a más aventureros a tus experiencias únicas!
                             </p>
                         </div>
+
                     </div>
                 </div>
             </section>
-
-
-
-
-
         </main>
     </section>
 

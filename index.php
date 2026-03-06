@@ -42,19 +42,6 @@ switch ($request) {
         require_once BASE_PATH . '/app/controllers/RegistroProveedorController.php'; //redirige al guardar el registro de proveedor turistico ALB 18/02/2026
         break;
 
-    case '/proveedor/pendiente':
-        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/pendiente_aprobacion.php'; //redirige a la pagina de pendiente de aprobacion del proveedor turistico ALB 19/02/2026
-        break;
-
-    case '/proveedor/completar-informacion':
-        require_once BASE_PATH . '/app/controllers/proveedor_turistico/completarInformacion.php'; //redirige a completar la informacion del proveedor turistico ALB 19/02/2026
-        break;
-
-    case '/proveedor/guardar-informacion':
-        require_once BASE_PATH . '/app/controllers/proveedor_turistico/completarInformacion.php'; //redirige al guardar la informacion del proveedor turistico ALB 19/02/2026
-        break;
-
-
     case '/registrar-proveedor-hotelero':
         require BASE_PATH . '/app/views/auth/registrar_proveedor_hotelero.php'; //redirige a el registro de proveedor hotelero ALB 18/02/2026
         break;
@@ -274,6 +261,18 @@ switch ($request) {
     //                                     RUTAS PROVEEDOR TURISTICO
     // ===================================================================================================
 
+    case '/proveedor/pendiente':
+        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/pendiente_aprobacion.php'; //redirige a la pagina de pendiente de aprobacion del proveedor turistico ALB 19/02/2026
+        break;
+
+    case '/proveedor/completar-informacion':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/completarInformacion.php'; //redirige a completar la informacion del proveedor turistico ALB 19/02/2026
+        break;
+
+    case '/proveedor/guardar-informacion':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/completarInformacion.php'; //redirige al guardar la informacion del proveedor turistico ALB 19/02/2026
+        break;
+
     case '/proveedor/dashboard':
         require BASE_PATH . '/app/views/dashboard/proveedor_turistico/dashboard.php';
         break;
@@ -294,7 +293,6 @@ switch ($request) {
         require_once BASE_PATH . '/app/controllers/proveedor_turistico/actividadPdfController.php';
         generarPdfActividades();
         break;
-
 
     case '/proveedor/editar-actividad':
         require BASE_PATH . '/app/views/dashboard/proveedor_turistico/editar_actividad_turistica.php'; //editar la actividad turisitica 

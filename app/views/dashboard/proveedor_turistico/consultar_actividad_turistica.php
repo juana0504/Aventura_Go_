@@ -7,7 +7,7 @@ $datos = listarActividades();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -47,133 +47,143 @@ $datos = listarActividades();
     <!-- Layout Principal -->
     <section id="proveedor-actividades">
 
-        <!-- Panel Lateral -->
-        <?php
-        require_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php';
-        ?>
+        <!-- PANEL LATERAL -->
+        <aside class="sidebar">
+            <?php
+            include_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php';
+            ?>
+        </aside>
+
 
         <!-- Contenido Principal -->
-        <div class="info">
+        <main class="consultar-main">
 
-            <!-- Barra de Búsqueda Superior -->
-            <?php
-            require_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php';
-            ?>
+            <!-- BARRA SUPERIOR -->
+            <header class="informacion-topbar">
+                <?php
+                include_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php';
+                ?>
+            </header>
 
-            <!-- Título y Acciones -->
-            <div class="header-section">
-                <h1>Gestión de Actividades turisticas</h1>
-            </div>
+            <!-- CONTENIDO DE LA PAGINA -->
+            <section class="tabla-actividades">
 
+                <div class="container">
 
-            <!-- Filtros Rápidos -->
-            <div class="filtros-rapidos">
-                <button class="filtro-btn active" data-filter="all">
-                    <i class="bi bi-grid"></i> Todos
-                </button>
-                <button class="filtro-btn" data-filter="activo">
-                    <i class="bi bi-check-circle"></i> Activos
-                </button>
-                <button class="filtro-btn" data-filter="inactivo">
-                    <i class="bi bi-x-circle"></i> Inactivos
-                </button>
-                <button class="filtro-btn" data-filter="pendiente">
-                    <i class="bi bi-clock"></i> Pendientes
-                </button>
-
-                <a href="<?= BASE_URL ?>/proveedor/pdf-actividades" class="btn-pdf" target="_blank">
-                    <i class="bi bi-file-earmark-pdf"></i>Generar Reportes
-                </a>
-
-            </div>
+                    <!-- Título y Acciones -->
+                    <div class="header-section">
+                        <h1>Gestión de Actividades turisticas</h1>
+                    </div>
 
 
-            <div class="card shadow-sm mt-4">
+                    <!-- Filtros Rápidos -->
+                    <div class="filtros-rapidos">
+                        <button class="filtro-btn active" data-filter="all">
+                            <i class="bi bi-grid"></i> Todos
+                        </button>
+                        <button class="filtro-btn" data-filter="activo">
+                            <i class="bi bi-check-circle"></i> Activos
+                        </button>
+                        <button class="filtro-btn" data-filter="inactivo">
+                            <i class="bi bi-x-circle"></i> Inactivos
+                        </button>
+                        <button class="filtro-btn" data-filter="pendiente">
+                            <i class="bi bi-clock"></i> Pendientes
+                        </button>
 
-                <div class="table-responsive">
-                    <table id="tablaActividades" class="table table-hover align-middle">
-                        <thead class="table-light">
-                            <tr>
-                                <th>FOTO</th>
-                                <th>NOMBRE ACTIVIDAD</th>
-                                <th>DESTINO</th>
-                                <th>UBICACIÓN</th>
-                                <th>CUPOS</th>
-                                <th>PRECIO</th>
-                                <th>ESTADO</th>
-                                <th>ACCIONES</th>
-                            </tr>
-                        </thead>
+                        <a href="<?= BASE_URL ?>/proveedor/pdf-actividades" class="btn-pdf" target="_blank">
+                            <i class="bi bi-file-earmark-pdf"></i>Generar Reportes
+                        </a>
+                    </div>
 
-                        <tbody>
-                            <?php if (!empty($datos)): ?>
-                                <?php foreach ($datos as $actividad): ?>
+
+                    <div class="card shadow-sm mt-4">
+
+                        <div class="table-responsive">
+                            <table id="tablaActividades" class="table table-hover align-middle">
+                                <thead class="table-light">
                                     <tr>
-                                        <!-- Imagen -->
-                                        <td>
-                                            <img
-                                                src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $actividad['imagen_principal'] ?? 'actividad_default.png' ?>"
-                                                alt="Actividad" class="rounded">
-
-                                        </td>
-
-                                        <!-- Nombre -->
-                                        <td><?= htmlspecialchars($actividad['nombre']) ?></td>
-
-                                        <!-- Destino / ciudad -->
-                                        <td><?= htmlspecialchars($actividad['destino'] ?? 'N/A') ?></td>
-
-                                        <!-- Ubicación -->
-                                        <td><?= htmlspecialchars($actividad['ubicacion']) ?></td>
-
-                                        <!-- Cupos -->
-                                        <td><?= $actividad['cupos'] ?></td>
-
-                                        <!-- Precio -->
-                                        <td>$<?= number_format($actividad['precio'], 0, ',', '.') ?></td>
-
-                                        <!-- Estado -->
-                                        <td>
-                                            <?php if ($actividad['estado'] === 'ACTIVO'): ?>
-                                                <span class="badge bg-success">Activa</span>
-                                            <?php else: ?>
-                                                <span class="badge bg-secondary">Inactiva</span>
-                                            <?php endif; ?>
-                                        </td>
-
-                                        <!-- Acciones -->
-                                        <td>
-                                            <button
-                                                class="btn-accion btn-ver"
-                                                data-id="<?= $actividad['id_actividad'] ?>"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalActividad">
-                                                <i class="bi bi-eye"></i>
-                                            </button>
-
-                                            <a href="<?= BASE_URL ?>/proveedor/editar-actividad?id=<?= $actividad['id_actividad'] ?>" class="btn-accion btn-editar">
-                                                <i class="bi bi-pencil"></i>
-                                            </a>
-
-                                            <a href="<?= BASE_URL ?>/proveedor/eliminar-actividad?accion=eliminar&id=<?= $actividad['id_actividad'] ?>" class="btn-accion btn-eliminar">
-                                                <i class="bi bi-trash"></i>
-                                            </a>
-                                        </td>
+                                        <th>FOTO</th>
+                                        <th>NOMBRE ACTIVIDAD</th>
+                                        <th>DESTINO</th>
+                                        <th>UBICACIÓN</th>
+                                        <th>CUPOS</th>
+                                        <th>PRECIO</th>
+                                        <th>ESTADO</th>
+                                        <th>ACCIONES</th>
                                     </tr>
-                                <?php endforeach; ?>
+                                </thead>
 
-                            <?php else: ?>
-                                <tr>
-                                    <td colspan="8" class="text-center text-muted">
-                                        No hay actividades registradas
-                                    </td>
-                                </tr>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
+                                <tbody>
+                                    <?php if (!empty($datos)): ?>
+                                        <?php foreach ($datos as $actividad): ?>
+                                            <tr>
+                                                <!-- Imagen -->
+                                                <td>
+                                                    <img
+                                                        src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $actividad['imagen_principal'] ?? 'actividad_default.png' ?>"
+                                                        alt="Actividad" class="rounded">
+
+                                                </td>
+
+                                                <!-- Nombre -->
+                                                <td><?= htmlspecialchars($actividad['nombre']) ?></td>
+
+                                                <!-- Destino / ciudad -->
+                                                <td><?= htmlspecialchars($actividad['destino'] ?? 'N/A') ?></td>
+
+                                                <!-- Ubicación -->
+                                                <td><?= htmlspecialchars($actividad['ubicacion']) ?></td>
+
+                                                <!-- Cupos -->
+                                                <td><?= $actividad['cupos'] ?></td>
+
+                                                <!-- Precio -->
+                                                <td>$<?= number_format($actividad['precio'], 0, ',', '.') ?></td>
+
+                                                <!-- Estado -->
+                                                <td>
+                                                    <?php if ($actividad['estado'] === 'ACTIVO'): ?>
+                                                        <span class="badge bg-success">Activa</span>
+                                                    <?php else: ?>
+                                                        <span class="badge bg-secondary">Inactiva</span>
+                                                    <?php endif; ?>
+                                                </td>
+
+                                                <!-- Acciones -->
+                                                <td>
+                                                    <button
+                                                        class="btn-accion btn-ver" data-id="<?= $actividad['id_actividad'] ?>"
+                                                        data-bs-toggle="modal" data-bs-target="#modalActividad">
+                                                        <i class="bi bi-eye"></i>
+                                                    </button>
+
+                                                    <a href="<?= BASE_URL ?>/proveedor/editar-actividad?id=<?= $actividad['id_actividad'] ?>" class="btn-accion btn-editar">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </a>
+
+                                                    <a href="<?= BASE_URL ?>/proveedor/eliminar-actividad?accion=eliminar&id=<?= $actividad['id_actividad'] ?>" class="btn-accion btn-eliminar">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+
+                                    <?php else: ?>
+                                        <tr>
+                                            <td colspan="8" class="text-center text-muted">
+                                                No hay actividades registradas
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-        </div>
+            </section>
+        </main>
     </section>
 
 
@@ -196,7 +206,7 @@ $datos = listarActividades();
                         </div>
                     </div>
 
-                    <button class="btn-close ms-3" data-bs-dismiss="modal"></button>
+                    <button class="btn-close ms-3" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
 
 
@@ -252,9 +262,6 @@ $datos = listarActividades();
     <script>
         const BASE_URL = "<?= BASE_URL ?>";
     </script>
-
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/consultar_actividad_turistica/modal_actividad.js"></script>
-
 
 
     <!-- Scripts -->

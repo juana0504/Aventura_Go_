@@ -1,0 +1,333 @@
+/* ================= ESTILOS WIZARD PROVEEDOR TURISTICO - AVENTURA GO ================= */
+
+/* Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+/* ================= PALETA ================= */
+
+:root {
+    --color-primary: #2D4059;
+    --color-secondary: #EA8217;
+    --color-white: #FFFFFF;
+    --color-bg-light: #F8F9FA;
+    --color-border: #E0E0E0;
+    --color-text: #2B2B2B;
+    --font-titles: 'Raleway', sans-serif;
+    --font-text: 'Lato', sans-serif;
+}
+
+/* ================= TIPOGRAFÍA ================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-titles);
+}
+
+body,
+p,
+a,
+button,
+input,
+select,
+textarea {
+    font-family: var(--font-text);
+}
+
+/* =====================================================
+   ESTRUCTURA BASE DASHBOARD
+===================================================== */
+
+#editar-actividades {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 280px;
+    flex-shrink: 0;
+}
+
+/* CONTENIDO PRINCIPAL */
+
+.editar-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* TOPBAR */
+
+.informacion-topbar {
+    height: 80px;
+    flex-shrink: 0;
+}
+
+/* CONTENIDO DE LA PAGINA */
+
+.formulario {
+    flex: 1;
+    padding: 20px;
+    background: var(--color-bg-light);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.parrafos-informativos {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 20px 20px;
+}
+
+.parrafos-informativos img {
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    display: block;
+}
+
+/* =========================
+   CONTENEDOR GENERAL
+========================= */
+
+#editar-actividades {
+    display: flex;
+    min-height: 100vh;
+    background: #F8F9FA;
+    font-family: 'Lato', sans-serif;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    background: #2D4059;
+}
+
+/* =========================
+   CONTENIDO PRINCIPAL
+========================= */
+
+.editar-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* =========================
+   TOPBAR
+========================= */
+
+.informacion-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* =========================
+   CONTENIDO
+========================= */
+
+.tabla-editar-actividad {
+    padding: 40px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header-section {
+    margin-bottom: 30px;
+}
+
+.header-section h1 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    color: #2B2B2B;
+}
+
+/* =========================
+   TARJETA DEL FORMULARIO
+========================= */
+
+.info {
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+    padding: 35px;
+}
+
+/* =========================
+   WIZARD
+========================= */
+
+.wizard-header {
+    margin-bottom: 25px;
+}
+
+.wizard-header h2 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 22px;
+    color: #2D4059;
+}
+
+/* pasos */
+
+.wizard-step {
+    display: none;
+}
+
+.wizard-step.active {
+    display: block;
+}
+
+/* =========================
+   FORMULARIOS
+========================= */
+
+.form-label {
+    font-weight: 600;
+    color: #2B2B2B;
+}
+
+.form-control,
+.form-select {
+    height: 42px;
+    border-radius: 8px;
+    border: 1px solid #E0E0E0;
+}
+
+textarea.form-control {
+    height: 120px;
+    resize: none;
+}
+
+/* =========================
+   BOTONES WIZARD
+========================= */
+
+.wizard-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.wizard-actions button {
+    background: #EA8217;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.wizard-actions button:hover {
+    background: #d87314;
+}
+
+/* =========================
+   INPUT FILE
+========================= */
+
+input[type="file"] {
+    padding: 8px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* tablets */
+
+@media (max-width:992px) {
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .tabla-editar-actividad {
+        padding: 25px;
+    }
+
+    .info {
+        padding: 25px;
+    }
+
+}
+
+/* tablets pequeñas */
+
+@media (max-width:768px) {
+
+    #editar-actividades {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .editar-main {
+        width: 100%;
+    }
+
+    .tabla-editar-actividad {
+        padding: 20px;
+    }
+
+    .header-section h1 {
+        font-size: 22px;
+    }
+
+    .wizard-header h2 {
+        font-size: 20px;
+    }
+
+}
+
+/* móviles */
+
+@media (max-width:576px) {
+
+    .tabla-editar-actividad {
+        padding: 15px;
+    }
+
+    .info {
+        padding: 20px;
+    }
+
+    .wizard-actions {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .wizard-actions button {
+        width: 100%;
+    }
+
+    .form-control,
+    .form-select {
+        height: 40px;
+    }
+
+    textarea.form-control {
+        height: 110px;
+    }
+
+}
