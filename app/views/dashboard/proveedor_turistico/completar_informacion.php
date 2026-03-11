@@ -70,7 +70,6 @@ if (!empty($proveedor['actividades'])) {
             </header>
 
             <!-- CONTENIDO DE LA PAGINA -->
-
             <section class="formulario">
 
                 <div class="container-fluid">
@@ -298,6 +297,7 @@ if (!empty($proveedor['actividades'])) {
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="preview-card">
                                                 <h6 class="text-primary mb-3"><i class="fas fa-hiking"></i> Servicios</h6>
                                                 <div id="prev-actividades">-</div>

@@ -38,124 +38,139 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
 <body>
 
-    <section id="proveedor-reservas">
+    <section id="consultar-reservas">
 
-        <!-- Panel lateral -->
-        <?php require_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php'; ?>
+        <!-- PANEL LATERAL -->
+        <aside class="sidebar">
+            <?php
+            include_once __DIR__ . '/../../layouts/proveedor_turistico_panel_izq.php';
+            ?>
+        </aside>
 
-        <!-- Contenido principal -->
-        <div class="info">
+        <!-- Contenido Principal -->
+        <main class="consultar-main">
 
-            <!-- Buscador superior -->
-            <?php require_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php'; ?>
+            <!-- BARRA SUPERIOR -->
+            <header class="consultar-topbar">
+                <?php
+                include_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php';
+                ?>
+            </header>
 
-            <!-- Header -->
-            <div class="header-section">
-                <h1>Consultar Reservas</h1>
+            <!-- CONTENIDO DE LA PAGINA -->
+            <section class="formulario">
 
-            </div>
+                <div class="container-fluid">
+
+                    <!-- Header -->
+                    <div class="header-section">
+                        <h1>Consultar Reservas</h1>
+
+                    </div>
 
 
-            <!-- Filtros Rápidos -->
-            <div class="filtros-rapidos">
-                <button class="filtro-btn active" data-filter="all">
-                    <i class="bi bi-grid"></i> Todos
-                </button>
-                <button class="filtro-btn" data-filter="pendiente">
-                    <i class="bi bi-clock"></i> Pendientes
-                </button>
-                <button class="filtro-btn" data-filter="confirmada">
-                    <i class="bi bi-check-circle"></i> Confirmadas
-                </button>
-                <button class="filtro-btn" data-filter="cancelada">
-                    <i class="bi bi-x-circle"></i> Canceladas
-                </button>
-                <a href="<?= BASE_URL ?>/proveedor/pdf-reservas?filtro=<?= urlencode($filtro ?? 'all') ?>" class="btn-pdf" target="_blank">
-                    <i class="bi bi-file-earmark-pdf"></i>Generar Reportes
-                </a>
-            </div>
+                    <!-- Filtros Rápidos -->
+                    <div class="filtros-rapidos">
+                        <button class="filtro-btn active" data-filter="all">
+                            <i class="bi bi-grid"></i> Todos
+                        </button>
+                        <button class="filtro-btn" data-filter="pendiente">
+                            <i class="bi bi-clock"></i> Pendientes
+                        </button>
+                        <button class="filtro-btn" data-filter="confirmada">
+                            <i class="bi bi-check-circle"></i> Confirmadas
+                        </button>
+                        <button class="filtro-btn" data-filter="cancelada">
+                            <i class="bi bi-x-circle"></i> Canceladas
+                        </button>
+                        <a href="<?= BASE_URL ?>/proveedor/pdf-reservas?filtro=<?= urlencode($filtro ?? 'all') ?>" class="btn-pdf" target="_blank">
+                            <i class="bi bi-file-earmark-pdf"></i>Generar Reportes
+                        </a>
+                    </div>
 
-            <!-- Tabla -->
-            <div class="card shadow-sm mt-4">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Turista</th>
-                                    <th>Actividad</th>
-                                    <th>Fecha</th>
-                                    <th>Personas</th>
-                                    <th>Estado</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <?php if (!empty($reservas)): ?>
-                                    <?php foreach ($reservas as $reserva): ?>
+                    <!-- Tabla -->
+                    <div class="card shadow-sm mt-4">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle">
+                                    <thead class="table-light">
                                         <tr>
-                                            <td>
-                                                <strong><?= htmlspecialchars($reserva['nombre_turista']) ?></strong>
-                                                <?php if ($reserva['email_turista']): ?>
-                                                    <br><small class="text-muted"><?= htmlspecialchars($reserva['email_turista']) ?></small>
-                                                <?php endif; ?>
-                                            </td>
-                                            <td>
-                                                <strong><?= htmlspecialchars($reserva['nombre_actividad']) ?></strong>
-                                                <br><small class="text-muted"><?= htmlspecialchars($reserva['ubicacion']) ?></small>
-                                            </td>
-                                            <td>
-                                                <?= date('Y-m-d', strtotime($reserva['fecha'])) ?>
-                                                <br><small class="text-muted">Reserva: <?= date('d/m/Y', strtotime($reserva['fecha_reserva'])) ?></small>
-                                            </td>
-                                            <td class="text-center">
-                                                <strong><?= $reserva['cantidad_personas'] ?></strong>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                $estadoClass = $reserva['estado'] === 'pendiente' ? 'bg-warning text-dark' : ($reserva['estado'] === 'confirmada' ? 'bg-success' : 'bg-danger');
-                                                echo "<span class='badge $estadoClass'>" . ucfirst($reserva['estado']) . "</span>";
-                                                ?>
-                                            </td>
-                                            <td>
-                                                <button class="btn-accion btn-ver"
-                                                    data-id="<?= $reserva['id_reserva'] ?>"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#modalReserva"
-                                                    title="Ver detalles">
-                                                    <i class="bi bi-eye"></i>
-                                                </button>
-                                                <?php if ($reserva['estado'] === 'pendiente'): ?>
-                                                    <button class="btn-accion btn-confirmar"
-                                                        onclick="confirmarReserva(<?= $reserva['id_reserva'] ?>)"
-                                                        title="Confirmar reserva">
-                                                        <i class="bi bi-check"></i>
-                                                    </button>
-                                                    <button class="btn-accion btn-cancelar"
-                                                        onclick="cancelarReserva(<?= $reserva['id_reserva'] ?>)"
-                                                        title="Cancelar reserva">
-                                                        <i class="bi bi-x"></i>
-                                                    </button>
-                                                <?php endif; ?>
-                                            </td>
+                                            <th>Turista</th>
+                                            <th>Actividad</th>
+                                            <th>Fecha</th>
+                                            <th>Personas</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
                                         </tr>
-                                    <?php endforeach; ?>
-                                <?php else: ?>
-                                    <tr>
-                                        <td colspan="6" class="text-center text-muted py-4">
-                                            <i class="bi bi-calendar-x" style="font-size: 2rem;"></i>
-                                            <br><strong>No hay reservas registradas</strong>
-                                            <br><small>Las reservas aparecerán aquí cuando los turistas realicen reservas en sus actividades</small>
-                                        </td>
-                                    </tr>
-                                <?php endif; ?>
-                            </tbody>
-                        </table>
+                                    </thead>
+
+                                    <tbody>
+                                        <?php if (!empty($reservas)): ?>
+                                            <?php foreach ($reservas as $reserva): ?>
+                                                <tr>
+                                                    <td>
+                                                        <strong><?= htmlspecialchars($reserva['nombre_turista']) ?></strong>
+                                                        <?php if ($reserva['email_turista']): ?>
+                                                            <br><small class="text-muted"><?= htmlspecialchars($reserva['email_turista']) ?></small>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                    <td>
+                                                        <strong><?= htmlspecialchars($reserva['nombre_actividad']) ?></strong>
+                                                        <br><small class="text-muted"><?= htmlspecialchars($reserva['ubicacion']) ?></small>
+                                                    </td>
+                                                    <td>
+                                                        <?= date('Y-m-d', strtotime($reserva['fecha'])) ?>
+                                                        <br><small class="text-muted">Reserva: <?= date('d/m/Y', strtotime($reserva['fecha_reserva'])) ?></small>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <strong><?= $reserva['cantidad_personas'] ?></strong>
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        $estadoClass = $reserva['estado'] === 'pendiente' ? 'bg-warning text-dark' : ($reserva['estado'] === 'confirmada' ? 'bg-success' : 'bg-danger');
+                                                        echo "<span class='badge $estadoClass'>" . ucfirst($reserva['estado']) . "</span>";
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn-accion btn-ver"
+                                                            data-id="<?= $reserva['id_reserva'] ?>"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#modalReserva"
+                                                            title="Ver detalles">
+                                                            <i class="bi bi-eye"></i>
+                                                        </button>
+                                                        <?php if ($reserva['estado'] === 'pendiente'): ?>
+                                                            <button class="btn-accion btn-confirmar"
+                                                                onclick="confirmarReserva(<?= $reserva['id_reserva'] ?>)"
+                                                                title="Confirmar reserva">
+                                                                <i class="bi bi-check"></i>
+                                                            </button>
+                                                            <button class="btn-accion btn-cancelar"
+                                                                onclick="cancelarReserva(<?= $reserva['id_reserva'] ?>)"
+                                                                title="Cancelar reserva">
+                                                                <i class="bi bi-x"></i>
+                                                            </button>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <tr>
+                                                <td colspan="6" class="text-center text-muted py-4">
+                                                    <i class="bi bi-calendar-x" style="font-size: 2rem;"></i>
+                                                    <br><strong>No hay reservas registradas</strong>
+                                                    <br><small>Las reservas aparecerán aquí cuando los turistas realicen reservas en sus actividades</small>
+                                                </td>
+                                            </tr>
+                                        <?php endif; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </section>
+        </main>
     </section>
 
     <!-- MODAL DETALLE RESERVA -->

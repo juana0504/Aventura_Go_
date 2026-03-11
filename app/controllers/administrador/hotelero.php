@@ -89,12 +89,25 @@ function registrarHotel()
     $metodo_pago                     = $_POST['metodo_pago'] ?? '';
 
     if (
-        empty($nombre_establecimiento) || empty($email) || empty($telefono) ||
-        empty($tipo_establecimiento) || empty($nombre_representante) || empty($identificacion_representante) || empty($tipo_documento) ||
-        empty($email_representante) || empty($telefono_representante) || empty($departamento) ||
-        empty($id_ciudad) || empty($direccion) || empty($tipo_habitacion) ||
-        empty($max_huesped) || empty($servicio_incluido) ||
-        empty($nit_rut) || empty($camara_comercio)
+        empty($nombre_establecimiento) ||
+        empty($email) ||
+        empty($telefono) ||
+        empty($tipo_establecimiento) ||
+        empty($nombre_representante) ||
+        empty($tipo_documento) ||
+        empty($identificacion_representante) ||
+        empty($email_representante) ||
+        empty($telefono_representante) ||
+        empty($departamento) ||
+        empty($id_ciudad) ||
+        empty($direccion) ||
+        empty($tipo_habitacion) ||
+        empty($max_huesped) ||
+        empty($servicio_incluido) ||
+        empty($nit_rut) ||
+        empty($camara_comercio) ||
+        empty($licencia) ||
+        empty($metodo_pago)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completa todos los campos');
         exit();
