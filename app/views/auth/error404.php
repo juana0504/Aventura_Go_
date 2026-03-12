@@ -5,13 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Error 404</title>
-  <link rel="stylesheet" href="public/assets/extras/error_404/error404.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/extras/error_404/error404.css">
 </head>
 
 <body>
   <div class="container">
     <div>
-      <img src="public/assets/extras/error_404/img/404 imagen.png" alt="imagen de fonto 404">
+      <img src="<?= BASE_URL ?>public/assets/extras/error_404/img/404 imagen.png" alt="imagen de fonto 404">
     </div>
     <div class="info">
       <p class="mensaje">La página que buscas no puede ser encontrada</p>

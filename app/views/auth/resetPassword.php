@@ -5,17 +5,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Restaurar Contraseña - Aventura GO</title>
-  <link rel="stylesheet" href="public/assets/extras/reset_pasword/resetPasword.css" />
+
+  <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/extras/reset_pasword/resetPasword.css" />
 </head>
 
 <body>
   <!-- Fondo con desenfoque -->
   <div class="fondo"></div>
-  <img src="public/assets/extras/reset_pasword/img/Rectangle 179.png" alt="Fondo" class="fondo">
+  <img src="<?= BASE_URL ?>public/assets/extras/reset_pasword/img/Rectangle 179.png" alt="Fondo" class="fondo">
 
   <div class="contenedor">
-    <form action="generar-clave" class="formulario" method="POST">
-      <img src="public/assets/extras/reset_pasword/img/REDES-LOGO 1.png" alt="Logo Aventura GO" class="logo" />
+    <form action="<?= BASE_URL ?>generar-clave" class="formulario" method="POST">
+      <img src="<?= BASE_URL ?>public/assets/extras/reset_pasword/img/REDES-LOGO 1.png" alt="Logo Aventura GO" class="logo" />
       <h2>RESTAURAR CONTRASEÑA</h2>
 
       <p class="instruccion">Ingresa tu correo electrónico</p>
@@ -27,7 +28,7 @@
     </form>
 
     <div class="imagen">
-      <img src="public/assets/extras/reset_pasword/img/Rectangle 179.png" alt="Imagen de aventura" />
+      <img src="<?= BASE_URL ?>public/assets/extras/reset_pasword/img/Rectangle 179.png" alt="Imagen de aventura" />
     </div>
   </div>
 </body>

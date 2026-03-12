@@ -8,7 +8,8 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="public/assets/extras/registrarse/registrar_proveedor.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/extras/registrarse/registrar_proveedor.css">
+
 </head>
 
 <body>
@@ -17,12 +18,12 @@
         <div class="login-box">
 
             <div class="form-section">
-                <img src="public/assets/extras/login/img/REDES-LOGO 2.png" alt="Aventura GO" class="logo mb-3">
+                <img src="<?= BASE_URL ?>public/assets/extras/login/img/REDES-LOGO 2.png" alt="Aventura GO" class="logo mb-3">
 
                 <h2 class="fw-bold">REGISTRO PROVEEDOR TURÍSTICO</h2>
                 <h3 class="fw-bold">Registrate y publica tus actividades.</h3>
 
-                <form action="<?= BASE_URL ?>/guardar-registro-proveedor" method="POST" enctype="multipart/form-data" id="registerForm">
+                <form action="<?= BASE_URL ?>guardar-registro-proveedor" method="POST" enctype="multipart/form-data" id="registerForm">
 
                     <div class="form-grid">
 
@@ -75,14 +76,14 @@
             </div>
 
             <div class="image-section">
-                <img src="public/assets/extras/registrarse/img/REGISTRATE (2).png" alt="Aventura en el río">
+                <img src="<?= BASE_URL ?>public/assets/extras/registrarse/img/REGISTRATE (2).png" alt="Aventura en el río">
             </div>
 
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="public/assets/extras/registrarse/registrarse.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/extras/registrarse/registrarse.js"></script>
 </body>
 
 </html>
