@@ -12,10 +12,10 @@ require_once __DIR__ . '/config/config.php';
 
 $requestUri = $_SERVER['REQUEST_URI']; //OBTENER LA URI ACTUAL (por ejemplo: aventura_go/login)
 
-$request = str_replace('/aventura_go', '', $requestUri); //Quitar el prefijo de la carpeta del proyecto
-
-$request = strtok($request, '?'); //Quitar parametros tipo ?id=123
-
+// $request = str_replace('/aventura_go', '', $requestUri); //Quitar el prefijo de la carpeta del proyecto
+//se cambio para q funcionara el dominio 
+$request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+// $request = strtok($request, '?'); //Quitar parametros tipo ?id=123
 $request = rtrim($request, '/'); //Quitar la barra final (si existe)
 
 if ($request === '') $request = '/'; //si la ruta queda vacia, se interpreta como "/"
