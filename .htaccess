@@ -31,7 +31,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 # L = indica que es la última regla a ejecutar
 RewriteRule ^(.*)$ index.php [QSA,L]
 
-#Activar caché para CSS, JS e imágenes
+#Activar caché para CSS y JS por 7 días, Imágenes por 30 días
 <IfModule mod_expires.c>
     ExpiresActive On
 
