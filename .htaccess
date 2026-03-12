@@ -3,7 +3,8 @@ RewriteEngine On
 
 # Define la ruta base del proyecto dentro del servidor
 # Si tu proyecto está dentro de htdocs/aventura_go, se usa así
-RewriteBase /aventura_go/
+#RewriteBase /aventura_go/
+RewriteBase /
 
 # Ignora archivos o carpetas reales
 # Si el recurso solicitado es un archivo real (CSS, JS, imagen, PDF, etc.), NO lo reescribe

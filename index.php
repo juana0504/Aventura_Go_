@@ -8,7 +8,7 @@
 
 require_once __DIR__ . '/config/config.php';
 
-require_once BASE_PATH . '/app/controllers/website/WebsiteController.php';
+// require_once BASE_PATH . '/app/controllers/website/WebsiteController.php';
 
 $requestUri = $_SERVER['REQUEST_URI']; //OBTENER LA URI ACTUAL (por ejemplo: aventura_go/login)
 
