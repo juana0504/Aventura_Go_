@@ -8,8 +8,6 @@
 
 require_once __DIR__ . '/config/config.php';
 
-// require_once BASE_PATH . '/app/controllers/website/WebsiteController.php';
-
 $requestUri = $_SERVER['REQUEST_URI']; //OBTENER LA URI ACTUAL (por ejemplo: aventura_go/login)
 
 // $request = str_replace('/aventura_go', '', $requestUri); //Quitar el prefijo de la carpeta del proyecto
