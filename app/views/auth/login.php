@@ -21,12 +21,12 @@
 
             <!-- Sección del formulario -->
             <div class="form-section">
-                <img src="public/assets/extras/login/img/REDES-LOGO 2.png" alt="Aventura GO" class="logo mb-3">
+                <img src="<?= BASE_URL ?>public/assets/extras/login/img/REDES-LOGO 2.png" alt="Aventura GO" class="logo mb-3">
 
                 <h2 class="fw-bold">INICIO DE SESIÓN</h2>
                 <p>Por favor ingresa tu usuario y contraseña para iniciar sesión</p>
 
-                <form action="iniciar-sesion" method="POST">
+                <form action="<?= BASE_URL ?>iniciar-sesion" method="POST">
 
                     <input type="email" name="email" placeholder="Correo" required>
 
@@ -36,7 +36,7 @@
                     </div>
 
                     <p class="forgot-password">
-                        <a href="recoverpw">¿Olvidaste tu contraseña?</a>
+                        <a href="<?= BASE_URL ?>recoverpw">¿Olvidaste tu contraseña?</a>
                     </p>
 
                     <button type="submit">INGRESAR</button>
@@ -52,14 +52,14 @@
 
             <!-- Sección de la imagen -->
             <div class="image-section">
-                <img src="public/assets/extras/login/img/Rectangle 179.png" alt="Aventura en el río">
+                <img src="<?= BASE_URL ?>public/assets/extras/login/img/Rectangle 179.png" alt="Aventura en el río">
             </div>
 
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="public/assets/extras/login/login.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/extras/login/login.js"></script>
 
     <!-- MODAL REGISTRO -->
     <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
@@ -83,7 +83,7 @@
                                     <div class="card-body">
                                         <h3 class="card-title">Turista</h3>
                                         <p class="card-text">Quiero reservar actividades y experiencias.</p>
-                                        <a href="/aventura_go/registrarse?tipo=turista" class="btn btn-aventura">
+                                        <a href="<?= BASE_URL ?>registrarse?tipo=turista" class="btn btn-aventura">
                                             Elegir
                                         </a>
                                     </div>
@@ -97,7 +97,7 @@
                                     <div class="card-body">
                                         <h3 class="card-title">Proveedor turístico</h3>
                                         <p class="card-text">Quiero publicar actividades de aventura.</p>
-                                        <a href="/aventura_go/registrar-proveedor" class="btn btn-aventura">
+                                        <a href="<?= BASE_URL ?>registrar-proveedor" class="btn btn-aventura">
                                             Elegir
                                         </a>
                                     </div>
@@ -111,7 +111,7 @@
                                     <div class="card-body">
                                         <h3 class="card-title">Proveedor hotelero</h3>
                                         <p class="card-text">Quiero publicar hospedajes.</p>
-                                        <a href="/aventura_go/registrar-proveedor-hotelero" class="btn btn-aventura">
+                                        <a href="<?= BASE_URL ?>registrar-proveedor-hotelero" class="btn btn-aventura">
                                             Elegir
                                         </a>
                                     </div>
