@@ -3,17 +3,18 @@
 //configuracion global del proyecto
 
 //detectar protocolo (http o https)
-// $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
+$protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
+// $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
 
 //nombre de la carpeta del proyecto en el local
-// $baseFolder = '';
+$baseFolder = '/aventura_go';
 
 //host actual
 $host = $_SERVER['HTTP_HOST'];
 
 //URL base dinamica (funciona en local y en hosting)
-define('BASE_URL', $protocol . $host . '/');
+define('BASE_URL', $protocol . $host . $baseFolder);
+//define('BASE_URL', $protocol . $host . dirname($_SERVER['SCRIPT_NAME']) . '/');
 
 //ruta base del proyecto (para require o include)
 define('BASE_PATH', dirname(__DIR__));
