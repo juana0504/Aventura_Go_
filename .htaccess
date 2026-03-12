@@ -1,3 +1,6 @@
+# Bloquear listado de carpetas
+Options -Indexes 
+
 # Activa el motor de reescritura de URLs de Apache
 RewriteEngine On
 
@@ -5,7 +8,7 @@ RewriteEngine On
 RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-#Proteger carpetas internas
+# Proteger carpetas internas
 RewriteRule ^app/ - [F,L]
 RewriteRule ^config/ - [F,L]
 RewriteRule ^vendor/ - [F,L]
