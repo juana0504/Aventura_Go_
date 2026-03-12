@@ -1,17 +1,20 @@
 <?php
 require_once __DIR__ . '/../../../config/database.php';
-
-class Reserva {
+// Modelo de Reserva para el proveedor turístico
+class Reserva
+{
     private $conexion;
-    
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->conexion = (new Conexion())->getConexion();
     }
-    
+
     /**
      * Listar reservas de un proveedor con filtros
      */
-    public function listarPorProveedor($id_proveedor, $filtro = '') {
+    public function listarPorProveedor($id_proveedor, $filtro = '')
+    {
         $sql = "SELECT 
                     r.id_reserva,
                     r.fecha,
@@ -29,34 +32,34 @@ class Reserva {
                 JOIN turista t ON r.id_turista = t.id_turista
                 JOIN usuario u ON t.id_usuario = u.id_usuario
                 WHERE a.id_proveedor = :id_proveedor";
-        
+
         if ($filtro && $filtro !== 'all') {
             $sql .= " AND r.estado = :estado";
         }
-        
+
         $sql .= " ORDER BY r.created_at DESC";
-        
+
         try {
             $stmt = $this->conexion->prepare($sql);
             $stmt->bindParam(':id_proveedor', $id_proveedor);
-            
+
             if ($filtro && $filtro !== 'all') {
                 $stmt->bindParam(':estado', $filtro);
             }
-            
+
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
         } catch (PDOException $e) {
             error_log("Error en listarPorProveedor: " . $e->getMessage());
             return [];
         }
     }
-    
+
     /**
      * Obtener detalles completos de una reserva específica
      */
-    public function listarPorId($id_reserva) {
+    public function listarPorId($id_reserva)
+    {
         $sql = "SELECT 
                     r.*,
                     a.nombre as nombre_actividad,
@@ -75,71 +78,72 @@ class Reserva {
                 JOIN usuario u ON t.id_usuario = u.id_usuario
                 JOIN proveedor p ON a.id_proveedor = p.id_proveedor
                 WHERE r.id_reserva = :id_reserva";
-        
+
         try {
             $stmt = $this->conexion->prepare($sql);
             $stmt->bindParam(':id_reserva', $id_reserva);
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
-            
         } catch (PDOException $e) {
             error_log("Error en listarPorId: " . $e->getMessage());
             return null;
         }
     }
-    
+
     /**
      * Confirmar una reserva (cambiar estado a 'confirmada')
      */
-    public function confirmarReserva($id_reserva) {
+    public function confirmarReserva($id_reserva)
+    {
         $sql = "UPDATE reserva SET estado = 'confirmada', modified_at = NOW() 
                 WHERE id_reserva = :id_reserva";
-        
+
         try {
             $stmt = $this->conexion->prepare($sql);
             $stmt->bindParam(':id_reserva', $id_reserva);
             return $stmt->execute();
-            
         } catch (PDOException $e) {
             error_log("Error en confirmarReserva: " . $e->getMessage());
             return false;
         }
     }
-    
+
     /**
      * Cancelar una reserva (cambiar estado a 'cancelada')
      */
-    public function cancelarReserva($id_reserva) {
+    public function cancelarReserva($id_reserva)
+    {
         $sql = "UPDATE reserva SET estado = 'cancelada', modified_at = NOW() 
                 WHERE id_reserva = :id_reserva";
-        
+
         try {
             $stmt = $this->conexion->prepare($sql);
             $stmt->bindParam(':id_reserva', $id_reserva);
             return $stmt->execute();
-            
         } catch (PDOException $e) {
             error_log("Error en cancelarReserva: " . $e->getMessage());
             return false;
         }
     }
-    
+
     /**
      * Listar reservas para generación de PDF (método especializado)
      */
-    public function listarParaPdf($id_proveedor, $filtro = '') {
+    public function listarParaPdf($id_proveedor, $filtro = '')
+    {
         return $this->listarPorProveedor($id_proveedor, $filtro);
     }
-    
+
     /**
      * Verificar si una reserva pertenece al proveedor actual (seguridad)
      */
-    public function verificarReservaDeProveedor($id_reserva, $id_proveedor) {
+    public function verificarReservaDeProveedor($id_reserva, $id_proveedor)
+    {
         $sql = "SELECT COUNT(*) as count 
                 FROM reserva r
                 JOIN actividad a ON r.id_actividad = a.id_actividad
                 WHERE r.id_reserva = :id_reserva AND a.id_proveedor = :id_proveedor";
-        
+
         try {
             $stmt = $this->conexion->prepare($sql);
             $stmt->bindParam(':id_reserva', $id_reserva);
@@ -147,17 +151,17 @@ class Reserva {
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             return $result['count'] > 0;
-            
         } catch (PDOException $e) {
             error_log("Error en verificarReservaDeProveedor: " . $e->getMessage());
             return false;
         }
     }
-    
+
     /**
      * Obtener estadísticas de reservas para el proveedor
      */
-    public function obtenerEstadisticas($id_proveedor) {
+    public function obtenerEstadisticas($id_proveedor)
+    {
         $sql = "SELECT 
                     COUNT(*) as total_reservas,
                     SUM(CASE WHEN estado = 'pendiente' THEN 1 ELSE 0 END) as pendientes,
@@ -167,20 +171,20 @@ class Reserva {
                 FROM reserva r
                 JOIN actividad a ON r.id_actividad = a.id_actividad
                 WHERE a.id_proveedor = :id_proveedor";
-        
+
         try {
             $stmt = $this->conexion->prepare($sql);
             $stmt->bindParam(':id_proveedor', $id_proveedor);
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
-            
         } catch (PDOException $e) {
             error_log("Error en obtenerEstadisticas: " . $e->getMessage());
             return null;
         }
     }
 
-    public function getReservasPorDiaProveedor($id_proveedor, $dias = 7) {
+    public function getReservasPorDiaProveedor($id_proveedor, $dias = 7)
+    {
         $query = "SELECT DATE(r.fecha) AS dia, COUNT(*) AS total
                   FROM reserva r
                   JOIN actividad a ON r.id_actividad = a.id_actividad
@@ -194,7 +198,8 @@ class Reserva {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getReservasPorAniosProveedor($id_proveedor, $anio = null) {
+    public function getReservasPorAniosProveedor($id_proveedor, $anio = null)
+    {
         if ($anio !== null) {
             $query = "SELECT YEAR(r.fecha) AS periodo, COUNT(*) AS total
                       FROM reserva r
@@ -218,7 +223,8 @@ class Reserva {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getReservasPorMesProveedor($id_proveedor, $anio) {
+    public function getReservasPorMesProveedor($id_proveedor, $anio)
+    {
         $query = "SELECT MONTH(r.fecha) AS periodo, COUNT(*) AS total
                   FROM reserva r
                   JOIN actividad a ON r.id_actividad = a.id_actividad
@@ -231,7 +237,8 @@ class Reserva {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getReservasPorMesGlobalProveedor($id_proveedor) {
+    public function getReservasPorMesGlobalProveedor($id_proveedor)
+    {
         $query = "SELECT MONTH(r.fecha) AS periodo, COUNT(*) AS total
                   FROM reserva r
                   JOIN actividad a ON r.id_actividad = a.id_actividad
@@ -247,7 +254,8 @@ class Reserva {
     /**
      * Listar ingresos del proveedor: filas con fecha, actividad, cantidad, precio y total
      */
-    public function listarIngresosPorProveedor($id_proveedor) {
+    public function listarIngresosPorProveedor($id_proveedor)
+    {
         $sql = "SELECT 
                     r.id_reserva,
                     r.created_at AS fecha_reserva,
@@ -276,7 +284,8 @@ class Reserva {
     /**
      * Listar reservas filtradas por año, mes y/o día
      */
-    public function listarReservasFiltradas($id_proveedor, $tipo = 'anio', $anio = null, $mes = null, $dia = null) {
+    public function listarReservasFiltradas($id_proveedor, $tipo = 'anio', $anio = null, $mes = null, $dia = null)
+    {
         $sql = "SELECT 
                     r.id_reserva,
                     r.fecha,
@@ -327,11 +336,9 @@ class Reserva {
 
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
         } catch (PDOException $e) {
             error_log("Error en listarReservasFiltradas: " . $e->getMessage());
             return [];
         }
     }
 }
-?>

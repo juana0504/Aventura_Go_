@@ -1,0 +1,250 @@
+/* ================= PALETA ================= */
+
+:root {
+    --color-primary: #2D4059;
+    --color-secondary: #EA8217;
+    --color-white: #FFFFFF;
+    --color-bg-light: #F8F9FA;
+    --color-border: #E0E0E0;
+    --color-text: #2B2B2B;
+    --font-titles: 'Raleway', sans-serif;
+    --font-text: 'Lato', sans-serif;
+}
+
+/* ================= TIPOGRAFÍA ================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-titles);
+}
+
+body,
+p,
+a,
+button,
+input,
+select,
+textarea {
+    font-family: var(--font-text);
+}
+
+/* ESTRUCTURA BASE DASHBOARd________________________________________________________________________________ */
+
+.pendiente-aprobacion {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 280px;
+    flex-shrink: 0;
+}
+
+/* CONTENIDO PRINCIPAL */
+
+.informacion-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* TOPBAR */
+
+.informacion-topbar {
+    height: 80px;
+    flex-shrink: 0;
+}
+
+/* BOTON HAMBURGUESA */
+
+.btn-hamburguesa {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: var(--color-primary);
+    cursor: pointer;
+    padding: 8px 12px;
+    font-size: 22px;
+}
+
+
+
+/* _________________________________________________________________________________________________________________ */
+/* ========SECCION PENDIENTE APROBACION========== */
+.pendiente {
+    padding: 40px;
+    max-width: 700px;
+    margin: 40px auto;
+    background: var(--color-white);
+    padding: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    position: relative;
+}
+
+/* LINEA SUPERIOR */
+.pendiente .container-fluid::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--color-secondary);
+    border-radius: 10px 10px 0 0;
+}
+
+/* RELOJ */
+.pendiente h2::before {
+    content: "\f017";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    display: block;
+    font-size: 50px;
+    color: var(--color-secondary);
+    margin-bottom: 15px;
+    animation: relojTick 2s ease-in-out infinite;
+}
+
+/* TITULO */
+.pendiente h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+}
+
+/* TEXTOS */
+.pendiente p {
+    font-size: 16px;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+/* ALERTA */
+
+.pendiente .alert {
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+/* BOTON */
+
+.pendiente .btn {
+    background: var(--color-secondary);
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.pendiente .btn:hover {
+
+    background: #cf6f13;
+
+}
+
+/* ANIMACION TICK */
+
+@keyframes relojTick {
+
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(10deg);
+    }
+
+    50% {
+        transform: rotate(0deg);
+    }
+
+    75% {
+        transform: rotate(-10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+
+}
+
+/* ================= RESPONSIVE ================= */
+/* OJO YA ESTA EL DEL MENU HAMBURGUESA */
+
+@media (max-width: 992px) {
+
+    .ag-buscador-proveedor {
+        gap: 10px;
+        padding: 0 20px;
+    }
+
+    .busqueda-wrapper {
+        display: none;
+    }
+}
+
+
+@media (max-width:768px) {
+
+    .pendiente-aprobacion {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .informacion-main {
+        width: 100%;
+    }
+
+    /* SIDEBAR MOVIL */
+    .btn-hamburguesa {
+        display: block;
+        margin-left: 15px;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        width: 280px;
+        height: 100vh;
+        background: #2D4059;
+        z-index: 2000;
+        transition: left 0.3s ease;
+    }
+
+    .sidebar.activo {
+        left: 0;
+    }
+
+}
+
+
+@media (max-width:576px) {
+
+    .wizard-header {
+        font-size: 18px;
+        padding: 20px;
+    }
+
+    .wizard-steps {
+        display: none;
+    }
+
+}

@@ -1,0 +1,355 @@
+/* ================= ESTILOS WIZARD PROVEEDOR TURISTICO - AVENTURA GO ================= */
+
+/* Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+/* ================= PALETA ================= */
+
+:root {
+    --color-primary: #2D4059;
+    --color-secondary: #EA8217;
+    --color-white: #FFFFFF;
+    --color-bg-light: #F8F9FA;
+    --color-border: #E0E0E0;
+    --color-text: #2B2B2B;
+    --font-titles: 'Raleway', sans-serif;
+    --font-text: 'Lato', sans-serif;
+}
+
+/* ================= TIPOGRAFÍA ================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-titles);
+}
+
+body,
+p,
+a,
+button,
+input,
+select,
+textarea {
+    font-family: var(--font-text);
+}
+
+/* =====================================================
+   ESTRUCTURA BASE DASHBOARD
+===================================================== */
+
+#informacion-hotelero {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 280px;
+    flex-shrink: 0;
+}
+
+/* CONTENIDO PRINCIPAL */
+
+.informacion-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* TOPBAR */
+
+.informacion-topbar {
+    height: 80px;
+    flex-shrink: 0;
+}
+
+/* __________________________________________________________________________________________________________ */
+
+/* BOTON HAMBURGUESA */
+.btn-hamburguesa {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: var(--color-primary);
+    cursor: pointer;
+    padding: 8px 12px;
+    font-size: 22px;
+}
+
+/* CONTENIDO DE LA PAGINA */
+
+.formulario {
+    padding: 20px;
+    background: var(--color-bg-light);
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.parrafos-informativos {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 20px 20px;
+}
+
+.parrafos-informativos img {
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    display: block;
+}
+
+
+
+/* ================= WIZARD ================= */
+
+.wizard-container {
+    width: 100%;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* HEADER */
+
+.wizard-header {
+    width: 100%;
+    background: linear-gradient(135deg, #2D4059, #3E5C76);
+    border-radius: 12px 12px 0 0;
+    padding: 30px 20px;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* ================= STEPS ================= */
+
+.wizard-steps {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 20px;
+    gap: 8px;
+}
+
+.step {
+    flex: 1;
+    text-align: center;
+    opacity: 0.4;
+}
+
+.step.active {
+    opacity: 1;
+}
+
+.step-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--color-border);
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 6px auto;
+    font-weight: 700;
+}
+
+.step.active .step-circle {
+    background: var(--color-secondary);
+    color: #FFFFFF;
+}
+
+.step-label {
+    font-size: 13px;
+    color: var(--color-primary);
+}
+
+/* ================= CONTENIDO ================= */
+
+.step-content {
+    display: none;
+    padding: 0 25px 10px 25px;
+}
+
+.step-content.active {
+    display: block;
+}
+
+/* ================= BOTONES ================= */
+
+.wizard-actions {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 25px;
+}
+
+/* Botón principal */
+
+.btn-primary-wizard {
+    background: var(--color-secondary);
+    border: none;
+    color: #FFFFFF;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.btn-primary-wizard:hover {
+    background: #d87314;
+}
+
+/* Botón secundario */
+
+.btn-secondary-wizard {
+    background: var(--color-primary);
+    border: none;
+    color: #FFFFFF;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.btn-secondary-wizard:hover {
+    background: #1f2d3f;
+}
+
+/* ================= PREVIEW ================= */
+
+.preview-card {
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 12px;
+    background: var(--color-bg-light);
+}
+
+.preview-label {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+.preview-value {
+    font-size: 14px;
+    color: var(--color-text);
+    font-weight: 600;
+}
+
+.success-icon {
+    font-size: 48px;
+    color: #28a745;
+    margin-bottom: 10px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+
+@media (max-width: 992px) {
+
+    .ag-buscador-proveedor {
+        gap: 10px;
+        padding: 0 20px;
+    }
+
+    .busqueda-wrapper {
+        display: none;
+    }
+
+    .parrafos-informativos {
+        margin-top: 20px;
+    }
+
+    #informacion-proveedor {
+        flex-direction: column;
+    }
+
+    .wizard-container {
+        max-width: 100%;
+    }
+
+    h4 {
+        margin-top: 15px;
+    }
+
+
+
+}
+
+@media (max-width:768px) {
+
+    #informacion-proveedor {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .informacion-main {
+        width: 100%;
+    }
+
+    .formulario {
+        margin-top: 40px;
+    }
+
+    .wizard-steps {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .step {
+        flex: 0 0 45%;
+    }
+
+    .parrafos-informativos {
+        margin-top: 25px;
+    }
+
+    /* SIDEBAR MOVIL */
+    .btn-hamburguesa {
+        display: block;
+        margin-left: 15px;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        width: 280px;
+        height: 100vh;
+        background: #2D4059;
+        z-index: 2000;
+        transition: left 0.3s ease;
+    }
+
+    .sidebar.activo {
+        left: 0;
+    }
+
+}
+
+
+@media (max-width:576px) {
+
+    .wizard-header {
+        font-size: 18px;
+        padding: 20px;
+    }
+
+    .wizard-steps {
+        display: none;
+    }
+
+}

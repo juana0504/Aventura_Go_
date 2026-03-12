@@ -11,7 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- CSS personalizado -->
-    <link rel="stylesheet" href="public/assets/extras/login/login.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/extras/login/login.css">
 </head>
 
 <body>

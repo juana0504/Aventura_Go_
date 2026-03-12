@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Subida de foto
-    $foto_url = 'default_proveedor.png';
+    // $foto_url = 'default_proveedor.png';
 
     // if (!empty($_FILES['foto']['name'])) {
     //     $file = $_FILES['foto'];
@@ -68,9 +68,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $sqlInsert = "
         INSERT INTO usuario 
-        (nombre, identificacion, tipo_documento, genero, telefono, email, clave, rol, estado, foto, intentos_fallidos)
+        (nombre, identificacion, tipo_documento, genero, telefono, email, clave, rol, estado, intentos_fallidos)
         VALUES
-        (:nombre, :identificacion, :tipo_documento, :genero, :telefono, :email, :clave, 'proveedor_hotelero', 'activo', :foto, 0)
+        (:nombre, :identificacion, :tipo_documento, :genero, :telefono, :email, :clave, 'proveedor_hotelero', 'activo', 0)
     ";
 
     $stmtInsert = $conexion->prepare($sqlInsert);
@@ -82,7 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmtInsert->bindParam(':telefono', $telefono);
     $stmtInsert->bindParam(':email', $email);
     $stmtInsert->bindParam(':clave', $claveHash);
-    $stmtInsert->bindParam(':foto', $foto_url);
 
     if ($stmtInsert->execute()) {
 
