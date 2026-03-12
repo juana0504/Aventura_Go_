@@ -14,7 +14,7 @@ if (!isset($_SESSION['reference_code'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aventura Go - Confirma tu reserva</title>
 
-    <link rel="icon" type="image/png" href="public/assets/website_externos/descubre_tours/img/FAVICON.png">
+    <link rel="icon" type="image/png" href="<?= BASE_URL ?>public/assets/website_externos/descubre_tours/img/FAVICON.png">
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -38,7 +38,7 @@ if (!isset($_SESSION['reference_code'])) {
         <nav class="navbar">
             <div class="container-fluid">
                 <div class="logo">
-                    <img src="public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png"
+                    <img src="<?= BASE_URL ?>public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png"
                         alt="Logo Aventura Go" class="navbar-logo">
                 </div>
 
@@ -53,22 +53,22 @@ if (!isset($_SESSION['reference_code'])) {
                                     <?= htmlspecialchars(
                                         ucwords(
                                             explode(' ', $_SESSION['user']['nombre'])[0] . ' ' .
-                                            (explode(' ', $_SESSION['user']['nombre'])[1] ?? '')
+                                                (explode(' ', $_SESSION['user']['nombre'])[1] ?? '')
                                         )
                                     ) ?>
                                 </span>
                                 <i class="fas fa-chevron-down"></i>
                             </button>
                             <ul class="profile-menu" id="profileMenu">
-                                <li><a href="/aventura_go/turista/perfil">Mi perfil</a></li>
-                                <li><a href="/aventura_go/turista/dashboard">Centro de ayuda</a></li>
+                                <li><a href="<?= BASE_URL ?>turista/perfil">Mi perfil</a></li>
+                                <li><a href="<?= BASE_URL ?>turista/dashboard">Centro de ayuda</a></li>
                                 <li class="divider"></li>
-                                <li><a href="/aventura_go/logout" class="logout">Cerrar sesión</a></li>
+                                <li><a href="<?= BASE_URL ?>logout" class="logout">Cerrar sesión</a></li>
                             </ul>
                         </div>
                     <?php else: ?>
-                        <a href="/aventura_go/login" class="btn-login">Ingresa</a>
-                        <a href="/aventura_go/registrarse" class="btn-register">Regístrate</a>
+                        <a href="<?= BASE_URL ?>login" class="btn-login">Ingresa</a>
+                        <a href="<?= BASE_URL ?>registrarse" class="btn-register">Regístrate</a>
                     <?php endif; ?>
                 </div>
             </div>
@@ -204,7 +204,7 @@ if (!isset($_SESSION['reference_code'])) {
 
     <script>
         const profileToggle = document.getElementById('profileToggle');
-        const profileMenu   = document.getElementById('profileMenu');
+        const profileMenu = document.getElementById('profileMenu');
 
         if (profileToggle && profileMenu) {
             profileToggle.addEventListener('click', function(e) {
@@ -220,4 +220,5 @@ if (!isset($_SESSION['reference_code'])) {
     </script>
 
 </body>
+
 </html>
