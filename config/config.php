@@ -7,13 +7,13 @@
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
 
 //nombre de la carpeta del proyecto en el local
-$baseFolder = '';
+// $baseFolder = '';
 
 //host actual
 $host = $_SERVER['HTTP_HOST'];
 
 //URL base dinamica (funciona en local y en hosting)
-define('BASE_URL', $protocol . $host . $baseFolder);
+define('BASE_URL', $protocol . $host . '/');
 
 //ruta base del proyecto (para require o include)
 define('BASE_PATH', dirname(__DIR__));
