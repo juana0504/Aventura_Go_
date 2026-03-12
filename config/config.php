@@ -7,7 +7,7 @@
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
 
 //nombre de la carpeta del proyecto en el local
-$baseFolder = '/aventura_go';
+$baseFolder = '';
 
 //host actual
 $host = $_SERVER['HTTP_HOST'];
