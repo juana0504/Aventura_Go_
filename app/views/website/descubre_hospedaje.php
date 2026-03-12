@@ -8,13 +8,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Descubre Tu Hospedaje</title>
 
-  <link rel="icon" type="image/png" href="public/assets/website_externos/index/img/FAVICON.png">
+  <link rel="icon" type="image/png" href="<?= BASE_URL ?>public/assets/website_externos/index/img/FAVICON.png">
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Estilos personalizados -->
-  <link rel="stylesheet" href="public/assets/website_externos/hospedaje_vega/hospedajeVega.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/hospedaje_vega/hospedajeVega.css">
 
 </head>
 
@@ -26,16 +26,16 @@
       <div class="container-fluid">
         <!-- Logo -->
         <div class="logo">
-          <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
+          <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
             class="navbar-logo">
         </div>
 
         <!-- Menú principal -->
         <ul class="navbar-nav" id="navbarNav">
-          <li><a class="nav-link" href="/aventura_go/">Inicio</a></li>
-          <li><a class="nav-link" href="/aventura_go/destacados">Destacados</a></li>
-          <li><a class="nav-link" href="/aventura_go/acerca-de-nosotros">Acerca de nosotros</a></li>
-          <li><a class="nav-link" href="/aventura_go/contactanos">Contáctanos</a></li>
+          <li><a class="nav-link" href="<?= BASE_URL ?>">Inicio</a></li>
+          <li><a class="nav-link" href="<?= BASE_URL ?>destacados">Destacados</a></li>
+          <li><a class="nav-link" href="<?= BASE_URL ?>acerca-de-nosotros">Acerca de nosotros</a></li>
+          <li><a class="nav-link" href="<?= BASE_URL ?>contactanos">Contáctanos</a></li>
         </ul>
 
         <!-- Botones y menú móvil -->
@@ -58,24 +58,24 @@
 
               <ul class="profile-menu" id="profileMenu">
                 <li>
-                  <a href="/aventura_go/turista/perfil">Mi perfil</a>
+                  <a href="<?= BASE_URL ?>turista/perfil">Mi perfil</a>
                 </li>
                 <li>
-                  <a href="/aventura_go/turista/dashboard">Centro de ayuda</a>
+                  <a href="<?= BASE_URL ?>turista/dashboard">Centro de ayuda</a>
                 </li>
                 <li class="divider"></li>
                 <li>
-                  <a href="/aventura_go/logout" class="logout">Cerrar sesión</a>
+                  <a href="<?= BASE_URL ?>logout" class="logout">Cerrar sesión</a>
                 </li>
               </ul>
             </div>
           <?php else: ?>
 
-            <a href="/aventura_go/login" class="btn-login">
+            <a href="<?= BASE_URL ?>login" class="btn-login">
               Ingresa
             </a>
 
-            <a href="/aventura_go/registro" class="btn-register">
+            <a href="<?= BASE_URL ?>registro" class="btn-register">
               Regístrate
             </a>
 
@@ -145,7 +145,7 @@
       <div class="row align-items-center">
         <div class="col-md-12">
           <h2 class="palpitando">¿Quieres que tu negocio aparezca aquí?</h2>
-          <a href="website_externos/contactanos.html">Publicate en Aventura Go</a>
+          <a href="<?= BASE_URL ?>contactanos">Publicate en Aventura Go</a>
         </div>
       </div>
     </div>
@@ -157,7 +157,7 @@
         <!-- Columna 1: Logo -->
         <div class="col-md-2">
           <div class="logo-section">
-            <img src="/assets/estilos_globales/img/LOGO-FINAL copy.png" alt="logo Aventura Go">
+            <img src="<?= BASE_URL ?>public/assets/estilos_globales/img/LOGO-FINAL copy.png" alt="logo Aventura Go">
           </div>
         </div>
 
