@@ -11,7 +11,7 @@
 
     <div class="panel">
 
-        <img src="<?= BASE_URL ?>/public/assets/dashboard/administrador/administrador/img/LOGO-POSITIVO 2 (1).png" alt="logo">
+        <img src="<?= BASE_URL ?>public/assets/dashboard/administrador/administrador/img/LOGO-POSITIVO 2 (1).png" alt="logo">
 
         <div class="items">
 
@@ -21,15 +21,15 @@
             <div id="Turistico">
 
                 <ul id="menu-panel">
-                    <a href="<?= BASE_URL ?>/proveedor/dashboard" class="bi-speedometer2">Dashboard</a>
-                    <a href="<?= BASE_URL ?>/proveedor/completar-informacion" class="bi bi-layout-text-sidebar-reverse"> Registrar/Actualizar informacion</a>
-                    <a href="<?= BASE_URL ?>/proveedor/registrar-actividad" class="bi bi-layout-text-sidebar-reverse">Registrar actividad turistica</a>
-                    <a href="<?= BASE_URL ?>/proveedor/consultar-actividad" class="bi bi-table">Consultar actividades turisiticas</a>
-                    <a href="<?= BASE_URL ?>/proveedor/consultar-reservas" class="bi bi-calendar-check">Consultar reservas</a>
-                    <a href="<?= BASE_URL ?>/proveedor/tickets">
+                    <a href="<?= BASE_URL ?>proveedor/dashboard" class="bi-speedometer2">Dashboard</a>
+                    <a href="<?= BASE_URL ?>proveedor/completar-informacion" class="bi bi-layout-text-sidebar-reverse"> Registrar/Actualizar informacion</a>
+                    <a href="<?= BASE_URL ?>proveedor/registrar-actividad" class="bi bi-layout-text-sidebar-reverse">Registrar actividad turistica</a>
+                    <a href="<?= BASE_URL ?>proveedor/consultar-actividad" class="bi bi-table">Consultar actividades turisiticas</a>
+                    <a href="<?= BASE_URL ?>proveedor/consultar-reservas" class="bi bi-calendar-check">Consultar reservas</a>
+                    <a href="<?= BASE_URL ?>proveedor/tickets">
                         <i class="fa fa-ticket"></i> Tickets
                     </a>
-                    <a href="<?= BASE_URL ?>/proveedor/ingresos" class="bi bi-cash-stack" id="menu-ingresos">Ingresos</a>
+                    <a href="<?= BASE_URL ?>proveedor/ingresos" class="bi bi-cash-stack" id="menu-ingresos">Ingresos</a>
                 </ul>
 
                 <script>

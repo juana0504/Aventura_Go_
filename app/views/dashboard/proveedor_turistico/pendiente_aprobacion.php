@@ -4,7 +4,7 @@
     <div class="alert alert-warning">
         <!-- <strong>Cuenta en proceso de validación.</strong><br> -->
         <strong>Completa tu información para continuar el proceso.</strong>
-        <a href="<?= BASE_URL ?>/proveedor/completar-informacion" class="btn btn-sm btn-primary ms-2">
+        <a href="<?= BASE_URL ?>proveedor/completar-informacion" class="btn btn-sm btn-primary ms-2">
             Completar información
         </a>
     </div>
@@ -17,7 +17,7 @@
     <meta charset="UTF-8">
     <title>Cuenta pendiente</title>
     <!-- Estilos CSS (siempre al final)-->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/pendiente_aprobacion/pendiente_aprobacion.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/pendiente_aprobacion/pendiente_aprobacion.css">
 </head>
 
 <body>

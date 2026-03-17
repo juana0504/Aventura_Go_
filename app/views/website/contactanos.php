@@ -401,7 +401,7 @@
         AOS.init();
     </script>
 
-    <script src="<?= BASE_URL ?>/public/assets/website_externos/contactanos/contactanos.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/website_externos/contactanos/contactanos.js"></script>
 
     <script>
         const profileToggle = document.getElementById('profileToggle');

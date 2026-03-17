@@ -124,7 +124,7 @@ $actividad = $actividadModel->obtenerPorId($idActividad);
                         <tbody>
                             <tr>
                                 <td>
-                                    <img src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= htmlspecialchars($actividad['imagen_principal']) ?>" width="60" class="me-2">
+                                    <img src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= htmlspecialchars($actividad['imagen_principal']) ?>" width="60" class="me-2">
 
                                     <strong><?= htmlspecialchars($actividad['nombre']) ?></strong><br>
                                     <small class="text-muted"><?= htmlspecialchars($fecha) ?></small>
@@ -160,7 +160,7 @@ $actividad = $actividadModel->obtenerPorId($idActividad);
                         <?php endif; ?>
 
 
-                        <a href="<?= BASE_URL ?>/descubre-tours" class="btn btn-link mt-2">
+                        <a href="<?= BASE_URL ?>descubre-tours" class="btn btn-link mt-2">
                             ← Seguir explorando
                         </a>
                     </div>
@@ -275,7 +275,7 @@ $actividad = $actividadModel->obtenerPorId($idActividad);
 
 
 
-                        <form action="<?= BASE_URL ?>/administrador/guardar-turista" method="POST" enctype="multipart/form-data">
+                        <form action="<?= BASE_URL ?>administrador/guardar-turista" method="POST" enctype="multipart/form-data">
 
                             <input type="text" placeholder="Nombre" name="nombre">
                             <div class="select-container">

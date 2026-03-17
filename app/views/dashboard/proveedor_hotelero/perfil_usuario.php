@@ -28,7 +28,7 @@ $usuario = mostrarPerfilProveedorHotelero($id);
     <title>Perfil Usuario</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -38,14 +38,14 @@ $usuario = mostrarPerfilProveedorHotelero($id);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
-    <!-- <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css"> -->
+    <!-- <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/layout_admin.css"> -->
 
     <!-- Componentes comunes -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_proveedor.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_hotelero.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/buscador_proveedor.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/panel_proveedor_hotelero.css">
 
     <!-- Estilos CSS (siempre al final)-->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_hotelero/perfil_usuario/perfil.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/proveedor_hotelero/perfil_usuario/perfil.css">
 
 </head>
 
@@ -79,7 +79,7 @@ $usuario = mostrarPerfilProveedorHotelero($id);
 
                         <div class="usuario">
                             <h2>Perfil de Proveedor Hotelero</h2>
-                            <img src="<?= BASE_URL ?>/public/uploads/usuario/<?= $usuario['foto'] ?>" alt="persona"></i>
+                            <img src="<?= BASE_URL ?>public/uploads/usuario/<?= $usuario['foto'] ?>" alt="persona"></i>
                             <h3><?= $_SESSION['user']['nombre'] ?></h3>
                             <p><?= $_SESSION['user']['rol'] ?></p>
 
@@ -209,7 +209,7 @@ $usuario = mostrarPerfilProveedorHotelero($id);
         crossorigin="anonymous"></script>
 
     <!-- JS -->
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/proveedor_hotelero/perfil_usuario/perfil.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/dashboard/proveedor_hotelero/perfil_usuario/perfil.js"></script>
 
 </body>
 

@@ -49,7 +49,7 @@ if (!$actividad) {
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
     <!-- CSS personalizado -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/website_externos/tour_escogido/tour_escogido.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/tour_escogido/tour_escogido.css">
 </head>
 
 <body>
@@ -134,7 +134,7 @@ if (!$actividad) {
 
                                     <div class="carousel-track">
                                         <?php foreach ($actividad['imagenes'] as $img): ?>
-                                            <img src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $img ?>">
+                                            <img src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= $img ?>">
                                         <?php endforeach; ?>
                                     </div>
 
@@ -144,7 +144,7 @@ if (!$actividad) {
                                 <div class="cont-items">
                                     <?php foreach ($actividad['imagenes'] as $index => $img): ?>
                                         <button type="button" class="item <?= $index === 0 ? 'active' : '' ?>">
-                                            <img src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $img ?>">
+                                            <img src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= $img ?>">
                                         </button>
                                     <?php endforeach; ?>
                                 </div>
@@ -197,7 +197,7 @@ if (!$actividad) {
                     <div class="col-md-4">
 
                         <!-- BOTON DE RESERVAR____________________________________________________________________________________________________________ -->
-                        <form class="form-reserva" action="<?= BASE_URL ?>/formulario-reserva" method="POST">
+                        <form class="form-reserva" action="<?= BASE_URL ?>formulario-reserva" method="POST">
 
                             <input type="hidden" name="id_actividad" value="<?= $actividad['id_actividad'] ?>">
 
@@ -320,7 +320,7 @@ if (!$actividad) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
-    <script src="<?= BASE_URL ?>/public/assets/website_externos/tour_escogido/tour_escogido.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/website_externos/tour_escogido/tour_escogido.js"></script>
 
     <script>
         const profileToggle = document.getElementById('profileToggle');

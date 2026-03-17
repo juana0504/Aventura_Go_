@@ -102,7 +102,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
         <div class="container">
             <div class="tabs-container">
                 <button class="tab-btn active">TOURS Y AVENTURA</button>
-                <a href="<?= BASE_URL ?>/descubre-hospedaje" class="tab-btn"> HOSPEDAJE </a>
+                <a href="<?= BASE_URL ?>descubre-hospedaje" class="tab-btn"> HOSPEDAJE </a>
             </div>
 
 
@@ -116,7 +116,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
                         <div class="activity-card">
 
                             <img
-                                src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $actividad['imagen'] ?>"
+                                src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= $actividad['imagen'] ?>"
                                 alt="<?= htmlspecialchars($actividad['nombre']) ?>"
                                 class="activity-image">
 
@@ -155,7 +155,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
                                 </div>
 
                                 <div class="button">
-                                    <a href="<?= BASE_URL ?>/tour-escogido?id=<?= $actividad['id_actividad'] ?>" class="btn-ver-mas">
+                                    <a href="<?= BASE_URL ?>tour-escogido?id=<?= $actividad['id_actividad'] ?>" class="btn-ver-mas">
                                         Ver más
                                     </a>
                                 </div>

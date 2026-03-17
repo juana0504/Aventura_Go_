@@ -142,7 +142,7 @@ if (!isset($_SESSION['id_reserva']) || !isset($_SESSION['id_pago'])) {
                 </div>
 
                 <!-- ── FORMULARIOS ── -->
-                <form action="<?= BASE_URL ?>/pago/payu-respuesta" method="POST">
+                <form action="<?= BASE_URL ?>pago/payu-respuesta" method="POST">
 
                     <!-- TARJETA -->
                     <div class="pd-form pd-form--active" id="form-tarjeta">

@@ -33,7 +33,7 @@ $getPagoColorClass = static function (string $texto = ''): string {
     <title>Administrador</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -49,14 +49,14 @@ $getPagoColorClass = static function (string $texto = ''): string {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/layout_admin.css">
 
     <!-- Componentes comunes -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/buscador_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/panel.css">
 
     <!-- CSS SOLO DE ESTA VISTA (SIEMPRE AL FINAL) -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/administrador/administrador.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/administrador/administrador.css">
 </head>
 
 
@@ -74,7 +74,7 @@ $getPagoColorClass = static function (string $texto = ''): string {
             include_once __DIR__ . '/../../layouts/buscador_administrador.php'
             ?>
 
-            <div class="dashboard-content" data-dashboard-url="<?= BASE_URL ?>/administrador/dashboard/data">
+            <div class="dashboard-content" data-dashboard-url="<?= BASE_URL ?>administrador/dashboard/data">
 
                 <main class="main-content">
                     <section class="summary-cards">
@@ -271,7 +271,7 @@ $getPagoColorClass = static function (string $texto = ''): string {
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/administrador/administrador.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/dashboard/administrador/administrador/administrador.js"></script>
 
 
 
