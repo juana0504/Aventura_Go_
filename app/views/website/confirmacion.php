@@ -53,7 +53,7 @@
                     <span class="divider-icon">✦</span>
                 </div>
 
-                <a href="<?= BASE_URL ?>/" class="btn btn-primary">
+                <a href="<?= BASE_URL ?>" class="btn btn-primary">
                     <span class="btn-arrow">←</span>
                     Volver al inicio
                 </a>

@@ -23,7 +23,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     <title>hotelero</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -39,14 +39,14 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/layout_admin.css">
 
     <!-- Componentes comunes -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/buscador_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/panel.css">
 
     <!-- CSS SOLO DE ESTA VISTA (SIEMPRE AL FINAL) -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_hotelero.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_hotelero.css">
 
 
 
@@ -89,7 +89,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                 <button class="filtro-btn" data-filter="pendiente">
                     <i class="bi bi-clock"></i> Pendientes
                 </button>
-                <a href="<?= BASE_URL ?>/administrador/reporte?tipo=hoteles" class="btn-pdf" target="_blank">
+                <a href="<?= BASE_URL ?>administrador/reporte?tipo=hoteles" class="btn-pdf" target="_blank">
                     <i class="bi bi-file-earmark-pdf"></i>Generar Reportes
                 </a>
             </div>
@@ -115,7 +115,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                             <?php if (!empty($datos)) : ?>
                                 <?php foreach ($datos as $hotelero): ?>
                         <tr id="fila-<?= $hotelero['id_proveedor_hotelero'] ?>">
-                            <td><img src="<?= BASE_URL ?>/public/uploads/hoteles/<?= $hotelero['logo'] ?>" alt="" style="10px"></td>
+                            <td><img src="<?= BASE_URL ?>public/uploads/hoteles/<?= $hotelero['logo'] ?>" alt="" style="10px"></td>
                             <td><?= $hotelero['nombre_establecimiento'] ?></td>
                             <td><?= $hotelero['tipo_establecimiento'] ?></td>
                             <td><?= $hotelero['nombre_representante'] ?></td>
@@ -142,11 +142,11 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                                     <i class="i bi-eye"></i>
                                 </button>
 
-                                <a href="<?= BASE_URL ?>/administrador/editar-proveedor-hotelero?id=<?= $hotelero['id_proveedor_hotelero'] ?>" class="btn-accion btn-editar">
+                                <a href="<?= BASE_URL ?>administrador/editar-proveedor-hotelero?id=<?= $hotelero['id_proveedor_hotelero'] ?>" class="btn-accion btn-editar">
                                     <i class="bi bi-pencil"></i>
                                 </a>
 
-                                <a href="<?= BASE_URL ?>/administrador/eliminar-proveedor-hotelero?accion=eliminar&id=<?= $hotelero['id_proveedor_hotelero'] ?>" class="btn-accion btn-eliminar">
+                                <a href="<?= BASE_URL ?>administrador/eliminar-proveedor-hotelero?accion=eliminar&id=<?= $hotelero['id_proveedor_hotelero'] ?>" class="btn-accion btn-eliminar">
                                     <i class="bi bi-trash"></i>
                                 </a>
                             </td>
@@ -412,7 +412,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
         const BASE_URL = "<?= BASE_URL ?>";
     </script>
 
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_hotelero.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_hotelero.js"></script>
 
 </body>
 

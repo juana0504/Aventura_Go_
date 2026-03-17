@@ -28,7 +28,7 @@ $usuario = mostrarPerfilTurista($id);
     <title>Perfil Usuario</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -38,14 +38,14 @@ $usuario = mostrarPerfilTurista($id);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/layout_admin.css">
 
     <!-- Componentes comunes -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_turista.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_turista.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/buscador_turista.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/panel_turista.css">
 
     <!-- Estilos CSS (siempre al final)-->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/turista/perfil_usuario/perfil.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/turista/perfil_usuario/perfil.css">
 
 </head>
 
@@ -70,7 +70,7 @@ $usuario = mostrarPerfilTurista($id);
 
 
                 <!-- <h2>ojo este solo es Formulario de prueba de reservar Actividad</h2> -->
-                <!-- <form method="POST" action="<?= BASE_URL ?>/seleccionar-actividad">
+                <!-- <form method="POST" action="<?= BASE_URL ?>seleccionar-actividad">
                     <label>ID Actividad:</label><br>
                     <input type="number" name="id_actividad" value="1" required><br><br>
 
@@ -86,7 +86,7 @@ $usuario = mostrarPerfilTurista($id);
 
 
                 <h2><br><br>formulario que viene, el real <br></h2>
-                <form method="POST" action="<?= BASE_URL ?>/seleccionar-actividad">
+                <form method="POST" action="<?= BASE_URL ?>seleccionar-actividad">
                     <!-- ID REAL de la actividad -->
                     <input type="hidden" name="id_actividad" value="<?= $actividad['id_actividad'] ?>">
 

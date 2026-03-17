@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cuenta pendiente</title>
     <!-- favicon -->
-    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -24,14 +24,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/layout_admin.css">
 
     <!-- Componentes comunes -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_proveedor.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/buscador_proveedor.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
     <!-- Estilos CSS (siempre al final)-->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_hotelero/pendiente_aprobacion/pendiente_aprobacion.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/proveedor_hotelero/pendiente_aprobacion/pendiente_aprobacion.css">
 </head>
 
 <body>
@@ -66,7 +66,7 @@
                     <?php if ($proveedor['validado'] == 0): ?>
                         <div class="alert alert-warning">
                             <strong>Completa tu información para continuar el proceso.</strong>
-                            <a href="<?= BASE_URL ?>/proveedor_hotelero/registrar-informacion" class="btn btn-sm btn-primary ms-2">
+                            <a href="<?= BASE_URL ?>proveedor_hotelero/registrar-informacion" class="btn btn-sm btn-primary ms-2">
                                 Completar información
                             </a>
                         </div>

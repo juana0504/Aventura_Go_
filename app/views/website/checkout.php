@@ -26,8 +26,8 @@ if (!isset($_SESSION['reference_code'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <!-- Checkout CSS -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/website_externos/checkout/checkout.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/website_externos/formulario_reserva/formulario_reserva.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/checkout/checkout.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/formulario_reserva/formulario_reserva.css">
 
 </head>
 
@@ -90,7 +90,7 @@ if (!isset($_SESSION['reference_code'])) {
                             <div class="card-body">
                                 <div class="row g-3 align-items-start">
                                     <div class="col-md-4">
-                                        <img src="<?= BASE_URL ?>/public/uploads/actividades/<?= $reserva['imagen'] ?>"
+                                        <img src="<?= BASE_URL ?>public/uploads/actividades/<?= $reserva['imagen'] ?>"
                                             class="img-fluid rounded"
                                             alt="<?= htmlspecialchars($reserva['nombre']) ?>">
                                     </div>
@@ -135,7 +135,7 @@ if (!isset($_SESSION['reference_code'])) {
                             </div>
 
                             <div class="card-body">
-                                <form action="<?= BASE_URL ?>/pago" method="POST">
+                                <form action="<?= BASE_URL ?>pago" method="POST">
 
                                     <h6 class="fw-bold mb-3">Datos del turista</h6>
 

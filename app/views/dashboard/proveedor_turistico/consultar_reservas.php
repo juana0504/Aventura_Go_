@@ -11,7 +11,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <title>Consultar Reservas | Proveedor Turístico</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -26,14 +26,14 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- Layout global -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/layout_admin.css">
 
     <!-- Componentes comunes -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_proveedor.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/buscador_proveedor.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
     <!-- CSS propio de reservas -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/consultar_reservas/consultar_reservas.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/consultar_reservas/consultar_reservas.css">
 </head>
 
 <body>
@@ -83,7 +83,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                         <button class="filtro-btn" data-filter="cancelada">
                             <i class="bi bi-x-circle"></i> Canceladas
                         </button>
-                        <a href="<?= BASE_URL ?>/proveedor/pdf-reservas?filtro=<?= urlencode($filtro ?? 'all') ?>" class="btn-pdf" target="_blank">
+                        <a href="<?= BASE_URL ?>proveedor/pdf-reservas?filtro=<?= urlencode($filtro ?? 'all') ?>" class="btn-pdf" target="_blank">
                             <i class="bi bi-file-earmark-pdf"></i>Generar Reportes
                         </a>
                     </div>
@@ -235,7 +235,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                     const modalBody = document.querySelector('#modalReserva .modal-body');
                     modalBody.innerHTML = '<div class="text-center py-4"><i class="bi bi-hourglass-split"></i> Cargando detalles...</div>';
 
-                    fetch(`<?= BASE_URL ?>/proveedor/reserva-detalle?id=${id}`)
+                    fetch(`<?= BASE_URL ?>proveedor/reserva-detalle?id=${id}`)
                         .then(res => res.json())
                         .then(data => {
                             if (!data.success) {
@@ -293,7 +293,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
                     this.classList.add('active');
 
                     const filtro = this.dataset.filter;
-                    window.location.href = `<?= BASE_URL ?>/proveedor/consultar-reservas?filtro=${filtro}`;
+                    window.location.href = `<?= BASE_URL ?>proveedor/consultar-reservas?filtro=${filtro}`;
                 });
             });
 
@@ -310,13 +310,13 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
         // Funciones de acción
         function confirmarReserva(id) {
             if (confirm('¿Está seguro de confirmar esta reserva?\n\nUna vez confirmada, el turista será notificado y se esperará su asistencia.')) {
-                window.location.href = `<?= BASE_URL ?>/proveedor/consultar-reservas?accion=confirmar&id=${id}`;
+                window.location.href = `<?= BASE_URL ?>proveedor/consultar-reservas?accion=confirmar&id=${id}`;
             }
         }
 
         function cancelarReserva(id) {
             if (confirm('¿Está seguro de cancelar esta reserva?\n\nEsta acción no se puede deshacer y el turista será notificado.')) {
-                window.location.href = `<?= BASE_URL ?>/proveedor/consultar-reservas?accion=cancelar&id=${id}`;
+                window.location.href = `<?= BASE_URL ?>proveedor/consultar-reservas?accion=cancelar&id=${id}`;
             }
         }
 
@@ -332,7 +332,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/consultar_reservas/consultar_reservas.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/consultar_reservas/consultar_reservas.js"></script>
 
 
 

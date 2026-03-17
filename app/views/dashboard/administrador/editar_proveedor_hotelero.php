@@ -44,7 +44,7 @@ if (!empty($hotelero['metodo_pago'])) {
     <title>Editar Proveedor</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -60,15 +60,15 @@ if (!empty($hotelero['metodo_pago'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/layout_admin.css">
 
     <!-- Componentes comunes -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/buscador_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/panel.css">
 
     <!-- Estilos CSS SIEMPRE AL FINAL -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_hotelero.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_turistico.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_hotelero.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_turistico.css">
 
 </head>
 
@@ -90,7 +90,7 @@ if (!empty($hotelero['metodo_pago'])) {
             ?>
 
             <!-- Formulario Wizard -->
-            <form id="formProveedor" action="<?= BASE_URL ?>/administrador/actualizar-proveedor-hotelero" method="POST" enctype="multipart/form-data">
+            <form id="formProveedor" action="<?= BASE_URL ?>administrador/actualizar-proveedor-hotelero" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id_proveedor_hotelero" value="<?= $hotelero['id_proveedor_hotelero'] ?>">
                 <input type="hidden" name="id_usuario" value="<?= $hotelero['id_usuario'] ?>">
                 <input type="hidden" name="accion" value="actualizar">
@@ -132,7 +132,7 @@ if (!empty($hotelero['metodo_pago'])) {
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Logo</label>
-                                        <img src="<?= BASE_URL ?>/public/uploads/hoteles/<?= $hotelero['logo'] ?>"
+                                        <img src="<?= BASE_URL ?>public/uploads/hoteles/<?= $hotelero['logo'] ?>"
                                             alt="Foto del turista" width="120" class="img-thumbnail mb-2">
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -204,7 +204,7 @@ if (!empty($hotelero['metodo_pago'])) {
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Foto</label>
-                                        <img src="<?= BASE_URL ?>/public/uploads/usuario/<?= $hotelero['foto_representante'] ?>"
+                                        <img src="<?= BASE_URL ?>public/uploads/usuario/<?= $hotelero['foto_representante'] ?>"
                                             alt="Foto del turista" width="120" class="img-thumbnail mb-2">
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -414,14 +414,14 @@ if (!empty($hotelero['metodo_pago'])) {
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/editar_proveedor.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/dashboard/administrador/registrar_proveedor/editar_proveedor.js"></script>
 
     <script>
         const departamentoActual = "<?= $hotelero['departamento'] ?>";
         const ciudadActual = "<?= $hotelero['id_ciudad'] ?>";
     </script>
 
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/departamento.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/dashboard/administrador/registrar_proveedor/departamento.js"></script>
 </body>
 
 </html>

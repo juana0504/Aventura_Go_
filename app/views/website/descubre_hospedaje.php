@@ -104,8 +104,8 @@
     </div>
 
     <div class="tabs-container">
-      <a href="<?= BASE_URL ?>/descubre-tours" class="tab-btn"> TOURS Y AVENTURA </a>
-      <a href="<?= BASE_URL ?>/descubre-hospedaje" class="tab-btn"> HOSPEDAJE </a>
+      <a href="<?= BASE_URL ?>descubre-tours" class="tab-btn"> TOURS Y AVENTURA </a>
+      <a href="<?= BASE_URL ?>descubre-hospedaje" class="tab-btn"> HOSPEDAJE </a>
     </div>
 
     <!-- Tarjetas dinámicas -->
@@ -235,7 +235,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
-  <script src="<?= BASE_URL ?>/public/assets/website_externos/hospedaje_vega/hospedajeVega.js"></script>
+  <script src="<?= BASE_URL ?>public/assets/website_externos/hospedaje_vega/hospedajeVega.js"></script>
 
   <script>
     const profileToggle = document.getElementById('profileToggle');
