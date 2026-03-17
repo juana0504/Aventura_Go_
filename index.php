@@ -408,6 +408,17 @@ switch ($request) {
     case '/administrador/consultar-tickets':
         require BASE_PATH . '/app/views/dashboard/administrador/consultar_tickets.php'; //consultar tiquets enviados por el usuario
         break;
+
+    // Llamar ciudades y departamentos para el registro de proveedores y turistas
+    case '/departamentos':
+        require_once BASE_PATH . '/app/controllers/departamentoController.php';
+        break;
+
+    case '/ciudades':
+        require_once BASE_PATH . '/app/controllers/ciudadController.php';
+        break;
+
+
     //fin rutas administrador
 
 
