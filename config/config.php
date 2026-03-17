@@ -6,7 +6,7 @@
 $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
 
 //nombre de la carpeta del proyecto en el local
-$baseFolder = '/aventura_go';
+$baseFolder = '/aventura_go/';
 
 //host actual
 $host = $_SERVER['HTTP_HOST'];
