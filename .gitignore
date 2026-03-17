@@ -1,7 +1,11 @@
 # Dependencias
 /vendor/
-/vendor/*
 
 # Archivos subidos por usuarios (NO versionar)
 /public/uploads/
-/public/uploads/*
+
+# Configuración sensible
+config/config.php
+
+# ignorar htaccess local
+.htaccess

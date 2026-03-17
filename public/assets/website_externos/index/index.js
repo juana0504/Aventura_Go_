@@ -6,6 +6,22 @@ toggle.addEventListener('click', () => {
     nav.classList.toggle('show');
 });
 
+  // para el dropdown
+    const profileToggle = document.getElementById('profileToggle');
+    const profileMenu = document.getElementById('profileMenu');
+
+    if (profileToggle) {
+        profileToggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            profileMenu.style.display =
+                profileMenu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.addEventListener('click', function () {
+            profileMenu.style.display = 'none';
+        });
+    }
+
 // carrusel slick automatico
 $(document).ready(function () {
 
@@ -30,27 +46,12 @@ $(document).ready(function () {
                     slidesToShow: 1
                 }
             }
-        ]
+            ]
+        });
+
     });
 
-});
-
-// para el dropdown
-    const profileToggle = document.getElementById('profileToggle');
-    const profileMenu = document.getElementById('profileMenu');
-
-    if (profileToggle) {
-        profileToggle.addEventListener('click', function (e) {
-            e.stopPropagation();
-            profileMenu.style.display =
-                profileMenu.style.display === 'block' ? 'none' : 'block';
-        });
-
-        document.addEventListener('click', function () {
-            profileMenu.style.display = 'none';
-        });
-    }
-document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {
     const inputBuscador = document.querySelector('.buscador input');
 
     // Elementos que quieres que sean buscables — ajusta el selector a tu contenido
