@@ -197,7 +197,11 @@ if (!$actividad) {
                     <div class="col-md-4">
 
                         <!-- BOTON DE RESERVAR____________________________________________________________________________________________________________ -->
+
                         <form class="form-reserva" action="<?= BASE_URL ?>/formulario-reserva" method="POST">
+
+                            <h1>Reserva tu actividad</h1>
+                            <p>Completa el formulario para reservar tu actividad.</p>
 
                             <input type="hidden" name="id_actividad" value="<?= $actividad['id_actividad'] ?>">
 
@@ -216,7 +220,7 @@ if (!$actividad) {
                                 Reservar
                             </button>
                         </form>
-                        
+
                     </div>
                 </div>
             </div>
