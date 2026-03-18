@@ -390,7 +390,6 @@ header {
     margin-bottom: 30px;
     position: relative;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    text-align: center;
 }
 
 .detalle h2 {
@@ -496,50 +495,6 @@ header {
     color: #666;
     margin-bottom: 20px;
     line-height: 1.6;
-}
-
-/* Tarjeta de información */
-.targeta {
-    background-color: #FFFFFF;
-    border-radius: 15px;
-    padding: 25px 30px;
-    margin-bottom: 30px;
-    position: relative;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-}
-
-.detalle h2 {
-    font-family: var(--font-titles);
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--color-secondary);
-    margin-bottom: 10px;
-}
-
-.detalle span {
-    position: absolute;
-    top: 21px;
-    left: 448px;
-    background-color: #000000;
-    color: white;
-    padding: 8px 20px;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 16px;
-}
-
-.detalle #direccion {
-    color: #000000;
-    font-weight: 600px;
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 10px;
-}
-
-.detalle>p {
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 10px;
 }
 
 /* Datos - Estrellas y precios */
@@ -720,6 +675,12 @@ header {
     min-height: 300px;
     max-width: 400px;
     z-index: 10; /* Aumentado para que esté sobre el contenido */
+}
+
+.form-reserva h1{
+    font-size: 25px;
+    text-align: center;
+    font-weight: 700;
 }
 
 /* Agregado: responsividad */

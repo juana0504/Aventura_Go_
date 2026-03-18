@@ -50,17 +50,17 @@ switch ($request) {
 
     // Ruta: descubre tours
     case '/descubre-tours':
-        (new WebsiteController())->descubreTours();
+        require BASE_PATH . '/app/views/website/descubre_tours.php';
         break;
 
     // Ruta: /tour escogido
     case '/tour-escogido': //ojo se modifico aca para darle login
-        (new WebsiteController())->tourEscogido();
+        require BASE_PATH . '/app/views/website/tour_escogido.php';
         break;
 
     // Ruta: /formulario de reserva
     case '/formulario-reserva':
-        (new WebsiteController())->formularioReserva();
+        require BASE_PATH . '/app/views/website/formulario_reserva.php';
         break;
 
     // ruta confirmar en formulario checkout, ojo no cambiar nada ruta DE PAGO PROTEGIDA 
