@@ -21,7 +21,7 @@ if (!empty($proveedor['actividades'])) {
     <title>Registro de Proveedor de Turismo</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -37,14 +37,14 @@ if (!empty($proveedor['actividades'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/layout_admin.css">
 
     <!-- Componentes comunes -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_proveedor.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/buscador_proveedor.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
     <!-- Estilos CSS (siempre al final) -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/completar_informacion/completar_informacion.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/completar_informacion/completar_informacion.css">
 
 </head>
 
@@ -70,7 +70,6 @@ if (!empty($proveedor['actividades'])) {
             </header>
 
             <!-- CONTENIDO DE LA PAGINA -->
-
             <section class="formulario">
 
                 <div class="container-fluid">
@@ -79,7 +78,7 @@ if (!empty($proveedor['actividades'])) {
 
                         <div class="col-md-9 col-md-8 col-lg-9">
                             <!-- Formulario Wizard -->
-                            <form id="formCompletarProveedor" action="<?= BASE_URL ?>/proveedor/guardar-informacion" method="POST" enctype="multipart/form-data">
+                            <form id="formCompletarProveedor" action="<?= BASE_URL ?>proveedor/guardar-informacion" method="POST" enctype="multipart/form-data">
 
                                 <input type="hidden" name="accion" value="actualizar">
 
@@ -298,6 +297,7 @@ if (!empty($proveedor['actividades'])) {
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="preview-card">
                                                 <h6 class="text-primary mb-3"><i class="fas fa-hiking"></i> Servicios</h6>
                                                 <div id="prev-actividades">-</div>
@@ -393,8 +393,8 @@ if (!empty($proveedor['actividades'])) {
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/completar_informacion/completar_informacion.js"></script>
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/completar_informacion/departamento.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/completar_informacion/completar_informacion.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/completar_informacion/departamento.js"></script>
 
 
 </body>

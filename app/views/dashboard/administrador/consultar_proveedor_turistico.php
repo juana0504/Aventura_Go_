@@ -20,7 +20,7 @@ require_once __DIR__ . '/../../layouts/header_administrador.php';
     <title>Turistico</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -36,14 +36,14 @@ require_once __DIR__ . '/../../layouts/header_administrador.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/layout_admin.css">
 
     <!-- Componentes comunes -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/buscador_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/panel.css">
 
     <!-- CSS SOLO DE ESTA VISTA (SIEMPRE AL FINAL) -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_turistico.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_turistico.css">
 
 
 </head>
@@ -87,7 +87,7 @@ require_once __DIR__ . '/../../layouts/header_administrador.php';
                 <button class="filtro-btn" data-filter="pendiente">
                     <i class="bi bi-clock"></i> Pendientes
                 </button>
-                <a href="<?= BASE_URL ?>/administrador/reporte?tipo=turistico" class="btn-pdf" target="_blank">
+                <a href="<?= BASE_URL ?>administrador/reporte?tipo=turistico" class="btn-pdf" target="_blank">
                     <i class="bi bi-file-earmark-pdf"></i>Generar Reportes
                 </a>
             </div>
@@ -112,7 +112,7 @@ require_once __DIR__ . '/../../layouts/header_administrador.php';
                             <?php foreach ($datos as $proveedor): ?>
                                 <tr id="fila-<?= $proveedor['id_proveedor'] ?>">
                                     <td>
-                                        <img src="<?= BASE_URL ?>/public/uploads/turistico/<?= $proveedor['logo'] ?>" alt="logo empresa">
+                                        <img src="<?= BASE_URL ?>public/uploads/turistico/<?= $proveedor['logo'] ?>" alt="logo empresa">
                                     </td>
                                     <td><?= $proveedor['nombre_empresa'] ?></td>
                                     <td><?= $proveedor['nombre_representante'] ?></td>
@@ -139,11 +139,11 @@ require_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <i class="i bi-eye"></i>
                                         </button>
 
-                                        <a href="<?= BASE_URL ?>/administrador/editar-proveedor?id=<?= $proveedor['id_proveedor'] ?>" class="btn-accion btn-editar">
+                                        <a href="<?= BASE_URL ?>administrador/editar-proveedor?id=<?= $proveedor['id_proveedor'] ?>" class="btn-accion btn-editar">
                                             <i class="bi bi-pencil"></i>
                                         </a>
 
-                                        <a href="<?= BASE_URL ?>/administrador/eliminar-proveedor?accion=eliminar&id=<?= $proveedor['id_proveedor'] ?>" class="btn-accion btn-eliminar">
+                                        <a href="<?= BASE_URL ?>administrador/eliminar-proveedor?accion=eliminar&id=<?= $proveedor['id_proveedor'] ?>" class="btn-accion btn-eliminar">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                     </td>
@@ -343,7 +343,7 @@ require_once __DIR__ . '/../../layouts/header_administrador.php';
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_turistico.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_turistico.js"></script>
 </body>
 
 </html>

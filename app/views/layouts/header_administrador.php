@@ -15,7 +15,7 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     <title>Administrador</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -31,14 +31,14 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- Estilos CSS -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/administrador/administrador.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_turistico.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_hotelero.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/historial de reservas/historial_reservas.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/perfil.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_turistico.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_hotelero.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/tabla/tabla.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/administrador/administrador.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_turistico.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_hotelero.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/historial de reservas/historial_reservas.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/perfil.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_turistico.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_hotelero.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/tabla/tabla.css">
 
 
 </head>

@@ -90,7 +90,7 @@
 
     <!-- Encabezado -->
     <div class="header">
-        <img src="<?= BASE_URL ?>/public/assets/estilos_globales/img/LOGO-FINAL.png" alt="Logo Aventura Go">
+        <img src="<?= BASE_URL ?>public/assets/estilos_globales/img/LOGO-FINAL.png" alt="Logo Aventura Go">
     </div>
 
     <h1>Reporte de Proveedores Hoteleros Inscritos</h1>
@@ -120,7 +120,7 @@
             <?php if (!empty($hoteles)) : ?>
                 <?php foreach ($hoteles as $hotelero): ?>
                     <tr>
-                        <td><img src="<?= BASE_URL ?>/public/uploads/hoteles/<?= $hotelero['logo'] ?>" width="50px"></td>
+                        <td><img src="<?= BASE_URL ?>public/uploads/hoteles/<?= $hotelero['logo'] ?>" width="50px"></td>
                         <td><?= $hotelero['nombre_establecimiento'] ?></td>
                         <td><?= $hotelero['tipo_establecimiento'] ?></td>
                         <td><?= $hotelero['nombre_representante'] ?></td>
