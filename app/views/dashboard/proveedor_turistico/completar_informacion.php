@@ -305,6 +305,7 @@ if (!empty($proveedor['actividades'])) {
                                             <div class="preview-card">
                                                 <h6 class="text-primary mb-3"><i class="fas fa-map-marker-alt"></i> Ubicación</h6>
                                                 <div class="preview-value" id="prev-ubicacion">-</div>
+                                                <div class="preview-value" id="prev-direccion"></div>
                                             </div>
                                             <div class="preview-card">
                                                 <h6 class="text-primary mb-3"><i class="fas fa-building"></i> Representante</h6>
@@ -392,6 +393,10 @@ if (!empty($proveedor['actividades'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+
+    <script>
+        const BASE_URL = "<?= BASE_URL ?>";
+    </script>
 
     <script src="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/completar_informacion/completar_informacion.js"></script>
     <script src="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/completar_informacion/departamento.js"></script>

@@ -3,184 +3,144 @@
 require_once __DIR__ . '/../../helpers/session_proveedor.php';
 require_once __DIR__ . '/../../../config/database.php';
 require_once __DIR__ . '/../../helpers/alert_helper.php';
+require_once __DIR__ . '/../../models/proveedor_turistico/ProveedorModel.php';
+require_once __DIR__ . '/../../helpers/upload_helper.php';
 
-$db = new conexion();
-$conexion = $db->getConexion();
-
+$model = new ProveedorModel();
 $idUsuario = $_SESSION['user']['id_usuario'];
 
-/* =====================================
-   SI ES POST → ACTUALIZAR INFORMACIÓN
-===================================== */
+class CompletarInformacionController
+{
+    //aca se maneja la lógica de negocio, es decir, procesar el formulario, validar los datos, subir los archivos 
+    // y llamar al modelo para actualizar la información del proveedor.
+    private $model;
+    private $idUsuario;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    $nombre_empresa = $_POST['nombre_empresa'] ?? '';
-    $nit_rut = $_POST['nit_rut'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $telefono = $_POST['telefono'] ?? '';
-    $direccion = $_POST['direccion'] ?? '';
-    $nombre_representante = $_POST['nombre_representante'] ?? '';
-    $identificacion_representante = $_POST['identificacion_representante'] ?? '';
-    $telefono_representante = $_POST['telefono_representante'] ?? '';
-    $id_ciudad = $_POST['id_ciudad'] ?? '';
-    $tipo_documento = $_POST['tipo_documento'] ?? '';
-    $departamento = $_POST['departamento'] ?? '';
-    $descripcion = $_POST['descripcion'] ?? '';
-
-    // Validación básica
-    if (
-        empty($nombre_empresa) ||
-        empty($nit_rut) ||
-        empty($email) ||
-        empty($telefono) ||
-        empty($direccion) ||
-        empty($nombre_representante) ||
-        empty($identificacion_representante) ||
-        empty($telefono_representante) ||
-        empty($id_ciudad) ||
-        empty($tipo_documento) ||
-        empty($departamento) ||
-        empty($descripcion)
-
-
-    ) {
-        mostrarSweetAlert(
-            'error',
-            'Campos incompletos',
-            'Por favor completa todos los campos obligatorios.',
-            '/aventura_go/proveedor/completar-informacion'
-        );
-
-        exit;
+    // El constructor recibe el modelo y el ID del usuario para poder trabajar con ellos en los métodos del controlador.
+    public function __construct($model, $idUsuario)
+    {
+        $this->model = $model;
+        $this->idUsuario = $idUsuario;
     }
 
-    // Procesar actividades para que aparezcan como una cadena separada por comas en la base de datos
-    $actividadesArray = $_POST['actividades'] ?? [];
-    $actividades = !empty($actividadesArray) ? implode(', ', $actividadesArray) : null;
+    // Este método se encarga de procesar el formulario cuando se envía. Valida los datos, maneja la subida de archivos
+    //  y llama al modelo para actualizar la información del proveedor.
+    public function procesarFormulario()
+    {
+        $nombre_empresa = $_POST['nombre_empresa'] ?? '';
+        $nit_rut = $_POST['nit_rut'] ?? '';
+        $email = $_POST['email'] ?? '';
+        $telefono = $_POST['telefono'] ?? '';
+        $direccion = $_POST['direccion'] ?? '';
+        $nombre_representante = $_POST['nombre_representante'] ?? '';
+        $identificacion_representante = $_POST['identificacion_representante'] ?? '';
+        $telefono_representante = $_POST['telefono_representante'] ?? '';
+        $id_ciudad = $_POST['id_ciudad'] ?? '';
+        $tipo_documento = $_POST['tipo_documento'] ?? '';
+        $departamento = $_POST['departamento'] ?? '';
+        $descripcion = $_POST['descripcion'] ?? '';
 
-    // Obtener datos actuales del proveedor
-    $sqlActual = "SELECT logo, foto_representante FROM proveedor WHERE id_usuario = :id LIMIT 1";
-    $stmtActual = $conexion->prepare($sqlActual);
-    $stmtActual->bindParam(':id', $idUsuario, PDO::PARAM_INT);
-    $stmtActual->execute();
-    $proveedorActual = $stmtActual->fetch(PDO::FETCH_ASSOC);
-
-    // Si el proveedor ya tiene logo o foto, mantenemos esos nombres para no perder la referencia si no se suben nuevos archivos
-    $nombreLogo = $proveedorActual['logo'];
-    $nombreFoto = $proveedorActual['foto_representante'];
-
-    $permitidas = ['jpg', 'jpeg', 'png'];
-
-    /* ============================
-    LOGO
-    ============================ */
-
-    if (!empty($_FILES['logo']['name'])) {
-
-        $logo = $_FILES['logo'];
-        $extLogo = strtolower(pathinfo($logo['name'], PATHINFO_EXTENSION));
-
-        if (!in_array($extLogo, $permitidas)) {
-            die("Formato de logo no permitido.");
+        if (
+            empty($nombre_empresa) ||
+            empty($nit_rut) ||
+            empty($email) ||
+            empty($telefono) ||
+            empty($direccion) ||
+            empty($nombre_representante) ||
+            empty($identificacion_representante) ||
+            empty($telefono_representante) ||
+            empty($id_ciudad) ||
+            empty($tipo_documento) ||
+            empty($departamento) ||
+            empty($descripcion)
+        ) {
+            mostrarSweetAlert(
+                'error',
+                'Campos incompletos',
+                'Por favor completa todos los campos obligatorios.',
+                '/aventura_go/proveedor/completar-informacion'
+            );
+            exit;
         }
 
-        $nombreLogo = uniqid('logo_') . '.' . $extLogo;
-        $rutaLogo = __DIR__ . '/../../../public/uploads/proveedores/' . $nombreLogo;
+        // Manejo de actividades (checkboxes)
+        $actividadesArray = $_POST['actividades'] ?? [];
+        $actividades = !empty($actividadesArray) ? implode(', ', $actividadesArray) : null;
 
-        move_uploaded_file($logo['tmp_name'], $rutaLogo);
-    } elseif (empty($proveedorActual['logo'])) {
-        die("Debes subir el logo.");
-    }
+        $proveedorActual = $this->model->obtenerArchivosActuales($this->idUsuario);
 
-    /* ============================
-    FOTO REPRESENTANTE
-    ============================ */
+        $nombreLogo = $proveedorActual['logo'];
+        $nombreFoto = $proveedorActual['foto_representante'];
 
-    if (!empty($_FILES['foto_representante']['name'])) {
+        // LOGO - Se llama a la función subirArchivo para manejar la subida del logo. 
+        // Si se sube un nuevo logo, se actualiza el nombre del archivo.
+        $nuevoLogo = subirArchivo($_FILES['logo'], 'proveedores', 'logo_');
 
-        $foto = $_FILES['foto_representante'];
-        $extFoto = strtolower(pathinfo($foto['name'], PATHINFO_EXTENSION));
-
-        if (!in_array($extFoto, $permitidas)) {
-            die("Formato de foto no permitido.");
+        if ($nuevoLogo) {
+            $nombreLogo = $nuevoLogo;
+        } elseif (empty($proveedorActual['logo'])) {
+            die("Debes subir el logo.");
         }
 
-        $nombreFoto = uniqid('repre_') . '.' . $extFoto;
-        $rutaFoto = __DIR__ . '/../../../public/uploads/proveedores/' . $nombreFoto;
+        // FOTO - Se llama a la función subirArchivo para manejar la subida de la foto del representante.
+        // Si se sube una nueva foto, se actualiza el nombre del archivo. Si no se sube una nueva foto y no hay una foto actual, se muestra un error.
+        $nuevaFoto = subirArchivo($_FILES['foto_representante'], 'proveedores', 'repre_');
 
-        move_uploaded_file($foto['tmp_name'], $rutaFoto);
-    } elseif (empty($proveedorActual['foto_representante'])) {
-        die("Debes subir la foto del representante.");
+        if ($nuevaFoto) {
+            $nombreFoto = $nuevaFoto;
+        } elseif (empty($proveedorActual['foto_representante'])) {
+            die("Debes subir la foto del representante.");
+        }
+
+        // Se prepara un array con todos los datos para actualizar el proveedor.
+        $data = [
+            ':nombre_empresa' => $nombre_empresa,
+            ':nit_rut' => $nit_rut,
+            ':email' => $email,
+            ':telefono' => $telefono,
+            ':direccion' => $direccion,
+            ':nombre_representante' => $nombre_representante,
+            ':identificacion_representante' => $identificacion_representante,
+            ':telefono_representante' => $telefono_representante,
+            ':id_ciudad' => $id_ciudad,
+            ':tipo_documento' => $tipo_documento,
+            ':departamento' => $departamento,
+            ':actividades' => $actividades,
+            ':descripcion' => $descripcion,
+            ':logo' => $nombreLogo,
+            ':foto_representante' => $nombreFoto,
+            ':id_usuario' => $this->idUsuario
+        ];
+
+        // Se llama al modelo para actualizar la información del proveedor. 
+        // Si la actualización es exitosa, se muestra un mensaje de éxito. Si no, se muestra un error.
+        if ($this->model->actualizarProveedor($data)) {
+            mostrarSweetAlert(
+                'success',
+                'Información actualizada',
+                'La información del proveedor ha sido actualizada correctamente.',
+                '/aventura_go/proveedor/completar-informacion'
+            );
+            exit;
+        } else {
+            die("Error al actualizar la información.");
+        }
     }
 
-    $sqlUpdate = "
-        UPDATE proveedor SET
-            nombre_empresa = :nombre_empresa,
-            nit_rut = :nit_rut,
-            email = :email,
-            telefono = :telefono,
-            direccion = :direccion,
-            nombre_representante = :nombre_representante,
-            identificacion_representante = :identificacion_representante,
-            telefono_representante = :telefono_representante,
-            id_ciudad = :id_ciudad,
-            tipo_documento = :tipo_documento,
-            departamento = :departamento,
-            actividades = :actividades,
-            descripcion = :descripcion,
-            logo = :logo,
-            foto_representante = :foto_representante,
-            estado = 'EN_REVISION'
-        WHERE id_usuario = :id_usuario
-    ";
-
-    $stmt = $conexion->prepare($sqlUpdate);
-
-    $stmt->bindParam(':nombre_empresa', $nombre_empresa);
-    $stmt->bindParam(':nit_rut', $nit_rut);
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':telefono', $telefono);
-    $stmt->bindParam(':direccion', $direccion);
-    $stmt->bindParam(':nombre_representante', $nombre_representante);
-    $stmt->bindParam(':identificacion_representante', $identificacion_representante);
-    $stmt->bindParam(':telefono_representante', $telefono_representante);
-    $stmt->bindParam(':id_usuario', $idUsuario);
-    $stmt->bindParam(':id_ciudad', $id_ciudad);
-    $stmt->bindParam(':tipo_documento', $tipo_documento);
-    $stmt->bindParam(':departamento', $departamento);
-    $stmt->bindParam(':actividades', $actividades);
-    $stmt->bindParam(':descripcion', $descripcion);
-    $stmt->bindParam(':logo', $nombreLogo);
-    $stmt->bindParam(':foto_representante', $nombreFoto);
-
-    if ($stmt->execute()) {
-        mostrarSweetAlert(
-            'success',
-            'Información actualizada',
-            'La información del proveedor ha sido actualizada correctamente.',
-            '/aventura_go/proveedor/completar-informacion'
-        );
-        exit;
-    } else {
-        die("Error al actualizar la información.");
+    // Este método se encarga de mostrar el formulario para completar la información del proveedor.
+    public function mostrarFormulario()
+    {
+        $proveedor = $this->model->obtenerPorUsuario($this->idUsuario);
+        require __DIR__ . '/../../views/dashboard/proveedor_turistico/completar_informacion.php';
     }
 }
 
-/* =====================================
-   SI ES GET → CARGAR INFORMACIÓN
-===================================== */
+// Se crea una instancia del controlador pasando el modelo y el ID del usuario. 
+// Luego se verifica si el formulario fue enviado (método POST) para procesarlo, o si no, se muestra el formulario.
+$controller = new CompletarInformacionController($model, $idUsuario);
 
-$sql = "SELECT p.*, u.email AS email_login
-FROM proveedor p
-JOIN usuario u ON p.id_usuario = u.id_usuario
-WHERE p.id_usuario = :id
-LIMIT 1";
-
-$stmt = $conexion->prepare($sql);
-$stmt->bindParam(':id', $idUsuario, PDO::PARAM_INT);
-$stmt->execute();
-
-$proveedor = $stmt->fetch(PDO::FETCH_ASSOC);
-
-require_once __DIR__ . '/../../views/dashboard/proveedor_turistico/completar_informacion.php';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $controller->procesarFormulario();
+} else {
+    $controller->mostrarFormulario();
+}
