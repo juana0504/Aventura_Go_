@@ -309,7 +309,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
             const ciudadSelect = document.getElementById('id_ciudad');
 
             // Cargar departamentos
-            fetch('<?= BASE_URL ?>app/controllers/departamentoController.php')
+            fetch('<?= BASE_URL ?>departamentos')
                 .then(res => res.json())
                 .then(data => {
                     data.forEach(dep => {
@@ -326,7 +326,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
 
                 if (!departamentoSelect.value) return;
 
-                fetch(`<?= BASE_URL ?>app/controllers/ciudadController.php?id_departamento=${departamentoSelect.value}`)
+                fetch(`<?= BASE_URL ?>ciudades?id_departamento=${departamentoSelect.value}`)
                     .then(res => res.json())
                     .then(data => {
                         data.forEach(ciudad => {

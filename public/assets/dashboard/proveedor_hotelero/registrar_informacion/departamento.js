@@ -4,7 +4,7 @@ const selectDepartamento = document.getElementById('departamento');
 const selectCiudad = document.getElementById('id_ciudad');
 
 // Cargar departamentos al iniciar la página
-fetch('/aventura_go/app/controllers/departamentoController.php')
+fetch(BASE_URL + 'departamentos')  
     .then(response => response.json())
     .then(data => {
         data.forEach(dep => {
@@ -38,7 +38,7 @@ selectDepartamento.addEventListener('change', function () {
     }
 
     // Llamamos al controlador que trae las ciudades desde la base de datos
-    fetch(`/aventura_go/app/controllers/ciudadController.php?id_departamento=${idDepartamento}`)
+    fetch(BASE_URL + `ciudades?id_departamento=${idDepartamento}`)
         .then(response => response.json()) // Convertimos la respuesta a JSON
         .then(data => {
 

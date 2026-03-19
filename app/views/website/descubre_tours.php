@@ -283,22 +283,6 @@ $actividades = $actividadModel->listarActividadesPublicas();
     </footer>
 
 
-    <script>
-        const profileToggle = document.getElementById('profileToggle');
-        const profileMenu = document.getElementById('profileMenu');
-
-        if (profileToggle && profileMenu) {
-            profileToggle.addEventListener('click', function(e) {
-                e.stopPropagation();
-                profileMenu.style.display =
-                    profileMenu.style.display === 'block' ? 'none' : 'block';
-            });
-
-            document.addEventListener('click', function() {
-                profileMenu.style.display = 'none';
-            });
-        }
-    </script>
 
     <!-- MODAL REGISTRO -->
     <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
@@ -367,6 +351,26 @@ $actividades = $actividadModel->listarActividadesPublicas();
         </div>
     </div>
     <!-- FIN MODAL REGISTRO -->
+
+
+
+    <script>
+        const profileToggle = document.getElementById('profileToggle');
+        const profileMenu = document.getElementById('profileMenu');
+
+        if (profileToggle && profileMenu) {
+            profileToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                profileMenu.style.display =
+                    profileMenu.style.display === 'block' ? 'none' : 'block';
+            });
+
+            document.addEventListener('click', function() {
+                profileMenu.style.display = 'none';
+            });
+        }
+    </script>
+
 
 </body>
 
