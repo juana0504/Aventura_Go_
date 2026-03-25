@@ -90,7 +90,7 @@
 
     <!-- Encabezado -->
     <div class="header">
-        <img src="<?= BASE_URL ?>/public/assets/estilos_globales/img/LOGO-FINAL.png" alt="Logo Aventura Go">
+        <img src="<?= BASE_URL ?>public/assets/estilos_globales/img/LOGO-FINAL.png" alt="Logo Aventura Go">
     </div>
 
     <h1>Reporte de Proveedores Inscritos</h1>
@@ -121,7 +121,7 @@
                     <tr>
                         <td>
                             <img class="foto"
-                                src="<?= BASE_URL ?>/public/uploads/turistico/<?= $proveedor['logo'] ?>">
+                                src="<?= BASE_URL ?>public/uploads/turistico/<?= $proveedor['logo'] ?>">
                         </td>
 
                         <td><?= $proveedor['nombre_empresa'] ?></td>

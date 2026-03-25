@@ -81,6 +81,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const ciudad = document.getElementById("id_ciudad");
         const ciudadTexto = ciudad.options[ciudad.selectedIndex]?.text || "-";
         document.getElementById("prev-ubicacion").innerText = ciudadTexto;
+        const direccion = document.getElementById("direccion").value || "-";
+        document.getElementById("prev-direccion").innerText = direccion;
     }
 
 });

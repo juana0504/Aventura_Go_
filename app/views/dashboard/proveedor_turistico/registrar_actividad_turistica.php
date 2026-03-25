@@ -11,7 +11,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <title>Registrar Actividad Turística</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -26,11 +26,11 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- Layouts -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_proveedor.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/buscador_proveedor.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
     <!-- CSS propio -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/registrar_actividad_turistica/registrar_actividad_turistica.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/registrar_actividad_turistica/registrar_actividad_turistica.css">
 </head>
 
 <body>
@@ -65,7 +65,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
                         <div class="col-md-9 col-md-8 col-lg-9">
                             <!-- Formulario Wizard -->
-                            <form id="formActividad" action="<?= BASE_URL ?>/proveedor/guardar-actividad" method="POST" enctype="multipart/form-data">
+                            <form id="formActividad" action="<?= BASE_URL ?>proveedor/guardar-actividad" method="POST" enctype="multipart/form-data">
 
                                 <input type="hidden" name="accion" value="registrar">
 
@@ -309,7 +309,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
             const ciudadSelect = document.getElementById('id_ciudad');
 
             // Cargar departamentos
-            fetch('<?= BASE_URL ?>/app/controllers/departamentoController.php')
+            fetch('<?= BASE_URL ?>app/controllers/departamentoController.php')
                 .then(res => res.json())
                 .then(data => {
                     data.forEach(dep => {
@@ -326,7 +326,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
                 if (!departamentoSelect.value) return;
 
-                fetch(`<?= BASE_URL ?>/app/controllers/ciudadController.php?id_departamento=${departamentoSelect.value}`)
+                fetch(`<?= BASE_URL ?>app/controllers/ciudadController.php?id_departamento=${departamentoSelect.value}`)
                     .then(res => res.json())
                     .then(data => {
                         data.forEach(ciudad => {

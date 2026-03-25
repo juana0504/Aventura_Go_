@@ -90,7 +90,7 @@
 
     <!-- Encabezado -->
     <div class="header">
-        <img src="<?= BASE_URL ?>/public/assets/estilos_globales/img/LOGO-FINAL.png" alt="Logo Aventura Go">
+        <img src="<?= BASE_URL ?>public/assets/estilos_globales/img/LOGO-FINAL.png" alt="Logo Aventura Go">
     </div>
 
     <h1>Reporte de Turistas Inscritos</h1>
@@ -120,7 +120,7 @@
                     <tr>
                         <td>
                             <img class="foto"
-                                src="<?= BASE_URL ?>/public/uploads/usuario/<?= $turista['foto'] ?>">
+                                src="<?= BASE_URL ?>public/uploads/usuario/<?= $turista['foto'] ?>">
                         </td>
 
                         <td><?= $turista['nombre'] ?></td>
@@ -132,7 +132,7 @@
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="7">No hay proveedores registrados.</td>
+                    <td colspan="7">No hay turistas registrados.</td>
                 </tr>
             <?php endif; ?>
         </tbody>

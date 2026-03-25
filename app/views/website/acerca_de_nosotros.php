@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aventura Go - Acerca de acerca_de_nosotros</title>
 
-    <link rel="icon" type="image/png" href="public/assets/website_externos/index/img/FAVICON.png">
+    <link rel="icon" type="image/png" href="<?= BASE_URL ?>public/assets/website_externos/index/img/FAVICON.png">
 
     <!-- bootstrap para el carrusel -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -30,7 +30,8 @@
     <!-- LIBRERIA AOS ANIMATE -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="public/assets/website_externos/acerca_de_nosotros/acerca_de_nosotros.css">
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/acerca_de_nosotros/acerca_de_nosotros.css">
 </head>
 
 <body>
@@ -41,16 +42,16 @@
             <div class="container-fluid">
                 <!-- Logo -->
                 <div class="logo">
-                    <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
+                    <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
                         class="navbar-logo">
                 </div>
 
                 <!-- Menú principal -->
                 <ul class="navbar-nav" id="navbarNav">
-                    <li><a class="nav-link" href="/aventura_go/">Inicio</a></li>
-                    <li><a class="nav-link" href="/aventura_go/destacados">Destacados</a></li>
-                    <li><a class="nav-link active" href="/aventura_go/acerca-de-nosotros">Acerca de nosotros</a></li>
-                    <li><a class="nav-link" href="/aventura_go/contactanos">Contáctanos</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>">Inicio</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>destacados">Destacados</a></li>
+                    <li><a class="nav-link active" href="<?= BASE_URL ?>acerca-de-nosotros">Acerca de nosotros</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>contactanos">Contáctanos</a></li>
                 </ul>
 
                 <!-- Botones y menú móvil -->
@@ -73,20 +74,20 @@
 
                             <ul class="profile-menu" id="profileMenu">
                                 <li>
-                                    <a href="/aventura_go/turista/perfil">Mi perfil</a>
+                                    <a href="<?= BASE_URL ?>turista/perfil">Mi perfil</a>
                                 </li>
                                 <li>
-                                    <a href="/aventura_go/turista/dashboard">Centro de ayuda</a>
+                                    <a href="<?= BASE_URL ?>turista/dashboard">Centro de ayuda</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="/aventura_go/logout" class="logout">Cerrar sesión</a>
+                                    <a href="<?= BASE_URL ?>logout" class="logout">Cerrar sesión</a>
                                 </li>
                             </ul>
                         </div>
                     <?php else: ?>
 
-                        <a href="/aventura_go/login" class="btn-login">
+                        <a href="<?= BASE_URL ?>login" class="btn-login">
                             Ingresa
                         </a>
 
@@ -637,7 +638,7 @@
         AOS.init();
     </script>
 
-    <script src="<?= BASE_URL ?>/public/assets/website_externos/acerca_de_nosotros/acerca_de_nosotros.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/website_externos/acerca_de_nosotros/acerca_de_nosotros.js"></script>
 
     <script>
         const profileToggle = document.getElementById('profileToggle');
@@ -679,7 +680,7 @@
                                     <div class="card-body">
                                         <h3 class="card-title">Turista</h3>
                                         <p class="card-text">Quiero reservar actividades y experiencias.</p>
-                                        <a href="/aventura_go/registrarse?tipo=turista" class="btn btn-aventura">
+                                        <a href="<?= BASE_URL ?>registrarse?tipo=turista" class="btn btn-aventura">
                                             Elegir
                                         </a>
                                     </div>
@@ -693,7 +694,7 @@
                                     <div class="card-body">
                                         <h3 class="card-title">Proveedor turístico</h3>
                                         <p class="card-text">Quiero publicar actividades de aventura.</p>
-                                        <a href="/aventura_go/registrar-proveedor" class="btn btn-aventura">
+                                        <a href="<?= BASE_URL ?>registrar-proveedor" class="btn btn-aventura">
                                             Elegir
                                         </a>
                                     </div>
@@ -707,7 +708,7 @@
                                     <div class="card-body">
                                         <h3 class="card-title">Proveedor hotelero</h3>
                                         <p class="card-text">Quiero publicar hospedajes.</p>
-                                        <a href="/aventura_go/registrar-proveedor-hotelero" class="btn btn-aventura">
+                                        <a href="<?= BASE_URL ?>registrar-proveedor-hotelero" class="btn btn-aventura">
                                             Elegir
                                         </a>
                                     </div>

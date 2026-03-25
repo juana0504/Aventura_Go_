@@ -10,17 +10,17 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Reservas | Turista</title>
 
-    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_turista.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_turista.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/layout_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/buscador_turista.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/panel_turista.css">
 
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/turista/ver_reservas/ver_reservas.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/turista/ver_reservas/ver_reservas.css">
 
 
 </head>
@@ -55,7 +55,7 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
                     <i class="bi bi-clock"></i> Pendientes
                 </button>
 
-                <a href="<?= BASE_URL ?>/turista/pdf-actividades" class="btn-pdf" target="_blank">
+                <a href="<?= BASE_URL ?>turista/pdf-actividades" class="btn-pdf" target="_blank">
                     <i class="bi bi-file-earmark-pdf"></i>Generar Reportes
                 </a>
 
@@ -89,7 +89,7 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
                                             <!-- 1 Imagen + Actividad -->
                                             <td>
                                                 <?php if (!empty($reserva['imagen'])): ?>
-                                                    <img src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= htmlspecialchars($reserva['imagen']) ?>">
+                                                    <img src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= htmlspecialchars($reserva['imagen']) ?>">
                                                 <?php endif; ?>
                                             </td>
 
@@ -255,7 +255,7 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
                     const idReserva = this.dataset.id;
                     if (!idReserva) return;
 
-                    fetch(`<?= BASE_URL ?>/turista/reserva-detalle?id=${idReserva}`)
+                    fetch(`<?= BASE_URL ?>turista/reserva-detalle?id=${idReserva}`)
                         .then(res => res.text())
                         .then(texto => {
 
@@ -283,12 +283,12 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
 
                             if (data.imagenes && data.imagenes.length > 0) {
                                 imgPrincipal.src =
-                                    `<?= BASE_URL ?>/public/uploads/turistico/actividades/${data.imagenes[0].imagen}`;
+                                    `<?= BASE_URL ?>public/uploads/turistico/actividades/${data.imagenes[0].imagen}`;
 
                                 data.imagenes.forEach(img => {
                                     const mini = document.createElement('img');
                                     mini.src =
-                                        `<?= BASE_URL ?>/public/uploads/turistico/actividades/${img.imagen}`;
+                                        `<?= BASE_URL ?>public/uploads/turistico/actividades/${img.imagen}`;
                                     mini.style.width = '60px';
                                     mini.style.cursor = 'pointer';
                                     mini.onclick = () => imgPrincipal.src = mini.src;
@@ -326,7 +326,7 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
                 const idReserva = document.getElementById('btn-confirmar').dataset.id;
                 if (!idReserva) return;
 
-                fetch(`<?= BASE_URL ?>/turista/reserva-accion`, {
+                fetch(`<?= BASE_URL ?>turista/reserva-accion`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded'
@@ -358,7 +358,7 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
                     const idReserva = this.dataset.id;
                     if (!idReserva) return;
 
-                    fetch(`<?= BASE_URL ?>/turista/reserva-detalle?id=${idReserva}`)
+                    fetch(`<?= BASE_URL ?>turista/reserva-detalle?id=${idReserva}`)
                         .then(res => res.text())
                         .then(texto => {
 
@@ -386,12 +386,12 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
 
                             if (data.imagenes && data.imagenes.length > 0) {
                                 imgPrincipal.src =
-                                    `<?= BASE_URL ?>/public/uploads/turistico/actividades/${data.imagenes[0].imagen}`;
+                                    `<?= BASE_URL ?>public/uploads/turistico/actividades/${data.imagenes[0].imagen}`;
 
                                 data.imagenes.forEach(img => {
                                     const mini = document.createElement('img');
                                     mini.src =
-                                        `<?= BASE_URL ?>/public/uploads/turistico/actividades/${img.imagen}`;
+                                        `<?= BASE_URL ?>public/uploads/turistico/actividades/${img.imagen}`;
                                     mini.style.width = '60px';
                                     mini.style.cursor = 'pointer';
                                     mini.onclick = () => imgPrincipal.src = mini.src;
@@ -430,7 +430,7 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
 
                 if (!idReserva) return;
 
-                fetch(`<?= BASE_URL ?>/turista/reserva-accion`, {
+                fetch(`<?= BASE_URL ?>turista/reserva-accion`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded'
@@ -463,7 +463,7 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
                     const idReserva = this.dataset.id;
                     if (!idReserva) return;
 
-                    fetch(`<?= BASE_URL ?>/turista/reserva-detalle?id=${idReserva}`)
+                    fetch(`<?= BASE_URL ?>turista/reserva-detalle?id=${idReserva}`)
                         .then(res => res.text())
                         .then(texto => {
 
@@ -491,12 +491,12 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
 
                             if (data.imagenes && data.imagenes.length > 0) {
                                 imgPrincipal.src =
-                                    `<?= BASE_URL ?>/public/uploads/turistico/actividades/${data.imagenes[0].imagen}`;
+                                    `<?= BASE_URL ?>public/uploads/turistico/actividades/${data.imagenes[0].imagen}`;
 
                                 data.imagenes.forEach(img => {
                                     const mini = document.createElement('img');
                                     mini.src =
-                                        `<?= BASE_URL ?>/public/uploads/turistico/actividades/${img.imagen}`;
+                                        `<?= BASE_URL ?>public/uploads/turistico/actividades/${img.imagen}`;
                                     mini.style.width = '60px';
                                     mini.style.cursor = 'pointer';
                                     mini.onclick = () => imgPrincipal.src = mini.src;
@@ -541,7 +541,7 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
                 const idReserva = document.getElementById('btn-confirmar').dataset.id;
                 if (!idReserva) return;
 
-                fetch(`<?= BASE_URL ?>/turista/reserva-accion`, {
+                fetch(`<?= BASE_URL ?>turista/reserva-accion`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded'
@@ -593,9 +593,9 @@ require_once BASE_PATH . '/app/helpers/session_turista.php';
         const BASE_URL = "<?= BASE_URL ?>";
     </script>
 
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/turista/ver_reservas/modal_reserva.js"></script> -->
+    <script src="<?= BASE_URL ?>public/assets/dashboard/turista/ver_reservas/modal_reserva.js"></script> -->
 
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/turista/ver_reservas/modal_reserva.js"></script> -->
+    <script src="<?= BASE_URL ?>public/assets/dashboard/turista/ver_reservas/modal_reserva.js"></script> -->
 
 
 
