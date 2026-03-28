@@ -2,6 +2,8 @@
 session_start();
 require_once __DIR__ . '/../../controllers/website/websiteController.php';
 
+require_once BASE_PATH . '/app/models/proveedor_turistico/ActividadTuristica.php';
+
 $actividadModel = new ActividadTuristica();
 $actividades = $actividadModel->listarActividadesPublicas();
 ?>
