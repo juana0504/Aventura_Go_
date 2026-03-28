@@ -29,7 +29,7 @@ $reserva = $_SESSION['reserva_tmp'];
     <div class="pay-orb pay-orb--1" aria-hidden="true"></div>
     <div class="pay-orb pay-orb--2" aria-hidden="true"></div>
     <div class="pay-orb pay-orb--3" aria-hidden="true"></div>
-    <div class="pay-lines"          aria-hidden="true"></div>
+    <div class="pay-lines" aria-hidden="true"></div>
 
     <!-- Tarjeta principal -->
     <main class="pay-wrapper">
@@ -39,9 +39,9 @@ $reserva = $_SESSION['reserva_tmp'];
                 <!-- Ícono candado -->
                 <div class="pay-icon">
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="#2D4059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <rect x="3" y="11" width="18" height="11" rx="3" fill="#2D4059"/>
-                        <circle cx="12" cy="16.5" r="1.5" fill="#EA8217"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="#2D4059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <rect x="3" y="11" width="18" height="11" rx="3" fill="#2D4059" />
+                        <circle cx="12" cy="16.5" r="1.5" fill="#EA8217" />
                     </svg>
                 </div>
 
@@ -52,7 +52,7 @@ $reserva = $_SESSION['reserva_tmp'];
                 <div class="pay-divider">
                     <span></span>
                     <svg viewBox="0 0 14 14" fill="none">
-                        <path d="M7 0l1.8 5H14l-4.2 3 1.6 5L7 10.2 2.6 13l1.6-5L0 5h5.2z" fill="#EA8217"/>
+                        <path d="M7 0l1.8 5H14l-4.2 3 1.6 5L7 10.2 2.6 13l1.6-5L0 5h5.2z" fill="#EA8217" />
                     </svg>
                     <span></span>
                 </div>
@@ -75,8 +75,8 @@ $reserva = $_SESSION['reserva_tmp'];
                 <!-- Aviso seguridad -->
                 <p class="pay-notice">
                     <svg viewBox="0 0 24 24" fill="none">
-                        <circle cx="12" cy="12" r="10" stroke="#EA8217" stroke-width="2"/>
-                        <path d="M12 8v4M12 16h.01" stroke="#EA8217" stroke-width="2.2" stroke-linecap="round"/>
+                        <circle cx="12" cy="12" r="10" stroke="#EA8217" stroke-width="2" />
+                        <path d="M12 8v4M12 16h.01" stroke="#EA8217" stroke-width="2.2" stroke-linecap="round" />
                     </svg>
                     Serás redirigido a PayU para completar tu pago de forma segura.
                 </p>
@@ -87,14 +87,14 @@ $reserva = $_SESSION['reserva_tmp'];
                         Aquí irá el endpoint real de PayU (sandbox / producción)
                         En este paso NO se conecta aún
                     -->
-                    <a href="<?= BASE_URL ?>/pago/payu-demo" class="pay-btn">
+                    <a href="<?= BASE_URL ?>pago/payu-demo" class="pay-btn">
                         <span>Continuar a PayU</span>
                         <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </a>
 
-                    <!-- <a href="<?= BASE_URL ?>/pago/payu-respuesta" class="pay-btn">
+                    <!-- <a href="<?= BASE_URL ?>pago/payu-respuesta" class="pay-btn">
                         <span>Continuar a PayU</span>
                         <svg viewBox="0 0 24 24" fill="none">
                             <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -106,7 +106,7 @@ $reserva = $_SESSION['reserva_tmp'];
                 <div class="pay-ssl">
                     <svg viewBox="0 0 24 24" fill="none">
                         <path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.35C16.5 22.15 20 17.25 20 12V6L12 2z"
-                              fill="#16a34a" fill-opacity=".2" stroke="#16a34a" stroke-width="1.5"/>
+                            fill="#16a34a" fill-opacity=".2" stroke="#16a34a" stroke-width="1.5" />
                     </svg>
                     Pago 100% seguro &nbsp;·&nbsp; Cifrado SSL
                 </div>
@@ -116,4 +116,5 @@ $reserva = $_SESSION['reserva_tmp'];
     </main>
 
 </body>
+
 </html>

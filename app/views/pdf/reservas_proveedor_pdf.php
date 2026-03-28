@@ -146,7 +146,7 @@
 
     <!-- Encabezado -->
     <div class="header">
-        <img src="<?= BASE_URL ?>/public/assets/estilos_globales/img/LOGO-FINAL.png" alt="Logo Aventura Go">
+        <img src="<?= BASE_URL ?>public/assets/estilos_globales/img/LOGO-FINAL.png" alt="Logo Aventura Go">
     </div>
 
     <h1>Reporte de Reservas</h1>
@@ -165,24 +165,24 @@
 
     <!-- Estadísticas -->
     <?php if (isset($estadisticas_pdf) && $estadisticas_pdf): ?>
-    <div class="estadisticas-grid">
-        <div class="estadistica-item">
-            <div class="numero"><?= number_format($estadisticas_pdf['total_reservas'] ?? 0) ?></div>
-            <div class="label">Total Reservas</div>
+        <div class="estadisticas-grid">
+            <div class="estadistica-item">
+                <div class="numero"><?= number_format($estadisticas_pdf['total_reservas'] ?? 0) ?></div>
+                <div class="label">Total Reservas</div>
+            </div>
+            <div class="estadistica-item">
+                <div class="numero"><?= number_format($estadisticas_pdf['pendientes'] ?? 0) ?></div>
+                <div class="label">Pendientes</div>
+            </div>
+            <div class="estadistica-item">
+                <div class="numero"><?= number_format($estadisticas_pdf['confirmadas'] ?? 0) ?></div>
+                <div class="label">Confirmadas</div>
+            </div>
+            <div class="estadistica-item">
+                <div class="numero"><?= number_format($estadisticas_pdf['canceladas'] ?? 0) ?></div>
+                <div class="label">Canceladas</div>
+            </div>
         </div>
-        <div class="estadistica-item">
-            <div class="numero"><?= number_format($estadisticas_pdf['pendientes'] ?? 0) ?></div>
-            <div class="label">Pendientes</div>
-        </div>
-        <div class="estadistica-item">
-            <div class="numero"><?= number_format($estadisticas_pdf['confirmadas'] ?? 0) ?></div>
-            <div class="label">Confirmadas</div>
-        </div>
-        <div class="estadistica-item">
-            <div class="numero"><?= number_format($estadisticas_pdf['canceladas'] ?? 0) ?></div>
-            <div class="label">Canceladas</div>
-        </div>
-    </div>
     <?php endif; ?>
 
     <!-- Tabla de Reservas -->
@@ -202,39 +202,39 @@
 
         <tbody>
             <?php if (!empty($reservas_pdf) && count($reservas_pdf) > 0): ?>
-                <?php 
+                <?php
                 $total_reservas = 0;
                 $total_ingresos = 0;
                 $total_personas = 0;
-                
-                foreach ($reservas_pdf as $reserva): 
+
+                foreach ($reservas_pdf as $reserva):
                     $total_reservas++;
                     $total_personas += $reserva['cantidad_personas'];
                     $precio_unitario = $reserva['precio'] ?? 0;
                     $total_reserva = $precio_unitario * $reserva['cantidad_personas'];
                     $total_ingresos += $total_reserva;
                 ?>
-                <tr>
-                    <td class="text-center"><?= $reserva['id_reserva'] ?></td>
-                    <td>
-                        <strong><?= htmlspecialchars($reserva['nombre_actividad']) ?></strong>
-                        <br><small style="color: #666;"><?= htmlspecialchars($reserva['ubicacion']) ?></small>
-                    </td>
-                    <td>
-                        <strong><?= htmlspecialchars($reserva['nombre_turista']) ?></strong>
-                        <br><small style="color: #666;"><?= htmlspecialchars($reserva['email_turista']) ?></small>
-                    </td>
-                    <td class="text-center"><?= date('Y-m-d', strtotime($reserva['fecha'])) ?></td>
-                    <td class="text-center"><?= $reserva['cantidad_personas'] ?></td>
-                    <td class="text-right">$<?= number_format($precio_unitario, 0) ?></td>
-                    <td class="text-right"><strong>$<?= number_format($total_reserva, 0) ?></strong></td>
-                    <td class="text-center">
-                        <?php
-                        $badgeClass = 'badge-' . $reserva['estado'];
-                        echo "<span class='$badgeClass'>" . ucfirst($reserva['estado']) . "</span>";
-                        ?>
-                    </td>
-                </tr>
+                    <tr>
+                        <td class="text-center"><?= $reserva['id_reserva'] ?></td>
+                        <td>
+                            <strong><?= htmlspecialchars($reserva['nombre_actividad']) ?></strong>
+                            <br><small style="color: #666;"><?= htmlspecialchars($reserva['ubicacion']) ?></small>
+                        </td>
+                        <td>
+                            <strong><?= htmlspecialchars($reserva['nombre_turista']) ?></strong>
+                            <br><small style="color: #666;"><?= htmlspecialchars($reserva['email_turista']) ?></small>
+                        </td>
+                        <td class="text-center"><?= date('Y-m-d', strtotime($reserva['fecha'])) ?></td>
+                        <td class="text-center"><?= $reserva['cantidad_personas'] ?></td>
+                        <td class="text-right">$<?= number_format($precio_unitario, 0) ?></td>
+                        <td class="text-right"><strong>$<?= number_format($total_reserva, 0) ?></strong></td>
+                        <td class="text-center">
+                            <?php
+                            $badgeClass = 'badge-' . $reserva['estado'];
+                            echo "<span class='$badgeClass'>" . ucfirst($reserva['estado']) . "</span>";
+                            ?>
+                        </td>
+                    </tr>
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
@@ -246,11 +246,11 @@
 
     <!-- Resumen de Totales -->
     <?php if (!empty($reservas_pdf) && count($reservas_pdf) > 0): ?>
-    <div style="margin-top: 20px; text-align: right; font-family: 'Lato', sans-serif;">
-        <p style="margin: 5px 0;"><strong>Total Reservas:</strong> <?= number_format($total_reservas) ?></p>
-        <p style="margin: 5px 0;"><strong>Total Personas:</strong> <?= number_format($total_personas) ?></p>
-        <p style="margin: 5px 0;"><strong>Ingresos Potenciales:</strong> $<?= number_format($total_ingresos, 0) ?></p>
-    </div>
+        <div style="margin-top: 20px; text-align: right; font-family: 'Lato', sans-serif;">
+            <p style="margin: 5px 0;"><strong>Total Reservas:</strong> <?= number_format($total_reservas) ?></p>
+            <p style="margin: 5px 0;"><strong>Total Personas:</strong> <?= number_format($total_personas) ?></p>
+            <p style="margin: 5px 0;"><strong>Ingresos Potenciales:</strong> $<?= number_format($total_ingresos, 0) ?></p>
+        </div>
     <?php endif; ?>
 
     <!-- Footer -->

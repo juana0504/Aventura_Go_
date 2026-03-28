@@ -26,7 +26,7 @@ if (!$actividadController) {
     <title>Editar Actividad Turística</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -41,11 +41,11 @@ if (!$actividadController) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- Layouts -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_proveedor.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/buscador_proveedor.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
     <!-- CSS propio -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/editar_actividad_turistica/editar_actividad_turistica.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/editar_actividad_turistica/editar_actividad_turistica.css">
 </head>
 
 <body>
@@ -83,7 +83,7 @@ if (!$actividadController) {
 
                     <div class="info">
                         <!-- Formulario Wizard -->
-                        <form id="formActividad" action="<?= BASE_URL ?>/proveedor/actualizar-actividad" method="POST" enctype="multipart/form-data">
+                        <form id="formActividad" action="<?= BASE_URL ?>proveedor/actualizar-actividad" method="POST" enctype="multipart/form-data">
 
                             <input type="hidden" name="accion" value="actualizar">
                             <input type="hidden" name="id_actividad" value="<?= $actividadController['id_actividad'] ?>">
@@ -210,7 +210,7 @@ if (!$actividadController) {
             const ciudadSelect = document.getElementById('id_ciudad');
 
             // Cargar departamentos
-            fetch('<?= BASE_URL ?>/app/controllers/departamentoController.php')
+            fetch('<?= BASE_URL ?>app/controllers/departamentoController.php')
                 .then(res => res.json())
                 .then(data => {
                     data.forEach(dep => {
@@ -227,7 +227,7 @@ if (!$actividadController) {
 
                 if (!departamentoSelect.value) return;
 
-                fetch(`<?= BASE_URL ?>/app/controllers/ciudadController.php?id_departamento=${departamentoSelect.value}`)
+                fetch(`<?= BASE_URL ?>app/controllers/ciudadController.php?id_departamento=${departamentoSelect.value}`)
                     .then(res => res.json())
                     .then(data => {
                         data.forEach(ciudad => {

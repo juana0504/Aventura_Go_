@@ -11,7 +11,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
     <title>Registrar Hospedaje</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -26,11 +26,11 @@ require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- Layouts -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_proveedor.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_hotelero.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/buscador_proveedor.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/panel_proveedor_hotelero.css">
 
     <!-- CSS propio -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_hotelero/registrar_hospedaje/registrar_hospedaje.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/proveedor_hotelero/registrar_hospedaje/registrar_hospedaje.css">
 </head>
 
 <body>
@@ -65,7 +65,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
 
                         <div class="col-md-9 col-md-8 col-lg-9">
                             <!-- Formulario Wizard -->
-                            <form id="formActividad" action="<?= BASE_URL ?>/proveedor_hotelero/guardar-actividad" method="POST" enctype="multipart/form-data">
+                            <form id="formActividad" action="<?= BASE_URL ?>proveedor_hotelero/guardar-actividad" method="POST" enctype="multipart/form-data">
 
                                 <input type="hidden" name="accion" value="registrar">
 
@@ -309,7 +309,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
             const ciudadSelect = document.getElementById('id_ciudad');
 
             // Cargar departamentos
-            fetch('<?= BASE_URL ?>/app/controllers/departamentoController.php')
+            fetch('<?= BASE_URL ?>departamentos')
                 .then(res => res.json())
                 .then(data => {
                     data.forEach(dep => {
@@ -326,7 +326,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
 
                 if (!departamentoSelect.value) return;
 
-                fetch(`<?= BASE_URL ?>/app/controllers/ciudadController.php?id_departamento=${departamentoSelect.value}`)
+                fetch(`<?= BASE_URL ?>ciudades?id_departamento=${departamentoSelect.value}`)
                     .then(res => res.json())
                     .then(data => {
                         data.forEach(ciudad => {
@@ -388,8 +388,10 @@ require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
         }
     </script>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 
 </body>
 

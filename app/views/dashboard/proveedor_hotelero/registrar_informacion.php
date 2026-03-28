@@ -14,7 +14,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
     <title>Registro de Proveedor hotelero</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -30,14 +30,14 @@ require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
-    <!-- <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css"> -->
+    <!-- <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/layout_admin.css"> -->
 
     <!-- Componentes comunes -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_proveedor.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_hotelero.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/buscador_proveedor.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/panel_proveedor_hotelero.css">
 
     <!-- Estilos CSS (siempre al final) -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_hotelero/registrar_informacion/registrar_informacion.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/proveedor_hotelero/registrar_informacion/registrar_informacion.css">
 
 </head>
 
@@ -75,7 +75,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
                         <div class="col-12 col-md-9 col-lg-9">
 
                             <!-- Formulario Wizard -->
-                            <form id="formProveedor" action="<?= BASE_URL ?>/proveedor_hotelero/guardar-informacion" method="POST" enctype="multipart/form-data">
+                            <form id="formProveedor" action="<?= BASE_URL ?>proveedor_hotelero/guardar-informacion" method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="accion" value="registrar">
 
                                 <!-- botones indicadores superiores del wizard -->
@@ -430,7 +430,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
 
                         <div class="col-12 col-md-3 col-lg-3 parrafos-informativos">
 
-                            <img src="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/registrar_informacion/img/image.png"
+                            <img src="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/registrar_informacion/img/image.png"
                                 class="img-fluid mb-3" alt="logo aventura go">
                             <p>
                                 <strong>¿Por qué registrar tu empresa?</strong> <br>
@@ -476,8 +476,12 @@ require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/proveedor_hotelero/registrar_informacion/registrar_informacion.js"></script>
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/proveedor_hotelero/registrar_informacion/departamento.js"></script>
+    <script>
+        const BASE_URL = "<?= BASE_URL ?>";
+    </script>
+
+    <script src="<?= BASE_URL ?>public/assets/dashboard/proveedor_hotelero/registrar_informacion/registrar_informacion.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/dashboard/proveedor_hotelero/registrar_informacion/departamento.js"></script>
 
 
 </body>

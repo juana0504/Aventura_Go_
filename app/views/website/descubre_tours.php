@@ -2,6 +2,8 @@
 session_start();
 require_once __DIR__ . '/../../controllers/website/websiteController.php';
 
+require_once BASE_PATH . '/app/models/proveedor_turistico/ActividadTuristica.php';
+
 $actividadModel = new ActividadTuristica();
 $actividades = $actividadModel->listarActividadesPublicas();
 ?>
@@ -102,7 +104,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
         <div class="container">
             <div class="tabs-container">
                 <button class="tab-btn active">TOURS Y AVENTURA</button>
-                <a href="<?= BASE_URL ?>/descubre-hospedaje" class="tab-btn"> HOSPEDAJE </a>
+                <a href="<?= BASE_URL ?>descubre-hospedaje" class="tab-btn"> HOSPEDAJE </a>
             </div>
 
 
@@ -116,7 +118,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
                         <div class="activity-card">
 
                             <img
-                                src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $actividad['imagen'] ?>"
+                                src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= $actividad['imagen'] ?>"
                                 alt="<?= htmlspecialchars($actividad['nombre']) ?>"
                                 class="activity-image">
 
@@ -155,7 +157,7 @@ $actividades = $actividadModel->listarActividadesPublicas();
                                 </div>
 
                                 <div class="button">
-                                    <a href="<?= BASE_URL ?>/tour-escogido?id=<?= $actividad['id_actividad'] ?>" class="btn-ver-mas">
+                                    <a href="<?= BASE_URL ?>tour-escogido?id=<?= $actividad['id_actividad'] ?>" class="btn-ver-mas">
                                         Ver más
                                     </a>
                                 </div>
@@ -283,22 +285,6 @@ $actividades = $actividadModel->listarActividadesPublicas();
     </footer>
 
 
-    <script>
-        const profileToggle = document.getElementById('profileToggle');
-        const profileMenu = document.getElementById('profileMenu');
-
-        if (profileToggle && profileMenu) {
-            profileToggle.addEventListener('click', function(e) {
-                e.stopPropagation();
-                profileMenu.style.display =
-                    profileMenu.style.display === 'block' ? 'none' : 'block';
-            });
-
-            document.addEventListener('click', function() {
-                profileMenu.style.display = 'none';
-            });
-        }
-    </script>
 
     <!-- MODAL REGISTRO -->
     <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
@@ -367,6 +353,26 @@ $actividades = $actividadModel->listarActividadesPublicas();
         </div>
     </div>
     <!-- FIN MODAL REGISTRO -->
+
+
+
+    <script>
+        const profileToggle = document.getElementById('profileToggle');
+        const profileMenu = document.getElementById('profileMenu');
+
+        if (profileToggle && profileMenu) {
+            profileToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                profileMenu.style.display =
+                    profileMenu.style.display === 'block' ? 'none' : 'block';
+            });
+
+            document.addEventListener('click', function() {
+                profileMenu.style.display = 'none';
+            });
+        }
+    </script>
+
 
 </body>
 

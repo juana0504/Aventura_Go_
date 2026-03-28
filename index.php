@@ -10,10 +10,12 @@ require_once __DIR__ . '/config/config.php';
 
 $requestUri = $_SERVER['REQUEST_URI']; //OBTENER LA URI ACTUAL (por ejemplo: aventura_go/login)
 
-// $request = str_replace('/aventura_go', '', $requestUri); //Quitar el prefijo de la carpeta del proyecto
+$request = str_replace('/aventura_go', '', $requestUri); //Quitar el prefijo de la carpeta del proyecto
+
 //se cambio para q funcionara el dominio 
-$request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-// $request = strtok($request, '?'); //Quitar parametros tipo ?id=123
+// $request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$request = strtok($request, '?'); //Quitar parametros tipo ?id=123
+
 $request = rtrim($request, '/'); //Quitar la barra final (si existe)
 
 if ($request === '') $request = '/'; //si la ruta queda vacia, se interpreta como "/"
@@ -48,17 +50,17 @@ switch ($request) {
 
     // Ruta: descubre tours
     case '/descubre-tours':
-        (new WebsiteController())->descubreTours();
+        require BASE_PATH . '/app/views/website/descubre_tours.php';
         break;
 
     // Ruta: /tour escogido
     case '/tour-escogido': //ojo se modifico aca para darle login
-        (new WebsiteController())->tourEscogido();
+        require BASE_PATH . '/app/views/website/tour_escogido.php';
         break;
 
     // Ruta: /formulario de reserva
     case '/formulario-reserva':
-        (new WebsiteController())->formularioReserva();
+        require BASE_PATH . '/app/views/website/formulario_reserva.php';
         break;
 
     // ruta confirmar en formulario checkout, ojo no cambiar nada ruta DE PAGO PROTEGIDA 
@@ -406,6 +408,17 @@ switch ($request) {
     case '/administrador/consultar-tickets':
         require BASE_PATH . '/app/views/dashboard/administrador/consultar_tickets.php'; //consultar tiquets enviados por el usuario
         break;
+
+    // Llamar ciudades y departamentos para el registro de proveedores y turistas
+    case '/departamentos':
+        require_once BASE_PATH . '/app/controllers/departamentoController.php';
+        break;
+
+    case '/ciudades':
+        require_once BASE_PATH . '/app/controllers/ciudadController.php';
+        break;
+
+
     //fin rutas administrador
 
 
