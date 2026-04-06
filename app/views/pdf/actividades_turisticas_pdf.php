@@ -90,7 +90,7 @@
 
     <!-- Encabezado -->
     <div class="header">
-        <img src="<?= BASE_URL ?>/public/assets/estilos_globales/img/LOGO-FINAL.png" alt="Logo Aventura Go">
+        <img src="<?= BASE_URL ?>public/assets/estilos_globales/img/LOGO-FINAL.png" alt="Logo Aventura Go">
     </div>
 
     <h1>Listado de Actividades turisticas</h1>
@@ -120,7 +120,7 @@
                     <tr>
                         <!-- <td>
                             <img class="foto"
-                                src="<?= BASE_URL ?>/public/uploads/turistico/actividades<?= $actividad['logo'] ?>">
+                                src="<?= BASE_URL ?>public/uploads/turistico/actividades<?= $actividad['logo'] ?>">
                         </td> -->
 
                         <td><?= $actividad['nombre'] ?></td>

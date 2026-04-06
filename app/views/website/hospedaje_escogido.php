@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hospedaje Escogido</title>
 
-    <link rel="shortcut icon" href="../../assets/dashboard/turista/hospedaje_escogido/img/FAVICON.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>assets/dashboard/turista/hospedaje_escogido/img/FAVICON.png">
     <!-- Bootstrap Icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="public/assets/website_externos/hospedaje_escogido/hospedaje_escogido.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/hospedaje_escogido/hospedaje_escogido.css">
 
 
 </head>
@@ -28,16 +28,16 @@
             <div class="container-fluid">
                 <!-- Logo -->
                 <div class="logo">
-                    <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
+                    <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
                         class="navbar-logo">
                 </div>
 
                 <!-- Menú principal -->
                 <ul class="navbar-nav" id="navbarNav">
-                    <li><a class="nav-link" href="/aventura_go/">Inicio</a></li>
-                    <li><a class="nav-link" href="/aventura_go/destacados">Destacados</a></li>
-                    <li><a class="nav-link" href="/aventura_go/acerca-de-nosotros">Acerca de nosotros</a></li>
-                    <li><a class="nav-link" href="/aventura_go/contactanos">Contáctanos</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>">Inicio</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>destacados">Destacados</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>acerca-de-nosotros">Acerca de nosotros</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>contactanos">Contáctanos</a></li>
                 </ul>
 
                 <!-- Botones y menú móvil -->
@@ -60,24 +60,24 @@
 
                             <ul class="profile-menu" id="profileMenu">
                                 <li>
-                                    <a href="/aventura_go/turista/perfil">Mi perfil</a>
+                                    <a href="<?= BASE_URL ?>turista/perfil">Mi perfil</a>
                                 </li>
                                 <li>
-                                    <a href="/aventura_go/turista/dashboard">Centro de ayuda</a>
+                                    <a href="<?= BASE_URL ?>turista/dashboard">Centro de ayuda</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="/aventura_go/logout" class="logout">Cerrar sesión</a>
+                                    <a href="<?= BASE_URL ?>logout" class="logout">Cerrar sesión</a>
                                 </li>
                             </ul>
                         </div>
                     <?php else: ?>
 
-                        <a href="/aventura_go/login" class="btn-login">
+                        <a href="<?= BASE_URL ?>login" class="btn-login">
                             Ingresa
                         </a>
 
-                        <a href="/aventura_go/registro" class="btn-register">
+                        <a href="<?= BASE_URL ?>registro" class="btn-register">
                             Regístrate
                         </a>
 
@@ -135,12 +135,12 @@
 
 
                     <div class="imagenes">
-                        <img src="../../assets/dashboard/turista/hospedaje_escogido/img/hosp1.png" alt="">
-                        <img src="../../assets/dashboard/turista/hospedaje_escogido/img/hosp2.png" alt="">
-                        <img src="../../assets/dashboard/turista/hospedaje_escogido/img/hosp3.png" alt="">
-                        <img src="../../assets/dashboard/turista/hospedaje_escogido/img/hosp4.png" alt="">
-                        <img src="../../assets/dashboard/turista/hospedaje_escogido/img/hosp5.png" alt="">
-                        <img src="../../assets/dashboard/turista/hospedaje_escogido/img/hosp6.png" alt="">
+                        <img src="<?= BASE_URL ?>assets/dashboard/turista/hospedaje_escogido/img/hosp1.png" alt="">
+                        <img src="<?= BASE_URL ?>assets/dashboard/turista/hospedaje_escogido/img/hosp2.png" alt="">
+                        <img src="<?= BASE_URL ?>assets/dashboard/turista/hospedaje_escogido/img/hosp3.png" alt="">
+                        <img src="<?= BASE_URL ?>assets/dashboard/turista/hospedaje_escogido/img/hosp4.png" alt="">
+                        <img src="<?= BASE_URL ?>assets/dashboard/turista/hospedaje_escogido/img/hosp5.png" alt="">
+                        <img src="<?= BASE_URL ?>assets/dashboard/turista/hospedaje_escogido/img/hosp6.png" alt="">
                     </div>
 
 
@@ -185,7 +185,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <h2 class="palpitando">¿Quieres que tu negocio aparezca aquí?</h2>
-                        <a href="website_externos/contactanos.html">Publicate en Aventura Go</a>
+                        <a href="<?= BASE_URL ?>website_externos/contactanos.html">Publicate en Aventura Go</a>
                     </div>
                 </div>
             </div>
@@ -197,7 +197,7 @@
                     <!-- Columna 1: Logo -->
                     <div class="col-md-2">
                         <div class="logo-section">
-                            <img src="../../assets/dashboard/turista/hospedaje_escogido/img/LOGO-FINAL.png"
+                            <img src="<?= BASE_URL ?>assets/dashboard/turista/hospedaje_escogido/img/LOGO-FINAL.png"
                                 alt="logo Aventura Go">
                         </div>
                     </div>

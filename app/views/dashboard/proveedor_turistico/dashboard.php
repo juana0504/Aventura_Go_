@@ -24,7 +24,7 @@ $estadoBadgeClass = static function (string $estado): string {
     <title>Proveedor Turístico</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -40,15 +40,15 @@ $estadoBadgeClass = static function (string $estado): string {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- 🔹 Layout global (Este es nuevo) -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/layout_admin.css">
 
     <!-- Componentes comunes -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_proveedor.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_proveedor_turistico.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/buscador_proveedor.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/panel_proveedor_turistico.css">
 
 
     <!-- CSS solo de esta vista (Siempre al final) -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/dashboard/dashboard.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/dashboard/dashboard.css">
 </head>
 
 <body>
@@ -65,7 +65,7 @@ $estadoBadgeClass = static function (string $estado): string {
             <?php
             require_once __DIR__ . '/../../layouts/buscador_proveedor_turistico.php';
             ?>
-            <main class="container dashboard-proveedor" data-dashboard-url="<?= BASE_URL ?>/proveedor/dashboard/data">
+            <main class="container dashboard-proveedor" data-dashboard-url="<?= BASE_URL ?>proveedor/dashboard/data">
 
                 <header class="mb-4">
                     <h3 class="fw-bold">Panel del Proveedor Turístico</h3>
@@ -109,13 +109,13 @@ $estadoBadgeClass = static function (string $estado): string {
                 <div class="mb-5">
                     <h5 class="mb-3">Acciones rápidas</h5>
                     <div class="d-flex gap-3 flex-wrap">
-                        <a href="registrar-actividad" class="btn btn-primary">
+                        <a href="<?= BASE_URL ?>proveedor/registrar-actividad" class="btn btn-primary">
                             <i class="bi bi-plus-circle"></i> Nueva actividad
                         </a>
-                        <a href="consultar-reservas" class="btn btn-outline-secondary">
+                        <a href="<?= BASE_URL ?>proveedor/consultar-reservas" class="btn btn-outline-secondary">
                             <i class="bi bi-calendar-event"></i> Ver reservas
                         </a>
-                        <a href="<?= BASE_URL ?>/proveedor/ingresos" class="btn btn-outline-secondary">
+                        <a href="<?= BASE_URL ?>proveedor/ingresos" class="btn btn-outline-secondary">
                             <i class="bi bi-bar-chart-line"></i> Ver ingresos
                         </a>
                     </div>
@@ -217,7 +217,7 @@ $estadoBadgeClass = static function (string $estado): string {
         crossorigin="anonymous"></script>
 
     <!-- JavaScript -->
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/proveedor_turistico/dashboard/dashboard.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/dashboard/dashboard.js"></script>
 
 </body>
 

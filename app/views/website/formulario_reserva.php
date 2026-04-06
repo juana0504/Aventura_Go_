@@ -16,7 +16,7 @@ $actividad = $actividadModel->obtenerPorId($idActividad);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aventura Go - formulario de reserva</title>
 
-    <link rel="icon" type="image/png" href="public/assets/website_externos/descubre_tours/img/FAVICON.png">
+    <link rel="icon" type="image/png" href="<?= BASE_URL ?>public/assets/website_externos/descubre_tours/img/FAVICON.png">
 
 
     <!-- bootstrap primero -->
@@ -28,8 +28,8 @@ $actividad = $actividadModel->obtenerPorId($idActividad);
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/website_externos/formulario_reserva/formulario_reserva.css">
-    
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/formulario_reserva/formulario_reserva.css">
+
 
 </head>
 
@@ -42,7 +42,7 @@ $actividad = $actividadModel->obtenerPorId($idActividad);
             <div class="container-fluid">
                 <!-- Logo -->
                 <div class="logo">
-                    <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
+                    <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
                         class="navbar-logo">
                 </div>
 
@@ -66,24 +66,24 @@ $actividad = $actividadModel->obtenerPorId($idActividad);
 
                             <ul class="profile-menu" id="profileMenu">
                                 <li>
-                                    <a href="/aventura_go/turista/perfil">Mi perfil</a>
+                                    <a href="<?= BASE_URL ?>turista/perfil">Mi perfil</a>
                                 </li>
                                 <li>
-                                    <a href="/aventura_go/turista/dashboard">Centro de ayuda</a>
+                                    <a href="<?= BASE_URL ?>turista/dashboard">Centro de ayuda</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="/aventura_go/logout" class="logout">Cerrar sesión</a>
+                                    <a href="<?= BASE_URL ?>logout" class="logout">Cerrar sesión</a>
                                 </li>
                             </ul>
                         </div>
                     <?php else: ?>
 
-                        <a href="/aventura_go/login" class="btn-login">
+                        <a href="<?= BASE_URL ?>login" class="btn-login">
                             Ingresa
                         </a>
 
-                        <a href="/aventura_go/registrarse" class="btn-register">
+                        <a href="<?= BASE_URL ?>registrarse" class="btn-register">
                             Regístrate
                         </a>
 
@@ -124,7 +124,7 @@ $actividad = $actividadModel->obtenerPorId($idActividad);
                         <tbody>
                             <tr>
                                 <td>
-                                    <img src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= htmlspecialchars($actividad['imagen_principal']) ?>" width="60" class="me-2">
+                                    <img src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= htmlspecialchars($actividad['imagen_principal']) ?>" width="60" class="me-2">
 
                                     <strong><?= htmlspecialchars($actividad['nombre']) ?></strong><br>
                                     <small class="text-muted"><?= htmlspecialchars($fecha) ?></small>
@@ -145,7 +145,7 @@ $actividad = $actividadModel->obtenerPorId($idActividad);
 
                         <?php if (isset($_SESSION['user'])): ?>
 
-                            <form action="<?= BASE_URL ?>/checkout" method="POST">
+                            <form action="<?= BASE_URL ?>checkout" method="POST">
                                 <button class="btn btn-danger w-100">
                                     Confirmar Reserva
                                 </button>
@@ -160,7 +160,7 @@ $actividad = $actividadModel->obtenerPorId($idActividad);
                         <?php endif; ?>
 
 
-                        <a href="<?= BASE_URL ?>/descubre-tours" class="btn btn-link mt-2">
+                        <a href="<?= BASE_URL ?>descubre-tours" class="btn btn-link mt-2">
                             ← Seguir explorando
                         </a>
                     </div>
@@ -216,12 +216,12 @@ $actividad = $actividadModel->obtenerPorId($idActividad);
                     <p>Debes iniciar sesión o registrarte para confirmar tu reserva.</p>
 
                     <div class="form-section">
-                        <img src="public/assets/extras/login/img/REDES-LOGO 2.png" alt="Aventura GO" class="logo mb-3">
+                        <img src="<?= BASE_URL ?>public/assets/extras/login/img/REDES-LOGO 2.png" alt="Aventura GO" class="logo mb-3">
 
                         <h2 class="fw-bold">INICIO DE SESIÓN</h2>
                         <p>Por favor ingresa tu usuario y contraseña para iniciar sesión</p>
 
-                        <form action="iniciar-sesion" method="POST">
+                        <form action="<?= BASE_URL ?>iniciar-sesion" method="POST">
                             <input type="email" name="email" class="form-control mb-3 rounded-pill" placeholder="Correo" required>
 
                             <div class="password-container position-relative mb-3">
@@ -230,7 +230,7 @@ $actividad = $actividadModel->obtenerPorId($idActividad);
                             </div>
 
                             <p class="forgot-password">
-                                <a href="recoverpw">¿Olvidaste tu contraseña?</a>
+                                <a href="<?= BASE_URL ?>recoverpw">¿Olvidaste tu contraseña?</a>
                             </p>
 
                             <button type="submit" class="btn w-100 rounded-pill fw-bold text-white"
@@ -265,7 +265,7 @@ $actividad = $actividadModel->obtenerPorId($idActividad);
                     <p>Debes iniciar sesión o registrarte para confirmar tu reserva.</p>
 
                     <div class="form-section">
-                        <img src="public/assets/extras/login/img/REDES-LOGO 2.png" alt="Aventura GO" class="logo mb-3">
+                        <img src="<?= BASE_URL ?>public/assets/extras/login/img/REDES-LOGO 2.png" alt="Aventura GO" class="logo mb-3">
 
                         <h2 class="fw-bold">REGISTRATE</h2>
                         <h3>
@@ -275,7 +275,7 @@ $actividad = $actividadModel->obtenerPorId($idActividad);
 
 
 
-                        <form action="<?= BASE_URL ?>/administrador/guardar-turista" method="POST" enctype="multipart/form-data">
+                        <form action="<?= BASE_URL ?>administrador/guardar-turista" method="POST" enctype="multipart/form-data">
 
                             <input type="text" placeholder="Nombre" name="nombre">
                             <div class="select-container">
