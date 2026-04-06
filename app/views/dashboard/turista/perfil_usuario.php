@@ -78,6 +78,8 @@ $usuario = mostrarPerfilTurista($id);
                         <button id="btndescripcion">Descripción General</button>
                         <button id="btneditar">Editar Perfil</button>
                         <button id="btncambiar">Cambiar Contraseña</button>
+                        <button id="btneliminar">Eliminar Cuenta</button>
+
                     </div>
 
                     <div class="datos">
