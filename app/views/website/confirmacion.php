@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Reserva confirmada | Aventura Go</title>
-    <link rel="icon" type="image/png" href="public/assets/website_externos/descubre_tours/img/FAVICON.png">
+    <link rel="icon" type="image/png" href="<?= BASE_URL ?>public/assets/website_externos/descubre_tours/img/FAVICON.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/website_externos/formulario_reserva/confirmacion.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/formulario_reserva/confirmacion.css">
 </head>
 
 <body>
@@ -53,7 +53,7 @@
                     <span class="divider-icon">✦</span>
                 </div>
 
-                <a href="<?= BASE_URL ?>/" class="btn btn-primary">
+                <a href="<?= BASE_URL ?>" class="btn btn-primary">
                     <span class="btn-arrow">←</span>
                     Volver al inicio
                 </a>

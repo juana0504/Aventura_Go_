@@ -28,7 +28,7 @@ if (!$actividad) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aventura Go - tour-escogido</title>
 
-    <link rel="icon" type="image/png" href="public/assets/website_externos/index/img/FAVICON.png">
+    <link rel="icon" type="image/png" href="<?= BASE_URL ?>public/assets/website_externos/index/img/FAVICON.png">
 
     <!-- bootstrap para el carrusel -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -49,7 +49,7 @@ if (!$actividad) {
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
     <!-- CSS personalizado -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/website_externos/tour_escogido/tour_escogido.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/tour_escogido/tour_escogido.css">
 </head>
 
 <body>
@@ -60,7 +60,7 @@ if (!$actividad) {
             <div class="container-fluid">
                 <!-- Logo -->
                 <div class="logo">
-                    <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
+                    <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
                         class="navbar-logo">
                 </div>
 
@@ -84,20 +84,20 @@ if (!$actividad) {
 
                             <ul class="profile-menu" id="profileMenu">
                                 <li>
-                                    <a href="/aventura_go/turista/perfil">Mi perfil</a>
+                                    <a href="<?= BASE_URL ?>turista/perfil">Mi perfil</a>
                                 </li>
                                 <li>
-                                    <a href="/aventura_go/turista/dashboard">Centro de ayuda</a>
+                                    <a href="<?= BASE_URL ?>turista/dashboard">Centro de ayuda</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="/aventura_go/logout" class="logout">Cerrar sesión</a>
+                                    <a href="<?= BASE_URL ?>logout" class="logout">Cerrar sesión</a>
                                 </li>
                             </ul>
                         </div>
                     <?php else: ?>
 
-                        <a href="/aventura_go/login" class="btn-login">
+                        <a href="<?= BASE_URL ?>login" class="btn-login">
                             Ingresa
                         </a>
 
@@ -127,31 +127,6 @@ if (!$actividad) {
                     <div class="col-md-8">
 
                         <?php if (!empty($actividad)): ?>
-                            <div class="targeta">
-                                <div class="col-md-6 detalle">
-                                    <h2><?= htmlspecialchars($actividad['nombre']) ?></h2>
-
-                                    <p id="direccion"><i class="bi bi-geo-alt"></i> <?= htmlspecialchars($actividad['ubicacion']) ?>, <?= htmlspecialchars($actividad['ciudad']) ?>,
-                                        <?= htmlspecialchars($actividad['departamento']) ?>,
-                                        253610 Villeta, Colombia <br></p>
-                                    <p>Después de reservar, encontrarás todos los datos del alojamiento con el número de
-                                        teléfono y la
-                                        <br>
-                                        dirección en tu confirmación de la reserva y en tu cuenta.
-                                    </p>
-                                </div>
-                                <div class="col-md-6 datos">
-                                    <!-- <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <samp>(120 Review)</samp>
-
-                                    <p><i class="bi bi-clock"></i>1 Noche, 2 Dias</p> -->
-                                    <p>$<?= htmlspecialchars($actividad['precio']) ?></p>
-                                </div>
-                            </div>
 
                             <section id="galeria-hotel">
                                 <div class="cont-img-principal">
@@ -159,7 +134,7 @@ if (!$actividad) {
 
                                     <div class="carousel-track">
                                         <?php foreach ($actividad['imagenes'] as $img): ?>
-                                            <img src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $img ?>">
+                                            <img src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= $img ?>">
                                         <?php endforeach; ?>
                                     </div>
 
@@ -169,35 +144,64 @@ if (!$actividad) {
                                 <div class="cont-items">
                                     <?php foreach ($actividad['imagenes'] as $index => $img): ?>
                                         <button type="button" class="item <?= $index === 0 ? 'active' : '' ?>">
-                                            <img src="<?= BASE_URL ?>/public/uploads/turistico/actividades/<?= $img ?>">
+                                            <img src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= $img ?>">
                                         </button>
                                     <?php endforeach; ?>
                                 </div>
 
                             </section>
 
-                            <div class="dato">
-                                <h2><?= htmlspecialchars($actividad['nombre']) ?></h2>
-                                <p><?= htmlspecialchars($actividad['descripcion']) ?></p>
+                            <div class="tarjeta">
+                                <div class="col-md-12 detalle">
+                                    <h2><?= htmlspecialchars($actividad['nombre']) ?></h2>
 
+                                    <p id="direccion"><i class="bi bi-geo-alt"></i> <?= htmlspecialchars($actividad['ubicacion']) ?>, <?= htmlspecialchars($actividad['ciudad']) ?>,
+                                        <?= htmlspecialchars($actividad['departamento']) ?>,
+                                        253610 Villeta, Colombia <br></p>
+                                    <p><?= htmlspecialchars($actividad['descripcion']) ?></p>
+                                    <p>$<?= htmlspecialchars($actividad['precio']) ?></p>
 
-                                <!-- seccion mapa -->
-                                <section id="mapa" class="mapa-section">
-                                    <div class="mapa-contenedor">
-                                        <iframe
-                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.166972063625!2d-74.472745125039!3d5.013951139904496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4067dfb5f1a3e7%3A0xeca58a4d9a0f72cb!2sVilleta%2C%20Cundinamarca!5e0!3m2!1ses!2sco!4v1690391856678!5m2!1ses!2sco"
-                                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                                        </iframe>
-                                    </div>
-                                </section>
+                                </div>
+                                <!-- <div class="col-md-6 datos"> -->
+                                <!-- <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <samp>(120 Review)</samp>
+
+                                    <p><i class="bi bi-clock"></i>1 Noche, 2 Dias</p> -->
+
+                                <!-- </div> -->
+
+                                <div class="dato">
+
+                                    <!-- seccion mapa -->
+                                    <section id="mapa" class="mapa-section">
+                                        <div class="mapa-contenedor">
+                                            <iframe
+                                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.166972063625!2d-74.472745125039!3d5.013951139904496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4067dfb5f1a3e7%3A0xeca58a4d9a0f72cb!2sVilleta%2C%20Cundinamarca!5e0!3m2!1ses!2sco!4v1690391856678!5m2!1ses!2sco"
+                                                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                            </iframe>
+                                        </div>
+                                    </section>
+                                </div>
+
                             </div>
+
+
                         <?php else: ?>
                             <p>No se encontró la actividad.</p>
                         <?php endif; ?>
                     </div>
                     <div class="col-md-4">
+
                         <!-- BOTON DE RESERVAR____________________________________________________________________________________________________________ -->
-                        <form class="form-reserva" action="<?= BASE_URL ?>/formulario-reserva" method="POST">
+
+                        <form class="form-reserva" action="<?= BASE_URL ?>formulario-reserva" method="POST">
+
+                            <h1>Reserva tu actividad</h1>
+                            <p>Completa el formulario para reservar tu actividad.</p>
 
                             <input type="hidden" name="id_actividad" value="<?= $actividad['id_actividad'] ?>">
 
@@ -209,13 +213,15 @@ if (!$actividad) {
 
                             <div class="form-group">
                                 <label>Fecha de la actividad</label>
-                                <input type="date" name="fecha" class="form-control" min="<?= date('Y-m-d') ?>"  required>
+                                <input type="date" name="fecha" class="form-control" min="<?= date('Y-m-d') ?>" required>
                             </div>
 
                             <button type="submit">
                                 Reservar
                             </button>
                         </form>
+
+
                     </div>
                 </div>
             </div>
@@ -231,7 +237,7 @@ if (!$actividad) {
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <h2 class="palpitando">¿Quieres que tu negocio aparezca aquí?</h2>
-                    <a href="contactanos">Publicate en Aventura Go</a>
+                    <a href="<?= BASE_URL ?>contactanos">Publicate en Aventura Go</a>
                 </div>
             </div>
         </div>
@@ -243,8 +249,8 @@ if (!$actividad) {
                 <!-- Columna 1: Logo -->
                 <div class="col-md-2">
                     <div class="logo-section">
-                       <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
-                        class="navbar-logo">
+                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
+                            class="navbar-logo">
                     </div>
                 </div>
 
@@ -319,7 +325,7 @@ if (!$actividad) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
-    <script src="<?= BASE_URL ?>/public/assets/website_externos/tour_escogido/tour_escogido.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/website_externos/tour_escogido/tour_escogido.js"></script>
 
     <script>
         const profileToggle = document.getElementById('profileToggle');
@@ -360,7 +366,7 @@ if (!$actividad) {
                                     <div class="card-body">
                                         <h3 class="card-title">Turista</h3>
                                         <p class="card-text">Quiero reservar actividades y experiencias.</p>
-                                        <a href="/aventura_go/registrarse?tipo=turista" class="btn btn-aventura">
+                                        <a href="<?= BASE_URL ?>registrarse?tipo=turista" class="btn btn-aventura">
                                             Elegir
                                         </a>
                                     </div>
@@ -374,7 +380,7 @@ if (!$actividad) {
                                     <div class="card-body">
                                         <h3 class="card-title">Proveedor turístico</h3>
                                         <p class="card-text">Quiero publicar actividades de aventura.</p>
-                                        <a href="/aventura_go/registrar-proveedor" class="btn btn-aventura">
+                                        <a href="<?= BASE_URL ?>registrar-proveedor" class="btn btn-aventura">
                                             Elegir
                                         </a>
                                     </div>
@@ -388,7 +394,7 @@ if (!$actividad) {
                                     <div class="card-body">
                                         <h3 class="card-title">Proveedor hotelero</h3>
                                         <p class="card-text">Quiero publicar hospedajes.</p>
-                                        <a href="/aventura_go/registrar-proveedor-hotelero" class="btn btn-aventura">
+                                        <a href="<?= BASE_URL ?>registrar-proveedor-hotelero" class="btn btn-aventura">
                                             Elegir
                                         </a>
                                     </div>

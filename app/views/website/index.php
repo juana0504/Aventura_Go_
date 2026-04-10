@@ -7,9 +7,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aventura Go - contactanos</title>
+    <title>Aventura Go</title>
 
-    <link rel="icon" type="image/png" href="public/assets/website_externos/index/img/FAVICON.png">
+    <link rel="icon" type="image/png" href="<?= BASE_URL ?>public/assets/website_externos/index/img/FAVICON.png">
 
 
     <!-- bootstrap para el carrusel -->
@@ -36,7 +36,7 @@
     <!-- LIBRERIA AOS ANIMATE -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="public/assets/website_externos/index/index.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/index/index.css">
 </head>
 
 
@@ -48,16 +48,16 @@
             <div class="container-fluid">
                 <!-- Logo -->
                 <div class="logo">
-                    <img src="public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
+                    <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
                         class="navbar-logo">
                 </div>
 
                 <!-- Menú principal -->
                 <ul class="navbar-nav" id="navbarNav">
-                    <li><a class="nav-link active" href="/aventura_go/">Inicio</a></li>
-                    <li><a class="nav-link" href="/aventura_go/destacados">Destacados</a></li>
-                    <li><a class="nav-link" href="/aventura_go/acerca-de-nosotros">Acerca de nosotros</a></li>
-                    <li><a class="nav-link" href="/aventura_go/contactanos">Contáctanos</a></li>
+                    <li><a class="nav-link active" href="<?= BASE_URL ?>">Inicio</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>destacados">Destacados</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>acerca-de-nosotros">Acerca de nosotros</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>contactanos">Contáctanos</a></li>
                 </ul>
 
                 <!-- Botones y menú móvil -->
@@ -80,20 +80,20 @@
 
                             <ul class="profile-menu" id="profileMenu">
                                 <li>
-                                    <a href="/aventura_go/turista/perfil">Mi perfil</a>
+                                    <a href="<?= BASE_URL ?>turista/perfil">Mi perfil</a>
                                 </li>
                                 <li>
-                                    <a href="/aventura_go/turista/dashboard">Centro de ayuda</a>
+                                    <a href="<?= BASE_URL ?>turista/dashboard">Centro de ayuda</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="/aventura_go/logout" class="logout">Cerrar sesión</a>
+                                    <a href="<?= BASE_URL ?>logout" class="logout">Cerrar sesión</a>
                                 </li>
                             </ul>
                         </div>
                     <?php else: ?>
 
-                        <a href="/aventura_go/login" class="btn-login">
+                        <a href="<?= BASE_URL ?>login" class="btn-login">
                             Ingresa
                         </a>
 
@@ -126,7 +126,7 @@
                 <div class="carousel-inner">
 
                     <div class="carousel-item active">
-                        <img src="public/assets/website_externos/index/img/rafting1.jpg" class="d-block w-100"
+                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/rafting1.jpg" class="d-block w-100"
                             alt="Turismo en bote">
                         <div class="carousel-caption">
                             <h1>Explora sin límites,</h1>
@@ -139,7 +139,7 @@
                     </div>
 
                     <div class="carousel-item">
-                        <img src="public/assets/website_externos/index/img/rafting1.jpg" class="d-block w-100"
+                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/rafting1.jpg" class="d-block w-100"
                             alt="...">
                         <div class="carousel-caption">
                             <h1>El mundo te espera,</h1>
@@ -150,7 +150,7 @@
                     </div>
 
                     <div class="carousel-item">
-                        <img src="public/assets/website_externos/index/img/rafting1.jpg" class="d-block w-100"
+                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/rafting1.jpg" class="d-block w-100"
                             alt="...">
                         <div class="carousel-caption">
                             <h1>Destinos que inspiran,</h1>
@@ -222,7 +222,7 @@
             <!-- Tarjeta 1 -->
             <div class="col">
                 <div class="card destino-card shadow-sm">
-                    <img src="public/assets/website_externos/index/img/destinos_populares_nimaima.png"
+                    <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_nimaima.png"
                         class="card-img-top" alt="Nimaima">
                     <div class="card-body">
                         <h5 class="card-title">NIMAIMA</h5>
@@ -232,9 +232,9 @@
 
             <!-- Tarjeta 2 -->
             <div class="col">
-                <a href="/aventura_go/descubre-tours" class="text-decoration-none">
+                <a href="<?= BASE_URL ?>descubre-tours" class="text-decoration-none">
                     <div class="card destino-card shadow-sm">
-                        <img src="public/assets/website_externos/index/img/destinos_visitados_villeta.png"
+                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_visitados_villeta.png"
                             class="card-img-top" alt="Villeta">
                         <div class="card-body">
                             <h5 class="card-title">VILLETA</h5>
@@ -247,7 +247,7 @@
             <!-- Tarjeta 3 -->
             <div class="col">
                 <div class="card destino-card shadow-sm">
-                    <img src="public/assets/website_externos/index/img/destinos_populares_lavega.png"
+                    <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_lavega.png"
                         class="card-img-top" alt="La Vega">
                     <div class="card-body">
                         <h5 class="card-title">LA VEGA</h5>
@@ -258,7 +258,7 @@
             <!-- Tarjeta 4 -->
             <div class="col">
                 <div class="card destino-card shadow-sm">
-                    <img src="public/assets/website_externos/index/img/destinos_populares_sanFrancisco.png"
+                    <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_sanFrancisco.png"
                         class="card-img-top" alt="San Francisco">
                     <div class="card-body">
                         <h5 class="card-title">SAN FRANCISCO</h5>
@@ -269,7 +269,7 @@
             <!-- Tarjeta 5 -->
             <div class="col">
                 <div class="card destino-card shadow-sm">
-                    <img src="public/assets/website_externos/index/img/destinos_populares_sasaima.png"
+                    <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_sasaima.png"
                         class="card-img-top" alt="Sasaima">
                     <div class="card-body">
                         <h5 class="card-title">SASAIMA</h5>
@@ -280,7 +280,7 @@
             <!-- Tarjeta 6 -->
             <div class="col">
                 <div class="card destino-card shadow-sm">
-                    <img src="public/assets/website_externos/index/img/destinos_populares_tobia.png"
+                    <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_tobia.png"
                         class="card-img-top" alt="Tobia">
                     <div class="card-body">
                         <h5 class="card-title">TOBIA</h5>
@@ -312,7 +312,7 @@
                 <!-- Tarjeta 1 -->
                 <div class="tarjeta-visitado">
                     <div class="imagen-container">
-                        <img src="public/assets/website_externos/index/img/destinos_visitados_villeta.png"
+                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_visitados_villeta.png"
                             alt="Villeta Cundinamarca">
                         <span class="etiqueta-oferta">Oferta especial</span>
                     </div>
@@ -332,8 +332,8 @@
                 <!-- Tarjeta 2 -->
                 <div class="tarjeta-visitado">
                     <div class="imagen-container">
-                        <img src="public/assets/website_externos/index/img/destinos_populares_sasaima.png"
-                            alt="Villeta Cundinamarca">
+                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_sasaima.png"
+                            alt="Sasaima Cundinamarca">
                     </div>
                     <div class="tarjeta-info">
                         <h5 class="tarjeta-titulo">SASAIMA CUNDINAMARCA</h5>
@@ -351,7 +351,7 @@
                 <!-- Tarjeta 3 -->
                 <div class="tarjeta-visitado">
                     <div class="imagen-container">
-                        <img src="public/assets/website_externos/index/img/destinos_populares_lavega.png"
+                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_lavega.png"
                             alt="La Vega Cundinamarca">
                         <span class="etiqueta-descuento">20% off</span>
                     </div>
@@ -386,7 +386,7 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <h2 class="palpitando">¿Quieres que tu negocio aparezca aquí?</h2>
-                    <a href="contactanos">Publicate en Aventura Go</a>
+                    <a href="<?= BASE_URL ?>contactanos">Publicate en Aventura Go</a>
                 </div>
             </div>
         </div>
@@ -399,7 +399,7 @@
                 <!-- Columna 1: Logo -->
                 <div class="col-md-2">
                     <div class="logo-section">
-                        <img src="public/assets/website_externos/index/img/LOGO-NEGATIVO.png" alt="logo Aventura Go">
+                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/LOGO-NEGATIVO.png" alt="logo Aventura Go">
                     </div>
                 </div>
 
@@ -509,7 +509,8 @@
                                     <div class="card-body">
                                         <h3 class="card-title">Turista</h3>
                                         <p class="card-text">Quiero reservar actividades y experiencias.</p>
-                                        <a href="/aventura_go/registrarse?tipo=turista" class="btn btn-aventura">
+
+                                        <a href="<?= BASE_URL ?>registrarse?tipo=turista" class="btn btn-aventura">
                                             Elegir
                                         </a>
                                     </div>
@@ -523,7 +524,7 @@
                                     <div class="card-body">
                                         <h3 class="card-title">Proveedor turístico</h3>
                                         <p class="card-text">Quiero publicar actividades de aventura.</p>
-                                        <a href="/aventura_go/registrar-proveedor" class="btn btn-aventura">
+                                        <a href="<?= BASE_URL ?>registrar-proveedor" class="btn btn-aventura">
                                             Elegir
                                         </a>
                                     </div>
@@ -537,7 +538,7 @@
                                     <div class="card-body">
                                         <h3 class="card-title">Proveedor hotelero</h3>
                                         <p class="card-text">Quiero publicar hospedajes.</p>
-                                        <a href="/aventura_go/registrar-proveedor-hotelero" class="btn btn-aventura">
+                                        <a href="<?= BASE_URL ?>registrar-proveedor-hotelero" class="btn btn-aventura">
                                             Elegir
                                         </a>
                                     </div>

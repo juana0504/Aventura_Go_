@@ -16,12 +16,12 @@ if (!isset($_SESSION['id_reserva']) || !isset($_SESSION['id_pago'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PayU (Demo) | Aventura Go</title>
 
-    <link rel="icon" type="image/png" href="public/assets/website_externos/descubre_tours/img/FAVICON.png">
+    <link rel="icon" type="image/png" href="<?= BASE_URL ?>public/assets/website_externos/descubre_tours/img/FAVICON.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&family=Lato:wght@300;400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- Tu archivo CSS — crealo con este nombre en tu carpeta css -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/website_externos/payu_demo/payu_demo.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/payu_demo/payu_demo.css">
 
 
 </head>
@@ -31,7 +31,7 @@ if (!isset($_SESSION['id_reserva']) || !isset($_SESSION['id_pago'])) {
     <!-- Fondo decorativo -->
     <div class="pd-orb pd-orb--1" aria-hidden="true"></div>
     <div class="pd-orb pd-orb--2" aria-hidden="true"></div>
-    <div class="pd-lines"         aria-hidden="true"></div>
+    <div class="pd-lines" aria-hidden="true"></div>
 
     <main class="pd-wrapper">
         <div class="pd-card">
@@ -45,7 +45,7 @@ if (!isset($_SESSION['id_reserva']) || !isset($_SESSION['id_pago'])) {
                     <div class="pd-step pd-step--done">
                         <div class="pd-step__circle">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </div>
                         <span>Reserva</span>
@@ -54,7 +54,7 @@ if (!isset($_SESSION['id_reserva']) || !isset($_SESSION['id_pago'])) {
                     <div class="pd-step pd-step--done">
                         <div class="pd-step__circle">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </div>
                         <span>Resumen</span>
@@ -142,7 +142,7 @@ if (!isset($_SESSION['id_reserva']) || !isset($_SESSION['id_pago'])) {
                 </div>
 
                 <!-- ── FORMULARIOS ── -->
-                <form action="<?= BASE_URL ?>/pago/payu-respuesta" method="POST">
+                <form action="<?= BASE_URL ?>pago/payu-respuesta" method="POST">
 
                     <!-- TARJETA -->
                     <div class="pd-form pd-form--active" id="form-tarjeta">
@@ -150,28 +150,28 @@ if (!isset($_SESSION['id_reserva']) || !isset($_SESSION['id_pago'])) {
                         <div class="pd-field">
                             <label class="pd-label" for="num_tarjeta">Número de tarjeta</label>
                             <input class="pd-input" id="num_tarjeta" type="text"
-                                   maxlength="19" placeholder="4111 1111 1111 1111"
-                                   autocomplete="cc-number">
+                                maxlength="19" placeholder="4111 1111 1111 1111"
+                                autocomplete="cc-number">
                         </div>
 
                         <div class="pd-row">
                             <div class="pd-field">
                                 <label class="pd-label" for="expiry">Vencimiento</label>
                                 <input class="pd-input" id="expiry" type="text"
-                                       maxlength="5" placeholder="MM/AA"
-                                       autocomplete="cc-exp">
+                                    maxlength="5" placeholder="MM/AA"
+                                    autocomplete="cc-exp">
                             </div>
                             <div class="pd-field">
                                 <label class="pd-label" for="cvv">CVV</label>
                                 <input class="pd-input" id="cvv" type="text"
-                                       maxlength="4" placeholder="•••"
-                                       autocomplete="cc-csc">
+                                    maxlength="4" placeholder="•••"
+                                    autocomplete="cc-csc">
                             </div>
                             <div class="pd-field">
                                 <label class="pd-label" for="holder">Nombre en la tarjeta</label>
                                 <input class="pd-input" id="holder" type="text"
-                                       placeholder="JUAN PEREZ"
-                                       autocomplete="cc-name">
+                                    placeholder="JUAN PEREZ"
+                                    autocomplete="cc-name">
                             </div>
                         </div>
 
@@ -203,7 +203,7 @@ if (!isset($_SESSION['id_reserva']) || !isset($_SESSION['id_pago'])) {
                         <div class="pd-field">
                             <label class="pd-label" for="cel_nequi">Número de celular Nequi</label>
                             <input class="pd-input" id="cel_nequi" type="text"
-                                   placeholder="3001234567" maxlength="10">
+                                placeholder="3001234567" maxlength="10">
                         </div>
                     </div>
 
@@ -212,7 +212,7 @@ if (!isset($_SESSION['id_reserva']) || !isset($_SESSION['id_pago'])) {
                         <div class="pd-field">
                             <label class="pd-label" for="cel_davi">Número de celular Daviplata</label>
                             <input class="pd-input" id="cel_davi" type="text"
-                                   placeholder="3001234567" maxlength="10">
+                                placeholder="3001234567" maxlength="10">
                         </div>
                     </div>
 
@@ -222,8 +222,8 @@ if (!isset($_SESSION['id_reserva']) || !isset($_SESSION['id_pago'])) {
                     <!-- Alerta demo -->
                     <div class="pd-alert">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 2L2 20h20L12 2z" stroke="#EA8217" stroke-width="2" stroke-linejoin="round"/>
-                            <path d="M12 9v4M12 17h.01" stroke="#EA8217" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M12 2L2 20h20L12 2z" stroke="#EA8217" stroke-width="2" stroke-linejoin="round" />
+                            <path d="M12 9v4M12 17h.01" stroke="#EA8217" stroke-width="2" stroke-linecap="round" />
                         </svg>
                         <span>Esto es una <strong>simulación</strong>. El botón solo confirma la compra en modo demo.</span>
                     </div>
@@ -232,7 +232,7 @@ if (!isset($_SESSION['id_reserva']) || !isset($_SESSION['id_pago'])) {
                     <button type="submit" class="pd-btn">
                         <span>Pagar (Demo)</span>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                            <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </button>
 
@@ -242,7 +242,7 @@ if (!isset($_SESSION['id_reserva']) || !isset($_SESSION['id_pago'])) {
                 <div class="pd-ssl">
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
                         <path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.35C16.5 22.15 20 17.25 20 12V6L12 2z"
-                              fill="#16a34a" fill-opacity=".2" stroke="#16a34a" stroke-width="1.5"/>
+                            fill="#16a34a" fill-opacity=".2" stroke="#16a34a" stroke-width="1.5" />
                     </svg>
                     Pago 100% seguro &nbsp;·&nbsp; Cifrado SSL &nbsp;·&nbsp; Powered by PayU
                 </div>
@@ -252,75 +252,76 @@ if (!isset($_SESSION['id_reserva']) || !isset($_SESSION['id_pago'])) {
     </main>
 
     <script>
-    // ── Métodos de pago ──
-    const methods = document.querySelectorAll('.pd-method');
-    const forms   = document.querySelectorAll('.pd-form');
-    const hidden  = document.getElementById('metodo_hidden');
-    const scene   = document.querySelector('.pd-scene'); // para mostrar/ocultar tarjeta
+        // ── Métodos de pago ──
+        const methods = document.querySelectorAll('.pd-method');
+        const forms = document.querySelectorAll('.pd-form');
+        const hidden = document.getElementById('metodo_hidden');
+        const scene = document.querySelector('.pd-scene'); // para mostrar/ocultar tarjeta
 
-    methods.forEach(m => {
-        m.addEventListener('click', () => {
-            methods.forEach(x => x.classList.remove('pd-method--active'));
-            forms.forEach(f => f.classList.remove('pd-form--active'));
-            m.classList.add('pd-method--active');
-            const key = m.dataset.method;
-            hidden.value = key;
-            document.getElementById('form-' + key).classList.add('pd-form--active');
-            // Mostrar tarjeta solo para tarjeta de crédito
-            scene.style.display = key === 'tarjeta' ? 'block' : 'none';
+        methods.forEach(m => {
+            m.addEventListener('click', () => {
+                methods.forEach(x => x.classList.remove('pd-method--active'));
+                forms.forEach(f => f.classList.remove('pd-form--active'));
+                m.classList.add('pd-method--active');
+                const key = m.dataset.method;
+                hidden.value = key;
+                document.getElementById('form-' + key).classList.add('pd-form--active');
+                // Mostrar tarjeta solo para tarjeta de crédito
+                scene.style.display = key === 'tarjeta' ? 'block' : 'none';
+            });
         });
-    });
 
-    // ── Tarjeta animada ──
-    const card     = document.getElementById('pdCard');
-    const pdNumber = document.getElementById('pdNumber');
-    const pdHolder = document.getElementById('pdHolder');
-    const pdExpiry = document.getElementById('pdExpiry');
-    const pdCvv    = document.getElementById('pdCvv');
-    const pdBrand  = document.getElementById('pdBrand');
+        // ── Tarjeta animada ──
+        const card = document.getElementById('pdCard');
+        const pdNumber = document.getElementById('pdNumber');
+        const pdHolder = document.getElementById('pdHolder');
+        const pdExpiry = document.getElementById('pdExpiry');
+        const pdCvv = document.getElementById('pdCvv');
+        const pdBrand = document.getElementById('pdBrand');
 
-    // Número
-    const inputNum = document.getElementById('num_tarjeta');
-    inputNum.addEventListener('input', e => {
-        let v = e.target.value.replace(/\D/g, '').slice(0, 16);
-        e.target.value = v.replace(/(.{4})/g, '$1 ').trim();
-        const display = v.padEnd(16, '•').replace(/(.{4})/g, '$1 ').trim();
-        pdNumber.textContent = display;
-        // Detectar marca
-        if      (/^4/.test(v))          pdBrand.textContent = 'VISA';
-        else if (/^5[1-5]/.test(v))     pdBrand.textContent = 'MASTERCARD';
-        else if (/^3[47]/.test(v))      pdBrand.textContent = 'AMEX';
-        else                            pdBrand.textContent = 'AVENTURA GO';
-    });
+        // Número
+        const inputNum = document.getElementById('num_tarjeta');
+        inputNum.addEventListener('input', e => {
+            let v = e.target.value.replace(/\D/g, '').slice(0, 16);
+            e.target.value = v.replace(/(.{4})/g, '$1 ').trim();
+            const display = v.padEnd(16, '•').replace(/(.{4})/g, '$1 ').trim();
+            pdNumber.textContent = display;
+            // Detectar marca
+            if (/^4/.test(v)) pdBrand.textContent = 'VISA';
+            else if (/^5[1-5]/.test(v)) pdBrand.textContent = 'MASTERCARD';
+            else if (/^3[47]/.test(v)) pdBrand.textContent = 'AMEX';
+            else pdBrand.textContent = 'AVENTURA GO';
+        });
 
-    // Titular
-    document.getElementById('holder').addEventListener('input', e => {
-        const v = e.target.value.toUpperCase() || 'NOMBRE APELLIDO';
-        pdHolder.textContent = v;
-    });
+        // Titular
+        document.getElementById('holder').addEventListener('input', e => {
+            const v = e.target.value.toUpperCase() || 'NOMBRE APELLIDO';
+            pdHolder.textContent = v;
+        });
 
-    // Vencimiento
-    document.getElementById('expiry').addEventListener('input', e => {
-        let v = e.target.value.replace(/\D/g, '').slice(0, 4);
-        if (v.length >= 2) v = v.slice(0,2) + '/' + v.slice(2);
-        e.target.value = v;
-        pdExpiry.textContent = v || 'MM/AA';
-    });
+        // Vencimiento
+        document.getElementById('expiry').addEventListener('input', e => {
+            let v = e.target.value.replace(/\D/g, '').slice(0, 4);
+            if (v.length >= 2) v = v.slice(0, 2) + '/' + v.slice(2);
+            e.target.value = v;
+            pdExpiry.textContent = v || 'MM/AA';
+        });
 
-    // CVV — voltear tarjeta
-    const inputCvv = document.getElementById('cvv');
-    inputCvv.addEventListener('focus', () => {
-        card.classList.add('pd-flipped');
-    });
-    inputCvv.addEventListener('blur', () => {
-        card.classList.remove('pd-flipped');
-    });
-    inputCvv.addEventListener('input', e => {
-        const v = e.target.value.replace(/\D/g, '').slice(0, 4);
-        e.target.value = v;
-        pdCvv.textContent = v.padEnd(v.length, '•') || '•••';
-    });
+        // CVV — voltear tarjeta
+        const inputCvv = document.getElementById('cvv');
+        inputCvv.addEventListener('focus', () => {
+            card.classList.add('pd-flipped');
+        });
+        inputCvv.addEventListener('blur', () => {
+            card.classList.remove('pd-flipped');
+        });
+        inputCvv.addEventListener('input', e => {
+            const v = e.target.value.replace(/\D/g, '').slice(0, 3);
+            e.target.value = v;
+            pdCvv.textContent = v.padEnd(v.length, '•') || '•••';
+        });
     </script>
 
 </body>
+
 </html>

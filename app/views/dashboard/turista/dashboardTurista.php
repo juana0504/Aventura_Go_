@@ -35,7 +35,7 @@ $estadoBadgeClass = static function (string $estado): string {
     <title>Dashboard Turista</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -51,14 +51,14 @@ $estadoBadgeClass = static function (string $estado): string {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- Layout global -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/layout_admin.css">
 
     <!-- Estilos comunes -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_turista.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel_turista.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/buscador_turista.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/panel_turista.css">
 
     <!-- CSS específico de esta vista -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/turista/turista/turista.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/turista/turista/turista.css">
 </head>
 
 <body>
@@ -139,7 +139,9 @@ $estadoBadgeClass = static function (string $estado): string {
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php else: ?>
-                                    <tr><td colspan="6" class="text-center">No tienes reservas aún.</td></tr>
+                                    <tr>
+                                        <td colspan="6" class="text-center">No tienes reservas aún.</td>
+                                    </tr>
                                 <?php endif; ?>
                             </tbody>
                         </table>
@@ -154,7 +156,7 @@ $estadoBadgeClass = static function (string $estado): string {
     <!-- Scripts de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/turista/turista/turista.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/dashboard/turista/turista/turista.js"></script>
 
 </body>
 

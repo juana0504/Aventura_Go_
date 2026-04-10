@@ -383,7 +383,7 @@ header {
 }
 
 /* Tarjeta de información */
-.targeta {
+.tarjeta {
     background-color: #FFFFFF;
     border-radius: 15px;
     padding: 25px 30px;
@@ -426,49 +426,50 @@ header {
     margin-bottom: 10px;
 }
 
-/* Datos - Estrellas y precios */
-.datos {
+/* .detalle {
     padding: 30px;
     display: block;
     align-items: center;
     margin-top: 20px;
-}
+} */
 
-.datos i {
+.detalle i {
     color: #FFD700;
     font-size: 18px;
 }
 
-.datos samp {
+.detalle samp {
     color: #888;
     font-size: 13px;
 }
 
-.datos p {
+.detalle p {
     margin-top: 20px;
     font-size: 14px;
     color: var(--color-text);
 }
 
-.datos p .bi-clock {
+.detalle p .bi-clock {
     margin-right: 10px;
     margin-top: 20px;
     font-size: 14px;
     color: var(--color-text);
 }
 
-.datos p samp {
+.detalle p samp {
     text-decoration: line-through;
     color: #999;
     margin-right: 10px;
     font-size: 16px;
 }
 
-.datos p:last-child {
+.detalle p:last-child {
     font-size: 22px;
     font-weight: 700;
     color: var(--color-secondary);
 }
+
+/* Datos - Estrellas y precios */
 
 .linea-gradiente {
     width: 2px;
@@ -494,50 +495,6 @@ header {
     color: #666;
     margin-bottom: 20px;
     line-height: 1.6;
-}
-
-/* Tarjeta de información */
-.targeta {
-    background-color: #FFFFFF;
-    border-radius: 15px;
-    padding: 25px 30px;
-    margin-bottom: 30px;
-    position: relative;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-}
-
-.detalle h2 {
-    font-family: var(--font-titles);
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--color-secondary);
-    margin-bottom: 10px;
-}
-
-.detalle span {
-    position: absolute;
-    top: 21px;
-    left: 448px;
-    background-color: #000000;
-    color: white;
-    padding: 8px 20px;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 16px;
-}
-
-.detalle #direccion {
-    color: #000000;
-    font-weight: 600px;
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 10px;
-}
-
-.detalle>p {
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 10px;
 }
 
 /* Datos - Estrellas y precios */
@@ -585,6 +542,9 @@ header {
 }
 
 /* ========== GALERÍA DE IMÁGENES ========== */
+#galeria-hotel{
+    padding-bottom: 50px;
+}
 .cont-img-principal {
     position: relative;
     overflow: hidden;
@@ -673,8 +633,8 @@ header {
 
 .dato {
     background: #FFFFFF;
-    margin-top: 30px;
-    padding: 20px;
+    /* margin-top: 30px;
+    padding: 20px; */
     border-radius: 20px;
 }
 
@@ -715,6 +675,12 @@ header {
     min-height: 300px;
     max-width: 400px;
     z-index: 10; /* Aumentado para que esté sobre el contenido */
+}
+
+.form-reserva h1{
+    font-size: 25px;
+    text-align: center;
+    font-weight: 700;
 }
 
 /* Agregado: responsividad */

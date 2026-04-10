@@ -15,7 +15,7 @@ $datos = listarTuristas();
     <title>Turista</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+    <link rel="shortcut icon" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -31,14 +31,14 @@ $datos = listarTuristas();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/layout_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/layout_admin.css">
 
     <!-- Componentes comunes -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/buscador_admin.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/layouts/panel.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/buscador_admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/panel.css">
 
     <!-- Estilos CSS siempre al final-->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_hotelero.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_hotelero.css">
 
 </head>
 
@@ -79,7 +79,7 @@ $datos = listarTuristas();
                 <button class="filtro-btn" data-filter="pendiente">
                     <i class="bi bi-clock"></i> Pendientes
                 </button>
-                <a href="<?= BASE_URL ?>/administrador/reporte-turista?tipo=turista" class="btn-pdf" target="_blank">
+                <a href="<?= BASE_URL ?>administrador/reporte-turista?tipo=turista" class="btn-pdf" target="_blank">
                     <i class="bi bi-file-earmark-pdf"></i>Generar Reportes
                 </a>
             </div>
@@ -102,18 +102,18 @@ $datos = listarTuristas();
                         <tr>
                             <?php if (!empty($datos)) : ?>
                                 <?php foreach ($datos as $turista): ?>
-                                    <td><img src="<?= BASE_URL ?>/public/uploads/usuario/<?= $turista['foto'] ?>" alt="" style="10px"></td>
+                                    <td><img src="<?= BASE_URL ?>public/uploads/usuario/<?= $turista['foto'] ?>" alt="" style="10px"></td>
                                     <td><?= $turista['nombre'] ?></td>
                                     <td><?= $turista['genero'] ?></td>
                                     <td><?= $turista['telefono'] ?></td>
                                     <td><?= $turista['email'] ?></td>
                                     <td><?= $turista['estado'] ?></td>
                                     <td>
-                                        <a href="<?= BASE_URL ?>/administrador/editar-turista?id=<?= $turista['id_usuario'] ?>" class="btn-accion btn-editar" title="Editar">
+                                        <a href="<?= BASE_URL ?>administrador/editar-turista?id=<?= $turista['id_usuario'] ?>" class="btn-accion btn-editar" title="Editar">
                                             <i class="bi bi-pencil"></i>
 
                                         </a>
-                                        <a href="<?= BASE_URL ?>/administrador/eliminar-turista?accion=eliminar&id=<?= $turista['id_usuario'] ?>" class="btn-accion btn-eliminar" title="Eliminar">
+                                        <a href="<?= BASE_URL ?>administrador/eliminar-turista?accion=eliminar&id=<?= $turista['id_usuario'] ?>" class="btn-accion btn-eliminar" title="Eliminar">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                     </td>
@@ -140,7 +140,7 @@ $datos = listarTuristas();
     require_once __DIR__ . '/../../layouts/footer_administrador.php';
     ?>
 
-    <script src="<?= BASE_URL ?>/public/assets/dashboard/administrador/consultar_turista/consultar_turista.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/dashboard/administrador/consultar_turista/consultar_turista.js"></script>
 
 </body>
 

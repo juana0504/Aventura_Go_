@@ -1,0 +1,174 @@
+/* ================= ESTILOS WIZARD PROVEEDOR TURISTICO - AVENTURA GO ================= */
+
+/* Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+/* ================= PALETA ================= */
+
+:root {
+    --color-primary: #2D4059;
+    --color-secondary: #EA8217;
+    --color-white: #FFFFFF;
+    --color-bg-light: #F8F9FA;
+    --color-border: #E0E0E0;
+    --color-text: #2B2B2B;
+    --font-titles: 'Raleway', sans-serif;
+    --font-text: 'Lato', sans-serif;
+}
+
+/* ================= TIPOGRAFÍA ================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-titles);
+}
+
+body,
+p,
+a,
+button,
+input,
+select,
+textarea {
+    font-family: var(--font-text);
+}
+
+/* =====================================================
+   ESTRUCTURA BASE DASHBOARD  NOOO TOCAR DESDE ACA HASTA QUE DIGA ESTILOS ESPECÍFICOS DASHBOARD
+===================================================== */
+
+#dashboard-hotelero {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 280px;
+    flex-shrink: 0;
+}
+
+/* CONTENIDO PRINCIPAL */
+
+.informacion-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* TOPBAR */
+
+.informacion-topbar {
+    height: 80px;
+    flex-shrink: 0;
+}
+
+.dashboard-content {
+    display: flex;
+    min-height: 100vh;
+    margin-top: 30px;
+}
+
+/* BOTON HAMBURGUESA */
+
+.btn-hamburguesa {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: var(--color-primary);
+    cursor: pointer;
+    padding: 8px 12px;
+    font-size: 22px;
+}
+
+/* =====================================================
+   ESTRUCTURA BASE DASHBOARD  ACA TERMINAN
+===================================================== */
+
+
+
+/* ================================= aca empiezan  ESTILOS ESPECÍFICOS DASHBOARD============ */
+
+
+
+
+
+
+
+
+
+/* ================= RESPONSIVE ================= */
+/* OJO YA ESTA EL DEL MENU HAMBURGUESA */
+
+@media (max-width: 992px) {
+
+    .ag-buscador-proveedor {
+        gap: 10px;
+        padding: 0 20px;
+    }
+
+    .busqueda-wrapper {
+        display: none;
+    }
+}
+
+
+@media (max-width:768px) {
+
+    #informacion-proveedor {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .informacion-main {
+        width: 100%;
+    }
+
+    /* SIDEBAR MOVIL */
+    .btn-hamburguesa {
+        display: block;
+        margin-left: 15px;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        width: 280px;
+        height: 100vh;
+        background: #2D4059;
+        z-index: 2000;
+        transition: left 0.3s ease;
+    }
+
+    .sidebar.activo {
+        left: 0;
+    }
+
+}
+
+
+@media (max-width:576px) {
+
+    .wizard-header {
+        font-size: 18px;
+        padding: 20px;
+    }
+
+    .wizard-steps {
+        display: none;
+    }
+
+}

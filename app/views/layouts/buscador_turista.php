@@ -22,7 +22,7 @@ $usuario = mostrarPerfilTurista($id);
     <!-- Dropdown con Bootstrap -->
     <div class="dropdown" id="perfil-dropdown">
         <a href="#" id="perfil" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="<?= BASE_URL ?>/public/uploads/usuario/<?= $usuario['foto'] ?>"
+            <img src="<?= BASE_URL ?>public/uploads/usuario/<?= $usuario['foto'] ?>"
                 alt="persona">
             <div class="info-usuario">
                 <p><?= $usuario['nombre'] ?></p>
@@ -30,12 +30,12 @@ $usuario = mostrarPerfilTurista($id);
             </div>
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="<?= BASE_URL ?>/turista/perfil"><i class="bi bi-person"></i> Mi Perfil</a>
+            <li><a class="dropdown-item" href="<?= BASE_URL ?>turista/perfil"><i class="bi bi-person"></i> Mi Perfil</a>
             </li>
             <hr class="dropdown-divider">
             </li>
             <li>
-                <a class="dropdown-item" href="<?= BASE_URL ?>/logout">
+                <a class="dropdown-item" href="<?= BASE_URL ?>logout">
                     <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
                 </a>
             </li>

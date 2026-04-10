@@ -1,7 +1,14 @@
 # Dependencias
 /vendor/
-/vendor/*
 
 # Archivos subidos por usuarios (NO versionar)
 /public/uploads/
-/public/uploads/*
+
+# Configuración sensible
+config/config.php
+
+#la configuracion ya esta en hostinguer se deja para trabajar localmente sin afectar el hosting
+config/database.php
+
+# ignorar htaccess local
+.htaccess
