@@ -284,24 +284,26 @@ class ActividadTuristica
     public function obtenerPorId($idActividad)
     {
         $sql = "SELECT 
-            a.id_actividad,
-            a.nombre,
-            a.created_at,
+        a.id_actividad,
+        a.nombre,
+        a.precio, 
+        a.created_at,
 
-            c.nombre AS ciudad,
-            d.nombre AS departamento,
+        c.nombre AS ciudad,
+        d.nombre AS departamento,
 
-            img_principal.imagen AS imagen_principal
-        FROM actividad a
-        INNER JOIN ciudades c 
-            ON a.id_ciudad = c.id_ciudad
-        INNER JOIN departamentos d
-            ON c.id_departamento = d.id_departamento
-        LEFT JOIN actividad_imagen img_principal
-            ON img_principal.id_actividad = a.id_actividad
-           AND img_principal.es_principal = 1
-        WHERE a.id_actividad = :id
-        LIMIT 1";
+        img_principal.imagen AS imagen_principal
+    FROM actividad a
+    INNER JOIN ciudades c 
+        ON a.id_ciudad = c.id_ciudad
+    INNER JOIN departamentos d
+        ON c.id_departamento = d.id_departamento
+    LEFT JOIN actividad_imagen img_principal
+        ON img_principal.id_actividad = a.id_actividad
+       AND img_principal.es_principal = 1
+    WHERE a.id_actividad = :id
+    LIMIT 1";
+
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':id', $idActividad, PDO::PARAM_INT);
         $stmt->execute();
