@@ -65,12 +65,6 @@ switch ($request) {
 
     // ruta confirmar en formulario checkout, ojo no cambiar nada ruta DE PAGO PROTEGIDA 
     case '/checkout':
-        session_start();
-
-        if (!isset($_SESSION['reserva_tmp'])) {
-            header('Location: ' . BASE_URL . '/descubre-tours');
-            exit;
-        }
         require BASE_PATH . '/app/views/website/checkout.php';
         break;
 

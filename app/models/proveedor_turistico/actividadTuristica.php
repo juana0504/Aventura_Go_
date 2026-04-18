@@ -218,7 +218,38 @@ class ActividadTuristica
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function obtenerPorCiudad($ciudad)
+    {
+        $sql = "
+    SELECT 
+        a.id_actividad,
+        a.nombre,
+        a.precio,
+        a.descripcion,
+        a.cupos,
+        a.ubicacion,
+        c.nombre AS ciudad,
+        img.imagen
+    FROM actividad a
+    INNER JOIN proveedor p
+        ON a.id_proveedor = p.id_proveedor
+    INNER JOIN ciudades c 
+        ON a.id_ciudad = c.id_ciudad
+    LEFT JOIN actividad_imagen img 
+        ON img.id_actividad = a.id_actividad 
+        AND img.es_principal = 1
+    WHERE a.estado = 'ACTIVO'
+    AND p.estado = 'ACTIVO'
+    AND UPPER(c.nombre) = UPPER(:ciudad)
+    ORDER BY a.created_at DESC
+    ";
 
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':ciudad', $ciudad);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function eliminar($id)
     {
@@ -284,24 +315,26 @@ class ActividadTuristica
     public function obtenerPorId($idActividad)
     {
         $sql = "SELECT 
-            a.id_actividad,
-            a.nombre,
-            a.created_at,
+        a.id_actividad,
+        a.nombre,
+        a.precio, 
+        a.created_at,
 
-            c.nombre AS ciudad,
-            d.nombre AS departamento,
+        c.nombre AS ciudad,
+        d.nombre AS departamento,
 
-            img_principal.imagen AS imagen_principal
-        FROM actividad a
-        INNER JOIN ciudades c 
-            ON a.id_ciudad = c.id_ciudad
-        INNER JOIN departamentos d
-            ON c.id_departamento = d.id_departamento
-        LEFT JOIN actividad_imagen img_principal
-            ON img_principal.id_actividad = a.id_actividad
-           AND img_principal.es_principal = 1
-        WHERE a.id_actividad = :id
-        LIMIT 1";
+        img_principal.imagen AS imagen_principal
+    FROM actividad a
+    INNER JOIN ciudades c 
+        ON a.id_ciudad = c.id_ciudad
+    INNER JOIN departamentos d
+        ON c.id_departamento = d.id_departamento
+    LEFT JOIN actividad_imagen img_principal
+        ON img_principal.id_actividad = a.id_actividad
+       AND img_principal.es_principal = 1
+    WHERE a.id_actividad = :id
+    LIMIT 1";
+
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':id', $idActividad, PDO::PARAM_INT);
         $stmt->execute();
