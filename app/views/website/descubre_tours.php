@@ -12,6 +12,14 @@ $ciudad = $_GET['ciudad'] ?? null;
         $actividades = $actividadModel->listarActividadesPublicas();
     }
 
+$ciudad = $_GET['ciudad'] ?? null;
+
+    if ($ciudad) {
+        $actividades = $actividadModel->obtenerPorCiudad($ciudad);
+    } else {
+        $actividades = $actividadModel->listarActividadesPublicas();
+    }
+
 ?>
 
 <!DOCTYPE html>

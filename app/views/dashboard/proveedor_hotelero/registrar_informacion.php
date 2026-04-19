@@ -476,6 +476,10 @@ require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
+    <script>
+        const BASE_URL = "<?= BASE_URL ?>";
+    </script>
+
     <script src="<?= BASE_URL ?>public/assets/dashboard/proveedor_hotelero/registrar_informacion/registrar_informacion.js"></script>
     <script src="<?= BASE_URL ?>public/assets/dashboard/proveedor_hotelero/registrar_informacion/departamento.js"></script>
 
