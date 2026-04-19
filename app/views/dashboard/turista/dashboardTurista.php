@@ -93,7 +93,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                 <i class="bi bi-grid-1x2-fill ag-nav-item__icon"></i>
                 Dashboard
             </a>
-            <a href="<?= BASE_URL ?>turista/reservas" class="ag-nav-item">
+            <a href="<?= BASE_URL ?>turista/ver-reservas" class="ag-nav-item">
                 <i class="bi bi-calendar3 ag-nav-item__icon"></i>
                 Ver reservas
             </a>
