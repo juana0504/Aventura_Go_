@@ -202,10 +202,6 @@ foreach (array_slice($partes, 0, 2) as $p) {
                 </a>
             </div>
 
-<<<<<<< HEAD
-=======
-            
->>>>>>> 732a3cda23df63d56d343fe0294491cd77a19ca5
 
             <!-- Tabla de tickets -->
             <div class="ag-section-header">
