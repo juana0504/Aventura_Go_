@@ -1,5 +1,22 @@
 <?php
-$reserva = $_SESSION['reserva_tmp'];
+require_once BASE_PATH . '/app/models/proveedor_turistico/ActividadTuristica.php';
+
+session_start();
+
+// 🔴 SI VIENE DEL FORMULARIO
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $_SESSION['reserva'] = $_SESSION['reserva']; // mantener lo que ya tenías
+}
+
+// 🔴 OBTENER RESERVA
+$reserva = $_SESSION['reserva'] ?? null;
+
+// 🔴 VALIDAR
+if (!$reserva) {
+    echo "Error: no hay datos de reserva.";
+    exit;
+}
+
 // reference único por intento
 if (!isset($_SESSION['reference_code'])) {
     $_SESSION['reference_code'] = 'RES-' . time() . '-' . rand(100, 999);
@@ -90,7 +107,7 @@ if (!isset($_SESSION['reference_code'])) {
                             <div class="card-body">
                                 <div class="row g-3 align-items-start">
                                     <div class="col-md-4">
-                                        <img src="<?= BASE_URL ?>public/uploads/actividades/<?= $reserva['imagen'] ?>"
+                                        <img src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= $reserva['imagen'] ?>"
                                             class="img-fluid rounded"
                                             alt="<?= htmlspecialchars($reserva['nombre']) ?>">
                                     </div>

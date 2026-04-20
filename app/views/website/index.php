@@ -221,18 +221,20 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <!-- Tarjeta 1 -->
             <div class="col">
-                <div class="card destino-card shadow-sm">
-                    <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_nimaima.png"
-                        class="card-img-top" alt="Nimaima">
-                    <div class="card-body">
-                        <h5 class="card-title">NIMAIMA</h5>
+                <a href="<?= BASE_URL ?>descubre-tours?ciudad=Nimaima" class="text-decoration-none">
+                    <div class="card destino-card shadow-sm">
+                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_nimaima.png"
+                            class="card-img-top" alt="Nimaima">
+                        <div class="card-body">
+                            <h5 class="card-title">NIMAIMA</h5>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
 
             <!-- Tarjeta 2 -->
             <div class="col">
-                <a href="<?= BASE_URL ?>descubre-tours" class="text-decoration-none">
+                <a href="<?= BASE_URL ?>descubre-tours?ciudad=Villeta" class="text-decoration-none">
                     <div class="card destino-card shadow-sm">
                         <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_visitados_villeta.png"
                             class="card-img-top" alt="Villeta">
@@ -246,46 +248,54 @@
 
             <!-- Tarjeta 3 -->
             <div class="col">
-                <div class="card destino-card shadow-sm">
-                    <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_lavega.png"
-                        class="card-img-top" alt="La Vega">
-                    <div class="card-body">
-                        <h5 class="card-title">LA VEGA</h5>
+                <a href="<?= BASE_URL ?>descubre-tours?ciudad=La Vega" class="text-decoration-none">
+                    <div class="card destino-card shadow-sm">
+                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_lavega.png"
+                            class="card-img-top" alt="La Vega">
+                        <div class="card-body">
+                            <h5 class="card-title">LA VEGA</h5>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
 
             <!-- Tarjeta 4 -->
             <div class="col">
-                <div class="card destino-card shadow-sm">
-                    <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_sanFrancisco.png"
-                        class="card-img-top" alt="San Francisco">
-                    <div class="card-body">
-                        <h5 class="card-title">SAN FRANCISCO</h5>
+                <a href="<?= BASE_URL ?>descubre-tours?ciudad=San Francisco" class="text-decoration-none">
+                    <div class="card destino-card shadow-sm">
+                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_sanFrancisco.png"
+                            class="card-img-top" alt="San Francisco">
+                        <div class="card-body">
+                            <h5 class="card-title">SAN FRANCISCO</h5>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
 
             <!-- Tarjeta 5 -->
             <div class="col">
-                <div class="card destino-card shadow-sm">
-                    <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_sasaima.png"
-                        class="card-img-top" alt="Sasaima">
-                    <div class="card-body">
-                        <h5 class="card-title">SASAIMA</h5>
+                <a href="<?= BASE_URL ?>descubre-tours?ciudad=Sasaima" class="text-decoration-none">
+                    <div class="card destino-card shadow-sm">
+                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_sasaima.png"
+                            class="card-img-top" alt="Sasaima">
+                        <div class="card-body">
+                            <h5 class="card-title">SASAIMA</h5>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
 
             <!-- Tarjeta 6 -->
             <div class="col">
-                <div class="card destino-card shadow-sm">
-                    <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_tobia.png"
-                        class="card-img-top" alt="Tobia">
-                    <div class="card-body">
-                        <h5 class="card-title">TOBIA</h5>
+                <a href="<?= BASE_URL ?>descubre-tours?ciudad=Tobia" class="text-decoration-none">
+                    <div class="card destino-card shadow-sm">
+                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_tobia.png"
+                            class="card-img-top" alt="Tobia">
+                        <div class="card-body">
+                            <h5 class="card-title">TOBIA</h5>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
 
