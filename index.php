@@ -446,7 +446,7 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/proveedor_turistico/dashboard.php';
         break;
 
-    //rutas actualizacion proveedor hotelero
+    //rutas actualizacion proveedor
     case '/proveedor/pendiente':
         require BASE_PATH . '/app/views/dashboard/proveedor_turistico/pendiente_aprobacion.php'; //redirige a la pagina de pendiente de aprobacion del proveedor turistico ALB 19/02/2026
         break;

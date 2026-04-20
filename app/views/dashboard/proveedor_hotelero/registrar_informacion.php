@@ -135,7 +135,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label class="form-label">Logo</label>
-                                                    <input type="file" accept=".jpg, .png, .jpeg" name="logo" class="form-control" id="logo" required>
+                                                    <input type="file" accept=".jpg, .png, .jpeg" name="logo" class="form-control" id="logo">
                                                 </div>
 
                                                 <div class="col-md-12 mb-4">
@@ -430,7 +430,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
 
                         <div class="col-12 col-md-3 col-lg-3 parrafos-informativos">
 
-                            <img src="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/registrar_informacion/img/image.png"
+                            <img src="<?= BASE_URL ?>public/assets/dashboard/proveedor_hotelero/registrar_informacion/img/image.png"
                                 class="img-fluid mb-3" alt="logo aventura go">
                             <p>
                                 <strong>¿Por qué registrar tu empresa?</strong> <br>
