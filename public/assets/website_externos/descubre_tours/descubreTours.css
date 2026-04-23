@@ -146,76 +146,7 @@ header {
     margin-bottom: 40px;
 }
 
-.tabs-container {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 30px;
-    justify-content: center;
-}
 
-/* ===============================
-   BIENVENIDA USUARIO - HEADER
-   =============================== */
-
-.Bienvenido {
-    background-color: #2D4059;
-    /* azul Aventura Go */
-    color: #FFFFFF;
-    padding: 8px 14px;
-    border-radius: 6px;
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    margin-right: 10px;
-    display: inline-flex;
-    align-items: center;
-    white-space: nowrap;
-}
-
-/* Ajuste para que no se pegue al botón salir */
-.actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.bienvenido strong {
-    font-weight: 700;
-}
-
-/* BOTONES */
-.tab-btn {
-    padding: 12px 30px;
-    border-radius: 25px;
-    font-family: var(--font-titles);
-    font-weight: 600;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-}
-
-.Bienvenido {
-    background-color: #2D4059;
-    /* azul Aventura Go */
-    color: #FFFFFF;
-    padding: 8px 14px;
-    border-radius: 6px;
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    margin-right: 10px;
-    display: inline-flex;
-    align-items: center;
-    white-space: nowrap;
-}
-
-/* Ajuste para que no se pegue al botón salir */
-.actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
 
 /* INICIA no modificar, estilos del dropdown--------------------------------------------- */
 .profile-dropdown {
@@ -280,27 +211,7 @@ header {
 
 /* termina no modificar, estilos del dropdown--------------------------------------------- */
 
-/* BOTÓN ACTIVO (NARANJA) */
-.tab-btn.active {
-    background-color: #F97316;
-    /* Naranja cálido */
-    color: #fff;
-    border-color: #F97316;
-    box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3);
-}
 
-/* BOTÓN INACTIVO (GRIS CLARO) */
-.tab-btn:not(.active) {
-    background-color: #f4f4f4;
-    color: #333;
-    border: 2px solid #ddd;
-}
-
-/* EFECTO HOVER */
-.tab-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
 
 .search-filters {
     background: linear-gradient(135deg, var(--color-primary) 0%, #1a2942 100%);
@@ -340,7 +251,53 @@ header {
     color: var(--color-text);
 }
 
+/* BOTONES */
+.tab-btn {
+    margin: 80px 30px;
+    padding: 20px 30px;
+    border-radius: 25px 25px 0 0;
+    font-family: var(--font-titles);
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    text-decoration: none;
+}
+
+/* BOTÓN ACTIVO (NARANJA) */
+.tab-btn.active {
+    background-color: #d6d5d5;
+    /* Naranja cálido */
+    color: var(--color-text);
+}
+
+/* BOTÓN INACTIVO (GRIS CLARO) */
+.tab-btn:not(.active) {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+/* EFECTO HOVER */
+.tab-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ===============================
+   BIENVENIDA USUARIO - HEADER
+   =============================== */
+/* Ajuste para que no se pegue al botón salir */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .activities-grid {
+    padding: 100px;
+    border-radius: 30px;
+    background: #d6d5d5;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 30px;
