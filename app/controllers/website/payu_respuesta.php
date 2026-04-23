@@ -30,7 +30,7 @@ if ($respuestaPayu === 'aprobado') {
     $stmtReserva->execute([':id' => $idReserva]);
 
     // Redirigir a confirmación
-    header('Location: ' . BASE_URL . '/confirmacion');
+    header('Location: ' . BASE_URL . 'confirmacion');
     exit;
 } else {
 

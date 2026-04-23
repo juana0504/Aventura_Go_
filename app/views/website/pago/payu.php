@@ -2,13 +2,13 @@
 session_start();
 
 /*| Validar que exista información de pago*/
-if (!isset($_SESSION['pago_tmp']) || !isset($_SESSION['reserva_tmp'])) {
-    header('Location: ' . BASE_URL . '/checkout');
-    exit;
-}
+// if (!isset($_SESSION['pago_tmp']) || !isset($_SESSION['reserva_tmp'])) {
+//     header('Location: ' . BASE_URL . 'checkout');
+//     exit;
+// }
 
 $pago    = $_SESSION['pago_tmp'];
-$reserva = $_SESSION['reserva_tmp'];
+$reserva = $_SESSION['reserva'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
