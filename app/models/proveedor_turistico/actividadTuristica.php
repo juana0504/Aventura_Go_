@@ -218,7 +218,38 @@ class ActividadTuristica
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function obtenerPorCiudad($ciudad)
+    {
+        $sql = "
+    SELECT 
+        a.id_actividad,
+        a.nombre,
+        a.precio,
+        a.descripcion,
+        a.cupos,
+        a.ubicacion,
+        c.nombre AS ciudad,
+        img.imagen
+    FROM actividad a
+    INNER JOIN proveedor p
+        ON a.id_proveedor = p.id_proveedor
+    INNER JOIN ciudades c 
+        ON a.id_ciudad = c.id_ciudad
+    LEFT JOIN actividad_imagen img 
+        ON img.id_actividad = a.id_actividad 
+        AND img.es_principal = 1
+    WHERE a.estado = 'ACTIVO'
+    AND p.estado = 'ACTIVO'
+    AND UPPER(c.nombre) = UPPER(:ciudad)
+    ORDER BY a.created_at DESC
+    ";
 
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':ciudad', $ciudad);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function eliminar($id)
     {
