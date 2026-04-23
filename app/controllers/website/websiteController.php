@@ -9,14 +9,9 @@ class WebsiteController
     public function descubreTours()
     {
         $actividadModel = new ActividadTuristica();
+        $actividades = $actividadModel->listarActividadesPublicas();
 
-        $ciudad = $_GET['ciudad'] ?? null;
-
-        if ($ciudad) {
-            $actividades = $actividadModel->obtenerPorCiudad($ciudad);
-        } else {
-            $actividades = $actividadModel->listarActividadesPublicas();
-        }
+        require BASE_PATH . '/app/views/website/descubre_tours.php';
     }
 
     // Página pública: /tour-escogido?id=XX

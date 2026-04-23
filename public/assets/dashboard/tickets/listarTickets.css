@@ -1,315 +1,240 @@
-/* =============================================
-   AVENTURAGO — TICKETS
-   tickets.css
-   Complementa turista.css (variables, layout,
-   topbar, sidebar, dropdowns ya están allí).
-   Solo estilos específicos de esta vista.
-============================================= */
+/* ESTILOS PREMIUM - AVENTURA GO 
+   Copia y pega este bloque completo para asegurar que las variables se definan
+*/
 
-/* ─── ENCABEZADO DE PÁGINA ────────────────── */
-.ag-page-header {
+:root {
+    --color-primary: #2D4059;
+    --color-secondary: #EA8217;
+    --color-white: #FFFFFF;
+    --color-bg-light: #F4F7F9;
+    --color-border: #E0E4E8;
+    --color-text: #2b2b2b;
+    --font-titles: 'Raleway', sans-serif;
+    --font-text: 'Lato', sans-serif;
+    --shadow-premium: 0 10px 30px rgba(45, 64, 89, 0.1);
+}
+
+/* =========================================
+   RESETEO Y CONTENEDOR
+========================================= */
+#listar-tickets,
+#admin-dashboard {
+    background-color: var(--color-bg-light) !important;
+    font-family: var(--font-text) !important;
+    color: var(--color-text);
+}
+
+
+
+/* BUSCA ESTO EN TU CSS Y REEMPLÁZALO */
+#listar-tickets .info,
+#admin-dashboard .info {
+    padding: 20px 40px;
+    /* Reducimos un poco el padding superior */
+    width: 100%;
+    /* Que ocupe todo el espacio disponible */
+    margin: 0;
+    /* Quitamos el centrado automático */
+}
+
+/* ASEGÚRATE DE QUE EL CONTENEDOR PRINCIPAL SEA FLEX */
+#listar-tickets {
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-bottom: 28px;
-    gap: 16px;
-    flex-wrap: wrap;
+    min-height: 100vh;
+    background-color: var(--color-bg-light) !important;
 }
 
-.ag-page-header__title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 38px;
-    letter-spacing: 2px;
-    color: var(--ag-text);
-    line-height: 1;
-    margin: 0 0 6px;
-}
-
-.ag-page-header__title span { color: var(--ag-primary); }
-
-/* --- ACTUALIZACIÓN PARA FORZAR HORIZONTALIDAD --- */
-
-.ag-tk-stats {
-    display: grid !important;
-    /* Forzamos 4 columnas iguales siempre que la pantalla sea grande */
-    grid-template-columns: repeat(4, 1fr) !important; 
-    gap: 20px;
-    margin-bottom: 30px;
-    width: 100% !important;
-    /* Evita que Bootstrap intente ponerlo en bloque */
-    clear: both; 
-}
-
-.ag-tk-stat {
-    background: var(--ag-surface);
-    border: 1px solid var(--ag-border);
-    border-radius: var(--ag-radius-lg);
-    padding: 20px;
-    /* Esto alinea el icono y el texto de forma horizontal */
-    display: flex !important;
-    align-items: center;
-    gap: 15px;
-    transition: transform .25s ease, box-shadow .25s ease;
-    /* Evita que la tarjeta se encoja demasiado */
-    min-width: 0; 
-}
-
-/* Ajuste para que el texto dentro de la tarjeta no se amontone */
-.ag-tk-stat > div {
+.contenido-principal {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
-/* --- REVISA TUS MEDIA QUERIES AL FINAL DEL ARCHIVO --- */
-/* Si se ve vertical en PC, es posible que una media query esté activa */
-
-@media (max-width: 1100px) {
-    .ag-tk-stats { 
-        grid-template-columns: repeat(2, 1fr) !important; 
-    }
-}
-
-@media (max-width: 480px) {
-    .ag-tk-stats { 
-        grid-template-columns: 1fr !important; 
-    }
-}
-.ag-tk-stat {
-    background: var(--ag-surface);
-    border: 1px solid var(--ag-border);
-    border-radius: var(--ag-radius-lg);
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
+/* =========================================
+   TÍTULOS (Nivel Premium)
+========================================= */
+h1,
+h2 {
+    font-family: var(--font-titles) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.5px;
+    color: var(--color-primary);
+    margin-bottom: 25px;
     position: relative;
-    overflow: hidden;
-    transition: transform .25s ease, box-shadow .25s ease;
-    cursor: default;
 }
 
-.ag-tk-stat:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--ag-shadow-hover);
-}
-
-.ag-tk-stat::after {
+/* Subrayado elegante bajo el título */
+h1::after,
+h2::after {
     content: '';
-    position: absolute;
-    top: -30px;
-    right: -30px;
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    background: rgba(234,130,23,.05);
-    pointer-events: none;
+    display: block;
+    width: 50px;
+    height: 4px;
+    background: var(--color-secondary);
+    border-radius: 10px;
+    margin-top: 8px;
 }
 
-.ag-tk-stat__icon {
-    width: 48px;
-    height: 48px;
-    border-radius: var(--ag-radius-sm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    flex-shrink: 0;
-}
-
-.ag-tk-stat__icon--amber  { background: var(--ag-amber-light); color: var(--ag-amber); }
-.ag-tk-stat__icon--green  { background: var(--ag-green-light); color: var(--ag-green); }
-.ag-tk-stat__icon--blue   { background: var(--ag-blue-light);  color: var(--ag-blue); }
-.ag-tk-stat__icon--orange { background: var(--ag-primary-light); color: var(--ag-primary); }
-
-.ag-tk-stat__label {
-    font-size: 12px;
-    letter-spacing: .4px;
-    color: var(--ag-muted);
-    font-weight: 500;
-    margin-bottom: 4px;
-}
-
-.ag-tk-stat__value {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px;
-    letter-spacing: 1px;
-    color: var(--ag-text);
-    line-height: 1;
-}
-
-/* Tarjeta destacada */
-.ag-tk-stat--featured {
-    background: #1a2b3c;
-    border-color: transparent;
-}
-
-.ag-tk-stat--featured .ag-tk-stat__label { color: rgba(255,255,255,.45); }
-.ag-tk-stat--featured .ag-tk-stat__value { color: var(--ag-primary); }
-
-/* ─── TABLA ESPECÍFICA ────────────────────── */
-.ag-tk-id {
-    display: inline-flex;
-    align-items: center;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 15px;
-    letter-spacing: 1px;
-    color: var(--ag-primary);
-    background: var(--ag-primary-light);
-    padding: 3px 9px;
-    border-radius: 6px;
-}
-
-.ag-tk-desc {
-    max-width: 280px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.ag-tk-sin-respuesta {
-    font-size: 12px;
-    color: var(--ag-muted);
-    font-style: italic;
-}
-
-/* Botón "Ver respuesta" */
-.ag-btn-ver {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--ag-primary);
-    background: var(--ag-primary-light);
-    border: 1px solid rgba(234,130,23,.25);
-    border-radius: var(--ag-radius-sm);
-    padding: 6px 14px;
-    cursor: pointer;
-    transition: all .2s;
-    letter-spacing: .3px;
-}
-
-.ag-btn-ver:hover {
-    background: var(--ag-primary);
-    color: #fff;
-    border-color: var(--ag-primary);
-}
-
-/* ─── MODAL REDISEÑADO ────────────────────── */
-.ag-modal {
+/* =========================================
+   TARJETAS Y TABLAS (Efecto Elevación)
+========================================= */
+.card,
+.table-responsive {
     border: none !important;
-    border-radius: var(--ag-radius-lg) !important;
+    border-radius: 20px !important;
+    background: var(--color-white) !important;
+    box-shadow: var(--shadow-premium) !important;
     overflow: hidden;
-    box-shadow: 0 24px 64px rgba(0,0,0,.18) !important;
 }
 
-.ag-modal__header {
-    background: #1a2b3c;
-    padding: 22px 24px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
+.table {
+    margin-bottom: 0 !important;
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
-.ag-modal__eyebrow {
-    font-size: 10px;
-    letter-spacing: 2px;
+/* Encabezado de Tabla Moderno */
+.table thead th {
+    background-color: var(--color-primary) !important;
+    color: var(--color-white) !important;
     text-transform: uppercase;
-    color: rgba(255,255,255,.45);
-    margin-bottom: 4px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 20px !important;
+    border: none !important;
 }
 
-.ag-modal__title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    letter-spacing: 1.5px;
-    color: #fff;
-    margin: 0;
+/* Filas de la Tabla */
+.table tbody tr {
+    transition: all 0.3s ease !important;
 }
 
-.ag-modal__close {
-    background: rgba(255,255,255,.1);
-    border: none;
-    color: rgba(255,255,255,.7);
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
+.table tbody tr:hover {
+    background-color: rgba(234, 130, 23, 0.05) !important;
+    /* Un toque de tu naranja */
+    transform: translateY(-2px);
+}
+
+.table td {
+    padding: 18px 20px !important;
+    vertical-align: middle !important;
+    border-bottom: 1px solid var(--color-border) !important;
+}
+
+/* =========================================
+   BOTONES (Diseño de Autor)
+========================================= */
+.btn {
+    border-radius: 12px !important;
+    padding: 12px 24px !important;
+    font-weight: 700 !important;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+    text-transform: uppercase;
+    font-size: 12px;
+    border: none !important;
+}
+
+/* Botón Principal (Naranja) */
+.btn-primary,
+.btn-success {
+    background: var(--color-secondary) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(234, 130, 23, 0.3) !important;
+}
+
+.btn-primary:hover,
+.btn-success:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(234, 130, 23, 0.4) !important;
+    filter: brightness(1.1);
+}
+
+/* Botón Outline para "Ver Respuesta" */
+.btn-outline-primary {
+    border: 2px solid var(--color-primary) !important;
+    color: var(--color-primary) !important;
+    background: transparent !important;
+}
+
+.btn-outline-primary:hover {
+    background: var(--color-primary) !important;
+    color: white !important;
+}
+
+/* =========================================
+   BADGES (Estados)
+========================================= */
+.badge {
+    padding: 8px 14px !important;
+    border-radius: 8px !important;
+    font-weight: 700 !important;
+    font-size: 11px !important;
+}
+
+.bg-warning {
+    background-color: #FFF4E5 !important;
+    color: #EA8217 !important;
+    border: 1px solid #FFE2C2 !important;
+}
+
+/* =========================================
+   MODALES PREMIUM
+========================================= */
+.modal-content {
+    border-radius: 25px !important;
+    border: none !important;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2) !important;
+}
+
+.modal-header {
+    background: var(--color-primary) !important;
+    color: white !important;
+    border-top-left-radius: 25px !important;
+    border-top-right-radius: 25px !important;
+    padding: 25px !important;
+}
+
+
+
+/* =========================================
+   RESETEO Y CONTENEDOR (AJUSTE DE POSICIÓN)
+========================================= */
+#listar-tickets {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: all .2s;
-    font-size: 13px;
+    /* Establece el panel y el contenido como columnas */
+    min-height: 100vh;
+    background-color: var(--color-bg-light) !important;
 }
 
-.ag-modal__close:hover {
-    background: rgba(255,255,255,.2);
-    color: #fff;
-}
-
-.ag-modal__body {
-    padding: 24px;
-    background: var(--ag-bg);
+.contenido-principal {
+    flex-grow: 1;
+    /* Ocupa el resto de la pantalla */
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    /* Apila el buscador y luego la info (tabla) */
+
+    /* IMPORTANTE: Ajusta este margen al ancho de tu panel izquierdo. 
+       Si tu panel es más ancho, sube este valor (ej. 280px o 300px).
+    */
+    margin-left: 260px;
+
+    width: calc(100% - 260px);
+    /* Asegura que el ancho no exceda la pantalla */
+    overflow-x: hidden;
 }
 
-.ag-modal__block {
-    background: var(--ag-surface);
-    border: 1px solid var(--ag-border);
-    border-radius: var(--ag-radius);
-    padding: 18px 20px;
-}
-
-.ag-modal__block--reply {
-    border-left: 3px solid var(--ag-primary);
-}
-
-.ag-modal__block--query {
-    border-left: 3px solid var(--ag-muted);
-}
-
-.ag-modal__block-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--ag-muted);
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.ag-modal__block--reply .ag-modal__block-label { color: var(--ag-primary); }
-
-.ag-modal__block p {
-    font-size: 14px;
-    color: var(--ag-text);
-    line-height: 1.7;
+#listar-tickets .info,
+#admin-dashboard .info {
+    padding: 20px 40px;
+    width: 100%;
     margin: 0;
+    /* Elimina el margin: 0 auto para que no se centre y choque con el panel */
 }
 
-/* ─── DARK MODE ESPECÍFICO ────────────────── */
-.ag-dark .ag-tk-stat--featured { background: #111c27; }
-.ag-dark .ag-modal__body       { background: var(--ag-bg); }
-.ag-dark .ag-modal__block      { background: var(--ag-surface); }
-
-/* ─── RESPONSIVE ──────────────────────────── */
-@media (max-width: 1100px) {
-    .ag-tk-stats { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 768px) {
-    .ag-tk-stats        { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .ag-page-header     { flex-direction: column; align-items: flex-start; }
-    .ag-page-header > a { width: 100%; justify-content: center; }
-    .ag-tk-desc         { max-width: 160px; }
-}
-
-@media (max-width: 480px) {
-    .ag-tk-stats { grid-template-columns: 1fr 1fr; }
+/* Asegura que el buscador no tenga posiciones absolutas que lo saquen del flujo */
+.buscador-turista {
+    width: 100%;
+    position: relative;
+    margin: 0;
 }

@@ -1,461 +1,546 @@
-/* =============================================
-   AVENTURAGO — VER RESERVAS
-   ver_reservas.css
-   Complementa turista.css.
-   Solo estilos específicos de esta vista.
-============================================= */
+/* AVENTURA GO – CONSULTAR ACTIVIDADES TURÍSTICAS */
 
-/* ─── ENCABEZADO DE PÁGINA ────────────────── */
-.ag-page-header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-bottom: 28px;
-    gap: 16px;
-    flex-wrap: wrap;
+/* fuente para titulos*/
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
+
+/*fuente para textos*/
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+h1 h2 h3 h4 h5 h6 {
+    --font-titles: 'Raleway', sans-serif;
+    /*tipografia titulos*/
 }
 
-.ag-page-header__title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 38px;
-    letter-spacing: 2px;
-    color: var(--ag-text);
-    line-height: 1;
-    margin: 0 0 6px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.ag-page-header__title span { color: var(--ag-primary); }
+body {
+    font-family: 'lato', sans-serif;
+    background-color: #f5f5f5;
+}
 
-/* Botón PDF */
-.ag-btn-pdf {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: #dc2626;
-    color: #fff;
-    border: none;
-    border-radius: var(--ag-radius-sm);
-    padding: 10px 22px;
-    font-size: 13px;
-    font-weight: 600;
+/* da estilos a toda la seccion izquierda */
+.info {
+    flex: 1;
+    margin-left: 280px;
+    overflow-x: hidden;
+}
+
+/* ========== estilos boton pdf ========== */
+.btn-pdf {
+    background: red;
+    color: #ffffff;
     text-decoration: none;
+    padding: 10px 20px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 13px;
     cursor: pointer;
-    transition: background .2s, transform .2s;
-    white-space: nowrap;
-}
-
-.ag-btn-pdf:hover {
-    background: #b91c1c;
-    transform: translateY(-1px);
-    color: #fff;
-    text-decoration: none;
-}
-
-/* Botón peligro (cancelar) */
-.ag-btn-danger {
-    display: inline-flex;
+    transition: all 0.3s;
+    display: flex;
     align-items: center;
     gap: 8px;
-    background: #dc2626;
-    color: #fff;
-    border: none;
-    border-radius: var(--ag-radius-sm);
-    padding: 10px 22px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background .2s, transform .2s;
 }
 
-.ag-btn-danger:hover {
-    background: #b91c1c;
-    transform: translateY(-1px);
-}
 
-/* ─── TARJETAS DE ESTADÍSTICAS ────────────── */
-.ag-rv-stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-bottom: 24px;
-}
-
-.ag-rv-stat {
-    background: var(--ag-surface);
-    border: 1px solid var(--ag-border);
-    border-radius: var(--ag-radius-lg);
-    padding: 20px;
+/* ========== HEADER SECTION ========== */
+.header-section {
     display: flex;
-    align-items: center;
-    gap: 16px;
-    position: relative;
-    overflow: hidden;
-    transition: transform .25s, box-shadow .25s;
-    cursor: default;
-}
-
-.ag-rv-stat:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--ag-shadow-hover);
-}
-
-.ag-rv-stat::after {
-    content: '';
-    position: absolute;
-    top: -30px;
-    right: -30px;
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    background: rgba(234,130,23,.05);
-    pointer-events: none;
-}
-
-.ag-rv-stat__icon {
-    width: 48px;
-    height: 48px;
-    border-radius: var(--ag-radius-sm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    flex-shrink: 0;
-}
-
-.ag-rv-stat__icon--orange { background: var(--ag-primary-light); color: var(--ag-primary); }
-.ag-rv-stat__icon--green  { background: var(--ag-green-light);   color: var(--ag-green); }
-.ag-rv-stat__icon--amber  { background: var(--ag-amber-light);   color: var(--ag-amber); }
-.ag-rv-stat__icon--red    { background: var(--ag-red-light);     color: var(--ag-red); }
-
-.ag-rv-stat__label {
-    font-size: 12px;
-    color: var(--ag-muted);
-    font-weight: 500;
-    letter-spacing: .3px;
-    margin-bottom: 4px;
-}
-
-.ag-rv-stat__value {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px;
-    letter-spacing: 1px;
-    color: var(--ag-text);
-    line-height: 1;
-}
-
-/* Tarjeta destacada */
-.ag-rv-stat--featured {
-    background: #1a2b3c;
-    border-color: transparent;
-}
-
-.ag-rv-stat--featured .ag-rv-stat__label { color: rgba(255,255,255,.45); }
-.ag-rv-stat--featured .ag-rv-stat__value { color: var(--ag-primary); }
-
-/* ─── FILTROS RÁPIDOS ─────────────────────── */
-.ag-rv-filters {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 24px;
-    flex-wrap: wrap;
-}
-
-.ag-rv-filter {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 9px 18px;
-    border-radius: var(--ag-radius-sm);
-    border: 1px solid var(--ag-border);
-    background: var(--ag-surface);
-    color: var(--ag-muted);
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all .2s;
-}
-
-.ag-rv-filter:hover {
-    border-color: rgba(234,130,23,.35);
-    color: var(--ag-primary);
-    background: rgba(234,130,23,.04);
-}
-
-.ag-rv-filter--active {
-    background: var(--ag-primary-light);
-    border-color: rgba(234,130,23,.4);
-    color: var(--ag-primary);
-    font-weight: 600;
-}
-
-/* ─── TABLA ESPECÍFICA ────────────────────── */
-
-/* Celda de actividad con imagen */
-.ag-rv-actividad {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.ag-rv-img {
-    width: 52px;
-    height: 52px;
-    border-radius: var(--ag-radius-sm);
-    object-fit: cover;
-    border: 1px solid var(--ag-border);
-    flex-shrink: 0;
-    transition: transform .2s, box-shadow .2s;
-}
-
-.ag-rv-img:hover {
-    transform: scale(1.08);
-    box-shadow: 0 4px 12px rgba(234,130,23,.25);
-}
-
-.ag-rv-img--placeholder {
-    background: var(--ag-bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--ag-muted);
-    font-size: 18px;
-}
-
-/* Personas */
-.ag-rv-personas {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 13px;
-    color: var(--ag-text);
-}
-
-.ag-rv-personas i { color: var(--ag-muted); font-size: 13px; }
-
-/* Precio */
-.ag-rv-precio {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 17px;
-    letter-spacing: .5px;
-    color: var(--ag-primary);
-}
-
-/* Botón ver */
-.ag-btn-ver {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--ag-primary);
-    background: var(--ag-primary-light);
-    border: 1px solid rgba(234,130,23,.25);
-    border-radius: var(--ag-radius-sm);
-    padding: 7px 15px;
-    cursor: pointer;
-    transition: all .2s;
-    letter-spacing: .3px;
-}
-
-.ag-btn-ver:hover {
-    background: var(--ag-primary);
-    color: #fff;
-    border-color: var(--ag-primary);
-}
-
-/* ─── MODAL DE RESERVA ────────────────────── */
-.ag-rv-modal {
-    border: none !important;
-    border-radius: var(--ag-radius-lg) !important;
-    overflow: hidden;
-    box-shadow: 0 24px 64px rgba(0,0,0,.18) !important;
-}
-
-/* Header */
-.ag-rv-modal__header {
-    background: #1a2b3c;
-    padding: 22px 28px;
-    display: flex;
-    align-items: flex-start;
     justify-content: space-between;
-    gap: 16px;
-}
-
-.ag-rv-modal__header-info { flex: 1; min-width: 0; }
-
-.ag-rv-modal__title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 26px;
-    letter-spacing: 1.5px;
-    color: #fff;
-    margin: 4px 0 8px;
-    line-height: 1.1;
-}
-
-/* Body */
-.ag-rv-modal__body {
-    display: grid;
-    grid-template-columns: 340px 1fr;
-    gap: 0;
-    background: var(--ag-bg);
-    min-height: 320px;
-}
-
-/* Galería */
-.ag-rv-modal__gallery {
-    padding: 24px;
-    background: var(--ag-surface);
-    border-right: 1px solid var(--ag-border);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.ag-rv-modal__img-main {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    border-radius: var(--ag-radius);
-    border: 1px solid var(--ag-border);
-}
-
-.ag-rv-modal__thumbs {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.ag-rv-modal__thumbs img {
-    width: 58px;
-    height: 58px;
-    object-fit: cover;
-    border-radius: var(--ag-radius-sm);
-    border: 2px solid var(--ag-border);
-    cursor: pointer;
-    transition: border-color .2s, transform .2s;
-}
-
-.ag-rv-modal__thumbs img:hover {
-    border-color: var(--ag-primary);
-    transform: scale(1.06);
-}
-
-/* Info */
-.ag-rv-modal__info {
-    padding: 24px 28px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.ag-rv-modal__info-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-}
-
-.ag-rv-info-item {
-    background: var(--ag-surface);
-    border: 1px solid var(--ag-border);
-    border-radius: var(--ag-radius);
-    padding: 14px 16px;
-}
-
-.ag-rv-info-item--full {
-    grid-column: 1 / -1;
-}
-
-.ag-rv-info-item__label {
-    font-size: 11px;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    color: var(--ag-muted);
-    font-weight: 600;
-    margin-bottom: 6px;
-    display: flex;
     align-items: center;
-    gap: 5px;
+    margin-bottom: 25px;
 }
 
-.ag-rv-info-item__value {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--ag-text);
-}
-
-.ag-rv-info-item__value--price {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    letter-spacing: .5px;
-    color: var(--ag-primary);
-}
-
-/* Descripción */
-.ag-rv-modal__desc-block {
-    background: var(--ag-surface);
-    border: 1px solid var(--ag-border);
-    border-left: 3px solid var(--ag-primary);
-    border-radius: var(--ag-radius);
-    padding: 16px 18px;
-}
-
-.ag-rv-modal__desc-label {
-    font-size: 11px;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    color: var(--ag-primary);
-    font-weight: 600;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.ag-rv-modal__desc-text {
-    font-size: 14px;
-    color: var(--ag-text);
-    line-height: 1.7;
+.header-section h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2D4059;
     margin: 0;
 }
 
-/* Footer */
-.ag-rv-modal__footer {
-    padding: 18px 28px;
-    background: var(--ag-surface);
-    border-top: 1px solid var(--ag-border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-}
-
-.ag-rv-modal__footer-actions {
+/* ========== FILTROS RÁPIDOS ========== */
+.filtros-rapidos {
     display: flex;
     gap: 10px;
+    margin-bottom: 25px;
 }
 
-/* ─── DARK MODE ESPECÍFICO ────────────────── */
-.ag-dark .ag-rv-stat--featured       { background: #111c27; }
-.ag-dark .ag-rv-modal__gallery       { background: var(--ag-surface); }
-.ag-dark .ag-rv-modal__footer        { background: var(--ag-surface); }
-.ag-dark .ag-rv-info-item            { background: var(--ag-surface); }
-.ag-dark .ag-rv-modal__desc-block    { background: var(--ag-surface); }
-
-/* ─── RESPONSIVE ──────────────────────────── */
-@media (max-width: 1100px) {
-    .ag-rv-stats { grid-template-columns: repeat(2, 1fr); }
+.filtro-btn {
+    padding: 10px 20px;
+    background-color: #f0f4f8;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #6b7280;
 }
 
-@media (max-width: 900px) {
-    .ag-rv-modal__body { grid-template-columns: 1fr; }
-    .ag-rv-modal__gallery { border-right: none; border-bottom: 1px solid var(--ag-border); }
+.filtro-btn:hover {
+    background-color: #e5eaf0;
 }
 
-@media (max-width: 768px) {
-    .ag-rv-stats     { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .ag-rv-filters   { gap: 6px; }
-    .ag-rv-filter    { padding: 7px 12px; font-size: 12px; }
-    .ag-page-header  { flex-direction: column; align-items: flex-start; }
-    .ag-btn-pdf      { width: 100%; justify-content: center; }
-    .ag-rv-modal__info-grid { grid-template-columns: 1fr; }
+.filtro-btn.active {
+    background-color: #fff;
+    border-color: #EA8217;
+    color: #EA8217;
+}
+
+
+/* ========== TABLA ========== */
+.tabla-container {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+    /* Permite scroll horizontal en pantallas pequeñas */
+}
+
+table.table {
+    width: 100%;
+    margin-bottom: 0;
+    table-layout: fixed;
+    /* Esto hace que las columnas mantengan su ancho */
+    border-collapse: collapse;
+}
+
+/* ========== TABLA ========== */
+.table-responsive {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+    /* Permite scroll horizontal en pantallas pequeñas */
+}
+
+table.table {
+    width: 100%;
+    margin-bottom: 0;
+    table-layout: fixed;
+    /* Esto hace que las columnas mantengan su ancho */
+    border-collapse: collapse;
+}
+
+
+
+/* ===============================
+TABLA
+=============================== */
+
+.table-responsive {
+    background: #FFFFFF;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+}
+
+#tablaActividades {
+    width: 100%;
+    margin-bottom: 0;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+/* Anchos de columnas */
+/*1 Imagen */
+#tablaActividades thead th:nth-child(1) {
+    width: 5%;
+}
+
+/*2 actividad */
+#tablaActividades thead th:nth-child(2) {
+    width: 10%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* Muestra puntos suspensivos si es muy largo */
+}
+
+/* 3 proveedor */
+#tablaActividades thead th:nth-child(3) {
+    width: 10%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* Muestra puntos suspensivos si es muy largo */
+}
+
+/* 4 fecha */
+#tablaActividades thead th:nth-child(4) {
+    width: 10%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* Muestra puntos suspensivos si es muy largo */
+}
+
+/*5 personas */
+#tablaActividades thead th:nth-child(5) {
+    width: 4%;
+}
+
+/*6 Precio */
+#tablaActividades thead th:nth-child(6) {
+    width: 7%;
+}
+
+/*7 Estado */
+#tablaActividades thead th:nth-child(7) {
+    width: 10%;
+}
+
+/*8 Acciones */
+#tablaActividades thead th:nth-child(8) {
+    width: 12%;
+}
+
+
+/* Encabezados */
+#tablaActividades thead th {
+    background-color: #F8F9FA;
+    color: #2D4059;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    padding: 14px 12px;
+    border-bottom: 2px solid #E0E0E0;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Celdas */
+#tablaActividades tbody td {
+    padding: 14px 12px;
+    font-size: 14px;
+    color: #2B2B2B;
+    border-bottom: 1px solid #F1F1F1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}
+
+/* Columnas con texto largo */
+#tablaActividades tbody td:nth-child(2),
+#tablaActividades tbody td:nth-child(3),
+#tablaActividades tbody td:nth-child(4) {
+    max-width: 0;
+}
+
+/* Hover texto completo */
+#tablaActividades tbody td:hover {
+    white-space: normal;
+    background-color: #F8F9FA;
+    position: relative;
+    z-index: 2;
+}
+
+/* Filas */
+#tablaActividades tbody tr {
+    transition: background-color 0.25s ease;
+}
+
+#tablaActividades tbody tr:hover {
+    background-color: #F9FAFB;
+}
+
+/* Imágenes */
+#tablaActividades tbody img {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #E0E0E0;
+}
+
+/* ========== ESTILOS PARA LOGO EN TABLA ========== */
+tbody tr td img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #e5e7eb;
+    background-color: #f8f9fa;
+    display: block;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+tbody tr td img:hover {
+    transform: scale(1.1);
+    border-color: #EA8217;
+    box-shadow: 0 4px 8px rgba(234, 130, 23, 0.2);
+}
+
+/* Asegurar que la celda del logo tenga el contenido centrado */
+tbody tr td:nth-child(1) {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Badges de Estado */
+.badge-activo,
+.badge-inactivo,
+.badge-pendiente {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.badge-activo {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.badge-inactivo {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.badge-pendiente {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+/* Botones de Acción */
+.btn-accion {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: all 0.3s;
+    font-size: 14px;
+}
+
+.btn-ver {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+.btn-ver:hover {
+    background-color: #bfdbfe;
+    transform: translateY(-2px);
+}
+
+.btn-editar {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.btn-editar:hover {
+    background-color: #fde68a;
+    transform: translateY(-2px);
+}
+
+.btn-eliminar {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.btn-eliminar:hover {
+    background-color: #fecaca;
+    transform: translateY(-2px);
+}
+
+
+
+/* DataTables Personalization */
+.dt-buttons {
+    margin-bottom: 15px;
+}
+
+div.dataTables_wrapper div.dataTables_filter input {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+div.dataTables_wrapper div.dataTables_length select {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 6px 10px;
+}
+
+/* Ajustes específicos para DataTables */
+div.dataTables_wrapper div.dataTables_scroll {
+    margin-bottom: 1em;
+}
+
+div.dataTables_wrapper div.dataTables_scrollBody {
+    border: none !important;
+}
+
+div.dataTables_wrapper div.dataTables_scrollBody td {
+    border-top: none !important;
+}
+
+
+
+
+/* ====================================================== Modal Aventura Go ======================================================= */
+.modal-dialog {
+    max-width: 800px;
+    width: 100%;
+}
+
+.aventura-modal {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    font-family: 'Lato', sans-serif;
+}
+
+.aventura-modal-header {
+    background: #2D4059;
+    border-bottom: 3px solid #EA8217;
+    padding: 16px 20px;
+    color: #FFFFFF;
+}
+
+.modal-title {
+    max-width: 390px;
+    min-width: 390px;
+    background: #2d4059;
+    min-height: 50px;
+    padding: 0 2PX 0 2PX;
+}
+
+#modal-estado-header {
+    margin-left: 194px;
+}
+
+.text-muted {
+    color: rgb(255 255 255 / 75%) !important;
+}
+
+.modal-header-content {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 6px 16px;
+    align-items: center;
+}
+
+
+
+.modal-title-text {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin: 0;
+    color: #FFFFFF;
+}
+
+.modal-subtitle {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Body del Modal */
+.modal-body {
+    padding: 20px;
+    background-color: #F8F9FA;
+    color: #2B2B2B;
+}
+
+.status-badge {
+    padding: 0.375rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: 'Lato', sans-serif;
+}
+
+.status-badge[data-status="activo"] {
+    background-color: #28a745;
+    color: #FFFFFF;
+}
+
+.status-badge[data-status="inactivo"] {
+    background-color: #dc3545;
+    color: #FFFFFF;
+}
+
+.btn-close {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: end;
+    background-color: #ef2f42;
+    color: #FFFFFF;
+    opacity: 1;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-close:hover {
+    background-color: #c82333;
+}
+
+#modal-imagen-principal {
+    width: 100%;
+    height: 240px;
+    margin-left: 5px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.informacion {
+    padding: 5px 5px 0px 40px;
+}
+
+.btn-aventura-danger {
+    background-color: #dc3545;
+    color: #FFFFFF;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: 700;
+}
+
+h6 {
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+
+
+
+/* ===============================
+RESPONSIVE
+=============================== */
+
+@media (max-width: 992px) {
+    .info {
+        padding: 15px;
+    }
+
+    .header-section h1 {
+        font-size: 20px;
+    }
+
+    .btn-pdf {
+        margin-left: 0;
+    }
 }

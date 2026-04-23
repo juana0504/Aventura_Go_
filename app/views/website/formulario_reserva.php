@@ -1,30 +1,5 @@
 <?php
 session_start();
-require_once BASE_PATH . '/app/controllers/website/websiteController.php';
-
-require_once BASE_PATH . '/app/models/proveedor_turistico/ActividadTuristica.php';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    $_SESSION['reserva'] = [
-        'id_actividad' => $_POST['id_actividad'],
-        'cantidad' => $_POST['cantidad_personas'],
-        'fecha' => $_POST['fecha']
-    ];
-}
-
-if (
-    !isset($_SESSION['reserva']['id_actividad']) ||
-    !isset($_SESSION['reserva']['cantidad']) ||
-    !isset($_SESSION['reserva']['fecha'])
-) {
-    echo "Error: datos de reserva incompletos.";
-    exit;
-}
-
-$idActividad = $_SESSION['reserva']['id_actividad'];
-$cantidad = $_SESSION['reserva']['cantidad'];
-$fecha = $_SESSION['reserva']['fecha'];
 
 require_once BASE_PATH . '/app/models/proveedor_turistico/ActividadTuristica.php';
 
@@ -55,19 +30,25 @@ if (!$idActividad) {
 $actividadModel = new ActividadTuristica();
 $actividad = $actividadModel->obtenerPorId($idActividad);
 
+// 🔹 Validar actividad
 if (!$actividad) {
     echo "Error: actividad no encontrada.";
     exit;
 }
 
+// 🔹 Calcular
 $precioUnitario = $actividad['precio'];
 $total = $precioUnitario * $cantidad;
 
-$_SESSION['reserva']['nombre'] = $actividad['nombre'];
-$_SESSION['reserva']['imagen'] = $actividad['imagen_principal'];
-$_SESSION['reserva']['precio'] = $precioUnitario;
-$_SESSION['reserva']['total'] = $total;
-
+$_SESSION['reserva'] = [
+    'id' => $idActividad,
+    'nombre' => $actividad['nombre'],
+    'imagen' => $actividad['imagen_principal'],
+    'precio' => $precioUnitario,
+    'cantidad' => $cantidad,
+    'fecha' => $fecha,
+    'total' => $total
+];
 ?>
 
 
@@ -268,6 +249,7 @@ $_SESSION['reserva']['total'] = $total;
     }
 
     ?>
+
 
     <!-- Modal Login -->
     <div class="modal fade" id="loginModal" tabindex="-1">

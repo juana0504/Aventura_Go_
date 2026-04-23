@@ -1,25 +1,9 @@
 <?php
 session_start();
-
-require_once BASE_PATH . '/app/controllers/website/websiteController.php';
+require_once __DIR__ . '/../../controllers/website/websiteController.php';
 
 $actividadModel = new ActividadTuristica();
-$ciudad = $_GET['ciudad'] ?? null;
-
-    if ($ciudad) {
-        $actividades = $actividadModel->obtenerPorCiudad($ciudad);
-    } else {
-        $actividades = $actividadModel->listarActividadesPublicas();
-    }
-
-$ciudad = $_GET['ciudad'] ?? null;
-
-    if ($ciudad) {
-        $actividades = $actividadModel->obtenerPorCiudad($ciudad);
-    } else {
-        $actividades = $actividadModel->listarActividadesPublicas();
-    }
-
+$actividades = $actividadModel->listarActividadesPublicas();
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +40,7 @@ $ciudad = $_GET['ciudad'] ?? null;
                 <div class="logo">
 
                     <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
-                    class="navbar-logo">
+                        class="navbar-logo">
                 </div>
 
                 <!-- Botones y menú móvil -->
@@ -117,7 +101,7 @@ $ciudad = $_GET['ciudad'] ?? null;
     <main class="main-content">
         <div class="container">
             <div class="tabs-container">
-                <a class="tab-btn active" href="<?= BASE_URL ?>descubre-tours" class="tab-btn"> TOURS Y AVENTURA </a>
+                <button class="tab-btn active">TOURS Y AVENTURA</button>
                 <a href="<?= BASE_URL ?>descubre-hospedaje" class="tab-btn"> HOSPEDAJE </a>
             </div>
 

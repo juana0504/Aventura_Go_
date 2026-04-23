@@ -1,67 +1,36 @@
 <?php
-// Al principio de tu archivo de controlador de reportes, añade esto:
-require_once BASE_PATH . '/app/controllers/turista/reservas.php'; // Ajusta la ruta a donde tengas la función listarReservas
+
 require_once BASE_PATH . '/app/helpers/pdf_helper.php';
 require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';
 require_once BASE_PATH . '/app/controllers/administrador/hotelero.php';
 require_once BASE_PATH . '/app/controllers/administrador/turista.php';
-require_once BASE_PATH . '/app/controllers/turista/verReservaPdfController.php';
 
 
+// ESTA FUNCION SE ENCARGA DE VALIDAR EL TIPO DE REPORTE Y EJECUTAR LA FUNCION CORRESPONDIENTE 
 function reportesPdfControlers()
 {
-    // Usamos el operador null coalescing ?? para evitar error si 'tipo' no existe
-    $tipo = $_GET['tipo'] ?? ''; 
+    // CAPTURAMOS EL TIPO DE REPORTE ENVIADO DESDE LA VISTA 
+    $tipo = $_GET['tipo'];
+    // SEGUN EL TIPO DE REPORTE EJECUTAMOS X FUNCION 
 
     switch ($tipo) {
-        case 'turista_reservas': // Nuevo caso
-            reporteMisReservasPdf();
+        case 'turistico':
+            reporteProveedoresPdf();
+            break;
+        case 'hoteles':
+            reporteHotelesPdf();
             break;
         case 'turista':
             reporteTuristasPdf();
             break;
-            $tipo = $_GET['tipo'] ?? '';
-        if ($tipo === 'turista_reservas') {
-            generarPdfReservasTurista();
-    }
+        // case 'actividades':
+        //     reporteActividadesTuristicasPdf();
+        //     break;
+
         default:
-            die("Error: Tipo de reporte no especificado o no válido.");
+            # code...
             break;
     }
-}
-
-function reporteMisReservasPdf()
-{
-    // 1. Validar sesión
-    if (!isset($_SESSION['user']['id_usuario'])) {
-        die("Error: No has iniciado sesión.");
-    }
-
-    $id_usuario = $_SESSION['user']['id_usuario'];
-
-    // 2. IMPORTANTE: Asegúrate de que esta función exista en 
-    // app/controllers/turista/reservas.php. 
-    // Si en ese archivo la función se llama diferente (ej: obtenerReservas), cámbiala aquí.
-    if (function_exists('listarReservasPorUsuario')) {
-        $reservas = listarReservasPorUsuario($id_usuario);
-    } else {
-        // Esto te dirá exactamente si el error es que la función no existe
-        die("Error crítico: La función 'listarReservasPorUsuario' no se encuentra. Verifica el archivo reservas.php");
-    }
-
-    // 3. Generar el buffer
-    ob_start();
-    
-    // Pasamos el BASE_URL para las imágenes en el PDF
-    $reservas_data = $reservas; 
-
-    // Cargar la vista diseñada
-    require_once BASE_PATH . '/app/views/pdf/mis_reservas_pdf.php'; 
-    
-    $html = ob_get_clean();
-
-    // 4. Llamar al helper para convertir a PDF
-    generarPDF($html, 'Mis_Reservas_AventuraGO.pdf', false);
 }
 
 function reporteProveedoresPdf()

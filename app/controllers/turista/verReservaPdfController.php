@@ -1,29 +1,15 @@
 <?php
-// Evitamos que el archivo se llame a sí mismo o busque rutas inexistentes
-// Usamos __DIR__ para que PHP sepa exactamente dónde está parado
-
+// Usar el helper de sesión directamente
 require_once __DIR__ . '/../../helpers/session_turista.php';
+
+// Definir BASE_URL si no está definida
+if (!defined('BASE_URL')) {
+    define('BASE_URL', '/aventura_go');
+}
+
 require_once __DIR__ . '/../../helpers/pdf_helper.php';
 require_once __DIR__ . '/../../models/turista/ReservaTurista.php';
 
-// Definir BASE_PATH si no viene desde el index
-if (!defined('BASE_PATH')) {
-    define('BASE_PATH', realpath(__DIR__ . '/../../../')); 
-}
-
-
-function reportesPdfControlers()
-{
-    $tipo = $_GET['tipo'] ?? ''; 
-
-    switch ($tipo) {
-        case 'turista_reservas':
-            // LLAMAMOS A LA FUNCIÓN DEL ARCHIVO QUE ME MOSTRASTE
-            generarPdfReservasTurista(); 
-            break;
-        // ... otros casos
-    }
-}
 /**
  * Función principal para generar PDF de reservas del turista
  */
@@ -74,9 +60,9 @@ function generarPdfReservasTurista()
         // Generar PDF y mostrarlo en nueva pestaña (false) como el del proveedor
         generarPDF($html, $nombre_archivo, false);
     } catch (Exception $e) {
-    // Cambia la línea de abajo para ver el error en pantalla
-    die('ERROR TÉCNICO: ' . $e->getMessage() . ' en la línea ' . $e->getLine());
-}
+        error_log("Error al generar PDF de reservas turista: " . $e->getMessage());
+        die('Error al generar el reporte PDF. Por favor, intente nuevamente.');
+    }
 }
 
 /**

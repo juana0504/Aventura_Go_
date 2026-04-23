@@ -5,17 +5,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
 
 :root {
-    --primary: #2D4059;
+    --primary:       #2D4059;
     --primary-light: #3a5070;
-    --secondary: #EA8217;
-    --white: #FFFFFF;
-    --bg: #F0F2F5;
-    --text: #2b2b2b;
-    --text-muted: #7a8694;
-    --border: #E2E8F0;
-    --success: #0a8a4f;
-    --radius: 16px;
-    --radius-sm: 10px;
+    --secondary:     #EA8217;
+    --white:         #FFFFFF;
+    --bg:            #F0F2F5;
+    --text:          #2b2b2b;
+    --text-muted:    #7a8694;
+    --border:        #E2E8F0;
+    --success:       #0a8a4f;
+    --radius:        16px;
+    --radius-sm:     10px;
 }
 
 body {
@@ -26,14 +26,13 @@ body {
     min-height: 100vh;
     position: relative;
 }
-
 body::before {
     content: "";
     position: fixed;
     inset: 0;
     background-image:
-        radial-gradient(circle at 15% 15%, rgba(45, 64, 89, 0.04) 0%, transparent 50%),
-        radial-gradient(circle at 85% 80%, rgba(234, 130, 23, 0.05) 0%, transparent 50%);
+        radial-gradient(circle at 15% 15%, rgba(45,64,89,0.04) 0%, transparent 50%),
+        radial-gradient(circle at 85% 80%, rgba(234,130,23,0.05) 0%, transparent 50%);
     pointer-events: none;
     z-index: 0;
 }
@@ -41,24 +40,21 @@ body::before {
 /* ── HEADER ── */
 header {
     background: var(--white) !important;
-    box-shadow: 0 1px 0 var(--border), 0 2px 12px rgba(45, 64, 89, 0.08) !important;
+    box-shadow: 0 1px 0 var(--border), 0 2px 12px rgba(45,64,89,0.08) !important;
     position: fixed !important;
     top: 0 !important;
     width: 100% !important;
     z-index: 1000 !important;
 }
-
 header::after {
     content: "";
     display: block;
     height: 3px;
     background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 60%, transparent 100%);
 }
-
 header .navbar {
     padding: 0 !important;
 }
-
 header .navbar .container-fluid {
     display: flex !important;
     align-items: center !important;
@@ -67,12 +63,10 @@ header .navbar .container-fluid {
     height: 68px !important;
     position: relative !important;
 }
-
 .navbar-logo {
     width: 130px !important;
     height: auto !important;
 }
-
 header .page-title {
     font-family: 'Raleway', sans-serif !important;
     font-size: 17px !important;
@@ -91,11 +85,9 @@ main {
     position: relative;
     z-index: 1;
 }
-
 #formulario_confirmacion {
     padding: 48px 0 64px !important;
 }
-
 #formulario_confirmacion .my-5 {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
@@ -106,22 +98,19 @@ main {
     background: var(--white) !important;
     border: none !important;
     border-radius: var(--radius) !important;
-    box-shadow: 0 8px 32px rgba(45, 64, 89, 0.12) !important;
+    box-shadow: 0 8px 32px rgba(45,64,89,0.12) !important;
     overflow: hidden !important;
     transition: box-shadow 0.3s ease !important;
 }
-
 #formulario_confirmacion .card:hover {
-    box-shadow: 0 20px 60px rgba(45, 64, 89, 0.18) !important;
+    box-shadow: 0 20px 60px rgba(45,64,89,0.18) !important;
 }
-
 #formulario_confirmacion .card-header {
     background: var(--white) !important;
     border-bottom: 1px solid var(--border) !important;
     padding: 20px 28px !important;
     position: relative !important;
 }
-
 #formulario_confirmacion .card-header::before {
     content: "";
     position: absolute;
@@ -132,7 +121,6 @@ main {
     background: linear-gradient(180deg, var(--secondary), var(--primary));
     border-radius: 0 4px 4px 0;
 }
-
 #formulario_confirmacion .card-header h1 {
     font-family: 'Raleway', sans-serif !important;
     font-size: 20px !important;
@@ -140,7 +128,6 @@ main {
     color: var(--primary) !important;
     margin: 0 !important;
 }
-
 #formulario_confirmacion .card-header h5 {
     font-family: 'Raleway', sans-serif !important;
     font-size: 18px !important;
@@ -148,7 +135,6 @@ main {
     color: var(--primary) !important;
     margin: 0 !important;
 }
-
 #formulario_confirmacion .card-body {
     padding: 28px !important;
 }
@@ -159,7 +145,7 @@ main {
     width: 100% !important;
     height: 160px !important;
     object-fit: cover !important;
-    box-shadow: 0 2px 12px rgba(45, 64, 89, 0.08) !important;
+    box-shadow: 0 2px 12px rgba(45,64,89,0.08) !important;
 }
 
 /* ── INFO TOUR ── */
@@ -172,7 +158,6 @@ main {
     letter-spacing: 1.2px !important;
     margin-bottom: 6px !important;
 }
-
 #formulario_confirmacion .col-md-8 h6 {
     font-family: 'Raleway', sans-serif !important;
     font-size: 18px !important;
@@ -181,7 +166,6 @@ main {
     margin-bottom: 14px !important;
     line-height: 1.3 !important;
 }
-
 #formulario_confirmacion .col-md-8 p {
     font-size: 14px !important;
     color: var(--text-muted) !important;
@@ -190,7 +174,6 @@ main {
     align-items: center !important;
     gap: 8px !important;
 }
-
 #formulario_confirmacion .col-md-8 p strong {
     color: var(--text) !important;
     font-weight: 700 !important;
@@ -212,7 +195,6 @@ main {
     border: 1px solid var(--border) !important;
     align-items: center !important;
 }
-
 #formulario_confirmacion .d-flex.justify-content-between p {
     margin: 0 !important;
     font-size: 14px !important;
@@ -221,7 +203,6 @@ main {
     flex-direction: column !important;
     gap: 3px !important;
 }
-
 #formulario_confirmacion .d-flex.justify-content-between p strong {
     color: var(--text) !important;
     font-size: 12px !important;
@@ -229,7 +210,6 @@ main {
     text-transform: uppercase !important;
     letter-spacing: 0.5px !important;
 }
-
 #formulario_confirmacion .fs-4.fw-bold,
 #formulario_confirmacion .text-success {
     font-family: 'Raleway', sans-serif !important;
@@ -260,16 +240,14 @@ main {
     box-shadow: none !important;
     transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease !important;
 }
-
 #formulario_confirmacion .form-control::placeholder {
     color: #b0bac5 !important;
     font-weight: 300 !important;
 }
-
 #formulario_confirmacion .form-control:focus {
     border-color: var(--secondary) !important;
     background: var(--white) !important;
-    box-shadow: 0 0 0 3px rgba(234, 130, 23, 0.12) !important;
+    box-shadow: 0 0 0 3px rgba(234,130,23,0.12) !important;
     outline: none !important;
 }
 
@@ -286,7 +264,6 @@ main {
     gap: 10px !important;
     margin-bottom: 14px !important;
 }
-
 #formulario_confirmacion h6.fw-bold::after {
     content: "";
     flex: 1;
@@ -305,19 +282,16 @@ main {
     margin-bottom: 10px !important;
     transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease !important;
 }
-
 #formulario_confirmacion .form-check.border:hover {
     border-color: var(--secondary) !important;
     background: #fff8f2 !important;
-    box-shadow: 0 4px 12px rgba(234, 130, 23, 0.1) !important;
+    box-shadow: 0 4px 12px rgba(234,130,23,0.1) !important;
 }
-
 #formulario_confirmacion .form-check:has(.form-check-input:checked) {
     border-color: var(--secondary) !important;
     background: #fff8f2 !important;
-    box-shadow: 0 4px 16px rgba(234, 130, 23, 0.12) !important;
+    box-shadow: 0 4px 16px rgba(234,130,23,0.12) !important;
 }
-
 #formulario_confirmacion .form-check-input[type="radio"] {
     position: absolute !important;
     left: 14px !important;
@@ -331,7 +305,6 @@ main {
     accent-color: var(--secondary) !important;
     flex-shrink: 0 !important;
 }
-
 #formulario_confirmacion .form-check-label {
     font-family: 'Raleway', sans-serif !important;
     font-size: 15px !important;
@@ -341,14 +314,12 @@ main {
     display: block !important;
     margin-bottom: 2px !important;
 }
-
 #formulario_confirmacion .form-check small.text-muted {
     font-size: 12px !important;
     color: var(--text-muted) !important;
     margin-top: 2px !important;
     display: block !important;
 }
-
 #formulario_confirmacion .form-check.border[data-badge]::after {
     content: attr(data-badge) !important;
     position: absolute !important;
@@ -358,7 +329,7 @@ main {
     font-size: 11px !important;
     font-weight: 700 !important;
     color: var(--secondary) !important;
-    background: rgba(234, 130, 23, 0.1) !important;
+    background: rgba(234,130,23,0.1) !important;
     padding: 3px 8px !important;
     border-radius: 20px !important;
     letter-spacing: 0.5px !important;
@@ -381,14 +352,13 @@ main {
     position: relative !important;
     overflow: hidden !important;
     transition: transform 0.25s ease, box-shadow 0.3s ease !important;
-    box-shadow: 0 6px 24px rgba(45, 64, 89, 0.35) !important;
+    box-shadow: 0 6px 24px rgba(45,64,89,0.35) !important;
     margin-top: 8px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 8px !important;
 }
-
 #formulario_confirmacion .btn.btn-primary::before {
     content: "";
     position: absolute;
@@ -396,11 +366,10 @@ main {
     left: -100%;
     width: 55%;
     height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
     transition: left 0.5s ease;
     z-index: 0;
 }
-
 #formulario_confirmacion .btn.btn-primary::after {
     content: "";
     position: absolute;
@@ -413,24 +382,16 @@ main {
     transition: width 0.3s ease;
     border-radius: 3px 3px 0 0;
 }
-
 #formulario_confirmacion .btn.btn-primary:hover {
     transform: translateY(-2px) !important;
-    box-shadow: 0 12px 36px rgba(45, 64, 89, 0.45) !important;
+    box-shadow: 0 12px 36px rgba(45,64,89,0.45) !important;
     color: var(--white) !important;
 }
-
-#formulario_confirmacion .btn.btn-primary:hover::before {
-    left: 150%;
-}
-
-#formulario_confirmacion .btn.btn-primary:hover::after {
-    width: 80%;
-}
-
+#formulario_confirmacion .btn.btn-primary:hover::before { left: 150%; }
+#formulario_confirmacion .btn.btn-primary:hover::after  { width: 80%; }
 #formulario_confirmacion .btn.btn-primary:active {
     transform: translateY(0) !important;
-    box-shadow: 0 4px 16px rgba(45, 64, 89, 0.3) !important;
+    box-shadow: 0 4px 16px rgba(45,64,89,0.3) !important;
 }
 
 /* ── BADGE SEGURIDAD ── */
@@ -444,7 +405,6 @@ main {
     color: var(--text-muted) !important;
     font-family: 'Lato', sans-serif !important;
 }
-
 .secure-badge i {
     color: var(--success) !important;
     font-size: 14px !important;
@@ -452,507 +412,18 @@ main {
 
 /* ── ANIMACIONES DE ENTRADA ── */
 #formulario_confirmacion .col-md-7 .card {
-    animation: slideInLeft 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: slideInLeft 0.6s cubic-bezier(0.22,1,0.36,1) both;
 }
-
 #formulario_confirmacion .col-md-5 .card {
-    animation: slideInRight 0.6s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: slideInRight 0.6s 0.15s cubic-bezier(0.22,1,0.36,1) both;
 }
-
 @keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-24px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(-24px); }
+    to   { opacity: 1; transform: translateX(0); }
 }
-
 @keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(24px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-
-/* ══════════════════════════════════════════
-   MODALES LOGIN Y REGISTRO — intactos
-══════════════════════════════════════════ */
-#registroModal .modal-dialog {
-    max-width: 480px;
-}
-
-#registroModal .modal-content {
-    border: none;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
-    background: #ffffff;
-    position: relative;
-}
-
-#registroModal .modal-content::before {
-    content: "";
-    display: block;
-    height: 6px;
-    width: 100%;
-    background: linear-gradient(90deg, #2D4059 0%, #EA8217 50%, #2D4059 100%);
-    background-size: 200% auto;
-    animation: gradientShift 3s linear infinite;
-}
-
-@keyframes gradientShift {
-    0% {
-        background-position: 0% center;
-    }
-
-    100% {
-        background-position: 200% center;
-    }
-}
-
-#registroModal .modal-content::after {
-    content: "";
-    position: absolute;
-    top: -60px;
-    right: -60px;
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, rgba(234, 130, 23, .08) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-}
-
-#registroModal .modal-body {
-    padding: 36px 40px 40px;
-    position: relative;
-    z-index: 1;
-}
-
-#registroModal .logo {
-    width: 130px;
-    height: auto;
-    display: block;
-    margin: 0 auto 20px;
-}
-
-#registroModal h2 {
-    font-family: 'Raleway', sans-serif;
-    font-size: 26px;
-    font-weight: 800;
-    color: #2D4059;
-    letter-spacing: 1.5px;
-    margin-bottom: 8px;
-    text-align: center;
-}
-
-#registroModal h3 {
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 28px;
-    text-align: center;
-}
-
-#registroModal .centered-line {
-    color: #EA8217;
-    font-weight: 600;
-}
-
-#registroModal form {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-#registroModal input[type="text"],
-#registroModal input[type="tel"],
-#registroModal input[type="email"],
-#registroModal input[type="password"],
-#registroModal select {
-    width: 100%;
-    padding: 12px 16px;
-    border: 1.5px solid #E0E0E0;
-    border-radius: 10px;
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    color: #2b2b2b;
-    background-color: #F8F9FA;
-    transition: border-color .3s ease, box-shadow .3s ease;
-    outline: none;
-    appearance: none;
-}
-
-#registroModal input::placeholder {
-    color: #aaa;
-}
-
-#registroModal input:focus,
-#registroModal select:focus {
-    border-color: #EA8217;
-    background-color: #fff;
-    box-shadow: 0 0 0 3px rgba(234, 130, 23, .12);
-}
-
-#registroModal .select-container {
-    position: relative;
-}
-
-#registroModal .select-container::after {
-    content: "\F282";
-    font-family: "bootstrap-icons";
-    font-size: 14px;
-    color: #EA8217;
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-}
-
-#registroModal .password-container {
-    position: relative;
-}
-
-#registroModal .password-container input {
-    padding-right: 44px;
-}
-
-#registroModal .password-container #togglePassword {
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #EA8217;
-    font-size: 16px;
-    transition: color .2s;
-}
-
-#registroModal .password-container #togglePassword:hover {
-    color: #2D4059;
-}
-
-#registroModal .file-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    border: 1.5px dashed #E0E0E0;
-    border-radius: 10px;
-    padding: 12px 16px;
-    background-color: #F8F9FA;
-    cursor: pointer;
-    transition: border-color .3s, background-color .3s;
-    gap: 10px;
-}
-
-#registroModal .file-container:hover {
-    border-color: #EA8217;
-    background-color: #fff8f2;
-}
-
-#registroModal .file-container::before {
-    content: "\F30F";
-    font-family: "bootstrap-icons";
-    font-size: 18px;
-    color: #EA8217;
-    flex-shrink: 0;
-}
-
-#registroModal .file-container input[type="file"] {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-    border: none;
-    background: transparent;
-    box-shadow: none;
-    padding: 0;
-}
-
-#registroModal .file-placeholder {
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    color: #aaa;
-    pointer-events: none;
-}
-
-#registroModal form button[type="submit"] {
-    margin-top: 6px;
-    padding: 13px;
-    background: linear-gradient(135deg, #EA8217, #d4710f);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-family: 'Raleway', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    cursor: pointer;
-    transition: transform .2s, box-shadow .3s;
-    position: relative;
-    overflow: hidden;
-}
-
-#registroModal form button[type="submit"]:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(234, 130, 23, .35);
-}
-
-#registroModal form button[type="submit"]:active {
-    transform: translateY(0);
-}
-
-#registroModal .modal-body>p {
-    font-family: 'Lato', sans-serif;
-    font-size: 13px;
-    color: #fff;
-    background-color: #2D4059;
-    border-radius: 8px;
-    padding: 9px 14px;
-    margin-bottom: 20px;
-    text-align: center;
-    letter-spacing: .3px;
-}
-
-#loginModal .modal-dialog {
-    max-width: 440px;
-}
-
-#loginModal .modal-content {
-    border: none;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, .25);
-    background: #fff;
-    position: relative;
-}
-
-#loginModal .modal-content::before {
-    content: "";
-    display: block;
-    height: 6px;
-    width: 100%;
-    background: linear-gradient(90deg, #2D4059, #EA8217 50%, #2D4059);
-    background-size: 200% auto;
-    animation: loginGradientShift 3s linear infinite;
-}
-
-@keyframes loginGradientShift {
-    0% {
-        background-position: 0% center
-    }
-
-    100% {
-        background-position: 200% center
-    }
-}
-
-#loginModal .modal-content::after {
-    content: "";
-    position: absolute;
-    bottom: -80px;
-    left: -60px;
-    width: 220px;
-    height: 220px;
-    background: radial-gradient(circle, rgba(45, 64, 89, .07) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-}
-
-#loginModal .modal-body {
-    padding: 36px 40px 40px;
-    position: relative;
-    z-index: 1;
-}
-
-#loginModal .logo {
-    width: 130px;
-    height: auto;
-    display: block;
-    margin: 0 auto 20px;
-}
-
-#loginModal h2 {
-    font-family: 'Raleway', sans-serif;
-    font-size: 26px;
-    font-weight: 800;
-    color: #2D4059;
-    letter-spacing: 1.5px;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-#loginModal .form-section>p {
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    color: #888;
-    line-height: 1.6;
-    margin-bottom: 26px;
-    text-align: center;
-}
-
-#loginModal .modal-body>p:first-child {
-    font-family: 'Lato', sans-serif;
-    font-size: 13px;
-    color: #fff;
-    background-color: #2D4059;
-    border-radius: 8px;
-    padding: 9px 14px;
-    margin-bottom: 20px;
-    text-align: center;
-    letter-spacing: .3px;
-}
-
-#loginModal form {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-#loginModal input[type="email"],
-#loginModal input[type="password"] {
-    width: 100%;
-    padding: 12px 16px;
-    border: 1.5px solid #E0E0E0 !important;
-    border-radius: 10px !important;
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    color: #2b2b2b;
-    background-color: #F8F9FA !important;
-    box-shadow: none !important;
-    transition: border-color .3s, box-shadow .3s;
-    outline: none;
-    appearance: none;
-}
-
-#loginModal input::placeholder {
-    color: #aaa;
-}
-
-#loginModal input:focus {
-    border-color: #EA8217 !important;
-    background-color: #fff !important;
-    box-shadow: 0 0 0 3px rgba(234, 130, 23, .12) !important;
-}
-
-#loginModal .password-container {
-    position: relative;
-    margin-bottom: 0 !important;
-}
-
-#loginModal .password-container input {
-    padding-right: 44px;
-}
-
-#loginModal #togglePassword {
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #EA8217 !important;
-    font-size: 16px;
-    transition: color .2s;
-}
-
-#loginModal #togglePassword:hover {
-    color: #2D4059 !important;
-}
-
-#loginModal .forgot-password {
-    text-align: right;
-    margin: 0;
-    font-family: 'Lato', sans-serif;
-    font-size: 13px;
-}
-
-#loginModal .forgot-password a {
-    color: #2D4059;
-    font-weight: 600;
-    text-decoration: none;
-    border-bottom: 1.5px solid transparent;
-    transition: color .2s, border-color .2s;
-}
-
-#loginModal .forgot-password a:hover {
-    color: #EA8217;
-    border-bottom-color: #EA8217;
-}
-
-#loginModal form button[type="submit"] {
-    margin-top: 4px;
-    padding: 13px;
-    background: linear-gradient(135deg, #EA8217, #d4710f) !important;
-    color: #fff !important;
-    border: none !important;
-    border-radius: 10px !important;
-    font-family: 'Raleway', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    cursor: pointer;
-    transition: transform .2s, box-shadow .3s;
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-}
-
-#loginModal form button[type="submit"]:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(234, 130, 23, .35);
-}
-
-#loginModal form button[type="submit"]:active {
-    transform: translateY(0);
-}
-
-#loginModal .extra-links {
-    margin-top: 20px !important;
-}
-
-#loginModal .extra-links p {
-    font-family: 'Lato', sans-serif;
-    font-size: 13px;
-    color: #888;
-    text-align: center;
-    margin: 0;
-}
-
-#loginModal .extra-links a {
-    color: #2D4059;
-    font-weight: 700;
-    text-decoration: none;
-    border-bottom: 1.5px solid transparent;
-    transition: color .2s, border-color .2s;
-}
-
-#loginModal .extra-links a:hover {
-    color: #EA8217;
-    border-bottom-color: #EA8217;
-}
-
-#loginModal .extra-links::before {
-    content: "";
-    display: block;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #E0E0E0, transparent);
-    margin-bottom: 16px;
+    from { opacity: 0; transform: translateX(24px); }
+    to   { opacity: 1; transform: translateX(0); }
 }
 
 /* ── RESPONSIVE ── */
@@ -961,33 +432,14 @@ main {
         padding: 0 16px !important;
         height: 60px !important;
     }
-
-    header .page-title {
-        font-size: 13px !important;
-    }
-
-    .navbar-logo {
-        width: 100px !important;
-    }
-
-    #formulario_confirmacion {
-        padding: 24px 0 48px !important;
-    }
-
-    #formulario_confirmacion .card-body {
-        padding: 18px !important;
-    }
-
-    #formulario_confirmacion .card-header {
-        padding: 14px 18px !important;
-    }
-
+    header .page-title { font-size: 13px !important; }
+    .navbar-logo { width: 100px !important; }
+    #formulario_confirmacion { padding: 24px 0 48px !important; }
+    #formulario_confirmacion .card-body { padding: 18px !important; }
+    #formulario_confirmacion .card-header { padding: 14px 18px !important; }
     #formulario_confirmacion .d-flex.justify-content-between {
         flex-direction: column !important;
         gap: 14px !important;
     }
-
-    #formulario_confirmacion .img-fluid.rounded {
-        height: 200px !important;
-    }
+    #formulario_confirmacion .img-fluid.rounded { height: 200px !important; }
 }

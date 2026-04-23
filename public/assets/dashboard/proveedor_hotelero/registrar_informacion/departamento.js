@@ -1,21 +1,11 @@
-document.addEventListener("DOMContentLoaded", function () {
-    
+
 // Obtenemos los selects del formulario
 const selectDepartamento = document.getElementById('departamento');
 const selectCiudad = document.getElementById('id_ciudad');
 
-//ojo SOLO para pruebas
-// console.log(selectDepartamento);
-// console.log(selectCiudad);
-
 // Cargar departamentos al iniciar la página
-fetch(BASE_URL + 'departamentos')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Error en la respuesta del servidor');
-        }
-        return response.json();
-    })
+fetch(BASE_URL + 'departamentos')  
+    .then(response => response.json())
     .then(data => {
         data.forEach(dep => {
             const option = document.createElement('option');
@@ -23,7 +13,7 @@ fetch(BASE_URL + 'departamentos')
             option.textContent = dep.nombre;
             selectDepartamento.appendChild(option);
         });
-    }) 
+    })
     .catch(error => {
         console.error('Error cargando departamentos:', error);
     });
@@ -48,23 +38,13 @@ selectDepartamento.addEventListener('change', function () {
     }
 
     // Llamamos al controlador que trae las ciudades desde la base de datos
-fetch(BASE_URL + `ciudades?id_departamento=${idDepartamento}`)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Error al cargar ciudades');
-        }
-        return response.json();
-    })
-    .then(data => {
+    fetch(BASE_URL + `ciudades?id_departamento=${idDepartamento}`)
+        .then(response => response.json()) // Convertimos la respuesta a JSON
+        .then(data => {
 
             // Si no vienen ciudades, dejamos el select deshabilitado
-           if (data.length === 0) {
-            const option = document.createElement('option');
-            option.textContent = 'No hay ciudades disponibles';
-            option.value = '';
-            selectCiudad.appendChild(option);
-             selectCiudad.disabled = false; // Aunque no hay ciudades, permitimos que el usuario vea el mensaje
-            return;
+            if (data.length === 0) {
+                return;
             }
 
             // Recorremos las ciudades recibidas
@@ -82,9 +62,3 @@ fetch(BASE_URL + `ciudades?id_departamento=${idDepartamento}`)
             console.error('Error cargando ciudades:', error);
         });
 });
-
-
-});
-
-
-

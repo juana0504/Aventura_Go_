@@ -48,44 +48,43 @@
         <!-- Botones y menú móvil -->
         <div class="actions">
 
-            <?php if (isset($_SESSION['user'])): ?>
+          <?php if (isset($_SESSION['user'])): ?>
             <div class="profile-dropdown">
-            <button class="profile-btn" id="profileToggle">
-              <i class="fas fa-user-circle"></i>
-            <span class="profile-name">
-            <?= htmlspecialchars(
-            ucwords(
-            explode(' ', $_SESSION['user']['nombre'])[0] . ' ' .
-            (explode(' ', $_SESSION['user']['nombre'])[1] ?? '')
-              )
-            ) ?>
-            </span>
-              <i class="fas fa-chevron-down"></i>
-            </button>
+              <button class="profile-btn" id="profileToggle">
+                <i class="fas fa-user-circle"></i>
+                <span class="profile-name">
+                  <?= htmlspecialchars(
+                    ucwords(
+                      explode(' ', $_SESSION['user']['nombre'])[0] . ' ' .
+                        (explode(' ', $_SESSION['user']['nombre'])[1] ?? '')
+                    )
+                  ) ?>
+                </span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
 
-           <ul class="profile-menu" id="profileMenu">
-            <li>
-              <a href="<?= BASE_URL ?>turista/perfil">Mi perfil</a>
-            </li>
-            <li>
-              <a href="<?= BASE_URL ?>turista/dashboard">Centro de ayuda</a>
-            </li>
-            <li class="divider"></li>
-            <li>
-              <a href="<?= BASE_URL ?>logout" class="logout">Cerrar sesión</a>
-            </li>
-            </ul>
-          </div>
+              <ul class="profile-menu" id="profileMenu">
+                <li>
+                  <a href="<?= BASE_URL ?>turista/perfil">Mi perfil</a>
+                </li>
+                <li>
+                  <a href="<?= BASE_URL ?>turista/dashboard">Centro de ayuda</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <a href="<?= BASE_URL ?>logout" class="logout">Cerrar sesión</a>
+                </li>
+              </ul>
+            </div>
           <?php else: ?>
 
-          <a href="<?= BASE_URL ?>login" class="btn-login">
-            Ingresa
-          </a>
+            <a href="<?= BASE_URL ?>login" class="btn-login">
+              Ingresa
+            </a>
 
-          <a href="#" class="btn-register" data-bs-toggle="modal" data-bs-target="#registroModal">
-            Regístrate
-          </a>
-
+            <a href="#" class="btn-register" data-bs-toggle="modal" data-bs-target="#registroModal">
+              Regístrate
+            </a>
           <?php endif; ?>
 
           <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">

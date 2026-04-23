@@ -115,22 +115,26 @@
         </thead>
 
         <tbody>
-            
-            <?php if (!empty($reservas)) : ?>
-                <?php foreach ($reservas as $reserva) : ?>
+            <?php if (!empty($turistas)) : ?>
+                <?php foreach ($turistas as $turista) : ?>
                     <tr>
-                        <td><?= htmlspecialchars($reserva['nombre_actividad']) ?></td>
-                        <td><?= htmlspecialchars($reserva['proveedor']) ?></td>
-                        <td><?= date('d/m/Y', strtotime($reserva['fecha'])) ?></td>
-                        <td><?= $reserva['cantidad_personas'] ?></td>
-                        <td>$<?= number_format($reserva['precio'], 0, ',', '.') ?></td>
-                        <td><?= ucfirst($reserva['estado']) ?></td>
+                        <td>
+                            <img class="foto"
+                                src="<?= BASE_URL ?>public/uploads/usuario/<?= $turista['foto'] ?>">
+                        </td>
+
+                        <td><?= $turista['nombre'] ?></td>
+                        <td><?= $turista['genero'] ?></td>
+                        <td><?= $turista['telefono'] ?></td>
+                        <td><?= $turista['email'] ?></td>
+                        <td><?= $turista['estado'] ?></td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>
-                <tr><td colspan="6">No hay reservas encontradas.</td></tr>
+                <tr>
+                    <td colspan="7">No hay turistas registrados.</td>
+                </tr>
             <?php endif; ?>
-
         </tbody>
     </table>
 
