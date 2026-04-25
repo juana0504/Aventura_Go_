@@ -100,8 +100,10 @@ foreach (array_slice($partes, 0, 2) as $p) {
                         </div>
                         <div class="ag-dropdown__divider"></div>
                         <a href="<?= BASE_URL ?>turista/perfil" class="ag-dropdown__item"><i class="bi bi-person-circle"></i> Mi perfil</a>
-                        <a href="<?= BASE_URL ?>auth/logout" class="ag-dropdown__item ag-dropdown__item--danger"><i class="bi bi-box-arrow-right"></i> Cerrar sesión</a>
-                    </div>
+                        <a href="<?= BASE_URL ?>logout" class="ag-dropdown__item ag-dropdown__item--danger">
+                            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+                        </a>                    
+                        </div>
                 </div>
             </div>
         </header>
