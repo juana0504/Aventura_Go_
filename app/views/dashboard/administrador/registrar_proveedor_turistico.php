@@ -1,75 +1,201 @@
 <?php
-
 require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
-
+// Iniciales del administrador para el topbar
+$nombreAdmin = $_SESSION['user']['nombre'] ?? 'Administrador';
+$iniciales   = '';
+$partes      = explode(' ', trim($nombreAdmin));
+foreach (array_slice($partes, 0, 2) as $p) {
+    $iniciales .= mb_strtoupper(mb_substr($p, 0, 1));
+}
 ?>
-
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Proveedor</title>
+    <title>Registrar Proveedor Turístico — AventuraGO</title>
 
-    <!-- favicon -->
+    <!-- Favicon -->
     <link rel="shortcut icon" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- LIBRERIA AOS ANIMATE -->
-    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
-    <!-- Icono de bootstrap -->
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <!-- 🔹 LAYOUT GLOBAL (ESTE ES NUEVO) -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/layout_admin.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Componentes comunes -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/buscador_admin.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/layouts/panel.css">
+    <!-- CSS sistema admin (sidebar, topbar, dropdowns, dark mode) -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/administrador/admin.css">
 
-    <!-- Estilos CSS (siempre al final) -->
+    <!-- CSS específico de esta vista -->
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor_turistico.css">
-
 </head>
 
-<body>
-    <!-- Layout Principal con Panel y Contenido -->
-    <section id="admin-dashboard">
+<body class="adm-body">
 
-        <!-- Panel Lateral -->
-        <?php
-        include_once __DIR__ . '/../../layouts/panel_izq_administrador.php';
-        ?>
+<div class="adm-layout" id="admin-dashboard">
 
-        <!-- Contenido Principal -->
-        <div class="info">
+    <!-- ==========================================
+         SIDEBAR — idéntico al dashboard admin
+    =========================================== -->
+    <nav class="adm-sidebar">
+        <div class="adm-sidebar__logo">
+            <div class="adm-sidebar__logo-icon">A</div>
+            <div>
+                <div class="adm-sidebar__logo-text">AVENTURA GO</div>
+                <div class="adm-sidebar__logo-sub">Panel Admin</div>
+            </div>
+        </div>
 
-            <!-- Barra de Búsqueda Superior -->
-            <?php
-            include_once __DIR__ . '/../../layouts/buscador_administrador.php';
-            ?>
+        <div class="adm-sidebar__section-label">Principal</div>
+        <a href="<?= BASE_URL ?>administrador/dashboard" class="adm-nav-item">
+            <i class="bi bi-grid-1x2-fill adm-nav-item__icon"></i> Dashboard
+        </a>
 
-            <!-- Formulario Wizard -->
+        <div class="adm-sidebar__section-label">Gestión</div>
+        <a href="<?= BASE_URL ?>administrador/consultar-proveedor" class="adm-nav-item adm-nav-item--active">
+            <i class="bi bi-people adm-nav-item__icon"></i> Proveedores Turísticos
+        </a>
+        <a href="<?= BASE_URL ?>administrador/consultar-proveedor-hotelero" class="adm-nav-item">
+            <i class="bi bi-building adm-nav-item__icon"></i> Proveedores Hoteleros
+        </a>
+        <a href="<?= BASE_URL ?>administrador/consultar-turista" class="adm-nav-item">
+            <i class="bi bi-person-badge adm-nav-item__icon"></i> Turistas
+        </a>
+
+        <div class="adm-sidebar__section-label">Soporte</div>
+        <a href="<?= BASE_URL ?>administrador/tickets" class="adm-nav-item">
+            <i class="bi bi-headset adm-nav-item__icon"></i> Tickets
+        </a>
+        <a href="<?= BASE_URL ?>administrador/reporte" class="adm-nav-item">
+            <i class="bi bi-file-earmark-bar-graph adm-nav-item__icon"></i> Reportes
+        </a>
+        <a href="<?= BASE_URL ?>administrador/perfil" class="adm-nav-item">
+            <i class="bi bi-person-circle adm-nav-item__icon"></i> Mi Perfil
+        </a>
+    </nav>
+
+    <!-- ==========================================
+         ÁREA PRINCIPAL
+    =========================================== -->
+    <div class="adm-main">
+
+        <!-- TOPBAR -->
+        <header class="adm-topbar">
+            <div class="adm-topbar__search">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Buscar..." class="adm-topbar__input" autocomplete="off">
+            </div>
+
+            <div class="adm-topbar__actions">
+                <button class="adm-icon-btn" id="adm-dark-toggle" title="Modo oscuro">
+                    <i class="bi bi-moon-fill" id="adm-dark-icon"></i>
+                </button>
+
+                <!-- Notificaciones -->
+                <div class="adm-topbar__dropdown-wrap">
+                    <button class="adm-icon-btn adm-icon-btn--notif" id="adm-notif-btn">
+                        <i class="bi bi-bell-fill"></i>
+                    </button>
+                    <div class="adm-dropdown adm-dropdown--notif" id="adm-notif-panel">
+                        <div class="adm-dropdown__header">
+                            <span class="adm-dropdown__title">Notificaciones</span>
+                            <button class="adm-dropdown__mark-all">Marcar todas</button>
+                        </div>
+                        <div class="adm-notif-list">
+                            <div class="adm-notif-item adm-notif-item--unread">
+                                <div class="adm-notif-item__icon adm-notif-item__icon--amber"><i class="bi bi-person-plus-fill"></i></div>
+                                <div class="adm-notif-item__body">
+                                    <p class="adm-notif-item__text">Nuevo proveedor pendiente de <strong>aprobación</strong>.</p>
+                                    <span class="adm-notif-item__time">Hace 3 horas</span>
+                                </div>
+                                <span class="adm-notif-item__dot"></span>
+                            </div>
+                        </div>
+                        <a href="<?= BASE_URL ?>administrador/tickets" class="adm-dropdown__footer">Ver todas las notificaciones</a>
+                    </div>
+                </div>
+
+                <!-- Perfil -->
+                <div class="adm-topbar__dropdown-wrap">
+                    <button class="adm-profile-btn" id="adm-profile-btn">
+                        <div class="adm-profile-btn__avatar"><?= htmlspecialchars($iniciales) ?></div>
+                        <div class="adm-profile-btn__info">
+                            <span class="adm-profile-btn__name"><?= htmlspecialchars($nombreAdmin) ?></span>
+                            <span class="adm-profile-btn__role">Administrador</span>
+                        </div>
+                        <i class="bi bi-chevron-down adm-profile-btn__chevron" id="adm-profile-chevron"></i>
+                    </button>
+                    <div class="adm-dropdown adm-dropdown--profile" id="adm-profile-panel">
+                        <div class="adm-dropdown__user-header">
+                            <div class="adm-profile-btn__avatar adm-profile-btn__avatar--lg"><?= htmlspecialchars($iniciales) ?></div>
+                            <div>
+                                <div class="adm-dropdown__user-name"><?= htmlspecialchars($nombreAdmin) ?></div>
+                                <div class="adm-dropdown__user-role">Administrador · AventuraGO</div>
+                            </div>
+                        </div>
+                        <div class="adm-dropdown__divider"></div>
+                        <a href="<?= BASE_URL ?>administrador/perfil" class="adm-dropdown__item">
+                            <i class="bi bi-person-circle"></i> Mi perfil
+                        </a>
+                        <a href="<?= BASE_URL ?>administrador/cambiar-password" class="adm-dropdown__item">
+                            <i class="bi bi-shield-lock"></i> Cambiar contraseña
+                        </a>
+                        <div class="adm-dropdown__divider"></div>
+                        <a href="<?= BASE_URL ?>logout" class="adm-dropdown__item adm-dropdown__item--danger">
+                            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ======================================
+             CONTENIDO PRINCIPAL
+        ======================================= -->
+        <main class="adm-content">
+
+            <!-- Encabezado -->
+            <div class="adm-page-header">
+                <div>
+                    <div class="adm-greeting__eyebrow">Gestión · Proveedores Turísticos</div>
+                    <h1 class="adm-page-title">Registrar <span>Proveedor</span></h1>
+                    <p class="adm-greeting__sub">Completa los 5 pasos para registrar un nuevo proveedor turístico</p>
+                </div>
+                <a href="<?= BASE_URL ?>administrador/consultar-proveedor" class="adm-btn-back">
+                    <i class="bi bi-arrow-left"></i> Volver al listado
+                </a>
+            </div>
+
+            <!-- ==============================
+                 WIZARD — lógica JS intacta
+                 IDs y clases originales conservados
+            =============================== -->
             <form id="formProveedor" action="<?= BASE_URL ?>administrador/guardar-proveedor" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="accion" value="registrar">
 
-                <div class="wizard-container">
-                    <div class="wizard-header">
-                        <p class="mb-0">Registro de Proveedor de Turismo</p>
+                <div class="adm-wizard">
+
+                    <!-- Cabecera del wizard -->
+                    <div class="adm-wizard__header">
+                        <p class="adm-wizard__header-text">
+                            <i class="bi bi-person-plus-fill"></i>
+                            Registro de Proveedor de Turismo
+                        </p>
                     </div>
 
-                    <div class="wizard-steps">
+                    <!-- Pasos — clases originales para el JS -->
+                    <div class="wizard-steps adm-wizard__steps">
                         <div class="step active" data-step="1">
                             <div class="step-circle">1</div>
                             <div class="step-label">Información Básica</div>
@@ -92,247 +218,315 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
                         </div>
                     </div>
 
-                    <div class="wizard-content">
-                        <!-- Paso 1 -->
+                    <!-- Contenido de pasos -->
+                    <div class="wizard-content adm-wizard__content">
+
+                        <!-- PASO 1 — Información Básica -->
                         <div class="step-content active" data-step="1">
-                            <h4 class="mb-4"><i class="fas fa-building text-primary"></i> Información Básica del Proveedor</h4>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Nombre de la Empresa:</label>
-                                    <input type="text" name="nombre_empresa" class="form-control" id="empresa" placeholder="Ej: Aventuras Extremas SAS" required>
+                            <div class="adm-wizard__step-title">
+                                <div class="adm-wizard__step-icon"><i class="fas fa-building"></i></div>
+                                <h4>Información Básica del Proveedor</h4>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="adm-form-label">Nombre de la Empresa</label>
+                                    <input type="text" name="nombre_empresa" class="adm-form-input" id="empresa" placeholder="Ej: Aventuras Extremas SAS" required>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">NIT/RUT:</label>
-                                    <input type="text" name="nit_rut" class="form-control" id="nit" placeholder="123456789-0" required>
+                                <div class="col-md-6">
+                                    <label class="adm-form-label">NIT / RUT</label>
+                                    <input type="text" name="nit_rut" class="adm-form-input" id="nit" placeholder="123456789-0" required>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Email De La Empresa:</label>
-                                    <input type="email" name="email" class="form-control" id="email" placeholder="contacto@empresa.com" required>
+                                <div class="col-md-6">
+                                    <label class="adm-form-label">Email de la Empresa</label>
+                                    <input type="email" name="email" class="adm-form-input" id="email" placeholder="contacto@empresa.com" required>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Teléfono:</label>
-                                    <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="+57 300 123 4567" required>
+                                <div class="col-md-6">
+                                    <label class="adm-form-label">Teléfono</label>
+                                    <input type="tel" name="telefono" class="adm-form-input" id="telefono" placeholder="+57 300 123 4567" required>
                                 </div>
-                                <div class="col-md-12 mb-3">
-                                    <label class="form-label">Logo:</label>
-                                    <input type="file" accept=".jpg, .png, .jpeg" name="logo" class="form-control" id="logo" required>
+                                <div class="col-12">
+                                    <label class="adm-form-label">Logo de la Empresa</label>
+                                    <input type="file" accept=".jpg,.png,.jpeg" name="logo" class="adm-form-input adm-form-input--file" id="logo" required>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Paso 2 -->
+                        <!-- PASO 2 — Servicios -->
                         <div class="step-content" data-step="2">
-                            <h4 class="mb-4"><i class="fas fa-hiking text-primary"></i> Servicios Ofrecidos</h4>
-                            <div class="row">
-                                <div class="col-md-12 mb-4">
-                                    <label class="form-label">Tipo de Actividades</label>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="rafting" value="Rafting">
-                                                <label class="form-check-label">🚣 Rafting</label>
-                                            </div>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="parapente" value="Parapente">
-                                                <label class="form-check-label">🪂 Parapente</label>
-                                            </div>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="senderismo" value="Senderismo">
-                                                <label class="form-check-label">🥾 Senderismo</label>
-                                            </div>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="escalada" value="Escalada">
-                                                <label class="form-check-label">🧗 Escalada</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="buceo" value="Buceo">
-                                                <label class="form-check-label">🤿 Buceo</label>
-                                            </div>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="camping" value="Camping">
-                                                <label class="form-check-label">🏕 Camping</label>
-                                            </div>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="ciclismo" value="Ciclismo de Montaña">
-                                                <label class="form-check-label">🚵 Ciclismo de Montaña</label>
-                                            </div>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" name="actividades[]" id="canopy" value="Canopy">
-                                                <label class="form-check-label">🌲 Canopy</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="adm-wizard__step-title">
+                                <div class="adm-wizard__step-icon"><i class="fas fa-hiking"></i></div>
+                                <h4>Servicios Ofrecidos</h4>
+                            </div>
+                            <label class="adm-form-label mb-3">Selecciona las actividades que ofrece</label>
+                            <div class="adm-activities-grid">
+                                <?php
+                                $actividades = [
+                                    ['id' => 'rafting',   'valor' => 'Rafting',             'emoji' => '🚣'],
+                                    ['id' => 'parapente', 'valor' => 'Parapente',            'emoji' => '🪂'],
+                                    ['id' => 'senderismo','valor' => 'Senderismo',           'emoji' => '🥾'],
+                                    ['id' => 'escalada',  'valor' => 'Escalada',             'emoji' => '🧗'],
+                                    ['id' => 'buceo',     'valor' => 'Buceo',                'emoji' => '🤿'],
+                                    ['id' => 'camping',   'valor' => 'Camping',              'emoji' => '🏕'],
+                                    ['id' => 'ciclismo',  'valor' => 'Ciclismo de Montaña',  'emoji' => '🚵'],
+                                    ['id' => 'canopy',    'valor' => 'Canopy',               'emoji' => '🌲'],
+                                ];
+                                foreach ($actividades as $act): ?>
+                                    <label class="adm-activity-card" for="<?= $act['id'] ?>">
+                                        <input class="form-check-input adm-activity-card__check"
+                                               type="checkbox"
+                                               name="actividades[]"
+                                               id="<?= $act['id'] ?>"
+                                               value="<?= $act['valor'] ?>">
+                                        <span class="adm-activity-card__emoji"><?= $act['emoji'] ?></span>
+                                        <span class="adm-activity-card__label"><?= $act['valor'] ?></span>
+                                    </label>
+                                <?php endforeach; ?>
                             </div>
                         </div>
 
-                        <!-- Paso 3 -->
+                        <!-- PASO 3 — Ubicación -->
                         <div class="step-content" data-step="3">
-                            <h4 class="mb-4"><i class="fas fa-map-marker-alt text-primary"></i> Ubicación</h4>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="departamento">Departamento</label>
-                                    <select name="departamento" id="departamento" class="form-control" required>
+                            <div class="adm-wizard__step-title">
+                                <div class="adm-wizard__step-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                <h4>Ubicación</h4>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="adm-form-label" for="departamento">Departamento</label>
+                                    <select name="departamento" id="departamento" class="adm-form-input adm-form-select" required>
                                         <option value="">Seleccione un departamento</option>
                                     </select>
                                 </div>
-
-                                <!-- <div class="col-md-6 mb-3">
-                                    <label for="ciudad">Ciudad *</label>
-                                    <select name="id_ciudad" id="id_ciudad" class="form-control" required>
-                                        <option value="">Seleccione una ciudad</option>
-                                    </select>
-                                </div> -->
-
-                                <div class="col-md-6 mb-3">
-                                    <label for="ciudad">Ciudad</label>
-                                    <select name="id_ciudad" id="id_ciudad" class="form-control" required>
+                                <div class="col-md-6">
+                                    <label class="adm-form-label" for="id_ciudad">Ciudad</label>
+                                    <select name="id_ciudad" id="id_ciudad" class="adm-form-input adm-form-select" required>
                                         <option value="">Seleccione una ciudad</option>
                                         <?php if (!empty($ciudades)): ?>
                                             <?php foreach ($ciudades as $ciudad): ?>
-                                                <option value="<?= $ciudad['id_ciudad']; ?>">
-                                                    <?= $ciudad['nombre']; ?>
-                                                </option>
+                                                <option value="<?= $ciudad['id_ciudad'] ?>"><?= $ciudad['nombre'] ?></option>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
                                     </select>
                                 </div>
-
-
-                                <div class="col-md-12 mb-3">
-                                    <label class="form-label">Dirección:</label>
-                                    <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Calle 123 #45-67" required>
+                                <div class="col-12">
+                                    <label class="adm-form-label">Dirección</label>
+                                    <input type="text" name="direccion" class="adm-form-input" id="direccion" placeholder="Calle 123 #45-67" required>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Paso 4 -->
+                        <!-- PASO 4 — Representante -->
                         <div class="step-content" data-step="4">
-                            <h4 class="mb-4"><i class="fas fa-map-marker-alt text-primary"></i> Representante</h4>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Nombre del Representante:</label>
-                                    <input type="text" name="nombre_representante" class="form-control" id="nombre_repre" placeholder="Juan Pérez" required>
+                            <div class="adm-wizard__step-title">
+                                <div class="adm-wizard__step-icon"><i class="fas fa-user-tie"></i></div>
+                                <h4>Datos del Representante</h4>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="adm-form-label">Nombre del Representante</label>
+                                    <input type="text" name="nombre_representante" class="adm-form-input" id="nombre_repre" placeholder="Juan Pérez" required>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Tipo de documento</label>
-                                    <select name="tipo_documento" class="form-select1" id="tipo_documento">
+                                <div class="col-md-6">
+                                    <label class="adm-form-label">Tipo de Documento</label>
+                                    <select name="tipo_documento" class="adm-form-input adm-form-select form-select1" id="tipo_documento">
                                         <option value="" disabled selected hidden>Tipo de documento</option>
                                         <option value="CC">CC</option>
                                         <option value="CE">CE</option>
                                         <option value="Pasaporte">Pasaporte</option>
                                     </select>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Identificacion:</label>
-                                    <input type="tel" name="identificacion_representante" class="form-control" id="identiificacion_repre" placeholder="N.°" required>
+                                <div class="col-md-6">
+                                    <label class="adm-form-label">Identificación</label>
+                                    <input type="tel" name="identificacion_representante" class="adm-form-input" id="identiificacion_repre" placeholder="N.°" required>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Foto:</label>
-                                    <input type="file" accept=".jpg, .png, .jpeg" name="foto_representante" class="form-control" id="foto_representante" required>
+                                <div class="col-md-6">
+                                    <label class="adm-form-label">Foto del Representante</label>
+                                    <input type="file" accept=".jpg,.png,.jpeg" name="foto_representante" class="adm-form-input adm-form-input--file" id="foto_representante" required>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Email (Mismo que el de iniciar sesión):</label>
-                                    <input type="email" name="email_representante" class="form-control" id="email_repre" placeholder="contacto@empresa.com" required>
+                                <div class="col-md-6">
+                                    <label class="adm-form-label">Email (mismo que para iniciar sesión)</label>
+                                    <input type="email" name="email_representante" class="adm-form-input" id="email_repre" placeholder="contacto@empresa.com" required>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Teléfono:</label>
-                                    <input type="tel" name="telefono_representante" class="form-control" id="telefono_repre" placeholder="+57 300 123 4567" required>
+                                <div class="col-md-6">
+                                    <label class="adm-form-label">Teléfono del Representante</label>
+                                    <input type="tel" name="telefono_representante" class="adm-form-input" id="telefono_repre" placeholder="+57 300 123 4567" required>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Paso 5 -->
+                        <!-- PASO 5 — Confirmación — IDs originales intactos -->
                         <div class="step-content" data-step="5">
-                            <div class="text-center">
-                                <i class="fas fa-check-circle success-icon"></i>
+                            <div class="adm-wizard__confirm-header">
+                                <div class="adm-wizard__confirm-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
                                 <h4>Confirma tu Registro</h4>
+                                <p>Revisa la información antes de guardar</p>
                             </div>
-                            <div class="preview-card">
-                                <h6 class="text-primary mb-3"><i class="fas fa-building"></i> Información Básica</h6>
-                                <div class="row">
-                                    <div class="col-md-6 mb-2">
-                                        <div class="preview-label">Empresa</div>
-                                        <div class="preview-value" id="prev-empresa">-</div>
+
+                            <div class="adm-preview-grid">
+
+                                <div class="adm-preview-card">
+                                    <div class="adm-preview-card__header">
+                                        <i class="fas fa-building"></i> Información Básica
                                     </div>
-                                    <div class="col-md-6 mb-2">
-                                        <div class="preview-label">NIT/RUT</div>
-                                        <div class="preview-value" id="prev-nit">-</div>
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <div class="preview-label">Representante</div>
-                                        <div class="preview-value" id="prev-representante">-</div>
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <div class="preview-label">Email</div>
-                                        <div class="preview-value" id="prev-email">-</div>
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <div class="preview-label">Telefono</div>
-                                        <div class="preview-value" id="prev-telefono">-</div>
+                                    <div class="adm-preview-card__body">
+                                        <div class="adm-preview-field">
+                                            <span class="adm-preview-label">Empresa</span>
+                                            <span class="preview-value" id="prev-empresa">—</span>
+                                        </div>
+                                        <div class="adm-preview-field">
+                                            <span class="adm-preview-label">NIT/RUT</span>
+                                            <span class="preview-value" id="prev-nit">—</span>
+                                        </div>
+                                        <div class="adm-preview-field">
+                                            <span class="adm-preview-label">Email</span>
+                                            <span class="preview-value" id="prev-email">—</span>
+                                        </div>
+                                        <div class="adm-preview-field">
+                                            <span class="adm-preview-label">Teléfono</span>
+                                            <span class="preview-value" id="prev-telefono">—</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="preview-card">
-                                <h6 class="text-primary mb-3"><i class="fas fa-hiking"></i> Servicios</h6>
-                                <div id="prev-actividades">-</div>
-                            </div>
-                            <div class="preview-card">
-                                <h6 class="text-primary mb-3"><i class="fas fa-map-marker-alt"></i> Ubicación</h6>
-                                <div class="preview-value" id="prev-ubicacion">-</div>
-                            </div>
-                            <div class="preview-card">
-                                <h6 class="text-primary mb-3"><i class="fas fa-building"></i> Representante</h6>
-                                <div class="row">
-                                    <div class="col-md-6 mb-2">
-                                        <div class="preview-label">Nombre del Representante</div>
-                                        <div class="preview-value" id="prev-nombre_repre">-</div>
+
+                                <div class="adm-preview-card">
+                                    <div class="adm-preview-card__header">
+                                        <i class="fas fa-hiking"></i> Servicios
                                     </div>
-                                    <div class="col-md-6 mb-2">
-                                        <div class="preview-label">Email del Representante</div>
-                                        <div class="preview-value" id="prev-email_repre">-</div>
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <div class="preview-label">Telefono del Representante</div>
-                                        <div class="preview-value" id="prev-telefono_repre">-</div>
+                                    <div class="adm-preview-card__body">
+                                        <div id="prev-actividades" class="adm-preview-activities">—</div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="preview-card">
-                                <h6 class="text-primary mb-3"><i class="fas fa-info-circle"></i> Descripción</h6>
-                                <div class="preview-value" id="prev-descripcion">-</div>
+
+                                <div class="adm-preview-card">
+                                    <div class="adm-preview-card__header">
+                                        <i class="fas fa-map-marker-alt"></i> Ubicación
+                                    </div>
+                                    <div class="adm-preview-card__body">
+                                        <div class="adm-preview-field">
+                                            <span class="adm-preview-label">Dirección</span>
+                                            <span class="preview-value" id="prev-ubicacion">—</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="adm-preview-card">
+                                    <div class="adm-preview-card__header">
+                                        <i class="fas fa-user-tie"></i> Representante
+                                    </div>
+                                    <div class="adm-preview-card__body">
+                                        <div class="adm-preview-field">
+                                            <span class="adm-preview-label">Nombre</span>
+                                            <span class="preview-value" id="prev-nombre_repre">—</span>
+                                        </div>
+                                        <div class="adm-preview-field">
+                                            <span class="adm-preview-label">Email</span>
+                                            <span class="preview-value" id="prev-email_repre">—</span>
+                                        </div>
+                                        <div class="adm-preview-field">
+                                            <span class="adm-preview-label">Teléfono</span>
+                                            <span class="preview-value" id="prev-telefono_repre">—</span>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 
-                    </div>
+                    </div><!-- /.wizard-content -->
 
-                    <div class="wizard-actions">
-                        <button class="btn btn-secondary-wizard" id="prevBtn" style="display:none;" onclick="changeStep(-1)">
+                    <!-- Acciones del wizard — IDs originales intactos -->
+                    <div class="wizard-actions adm-wizard__actions">
+                        <button type="button" class="adm-wizard__btn-prev" id="prevBtn" style="display:none;" onclick="changeStep(-1)">
                             <i class="fas fa-arrow-left"></i> Anterior
                         </button>
-
-                        <button class="btn btn-primary-wizard" id="nextBtn">
+                        <button type="button" class="adm-wizard__btn-next" id="nextBtn">
                             Siguiente <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
-                </div>
+
+                </div><!-- /.adm-wizard -->
             </form>
-        </div>
-    </section>
 
-    <script>
-        const BASE_URL = "<?= BASE_URL ?>";
-    </script>
+        </main>
+    </div><!-- /.adm-main -->
 
-    <script src="<?= BASE_URL ?>public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor.js"></script>
-    <script src="<?= BASE_URL ?>public/assets/dashboard/administrador/registrar_proveedor/departamento.js"></script>
+</div><!-- /.adm-layout -->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    const BASE_URL = "<?= BASE_URL ?>";
+</script>
+
+<!-- JS originales — lógica intacta -->
+<script src="<?= BASE_URL ?>public/assets/dashboard/administrador/registrar_proveedor/registrar_proveedor.js"></script>
+<script src="<?= BASE_URL ?>public/assets/dashboard/administrador/registrar_proveedor/departamento.js"></script>
+
+<script>
+(function () {
+
+    /* ─── MODO OSCURO ────────────────────────── */
+    const body     = document.body;
+    const darkBtn  = document.getElementById('adm-dark-toggle');
+    const darkIcon = document.getElementById('adm-dark-icon');
+    const DARK_KEY = 'adm_dark_mode';
+
+    function applyDark(on) {
+        body.classList.toggle('adm-dark', on);
+        darkIcon.className = on ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
+        darkBtn.title      = on ? 'Modo claro' : 'Modo oscuro';
+        localStorage.setItem(DARK_KEY, on ? '1' : '0');
+    }
+
+    applyDark(localStorage.getItem(DARK_KEY) === '1');
+    darkBtn.addEventListener('click', () => applyDark(!body.classList.contains('adm-dark')));
+
+    /* ─── DROPDOWNS ──────────────────────────── */
+    function makeDropdown(btnId, panelId, chevronId) {
+        const btn   = document.getElementById(btnId);
+        const panel = document.getElementById(panelId);
+        const chev  = chevronId ? document.getElementById(chevronId) : null;
+        if (!btn || !panel) return;
+        btn.addEventListener('click', e => {
+            e.stopPropagation();
+            const open = panel.classList.toggle('adm-dropdown--open');
+            if (chev) chev.classList.toggle('adm-profile-btn__chevron--open', open);
+            document.querySelectorAll('.adm-dropdown--open').forEach(d => {
+                if (d !== panel) {
+                    d.classList.remove('adm-dropdown--open');
+                    document.querySelectorAll('.adm-profile-btn__chevron--open')
+                        .forEach(c => c.classList.remove('adm-profile-btn__chevron--open'));
+                }
+            });
+        });
+    }
+
+    makeDropdown('adm-notif-btn',   'adm-notif-panel');
+    makeDropdown('adm-profile-btn', 'adm-profile-panel', 'adm-profile-chevron');
+
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.adm-dropdown--open').forEach(d => d.classList.remove('adm-dropdown--open'));
+        document.querySelectorAll('.adm-profile-btn__chevron--open')
+            .forEach(c => c.classList.remove('adm-profile-btn__chevron--open'));
+    });
+
+    /* ─── NOTIFICACIONES ─────────────────────── */
+    const markAll = document.querySelector('.adm-dropdown__mark-all');
+    if (markAll) {
+        markAll.addEventListener('click', () => {
+            document.querySelectorAll('.adm-notif-item--unread')
+                .forEach(el => el.classList.remove('adm-notif-item--unread'));
+            document.querySelector('.adm-icon-btn--notif')
+                ?.classList.remove('adm-icon-btn--notif');
+        });
+    }
+
+})();
+</script>
 
 </body>
-
 </html>
