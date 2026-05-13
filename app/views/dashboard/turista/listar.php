@@ -174,14 +174,9 @@ foreach (array_slice($partes, 0, 2) as $p) {
                         <a href="<?= BASE_URL ?>turista/reservas" class="ag-dropdown__item">
                             <i class="bi bi-calendar3"></i> Mis reservas
                         </a>
-                        <a href="<?= BASE_URL ?>turista/favoritos" class="ag-dropdown__item">
-                            <i class="bi bi-heart"></i> Favoritos
-                        </a>
-                        <a href="<?= BASE_URL ?>turista/configuracion" class="ag-dropdown__item">
-                            <i class="bi bi-gear"></i> Configuración
-                        </a>
+                        
                         <div class="ag-dropdown__divider"></div>
-                        <a href="<?= BASE_URL ?>auth/logout" class="ag-dropdown__item ag-dropdown__item--danger">
+                        <a href="<?= BASE_URL ?>logout" class="ag-dropdown__item ag-dropdown__item--danger">
                             <i class="bi bi-box-arrow-right"></i> Cerrar sesión
                         </a>
                     </div>
@@ -207,7 +202,6 @@ foreach (array_slice($partes, 0, 2) as $p) {
                 </a>
             </div>
 
-            
 
             <!-- Tabla de tickets -->
             <div class="ag-section-header">
