@@ -629,17 +629,21 @@
 }
 
 @media (max-width: 768px) {
-    .adm-pv-stats       { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .adm-pv-stats       { grid-template-columns: 1fr; gap: 12px; }
     .adm-page-header    { flex-direction: column; align-items: flex-start; }
     .adm-page-header__actions { width: 100%; }
     .adm-btn-primary,
     .adm-btn-pdf        { flex: 1; justify-content: center; }
+    .adm-pv-filters     { gap: 8px; }
+    .adm-pv-filter      { flex: 1 1 100%; text-align: center; }
+    .adm-table-wrap--card { overflow-x: auto; }
+    .adm-table          { min-width: 860px; }
     .adm-modal__grid    { grid-template-columns: 1fr; }
     .adm-modal__info-card--full { grid-column: 1; }
     .adm-modal__header  { flex-wrap: wrap; }
 }
 
 @media (max-width: 480px) {
-    .adm-pv-stats { grid-template-columns: 1fr 1fr; }
-    .adm-pv-stat__value { font-size: 26px; }
+    .adm-pv-stats { grid-template-columns: 1fr; }
+    .adm-pv-stat__value { font-size: 24px; }
 }

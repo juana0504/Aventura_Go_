@@ -617,5 +617,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
 })();
 </script>
 
+<script src="<?= BASE_URL ?>public/assets/dashboard/administrador/administrador/sidebar-toggle.js"></script>
+
 </body>
 </html>

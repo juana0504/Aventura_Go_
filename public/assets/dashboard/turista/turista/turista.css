@@ -946,3 +946,17 @@
     .ag-stats-grid { grid-template-columns: 1fr 1fr; }
     .ag-stat-card__value { font-size: 28px; }
 }
+
+/* Adjust sidebar for desktop */
+@media (min-width: 1024px) {
+    .ag-sidebar {
+        overflow: hidden; /* Remove internal scroll */
+    }
+}
+
+/* Adjust sidebar for mobile */
+@media (max-width: 1023px) {
+    .ag-sidebar {
+        overflow-y: auto; /* Enable scroll for mobile */
+    }
+}

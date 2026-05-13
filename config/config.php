@@ -9,10 +9,15 @@ $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
 $baseFolder = '/aventura_go/';
 
 //host actual
-$host = $_SERVER['HTTP_HOST'];
+$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
 
 //URL base dinamica (funciona en local y en hosting)
 define('BASE_URL', $protocol . $host . $baseFolder);
 
 //ruta base del proyecto (pra require o include)
 define('BASE_PATH', dirname(__DIR__));
+
+// Ensure session is started only once
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}

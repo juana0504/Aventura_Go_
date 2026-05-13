@@ -1,14 +1,16 @@
 <?php
 
-session_start();
+// Ensure session is started only once
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-//VALIDAMOS SI HAY UNA SECCION ACTIVA, se crea solo cuando hay una sesion activa
+// Validate session and role
 if (!isset($_SESSION['user'])) {
     header('Location: /aventura_go/login');
     exit();
 }
 
-//validamos que el rol sea el correspondiente
 if ($_SESSION['user']['rol'] != 'administrador') {
     header('Location: /aventura_go/login');
     exit();

@@ -1,20 +1,23 @@
 <?php
+// Ensure session is started only once
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-session_start();
-
-//VALIDAMOS SI HAY UNA SECCION ACTIVA, se crea solo cuando hay una sesion activa
+// Validate session and role
 if (!isset($_SESSION['user'])) {
     header('Location: /aventura_go/login');
     exit;
 }
 
-//validamos que el rol sea el correspondiente
 if ($_SESSION['user']['rol'] !== 'proveedor_hotelero') {
     header('Location: /aventura_go/login');
     exit;
 }
 
-
+require_once __DIR__ . '/../../config/config.php';
+?>
+<?php
 
 // NUEVA VALIDACIÓN DE APROBACIÓN
 require_once __DIR__ . '/../../config/database.php';

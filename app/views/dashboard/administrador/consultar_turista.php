@@ -41,7 +41,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
 <div class="adm-layout" id="admin-dashboard">
 
     <!-- SIDEBAR -->
-    <nav class="adm-sidebar">
+    <nav class="adm-sidebar responsive-sidebar">
         <div class="adm-sidebar__logo">
             <div class="adm-sidebar__logo-icon">A</div>
             <div>
@@ -426,6 +426,8 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
 })();
 </script>
+
+<script src="<?= BASE_URL ?>public/assets/dashboard/administrador/administrador/sidebar-toggle.js"></script>
 
 </body>
 </html>

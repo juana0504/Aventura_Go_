@@ -642,6 +642,14 @@
         grid-template-columns: 260px 1fr;
     }
 
+    .adm-pf-card{
+        padding: 22px 16px;
+    }
+
+    .adm-pf-panel__header{
+        padding: 16px 18px;
+    }
+
 }
 
 @media (max-width: 768px){
@@ -652,18 +660,28 @@
 
     .adm-pf-layout{
         grid-template-columns: 1fr;
+        gap: 16px;
     }
 
     .adm-pf-card{
         position: static;
+        padding: 20px 16px;
+    }
+
+    .adm-pf-title{
+        font-size: 32px;
+        letter-spacing: 1.2px;
     }
 
     .adm-pf-fields{
         grid-template-columns: 1fr;
+        padding: 16px;
+        gap: 12px;
     }
 
     .adm-pf-form__grid{
         grid-template-columns: 1fr;
+        gap: 12px;
     }
 
     .adm-pf-field--full{
@@ -673,6 +691,51 @@
     .adm-pf-form__photo-row{
         flex-direction: column;
         text-align: center;
+    }
+
+    .adm-pf-form{
+        padding: 16px;
+    }
+
+    .adm-pf-form__footer{
+        justify-content: stretch;
+    }
+
+    .adm-btn-primary{
+        width: 100%;
+        justify-content: center;
+    }
+
+}
+
+@media (max-width: 480px){
+    .adm-content{
+        padding: 12px;
+    }
+
+    .adm-pf-title{
+        font-size: 28px;
+    }
+
+    .adm-pf-card__name{
+        font-size: 20px;
+    }
+
+    .adm-pf-nav__btn{
+        padding: 11px 12px;
+        font-size: 13px;
+    }
+
+    .adm-pf-panel__title{
+        font-size: 18px;
+        letter-spacing: 1px;
+    }
+
+    .adm-pf-form,
+    .adm-pf-fields,
+    .adm-pf-panel__header{
+        padding-left: 12px;
+        padding-right: 12px;
     }
 
 }
