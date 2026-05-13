@@ -1,11 +1,74 @@
 <?php
-// session_start();
-require_once __DIR__ . '/../../controllers/website/websiteController.php';
+session_start();
+require_once BASE_PATH . '/app/controllers/website/websiteController.php';
 
+require_once BASE_PATH . '/app/models/proveedor_turistico/ActividadTuristica.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $_SESSION['reserva'] = [
+        'id_actividad' => $_POST['id_actividad'],
+        'cantidad' => $_POST['cantidad_personas'],
+        'fecha' => $_POST['fecha']
+    ];
+}
+
+if (
+    !isset($_SESSION['reserva']['id_actividad']) ||
+    !isset($_SESSION['reserva']['cantidad']) ||
+    !isset($_SESSION['reserva']['fecha'])
+) {
+    echo "Error: datos de reserva incompletos.";
+    exit;
+}
+
+$idActividad = $_SESSION['reserva']['id_actividad'];
+$cantidad = $_SESSION['reserva']['cantidad'];
+$fecha = $_SESSION['reserva']['fecha'];
+
+require_once BASE_PATH . '/app/models/proveedor_turistico/ActividadTuristica.php';
+
+
+
+// 🔴 SI VIENE DEL FORM (POST)
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $_SESSION['reserva'] = [
+        'id_actividad' => $_POST['id_actividad'],
+        'cantidad' => $_POST['cantidad_personas'],
+        'fecha' => $_POST['fecha']
+    ];
+}
+
+// 🔴 SI EXISTE SESSION → USARLA
+$idActividad = $_SESSION['reserva']['id_actividad'] ?? null;
+$cantidad = $_SESSION['reserva']['cantidad'] ?? 1;
+$fecha = $_SESSION['reserva']['fecha'] ?? null;
+
+// 🔹 Validar datos
+if (!$idActividad) {
+    echo "Error: no hay datos de la reserva.";
+    exit;
+}
+
+// 🔹 Obtener actividad
 $actividadModel = new ActividadTuristica();
 $actividad = $actividadModel->obtenerPorId($idActividad);
-?>
 
+if (!$actividad) {
+    echo "Error: actividad no encontrada.";
+    exit;
+}
+
+$precioUnitario = $actividad['precio'];
+$total = $precioUnitario * $cantidad;
+
+$_SESSION['reserva']['nombre'] = $actividad['nombre'];
+$_SESSION['reserva']['imagen'] = $actividad['imagen_principal'];
+$_SESSION['reserva']['precio'] = $precioUnitario;
+$_SESSION['reserva']['total'] = $total;
+
+?>
 
 
 <!DOCTYPE html>
@@ -201,11 +264,10 @@ $actividad = $actividadModel->obtenerPorId($idActividad);
 
     <?php
     if (!isset($_SESSION['user'])) {
-        $_SESSION['redirect_after_login'] = BASE_URL . '/formulario-reserva?id=' . $idActividad;
+        $_SESSION['redirect_after_login'] = BASE_URL . 'formulario-reserva';
     }
 
     ?>
-
 
     <!-- Modal Login -->
     <div class="modal fade" id="loginModal" tabindex="-1">

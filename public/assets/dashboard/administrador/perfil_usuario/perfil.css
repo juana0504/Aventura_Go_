@@ -1,450 +1,678 @@
-/* fuente para titulos*/
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
+/* =============================================
+   AVENTURAGO — PERFIL ADMINISTRADOR
+   perfil.css
+============================================= */
 
-/* /fuente para textos/ */
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+/* ───────────────── VARIABLES ───────────────── */
+:root{
+    --adm-primary: #ea8217;
+    --adm-primary-light: rgba(234,130,23,.1);
 
-h1 h2 h3 h4 h5 h6 {
-    --font-titles: 'Raleway', sans-serif;
+    --adm-bg: #f4f6f9;
+    --adm-surface: #ffffff;
+
+    --adm-text: #1f2937;
+    --adm-muted: #6b7280;
+
+    --adm-border: #e5e7eb;
+
+    --adm-radius: 16px;
+    --adm-radius-lg: 24px;
+    --adm-radius-sm: 10px;
+
+    --adm-topbar-height: 80px;
 }
 
-p a button input {
-    --font-text: 'Lato', sans-serif;
+/* ───────────────── DARK MODE ───────────────── */
+.adm-dark{
+    --adm-bg: #0f172a;
+    --adm-surface: #162032;
+
+    --adm-text: #f3f4f6;
+    --adm-muted: #9ca3af;
+
+    --adm-border: rgba(255,255,255,.08);
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-color: #f5f5f5;
-}
-
-/* Layout principal */
-.perfil {
-    display: flex;
+/* ───────────────── GENERAL ───────────────── */
+.adm-content{
+    padding: 28px;
+    background: var(--adm-bg);
     min-height: 100vh;
 }
 
-/* ========== CONTENIDO PRINCIPAL ========== */
-.info {
-    flex-grow: 1;
-    padding: 15px 40px;
-    background-color:#b1b1b1;
+.adm-page-header{
+    margin-bottom: 28px;
 }
 
-.info #usuario #datos {
-    display: inline-block;
-    vertical-align: top;
+.adm-greeting__eyebrow{
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--adm-primary);
+    margin-bottom: 8px;
 }
 
-/* Paleta de colores */
-:root {
-    --color-primary: #2D4059;
-    --color-secondary: #EA8217;
-    --color-white: #FFFFFF;
-    --color-bg-light: #F8F9FA;
-    --color-border: #E0E0E0;
-    --color-text: #2b2b2b;
-    --font-titles: 'Raleway', sans-serif;
-    --font-text: 'Lato', sans-serif;
+.adm-greeting__sub{
+    color: var(--adm-muted);
+    font-size: 14px;
+    margin-top: 8px;
 }
 
-/* ========== TARJETA DE PERFIL IZQUIERDA ========== */
-.usuario {
-    width: 28%;
-    background-color: white;
-    border: 1px solid #2D4059;
-    border-radius: 20px;
-    padding: 35px 25px;
+/* ───────────────── TÍTULO ───────────────── */
+.adm-pf-title{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    letter-spacing: 2px;
+    line-height: 1;
+    color: var(--adm-text);
+    margin: 0;
+}
+
+.adm-pf-title span{
+    color: var(--adm-primary);
+}
+
+/* ───────────────── LAYOUT ───────────────── */
+.adm-pf-layout{
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+/* =============================================
+   TARJETA PERFIL
+============================================= */
+.adm-pf-card{
+    background: var(--adm-surface);
+    border: 1px solid var(--adm-border);
+    border-radius: var(--adm-radius-lg);
+    padding: 28px 22px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #ffffff;
-    box-shadow: 0 8px 24px rgba(45, 64, 89, 0.15);
+
+    text-align: center;
+
+    position: sticky;
+    top: calc(var(--adm-topbar-height) + 20px);
 }
 
-.usuario h2 {
-    font-size: 20px;
-    font-weight: 700;
-    align-self: flex-start;
-    margin-bottom: 30px;
-    letter-spacing: 0.3px;
+/* Avatar */
+.adm-pf-avatar-wrap{
+    position: relative;
+    margin-bottom: 18px;
 }
 
-.usuario img {
+.adm-pf-avatar{
     width: 120px;
     height: 120px;
+
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 20px;
-    border: 4px solid rgba(234, 130, 23, 0.3);
+
+    border: 3px solid rgba(234,130,23,.35);
+
+    transition: .2s;
 }
 
-.usuario h3 {
-    color: #000000;
-    font-size: 19px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    letter-spacing: 0.3px;
+.adm-pf-avatar:hover{
+    border-color: var(--adm-primary);
 }
 
-.usuario p {
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.8);
-    margin-bottom: 35px;
-    font-weight: 300;
-}
-
-/* BOTONES - Estilos base */
-.usuario button {
-    width: 100%;
-    padding: 14px 20px;
-    border: 2px solid #EA8217;
-    border-radius: 10px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-bottom: 12px;
-    transition: all 0.3s ease;
-    letter-spacing: 0.3px;
-    background-color: transparent;
-    color: #000000;
-}
-
-
-/* Botones*/
-.usuario button:not(.activo):hover {
-    background-color:#d67414;
-    transform: translateY(-2px);
-    color: #ffffff;
-
-}
-
-/* ==========Secciones========== */
-.datos,
-.editar,
-.cambiar {
-    display: none;
-}
-
-.activa {
-    display: block;
-}
-/* ================= PANEL DETALLES DEL PERFIL (DERECHA) ================= */
-.datos {
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 40px 35px;
-    box-shadow: 0 8px 24px rgba(89, 45, 45, 0.15);
-    width: 68%;
-    border: 1px solid #2D4059;
-    margin-left: 3%;
-}
-
-/* Título */
-.datos h3 {
-    text-align: left;
-    font-size: 24px;
-    font-weight: 700;
-    color: #000000;
-    margin-bottom: 40px;
-    position: relative;
-    padding-bottom: 15px;
-}
-
-.datos h3::after {
-    content: '';
+.adm-pf-avatar-badge{
     position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 70px;
-    height: 4px;
-    background: var(--color-secondary);
-    border-radius: 2px;
+
+    bottom: 5px;
+    right: 5px;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    background: var(--adm-primary);
+    color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 3px solid var(--adm-surface);
 }
 
-/* Grid interno */
-.datos .row {
-    row-gap: 28px;
+/* Nombre */
+.adm-pf-card__name{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 1px;
+    color: var(--adm-text);
+    margin-bottom: 6px;
 }
 
-/* Labels */
-.datos h4 {
-    font-size: 14px;
-    font-weight: 700;
-    color: #2D4059;
-    padding: 13px 16px;
-    margin: 0 0 8px 0;
+/* Rol */
+.adm-pf-card__role{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    font-size: 12px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+
+    font-weight: 700;
+
+    color: var(--adm-primary);
 }
 
-/* Valores */
-.datos p {
-    font-size: 16px;
-    color: #2D4059;
-    margin: 0;
-    padding: 13px 16px;
-    background: #ffffff;
-    border-radius: 15px;
-    border: 1px solid #EA8217;
-
+.adm-pf-card__divider{
+    width: 100%;
+    height: 1px;
+    background: var(--adm-border);
+    margin: 22px 0;
 }
 
-/* ========== SECCIÓN EDITAR PERFIL ========== */
-.editar {
-    background: #ffffff;
-    width: 68%;
-    margin-left: 3%;
-    padding: 40px 35px;
-    border-radius: 20px;
-    border: 1px solid #2D4059;
-    box-shadow: 0 8px 24px rgba(45, 64, 89, 0.15);
-}
+/* =============================================
+   NAV PERFIL
+============================================= */
+.adm-pf-nav{
+    width: 100%;
 
-.editar form {
-    margin-top: 0;
-    padding-top: 0;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 8px;
 }
 
-/* Contenedor de imagen */
-.editar form .imagen-container {
-    text-align: center;
-    margin-bottom: 20px;
+.adm-pf-nav__btn{
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 13px 15px;
+
+    border: 1px solid transparent;
+    border-radius: var(--adm-radius-sm);
+
+    background: transparent;
+
+    color: var(--adm-muted);
+
+    font-size: 14px;
+    font-weight: 500;
+
+    text-align: left;
+
+    transition: .2s;
+
+    cursor: pointer;
 }
 
-.editar form img {
-    width: 130px;
-    height: 130px;
-    object-fit: cover;
+.adm-pf-nav__btn i{
+    font-size: 16px;
+}
+
+.adm-pf-nav__btn:hover{
+    background: rgba(234,130,23,.07);
+    border-color: rgba(234,130,23,.2);
+    color: var(--adm-primary);
+}
+
+.adm-pf-nav__btn--active{
+    background: rgba(234,130,23,.12);
+    border-color: rgba(234,130,23,.28);
+
+    color: var(--adm-primary);
+
+    font-weight: 700;
+}
+
+/* =============================================
+   PANELES
+============================================= */
+.adm-pf-panels{
+    min-width: 0;
+}
+
+.adm-pf-panel{
+    display: none;
+
+    background: var(--adm-surface);
+
+    border: 1px solid var(--adm-border);
+    border-radius: var(--adm-radius-lg);
+
+    overflow: hidden;
+}
+
+.adm-pf-panel--active{
+    display: block;
+}
+
+/* Header */
+.adm-pf-panel__header{
+    background: #1a2b3c;
+
+    padding: 18px 24px;
+
+    border-bottom: 1px solid var(--adm-border);
+}
+
+.adm-pf-panel__title{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1.5px;
+
+    color: #fff;
+}
+
+.adm-pf-panel__title i{
+    color: var(--adm-primary);
+}
+
+/* =============================================
+   DETALLES PERFIL
+============================================= */
+.adm-pf-fields{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+
+    padding: 24px;
+}
+
+.adm-pf-field{
+    background: var(--adm-bg);
+
+    border: 1px solid var(--adm-border);
+    border-radius: var(--adm-radius);
+
+    padding: 18px;
+
+    transition: .2s;
+}
+
+.adm-pf-field:hover{
+    border-color: rgba(234,130,23,.3);
+}
+
+.adm-pf-field--full{
+    grid-column: 1 / -1;
+}
+
+.adm-pf-field__label{
+    font-size: 11px;
+
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+
+    font-weight: 700;
+
+    color: var(--adm-muted);
+
+    margin-bottom: 7px;
+}
+
+.adm-pf-field__value{
+    font-size: 15px;
+    font-weight: 500;
+
+    color: var(--adm-text);
+}
+
+/* Badge */
+.adm-badge{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.adm-badge--confirmed{
+    background: rgba(34,197,94,.1);
+    color: #16a34a;
+}
+
+.adm-badge__dot{
+    width: 8px;
+    height: 8px;
+
     border-radius: 50%;
-    border: 4px solid var(--color-secondary);
-    box-shadow: 0 8px 20px rgba(234, 130, 23, 0.25);
-}
 
-/* Campos del formulario */
-.editar form h4 {
-    font-family: var(--font-titles);
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--color-primary);
-    margin-bottom: 6px;
-    margin-top: 5px;
+    background: #16a34a;
 }
-
-.editar form input[type="text"],
-.editar form input[type="number"],
-.editar form input[type="file"] {
-    width: 100%;
-    padding: 13px 16px;
-    border: 1px solid #EA8217;
-    border-radius: 10px;
-    font-size: 15px;
-    background: #ffffff;
-    color: var(--color-text);
-    transition: 0.3s;
-}
-
-.editar form input:focus {
-    border-color: var(--color-secondary);
-    box-shadow: 0 0 0 4px rgba(234, 130, 23, 0.1);
-    outline: none;
-}
-
-/* Botón actualizar */
-.editar form button#actualizar {
-    padding: 15px 30px;
-    background: linear-gradient(135deg, var(--color-secondary) 0%, #d67414 100%);
-    color: #ffffff;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    margin-top: 15px;
-    box-shadow: 0 6px 20px rgba(234, 130, 23, 0.3);
-    transition: all 0.3s ease;
-}
-
-.editar form button#actualizar:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(234, 130, 23, 0.4);
-}
-
-/* ========== SECCIÓN CAMBIAR CONTRASEÑA ========== */
-.cambiar {
-    width: 68%;
-    margin-left: 3%;
-    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
-    padding: 40px 35px;
-    border-radius: 20px;
-    border: 1px solid #2D4059;
-    box-shadow: 0 8px 24px rgba(45, 64, 89, 0.15);
-}
-
-/* Títulos */
-.cambiar h4 {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    margin-top: 10px;
-    color: var(--color-primary);
-}
-
-/* Contenedor del input + ojito */
-.input-password {
+/* =========================================
+   AVATAR PRINCIPAL
+========================================= */
+.adm-pf-avatar-wrap{
     position: relative;
-    width: 100%;
-    margin-bottom: 15px;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Inputs */
-.input-password input {
-    width: 100%;
-    padding: 13px 45px 13px 16px;
-    border: 1px solid #EA8217;
-    border-radius: 10px;
-    font-size: 15px;
-    background: #ffffff;
-    transition: 0.3s;
-    color: var(--color-text);
-}
+.adm-pf-avatar{
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
 
-/* Focus */
-.input-password input:focus {
-    border-color: var(--color-secondary);
+    /* BORDE COMO EL EJEMPLO */
+    border: 3px solid #a56217;
+
+    /* PARA QUE NO SE CORTE */
     background: #fff;
-    box-shadow: 0 0 0 4px rgba(234, 130, 23, 0.1);
-    outline: none;
+
+    transition: all .3s ease;
 }
 
-/* Icono del ojito */
-.togglePassword {
+.adm-pf-avatar:hover{
+    transform: scale(1.03);
+    border-color: #d8841f;
+}
+
+/* BOTÓN DE CÁMARA */
+.adm-pf-avatar-badge{
     position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 18px;
-    color: #999;
-    cursor: pointer;
-    user-select: none;
-    transition: 0.2s;
+    right: 6px;
+    bottom: 8px;
+
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+
+    background: #ea8217;
+    color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 14px;
+
+    border: 3px solid #0f1c33;
+
+    z-index: 5;
 }
 
-.togglePassword:hover {
-    color: var(--color-primary);
+/* =========================================
+   FOTO PREVIEW EN EDITAR PERFIL
+========================================= */
+.adm-pf-form__photo-preview{
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+
+    border: 3px solid #a56217;
+
+    background: #fff;
+
+    transition: all .3s ease;
 }
 
-/* Botón */
-.cambiar button[type="submit"] {
-    width: 100%;
-    padding: 15px;
-    background: linear-gradient(135deg, var(--color-secondary) 0%, #d67414 100%);
-    border: none;
-    border-radius: 10px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
+.adm-pf-form__photo-preview:hover{
+    transform: scale(1.03);
+    border-color: #d8841f;
+}
+
+/* =============================================
+   FORMULARIOS
+============================================= */
+.adm-pf-form{
+    padding: 24px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* Foto */
+.adm-pf-form__photo-row{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+
+    border-bottom: 1px solid var(--adm-border);
+}
+
+.adm-pf-form__photo-preview{
+    width: 90px;
+    height: 90px;
+
+    border-radius: 50%;
+    object-fit: cover;
+
+    border: 2px solid rgba(234,130,23,.35);
+}
+
+.adm-pf-form__photo-actions{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Botón outline */
+.adm-btn-outline{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 16px;
+
+    border: 1px solid rgba(234,130,23,.25);
+    border-radius: var(--adm-radius-sm);
+
+    background: rgba(234,130,23,.05);
+
+    color: var(--adm-primary);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: .2s;
+}
+
+.adm-btn-outline:hover{
+    background: rgba(234,130,23,.1);
+}
+
+/* Grid */
+.adm-pf-form__grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+
+    margin-bottom: 24px;
+}
+
+/* Group */
+.adm-pf-form__group{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.adm-pf-form__group--full{
+    margin-bottom: 22px;
+}
+
+/* Label */
+.adm-pf-form__label{
+    font-size: 12px;
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
     font-weight: 700;
-    margin-top: 15px;
-    box-shadow: 0 6px 20px rgba(234, 130, 23, 0.3);
-    transition: all 0.3s ease;
+
+    color: var(--adm-muted);
 }
 
-.cambiar button[type="submit"]:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(234, 130, 23, 0.4);
+/* Input */
+.adm-pf-form__input{
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid var(--adm-border);
+    border-radius: var(--adm-radius-sm);
+
+    background: var(--adm-bg);
+
+    color: var(--adm-text);
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: .2s;
 }
 
-/* ========== MODO OSCURO ========== */
-.modo-oscuro .panel {
-    background: #2a2828;
+.adm-pf-form__input:focus{
+    border-color: var(--adm-primary);
+
+    box-shadow: 0 0 0 3px rgba(234,130,23,.12);
+
+    background: var(--adm-surface);
 }
 
-.modo-oscuro .info {
-    background: #000000;
-    color: #FFFFFF;
+/* Password */
+.adm-pf-input-wrap{
+    position: relative;
 }
 
-.modo-oscuro .editar,
-.modo-oscuro .cambiar {
-    background: linear-gradient(145deg, #2a2828 0%, #1a1818 100%);
+.adm-pf-input-wrap .adm-pf-form__input{
+    padding-right: 45px;
 }
 
-.modo-oscuro .editar form h4,
-.modo-oscuro .cambiar h4 {
-    color: #ffffff;
+.adm-pf-toggle-pw{
+    position: absolute;
+
+    top: 50%;
+    right: 14px;
+
+    transform: translateY(-50%);
+
+    cursor: pointer;
+
+    color: var(--adm-muted);
+
+    font-size: 18px;
+
+    transition: .2s;
 }
 
-.modo-oscuro .editar form input,
-.modo-oscuro .cambiar input {
-    background: #1a1818;
-    border-color: #3a3838;
-    color: #ffffff;
+.adm-pf-toggle-pw:hover{
+    color: var(--adm-primary);
 }
 
-.modo-oscuro .editar form input:focus,
-.modo-oscuro .cambiar input:focus {
-    background: #2a2828;
-    border-color: var(--color-secondary);
+/* Footer */
+.adm-pf-form__footer{
+    display: flex;
+    justify-content: flex-end;
+
+    padding-top: 22px;
+    margin-top: 8px;
+
+    border-top: 1px solid var(--adm-border);
 }
 
-.modo-oscuro .usuario {
-    background: #2a2828;
+/* Botón principal */
+.adm-btn-primary{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    border: none;
+    border-radius: var(--adm-radius-sm);
+
+    background: var(--adm-primary);
+    color: #fff;
+
+    padding: 12px 22px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition: .2s;
 }
 
-.modo-oscuro .datos {
-    background: #2a2828;
+.adm-btn-primary:hover{
+    transform: translateY(-1px);
+    opacity: .95;
 }
 
-.modo-oscuro .datos p {
-    background: #1a1818;
-    color: #ffffff;
-    border: 1px solid #3a3838;
+/* Dropdown active */
+.adm-dropdown__item--active{
+    background: rgba(234,130,23,.08);
+    color: var(--adm-primary);
 }
 
-/* ========== RESPONSIVE ========== */
-@media (max-width: 1024px) {
-    .usuario {
-        width: 32%;
+.adm-dropdown__item--active i{
+    color: var(--adm-primary);
+}
+
+/* =============================================
+   RESPONSIVE
+============================================= */
+@media (max-width: 1024px){
+
+    .adm-pf-layout{
+        grid-template-columns: 260px 1fr;
     }
 
-    .datos,
-    .editar,
-    .cambiar {
-        width: 65%;
-    }
 }
 
-@media (max-width: 768px) {
-    .perfil {
+@media (max-width: 768px){
+
+    .adm-content{
+        padding: 18px;
+    }
+
+    .adm-pf-layout{
+        grid-template-columns: 1fr;
+    }
+
+    .adm-pf-card{
+        position: static;
+    }
+
+    .adm-pf-fields{
+        grid-template-columns: 1fr;
+    }
+
+    .adm-pf-form__grid{
+        grid-template-columns: 1fr;
+    }
+
+    .adm-pf-field--full{
+        grid-column: 1;
+    }
+
+    .adm-pf-form__photo-row{
         flex-direction: column;
+        text-align: center;
     }
 
-    .usuario {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .datos,
-    .editar,
-    .cambiar {
-        width: 100%;
-        margin-left: 0;
-    }
-
-    .datos .row {
-        row-gap: 20px;
-    }
-
-    .editar form img {
-        width: 110px;
-        height: 110px;
-    }
 }
