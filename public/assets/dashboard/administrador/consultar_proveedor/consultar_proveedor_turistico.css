@@ -177,12 +177,25 @@
 }
 
 .adm-pv-stat--featured {
-    background: #1a2b3c;
-    border-color: transparent;
+    background: linear-gradient(135deg, #fff6ec 0%, #ffffff 100%);
+    border-color: rgba(234,130,23,.22);
 }
 
-.adm-pv-stat--featured .adm-pv-stat__label { color: rgba(255,255,255,.45); }
+.adm-pv-stat--featured .adm-pv-stat__label { color: var(--adm-muted); }
 .adm-pv-stat--featured .adm-pv-stat__value { color: var(--adm-primary); }
+
+body:not(.adm-dark) .adm-pv-stat--featured {
+    background: linear-gradient(135deg, #fff6ec 0%, #ffffff 100%) !important;
+    border-color: rgba(234,130,23,.22) !important;
+}
+
+body:not(.adm-dark) .adm-pv-stat--featured .adm-pv-stat__label {
+    color: var(--adm-muted) !important;
+}
+
+body:not(.adm-dark) .adm-pv-stat--featured .adm-pv-stat__value {
+    color: var(--adm-primary) !important;
+}
 
 /* ─── FILTROS ─────────────────────────────── */
 .adm-pv-filters {

@@ -34,6 +34,9 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
     <!-- CSS específico -->
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/tickets/responder.css">
+
+    <!-- CSS unificado para listados admin -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/consultas_admin_unificado.css">
 </head>
 
 <body class="adm-body">
