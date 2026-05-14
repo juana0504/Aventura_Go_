@@ -33,7 +33,11 @@ const setupTopbarActions = () => {
   }
 };
 
-const getDataUrl = () => document.querySelector('.dashboard-content')?.dataset.dashboardUrl || '';
+const getDataUrl = () => (
+  document.querySelector('.adm-content')?.dataset.dashboardUrl
+  || document.querySelector('.dashboard-content')?.dataset.dashboardUrl
+  || ''
+);
 
 const createChartManager = () => {
   const reservasCtx = byId('reservasChart');
@@ -223,7 +227,7 @@ const setupDashboardFilters = () => {
   const anioContainer = byId('filtro-anio-container');
   const filtrosContainer = byId('filtros-reservas');
   const btnFiltrar = document.querySelector('.btn-filtrar');
-  const tablaReservas = document.querySelector('.resumen-reservas table');
+  const tablaReservas = document.querySelector('.adm-table-wrap .adm-table');
   const tableRows = tablaReservas?.tBodies?.[0] ? Array.from(tablaReservas.tBodies[0].rows) : [];
 
   const togglePeriodControls = () => {

@@ -840,6 +840,18 @@ foreach (array_slice($partes, 0, 2) as $p) {
         });
     });
 
+    // Permite abrir panel especifico desde URL, p.e. ?section=cambiar
+    const params = new URLSearchParams(window.location.search);
+    const sectionFromUrl = params.get('section');
+
+    if (sectionFromUrl) {
+        const targetBtn = document.querySelector('.adm-pf-nav__btn[data-section="' + sectionFromUrl + '"]');
+
+        if (targetBtn) {
+            targetBtn.click();
+        }
+    }
+
     /* ─── PREVIEW FOTO ──────────────────────── */
     const fileInput   = document.getElementById('foto');
     const editPreview = document.getElementById('adm-pf-edit-preview');
