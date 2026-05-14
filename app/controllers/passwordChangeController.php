@@ -67,7 +67,7 @@ class PasswordChangeController
                 'success',
                 'Listo',
                 'Contraseña actualizada correctamente.',
-                '/aventura_go/login'
+                BASE_URL . 'login'
             );
         } else {
             mostrarSweetAlert('error', 'Error', 'No se pudo actualizar la contraseña.');

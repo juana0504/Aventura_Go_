@@ -7,11 +7,11 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Validate session and role
 if (!isset($_SESSION['user'])) {
-    header('Location: /aventura_go/login');
+    header('Location: ' . BASE_URL . 'login');
     exit();
 }
 
 if ($_SESSION['user']['rol'] != 'administrador') {
-    header('Location: /aventura_go/login');
+    header('Location: ' . BASE_URL . 'login');
     exit();
 }

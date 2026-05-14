@@ -1,17 +1,21 @@
 <?php
-//este archivo es para cuando carguemos a un servuidor no se haga mayor configuracion en ese hosting cuando se publique, ni cambiar carpetas
-//configuracion global del proyecto
+// Este archivo define configuracion global del proyecto para local y hosting.
 
-//detectar protocolo (http o https)
-$protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
+// Detectar protocolo real (incluye proxy inverso comun en hosting).
+$isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+    || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https');
+$protocol = $isHttps ? 'https://' : 'http://';
 
-//nombre de la carpeta del proyecto en el local
-$baseFolder = '/aventura_go/';
+// Detectar carpeta base a partir de la ruta del front controller.
+// En local suele ser /aventura_go/ y en hosting raiz suele ser /.
+$scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? ''));
+$scriptDir = rtrim($scriptDir, '/');
+$baseFolder = $scriptDir === '' ? '/' : ($scriptDir . '/');
 
-//host actual
+// Host actual
 $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
 
-//URL base dinamica (funciona en local y en hosting)
+// URL base dinamica (funciona en local y en hosting)
 define('BASE_URL', $protocol . $host . $baseFolder);
 
 //ruta base del proyecto (pra require o include)
