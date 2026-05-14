@@ -42,6 +42,9 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
     <!-- CSS específico de esta vista -->
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_turistico.css">
+
+    <!-- CSS unificado para listados admin -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/consultas_admin_unificado.css">
 </head>
 
 <body class="adm-body">
@@ -622,6 +625,8 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
 })();
 </script>
+
+<script src="<?= BASE_URL ?>public/assets/dashboard/administrador/administrador/sidebar-toggle.js"></script>
 
 </body>
 </html>

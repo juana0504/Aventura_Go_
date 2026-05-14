@@ -467,13 +467,26 @@
 @media (max-width: 768px) {
     .adm-wizard__content  { padding: 24px 20px; }
     .adm-wizard__actions  { padding: 16px 20px; }
-    .adm-wizard__steps    { padding: 20px 16px 0; gap: 4px; }
+    .adm-wizard__steps    { padding: 20px 16px 10px; gap: 6px; overflow-x: auto; justify-content: flex-start; }
+    .adm-wizard__steps::after { display: none; }
+    .wizard-steps .step { min-width: 88px; }
     .wizard-steps .step-label { font-size: 9px; }
     .adm-page-header      { flex-direction: column; align-items: flex-start; }
+    .adm-btn-back         { width: 100%; justify-content: center; }
+    .adm-wizard__actions  { flex-direction: column-reverse; gap: 10px; }
+    .adm-wizard__btn-prev,
+    .adm-wizard__btn-next,
+    .btn-primary-wizard   { width: 100%; justify-content: center; margin-left: 0; }
     .adm-activities-grid  { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 480px) {
-    .adm-activities-grid { grid-template-columns: repeat(2, 1fr); }
+    .adm-page-title { font-size: 30px; }
+    .adm-wizard__header { padding: 16px 18px; }
+    .adm-wizard__header-text { font-size: 17px; letter-spacing: 1px; }
+    .adm-wizard__content { padding: 18px 14px; }
+    .adm-wizard__actions { padding: 14px; }
+    .adm-activities-grid { grid-template-columns: 1fr; }
     .wizard-steps .step-circle { width: 34px; height: 34px; font-size: 15px; }
+    .wizard-steps .step-label { white-space: normal; line-height: 1.2; }
 }

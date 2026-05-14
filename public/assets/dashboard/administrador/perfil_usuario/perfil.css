@@ -8,28 +8,28 @@
     --adm-primary: #ea8217;
     --adm-primary-light: rgba(234,130,23,.1);
 
-    --adm-bg: #f4f6f9;
+    --adm-bg: #f4f5f7;
     --adm-surface: #ffffff;
 
-    --adm-text: #1f2937;
-    --adm-muted: #6b7280;
+    --adm-text: #1a1a2e;
+    --adm-muted: #7f8794;
 
-    --adm-border: #e5e7eb;
+    --adm-border: rgba(0,0,0,.08);
 
-    --adm-radius: 16px;
-    --adm-radius-lg: 24px;
-    --adm-radius-sm: 10px;
+    --adm-radius: 12px;
+    --adm-radius-lg: 16px;
+    --adm-radius-sm: 8px;
 
-    --adm-topbar-height: 80px;
+    --adm-topbar-height: 68px;
 }
 
 /* ───────────────── DARK MODE ───────────────── */
 .adm-dark{
-    --adm-bg: #0f172a;
-    --adm-surface: #162032;
+    --adm-bg: #0f1923;
+    --adm-surface: #1a2535;
 
-    --adm-text: #f3f4f6;
-    --adm-muted: #9ca3af;
+    --adm-text: #e8eaf0;
+    --adm-muted: #8b95a5;
 
     --adm-border: rgba(255,255,255,.08);
 }
@@ -642,6 +642,14 @@
         grid-template-columns: 260px 1fr;
     }
 
+    .adm-pf-card{
+        padding: 22px 16px;
+    }
+
+    .adm-pf-panel__header{
+        padding: 16px 18px;
+    }
+
 }
 
 @media (max-width: 768px){
@@ -652,18 +660,28 @@
 
     .adm-pf-layout{
         grid-template-columns: 1fr;
+        gap: 16px;
     }
 
     .adm-pf-card{
         position: static;
+        padding: 20px 16px;
+    }
+
+    .adm-pf-title{
+        font-size: 32px;
+        letter-spacing: 1.2px;
     }
 
     .adm-pf-fields{
         grid-template-columns: 1fr;
+        padding: 16px;
+        gap: 12px;
     }
 
     .adm-pf-form__grid{
         grid-template-columns: 1fr;
+        gap: 12px;
     }
 
     .adm-pf-field--full{
@@ -673,6 +691,51 @@
     .adm-pf-form__photo-row{
         flex-direction: column;
         text-align: center;
+    }
+
+    .adm-pf-form{
+        padding: 16px;
+    }
+
+    .adm-pf-form__footer{
+        justify-content: stretch;
+    }
+
+    .adm-btn-primary{
+        width: 100%;
+        justify-content: center;
+    }
+
+}
+
+@media (max-width: 480px){
+    .adm-content{
+        padding: 12px;
+    }
+
+    .adm-pf-title{
+        font-size: 28px;
+    }
+
+    .adm-pf-card__name{
+        font-size: 20px;
+    }
+
+    .adm-pf-nav__btn{
+        padding: 11px 12px;
+        font-size: 13px;
+    }
+
+    .adm-pf-panel__title{
+        font-size: 18px;
+        letter-spacing: 1px;
+    }
+
+    .adm-pf-form,
+    .adm-pf-fields,
+    .adm-pf-panel__header{
+        padding-left: 12px;
+        padding-right: 12px;
     }
 
 }

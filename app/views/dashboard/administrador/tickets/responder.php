@@ -1,8 +1,7 @@
 <?php
 require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
-/*  El controller envía:
-    $ticket => array con la info del ticket  */
+/** @var array $ticket Información del ticket desde el controlador */
 
 $nombreAdmin = $_SESSION['user']['nombre'] ?? 'Administrador';
 $iniciales   = '';
@@ -34,6 +33,9 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
     <!-- CSS específico -->
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/tickets/responder.css">
+
+    <!-- CSS unificado para listados admin -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/consultas_admin_unificado.css">
 </head>
 
 <body class="adm-body">
@@ -265,6 +267,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="<?= BASE_URL ?>public/assets/dashboard/administrador/administrador/sidebar-toggle.js"></script>
 
 <script>
 (function () {
