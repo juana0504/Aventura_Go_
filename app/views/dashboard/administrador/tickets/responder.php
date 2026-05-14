@@ -1,8 +1,7 @@
 <?php
 require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
-/*  El controller envía:
-    $ticket => array con la info del ticket  */
+/** @var array $ticket Información del ticket desde el controlador */
 
 $nombreAdmin = $_SESSION['user']['nombre'] ?? 'Administrador';
 $iniciales   = '';
