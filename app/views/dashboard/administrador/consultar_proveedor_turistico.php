@@ -42,6 +42,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
     <!-- CSS específico de esta vista -->
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_turistico.css">
+</head>
 
     <!-- CSS unificado para listados admin -->
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/consultas_admin_unificado.css">
@@ -381,13 +382,34 @@ foreach (array_slice($partes, 0, 2) as $p) {
         </main>
     </div><!-- /.adm-main -->
 
+<div class="modal fade" id="verProveedorModal" tabindex="-1" aria-labelledby="verProveedorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content adm-modal">
+
+            <!-- Header -->
+            <div class="adm-modal__header">
+                <div class="adm-modal__logo-wrap">
+                    <img src="" alt="Logo proveedor" id="modal-logo" class="adm-modal__logo">
+                </div>
+                <div class="adm-modal__header-info">
+                    <div class="adm-modal__eyebrow">Proveedor Turístico</div>
+                    <h5 class="adm-modal__title" id="verProveedorModalLabel">Detalles del Proveedor</h5>
+                    <small class="adm-modal__subtitle">Información completa del proveedor turístico</small>
+                </div>
+                <button type="button" class="adm-modal__close" data-bs-dismiss="modal" aria-label="Cerrar">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal-body adm-modal__body">
+
 </div><!-- /.adm-layout -->
 
 
 <!-- ==========================================
      MODAL VER PROVEEDOR
      IDs originales intactos para el JS externo
-=========================================== -->
 <div class="modal fade" id="verProveedorModal" tabindex="-1" aria-labelledby="verProveedorModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content adm-modal">

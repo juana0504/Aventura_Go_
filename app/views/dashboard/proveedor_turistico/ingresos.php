@@ -35,7 +35,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
     <!-- CSS de proveedor -->
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/proveedorTuristico/proveedorTuristico.css">
-
+    
     <!-- CSS de ingresos (Siempre al final) -->
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/proveedorTuristico/ingresos.css">
 </head>

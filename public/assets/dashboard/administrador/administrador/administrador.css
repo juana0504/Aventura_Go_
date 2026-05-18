@@ -422,6 +422,526 @@ body.adm-no-scroll { overflow: hidden; }
 .adm-notif-item__icon--green { background: var(--adm-green-light); color: var(--adm-green); }
 .adm-notif-item__icon--amber { background: var(--adm-amber-light); color: var(--adm-amber); }
 .adm-notif-item__icon--blue  { background: var(--adm-blue-light);  color: var(--adm-blue); }
+.adm-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.adm-stat-card {
+    background: var(--adm-surface);
+    border: 1px solid var(--adm-border);
+    border-radius: var(--adm-radius-lg);
+    padding: 22px 20px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .25s, box-shadow .25s;
+    cursor: default;
+}
+
+.adm-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--adm-shadow-hover);
+}
+
+.adm-stat-card::after {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(234,130,23,.05);
+    pointer-events: none;
+}
+
+.adm-stat-card__icon {
+    width: 46px;
+    height: 46px;
+    border-radius: var(--adm-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+
+.adm-stat-card__icon--orange { background: var(--adm-primary-light); color: var(--adm-primary); }
+.adm-stat-card__icon--green  { background: var(--adm-green-light);   color: var(--adm-green); }
+.adm-stat-card__icon--blue   { background: var(--adm-blue-light);    color: var(--adm-blue); }
+
+.adm-stat-card__label {
+    font-size: 12px;
+    letter-spacing: .5px;
+    color: var(--adm-muted);
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.adm-stat-card__value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 1px;
+    color: var(--adm-text);
+    line-height: 1;
+}
+
+/* Tarjeta destacada */
+.adm-stat-card--featured {
+    background: var(--adm-sidebar-bg);
+    border-color: transparent;
+}
+
+.adm-stat-card--featured .adm-stat-card__label { color: rgba(255,255,255,.45); }
+.adm-stat-card--featured .adm-stat-card__value { color: var(--adm-primary); }
+
+/* =============================================
+   GRID DASHBOARD: main + aside
+.adm-dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 20px;
+    align-items: start;
+}
+
+.adm-dashboard-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+}
+
+.adm-dashboard-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ─── TARJETA GENÉRICA ────────────────────── */
+.adm-card {
+    background: var(--adm-surface);
+    border: 1px solid var(--adm-border);
+    border-radius: var(--adm-radius-lg);
+    overflow: hidden;
+}
+
+.adm-card--compact .adm-card__header { padding: 14px 18px 10px; }
+
+
+.adm-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px 14px;
+    border-bottom: 1px solid var(--adm-border);
+}
+
+.adm-card__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+    color: var(--adm-text);
+    margin: 0;
+}
+
+.adm-card__title span { color: var(--adm-primary); }
+
+/* ─── FILTROS ─────────────────────────────── */
+.adm-filtros {
+    padding: 16px 22px;
+    background: var(--adm-bg);
+    border-bottom: 1px solid var(--adm-border);
+    animation: slideDown .25s ease-out;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.adm-filtros__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: flex-end;
+}
+
+.adm-filtros__group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.adm-filtros__label {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--adm-muted);
+}
+
+.adm-filtros__select {
+    border: 1px solid var(--adm-border);
+    border-radius: var(--adm-radius-sm);
+    padding: 8px 10px;
+    background: var(--adm-surface);
+    color: var(--adm-text);
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    min-width: 130px;
+    cursor: pointer;
+    transition: border-color .2s;
+    outline: none;
+}
+
+.adm-filtros__select:focus { border-color: var(--adm-primary); }
+
+.adm-filtros__actions {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+}
+
+.adm-btn-apply, .adm-btn-clear {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: var(--adm-radius-sm);
+    padding: 8px 16px;
+    cursor: pointer;
+    border: none;
+    transition: all .2s;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: .3px;
+}
+
+.adm-btn-apply {
+    background: var(--adm-primary);
+    color: #fff;
+}
+
+.adm-btn-apply:hover { background: var(--adm-primary-dark); }
+
+.adm-btn-clear {
+    background: var(--adm-surface);
+    color: var(--adm-muted);
+    border: 1px solid var(--adm-border);
+}
+
+.adm-btn-clear:hover { background: var(--adm-bg); }
+
+/* Botón filtrar principal */
+.adm-btn-filtrar {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--adm-primary);
+    background: var(--adm-primary-light);
+    border: 1px solid rgba(234,130,23,.25);
+    border-radius: var(--adm-radius-sm);
+    padding: 7px 15px;
+    cursor: pointer;
+    transition: all .2s;
+    letter-spacing: .3px;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.adm-btn-filtrar:hover {
+    background: var(--adm-primary);
+    color: #fff;
+    border-color: var(--adm-primary);
+}
+
+/* ─── GRÁFICOS ────────────────────────────── */
+.adm-chart-wrap {
+    padding: 20px 22px;
+    height: 300px;
+    position: relative;
+}
+
+.adm-chart-wrap--sm {
+    height: 180px;
+    padding: 14px 18px 18px;
+}
+
+.adm-chart-wrap canvas,
+.adm-chart-wrap--sm canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* ─── CABECERA DE SECCIÓN ─────────────────── */
+.adm-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 22px;
+    margin-bottom: 0;
+}
+
+.adm-section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 1.2px;
+    color: var(--adm-text);
+    margin: 0;
+}
+
+.adm-section-title span { color: var(--adm-primary); }
+
+/* ─── TABLA ───────────────────────────────── */
+.adm-table-wrap {
+    overflow-x: auto;
+}
+
+.adm-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.adm-table thead th {
+    background: #f9fafb;
+    padding: 12px 20px;
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--adm-muted);
+    font-weight: 600;
+    border-bottom: 1px solid var(--adm-border);
+}
+
+.adm-table tbody tr {
+    border-bottom: 1px solid var(--adm-border);
+    transition: background .15s;
+}
+
+.adm-table tbody tr:last-child { border-bottom: none; }
+.adm-table tbody tr:hover { background: #fdf6ee; }
+
+.adm-table td {
+    padding: 14px 20px;
+    color: var(--adm-text);
+    vertical-align: middle;
+}
+
+.adm-table__name {
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.adm-table__price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    color: var(--adm-primary);
+    letter-spacing: .5px;
+}
+
+/* Empty state */
+.adm-empty-state {
+    padding: 40px;
+    text-align: center;
+    color: var(--adm-muted);
+    font-size: 14px;
+}
+
+.adm-empty-state__icon {
+    font-size: 36px;
+    opacity: .25;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.adm-empty-text {
+    font-size: 13px;
+    color: var(--adm-muted);
+    padding: 14px 18px;
+    margin: 0;
+}
+
+/* ─── TARJETA INGRESOS ────────────────────── */
+.adm-income-card {
+    background: #1a2b3c;
+    border-radius: var(--adm-radius-lg);
+    padding: 24px 22px;
+    position: relative;
+    overflow: hidden;
+}
+
+.adm-income-card::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: rgba(234,130,23,.12);
+    pointer-events: none;
+}
+
+.adm-income-card__eyebrow {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.4);
+    margin-bottom: 10px;
+}
+
+.adm-income-card__amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 1px;
+    color: var(--adm-primary);
+    line-height: 1;
+    margin-bottom: 6px;
+}
+
+.adm-income-card__label {
+    font-size: 12px;
+    color: rgba(255,255,255,.5);
+}
+
+/* ─── PAGOS ───────────────────────────────── */
+.adm-pagos-list {
+    list-style: none;
+    padding: 0 18px 14px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.adm-pagos-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+}
+
+.adm-pagos-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.adm-pagos-dot--green_r { background: #2ec804; }
+.adm-pagos-dot--blue_r  { background: #0066ff; }
+.adm-pagos-dot--red_r   { background: #ff0000; }
+
+.adm-pagos-text {
+    flex: 1;
+    color: var(--adm-text);
+}
+
+.adm-pagos-amount {
+    font-weight: 600;
+    color: var(--adm-primary);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    letter-spacing: .5px;
+}
+
+/* ─── ACCESOS RÁPIDOS ─────────────────────── */
+.adm-quick-links {
+    padding: 6px 0 10px;
+}
+
+.adm-quick-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 18px;
+    font-size: 13px;
+    color: var(--adm-text);
+    text-decoration: none;
+    transition: background .15s;
+    border-bottom: 1px solid var(--adm-border);
+}
+
+.adm-quick-link:last-child { border-bottom: none; }
+
+.adm-quick-link i:first-child {
+    font-size: 16px;
+    color: var(--adm-primary);
+    width: 20px;
+    flex-shrink: 0;
+}
+
+.adm-quick-link span { flex: 1; font-weight: 500; }
+
+.adm-quick-link__arrow {
+    font-size: 12px;
+    color: var(--adm-muted);
+    transition: transform .2s, color .2s;
+}
+
+.adm-quick-link:hover {
+    background: var(--adm-bg);
+    color: var(--adm-primary);
+    text-decoration: none;
+}
+
+.adm-quick-link:hover .adm-quick-link__arrow {
+    transform: translateX(3px);
+    color: var(--adm-primary);
+}
+
+/* ─── MODO OSCURO ─────────────────────────── */
+.adm-dark {
+    --adm-bg:      #0f1923;
+    --adm-surface: #1a2535;
+    --adm-border:  rgba(255,255,255,.08);
+    --adm-text:    #e8eaf0;
+    --adm-muted:   #8b95a5;
+}
+
+.adm-dark .adm-sidebar           { background: #111c27; }
+.adm-dark .adm-topbar__input     { color: var(--adm-text); }
+.adm-dark .adm-table thead th    { background: #1f2d3d; }
+.adm-dark .adm-table tbody tr:hover { background: rgba(234,130,23,.05); }
+.adm-dark .adm-stat-card--featured  { background: #111c27; }
+.adm-dark .adm-dropdown          { background: #1a2535; }
+.adm-dark .adm-notif-item--unread { background: rgba(234,130,23,.05); }
+.adm-dark .adm-notif-item:hover  { background: rgba(255,255,255,.04); }
+.adm-dark .adm-dropdown__footer:hover { background: rgba(255,255,255,.04); }
+.adm-dark .adm-dropdown__item:hover   { background: rgba(255,255,255,.04); }
+.adm-dark .adm-icon-btn--notif::after { border-color: var(--adm-surface); }
+.adm-dark .adm-filtros           { background: var(--adm-bg); }
+.adm-dark .adm-filtros__select   { background: var(--adm-surface); color: var(--adm-text); }
+.adm-dark .adm-btn-clear         { background: var(--adm-surface); border-color: var(--adm-border); }
+.adm-dark .adm-income-card       { background: #111c27; }
+
+/* ─── RESPONSIVE ──────────────────────────── */
+@media (max-width: 1200px) {
+    .adm-stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .adm-dashboard-grid { grid-template-columns: 1fr 260px; }
+}
+
+@media (max-width: 992px) {
+    .adm-dashboard-grid { grid-template-columns: 1fr; }
+    .adm-dashboard-aside { display: grid; grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+    :root { --adm-sidebar-width: 0px; }
+    .adm-sidebar { display: none; }
+    .adm-content { padding: 20px 18px; }
+    .adm-stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .adm-dashboard-aside { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+    .adm-stats-grid { grid-template-columns: 1fr 1fr; }
+    .adm-stat-card__value { font-size: 28px; }
 
 .adm-notif-item__body { flex: 1; min-width: 0; }
 
@@ -616,7 +1136,6 @@ body.adm-no-scroll { overflow: hidden; }
 
 /* =============================================
    TARJETAS DE ESTADÍSTICAS
-============================================= */
 .adm-stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -694,7 +1213,6 @@ body.adm-no-scroll { overflow: hidden; }
 
 /* =============================================
    GRID DASHBOARD: main + aside
-============================================= */
 .adm-dashboard-grid {
     display: grid;
     grid-template-columns: 1fr 300px;
