@@ -53,6 +53,10 @@ switch ($request) {
         require BASE_PATH . '/app/views/website/descubre_tours.php';
         break;
 
+    case '/descubre-hospedaje':
+        require BASE_PATH . '/app/views/website/descubre_hospedaje.php';
+        break;
+
     // Ruta: /tour escogido
     case '/tour-escogido': //ojo se modifico aca para darle login
         require BASE_PATH . '/app/views/website/tour_escogido.php';
@@ -164,10 +168,7 @@ switch ($request) {
 
 
     // RUTA EN TURISTA PARA SELECCIONAR HOSPEDAJE
-    // Ruta: descubre hospedaje
-    case '/descubre-hospedaje':
-        require BASE_PATH . '/app/views/website/descubre_hospedaje.php';
-        break;
+
 
 
 
