@@ -7,7 +7,15 @@ class PasswordChangeController
 {
     public function cambiarClave()
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Si llega por enlace (GET), abrir el panel de cambio en la vista de perfil.
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') {
+            header('Location: ' . BASE_URL . 'administrador/perfil?section=cambiar');
+            exit();
+        }
 
         $clave_actual = $_POST['clave_actual'] ?? '';
         $clave_nueva  = $_POST['clave_nueva'] ?? '';
@@ -59,7 +67,7 @@ class PasswordChangeController
                 'success',
                 'Listo',
                 'Contraseña actualizada correctamente.',
-                '/aventura_go/login'
+                BASE_URL . 'login'
             );
         } else {
             mostrarSweetAlert('error', 'Error', 'No se pudo actualizar la contraseña.');

@@ -101,9 +101,22 @@
     color: var(--adm-text); line-height: 1;
 }
 
-.adm-pv-stat--featured { background: #1a2b3c; border-color: transparent; }
-.adm-pv-stat--featured .adm-pv-stat__label { color: rgba(255,255,255,.45); }
+.adm-pv-stat--featured { background: linear-gradient(135deg, #fff6ec 0%, #ffffff 100%); border-color: rgba(234,130,23,.22); }
+.adm-pv-stat--featured .adm-pv-stat__label { color: var(--adm-muted); }
 .adm-pv-stat--featured .adm-pv-stat__value { color: var(--adm-primary); }
+
+body:not(.adm-dark) .adm-pv-stat--featured {
+    background: linear-gradient(135deg, #fff6ec 0%, #ffffff 100%) !important;
+    border-color: rgba(234,130,23,.22) !important;
+}
+
+body:not(.adm-dark) .adm-pv-stat--featured .adm-pv-stat__label {
+    color: var(--adm-muted) !important;
+}
+
+body:not(.adm-dark) .adm-pv-stat--featured .adm-pv-stat__value {
+    color: var(--adm-primary) !important;
+}
 
 /* ─── FILTROS ─────────────────────────────── */
 .adm-pv-filters {
@@ -245,14 +258,18 @@
 @media (max-width: 1100px) { .adm-pv-stats { grid-template-columns: repeat(2, 1fr); } }
 
 @media (max-width: 768px) {
-    .adm-pv-stats { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .adm-pv-stats { grid-template-columns: 1fr; gap: 12px; }
     .adm-page-header { flex-direction: column; align-items: flex-start; }
     .adm-page-header__actions { width: 100%; }
     .adm-btn-pdf { width: 100%; justify-content: center; }
     .adm-pv-email { max-width: 140px; }
+    .adm-pv-filters { gap: 8px; }
+    .adm-pv-filter { flex: 1 1 100%; text-align: center; }
+    .adm-table-wrap--card { overflow-x: auto; }
+    .adm-table { min-width: 820px; }
 }
 
 @media (max-width: 480px) {
-    .adm-pv-stats { grid-template-columns: 1fr 1fr; }
-    .adm-pv-stat__value { font-size: 26px; }
+    .adm-pv-stats { grid-template-columns: 1fr; }
+    .adm-pv-stat__value { font-size: 24px; }
 }

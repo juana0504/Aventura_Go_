@@ -1,111 +1,156 @@
 <?php
-// Al principio de tu archivo de controlador de reportes, añade esto:
-require_once BASE_PATH . '/app/controllers/turista/reservas.php'; // Ajusta la ruta a donde tengas la función listarReservas
+require_once BASE_PATH . '/app/helpers/session_administrador.php';
 require_once BASE_PATH . '/app/helpers/pdf_helper.php';
-require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';
-require_once BASE_PATH . '/app/controllers/administrador/hotelero.php';
-require_once BASE_PATH . '/app/controllers/administrador/turista.php';
-require_once BASE_PATH . '/app/controllers/turista/verReservaPdfController.php';
-
+require_once BASE_PATH . '/app/models/administrador/proveedor.php';
+require_once BASE_PATH . '/app/models/administrador/hotelero.php';
+require_once BASE_PATH . '/app/models/administrador/turista.php';
 
 function reportesPdfControlers()
 {
-    // Usamos el operador null coalescing ?? para evitar error si 'tipo' no existe
-    $tipo = $_GET['tipo'] ?? ''; 
+    $tipo = strtolower(trim($_GET['tipo'] ?? ''));
+    $estado = strtolower(trim($_GET['estado'] ?? ''));
+    $fechaDesde = trim($_GET['fecha_desde'] ?? '');
+    $fechaHasta = trim($_GET['fecha_hasta'] ?? '');
+
+    // Si no llega tipo, se muestra el modulo visual de reportes.
+    if ($tipo === '') {
+        require_once BASE_PATH . '/app/views/dashboard/administrador/reportes.php';
+        return;
+    }
 
     switch ($tipo) {
-        case 'turista_reservas': // Nuevo caso
-            reporteMisReservasPdf();
+        case 'turistico':
+        case 'proveedor':
+        case 'proveedores':
+            reporteProveedoresPdf($estado, $fechaDesde, $fechaHasta);
             break;
+
+        case 'hoteles':
+        case 'hotelero':
+        case 'hoteleros':
+            reporteHotelesPdf($estado, $fechaDesde, $fechaHasta);
+            break;
+
         case 'turista':
-            reporteTuristasPdf();
+        case 'turistas':
+            reporteTuristasPdf($estado, $fechaDesde, $fechaHasta);
             break;
-            $tipo = $_GET['tipo'] ?? '';
-        if ($tipo === 'turista_reservas') {
-            generarPdfReservasTurista();
-    }
+
         default:
-            die("Error: Tipo de reporte no especificado o no válido.");
-            break;
+            http_response_code(400);
+            die('Error: Tipo de reporte no valido.');
     }
 }
 
-function reporteMisReservasPdf()
+function normalizarEstado($estado)
 {
-    // 1. Validar sesión
-    if (!isset($_SESSION['user']['id_usuario'])) {
-        die("Error: No has iniciado sesión.");
+    $estado = strtolower(trim((string)$estado));
+    if ($estado === 'todos' || $estado === 'all') {
+        return '';
     }
-
-    $id_usuario = $_SESSION['user']['id_usuario'];
-
-    // 2. IMPORTANTE: Asegúrate de que esta función exista en 
-    // app/controllers/turista/reservas.php. 
-    // Si en ese archivo la función se llama diferente (ej: obtenerReservas), cámbiala aquí.
-    if (function_exists('listarReservasPorUsuario')) {
-        $reservas = listarReservasPorUsuario($id_usuario);
-    } else {
-        // Esto te dirá exactamente si el error es que la función no existe
-        die("Error crítico: La función 'listarReservasPorUsuario' no se encuentra. Verifica el archivo reservas.php");
-    }
-
-    // 3. Generar el buffer
-    ob_start();
-    
-    // Pasamos el BASE_URL para las imágenes en el PDF
-    $reservas_data = $reservas; 
-
-    // Cargar la vista diseñada
-    require_once BASE_PATH . '/app/views/pdf/mis_reservas_pdf.php'; 
-    
-    $html = ob_get_clean();
-
-    // 4. Llamar al helper para convertir a PDF
-    generarPDF($html, 'Mis_Reservas_AventuraGO.pdf', false);
+    return $estado;
 }
 
-function reporteProveedoresPdf()
+function normalizarFechaInicio($fecha)
 {
+    if ($fecha === '') {
+        return null;
+    }
 
-    // CARGAR LA VISTA Y OBTENERLACOMO HTML
+    $timestamp = strtotime($fecha . ' 00:00:00');
+    return $timestamp !== false ? $timestamp : null;
+}
+
+function normalizarFechaFin($fecha)
+{
+    if ($fecha === '') {
+        return null;
+    }
+
+    $timestamp = strtotime($fecha . ' 23:59:59');
+    return $timestamp !== false ? $timestamp : null;
+}
+
+function extraerFechaFila(array $fila)
+{
+    $keys = ['fecha_creacion', 'fecha_registro', 'created_at', 'fecha', 'fecha_alta'];
+
+    foreach ($keys as $key) {
+        if (!empty($fila[$key])) {
+            $timestamp = strtotime((string)$fila[$key]);
+            if ($timestamp !== false) {
+                return $timestamp;
+            }
+        }
+    }
+
+    return null;
+}
+
+function filtrarRegistros(array $items, $estado, $fechaDesde, $fechaHasta)
+{
+    $estado = normalizarEstado($estado);
+    $desdeTs = normalizarFechaInicio($fechaDesde);
+    $hastaTs = normalizarFechaFin($fechaHasta);
+
+    return array_values(array_filter($items, function ($fila) use ($estado, $desdeTs, $hastaTs) {
+        $estadoFila = strtolower(trim((string)($fila['estado'] ?? '')));
+
+        if ($estado !== '' && $estadoFila !== $estado) {
+            return false;
+        }
+
+        if ($desdeTs !== null || $hastaTs !== null) {
+            $fechaFila = extraerFechaFila($fila);
+
+            if ($fechaFila === null) {
+                return false;
+            }
+            if ($desdeTs !== null && $fechaFila < $desdeTs) {
+                return false;
+            }
+            if ($hastaTs !== null && $fechaFila > $hastaTs) {
+                return false;
+            }
+        }
+
+        return true;
+    }));
+}
+
+function reporteProveedoresPdf($estado = '', $fechaDesde = '', $fechaHasta = '')
+{
+    $proveedorModel = new Proveedor();
+    $proveedores = $proveedorModel->listar();
+    $proveedores = filtrarRegistros($proveedores, $estado, $fechaDesde, $fechaHasta);
+
     ob_start();
-
-    // ASIGNAMOS LOS DATOS DE LA FUNCION EN EL CONTROLADOR ENLAZADO A UNA VARIABLE QUE PODAMOS MANIPULAR EN LA VISTA DEL PDF
-    $proveedores = listarProveedores();
-
-    // ARCHIVO QUE TIENE LA INTERFAZ DISEÑANDA EN HTML
     require_once BASE_PATH . '/app/views/pdf/proveedor_pdf.php';
     $html = ob_get_clean();
 
     generarPDF($html, 'reporte_proveedores.pdf', false);
 }
 
-function reporteHotelesPdf()
+function reporteHotelesPdf($estado = '', $fechaDesde = '', $fechaHasta = '')
 {
+    $hoteleroModel = new Hotelero();
+    $hoteles = $hoteleroModel->listar();
+    $hoteles = filtrarRegistros($hoteles, $estado, $fechaDesde, $fechaHasta);
 
-    // CARGAR LA VISTA Y OBTENERLACOMO HTML
     ob_start();
-
-    // ASIGNAMOS LOS DATOS DE LA FUNCION EN EL CONTROLADOR ENLAZADO A UNA VARIABLE QUE PODAMOS MANIPULAR EN LA VISTA DEL PDF
-    $hoteles = listarHoteles();
-
-    // ARCHIVO QUE TIENE LA INTERFAZ DISEÑANDA EN HTML
     require_once BASE_PATH . '/app/views/pdf/hoteles_pdf.php';
     $html = ob_get_clean();
 
-    generarPDF($html, 'reporte_proveedores.pdf', false);
+    generarPDF($html, 'reporte_hoteles.pdf', false);
 }
 
-function reporteTuristasPdf()
+function reporteTuristasPdf($estado = '', $fechaDesde = '', $fechaHasta = '')
 {
+    $turistaModel = new Turista();
+    $turistas = $turistaModel->listar();
+    $turistas = filtrarRegistros($turistas, $estado, $fechaDesde, $fechaHasta);
 
-    // CARGAR LA VISTA Y OBTENERLACOMO HTML
     ob_start();
-
-    // ASIGNAMOS LOS DATOS DE LA FUNCION EN EL CONTROLADOR ENLAZADO A UNA VARIABLE QUE PODAMOS MANIPULAR EN LA VISTA DEL PDF
-    $turistas = listarTuristas();
-
-    // ARCHIVO QUE TIENE LA INTERFAZ DISEÑANDA EN HTML
     require_once BASE_PATH . '/app/views/pdf/turista_pdf.php';
     $html = ob_get_clean();
 

@@ -648,6 +648,16 @@
         align-items: flex-start;
     }
 
+    .adm-page-header__actions {
+        width: 100%;
+    }
+
+    .adm-btn-primary,
+    .adm-btn-pdf {
+        width: 100%;
+        justify-content: center;
+    }
+
     .adm-modal__grid--2,
     .adm-modal__grid--3 {
         grid-template-columns: 1fr;
@@ -667,7 +677,7 @@
     }
 
     .adm-table {
-        min-width: 1000px;
+        min-width: 900px;
     }
 
     .adm-table-wrap--card {
@@ -687,5 +697,21 @@
     .adm-modal__btn-success,
     .adm-modal__btn-danger {
         justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .adm-pv-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .adm-pv-stat__value {
+        font-size: 24px;
+    }
+
+    .adm-modal__body,
+    .adm-modal__header,
+    .adm-modal__footer {
+        padding: 16px;
     }
 }
