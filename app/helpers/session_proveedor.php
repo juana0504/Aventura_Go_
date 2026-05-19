@@ -1,6 +1,14 @@
 <?php
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+//VALIDAMOS SI HAY UNA SESION ACTIVA
+if (!isset($_SESSION['user'])) {
+    header('Location: /aventura_go/login');
+    exit;
+}
 
 //VALIDAMOS SI HAY UNA SECCION ACTIVA, se crea solo cuando hay una sesion activa
 if (!isset($_SESSION['user'])) {

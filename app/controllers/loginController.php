@@ -30,7 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     //si pasa esta linea el ususario es valido
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     $_SESSION['user'] = [
         'id_usuario' => $resultado['id_usuario'],
         'nombre' => $resultado['nombre'],
