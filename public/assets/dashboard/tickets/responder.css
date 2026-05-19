@@ -1,165 +1,256 @@
-/* =========================
-   VARIABLES APLICADAS
-========================= */
-:root {
-    --color-primary: #2D4059;
-    --color-secondary: #EA8217;
-    --color-white: #FFFFFF;
-    --color-bg-light: #F8F9FA;
-    --color-border: #E0E0E0;
-    --color-text: #2b2b2b;
-    --font-titles: 'Raleway', sans-serif;
-    --font-text: 'Lato', sans-serif;
+/* =============================================
+   AVENTURAGO — TICKETS ADMIN — responder.css
+   Complementa admin.css
+   Colores completos modo DÍA y NOCHE
+============================================= */
+
+/* Botón volver */
+.adm-btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--adm-surface);
+    color: var(--adm-muted);
+    border: 1px solid var(--adm-border);
+    border-radius: var(--adm-radius-sm);
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all .2s;
+    font-family: 'DM Sans', sans-serif;
 }
 
-/* =========================
-   CONTENEDOR GENERAL
-========================= */
-#admin-dashboard {
+.adm-btn-back:hover {
+    border-color: rgba(234,130,23,.4);
+    color: var(--adm-primary);
+    background: var(--adm-primary-light);
+    text-decoration: none;
+}
+
+/* ─── LAYOUT DOS COLUMNAS ─────────────────── */
+.adm-reply-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+/* ─── CARD GENÉRICA ───────────────────────── */
+.adm-reply-card {
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.adm-reply-card:last-child { margin-bottom: 0; }
+
+.adm-reply-card__body {
+    padding: 20px;
     display: flex;
-    min-height: 100vh;
-    background-color: var(--color-bg-light);
-    font-family: var(--font-text);
+    flex-direction: column;
+    gap: 14px;
 }
 
-/* CONTENIDO DERECHO */
-#admin-dashboard .info {
-    flex: 1;
-    padding: 20px 30px;
-    margin-left: 0px; 
+/* ─── ESTADO BADGE ────────────────────────── */
+.adm-reply-status-row { display: flex; align-items: center; }
+
+.adm-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; font-weight: 600;
+    padding: 5px 12px; border-radius: 20px;
+    letter-spacing: .4px; text-transform: capitalize;
+    font-family: 'DM Sans', sans-serif;
 }
 
-/* =========================
-   TITULO
-========================= */
-.info h2 {
-    font-family: var(--font-titles);
-    font-weight: 700;
-    color: var(--color-primary); /* Cambiado al azul de tu paleta */
+.adm-badge__dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+.adm-badge--confirmed { background: var(--adm-green-light); color: #059669; }
+.adm-badge--pending   { background: var(--adm-amber-light); color: #d97706; }
+.adm-badge--cancelled { background: var(--adm-red-light);   color: #dc2626; }
+
+/* ─── CAMPOS DE INFO ──────────────────────── */
+.adm-reply-field {
+    background: var(--adm-bg);
+    border: 1px solid var(--adm-border);
+    border-left: 3px solid #1a2b3c;
+    border-radius: var(--adm-radius-sm);
+    padding: 12px 14px;
+    transition: border-left-color .2s;
+}
+
+.adm-reply-field:hover { border-left-color: var(--adm-primary); }
+
+.adm-reply-field__label {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--adm-muted);
+    font-weight: 600;
+    margin-bottom: 6px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
 }
 
-.info h2 i {
-    color: var(--color-secondary); /* El icono resalta con tu naranja secundario */
-}
+.adm-reply-field__label i { color: var(--adm-primary); }
 
-/* =========================
-   TARJETAS
-========================= */
-.card {
-    border: 1px solid var(--color-border);
-    border-radius: 14px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
-}
-
-/* =========================
-   INFO TICKET
-========================= */
-.card-body p {
-    margin-bottom: 8px;
+.adm-reply-field__value {
     font-size: 14px;
-    color: var(--color-text);
+    font-weight: 500;
+    color: var(--adm-text);
+    line-height: 1.4;
 }
 
-.card-body strong {
-    color: var(--color-primary);
+/* ─── BLOQUE DE TEXTO (consulta/respuesta) ── */
+.adm-reply-block {
+    background: var(--adm-surface);
+    border: 1px solid var(--adm-border);
+    border-radius: var(--adm-radius-lg);
+    overflow: hidden;
 }
 
-/* DESCRIPCION */
-.card-body .bg-light {
-    background-color: var(--color-bg-light) !important;
-    border: 1px solid var(--color-border) !important;
-    border-radius: 10px;
+.adm-reply-block--query { border-left: 4px solid var(--adm-muted); }
+.adm-reply-block--reply { border-left: 4px solid var(--adm-primary); }
+
+.adm-reply-block__label {
+    padding: 12px 16px;
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--adm-muted);
+    border-bottom: 1px solid var(--adm-border);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--adm-bg);
+}
+
+.adm-reply-block--reply .adm-reply-block__label { color: var(--adm-primary); }
+
+.adm-reply-block__text {
     font-size: 14px;
-    color: var(--color-text);
+    color: var(--adm-text);
+    line-height: 1.7;
+    margin: 0;
+    padding: 16px;
+    white-space: pre-wrap;
 }
 
-/* =========================
-   BADGE ESTADO
-========================= */
-.badge {
+/* ─── FORMULARIO ──────────────────────────── */
+.adm-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.adm-form-label {
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--adm-muted);
+    font-family: 'DM Sans', sans-serif;
+}
+
+.adm-form-textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--adm-border);
+    border-radius: var(--adm-radius-sm);
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--adm-text);
+    background: var(--adm-bg);
+    resize: vertical;
+    min-height: 180px;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+    line-height: 1.6;
+}
+
+.adm-form-textarea:focus {
+    border-color: var(--adm-primary);
+    box-shadow: 0 0 0 3px rgba(234,130,23,.1);
+    background: var(--adm-surface);
+}
+
+.adm-form-textarea::placeholder { color: var(--adm-muted); }
+
+/* ─── FOOTER DEL FORMULARIO ───────────────── */
+.adm-reply-form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--adm-border);
+    margin-top: 4px;
+}
+
+.adm-btn-back-sm {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--adm-surface);
+    color: var(--adm-muted);
+    border: 1px solid var(--adm-border);
+    border-radius: var(--adm-radius-sm);
+    padding: 9px 18px;
     font-size: 13px;
-    padding: 6px 10px;
-    border-radius: 8px;
-    font-weight: 600;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all .2s;
+    font-family: 'DM Sans', sans-serif;
 }
 
-/* =========================
-   HEADER RESPUESTA
-========================= */
-.card-header {
-    border-top-left-radius: 14px;
-    border-top-right-radius: 14px;
-    font-weight: 600;
-    font-size: 15px;
-    font-family: var(--font-titles);
+.adm-btn-back-sm:hover {
+    background: var(--adm-bg);
+    color: var(--adm-text);
+    text-decoration: none;
 }
 
-/* Cambiado al gradiente con tu azul primario */
-.card-header.bg-primary {
-    background: linear-gradient(135deg, var(--color-primary), #1a2a3d); 
-    color: var(--color-white);
-}
-
-/* =========================
-   FORMULARIO
-========================= */
-.form-label {
-    font-weight: 600;
-    color: var(--color-text);
-}
-
-.form-control {
-    border-radius: 10px;
-    border: 1px solid var(--color-border);
-    font-size: 14px;
-    padding: 12px;
-}
-
-/* Foco con tu azul primario */
-.form-control:focus {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(45, 64, 89, 0.15);
-}
-
-/* =========================
-   BOTONES
-========================= */
-.btn {
-    border-radius: 10px;
-    font-weight: 600;
-    padding: 8px 16px;
-    font-size: 14px;
-    transition: all 0.3s ease;
-}
-
-/* ENVIAR - Usando tu color secundario naranja para que destaque */
-.btn-success {
-    background-color: var(--color-secondary);
+.adm-btn-send {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--adm-green);
+    color: #fff;
     border: none;
-    color: var(--color-white);
+    border-radius: var(--adm-radius-sm);
+    padding: 11px 24px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: 'DM Sans', sans-serif;
 }
 
-.btn-success:hover {
-    background-color: #d17212; /* Un tono más oscuro del naranja */
+.adm-btn-send:hover {
+    background: #059669;
     transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16,185,129,.3);
 }
 
-/* VOLVER */
-.btn-secondary {
-    background-color: var(--color-border);
-    color: var(--color-text);
-    border: none;
+/* ─── MODO OSCURO — DÍA Y NOCHE ──────────── */
+
+/* Día — ya hereda de admin.css con variables, no se necesita nada extra */
+
+/* Noche */
+.adm-dark .adm-reply-card__body   { background: var(--adm-surface); }
+.adm-dark .adm-reply-field        { background: var(--adm-bg); border-color: var(--adm-border); }
+.adm-dark .adm-reply-field__value { color: var(--adm-text); }
+.adm-dark .adm-reply-block        { background: var(--adm-surface); border-color: var(--adm-border); }
+.adm-dark .adm-reply-block__label { background: var(--adm-bg); border-color: var(--adm-border); }
+.adm-dark .adm-reply-block__text  { color: var(--adm-text); }
+.adm-dark .adm-form-textarea      { background: var(--adm-bg); color: var(--adm-text); border-color: var(--adm-border); }
+.adm-dark .adm-form-textarea:focus { background: var(--adm-surface); }
+.adm-dark .adm-reply-form-footer  { border-color: var(--adm-border); }
+
+/* ─── RESPONSIVE ──────────────────────────── */
+@media (max-width: 900px) {
+    .adm-reply-layout { grid-template-columns: 1fr; }
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-@media (max-width: 992px) {
-    #admin-dashboard .info {
-        margin-left: 0;
-        padding: 15px;
-    }
+@media (max-width: 768px) {
+    .adm-btn-back { width: 100%; justify-content: center; }
 }

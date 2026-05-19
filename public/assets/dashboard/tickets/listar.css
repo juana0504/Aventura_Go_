@@ -1,152 +1,70 @@
-/* =========================
-   CONTENEDOR GENERAL
-========================= */
-#admin-dashboard {
-    display: flex;
-    min-height: 100vh;
-    background-color: #f4f6f9;
-}
+/* =============================================
+   AVENTURAGO — TICKETS ADMIN — listar.css
+   Complementa admin.css
+   Colores completos modo DÍA y NOCHE
+============================================= */
 
-/* CONTENIDO DERECHO */
-#admin-dashboard .info {
-    flex: 1;
-    padding: 20px 30px;
-}
+.adm-tk-stat__icon--orange { background: var(--adm-primary-light); color: var(--adm-primary); }
+.adm-tk-stat__icon--amber  { background: var(--adm-amber-light);   color: var(--adm-amber); }
+.adm-tk-stat__icon--green  { background: var(--adm-green-light);   color: var(--adm-green); }
+.adm-tk-stat__icon--blue   { background: var(--adm-blue-light);    color: var(--adm-blue); }
 
-/* =========================
-   TITULO
-========================= */
-.info h2 {
-    font-weight: 700;
-    color: #1f2937;
-    display: flex;
+/* ID del ticket */
+.adm-tk-id {
+    display: inline-flex;
     align-items: center;
-    gap: 10px;
-}
-
-.info h2 i {
-    color: #2563eb;
-}
-
-/* =========================
-   TABLA
-========================= */
-.table-responsive {
-    background: #ffffff;
-    border-radius: 14px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
-    padding: 20px;
-}
-
-.table {
-    margin-bottom: 0;
-    border-collapse: separate;
-    border-spacing: 0 10px;
-}
-
-/* HEADER */
-.table thead th {
-    background-color: #111827 !important;
-    color: #ffffff;
-    font-size: 14px;
-    border: none;
-    padding: 14px;
-}
-
-/* FILAS */
-.table tbody tr {
-    background: #f9fafb;
-    border-radius: 10px;
-    transition: all 0.25s ease;
-}
-
-.table tbody tr:hover {
-    background-color: #eef2ff;
-    transform: scale(1.01);
-}
-
-/* CELDAS */
-.table td {
-    vertical-align: middle;
-    padding: 14px;
-    font-size: 14px;
-    color: #374151;
-    border-top: none;
-}
-
-/* =========================
-   BADGES ESTADO
-========================= */
-.badge {
-    font-size: 13px;
-    padding: 6px 10px;
-    border-radius: 8px;
-    font-weight: 600;
-}
-
-.badge.bg-warning {
-    background-color: #fde68a !important;
-    color: #92400e !important;
-}
-
-.badge.bg-success {
-    background-color: #bbf7d0 !important;
-    color: #065f46 !important;
-}
-
-.badge.bg-secondary {
-    background-color: #e5e7eb !important;
-    color: #374151 !important;
-}
-
-/* =========================
-   ACCIONES
-========================= */
-.table td a {
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    margin-right: 8px;
-}
-
-.table td a:first-child {
-    color: #2563eb;
-}
-
-.table td a:first-child:hover {
-    text-decoration: underline;
-}
-
-/* BOTON CERRAR */
-.table .btn-danger {
-    background-color: #ef4444;
-    border: none;
-    border-radius: 8px;
-    padding: 4px 8px;
-}
-
-.table .btn-danger:hover {
-    background-color: #dc2626;
-}
-
-/* =========================
-   MENSAJE VACIO
-========================= */
-.table td.text-muted {
-    padding: 40px 0;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 15px;
+    letter-spacing: 1px;
+    color: var(--adm-primary);
+    background: var(--adm-primary-light);
+    padding: 3px 9px;
+    border-radius: 6px;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-@media (max-width: 992px) {
-    #admin-dashboard .info {
-        margin-left: 0;
-        padding: 15px;
-    }
-
-    .table-responsive {
-        padding: 15px;
-    }
+/* Badges */
+.adm-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; font-weight: 600;
+    padding: 4px 10px; border-radius: 20px;
+    letter-spacing: .4px; text-transform: capitalize;
+    font-family: 'DM Sans', sans-serif;
 }
+
+.adm-badge__dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+.adm-badge--confirmed { background: var(--adm-green-light); color: #059669; }
+.adm-badge--pending   { background: var(--adm-amber-light); color: #d97706; }
+.adm-badge--cancelled { background: var(--adm-red-light);   color: #dc2626; }
+
+/* Botones de acción */
+.adm-pv-actions { display: flex; gap: 6px; align-items: center; }
+
+.adm-pv-btn {
+    width: 34px; height: 34px;
+    border-radius: var(--adm-radius-sm);
+    border: none;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; cursor: pointer;
+    transition: all .2s; text-decoration: none; flex-shrink: 0;
+}
+
+.adm-pv-btn--view   { background: var(--adm-blue-light);  color: var(--adm-blue); }
+.adm-pv-btn--view:hover   { background: var(--adm-blue);  color: #fff; transform: translateY(-1px); text-decoration: none; }
+.adm-pv-btn--delete { background: var(--adm-red-light);   color: var(--adm-red); }
+.adm-pv-btn--delete:hover { background: var(--adm-red);   color: #fff; transform: translateY(-1px); text-decoration: none; }
+
+/* Empty state */
+.adm-empty-state { padding: 52px 24px; text-align: center; color: var(--adm-muted); }
+.adm-empty-state__icon { font-size: 40px; opacity: .2; display: block; margin-bottom: 12px; }
+.adm-empty-state p { font-size: 14px; }
+
+/* Sección header */
+.adm-section-header { display: flex; align-items: center; justify-content: space-between; }
+.adm-section-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1.5px; color: var(--adm-text); margin: 0; }
+.adm-section-title span { color: var(--adm-primary); }
+
+.adm-table__act-name { font-weight: 600; font-size: 13px; color: var(--adm-text); }
+
+/* ─── MODO OSCURO ─────────────────────────── */
+.adm-dark .adm-table__act-name   { color: var(--adm-text); }
+.adm-dark .adm-section-title     { color: var(--adm-text); }
