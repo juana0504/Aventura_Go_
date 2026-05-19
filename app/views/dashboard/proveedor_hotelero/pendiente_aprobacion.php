@@ -1,4 +1,10 @@
-<?php require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php'; ?>
+<?php
+require_once __DIR__ . '/../../../../config/config.php';
+require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
+require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';
+
+$proveedor = listarProveedores()[0] ?? null; // Assuming the first provider is used
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -40,9 +46,7 @@
 
         <!-- PANEL LATERAL -->
         <aside class="sidebar">
-            <?php
-            include_once __DIR__ . '/../../layouts/proveedor_hotelero_panel_izq.php';
-            ?>
+            <?php include_once __DIR__ . '/../../layouts/proveedor_hotelero_panel_izq.php'; ?>
         </aside>
 
         <!-- Contenido Principal -->
@@ -89,6 +93,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script src="<?= BASE_URL ?>public/assets/dashboard/proveedor_hotelero/registrar_informacion/registrar_informacion.js"></script>
+
     <script>
         // Toggle sidebar
         const btnMenu = document.getElementById("btnMenu");
@@ -99,6 +105,11 @@
                 sidebar.classList.toggle("activo");
             });
         }
+
+        // Ensure the hamburger menu toggle works
+        btnMenu.addEventListener("click", () => {
+            sidebar.classList.toggle("activo");
+        });
     </script>
 
 </body>

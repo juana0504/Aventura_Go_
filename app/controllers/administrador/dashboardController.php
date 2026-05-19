@@ -44,6 +44,10 @@ class DashboardAdminController
     {
         header('Content-Type: application/json');
         $tipo = $_GET['tipo'] ?? 'dias'; // 'anio', 'mes' o por defecto últimos días
+        $mesFiltro = isset($_GET['mes']) && is_numeric($_GET['mes'])
+            ? (int) $_GET['mes']
+            : null;
+
         $graficoReservas = [];
         switch ($tipo) {
             case 'anio':
@@ -60,6 +64,16 @@ class DashboardAdminController
                     $graficoReservas = $this->model->getReservasPorMes($anio);
                 } else {
                     $graficoReservas = $this->model->getReservasPorMesGlobal();
+                }
+
+                // Si se selecciona un mes puntual, filtrar para que grafico y tabla coincidan.
+                if ($mesFiltro !== null && $mesFiltro >= 1 && $mesFiltro <= 12) {
+                    $graficoReservas = array_values(array_filter(
+                        $graficoReservas,
+                        static function ($row) use ($mesFiltro) {
+                            return isset($row['periodo']) && (int) $row['periodo'] === $mesFiltro;
+                        }
+                    ));
                 }
                 break;
             default:

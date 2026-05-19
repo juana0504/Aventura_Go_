@@ -21,7 +21,7 @@
     /* 🔴 CLAVE */
     padding: 15px 40px;
     background-color: #ffffff;
-    overflow-x: hidden;
+    overflow-x: auto;
     /* 🔴 CLAVE */
 }
 
@@ -41,5 +41,22 @@
 
     .info {
         margin-left: 0;
+        padding: 14px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .panel {
+        width: 100%;
+    }
+
+    .info {
+        padding: 12px 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .info {
+        padding: 10px;
     }
 }
