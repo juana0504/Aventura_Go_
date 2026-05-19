@@ -28,6 +28,9 @@ $fecha = $_SESSION['reserva']['fecha'];
 
 require_once BASE_PATH . '/app/models/proveedor_turistico/ActividadTuristica.php';
 
+
+
+// 🔴 SI VIENE DEL FORM (POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $_SESSION['reserva'] = [
@@ -37,19 +40,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ];
 }
 
-if (
-    !isset($_SESSION['reserva']['id_actividad']) ||
-    !isset($_SESSION['reserva']['cantidad']) ||
-    !isset($_SESSION['reserva']['fecha'])
-) {
-    echo "Error: datos de reserva incompletos.";
+// 🔴 SI EXISTE SESSION → USARLA
+$idActividad = $_SESSION['reserva']['id_actividad'] ?? null;
+$cantidad = $_SESSION['reserva']['cantidad'] ?? 1;
+$fecha = $_SESSION['reserva']['fecha'] ?? null;
+
+// 🔹 Validar datos
+if (!$idActividad) {
+    echo "Error: no hay datos de la reserva.";
     exit;
 }
 
-$idActividad = $_SESSION['reserva']['id_actividad'];
-$cantidad = $_SESSION['reserva']['cantidad'];
-$fecha = $_SESSION['reserva']['fecha'];
-
+// 🔹 Obtener actividad
 $actividadModel = new ActividadTuristica();
 $actividad = $actividadModel->obtenerPorId($idActividad);
 
