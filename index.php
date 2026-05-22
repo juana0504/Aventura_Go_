@@ -2,8 +2,8 @@
 //index.php - Router principal en larabel se tiene un archivo por cada carpeta de views
 
 //HABILITAR LA VISUALIZACION DE ERRORES EN PHP (PARA DESARROLLO, NO USAR EN PRODUCCION)
-// error_reporting(E_ALL);
-// ini_set('display_errors', 1);
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 
 require_once __DIR__ . '/config/config.php';
@@ -450,7 +450,7 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/proveedor_turistico/dashboard.php';
         break;
 
-    //rutas actualizacion proveedor hotelero
+    //rutas actualizacion proveedor
     case '/proveedor/pendiente':
         require BASE_PATH . '/app/views/dashboard/proveedor_turistico/pendiente_aprobacion.php'; //redirige a la pagina de pendiente de aprobacion del proveedor turistico ALB 19/02/2026
         break;
