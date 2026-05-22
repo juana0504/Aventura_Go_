@@ -8,6 +8,8 @@ $idUsuario = $_SESSION['user']['id_usuario'];
 
 $model = new registrarInformacionModel();
 
+$model->crearProveedor($idUsuario);
+
 /* =====================================
    SI ES POST → ACTUALIZAR INFORMACIÓN
 ===================================== */
