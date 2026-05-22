@@ -45,7 +45,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- CSS sistema admin -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/administrador/administrador.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/administrador/admin.css">
 </head>
 
 <body class="adm-body">
