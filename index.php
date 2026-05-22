@@ -8,9 +8,19 @@
 
 require_once __DIR__ . '/config/config.php';
 
-$requestUri = $_SERVER['REQUEST_URI']; //OBTENER LA URI ACTUAL (por ejemplo: aventura_go/login)
+$requestUri = $_SERVER['REQUEST_URI']; //OBTENER LA URI ACTUAL (por ejemplo: /aventura_go/login)
 
-$request = str_replace('/aventura_go', '', $requestUri); //Quitar el prefijo de la carpeta del proyecto
+// Quitar el prefijo de la carpeta del proyecto de forma dinamica.
+$basePath = rtrim((string) parse_url(BASE_URL, PHP_URL_PATH), '/');
+$request = $requestUri;
+
+if ($basePath !== '' && $basePath !== '/' && str_starts_with($requestUri, $basePath)) {
+    $request = substr($requestUri, strlen($basePath));
+}
+
+if ($request === '' || $request[0] !== '/') {
+    $request = '/' . ltrim($request, '/');
+}
 
 //se cambio para q funcionara el dominio 
 // $request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);

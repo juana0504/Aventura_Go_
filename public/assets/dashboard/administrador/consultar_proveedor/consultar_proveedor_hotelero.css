@@ -688,4 +688,67 @@
     .adm-modal__btn-danger {
         justify-content: center;
     }
+
+    .adm-btn-primary,
+    .adm-btn-pdf {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .adm-modal__grid--2,
+    .adm-modal__grid--3 {
+        grid-template-columns: 1fr;
+    }
+
+    .adm-modal__body {
+        padding: 20px;
+    }
+
+    .adm-modal__header {
+        padding: 20px;
+        align-items: flex-start;
+    }
+
+    .adm-modal__title {
+        font-size: 24px;
+    }
+
+    .adm-table {
+        min-width: 900px;
+    }
+
+    .adm-table-wrap--card {
+        overflow-x: auto;
+    }
+
+    .adm-modal__footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .adm-modal__footer-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .adm-modal__btn-success,
+    .adm-modal__btn-danger {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .adm-pv-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .adm-pv-stat__value {
+        font-size: 24px;
+    }
+
+    .adm-modal__body,
+    .adm-modal__header,
+    .adm-modal__footer {
+        padding: 16px;
+    }
 }

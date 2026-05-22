@@ -6,144 +6,368 @@
     <title>Reporte de Proveedores - Aventura Go</title>
 
     <style>
-        /* Fuentes */
-        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+        @page {
+            margin: 20px 22px 40px 22px;
+        }
 
         body {
-            margin: 30px;
+            font-family: DejaVu Sans, sans-serif;
+            color: #1a1a2e;
+            font-size: 11px;
+            margin: 0;
+            background: #ffffff;
         }
 
-        /* Encabezado */
-        .header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
+        .page-shell { width: 100%; }
+
+        .hero {
+            background: #1A2B3C;
+            border-top: 6px solid #EA8217;
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 16px;
+            color: #ffffff;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
         }
 
-        .header img {
-            width: 120px;
-        }
-
-        h1 {
-            color: #2D4059;
-            font-size: 22px;
-            margin-top: 10px;
-            text-transform: uppercase;
-            font-family: 'Raleway', sans-serif;
-        }
-
-        p {
-            color: #000000;
-            font-size: 12px;
-            margin-bottom: 25px;
-            font-family: 'Lato', sans-serif;
-        }
-
-        /* Tabla */
-        table {
+        .hero table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 12px;
-            margin-top: 15px;
         }
 
-        table th {
-            background-color: #2D4059;
-            color: #ffffff;
-            font-weight: 700;
-            font-family: 'Lato', sans-serif;
-            text-align: center;
-            font-size: 10px;
+        .hero__brand {
+            width: 26%;
+            vertical-align: middle;
+        }
+
+        .hero__logo-wrap {
+            display: inline-block;
+            background: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.32);
+            border-radius: 10px;
+            padding: 8px 10px;
+        }
+
+        .hero__logo {
+            width: 158px;
+            height: auto;
+            display: block;
+        }
+
+        .hero__title {
+            width: 50%;
+            vertical-align: middle;
+            padding: 0 10px;
+        }
+
+        .hero__eyebrow {
+            display: inline-block;
+            font-size: 9px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            padding: 15px 12px;
-            border-bottom: 2px solid #e5e7eb;
+            color: #F5B15A;
+            font-weight: bold;
+            margin-bottom: 4px;
         }
 
-        table td {
-            padding: 8px;
-            border: 1px solid #ddd;
-            font-family: 'Lato', sans-serif;
+        .hero__title-main {
+            margin: 0;
+            font-size: 27px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            line-height: 1;
         }
 
-        .foto {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
+        .hero__title-sub {
+            margin: 5px 0 0 0;
+            font-size: 9px;
+            color: #d7e1ec;
+        }
+
+        .hero__meta {
+            width: 24%;
+            vertical-align: middle;
+            text-align: right;
+            font-size: 9px;
+            line-height: 1.4;
+            color: #e2e8f0;
+        }
+
+        .hero__meta-date {
+            font-size: 10px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .hero__meta-page {
+            margin-top: 2px;
+            font-size: 10px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .intro {
+            text-align: center;
+            color: #4b5563;
+            font-size: 11px;
+            line-height: 1.5;
+            margin: 4px 28px 16px;
+        }
+
+        .stats {
+            width: 100%;
+            margin-bottom: 18px;
+            border-collapse: separate;
+            border-spacing: 12px 0;
+        }
+
+        .stat {
+            background: #ffffff;
+            border: 1px solid #d9e2ec;
+            border-left-width: 5px;
+            border-radius: 10px;
+            padding: 11px 14px 10px;
+            width: 33.33%;
+        }
+
+        .stat__label {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1.3px;
+            color: #6b7280;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        .stat__value {
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: .4px;
+            color: #1A2B3C;
+            line-height: 1;
+        }
+
+        .stat--blue { border-left-color: #1A2B3C; }
+        .stat--green { border-left-color: #10b981; }
+        .stat--red { border-left-color: #ef4444; }
+
+        .section-title {
+            margin: 8px 0 10px 0;
+            font-size: 22px;
+            text-transform: uppercase;
+            letter-spacing: 1.1px;
+            color: #1a1a2e;
+            font-weight: bold;
+            padding-bottom: 6px;
+            border-bottom: 3px solid #EA8217;
+            line-height: 1;
+        }
+
+        table.report {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10px;
+            margin-top: 8px;
+        }
+
+        .report th {
+            background: #1A2B3C;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: .7px;
+            font-size: 9px;
+            padding: 10px 8px;
+            border: 1px solid #90a0b2;
+            border-bottom: 3px solid #EA8217;
+        }
+
+        .report td {
+            padding: 9px 8px;
+            border: 1px solid #d9e2ec;
+            vertical-align: middle;
+            color: #1a1a2e;
+        }
+
+        .report tbody tr:nth-child(even) td {
+            background: #fafbfd;
+        }
+
+        .company-logo {
+            width: 48px;
+            height: 48px;
             object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid #d7dee7;
+            background: #ffffff;
         }
 
-        /* Footer */
+        .empty-row {
+            text-align: center;
+            color: #6b7280;
+            padding: 16px 8px;
+            font-style: italic;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 9px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .badge--ok {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge--soft {
+            background: #e2e8f0;
+            color: #334155;
+        }
+
+        .text-center { text-align: center; }
+
         footer {
             position: fixed;
-            bottom: 15px;
+            bottom: 12px;
             left: 0;
             right: 0;
-            text-align: center;
-            font-size: 10px;
-            color: #555;
+            font-size: 8.5px;
+            color: #7b8794;
         }
+
+        .footer-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .footer-table td {
+            width: 33.33%;
+            vertical-align: middle;
+        }
+
+        .footer-left { text-align: left; }
+        .footer-center { text-align: center; }
+
+        .footer-right {
+            text-align: right;
+            color: #5f6b7a;
+            font-weight: bold;
+        }
+
+        .confidential { color: #5f6b7a; }
     </style>
 </head>
 
 <body>
 
-    <!-- Encabezado -->
-    <div class="header">
-        <img src="<?= BASE_URL ?>public/assets/estilos_globales/img/LOGO-FINAL.png" alt="Logo Aventura Go">
+    <div class="page-shell">
+        <div class="hero">
+            <table>
+                <tr>
+                    <td class="hero__brand">
+                        <span class="hero__logo-wrap">
+                            <img class="hero__logo" src="<?= pdf_image_data_uri('public/assets/estilos_globales/img/LOGO-FINAL.png', 'Aventura Go') ?>" alt="Logo Aventura Go">
+                        </span>
+                    </td>
+                    <td class="hero__title">
+                        <span class="hero__eyebrow">Módulo Administrador</span>
+                        <h1 class="hero__title-main">Reporte de Proveedores Turísticos</h1>
+                        <p class="hero__title-sub">Consolidado oficial de proveedores turísticos registrados en plataforma</p>
+                    </td>
+                    <td class="hero__meta">
+                        <div class="hero__meta-date"><?= date('d/m/Y H:i') ?></div>
+                        <div class="hero__meta-page">Pág. 1 / 1</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="intro">
+            Informe ejecutivo para control administrativo de proveedores turísticos, diseñado para revisión rápida, seguimiento operativo y toma de decisiones.
+        </div>
+
+        <?php
+        $total = count($proveedores ?? []);
+        $activos = count(array_filter($proveedores ?? [], fn($p) => strtolower($p['estado'] ?? '') === 'activo'));
+        $inactivos = count(array_filter($proveedores ?? [], fn($p) => strtolower($p['estado'] ?? '') === 'inactivo'));
+        ?>
+        <table class="stats">
+            <tr>
+                <td class="stat stat--blue">
+                    <div class="stat__label">Total registrados</div>
+                    <div class="stat__value"><?= $total ?></div>
+                </td>
+                <td class="stat stat--green">
+                    <div class="stat__label">Activos</div>
+                    <div class="stat__value"><?= $activos ?></div>
+                </td>
+                <td class="stat stat--red">
+                    <div class="stat__label">Inactivos</div>
+                    <div class="stat__value"><?= $inactivos ?></div>
+                </td>
+            </tr>
+        </table>
+
+        <div class="section-title">Listado detallado</div>
+
+        <table class="report">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Logo</th>
+                    <th>Empresa</th>
+                    <th>Representante</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Ciudad</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (!empty($proveedores)) : ?>
+                    <?php $contador = 1; ?>
+                    <?php foreach ($proveedores as $proveedor) : ?>
+                        <tr>
+                            <td class="text-center"><?= $contador++ ?></td>
+                            <td class="text-center"><img class="company-logo" src="<?= pdf_image_data_uri('public/uploads/turistico/' . ($proveedor['logo'] ?? ''), 'Proveedor') ?>" alt="Logo proveedor"></td>
+                            <td><?= htmlspecialchars($proveedor['nombre_empresa'] ?? '') ?></td>
+                            <td><?= htmlspecialchars($proveedor['nombre_representante'] ?? '') ?></td>
+                            <td><?= htmlspecialchars($proveedor['email'] ?? '') ?></td>
+                            <td><?= htmlspecialchars($proveedor['telefono'] ?? '') ?></td>
+                            <td><?= htmlspecialchars($proveedor['nombre_ciudad'] ?? ($proveedor['id_ciudad'] ?? '')) ?></td>
+                            <td class="text-center"><span class="badge <?= strtolower($proveedor['estado'] ?? 'activo') === 'activo' ? 'badge--ok' : 'badge--soft' ?>"><?= htmlspecialchars($proveedor['estado'] ?? 'Activo') ?></span></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="8" class="empty-row">No hay proveedores registrados.</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
     </div>
 
-    <h1>Reporte de Proveedores Inscritos</h1>
-
-    <p>
-        El presente documento contiene el registro consolidado de los proveedores inscritos en Aventura Go. Este reporte
-        permite evaluar la participación de prestadores turísticos, analizar el crecimiento de la plataforma y mantener
-        actualizada la información relevante para la gestión administrativa.
-    </p>
-
-    <!-- Tabla de Proveedores -->
-    <table>
-        <thead>
-            <tr>
-                <th>Logo</th>
-                <th>Empresa</th>
-                <th>Representante</th>
-                <th>Email</th>
-                <th>Teléfono</th>
-                <th>Ciudad</th>
-                <th>Estado</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <?php if (!empty($proveedores)) : ?>
-                <?php foreach ($proveedores as $proveedor) : ?>
-                    <tr>
-                        <td>
-                            <img class="foto"
-                                src="<?= BASE_URL ?>public/uploads/turistico/<?= $proveedor['logo'] ?>">
-                        </td>
-
-                        <td><?= $proveedor['nombre_empresa'] ?></td>
-                        <td><?= $proveedor['nombre_representante'] ?></td>
-                        <td><?= $proveedor['email'] ?></td>
-                        <td><?= $proveedor['telefono'] ?></td>
-                        <td><?= $proveedor['id_ciudad'] ?></td>
-                        <td>Activo</td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <tr>
-                    <td colspan="7">No hay proveedores registrados.</td>
-                </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
-
-    <!-- Footer -->
     <footer>
-        © Aventura Go <?= date('Y') ?> - Todos los derechos reservados
+        <table class="footer-table">
+            <tr>
+                <td class="footer-left">Aventura Go © <?= date('Y') ?> — Documento generado automáticamente</td>
+                <td class="footer-center confidential">Confidencial — Solo para uso administrativo</td>
+                <td class="footer-right">Pág. 1 / 1</td>
+            </tr>
+        </table>
     </footer>
+
+    <script type="text/php">
+        if (isset($pdf)) {
+            $font = $fontMetrics->get_font('Helvetica', 'normal');
+            $pdf->page_text(503, 816, 'Pág. {PAGE_NUM} / {PAGE_COUNT}', $font, 8, array(0.37, 0.43, 0.52));
+        }
+    </script>
 
 </body>
 
