@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 
 require_once BASE_PATH . '/app/controllers/website/websiteController.php';
 

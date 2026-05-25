@@ -1,5 +1,8 @@
 <?php
-session_start();
+   //si pasa esta linea el ususario es valido
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
 /*| Validar que exista información de pago*/
 // if (!isset($_SESSION['pago_tmp']) || !isset($_SESSION['reserva_tmp'])) {

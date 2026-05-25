@@ -574,23 +574,27 @@ switch ($request) {
     case '/proveedor_hotelero/dashboard':
         require BASE_PATH . '/app/views/dashboard/proveedor_hotelero/dashboard.php';
         break;
-
-    //aca deben ir rutas para completar informacion del proveedor hotelero
+     //rutas actualizacion proveedor hotelero
     case '/proveedor_hotelero/pendiente':
         require BASE_PATH . '/app/views/dashboard/proveedor_hotelero/pendiente_aprobacion.php'; //redirige a la pagina de pendiente de aprobacion del proveedor hotelero
         break;
 
-    case '/proveedor_hotelero/registrar-informacion':
-        require BASE_PATH . '/app/views/dashboard/proveedor_hotelero/registrar_informacion.php';
+    case '/proveedor_hotelero/completar-informacion':
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/completarInformacion.php'; //redirige a completar la informacion del proveedor hotelero
+        break;
         break;
 
     case '/proveedor_hotelero/guardar-informacion':
-        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/registrarInformacion.php'; //redirige al guardar la informacion del proveedor hotelero
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/completarInformacion.php'; //redirige al guardar la informacion del proveedor hotelero
         break;
 
-    case '/proveedor_hotelero/registrar-hospedaje':
-        require BASE_PATH . '/app/views/dashboard/proveedor_hotelero/registrar_hospedaje.php'; //redirige a registrar hospedaje del proveedor hotelero
+    case '/proveedor_hotelero/registrar-hospedajes':
+        require BASE_PATH . '/app/views/dashboard/proveedor_hotelero/registrar_hotel.php';
         break;
+    case '/proveedor_hotelero/consultar-hospedajes':
+        require BASE_PATH . '/app/views/dashboard/proveedor_hotelero/consultar_hospedaje.php'; //consulta la tabla con las actividades turisticas registradas
+        break;
+
 
 
 

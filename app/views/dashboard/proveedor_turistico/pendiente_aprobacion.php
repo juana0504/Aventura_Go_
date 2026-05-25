@@ -1,4 +1,4 @@
-<?php require_once BASE_PATH . '/app/helpers/session_proveedor.php'; ?>
+<?php require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php'; ?>
 
 <?php if ($proveedor['validado'] == 0): ?>
     <div class="alert alert-warning">
