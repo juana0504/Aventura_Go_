@@ -41,7 +41,7 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
 
     <!-- CSS unificado para listados admin -->
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/consultas_admin_unificado.css">
-        </head>
+</head>
 
 <body class="adm-body">
 

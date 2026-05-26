@@ -121,7 +121,6 @@
             padding: 0;
             text-align: center;
         }
-
         .hero__meta-date {
             font-size: 10px;
             font-weight: bold;
@@ -304,7 +303,6 @@
     <?php
     $logoHeaderSvg = pdf_brand_logo_svg_markup();
     ?>
-
     <div class="page-shell">
         <div class="hero">
             <table>
@@ -410,7 +408,6 @@
         if (isset($pdf)) {
             $headerFont = $fontMetrics->get_font('Helvetica', 'bold');
             $pdf->page_text(496, 77, 'Pág. {PAGE_NUM} / {PAGE_COUNT}', $headerFont, 10, array(1, 1, 1));
-
             $font = $fontMetrics->get_font('Helvetica', 'normal');
             $pdf->page_text(503, 816, 'Pág. {PAGE_NUM} / {PAGE_COUNT}', $font, 8, array(0.37, 0.43, 0.52));
         }

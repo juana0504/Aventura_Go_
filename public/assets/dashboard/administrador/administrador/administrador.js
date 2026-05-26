@@ -226,7 +226,7 @@ const setupDashboardFilters = () => {
   const mesContainer = byId('filtro-mes-container');
   const anioContainer = byId('filtro-anio-container');
   const filtrosContainer = byId('filtros-reservas');
-  const btnFiltrar = document.querySelector('.adm-btn-filtrar');
+  const btnFiltrar = document.querySelector('.adm-btn-filtrar, .btn-filtrar');
   const tablaReservas = document.querySelector('.adm-table-wrap .adm-table');
   const tableRows = tablaReservas?.tBodies?.[0] ? Array.from(tablaReservas.tBodies[0].rows) : [];
 

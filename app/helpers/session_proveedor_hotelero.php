@@ -5,7 +5,6 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 require_once __DIR__ . '/../../config/config.php';
-
 // Validate session and role
 if (!isset($_SESSION['user'])) {
     header('Location: ' . BASE_URL . 'login');

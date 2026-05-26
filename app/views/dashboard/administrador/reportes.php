@@ -118,6 +118,10 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
                         <a href="<?= BASE_URL ?>administrador/perfil" class="adm-dropdown__item">
                             <i class="bi bi-person-circle"></i> Mi perfil
                         </a>
+                        <a href="<?= BASE_URL ?>administrador/cambiar-password" class="adm-dropdown__item">
+                            <i class="bi bi-shield-lock"></i> Cambiar contraseña
+                        </a>
+                        <div class="adm-dropdown__divider"></div>
                         <a href="<?= BASE_URL ?>logout" class="adm-dropdown__item adm-dropdown__item--danger">
                             <i class="bi bi-box-arrow-right"></i> Cerrar sesion
                         </a>
@@ -130,9 +134,47 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
             <div class="adm-greeting">
                 <div class="adm-greeting__eyebrow">Centro de reportes</div>
                 <h1 class="adm-greeting__name">Genera tus <span>reportes PDF</span></h1>
-                <p class="adm-greeting__sub">Descarga reportes con el mismo formato del dashboard administrativo.</p>
+                <p class="adm-greeting__sub">Aplica filtros y descarga reportes con el mismo formato del dashboard administrativo.</p>
             </div>
 
+            <section class="adm-card adm-card--compact adm-report-filter-card">
+                <div class="adm-card__header">
+                    <h2 class="adm-card__title">Filtros de <span>reporte</span></h2>
+                </div>
+
+                <div class="adm-filtros">
+                    <div class="adm-filtros__row">
+                        <div class="adm-filtros__group">
+                            <label class="adm-filtros__label" for="adm-filter-estado">Estado</label>
+                            <select id="adm-filter-estado" class="adm-filtros__select">
+                                <option value="todos">Todos</option>
+                                <option value="activo">Activo</option>
+                                <option value="inactivo">Inactivo</option>
+                            </select>
+                        </div>
+
+                        <div class="adm-filtros__group">
+                            <label class="adm-filtros__label" for="adm-filter-desde">Fecha desde</label>
+                            <input id="adm-filter-desde" type="date" class="adm-filtros__select adm-filtros__input">
+                        </div>
+
+                        <div class="adm-filtros__group">
+                            <label class="adm-filtros__label" for="adm-filter-hasta">Fecha hasta</label>
+                            <input id="adm-filter-hasta" type="date" class="adm-filtros__select adm-filtros__input">
+                        </div>
+
+                        <div class="adm-filtros__actions">
+                            <button type="button" id="adm-clear-filters" class="adm-btn-clear">
+                                <i class="bi bi-x-circle"></i> Limpiar
+                            </button>
+                        </div>
+                    </div>
+                    <p class="adm-report-note">
+                        <i class="bi bi-info-circle"></i>
+                        El filtro por fecha se aplica cuando el origen de datos tiene fecha de registro disponible.
+                    </p>
+                </div>
+            </section>
             <div class="adm-stats-grid adm-report-grid">
                 <article class="adm-stat-card adm-report-card" data-report="turistico proveedor">
                     <div class="adm-stat-card__icon adm-stat-card__icon--orange">
@@ -213,6 +255,10 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
 
     const searchInput = document.getElementById('adm-search-input');
     const cards = document.querySelectorAll('.adm-report-card');
+    const estadoInput = document.getElementById('adm-filter-estado');
+    const desdeInput = document.getElementById('adm-filter-desde');
+    const hastaInput = document.getElementById('adm-filter-hasta');
+    const clearFiltersBtn = document.getElementById('adm-clear-filters');
     if (searchInput) {
         searchInput.addEventListener('input', () => {
             const q = searchInput.value.toLowerCase().trim();
@@ -224,6 +270,13 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
         });
     }
 
+    if (clearFiltersBtn) {
+        clearFiltersBtn.addEventListener('click', () => {
+            if (estadoInput) estadoInput.value = 'todos';
+            if (desdeInput) desdeInput.value = '';
+            if (hastaInput) hastaInput.value = '';
+        });
+    }
     document.querySelectorAll('.adm-report-generate').forEach((btn) => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -234,6 +287,19 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
             const url = new URL(baseUrl + 'administrador/reporte');
             url.searchParams.set('tipo', tipo);
 
+            const estado = (estadoInput?.value || '').trim().toLowerCase();
+            const fechaDesde = (desdeInput?.value || '').trim();
+            const fechaHasta = (hastaInput?.value || '').trim();
+
+            if (estado && estado !== 'todos') {
+                url.searchParams.set('estado', estado);
+            }
+            if (fechaDesde) {
+                url.searchParams.set('fecha_desde', fechaDesde);
+            }
+            if (fechaHasta) {
+                url.searchParams.set('fecha_hasta', fechaHasta);
+            }
             window.open(url.toString(), '_blank');
         });
     });

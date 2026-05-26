@@ -29,7 +29,6 @@ function pdf_replace_images_without_gd(string $html): string
         return '<span style="display:inline-block;padding:3px 7px;border:1px solid #cbd5e1;border-radius:999px;font-size:8px;color:#334155;background:#f8fafc;">' . $alt . '</span>';
     }, $html) ?? $html;
 }
-
 function pdf_asset(string $relativePath): string
 {
     $relativePath = ltrim($relativePath, '/\\');

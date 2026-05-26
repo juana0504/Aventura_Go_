@@ -898,7 +898,6 @@ $tieneFotoPerfil = !empty($usuario['foto']) && $usuario['foto'] !== 'default.png
             }
         });
     }
-
     /* ─── PREVIEW FOTO ──────────────────────── */
     const fileInput   = document.getElementById('foto');
     const editPreview = document.getElementById('adm-pf-edit-preview');
