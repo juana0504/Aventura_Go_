@@ -17,7 +17,7 @@ $resultado = $objmodelo->recuperarClave($email, $asunto, $mensaje);
 
 // agregar sweet alert de envio o no envio delcorreo 
 if ($resultado === true) {
-    mostrarSweetAlert('success', 'Sera enviado una nueva clave', 'Se ha enviado una nueva contraseña al correo electronico.', '/aventura_go/login');
+    mostrarSweetAlert('success', 'Sera enviado una nueva clave', 'Se ha enviado una nueva contraseña al correo electronico.', BASE_URL . 'login');
 } else {
     mostrarSweetAlert('error', 'Usuario no encontrado', 'Verifique su correo electrónico e intente nuevamente.');
 }

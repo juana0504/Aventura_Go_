@@ -291,7 +291,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                         </div>
 
                         <!-- Lógica intacta: action y method originales -->
-                        <form action="/aventura_go/turista/actualizar-perfil" method="POST" enctype="multipart/form-data" class="ag-pf-form">
+                        <form action="<?= BASE_URL ?>turista/actualizar-perfil" method="POST" enctype="multipart/form-data" class="ag-pf-form">
 
                             <!-- Preview de foto -->
                             <div class="ag-pf-form__photo-row">
@@ -355,7 +355,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                         </div>
 
                         <!-- Lógica intacta: action, method y nombres de campos originales -->
-                        <form action="/aventura_go/turista/cambiar-password" method="POST" class="ag-pf-form">
+                        <form action="<?= BASE_URL ?>turista/cambiar-password" method="POST" class="ag-pf-form">
 
                             <input type="hidden" name="accion" value="cambiar_password">
 

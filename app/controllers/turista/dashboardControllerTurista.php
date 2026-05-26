@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../helpers/alert_helper.php';
 // modelo propio del turista
 require_once __DIR__ . '/../../models/turista/TuristaModel.php';
 // modelo de actividades del proveedor (se usa para reservar/ver detalles)
-require_once __DIR__ . '/../../models/proveedor_turistico/ActividadTuristica.php'; // ruta correcta según estructura
+require_once __DIR__ . '/../../models/proveedor_turistico/actividadTuristica.php'; // ruta correcta según estructura
 
 // DATOS PARA VISTAS (GET)
 // el modelo y el id del usuario estarán disponibles para las funciones
@@ -119,7 +119,7 @@ function reservarActividad() {
     // Descontamos los cupos
     $actividadModel->descontarCupos($id_actividad, $cantidad);
 
-    mostrarSweetAlert('success', 'Reserva exitosa', 'Has reservado la actividad correctamente.', '/aventura_go/turista/dashboard');
+    mostrarSweetAlert('success', 'Reserva exitosa', 'Has reservado la actividad correctamente.', BASE_URL . 'turista/dashboard');
 
     
 }

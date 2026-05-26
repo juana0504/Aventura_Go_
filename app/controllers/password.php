@@ -1,7 +1,7 @@
 <?php
 //impotamos las dependencias
 require_once __DIR__ . '/../helpers/alert_helper.php';
-require_once __DIR__ . '/../models/Recoverypass.php';
+require_once __DIR__ . '/../models/recoverypass.php';
 
 
 
@@ -18,7 +18,7 @@ $resultado = $objmodelo->recuperarClave($email);
 
 // agregar sweet alert de envio o no envio delcorreo 
 if ($resultado === true) {
-    mostrarSweetAlert('success', 'Sera enviado una nueva clave', 'Se ha enviado una nueva contraseña al correo electronico.', '/aventura_go/login');
+    mostrarSweetAlert('success', 'Sera enviado una nueva clave', 'Se ha enviado una nueva contraseña al correo electronico.', BASE_URL . 'login');
 } else {
     mostrarSweetAlert('error', 'Usuario no encontrado', 'Verifique su correo electrónico e intente nuevamente.');
 }

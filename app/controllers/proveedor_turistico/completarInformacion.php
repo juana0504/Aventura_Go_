@@ -58,7 +58,7 @@ class CompletarInformacionController
                 'error',
                 'Campos incompletos',
                 'Por favor completa todos los campos obligatorios.',
-                '/aventura_go/proveedor/completar-informacion'
+                BASE_URL . 'proveedor/completar-informacion'
             );
             exit;
         }
@@ -119,7 +119,7 @@ class CompletarInformacionController
                 'success',
                 'Información actualizada',
                 'La información del proveedor ha sido actualizada correctamente.',
-                '/aventura_go/proveedor/completar-informacion'
+                BASE_URL . 'proveedor/completar-informacion'
             );
             exit;
         } else {

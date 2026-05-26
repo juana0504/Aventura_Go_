@@ -1,6 +1,6 @@
 <?php
 
-require_once BASE_PATH . '/app/models/Ticket.php';
+require_once BASE_PATH . '/app/models/ticket.php';
 require_once BASE_PATH . '/app/helpers/alert_helper.php';
 require_once BASE_PATH . '/app/helpers/session_administrador.php';
 

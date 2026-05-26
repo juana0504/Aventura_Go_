@@ -127,7 +127,7 @@ function actualizarPerfilTurista()
         // Actualizamos la sesión
         $_SESSION['user'] = array_merge($_SESSION['user'], $data);
 
-        mostrarSweetAlert('success', 'Actualizado', 'Tu perfil ha sido actualizado.', '/aventura_go/turista/perfil');
+        mostrarSweetAlert('success', 'Actualizado', 'Tu perfil ha sido actualizado.', BASE_URL . 'turista/perfil');
     } else {
         mostrarSweetAlert('error', 'Error', 'No se pudo actualizar el perfil.');
     }

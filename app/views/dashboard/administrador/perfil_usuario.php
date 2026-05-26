@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
@@ -724,6 +724,7 @@ $tieneFotoPerfil = !empty($usuario['foto']) && $usuario['foto'] !== 'default.png
 
 <!-- Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="<?= BASE_URL ?>public/assets/dashboard/administrador/administrador/admin_notifications.js"></script>
 
 <!-- JS ORIGINAL -->
 <script src="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/perfil.js"></script>
@@ -957,3 +958,4 @@ $tieneFotoPerfil = !empty($usuario['foto']) && $usuario['foto'] !== 'default.png
 
 </body>
 </html>
+
