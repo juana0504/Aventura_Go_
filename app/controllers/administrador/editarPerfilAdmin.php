@@ -2,7 +2,9 @@
 require_once __DIR__ . '/../../helpers/alert_helper.php';
 require_once __DIR__ . '/../../models/administrador/editarPerfilAdmin.php';
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -83,11 +85,17 @@ function actualizarPerfilAdmin()
     // FOTO / IMAGEN DE PERFIL
     // --------------------------------------------------------
 
-    $foto = $_SESSION['user']['foto']; // Deja la actual si no cambia
+    $foto = $_SESSION['user']['foto'] ?? 'default.png'; // Deja la actual si no cambia
 
     if (!empty($_FILES['foto']['name'])) {
 
         $file = $_FILES['foto'];
+
+        if (($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
+            mostrarSweetAlert('error', 'Error al cargar foto', 'No se pudo procesar la imagen. Intenta de nuevo.');
+            exit();
+        }
+
         $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
         $permitidas = ['png', 'jpg', 'jpeg'];
 
@@ -101,9 +109,27 @@ function actualizarPerfilAdmin()
             exit();
         }
 
-        $foto = uniqid('user_') . "." . $extension;
-        $destino = BASE_PATH . "/public/uploads/usuario/" . $foto;
-        move_uploaded_file($file['tmp_name'], $destino);
+        $uploadDir = BASE_PATH . '/public/uploads/usuario/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
+        }
+
+        $fotoNueva = uniqid('user_', true) . "." . $extension;
+        $destino = $uploadDir . $fotoNueva;
+
+        if (!move_uploaded_file($file['tmp_name'], $destino)) {
+            mostrarSweetAlert('error', 'Error al guardar foto', 'No se pudo guardar la imagen en el servidor.');
+            exit();
+        }
+
+        if (!empty($foto) && $foto !== 'default.png') {
+            $fotoAnteriorPath = $uploadDir . $foto;
+            if (is_file($fotoAnteriorPath)) {
+                @unlink($fotoAnteriorPath);
+            }
+        }
+
+        $foto = $fotoNueva;
     }
 
     // --------------------------------------------------------

@@ -1,51 +1,38 @@
-/* =============================================
-   AVENTURAGO — PERFIL ADMINISTRADOR
-   perfil.css
-============================================= */
+/* Perfil administrador - limpio y responsive */
 
-/* ───────────────── VARIABLES ───────────────── */
-:root{
+:root {
     --adm-primary: #ea8217;
     --adm-primary-light: rgba(234,130,23,.1);
-
     --adm-bg: #f4f5f7;
     --adm-surface: #ffffff;
-
     --adm-text: #1a1a2e;
     --adm-muted: #7f8794;
-
     --adm-border: rgba(0,0,0,.08);
-
     --adm-radius: 12px;
     --adm-radius-lg: 16px;
     --adm-radius-sm: 8px;
-
     --adm-topbar-height: 68px;
 }
 
-/* ───────────────── DARK MODE ───────────────── */
-.adm-dark{
+.adm-dark {
     --adm-bg: #0f1923;
     --adm-surface: #1a2535;
-
     --adm-text: #e8eaf0;
     --adm-muted: #8b95a5;
-
     --adm-border: rgba(255,255,255,.08);
 }
 
-/* ───────────────── GENERAL ───────────────── */
-.adm-content{
+.adm-content {
     padding: 28px;
     background: var(--adm-bg);
     min-height: 100vh;
 }
 
-.adm-page-header{
+.adm-page-header {
     margin-bottom: 28px;
 }
 
-.adm-greeting__eyebrow{
+.adm-greeting__eyebrow {
     font-size: 12px;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -54,14 +41,13 @@
     margin-bottom: 8px;
 }
 
-.adm-greeting__sub{
+.adm-greeting__sub {
     color: var(--adm-muted);
     font-size: 14px;
     margin-top: 8px;
 }
 
-/* ───────────────── TÍTULO ───────────────── */
-.adm-pf-title{
+.adm-pf-title {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 42px;
     letter-spacing: 2px;
@@ -70,82 +56,83 @@
     margin: 0;
 }
 
-.adm-pf-title span{
+.adm-pf-title span {
     color: var(--adm-primary);
 }
 
-/* ───────────────── LAYOUT ───────────────── */
-.adm-pf-layout{
+.adm-pf-layout {
     display: grid;
     grid-template-columns: 300px 1fr;
     gap: 24px;
     align-items: start;
 }
 
-/* =============================================
-   TARJETA PERFIL
-============================================= */
-.adm-pf-card{
+.adm-pf-card {
     background: var(--adm-surface);
     border: 1px solid var(--adm-border);
     border-radius: var(--adm-radius-lg);
     padding: 28px 22px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
-
     text-align: center;
-
     position: sticky;
     top: calc(var(--adm-topbar-height) + 20px);
 }
 
-/* Avatar */
-.adm-pf-avatar-wrap{
+.adm-pf-avatar-wrap {
     position: relative;
-    margin-bottom: 18px;
-}
-
-.adm-pf-avatar{
     width: 120px;
     height: 120px;
-
-    border-radius: 50%;
-    object-fit: cover;
-
-    border: 3px solid rgba(234,130,23,.35);
-
-    transition: .2s;
-}
-
-.adm-pf-avatar:hover{
-    border-color: var(--adm-primary);
-}
-
-.adm-pf-avatar-badge{
-    position: absolute;
-
-    bottom: 5px;
-    right: 5px;
-
-    width: 34px;
-    height: 34px;
-
-    border-radius: 50%;
-
-    background: var(--adm-primary);
-    color: #fff;
-
+    margin: 0 auto 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    border: 3px solid var(--adm-surface);
 }
 
-/* Nombre */
-.adm-pf-card__name{
+.adm-pf-avatar-wrap--clickable {
+    cursor: pointer;
+}
+
+.adm-pf-avatar-wrap--clickable:focus-visible {
+    outline: 3px solid rgba(234,130,23,.25);
+    outline-offset: 5px;
+    border-radius: 50%;
+}
+
+.adm-pf-avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(234,130,23,.5);
+    background: #fff;
+    transition: all .2s ease;
+}
+
+.adm-pf-avatar:hover {
+    transform: scale(1.03);
+    border-color: var(--adm-primary);
+}
+
+.adm-pf-avatar-badge {
+    position: absolute;
+    right: 6px;
+    bottom: 8px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--adm-primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border: 3px solid var(--adm-surface);
+    z-index: 5;
+}
+
+.adm-pf-card__name {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 24px;
     letter-spacing: 1px;
@@ -153,598 +140,419 @@
     margin-bottom: 6px;
 }
 
-/* Rol */
-.adm-pf-card__role{
+.adm-pf-card__role {
     display: flex;
     align-items: center;
     gap: 6px;
-
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 1px;
-
     font-weight: 700;
-
     color: var(--adm-primary);
 }
 
-.adm-pf-card__divider{
+.adm-pf-card__divider {
     width: 100%;
     height: 1px;
     background: var(--adm-border);
     margin: 22px 0;
 }
 
-/* =============================================
-   NAV PERFIL
-============================================= */
-.adm-pf-nav{
+.adm-pf-nav {
     width: 100%;
-
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.adm-pf-nav__btn{
+.adm-pf-nav__btn {
     width: 100%;
-
     display: flex;
     align-items: center;
     gap: 10px;
-
     padding: 13px 15px;
-
     border: 1px solid transparent;
     border-radius: var(--adm-radius-sm);
-
     background: transparent;
-
     color: var(--adm-muted);
-
     font-size: 14px;
     font-weight: 500;
-
     text-align: left;
-
     transition: .2s;
-
     cursor: pointer;
 }
 
-.adm-pf-nav__btn i{
+.adm-pf-nav__btn i {
     font-size: 16px;
 }
 
-.adm-pf-nav__btn:hover{
+.adm-pf-nav__btn:hover {
     background: rgba(234,130,23,.07);
     border-color: rgba(234,130,23,.2);
     color: var(--adm-primary);
 }
 
-.adm-pf-nav__btn--active{
+.adm-pf-nav__btn--active {
     background: rgba(234,130,23,.12);
     border-color: rgba(234,130,23,.28);
-
     color: var(--adm-primary);
-
     font-weight: 700;
 }
 
-/* =============================================
-   PANELES
-============================================= */
-.adm-pf-panels{
+.adm-pf-panels {
     min-width: 0;
 }
 
-.adm-pf-panel{
+.adm-pf-panel {
     display: none;
-
     background: var(--adm-surface);
-
     border: 1px solid var(--adm-border);
     border-radius: var(--adm-radius-lg);
-
     overflow: hidden;
 }
 
-.adm-pf-panel--active{
+.adm-pf-panel--active {
     display: block;
 }
 
-/* Header */
-.adm-pf-panel__header{
+.adm-pf-panel__header {
     background: #1a2b3c;
-
     padding: 18px 24px;
-
     border-bottom: 1px solid var(--adm-border);
 }
 
-.adm-pf-panel__title{
+.adm-pf-panel__title {
     display: flex;
     align-items: center;
     gap: 10px;
-
     font-family: 'Bebas Neue', sans-serif;
     font-size: 22px;
     letter-spacing: 1.5px;
-
     color: #fff;
 }
 
-.adm-pf-panel__title i{
+.adm-pf-panel__title i {
     color: var(--adm-primary);
 }
 
-/* =============================================
-   DETALLES PERFIL
-============================================= */
-.adm-pf-fields{
+.adm-pf-fields {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 18px;
-
     padding: 24px;
 }
 
-.adm-pf-field{
+.adm-pf-field {
     background: var(--adm-bg);
-
     border: 1px solid var(--adm-border);
     border-radius: var(--adm-radius);
-
     padding: 18px;
-
     transition: .2s;
 }
 
-.adm-pf-field:hover{
+.adm-pf-field:hover {
     border-color: rgba(234,130,23,.3);
 }
 
-.adm-pf-field--full{
+.adm-pf-field--full {
     grid-column: 1 / -1;
 }
 
-.adm-pf-field__label{
+.adm-pf-field__label {
     font-size: 11px;
-
     text-transform: uppercase;
     letter-spacing: 1.5px;
-
     font-weight: 700;
-
     color: var(--adm-muted);
-
     margin-bottom: 7px;
 }
 
-.adm-pf-field__value{
+.adm-pf-field__value {
     font-size: 15px;
     font-weight: 500;
-
     color: var(--adm-text);
 }
 
-/* Badge */
-.adm-badge{
+.adm-badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-
     padding: 8px 14px;
-
     border-radius: 999px;
-
     font-size: 12px;
     font-weight: 700;
 }
 
-.adm-badge--confirmed{
+.adm-badge--confirmed {
     background: rgba(34,197,94,.1);
     color: #16a34a;
 }
 
-.adm-badge__dot{
+.adm-badge__dot {
     width: 8px;
     height: 8px;
-
     border-radius: 50%;
-
     background: #16a34a;
 }
-/* =========================================
-   AVATAR PRINCIPAL
-========================================= */
-.adm-pf-avatar-wrap{
-    position: relative;
-    width: 120px;
-    height: 120px;
-    margin: 0 auto 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.adm-pf-avatar{
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    object-fit: cover;
-    display: block;
-
-    /* BORDE COMO EL EJEMPLO */
-    border: 3px solid #a56217;
-
-    /* PARA QUE NO SE CORTE */
-    background: #fff;
-
-    transition: all .3s ease;
-}
-
-.adm-pf-avatar:hover{
-    transform: scale(1.03);
-    border-color: #d8841f;
-}
-
-/* BOTÓN DE CÁMARA */
-.adm-pf-avatar-badge{
-    position: absolute;
-    right: 6px;
-    bottom: 8px;
-
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-
-    background: #ea8217;
-    color: #fff;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 14px;
-
-    border: 3px solid #0f1c33;
-
-    z-index: 5;
-}
-
-/* =========================================
-   FOTO PREVIEW EN EDITAR PERFIL
-========================================= */
-.adm-pf-form__photo-preview{
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    object-fit: cover;
-
-    border: 3px solid #a56217;
-
-    background: #fff;
-
-    transition: all .3s ease;
-}
-
-.adm-pf-form__photo-preview:hover{
-    transform: scale(1.03);
-    border-color: #d8841f;
-}
-
-/* =============================================
-   FORMULARIOS
-============================================= */
-.adm-pf-form{
+.adm-pf-form {
     padding: 24px;
-
     display: flex;
     flex-direction: column;
 }
 
-/* Foto */
-.adm-pf-form__photo-row{
+.adm-pf-form__photo-row {
     display: flex;
     align-items: center;
     gap: 20px;
-
     padding-bottom: 24px;
     margin-bottom: 24px;
-
     border-bottom: 1px solid var(--adm-border);
 }
 
-.adm-pf-form__photo-preview{
+.adm-pf-form__photo-preview {
     width: 90px;
     height: 90px;
-
     border-radius: 50%;
     object-fit: cover;
-
     border: 2px solid rgba(234,130,23,.35);
+    transition: all .2s ease;
 }
 
-.adm-pf-form__photo-actions{
+.adm-pf-form__photo-preview:hover {
+    transform: scale(1.03);
+    border-color: var(--adm-primary);
+}
+
+.adm-pf-form__photo-actions {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-/* Botón outline */
-.adm-btn-outline{
+.adm-btn-outline {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-
     padding: 10px 16px;
-
     border: 1px solid rgba(234,130,23,.25);
     border-radius: var(--adm-radius-sm);
-
     background: rgba(234,130,23,.05);
-
     color: var(--adm-primary);
-
     font-size: 14px;
     font-weight: 600;
-
     transition: .2s;
 }
 
-.adm-btn-outline:hover{
+.adm-btn-outline:hover {
     background: rgba(234,130,23,.1);
 }
 
-/* Grid */
-.adm-pf-form__grid{
+.adm-pf-form__grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 18px;
-
     margin-bottom: 24px;
 }
 
-/* Group */
-.adm-pf-form__group{
+.adm-pf-form__group {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.adm-pf-form__group--full{
+.adm-pf-form__group--full {
     margin-bottom: 22px;
 }
 
-/* Label */
-.adm-pf-form__label{
+.adm-pf-form__label {
     font-size: 12px;
-
     text-transform: uppercase;
     letter-spacing: 1px;
-
     font-weight: 700;
-
     color: var(--adm-muted);
 }
 
-/* Input */
-.adm-pf-form__input{
+.adm-pf-form__input {
     width: 100%;
-
     padding: 12px 14px;
-
     border: 1px solid var(--adm-border);
     border-radius: var(--adm-radius-sm);
-
     background: var(--adm-bg);
-
     color: var(--adm-text);
-
     font-size: 14px;
-
     outline: none;
-
     transition: .2s;
 }
 
-.adm-pf-form__input:focus{
+.adm-pf-form__input:focus {
     border-color: var(--adm-primary);
-
     box-shadow: 0 0 0 3px rgba(234,130,23,.12);
-
     background: var(--adm-surface);
 }
 
-/* Password */
-.adm-pf-input-wrap{
+.adm-pf-input-wrap {
     position: relative;
 }
 
-.adm-pf-input-wrap .adm-pf-form__input{
+.adm-pf-input-wrap .adm-pf-form__input {
     padding-right: 45px;
 }
 
-.adm-pf-toggle-pw{
+.adm-pf-toggle-pw {
     position: absolute;
-
     top: 50%;
     right: 14px;
-
     transform: translateY(-50%);
-
     cursor: pointer;
-
     color: var(--adm-muted);
-
     font-size: 18px;
-
     transition: .2s;
 }
 
-.adm-pf-toggle-pw:hover{
+.adm-pf-toggle-pw:hover {
     color: var(--adm-primary);
 }
 
-/* Footer */
-.adm-pf-form__footer{
+.adm-pf-form__footer {
     display: flex;
     justify-content: flex-end;
-
     padding-top: 22px;
     margin-top: 8px;
-
     border-top: 1px solid var(--adm-border);
 }
 
-/* Botón principal */
-.adm-btn-primary{
+.adm-btn-primary {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-
     border: none;
     border-radius: var(--adm-radius-sm);
-
     background: var(--adm-primary);
     color: #fff;
-
     padding: 12px 22px;
-
     font-size: 14px;
     font-weight: 700;
-
     transition: .2s;
 }
 
-@media (max-width: 1024px){
-
-    .adm-pf-layout{
-        grid-template-columns: 260px 1fr;
-    }
-
-}
-
-@media (max-width: 768px){
-
-.adm-btn-primary:hover{
+.adm-btn-primary:hover {
     transform: translateY(-1px);
     opacity: .95;
 }
 
-/* Dropdown active */
-.adm-dropdown__item--active{
+.adm-dropdown__item--active {
     background: rgba(234,130,23,.08);
     color: var(--adm-primary);
 }
 
-.adm-dropdown__item--active i{
+.adm-dropdown__item--active i {
     color: var(--adm-primary);
 }
 
-/* =============================================
-   RESPONSIVE
-@media (max-width: 1024px){
+.adm-profile-btn__avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}
 
-    .adm-pf-layout{
+@media (max-width: 1024px) {
+    .adm-pf-layout {
         grid-template-columns: 260px 1fr;
     }
 
-    .adm-pf-card{
+    .adm-pf-card {
         padding: 22px 16px;
     }
 
-    .adm-pf-panel__header{
+    .adm-pf-panel__header {
         padding: 16px 18px;
     }
-
 }
 
-@media (max-width: 768px){
-
-    .adm-content{
+@media (max-width: 768px) {
+    .adm-content {
         padding: 18px;
     }
 
-    .adm-pf-layout{
+    .adm-pf-layout {
         grid-template-columns: 1fr;
         gap: 16px;
     }
 
-    .adm-pf-card{
+    .adm-pf-card {
         position: static;
         padding: 20px 16px;
     }
 
-    .adm-pf-title{
+    .adm-pf-title {
         font-size: 32px;
         letter-spacing: 1.2px;
     }
 
-    .adm-pf-fields{
+    .adm-pf-fields {
         grid-template-columns: 1fr;
         padding: 16px;
         gap: 12px;
     }
 
-    .adm-pf-form__grid{
+    .adm-pf-form__grid {
         grid-template-columns: 1fr;
         gap: 12px;
     }
 
-    .adm-pf-field--full{
+    .adm-pf-field--full {
         grid-column: 1;
     }
 
-    .adm-pf-form__photo-row{
+    .adm-pf-form__photo-row {
         flex-direction: column;
         text-align: center;
     }
 
-    .adm-pf-form{
+    .adm-pf-form {
         padding: 16px;
     }
 
-    .adm-pf-form__footer{
+    .adm-pf-form__footer {
         justify-content: stretch;
     }
 
-    .adm-btn-primary{
+    .adm-btn-primary {
         width: 100%;
         justify-content: center;
     }
-
 }
 
-@media (max-width: 480px){
-    .adm-content{
+@media (max-width: 480px) {
+    .adm-content {
         padding: 12px;
     }
 
-    .adm-pf-title{
+    .adm-pf-title {
         font-size: 28px;
     }
 
-    .adm-pf-card__name{
+    .adm-pf-card__name {
         font-size: 20px;
     }
 
-    .adm-pf-nav__btn{
+    .adm-pf-nav__btn {
         padding: 11px 12px;
         font-size: 13px;
     }
 
-    .adm-pf-panel__title{
+    .adm-pf-panel__title {
         font-size: 18px;
         letter-spacing: 1px;
     }
 
     .adm-pf-form,
     .adm-pf-fields,
-    .adm-pf-panel__header{
+    .adm-pf-panel__header {
         padding-left: 12px;
         padding-right: 12px;
     }
-
 }

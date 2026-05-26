@@ -36,7 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['user'] = [
         'id_usuario' => $resultado['id_usuario'],
         'nombre' => $resultado['nombre'],
-        'rol' => $resultado['rol']
+        'rol' => $resultado['rol'],
+        'foto' => $resultado['foto'] ?? 'default.png'
     ];
 
     // Redirección segun el rol 

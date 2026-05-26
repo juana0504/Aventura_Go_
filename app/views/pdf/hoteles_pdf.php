@@ -24,40 +24,58 @@
             background: #1A2B3C;
             border-top: 6px solid #EA8217;
             border-radius: 12px;
-            padding: 14px 16px;
+            padding: 16px 18px;
             margin-bottom: 16px;
             color: #ffffff;
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
         }
 
+        .hero__rule {
+            margin-top: 10px;
+            height: 3px;
+            background: #EA8217;
+            border-radius: 999px;
+        }
+
         .hero table {
             width: 100%;
             border-collapse: collapse;
+            table-layout: fixed;
         }
 
         .hero__brand {
-            width: 26%;
-            vertical-align: middle;
+            width: 18%;
+            vertical-align: top;
+            text-align: center;
         }
 
         .hero__logo-wrap {
             display: inline-block;
-            background: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.32);
-            border-radius: 10px;
-            padding: 8px 10px;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 0;
+            max-width: 146px;
+            overflow: visible;
+            margin: 30px auto 0;
         }
 
         .hero__logo {
-            width: 158px;
+            width: 146px;
+            height: auto;
+            display: block;
+        }
+
+        .hero__logo-wrap svg {
+            width: 146px;
             height: auto;
             display: block;
         }
 
         .hero__title {
-            width: 50%;
-            vertical-align: middle;
-            padding: 0 10px;
+            width: 54%;
+            vertical-align: top;
+            padding: 0 14px 0 12px;
         }
 
         .hero__eyebrow {
@@ -72,26 +90,36 @@
 
         .hero__title-main {
             margin: 0;
-            font-size: 27px;
+            font-size: 22px;
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: bold;
-            line-height: 1;
+            line-height: 1.05;
         }
 
         .hero__title-sub {
             margin: 5px 0 0 0;
-            font-size: 9px;
+            font-size: 9.2px;
             color: #d7e1ec;
         }
 
         .hero__meta {
-            width: 24%;
+            width: 28%;
             vertical-align: middle;
             text-align: right;
             font-size: 9px;
             line-height: 1.4;
             color: #e2e8f0;
+        }
+
+        .hero__meta-card {
+            display: inline-block;
+            min-width: 128px;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 0;
+            text-align: center;
         }
 
         .hero__meta-date {
@@ -101,6 +129,14 @@
         }
 
         .hero__meta-page {
+            margin-top: 5px;
+            font-size: 8px;
+            letter-spacing: .7px;
+            text-transform: uppercase;
+            color: #b9c7d6;
+        }
+
+        .hero__meta-page-value {
             margin-top: 2px;
             font-size: 10px;
             font-weight: bold;
@@ -265,14 +301,18 @@
 
 <body>
 
+    <?php
+    $logoHeaderSvg = pdf_brand_logo_svg_markup();
+    ?>
+
     <div class="page-shell">
         <div class="hero">
             <table>
                 <tr>
                     <td class="hero__brand">
-                        <span class="hero__logo-wrap">
-                            <img class="hero__logo" src="<?= pdf_image_data_uri('public/assets/estilos_globales/img/LOGO-FINAL.png', 'Aventura Go') ?>" alt="Logo Aventura Go">
-                        </span>
+                        <div class="hero__logo-wrap">
+                            <?= $logoHeaderSvg ?>
+                        </div>
                     </td>
                     <td class="hero__title">
                         <span class="hero__eyebrow">Módulo Administrador</span>
@@ -280,11 +320,15 @@
                         <p class="hero__title-sub">Consolidado oficial de proveedores hoteleros registrados en plataforma</p>
                     </td>
                     <td class="hero__meta">
-                        <div class="hero__meta-date"><?= date('d/m/Y H:i') ?></div>
-                        <div class="hero__meta-page">Pág. 1 / 1</div>
+                        <div class="hero__meta-card">
+                            <div class="hero__meta-date"><?= date('d/m/Y H:i') ?></div>
+                            <div class="hero__meta-page">Paginación</div>
+                            <div class="hero__meta-page-value">Pág. 1 / 1</div>
+                        </div>
                     </td>
                 </tr>
             </table>
+            <div class="hero__rule"></div>
         </div>
 
         <div class="intro">
@@ -366,6 +410,9 @@
 
     <script type="text/php">
         if (isset($pdf)) {
+            $headerFont = $fontMetrics->get_font('Helvetica', 'bold');
+            $pdf->page_text(496, 77, 'Pág. {PAGE_NUM} / {PAGE_COUNT}', $headerFont, 10, array(1, 1, 1));
+
             $font = $fontMetrics->get_font('Helvetica', 'normal');
             $pdf->page_text(503, 816, 'Pág. {PAGE_NUM} / {PAGE_COUNT}', $font, 8, array(0.37, 0.43, 0.52));
         }

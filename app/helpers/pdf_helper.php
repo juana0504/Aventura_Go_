@@ -5,6 +5,31 @@ require_once __DIR__ . '/../../vendor/dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
+function pdf_brand_logo_svg_markup(): string
+{
+    return '<div style="width:146px;font-family:DejaVu Sans,Arial,sans-serif;line-height:1;">'
+        . '<div style="font-size:19px;font-weight:900;letter-spacing:0.2px;color:#f8fafc;text-align:left;">AVENTURA</div>'
+    . '<div style="font-size:30px;font-weight:900;letter-spacing:0.2px;color:#ea8217;text-align:right;padding-right:30px;">GO</div>'
+        . '</div>';
+}
+
+function pdf_replace_images_without_gd(string $html): string
+{
+    return preg_replace_callback('/<img\b[^>]*>/i', function ($matches) {
+        $imgTag = $matches[0];
+        $alt = 'Imagen';
+
+        if (preg_match('/alt\s*=\s*(["\'])(.*?)\1/i', $imgTag, $altMatch)) {
+            $cleanAlt = trim((string) $altMatch[2]);
+            if ($cleanAlt !== '') {
+                $alt = htmlspecialchars($cleanAlt, ENT_QUOTES, 'UTF-8');
+            }
+        }
+
+        return '<span style="display:inline-block;padding:3px 7px;border:1px solid #cbd5e1;border-radius:999px;font-size:8px;color:#334155;background:#f8fafc;">' . $alt . '</span>';
+    }, $html) ?? $html;
+}
+
 function pdf_asset(string $relativePath): string
 {
     $relativePath = ltrim($relativePath, '/\\');
@@ -105,27 +130,59 @@ function pdf_image_data_uri_resized(string $relativePath, int $maxWidth = 420, s
 
 function generarPDF($html, $filename = "documento.pdf", $download = false)
 {
-    if (!extension_loaded('gd')) {
-        $html = preg_replace('/<img\b[^>]*>/i', '', $html);
+    $previousDisplayErrors = ini_get('display_errors');
+    $previousErrorReporting = error_reporting();
+
+    // Evita que avisos de librerias legacy rompan la descarga/visualizacion del PDF.
+    ini_set('display_errors', '0');
+    error_reporting($previousErrorReporting & ~E_DEPRECATED & ~E_USER_DEPRECATED & ~E_NOTICE & ~E_WARNING);
+
+    try {
+        if (!extension_loaded('gd')) {
+            $html = pdf_replace_images_without_gd($html);
+        }
+
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true); // permite imágenes externas
+
+        $dompdf = new Dompdf($options);
+
+        // Cargar el HTML recibido
+        $dompdf->loadHtml($html);
+
+        // Opcional: tamaño y orientación
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Renderizar
+        $dompdf->render();
+
+        // Limpiar cualquier salida previa para no romper los headers del PDF.
+        while (ob_get_level() > 0) {
+            ob_end_clean();
+        }
+
+        // Descargar o mostrar
+        $dompdf->stream($filename, [
+            "Attachment" => $download ? 1 : 0
+        ]);
+    } catch (\Throwable $e) {
+        while (ob_get_level() > 0) {
+            ob_end_clean();
+        }
+
+        if (!headers_sent()) {
+            http_response_code(500);
+            header('Content-Type: text/html; charset=UTF-8');
+        }
+
+        echo '<h2>No fue posible generar el PDF.</h2>';
+        if ((int) $previousDisplayErrors === 1) {
+            echo '<pre>' . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8') . '</pre>';
+        }
+    } finally {
+        // Restaurar configuracion previa del entorno.
+        error_reporting($previousErrorReporting);
+        ini_set('display_errors', (string) $previousDisplayErrors);
     }
-
-    $options = new Options();
-    $options->set('isHtml5ParserEnabled', true);
-    $options->set('isRemoteEnabled', true); // permite imágenes externas
-
-    $dompdf = new Dompdf($options);
-
-    // Cargar el HTML recibido
-    $dompdf->loadHtml($html);
-
-    // Opcional: tamaño y orientación
-    $dompdf->setPaper('A4', 'portrait');
-
-    // Renderizar
-    $dompdf->render();
-
-    // Descargar o mostrar
-    $dompdf->stream($filename, [
-        "Attachment" => $download ? 1 : 0
-    ]);
 }
