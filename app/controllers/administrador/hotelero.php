@@ -224,7 +224,7 @@ function registrarHotel()
     $resultado = $objhotelero->registrar($data);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Registro exitoso', 'Proveedor registrado.', '/aventura_go/administrador/registrar-proveedor-hotelero');
+        mostrarSweetAlert('success', 'Registro exitoso', 'Proveedor registrado.', BASE_URL . 'administrador/registrar-proveedor-hotelero');
     } else {
         mostrarSweetAlert('error', 'Error al registrar', 'No se pudo registrar el proveedor.');
     }
@@ -332,7 +332,7 @@ function actualizarHotel()
     $resultado = $objHotelero->actualizar($data);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Actualización exitosa', 'Proveedor actualizado.', '/aventura_go/administrador/consultar-proveedor-hotelero');
+        mostrarSweetAlert('success', 'Actualización exitosa', 'Proveedor actualizado.', BASE_URL . 'administrador/consultar-proveedor-hotelero');
     } else {
         mostrarSweetAlert('error', 'Error al actualizar', 'No se pudo actualizar el proveedor.');
     }
@@ -345,7 +345,7 @@ function eliminarHotel($id)
     $resultado = $objHotelero->eliminar($id);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Eliminación exitosa', 'Proveedor eliminado.', '/aventura_go/administrador/consultar-proveedor-hotelero');
+        mostrarSweetAlert('success', 'Eliminación exitosa', 'Proveedor eliminado.', BASE_URL . 'administrador/consultar-proveedor-hotelero');
     } else {
         mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el proveedor.');
     }
@@ -395,14 +395,14 @@ function activarProveedorHotelero($id)
             'success',
             'Activación exitosa',
             'Proveedor hotelero activo en el sistema.',
-            '/aventura_go/administrador/consultar-proveedor-hotelero'
+            BASE_URL . 'administrador/consultar-proveedor-hotelero'
         );
     } else {
         mostrarSweetAlert(
             'error',
             'Error al activar',
             'No se pudo activar el proveedor hotelero.',
-            '/aventura_go/administrador/consultar-proveedor-hotelero'
+            BASE_URL . 'administrador/consultar-proveedor-hotelero'
         );
     }
 }
@@ -419,14 +419,14 @@ function desactivarProveedorHotelero($id)
             'success',
             'Desactivación exitosa',
             'Proveedor hotelero inactivo en el sistema.',
-            '/aventura_go/administrador/consultar-proveedor-hotelero'
+            BASE_URL . 'administrador/consultar-proveedor-hotelero'
         );
     } else {
         mostrarSweetAlert(
             'error',
             'Error al desactivar',
             'No se pudo desactivar el proveedor hotelero.',
-            '/aventura_go/administrador/consultar-proveedor-hotelero'
+            BASE_URL . 'administrador/consultar-proveedor-hotelero'
         );
     }
 }

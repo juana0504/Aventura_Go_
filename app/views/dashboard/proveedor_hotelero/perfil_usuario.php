@@ -138,7 +138,7 @@ $usuario = mostrarPerfilProveedorHotelero($id);
 
                         <div class="editar">
 
-                            <form action="/aventura_go/proveedor_hotelero/actualizar-perfil" method="POST" enctype="multipart/form-data">
+                            <form action="<?= BASE_URL ?>proveedor_hotelero/actualizar-perfil" method="POST" enctype="multipart/form-data">
 
                                 <h4>Imagen Perfil</h4>
                                 <input type="file" name="foto" value="<?= $usuario['foto'] ?>">
@@ -165,7 +165,7 @@ $usuario = mostrarPerfilProveedorHotelero($id);
 
 
 
-                        <form action="/aventura_go/proveedor_hotelero/cambiar-password" method="POST" class="cambiar">
+                        <form action="<?= BASE_URL ?>proveedor_hotelero/cambiar-password" method="POST" class="cambiar">
 
                             <input type="hidden" name="accion" value="cambiar_password">
 

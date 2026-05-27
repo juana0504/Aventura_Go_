@@ -1,12 +1,12 @@
 <?php
-require_once __DIR__ . '/../../models/Ticket.php';
+require_once __DIR__ . '/../../models/ticket.php';
 require_once __DIR__ . '/../../helpers/alert_helper.php';
 
 session_start();
 
 // 🔐 Seguridad básica: validar sesión y rol
 if (!isset($_SESSION['user']) || $_SESSION['user']['rol'] !== 'proveedor-turistico') {
-    header('Location: /aventura_go/login');
+    header('Location: ' . BASE_URL . 'login');
     exit();
 }
 
@@ -46,7 +46,7 @@ switch ($accion) {
                     'success',
                     'Ticket creado',
                     'Tu reporte fue enviado correctamente',
-                    '/aventura_go/proveedor_turistico/tickets'
+                    BASE_URL . 'proveedor/tickets'
                 );
             } else {
                 mostrarSweetAlert(

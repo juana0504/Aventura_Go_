@@ -3,6 +3,19 @@
 
 # Archivos subidos por usuarios (NO versionar)
 /public/uploads/
+/public/uploads/**
+
+# Imagenes y fotos de carga de usuarios
+/public/uploads/**/*.jpg
+/public/uploads/**/*.jpeg
+/public/uploads/**/*.png
+/public/uploads/**/*.gif
+/public/uploads/**/*.webp
+/public/uploads/**/*.avif
+/public/uploads/**/*.bmp
+
+# Mantener carpetas vacias versionables cuando se use .gitkeep
+!/public/uploads/**/.gitkeep
 
 # Configuración sensible
 config/config.php

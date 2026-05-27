@@ -1,13 +1,13 @@
 <?php
-require_once BASE_PATH . '/app/models/turista/ActividadModel.php';
+require_once BASE_PATH . '/app/models/turista/actividadModel.php';
 
 class ReservaController
 {
     public function prepararReserva()
     {
         require_once BASE_PATH . '/app/helpers/session_turista.php';
-        require_once BASE_PATH . '/app/models/turista/ActividadModel.php';
-        require_once BASE_PATH . '/app/models/turista/ReservaModel.php';
+        require_once BASE_PATH . '/app/models/turista/actividadModel.php';
+        require_once BASE_PATH . '/app/models/turista/reservaModel.php';
 
         if (!isset($_GET['id'])) {
             header('Location: ' . BASE_URL . '/descubre-tours');
@@ -46,7 +46,7 @@ class ReservaController
     public function verReservas()
     {
         require_once BASE_PATH . '/app/helpers/session_turista.php';
-        require_once BASE_PATH . '/app/models/turista/ReservaModel.php';
+        require_once BASE_PATH . '/app/models/turista/reservaModel.php';
 
         $idUsuario = $_SESSION['user']['id_usuario'];
 
@@ -91,8 +91,8 @@ class ReservaController
     public function confirmarReserva()
     {
         require_once BASE_PATH . '/app/helpers/session_turista.php';
-        require_once BASE_PATH . '/app/models/turista/ReservaModel.php';
-        require_once BASE_PATH . '/app/models/turista/ActividadModel.php';
+        require_once BASE_PATH . '/app/models/turista/reservaModel.php';
+        require_once BASE_PATH . '/app/models/turista/actividadModel.php';
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             echo json_encode(['error' => 'Método no permitido']);
@@ -191,7 +191,7 @@ class ReservaController
             exit;
         }
 
-        require_once BASE_PATH . '/app/models/turista/ReservaModel.php';
+        require_once BASE_PATH . '/app/models/turista/reservaModel.php';
 
         $idReserva = $_POST['id_reserva'] ?? null;
         $accion    = $_POST['accion'] ?? null;

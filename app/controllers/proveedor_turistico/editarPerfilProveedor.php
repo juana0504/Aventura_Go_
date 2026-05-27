@@ -127,7 +127,7 @@ function actualizarPerfilProveedor()
         // Actualizamos la sesión
         $_SESSION['user'] = array_merge($_SESSION['user'], $data);
 
-        mostrarSweetAlert('success', 'Actualizado', 'Tu perfil ha sido actualizado.', '/aventura_go/proveedor/perfil');
+        mostrarSweetAlert('success', 'Actualizado', 'Tu perfil ha sido actualizado.', BASE_URL . 'proveedor/perfil');
     } else {
         mostrarSweetAlert('error', 'Error', 'No se pudo actualizar el perfil.');
     }

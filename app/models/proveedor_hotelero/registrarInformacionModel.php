@@ -15,9 +15,8 @@ class RegistrarInformacionModel
     }
 
     /* =====================================
-       OBTENER PROVEEDOR
+    OBTENER PROVEEDOR
     ===================================== */
-
     public function obtenerProveedorActual($idUsuario)
     {
 
@@ -34,10 +33,49 @@ class RegistrarInformacionModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+
+    /* =====================================
+    CREAR PROVEEDOR
+    ===================================== */
+    public function crearProveedor($idUsuario)
+    {
+
+        $sqlVerificar = "SELECT id_proveedor_hotelero
+                     FROM proveedor_hotelero
+                     WHERE id_usuario = :id
+                     LIMIT 1";
+
+        $stmt = $this->conexion->prepare($sqlVerificar);
+        $stmt->bindParam(':id', $idUsuario, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $existe = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$existe) {
+
+            $sqlInsert = "INSERT INTO proveedor_hotelero (
+                        id_usuario,
+                        estado
+                      ) VALUES (
+                        :id_usuario,
+                        'PENDIENTE'
+                      )";
+
+            $stmtInsert = $this->conexion->prepare($sqlInsert);
+
+            $stmtInsert->bindParam(':id_usuario', $idUsuario, PDO::PARAM_INT);
+
+            return $stmtInsert->execute();
+        }
+
+        return true;
+    }
+
+
+
     /* =====================================
        ACTUALIZAR PROVEEDOR
     ===================================== */
-
     public function actualizarProveedorHotelero($idUsuario, $datos, $files)
     {
 
