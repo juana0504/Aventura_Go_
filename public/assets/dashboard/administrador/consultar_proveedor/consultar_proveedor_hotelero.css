@@ -681,12 +681,6 @@
 
     .adm-modal__footer-actions {
         width: 100%;
-        flex-direction: column;
-    }
-
-    .adm-modal__btn-success,
-    .adm-modal__btn-danger {
-        justify-content: center;
     }
 
     .adm-btn-primary,

@@ -470,6 +470,16 @@
     .adm-wizard__steps    { padding: 20px 16px 0; gap: 4px; }
     .wizard-steps .step-label { font-size: 9px; }
     .adm-page-header      { flex-direction: column; align-items: flex-start; }
+    .adm-wizard__steps    { padding: 20px 16px 10px; gap: 6px; overflow-x: auto; justify-content: flex-start; }
+    .adm-wizard__steps::after { display: none; }
+    .wizard-steps .step { min-width: 88px; }
+    .wizard-steps .step-label { font-size: 9px; }
+    .adm-page-header      { flex-direction: column; align-items: flex-start; }
+    .adm-btn-back         { width: 100%; justify-content: center; }
+    .adm-wizard__actions  { flex-direction: column-reverse; gap: 10px; }
+    .adm-wizard__btn-prev,
+    .adm-wizard__btn-next,
+    .btn-primary-wizard   { width: 100%; justify-content: center; margin-left: 0; }
     .adm-activities-grid  { grid-template-columns: repeat(2, 1fr); }
 }
 

@@ -42,6 +42,12 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
 
     <!-- CSS específico -->
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/tickets/responder.css">
+<<<<<<<<< Temporary merge branch 1
+
+    <!-- CSS unificado para listados admin -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/consultas_admin_unificado.css">
+=========
+>>>>>>>>> Temporary merge branch 2
 </head>
 
 <body class="adm-body">
@@ -285,9 +291,10 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-<script src="<?= BASE_URL ?>public/assets/dashboard/administrador/administrador/admin_notifications.js"></script>
+<<<<<<<<< Temporary merge branch 1
 <script src="<?= BASE_URL ?>public/assets/dashboard/administrador/administrador/sidebar-toggle.js"></script>
->>>>>>> cca6e22ee7efef818c0c1da004b478e91235cc4b
+=========
+>>>>>>>>> Temporary merge branch 2
 
 <script>
 (function () {
