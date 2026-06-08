@@ -1,5 +1,4 @@
 <?php
-include_once __DIR__ . '/../../layouts/header_administrador.php';
 require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';
 
 // le asignamos el valor id del registro segun la tabla 
@@ -14,18 +13,13 @@ if (!empty($proveedor['actividades'])) {
     $actividadesSeleccionadas = array_map('trim', explode(",", $proveedor['actividades']));
 }
 
-?>
-
-<?php
-
 require_once BASE_PATH . '/app/helpers/session_administrador.php';
-
 ?>
 
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">

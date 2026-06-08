@@ -57,7 +57,8 @@ class login
                 'id_usuario' => $user['id_usuario'],
                 'rol' => $user['rol'],
                 'nombre' => $user['nombre'],
-                'correo' => $user['email']
+                'correo' => $user['email'],
+                'foto' => $user['foto'] ?? 'default.png'
             ];
         } catch (PDOException $e) {
             error_log("Error en login: " . $e->getMessage());

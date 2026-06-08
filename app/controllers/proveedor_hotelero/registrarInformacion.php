@@ -8,6 +8,8 @@ $idUsuario = $_SESSION['user']['id_usuario'];
 
 $model = new registrarInformacionModel();
 
+$model->crearProveedor($idUsuario);
+
 /* =====================================
    SI ES POST → ACTUALIZAR INFORMACIÓN
 ===================================== */
@@ -48,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'error',
                 'Campos incompletos',
                 'Por favor completa todos los campos obligatorios.',
-                '/aventura_go/proveedor_hotelero/registrar-informacion'
+                BASE_URL . 'proveedor_hotelero/registrar-informacion'
             );
             exit;
         }
@@ -79,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'success',
             'Información actualizada',
             'Tu información ha sido actualizada y está en revisión.',
-            '/aventura_go/proveedor_hotelero/registrar-informacion'
+            BASE_URL . 'proveedor_hotelero/registrar-informacion'
         );
     } else {
 
@@ -87,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'error',
             'Error al actualizar',
             'Hubo un error al actualizar tu información.',
-            '/aventura_go/proveedor_hotelero/registrar-informacion'
+            BASE_URL . 'proveedor_hotelero/registrar-informacion'
         );
     }
 

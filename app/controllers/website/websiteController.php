@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../helpers/alert_helper.php';
-require_once __DIR__ . '/../../models/proveedor_turistico/ActividadTuristica.php';
+require_once __DIR__ . '/../../models/proveedor_turistico/actividadTuristica.php';
 
 class WebsiteController
 {

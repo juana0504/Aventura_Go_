@@ -33,8 +33,8 @@ mostrarSweetAlert(
     'success', 
     'Sesión cerrada', 
     'Has cerrado sesión correctamente. ¡Vuelve pronto!.', 
-    '/aventura_go/', 
-    BASE_URL . '/public/assets/video/roles/logout_bg.mp4'  // ← misma carpeta y usando BASE_URL
+    BASE_URL,
+    BASE_URL . 'public/assets/video/roles/logout_bg.mp4'
 );
 
 exit();
