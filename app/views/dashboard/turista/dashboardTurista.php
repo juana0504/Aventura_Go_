@@ -1,6 +1,6 @@
 <?php
 if (!isset($datos_turista)) {
-    header('Location: /aventura_go/turista/dashboard');
+    header('Location: ' . BASE_URL . 'turista/dashboard');
     exit;
 }
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once BASE_PATH . '/app/helpers/session_administrador.php';
 require_once BASE_PATH . '/app/controllers/administrador/hotelero.php';
 
@@ -11,6 +11,10 @@ $partes      = explode(' ', trim($nombreAdmin));
 foreach (array_slice($partes, 0, 2) as $p) {
     $iniciales .= mb_strtoupper(mb_substr($p, 0, 1));
 }
+
+$fotoAdmin = trim((string) ($_SESSION['user']['foto'] ?? ''));
+$usarFotoAdmin = $fotoAdmin !== '' && stripos($fotoAdmin, 'default') !== 0;
+$avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -132,7 +136,13 @@ foreach (array_slice($partes, 0, 2) as $p) {
                 <!-- Perfil -->
                 <div class="adm-topbar__dropdown-wrap">
                     <button class="adm-profile-btn" id="adm-profile-btn">
-                        <div class="adm-profile-btn__avatar"><?= htmlspecialchars($iniciales) ?></div>
+                        <div class="adm-profile-btn__avatar">
+                            <?php if ($usarFotoAdmin): ?>
+                                <img src="<?= htmlspecialchars($avatarAdminUrl) ?>" alt="Avatar administrador" class="adm-profile-btn__avatar-img">
+                            <?php else: ?>
+                                <?= htmlspecialchars($iniciales) ?>
+                            <?php endif; ?>
+                        </div>
                         <div class="adm-profile-btn__info">
                             <span class="adm-profile-btn__name"><?= htmlspecialchars($nombreAdmin) ?></span>
                             <span class="adm-profile-btn__role">Administrador</span>
@@ -141,7 +151,13 @@ foreach (array_slice($partes, 0, 2) as $p) {
                     </button>
                     <div class="adm-dropdown adm-dropdown--profile" id="adm-profile-panel">
                         <div class="adm-dropdown__user-header">
-                            <div class="adm-profile-btn__avatar adm-profile-btn__avatar--lg"><?= htmlspecialchars($iniciales) ?></div>
+                            <div class="adm-profile-btn__avatar adm-profile-btn__avatar--lg">
+                                <?php if ($usarFotoAdmin): ?>
+                                    <img src="<?= htmlspecialchars($avatarAdminUrl) ?>" alt="Avatar administrador" class="adm-profile-btn__avatar-img">
+                                <?php else: ?>
+                                    <?= htmlspecialchars($iniciales) ?>
+                                <?php endif; ?>
+                            </div>
                             <div>
                                 <div class="adm-dropdown__user-name"><?= htmlspecialchars($nombreAdmin) ?></div>
                                 <div class="adm-dropdown__user-role">Administrador · AventuraGO</div>
@@ -519,6 +535,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="<?= BASE_URL ?>public/assets/dashboard/administrador/administrador/admin_notifications.js"></script>
 
 <script>
     const BASE_URL = "<?= BASE_URL ?>";
@@ -624,3 +641,4 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
 </body>
 </html>
+

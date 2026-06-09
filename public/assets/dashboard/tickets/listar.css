@@ -4,10 +4,134 @@
    Colores completos modo DÍA y NOCHE
 ============================================= */
 
+/* ─── ENCABEZADO ──────────────────────────── */
+.adm-page-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.adm-page-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 38px;
+    letter-spacing: 2px;
+    color: var(--adm-text);
+    line-height: 1;
+    margin: 0 0 6px;
+}
+
+.adm-page-title span { color: var(--adm-primary); }
+
+/* ─── TARJETAS RESUMEN ────────────────────── */
+.adm-tk-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.adm-tk-stat {
+    background: var(--adm-surface);
+    border: 1px solid var(--adm-border);
+    border-radius: var(--adm-radius-lg);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .25s, box-shadow .25s;
+    cursor: default;
+}
+
+.adm-tk-stat:hover { transform: translateY(-3px); box-shadow: var(--adm-shadow-hover); }
+
+.adm-tk-stat::after {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: rgba(234,130,23,.05);
+    pointer-events: none;
+}
+
+.adm-tk-stat__icon {
+    width: 48px; height: 48px;
+    border-radius: var(--adm-radius-sm);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+}
+
 .adm-tk-stat__icon--orange { background: var(--adm-primary-light); color: var(--adm-primary); }
 .adm-tk-stat__icon--amber  { background: var(--adm-amber-light);   color: var(--adm-amber); }
 .adm-tk-stat__icon--green  { background: var(--adm-green-light);   color: var(--adm-green); }
 .adm-tk-stat__icon--blue   { background: var(--adm-blue-light);    color: var(--adm-blue); }
+
+.adm-tk-stat__label {
+    font-size: 12px; color: var(--adm-muted);
+    font-weight: 500; margin-bottom: 4px;
+}
+
+.adm-tk-stat__value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px; letter-spacing: 1px;
+    color: var(--adm-text); line-height: 1;
+}
+
+/* Tarjeta destacada */
+.adm-tk-stat--featured { background: #1a2b3c; border-color: transparent; }
+.adm-tk-stat--featured .adm-tk-stat__label { color: rgba(255,255,255,.45); }
+.adm-tk-stat--featured .adm-tk-stat__value { color: var(--adm-primary); }
+
+/* ─── FILTROS ─────────────────────────────── */
+.adm-tk-filters {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.adm-tk-filter {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 18px;
+    border-radius: var(--adm-radius-sm);
+    border: 1px solid var(--adm-border);
+    background: var(--adm-surface);
+    color: var(--adm-muted);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.adm-tk-filter:hover {
+    border-color: rgba(234,130,23,.35);
+    color: var(--adm-primary);
+    background: rgba(234,130,23,.04);
+}
+
+.adm-tk-filter--active {
+    background: var(--adm-primary-light);
+    border-color: rgba(234,130,23,.4);
+    color: var(--adm-primary);
+    font-weight: 600;
+}
+
+/* ─── TABLA ───────────────────────────────── */
+.adm-table-wrap--card {
+    background: var(--adm-surface);
+    border: 1px solid var(--adm-border);
+    border-radius: var(--adm-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--adm-shadow);
+}
 
 /* ID del ticket */
 .adm-tk-id {
@@ -63,8 +187,35 @@
 .adm-section-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1.5px; color: var(--adm-text); margin: 0; }
 .adm-section-title span { color: var(--adm-primary); }
 
+/* Tabla */
+.adm-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.adm-table thead th { background: #f9fafb; padding: 13px 20px; text-align: left; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--adm-muted); font-weight: 600; border-bottom: 1px solid var(--adm-border); }
+.adm-table tbody tr { border-bottom: 1px solid var(--adm-border); transition: background .15s; }
+.adm-table tbody tr:last-child { border-bottom: none; }
+.adm-table tbody tr:hover { background: #fdf6ee; }
+.adm-table td { padding: 14px 20px; color: var(--adm-text); vertical-align: middle; }
 .adm-table__act-name { font-weight: 600; font-size: 13px; color: var(--adm-text); }
 
 /* ─── MODO OSCURO ─────────────────────────── */
+.adm-dark .adm-tk-stat           { background: var(--adm-surface); border-color: var(--adm-border); }
+.adm-dark .adm-tk-stat__value    { color: var(--adm-text); }
+.adm-dark .adm-tk-stat__label    { color: var(--adm-muted); }
+.adm-dark .adm-tk-stat--featured { background: #111c27; }
+.adm-dark .adm-tk-filter         { background: var(--adm-surface); border-color: var(--adm-border); color: var(--adm-muted); }
+.adm-dark .adm-tk-filter--active { background: var(--adm-primary-light); border-color: rgba(234,130,23,.4); color: var(--adm-primary); }
+.adm-dark .adm-table-wrap--card  { background: var(--adm-surface); border-color: var(--adm-border); }
+.adm-dark .adm-table thead th    { background: #1f2d3d; color: var(--adm-muted); border-color: var(--adm-border); }
+.adm-dark .adm-table tbody tr    { border-color: var(--adm-border); }
+.adm-dark .adm-table tbody tr:hover { background: rgba(234,130,23,.05); }
+.adm-dark .adm-table td          { color: var(--adm-text); }
 .adm-dark .adm-table__act-name   { color: var(--adm-text); }
 .adm-dark .adm-section-title     { color: var(--adm-text); }
+.adm-dark .adm-page-title        { color: var(--adm-text); }
+
+/* ─── RESPONSIVE ──────────────────────────── */
+@media (max-width: 1100px) { .adm-tk-stats { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) {
+    .adm-tk-stats { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .adm-page-header { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) { .adm-tk-stats { grid-template-columns: 1fr 1fr; } }

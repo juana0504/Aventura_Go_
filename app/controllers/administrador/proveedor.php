@@ -46,7 +46,7 @@ switch ($method) {
             $ciudadModel = new Ciudad();
             $ciudades = $ciudadModel->obtenerCiudadesActivas();
 
-            require_once __DIR__ . '/../views/dashboard/administrador/registrar_proveedor_turistico.php';
+            require_once __DIR__ . '/../../views/dashboard/administrador/registrar_proveedor_turistico.php';
             exit;
         }
 
@@ -192,7 +192,7 @@ function registrarProveedor()
     $resultado = $objProveedor->registrar($data);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Registro exitoso', 'Proveedor registrado.', '/aventura_go/administrador/registrar-proveedor');
+        mostrarSweetAlert('success', 'Registro exitoso', 'Proveedor registrado.', BASE_URL . 'administrador/registrar-proveedor');
     } else {
         mostrarSweetAlert('error', 'Error al registrar', 'No se pudo registrar el proveedor.');
     }
@@ -270,7 +270,7 @@ function actualizarProveedor()
     $resultado = $objProveedor->actualizar($data);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Actualización exitosa', 'Proveedor actualizado.', '/aventura_go/administrador/consultar-proveedor');
+        mostrarSweetAlert('success', 'Actualización exitosa', 'Proveedor actualizado.', BASE_URL . 'administrador/consultar-proveedor');
     } else {
         mostrarSweetAlert('error', 'Error al actualizar', 'No se pudo actualizar el proveedor.');
     }
@@ -283,7 +283,7 @@ function eliminarProveedor($id)
     $resultado = $objProveedor->eliminar($id);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Eliminación exitosa', 'Proveedor eliminado.', '/aventura_go/administrador/consultar-proveedor');
+        mostrarSweetAlert('success', 'Eliminación exitosa', 'Proveedor eliminado.', BASE_URL . 'administrador/consultar-proveedor');
     } else {
         mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el proveedor.');
     }
@@ -330,7 +330,7 @@ function activarProveedorTuristico($id)
     $resultado = $objProveedor->activarProveedor($id);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Activación Exítosa del proveedor', 'Proveedor turistico activo en el sistema.', '/aventura_go/administrador/consultar-proveedor');
+        mostrarSweetAlert('success', 'Activación Exítosa del proveedor', 'Proveedor turistico activo en el sistema.', BASE_URL . 'administrador/consultar-proveedor');
     } else {
         mostrarSweetAlert('error', 'Error al activar ', 'No se pudo activar el proveedor turistico.');
     }
@@ -344,7 +344,7 @@ function desactivarProveedorTuristico($id)
     $resultado = $objProveedor->desactivarProveedor($id);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Desactivación Exítosa del proveedor', 'Proveedor turistico inactivo en el sistema.', '/aventura_go/administrador/consultar-proveedor');
+        mostrarSweetAlert('success', 'Desactivación Exítosa del proveedor', 'Proveedor turistico inactivo en el sistema.', BASE_URL . 'administrador/consultar-proveedor');
     } else {
         mostrarSweetAlert('error', 'Error al Desactivar', 'No se pudo activar el proveedor turistico.');
     }

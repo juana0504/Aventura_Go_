@@ -44,7 +44,7 @@ function reportesPdfControlers()
 
 function normalizarEstado($estado)
 {
-    $estado = strtolower(trim((string)$estado));
+    $estado = strtolower(trim((string) $estado));
     if ($estado === 'todos' || $estado === 'all') {
         return '';
     }

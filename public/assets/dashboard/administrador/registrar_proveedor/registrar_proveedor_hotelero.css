@@ -403,6 +403,8 @@
     .adm-wizard__content  { padding: 24px 20px; }
     .adm-wizard__actions  { padding: 16px 20px; }
     .adm-page-header      { flex-direction: column; align-items: flex-start; }
+    .wizard-steps .step-label { font-size: 9px; }
+    .wizard-steps .step-circle { width: 34px; height: 34px; font-size: 14px; }
     .adm-btn-back         { width: 100%; justify-content: center; }
     .adm-wizard__steps    { overflow-x: auto; justify-content: flex-start; padding: 20px 16px 10px; }
     .adm-wizard__steps::after { display: none; }

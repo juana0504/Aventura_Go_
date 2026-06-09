@@ -1,7 +1,6 @@
 <?php
 
 require_once BASE_PATH . '/app/helpers/session_administrador.php';
-include_once __DIR__ . '/../../layouts/header_administrador.php';
 require_once BASE_PATH . '/app/controllers/administrador/hotelero.php';
 
 // le asignamos el valor id del registro segun la tabla 
@@ -36,7 +35,7 @@ if (!empty($hotelero['metodo_pago'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
