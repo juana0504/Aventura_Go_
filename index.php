@@ -1,8 +1,8 @@
 <?php
 //index.php - Router principal en larabel se tiene un archivo por cada carpeta de views
 
-// Habilitar errores en desarrollo, excluyendo deprecated de librerias legacy.
-error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
+//HABILITAR LA VISUALIZACION DE ERRORES EN PHP (PARA DESARROLLO, NO USAR EN PRODUCCION)
+error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 
