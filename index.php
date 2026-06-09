@@ -2,8 +2,8 @@
 //index.php - Router principal en larabel se tiene un archivo por cada carpeta de views
 
 //HABILITAR LA VISUALIZACION DE ERRORES EN PHP (PARA DESARROLLO, NO USAR EN PRODUCCION)
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
 
 
 require_once __DIR__ . '/config/config.php';
