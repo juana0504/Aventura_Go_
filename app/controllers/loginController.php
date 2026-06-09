@@ -30,15 +30,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     //si pasa esta linea el ususario es valido
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     $_SESSION['user'] = [
         'id_usuario' => $resultado['id_usuario'],
         'nombre' => $resultado['nombre'],
-        'rol' => $resultado['rol']
+        'rol' => $resultado['rol'],
+        'foto' => $resultado['foto'] ?? 'default.png'
     ];
 
     // Redirección segun el rol 
-    $redirectUrl = '/aventura_go/login';
+    $redirectUrl = BASE_URL . 'login';
     $mensaje = 'Rol inexistente. Redirigiendo al inicio de sesión...';
     $bgVideo = null; // video de fondo por defecto (ninguno)
 
@@ -53,22 +56,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     switch ($resultado['rol']) {
         case 'administrador':
-            $redirectUrl = '/aventura_go/administrador/dashboard';
+            $redirectUrl = BASE_URL . 'administrador/dashboard';
             $mensaje = 'Bienvenido Administrador.';
             $bgVideo = BASE_URL . '/public/assets/video/roles/bg_administrador.mp4';
             break;
         case 'proveedor':
-            $redirectUrl = '/aventura_go/proveedor/dashboard';
+            $redirectUrl = BASE_URL . 'proveedor/dashboard';
             $mensaje = 'Bienvenido Proveedor Turistico.';
             $bgVideo = BASE_URL . '/public/assets/video/roles/bg_proveedor.mp4';
             break;
         case 'proveedor_hotelero':
-            $redirectUrl = '/aventura_go/proveedor_hotelero/dashboard';
+            $redirectUrl = BASE_URL . 'proveedor_hotelero/dashboard';
             $mensaje = 'Bienvenido Proveedor Hotelero.';
             $bgVideo = BASE_URL . '/public/assets/video/roles/bg_proveedor_hotelero.mp4';
             break;
         case 'turista':
-            $redirectUrl = '/aventura_go';
+            $redirectUrl = BASE_URL;
             $mensaje = 'Bienvenido Turista.';
             $bgVideo = BASE_URL . '/public/assets/video/roles/bg_turista.mp4';
             break;

@@ -2,7 +2,7 @@
 
 require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 require_once BASE_PATH . '/app/helpers/pdf_helper.php';
-require_once BASE_PATH . '/app/models/proveedor_turistico/ActividadTuristica.php';
+require_once BASE_PATH . '/app/models/proveedor_turistico/actividadTuristica.php';
 
 function generarPdfActividades()
 {

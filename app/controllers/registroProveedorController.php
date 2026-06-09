@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'success',
             'Registro exitoso',
             'Tu registro fue enviado correctamente. En un plazo de 7 días hábiles validaremos tu información.',
-            '/aventura_go/login'
+            BASE_URL . 'login'
         );
     } else {
         mostrarSweetAlert('error', 'Error', 'No se pudo completar el registro.');

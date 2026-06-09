@@ -4,18 +4,17 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+require_once __DIR__ . '/../../config/config.php';
 // Validate session and role
 if (!isset($_SESSION['user'])) {
-    header('Location: /aventura_go/login');
+    header('Location: ' . BASE_URL . 'login');
     exit;
 }
 
 if ($_SESSION['user']['rol'] !== 'proveedor_hotelero') {
-    header('Location: /aventura_go/login');
+    header('Location: ' . BASE_URL . 'login');
     exit;
 }
-
-require_once __DIR__ . '/../../config/config.php';
 ?>
 <?php
 
@@ -49,7 +48,7 @@ if ($proveedor && $proveedor['validado'] == 0) {
     // Si la ruta actual contiene alguna de las rutas bloqueadas, redirige a pendiente de aprobación
     foreach ($rutasBloqueadas as $ruta) {
         if (strpos($currentPath, $ruta) !== false) {
-            header('Location: /aventura_go/proveedor_hotelero/pendiente');
+            header('Location: ' . BASE_URL . 'proveedor_hotelero/pendiente');
             exit;
         }
     }

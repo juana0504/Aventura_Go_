@@ -1,16 +1,18 @@
 <?php
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 //VALIDAMOS SI HAY UNA SECCION ACTIVA, se crea solo cuando hay una sesion activa
 if (!isset($_SESSION['user'])) {
-    header('Location: /aventura_go/login');
+    header('Location: ' . BASE_URL . 'login');
     exit;
 }
 
 //validamos que el rol sea el correspondiente
 if ($_SESSION['user']['rol'] !== 'proveedor') {
-    header('Location: /aventura_go/login');
+    header('Location: ' . BASE_URL . 'login');
     exit;
 }
 
@@ -44,7 +46,7 @@ if ($proveedor && $proveedor['validado'] == 0) {
 
     foreach ($rutasBloqueadas as $ruta) {
         if (strpos($currentPath, $ruta) !== false) {
-            header('Location: /aventura_go/proveedor/pendiente');
+            header('Location: ' . BASE_URL . 'proveedor/pendiente');
             exit;
         }
     }

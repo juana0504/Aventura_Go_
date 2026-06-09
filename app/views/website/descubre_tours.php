@@ -79,14 +79,14 @@ $ciudad = $_GET['ciudad'] ?? null;
 
                             <ul class="profile-menu" id="profileMenu">
                                 <li>
-                                    <a href="/aventura_go/turista/perfil">Mi perfil</a>
+                                    <a href="<?= BASE_URL ?>turista/perfil">Mi perfil</a>
                                 </li>
                                 <li>
-                                    <a href="/aventura_go/turista/dashboard">Centro de ayuda</a>
+                                    <a href="<?= BASE_URL ?>turista/dashboard">Centro de ayuda</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="/aventura_go/logout" class="logout">Cerrar sesión</a>
+                                    <a href="<?= BASE_URL ?>logout" class="logout">Cerrar sesión</a>
                                 </li>
                             </ul>
                         </div>

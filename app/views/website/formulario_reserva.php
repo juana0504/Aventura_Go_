@@ -2,7 +2,7 @@
 session_start();
 require_once BASE_PATH . '/app/controllers/website/websiteController.php';
 
-require_once BASE_PATH . '/app/models/proveedor_turistico/ActividadTuristica.php';
+require_once BASE_PATH . '/app/models/proveedor_turistico/actividadTuristica.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -26,7 +26,7 @@ $idActividad = $_SESSION['reserva']['id_actividad'];
 $cantidad = $_SESSION['reserva']['cantidad'];
 $fecha = $_SESSION['reserva']['fecha'];
 
-require_once BASE_PATH . '/app/models/proveedor_turistico/ActividadTuristica.php';
+require_once BASE_PATH . '/app/models/proveedor_turistico/actividadTuristica.php';
 
 
 
