@@ -648,7 +648,38 @@
         align-items: flex-start;
     }
 
-    .adm-page-header__actions {
+    .adm-modal__grid--2,
+    .adm-modal__grid--3 {
+        grid-template-columns: 1fr;
+    }
+
+    .adm-modal__body {
+        padding: 20px;
+    }
+
+    .adm-modal__header {
+        padding: 20px;
+        align-items: flex-start;
+    }
+
+    .adm-modal__title {
+        font-size: 24px;
+    }
+
+    .adm-table {
+        min-width: 1000px;
+    }
+
+    .adm-table-wrap--card {
+        overflow-x: auto;
+    }
+
+    .adm-modal__footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .adm-modal__footer-actions {
         width: 100%;
     }
 
