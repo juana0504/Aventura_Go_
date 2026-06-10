@@ -130,7 +130,7 @@ $usuario = mostrarPerfilproveedor($id);
 
                     <div class="editar">
 
-                        <form action="/aventura_go/proveedor/actualizar-perfil" method="POST" enctype="multipart/form-data">
+                        <form action="<?= BASE_URL ?>proveedor/actualizar-perfil" method="POST" enctype="multipart/form-data">
 
                             <h4>Imagen Perfil</h4>
                             <input type="file" name="foto" value="<?= $usuario['foto'] ?>">
@@ -157,7 +157,7 @@ $usuario = mostrarPerfilproveedor($id);
 
 
 
-                    <form action="/aventura_go/proveedor/cambiar-password" method="POST" class="cambiar">
+                    <form action="<?= BASE_URL ?>proveedor/cambiar-password" method="POST" class="cambiar">
 
                         <input type="hidden" name="accion" value="cambiar_password">
 

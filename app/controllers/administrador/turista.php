@@ -147,7 +147,7 @@ function registrarTurista()
                 'success',
                 'Registro exitoso',
                 'Bienvenido a Aventura Go',
-                '/aventura_go/turista/dashboard'
+                BASE_URL . 'turista/dashboard'
             );
         }
 
@@ -203,7 +203,7 @@ function actualizarTurista()
     $resultado = $objTurista->actualizar($data);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Actualización exitosa', 'Turista actualizado.', '/aventura_go/administrador/consultar-turista');
+        mostrarSweetAlert('success', 'Actualización exitosa', 'Turista actualizado.', BASE_URL . 'administrador/consultar-turista');
     } else {
         mostrarSweetAlert('error', 'Error al actualizar', 'No se pudo actualizar el turista.');
     }
@@ -216,7 +216,7 @@ function eliminarTurista($id)
     $resultado = $objTurista->eliminar($id);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Eliminación exitosa', 'Turista eliminado.', '/aventura_go/administrador/consultar-turista');
+        mostrarSweetAlert('success', 'Eliminación exitosa', 'Turista eliminado.', BASE_URL . 'administrador/consultar-turista');
     } else {
         mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el turista.');
     }

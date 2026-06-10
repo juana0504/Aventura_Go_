@@ -127,7 +127,7 @@ function actualizarPerfilProveedorHotelero()
         // Actualizamos la sesión
         $_SESSION['user'] = array_merge($_SESSION['user'], $data);
 
-        mostrarSweetAlert('success', 'Actualizado', 'Tu perfil ha sido actualizado.', '/aventura_go/proveedor_hotelero/perfil');
+        mostrarSweetAlert('success', 'Actualizado', 'Tu perfil ha sido actualizado.', BASE_URL . 'proveedor_hotelero/perfil');
     } else {
         mostrarSweetAlert('error', 'Error', 'No se pudo actualizar el perfil.');
     }

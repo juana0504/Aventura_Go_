@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__ . '/../../layouts/header_administrador.php';
+require_once BASE_PATH . '/app/helpers/session_administrador.php';
 require_once BASE_PATH . '/app/controllers/administrador/turista.php';
 
 // le asignamos el valor id del registro segun la tabla 
@@ -10,7 +10,7 @@ $turista = listarTuristaId($id);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -93,7 +93,7 @@ $turista = listarTuristaId($id);
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Teléfono *</label>
-                                    <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="+57 300 123 4567" required value="<?= $turista['telefono'] ?>"">
+                                    <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="+57 300 123 4567" required value="<?= $turista['telefono'] ?>">
                                 </div>
                                 <div class=" col-md-6 mb-3">
                                     <label class="form-label">Email *</label>

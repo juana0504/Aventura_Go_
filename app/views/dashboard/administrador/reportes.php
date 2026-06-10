@@ -7,6 +7,10 @@ $partes = explode(' ', trim($nombreAdmin));
 foreach (array_slice($partes, 0, 2) as $p) {
     $iniciales .= mb_strtoupper(mb_substr($p, 0, 1));
 }
+
+$fotoAdmin = trim((string) ($_SESSION['user']['foto'] ?? ''));
+$usarFotoAdmin = $fotoAdmin !== '' && stripos($fotoAdmin, 'default') !== 0;
+$avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -83,7 +87,13 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
                 <div class="adm-topbar__dropdown-wrap">
                     <button class="adm-profile-btn" id="adm-profile-btn">
-                        <div class="adm-profile-btn__avatar"><?= htmlspecialchars($iniciales) ?></div>
+                        <div class="adm-profile-btn__avatar">
+                            <?php if ($usarFotoAdmin): ?>
+                                <img src="<?= htmlspecialchars($avatarAdminUrl) ?>" alt="Avatar administrador" class="adm-profile-btn__avatar-img">
+                            <?php else: ?>
+                                <?= htmlspecialchars($iniciales) ?>
+                            <?php endif; ?>
+                        </div>
                         <div class="adm-profile-btn__info">
                             <span class="adm-profile-btn__name"><?= htmlspecialchars($nombreAdmin) ?></span>
                             <span class="adm-profile-btn__role">Administrador</span>
@@ -92,7 +102,13 @@ foreach (array_slice($partes, 0, 2) as $p) {
                     </button>
                     <div class="adm-dropdown adm-dropdown--profile" id="adm-profile-panel">
                         <div class="adm-dropdown__user-header">
-                            <div class="adm-profile-btn__avatar adm-profile-btn__avatar--lg"><?= htmlspecialchars($iniciales) ?></div>
+                            <div class="adm-profile-btn__avatar adm-profile-btn__avatar--lg">
+                                <?php if ($usarFotoAdmin): ?>
+                                    <img src="<?= htmlspecialchars($avatarAdminUrl) ?>" alt="Avatar administrador" class="adm-profile-btn__avatar-img">
+                                <?php else: ?>
+                                    <?= htmlspecialchars($iniciales) ?>
+                                <?php endif; ?>
+                            </div>
                             <div>
                                 <div class="adm-dropdown__user-name"><?= htmlspecialchars($nombreAdmin) ?></div>
                                 <div class="adm-dropdown__user-role">Administrador · AventuraGO</div>
@@ -102,6 +118,10 @@ foreach (array_slice($partes, 0, 2) as $p) {
                         <a href="<?= BASE_URL ?>administrador/perfil" class="adm-dropdown__item">
                             <i class="bi bi-person-circle"></i> Mi perfil
                         </a>
+                        <a href="<?= BASE_URL ?>administrador/cambiar-password" class="adm-dropdown__item">
+                            <i class="bi bi-shield-lock"></i> Cambiar contraseña
+                        </a>
+                        <div class="adm-dropdown__divider"></div>
                         <a href="<?= BASE_URL ?>logout" class="adm-dropdown__item adm-dropdown__item--danger">
                             <i class="bi bi-box-arrow-right"></i> Cerrar sesion
                         </a>
@@ -155,7 +175,6 @@ foreach (array_slice($partes, 0, 2) as $p) {
                     </p>
                 </div>
             </section>
-
             <div class="adm-stats-grid adm-report-grid">
                 <article class="adm-stat-card adm-report-card" data-report="turistico proveedor">
                     <div class="adm-stat-card__icon adm-stat-card__icon--orange">
@@ -240,7 +259,6 @@ foreach (array_slice($partes, 0, 2) as $p) {
     const desdeInput = document.getElementById('adm-filter-desde');
     const hastaInput = document.getElementById('adm-filter-hasta');
     const clearFiltersBtn = document.getElementById('adm-clear-filters');
-
     if (searchInput) {
         searchInput.addEventListener('input', () => {
             const q = searchInput.value.toLowerCase().trim();
@@ -259,7 +277,6 @@ foreach (array_slice($partes, 0, 2) as $p) {
             if (hastaInput) hastaInput.value = '';
         });
     }
-
     document.querySelectorAll('.adm-report-generate').forEach((btn) => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -283,7 +300,6 @@ foreach (array_slice($partes, 0, 2) as $p) {
             if (fechaHasta) {
                 url.searchParams.set('fecha_hasta', fechaHasta);
             }
-
             window.open(url.toString(), '_blank');
         });
     });

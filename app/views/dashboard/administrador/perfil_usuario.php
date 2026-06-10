@@ -1,11 +1,9 @@
-<?php
+﻿<?php
+
+require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
 require_once __DIR__ . '/../../../helpers/alert_helper.php';
 require_once __DIR__ . '/../../../controllers/perfil.php';
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 
 /* ─────────────────────────────────────────────
    DATOS DEL ADMINISTRADOR
@@ -22,6 +20,10 @@ $partes = explode(' ', trim($nombreAdmin));
 foreach (array_slice($partes, 0, 2) as $p) {
     $iniciales .= mb_strtoupper(mb_substr($p, 0, 1));
 }
+
+$fotoPerfil = !empty($usuario['foto']) ? $usuario['foto'] : 'default.png';
+$fotoPerfilUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoPerfil);
+$tieneFotoPerfil = !empty($usuario['foto']) && $usuario['foto'] !== 'default.png';
 
 ?>
 
@@ -215,7 +217,13 @@ foreach (array_slice($partes, 0, 2) as $p) {
                         id="adm-profile-btn">
 
                         <div class="adm-profile-btn__avatar">
-                            <?= htmlspecialchars($iniciales) ?>
+                            <?php if ($tieneFotoPerfil): ?>
+                                <img src="<?= htmlspecialchars($fotoPerfilUrl) ?>"
+                                    alt="Avatar"
+                                    class="adm-profile-btn__avatar-img">
+                            <?php else: ?>
+                                <?= htmlspecialchars($iniciales) ?>
+                            <?php endif; ?>
                         </div>
 
                         <div class="adm-profile-btn__info">
@@ -241,7 +249,13 @@ foreach (array_slice($partes, 0, 2) as $p) {
                         <div class="adm-dropdown__user-header">
 
                             <div class="adm-profile-btn__avatar adm-profile-btn__avatar--lg">
-                                <?= htmlspecialchars($iniciales) ?>
+                                <?php if ($tieneFotoPerfil): ?>
+                                    <img src="<?= htmlspecialchars($fotoPerfilUrl) ?>"
+                                        alt="Avatar"
+                                        class="adm-profile-btn__avatar-img">
+                                <?php else: ?>
+                                    <?= htmlspecialchars($iniciales) ?>
+                                <?php endif; ?>
                             </div>
 
                             <div>
@@ -323,7 +337,12 @@ foreach (array_slice($partes, 0, 2) as $p) {
                 <aside class="adm-pf-card">
 
                     <!-- Avatar -->
-                    <div class="adm-pf-avatar-wrap">
+                    <div class="adm-pf-avatar-wrap adm-pf-avatar-wrap--clickable"
+                        id="adm-pf-avatar-trigger"
+                        role="button"
+                        tabindex="0"
+                        aria-label="Cambiar foto de perfil"
+                        title="Cambiar foto de perfil">
 
                         <img src="<?= BASE_URL ?>public/uploads/usuario/<?= htmlspecialchars($usuario['foto'] ?? 'default.png') ?>"
                             alt="Foto perfil"
@@ -705,6 +724,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
 <!-- Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="<?= BASE_URL ?>public/assets/dashboard/administrador/administrador/admin_notifications.js"></script>
 
 <!-- JS ORIGINAL -->
 <script src="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/perfil.js"></script>
@@ -818,24 +838,29 @@ foreach (array_slice($partes, 0, 2) as $p) {
     const navBtns = document.querySelectorAll('.adm-pf-nav__btn');
     const panels  = document.querySelectorAll('.adm-pf-panel');
 
+    const activarSeccion = (target) => {
+
+        navBtns.forEach(b => {
+            b.classList.remove('adm-pf-nav__btn--active');
+        });
+
+        const btnObjetivo = document.querySelector('.adm-pf-nav__btn[data-section="' + target + '"]');
+        if (btnObjetivo) {
+            btnObjetivo.classList.add('adm-pf-nav__btn--active');
+        }
+
+        panels.forEach(p => {
+            p.classList.remove('adm-pf-panel--active');
+        });
+
+        document.getElementById('panel-' + target)
+            ?.classList.add('adm-pf-panel--active');
+    };
+
     navBtns.forEach(btn => {
 
         btn.addEventListener('click', () => {
-
-            const target = btn.dataset.section;
-
-            navBtns.forEach(b => {
-                b.classList.remove('adm-pf-nav__btn--active');
-            });
-
-            btn.classList.add('adm-pf-nav__btn--active');
-
-            panels.forEach(p => {
-                p.classList.remove('adm-pf-panel--active');
-            });
-
-            document.getElementById('panel-' + target)
-                ?.classList.add('adm-pf-panel--active');
+            activarSeccion(btn.dataset.section);
 
         });
     });
@@ -848,10 +873,31 @@ foreach (array_slice($partes, 0, 2) as $p) {
         const targetBtn = document.querySelector('.adm-pf-nav__btn[data-section="' + sectionFromUrl + '"]');
 
         if (targetBtn) {
-            targetBtn.click();
+            activarSeccion(sectionFromUrl);
         }
     }
 
+    // Click en avatar lateral: abre editar perfil y dispara selector de foto
+    const avatarTrigger = document.getElementById('adm-pf-avatar-trigger');
+    const triggerFoto = () => {
+        activarSeccion('editar');
+        setTimeout(() => {
+            const input = document.getElementById('foto');
+            if (input) {
+                input.click();
+            }
+        }, 50);
+    };
+
+    if (avatarTrigger) {
+        avatarTrigger.addEventListener('click', triggerFoto);
+        avatarTrigger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                triggerFoto();
+            }
+        });
+    }
     /* ─── PREVIEW FOTO ──────────────────────── */
     const fileInput   = document.getElementById('foto');
     const editPreview = document.getElementById('adm-pf-edit-preview');
@@ -911,3 +957,4 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
 </body>
 </html>
+

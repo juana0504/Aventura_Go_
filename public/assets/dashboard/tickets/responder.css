@@ -4,6 +4,27 @@
    Colores completos modo DÍA y NOCHE
 ============================================= */
 
+/* ─── ENCABEZADO ──────────────────────────── */
+.adm-page-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.adm-page-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 38px;
+    letter-spacing: 2px;
+    color: var(--adm-text);
+    line-height: 1;
+    margin: 0 0 6px;
+}
+
+.adm-page-title span { color: var(--adm-primary); }
+
 /* Botón volver */
 .adm-btn-back {
     display: inline-flex;
@@ -38,11 +59,29 @@
 
 /* ─── CARD GENÉRICA ───────────────────────── */
 .adm-reply-card {
+    background: var(--adm-surface);
+    border: 1px solid var(--adm-border);
+    border-radius: var(--adm-radius-lg);
     overflow: hidden;
     margin-bottom: 16px;
 }
 
 .adm-reply-card:last-child { margin-bottom: 0; }
+
+.adm-reply-card__header {
+    background: #1a2b3c;
+    padding: 16px 20px;
+    border-bottom: 2px solid var(--adm-primary);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.adm-reply-card__header i { color: var(--adm-primary); }
 
 .adm-reply-card__body {
     padding: 20px;
@@ -236,6 +275,7 @@
 /* Día — ya hereda de admin.css con variables, no se necesita nada extra */
 
 /* Noche */
+.adm-dark .adm-reply-card         { background: var(--adm-surface); border-color: var(--adm-border); }
 .adm-dark .adm-reply-card__body   { background: var(--adm-surface); }
 .adm-dark .adm-reply-field        { background: var(--adm-bg); border-color: var(--adm-border); }
 .adm-dark .adm-reply-field__value { color: var(--adm-text); }
@@ -244,7 +284,10 @@
 .adm-dark .adm-reply-block__text  { color: var(--adm-text); }
 .adm-dark .adm-form-textarea      { background: var(--adm-bg); color: var(--adm-text); border-color: var(--adm-border); }
 .adm-dark .adm-form-textarea:focus { background: var(--adm-surface); }
+.adm-dark .adm-btn-back           { background: var(--adm-surface); border-color: var(--adm-border); color: var(--adm-muted); }
+.adm-dark .adm-btn-back-sm        { background: var(--adm-surface); border-color: var(--adm-border); color: var(--adm-muted); }
 .adm-dark .adm-reply-form-footer  { border-color: var(--adm-border); }
+.adm-dark .adm-page-title         { color: var(--adm-text); }
 
 /* ─── RESPONSIVE ──────────────────────────── */
 @media (max-width: 900px) {
@@ -252,5 +295,6 @@
 }
 
 @media (max-width: 768px) {
-    .adm-btn-back { width: 100%; justify-content: center; }
+    .adm-page-header { flex-direction: column; align-items: flex-start; }
+    .adm-btn-back    { width: 100%; justify-content: center; }
 }

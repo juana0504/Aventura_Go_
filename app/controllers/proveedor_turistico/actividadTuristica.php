@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../../helpers/session_proveedor.php';
 require_once __DIR__ . '/../../helpers/alert_helper.php';
-require_once __DIR__ . '/../../models/proveedor_turistico/ActividadTuristica.php';
+require_once __DIR__ . '/../../models/proveedor_turistico/actividadTuristica.php';
 require_once __DIR__ . '/../../models/Ciudad.php';
 
 
@@ -219,7 +219,7 @@ function registrarActividad()
         'success',
         'Registro exitoso',
         'Actividad turística registrada correctamente',
-        '/aventura_go/proveedor/registrar-actividad'
+        BASE_URL . 'proveedor/registrar-actividad'
     );
     exit;
 }
@@ -280,7 +280,7 @@ function actualizarActividad()
             'success',
             'Actividad actualizada',
             'La actividad turística fue actualizada correctamente',
-            '/aventura_go/proveedor/consultar-actividad'
+            BASE_URL . 'proveedor/consultar-actividad'
         );
     } else {
         mostrarSweetAlert(
@@ -328,7 +328,7 @@ function activarActividad($id)
             'success',
             'Actividad activada',
             'La actividad fue activada correctamente',
-            '/aventura_go/proveedor/consultar-actividad'
+            BASE_URL . 'proveedor/consultar-actividad'
         );
     } else {
         mostrarSweetAlert(
@@ -350,7 +350,7 @@ function desactivarActividad($id)
             'success',
             'Actividad desactivada',
             'La actividad fue desactivada correctamente',
-            '/aventura_go/proveedor/consultar-actividad'
+            BASE_URL . 'proveedor/consultar-actividad'
         );
     } else {
         mostrarSweetAlert(
@@ -369,7 +369,7 @@ function eliminaractividad($id)
     $resultado = $objActividad->eliminar($id);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Eliminación exitosa', 'actividad eliminada.', '/aventura_go/proveedor/consultar-actividad');
+        mostrarSweetAlert('success', 'Eliminación exitosa', 'actividad eliminada.', BASE_URL . 'proveedor/consultar-actividad');
     } else {
         mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar la actividad.');
     }

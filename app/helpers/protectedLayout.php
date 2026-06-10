@@ -11,7 +11,7 @@ header("Expires: 0");
 
 // Si no hay sesión → al login
 if (!isset($_SESSION['user'])) {
-    header("Location: /aventura_go/login");
+    header('Location: ' . BASE_URL . 'login');
     exit();
 }
 ?>

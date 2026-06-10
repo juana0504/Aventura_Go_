@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once BASE_PATH . '/app/models/proveedor_turistico/ActividadTuristica.php';
+require_once BASE_PATH . '/app/models/proveedor_turistico/actividadTuristica.php';
 
 $id = $_GET['id'] ?? null;
 if (!$id) {

@@ -199,7 +199,7 @@ switch ($request) {
         break;
 
     case '/guardar-registro-proveedor':
-        require_once BASE_PATH . '/app/controllers/RegistroProveedorController.php'; //redirige al guardar el registro de proveedor turistico ALB 18/02/2026
+        require_once BASE_PATH . '/app/controllers/registroProveedorController.php'; //redirige al guardar el registro de proveedor turistico ALB 18/02/2026
         break;
 
     case '/registrar-proveedor-hotelero':
@@ -243,6 +243,18 @@ switch ($request) {
         require_once BASE_PATH . '/app/controllers/administrador/dashboardController.php';
         $controller = new DashboardAdminController();
         $controller->data();
+        break;
+
+    case '/administrador/notificaciones':
+        require_once BASE_PATH . '/app/controllers/administrador/NotificacionAdminController.php';
+        $controller = new NotificacionAdminController();
+        $controller->listarJson();
+        break;
+
+    case '/administrador/notificaciones/marcar-todas':
+        require_once BASE_PATH . '/app/controllers/administrador/NotificacionAdminController.php';
+        $controller = new NotificacionAdminController();
+        $controller->marcarTodasLeidas();
         break;
 
     // dashboard proveedor turístico (página y datos JSON)
@@ -451,7 +463,8 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/proveedor_turistico/dashboard.php';
         break;
 
-    //rutas actualizacion proveedor hotelero
+    //rutas actualizacion proveedor
+    //rutas actualizacion proveedor
     case '/proveedor/pendiente':
         require BASE_PATH . '/app/views/dashboard/proveedor_turistico/pendiente_aprobacion.php'; //redirige a la pagina de pendiente de aprobacion del proveedor turistico ALB 19/02/2026
         break;
@@ -517,31 +530,31 @@ switch ($request) {
 
     // Tickets del proveedor turistico
     case '/proveedor_turistico/listar':
-        require_once BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/ticketProveedorController.php';
         $controller = new TicketProveedorController();
         $controller->listar();
         break;
 
     case '/proveedor_turistico/crear_ticket':
-        require_once BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/ticketProveedorController.php';
         $controller = new TicketProveedorController();
         $controller->crear();
         break;
 
     case '/proveedor_turistico/guardar_ticket':
-        require_once BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/ticketProveedorController.php';
         $controller = new TicketProveedorController();
         $controller->guardar();
         break;
 
     case '/proveedor/tickets':
-        require_once BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/ticketProveedorController.php';
         $controller = new TicketProveedorController();
         $controller->listar();
         break;
 
     case '/proveedor_turistico/ticket/ver':
-        require BASE_PATH . '/app/controllers/proveedor_turistico/TicketProveedorController.php';
+        require BASE_PATH . '/app/controllers/proveedor_turistico/ticketProveedorController.php';
         $controller = new TicketProveedorController();
         $controller->ver($_GET['id'] ?? null);
         break;
