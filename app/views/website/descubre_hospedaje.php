@@ -12,6 +12,7 @@
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
   <!-- Estilos personalizados -->
   <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/hospedaje_vega/hospedajeVega.css">
@@ -26,17 +27,10 @@
       <div class="container-fluid">
         <!-- Logo -->
         <div class="logo">
+
           <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
             class="navbar-logo">
         </div>
-
-        <!-- Menú principal -->
-        <ul class="navbar-nav" id="navbarNav">
-          <li><a class="nav-link" href="<?= BASE_URL ?>">Inicio</a></li>
-          <li><a class="nav-link" href="<?= BASE_URL ?>destacados">Destacados</a></li>
-          <li><a class="nav-link" href="<?= BASE_URL ?>acerca-de-nosotros">Acerca de nosotros</a></li>
-          <li><a class="nav-link" href="<?= BASE_URL ?>contactanos">Contáctanos</a></li>
-        </ul>
 
         <!-- Botones y menú móvil -->
         <div class="actions">
@@ -58,14 +52,14 @@
 
               <ul class="profile-menu" id="profileMenu">
                 <li>
-                  <a href="<?= BASE_URL ?>turista/perfil">Mi perfil</a>
+                  <a href="/aventura_go/turista/perfil">Mi perfil</a>
                 </li>
                 <li>
-                  <a href="<?= BASE_URL ?>turista/dashboard">Centro de ayuda</a>
+                  <a href="/aventura_go/turista/dashboard">Centro de ayuda</a>
                 </li>
                 <li class="divider"></li>
                 <li>
-                  <a href="<?= BASE_URL ?>logout" class="logout">Cerrar sesión</a>
+                  <a href="/aventura_go/logout" class="logout">Cerrar sesión</a>
                 </li>
               </ul>
             </div>
@@ -75,7 +69,7 @@
               Ingresa
             </a>
 
-            <a href="<?= BASE_URL ?>registro" class="btn-register">
+            <a href="#" class="btn-register" data-bs-toggle="modal" data-bs-target="#registroModal">
               Regístrate
             </a>
 
@@ -93,49 +87,96 @@
   </header>
 
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <main class="container hospedaje-container">
-    <h2 class="titulo-seccion text-center mt-5">Descubre tu hospedaje</h2>
-
-    <!-- Filtros -->
-    <div class="filtros mt-4 d-flex flex-wrap justify-content-center gap-3">
-      <input type="text" id="buscador" class="form-control buscador" placeholder="Buscar hospedaje específico...">
-      <button class="secundario" id="btnBuscar">Buscar</button>
-    </div>
-
-    <div class="tabs-container">
-      <a href="<?= BASE_URL ?>descubre-tours" class="tab-btn"> TOURS Y AVENTURA </a>
-      <a href="<?= BASE_URL ?>descubre-hospedaje" class="tab-btn"> HOSPEDAJE </a>
-    </div>
-
-    <!-- Tarjetas dinámicas -->
-    <div id="contenedorHospedajes" class="contenedor-grid mt-5"></div>
-  </main>
-
-  <!-- MODAL -->
-
-  <div class="modal fade" id="modalHospedaje" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalTitulo"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <img id="modalImagen" class="img-fluid rounded mb-3" alt="Imagen hospedaje">
-          <p id="modalDescripcion"></p>
-          <ul>
-            <li>Noches: <span id="modalNoches"></span></li>
-            <li>Días: <span id="modalDias"></span></li>
-            <li>Precio: $<span id="modalPrecio"></span></li>
-          </ul>
-        </div>
-        <div class="modal-footer">
-          <a href="hospedaje_escogido.html"><button class="secundario" id="btnReservar">Más Información</button></a>
-        </div>
+  <main class="main-content">
+    <div class="container">
+      <div class="tabs-container">
+        <a class="tab-btn active" href="<?= BASE_URL ?>descubre-tours" class="tab-btn"> TOURS Y AVENTURA </a>
+        <a href="<?= BASE_URL ?>descubre-hospedaje" class="tab-btn"> HOSPEDAJE </a>
       </div>
+
+
+
+      <!-- aca va las actividdes -->
+      <div class="activities-grid">
+
+        <?php if (!empty($actividades)): ?>
+          <?php foreach ($actividades as $actividad): ?>
+
+            <div class="activity-card">
+
+              <img
+                src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= $actividad['imagen'] ?>"
+                alt="<?= htmlspecialchars($actividad['nombre']) ?>"
+                class="activity-image">
+
+              <div class="activity-content">
+
+                <!-- Ciudad -->
+                <div class="activity-category">
+                  <h6>ubicación</h6>
+                  <i class="bi bi-geo-alt-fill"></i>
+                  <span> <?= htmlspecialchars($actividad['ciudad']) ?></span>
+                </div>
+
+                <!-- Nombre -->
+                <h3 class="activity-title">
+                  <?= htmlspecialchars($actividad['nombre']) ?>
+                </h3>
+
+                <!-- Descripción corta -->
+                <p class="activity-description">
+                  <i class="bi bi-card-heading"></i>
+                  <?= substr(htmlspecialchars($actividad['descripcion']), 0, 90) ?>...
+                </p>
+
+                <!-- Cupos -->
+                <div class="activity-duration">
+                  <i class="fas fa-users"></i>
+                  <span><?= (int)$actividad['cupos'] ?> cupos disponibles</span>
+                </div>
+
+                <!-- Precio -->
+                <div class="activity-price">
+                  <span class="price-label">Desde</span>
+                  <span class="price-current">
+                    $<?= number_format($actividad['precio'], 0, ',', '.') ?>
+                  </span>
+                </div>
+
+                <div class="button">
+                  <a href="<?= BASE_URL ?>tour-escogido?id=<?= $actividad['id_actividad'] ?>" class="btn-ver-mas">
+                    Ver más
+                  </a>
+                </div>
+
+
+              </div>
+            </div>
+
+          <?php endforeach; ?>
+        <?php else: ?>
+          <p>No hay actividades disponibles.</p>
+        <?php endif; ?>
+
+      </div>
+
+
+
+      <!-- barra de busqyeda -->
+      <form class="search-banner" action="<?= BASE_URL ?>busqueda" method="GET">
+        <div class="search-banner-text">
+          <i class="fas fa-search"></i>
+          <input type="text" name="q" placeholder="¿Buscas alguna actividad específica?" required>
+        </div>
+
+        <button type="submit" class="search-banner-btn">
+          <i class="fas fa-search"></i>
+          Buscar
+        </button>
+      </form>
+
     </div>
-  </div>
+  </main>
 
   <!-- F O O T E R_____________________________________________________________________________________________________________________________ -->
   <footer id="footer" class="container-fluid">
@@ -157,7 +198,7 @@
         <!-- Columna 1: Logo -->
         <div class="col-md-2">
           <div class="logo-section">
-            <img src="<?= BASE_URL ?>public/assets/estilos_globales/img/LOGO-FINAL copy.png" alt="logo Aventura Go">
+            <img src="<?= BASE_URL ?>public/assets/website_externos/descubre_tours/img/LOGO-NEGATIVO.png" alt="logo Aventura Go">
           </div>
         </div>
 
@@ -230,12 +271,7 @@
 
   </footer>
 
-
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-  <script src="<?= BASE_URL ?>public/assets/website_externos/hospedaje_vega/hospedajeVega.js"></script>
+          
 
   <script>
     const profileToggle = document.getElementById('profileToggle');

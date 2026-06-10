@@ -8,7 +8,7 @@ function subirArchivo($archivo, $carpetaDestino, $prefijo = 'file_')
         return null;
     }
 
-    $permitidas = ['jpg', 'jpeg', 'png'];
+    $permitidas = ['jpg', 'jpeg', 'png', 'pdf'];
     $ext = strtolower(pathinfo($archivo['name'], PATHINFO_EXTENSION));
 
     if (!in_array($ext, $permitidas)) {
