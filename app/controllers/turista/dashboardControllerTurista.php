@@ -93,7 +93,7 @@ function verActividad($id_actividad) {
     }
 
     // Cargar la vista de detalles de la actividad
-    require_once BASE_PATH . '/app/views/dashboard/turista/tour_escogido.php';
+    require_once BASE_PATH . '/app/views/website/tour_escogido.php';
 }
 
 // Función para realizar una reserva
