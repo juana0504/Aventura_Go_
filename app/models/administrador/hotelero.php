@@ -288,16 +288,16 @@ class Hotelero
     public function listarProveedorHotelero($id)
     {
         $sql = "
-    SELECT 
-        ph.*,
-        c.nombre AS ciudad,
-        d.nombre AS departamento
-    FROM proveedor_hotelero ph
-    LEFT JOIN ciudades c ON ph.id_ciudad = c.id_ciudad
-    LEFT JOIN departamentos d ON c.id_departamento = d.id_departamento
-    WHERE ph.id_proveedor_hotelero = :id
-    LIMIT 1
-";
+            SELECT 
+                ph.*,
+                c.nombre AS ciudad,
+                d.nombre AS departamento
+            FROM proveedor_hotelero ph
+            LEFT JOIN ciudades c ON ph.id_ciudad = c.id_ciudad
+            LEFT JOIN departamentos d ON c.id_departamento = d.id_departamento
+            WHERE ph.id_proveedor_hotelero = :id
+            LIMIT 1
+        ";
 
 
         $stmt = $this->conexion->prepare($sql);
@@ -313,7 +313,7 @@ class Hotelero
     {
         try {
             $sql = "UPDATE proveedor_hotelero 
-                SET estado = 'ACTIVO' 
+                SET validado = 1, estado = 'ACTIVO' 
                 WHERE id_proveedor_hotelero = :id";
 
             $stmt = $this->conexion->prepare($sql);
@@ -331,7 +331,7 @@ class Hotelero
     {
         try {
             $sql = "UPDATE proveedor_hotelero 
-                SET estado = 'INACTIVO' 
+                SET validado = 0, estado = 'INACTIVO' 
                 WHERE id_proveedor_hotelero = :id";
 
             $stmt = $this->conexion->prepare($sql);

@@ -20,11 +20,17 @@ class RegistrarInformacionModel
     public function obtenerProveedorActual($idUsuario)
     {
 
-        $sql = "SELECT p.*, u.email AS email_login
-                FROM proveedor_hotelero p
-                JOIN usuario u ON p.id_usuario = u.id_usuario
-                WHERE p.id_usuario = :id
-                LIMIT 1";
+        $sql = "SELECT
+            p.*,
+            u.nombre,
+            u.email,
+            u.telefono,
+            u.identificacion
+        FROM proveedor_hotelero p
+        JOIN usuario u
+            ON p.id_usuario = u.id_usuario
+        WHERE p.id_usuario = :id
+        LIMIT 1";
 
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':id', $idUsuario, PDO::PARAM_INT);
@@ -152,7 +158,6 @@ class RegistrarInformacionModel
             nombre_representante = :nombre_representante,
             tipo_documento = :tipo_documento,
             identificacion_representante = :identificacion_representante,
-            email_representante = :email_representante,
             telefono_representante = :telefono_representante,
             departamento = :departamento,
             id_ciudad = :id_ciudad,
@@ -179,7 +184,6 @@ class RegistrarInformacionModel
         $stmt->bindParam(':nombre_representante', $datos['nombre_representante']);
         $stmt->bindParam(':tipo_documento', $datos['tipo_documento']);
         $stmt->bindParam(':identificacion_representante', $datos['identificacion_representante']);
-        $stmt->bindParam(':email_representante', $datos['email_representante']);
         $stmt->bindParam(':telefono_representante', $datos['telefono_representante']);
         $stmt->bindParam(':departamento', $datos['departamento']);
         $stmt->bindParam(':id_ciudad', $datos['id_ciudad']);
