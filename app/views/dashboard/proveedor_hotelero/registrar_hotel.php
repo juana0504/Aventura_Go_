@@ -196,7 +196,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
                             <form id="formHospedaje"
                                 action="<?= BASE_URL ?>proveedor_hotelero/guardar-hospedaje"
-                                method="POST">
+                                method="POST" enctype="multipart/form-data">
 
                                 <input type="hidden" name="accion" value="registrar">
 
@@ -237,30 +237,90 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                                 Información del hospedaje
                                             </h4>
 
-                                            <label class="form-label">Nombre del hospedaje</label>
-                                            <input type="text" class="form-control" name="nombre" required>
+                                            <div class="col-md-12 mb-3">
+
+                                                <label class="form-label">Nombre del hospedaje</label>
+                                                <input type="text" class="form-control" name="nombre" required>
+
+                                            </div>
 
                                             <div class="row">
 
-                                                <div class="col-md-6 mb-3">
+                                                <div class="col-md-12 mb-3">
 
                                                     <label class="form-label">Tipo de hospedaje</label>
 
-                                                    <select name="tipo" class="form-control" required>
+                                                    <div class="row">
 
-                                                        <option value="">Seleccione</option>
+                                                        <div class="col-md-6">
 
-                                                        <option value="HOTEL">🏨 Hotel</option>
+                                                            <div class="form-check mb-3">
+                                                                <input class="form-check-input"
+                                                                    type="checkbox"
+                                                                    name="tipo[]"
+                                                                    id="hotel"
+                                                                    value="hotel">
 
-                                                        <option value="HOSTAL">🛏 Hostal</option>
+                                                                <label class="form-check-label">
+                                                                    🏨 Hotel
+                                                                </label>
+                                                            </div>
 
-                                                        <option value="FINCA">🌿 Finca</option>
+                                                            <div class="form-check mb-3">
+                                                                <input class="form-check-input"
+                                                                    type="checkbox"
+                                                                    name="tipo[]"
+                                                                    id="hostal"
+                                                                    value="Hostal">
 
-                                                        <option value="CABAÑA">🪵 Cabaña</option>
+                                                                <label class="form-check-label">
+                                                                    🛏 Hostal
+                                                                </label>
+                                                            </div>
 
-                                                        <option value="OTRO">🏕 Otro</option>
+                                                            <div class="form-check mb-3">
+                                                                <input class="form-check-input"
+                                                                    type="checkbox"
+                                                                    name="tipo[]"
+                                                                    id="finca"
+                                                                    value="finca">
 
-                                                    </select>
+                                                                <label class="form-check-label">
+                                                                    🌿 Finca
+                                                                </label>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="col-md-6">
+
+                                                            <div class="form-check mb-3">
+                                                                <input class="form-check-input"
+                                                                    type="checkbox"
+                                                                    name="tipo[]"
+                                                                    id="cabaña"
+                                                                    value="cabaña">
+
+                                                                <label class="form-check-label">
+                                                                    🏡 Cabaña
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="form-check mb-3">
+                                                                <input class="form-check-input"
+                                                                    type="checkbox"
+                                                                    name="tipo[]"
+                                                                    id="otro"
+                                                                    value="otro">
+
+                                                                <label class="form-check-label">
+                                                                    🏕 Otro
+                                                                </label>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
 
                                                 </div>
 
@@ -289,7 +349,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
                                                     <label class="form-label">Ciudad / Destino</label>
 
-                                                    <select name="id_destino" class="form-control" id="id_ciudad" required>
+                                                    <select name="id_ciudad" class="form-control" id="id_ciudad" required>
                                                         <option value="">Seleccione ciudad</option>
                                                     </select>
 
@@ -297,11 +357,19 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
                                             </div>
 
-                                            <label class="form-label">Ubicación</label>
-                                            <input type="text" class="form-control" name="ubicacion" required>
+                                            <div class="row">
 
-                                            <label class="form-label">Precio por noche</label>
-                                            <input type="number" class="form-control" step="0.01" name="precio" required>
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label">Ubicación</label>
+                                                    <input type="text" class="form-control" name="ubicacion" required>
+                                                </div>
+
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label">Precio por noche</label>
+                                                    <input type="number" class="form-control" step="0.01" name="precio" required>
+                                                </div>
+
+                                            </div>
 
                                             <div class="wizard-actions">
                                                 <span></span>
@@ -456,23 +524,36 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
                                             </div>
 
-                                            <label>Estado</label>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label>Estado</label>
 
-                                            <select name="estado">
+                                                    <select name="estado" class="form-control">
 
-                                                <option value="ACTIVO">Activo</option>
-                                                <option value="INACTIVO">Inactivo</option>
+                                                        <option value="ACTIVO">Activo</option>
+                                                        <option value="INACTIVO">Inactivo</option>
 
-                                            </select>
+                                                    </select>
+                                                </div>
 
-                                            <label>Disponibilidad</label>
+                                                <div class="col-md-6 mb-3">
+                                                    <label>Disponibilidad</label>
 
-                                            <select name="disponible">
+                                                    <select name="disponible" class="form-control">
 
-                                                <option value="1">Disponible</option>
-                                                <option value="0">No disponible</option>
+                                                        <option value="1">Disponible</option>
+                                                        <option value="0">No disponible</option>
 
-                                            </select>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <label>Imágenes del Hospedaje (máx. 5)</label>
+                                            <input type="file" name="imagenes[]" multiple required class="form-control">
+
+                                            <small>
+                                                Selecciona hasta 5 imágenes (JPG o PNG) no deben exceder 1 MB cada una
+                                            </small>
 
                                             <div class="wizard-actions">
 
@@ -485,6 +566,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                                 </button>
 
                                             </div>
+
 
                                         </div>
 
@@ -720,8 +802,15 @@ foreach (array_slice($partes, 0, 2) as $p) {
             document.getElementById("prev-nombre").textContent =
                 document.querySelector('input[name="nombre"]').value;
 
+            let tipos = [];
+
+            document.querySelectorAll('input[name="tipo[]"]:checked')
+                .forEach(tipo => {
+                    tipos.push(tipo.value);
+                });
+
             document.getElementById("prev-tipo").textContent =
-                document.querySelector('select[name="tipo"] option:checked').textContent;
+                tipos.length > 0 ? tipos.join(', ') : 'Sin seleccionar';
 
             document.getElementById("prev-capacidad").textContent =
                 document.querySelector('input[name="capacidad"]').value;

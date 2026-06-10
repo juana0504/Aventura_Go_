@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const stepContents = document.querySelectorAll(".step-content");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
-    const form = document.getElementById("formCompletarProveedor");
+    const form = document.getElementById("formCompletarHotelero");
     function showStep(step) {
         // Ocultar todo
         stepContents.forEach(c => c.classList.remove("active"));
@@ -36,18 +36,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Siguiente
     nextBtn.addEventListener("click", function () {
-        if (currentStep === totalSteps) {
-            form.submit(); // ahora sí envía
-            return;
-        }
 
-        if (currentStep === 4) {
-            fillPreview();
+        if (currentStep === totalSteps) {
+            form.submit();
+            return;
         }
 
         currentStep++;
         showStep(currentStep);
+
     });
+
+    function fillPreview() {
+    // Vacía temporalmente
+    }
 
     // Anterior
     prevBtn.addEventListener("click", function () {
@@ -58,31 +60,31 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Llenar preview
-    function fillPreview() {
-        document.getElementById("prev-empresa").innerText = document.getElementById("empresa").value || "-";
-        document.getElementById("prev-nit").innerText = document.getElementById("nit").value || "-";
-        document.getElementById("prev-email").innerText = document.getElementById("email").value || "-";
-        document.getElementById("prev-telefono").innerText = document.getElementById("telefono").value || "-";
+    // function fillPreview() {
+    //     document.getElementById("prev-empresa").innerText = document.getElementById("empresa").value || "-";
+    //     document.getElementById("prev-nit").innerText = document.getElementById("nit").value || "-";
+    //     document.getElementById("prev-email").innerText = document.getElementById("email").value || "-";
+    //     document.getElementById("prev-telefono").innerText = document.getElementById("telefono").value || "-";
 
-        document.getElementById("prev-nombre_repre").innerText = document.getElementById("nombre_repre").value || "-";
-        document.getElementById("prev-email_repre").innerText = document.getElementById("email_repre").value || "-";
-        document.getElementById("prev-telefono_repre").innerText = document.getElementById("telefono_repre").value || "-";
-        document.getElementById("prev-representante").innerText = document.getElementById("nombre_repre").value || "-";
-        document.getElementById("prev-descripcion").innerText = document.getElementById("descripcion").value || "-";
-    
-        // Actividades
-        const actividades = [];
-        document.querySelectorAll('input[name="actividades[]"]:checked').forEach(cb => {
-            actividades.push(cb.value);
-        });
-        document.getElementById("prev-actividades").innerText = actividades.length ? actividades.join(", ") : "-";
+    //     document.getElementById("prev-nombre_repre").innerText = document.getElementById("nombre_repre").value || "-";
+    //     document.getElementById("prev-email_repre").innerText = document.getElementById("email_repre").value || "-";
+    //     document.getElementById("prev-telefono_repre").innerText = document.getElementById("telefono_repre").value || "-";
+    //     document.getElementById("prev-representante").innerText = document.getElementById("nombre_repre").value || "-";
+    //     document.getElementById("prev-descripcion").innerText = document.getElementById("descripcion").value || "-";
 
-        // Ubicación
-        const ciudad = document.getElementById("id_ciudad");
-        const ciudadTexto = ciudad.options[ciudad.selectedIndex]?.text || "-";
-        document.getElementById("prev-ubicacion").innerText = ciudadTexto;
-        const direccion = document.getElementById("direccion").value || "-";
-        document.getElementById("prev-direccion").innerText = direccion;
-    }
+    //     // Actividades
+    //     const actividades = [];
+    //     document.querySelectorAll('input[name="actividades[]"]:checked').forEach(cb => {
+    //         actividades.push(cb.value);
+    //     });
+    //     document.getElementById("prev-actividades").innerText = actividades.length ? actividades.join(", ") : "-";
+
+    //     // Ubicación
+    //     const ciudad = document.getElementById("id_ciudad");
+    //     const ciudadTexto = ciudad.options[ciudad.selectedIndex]?.text || "-";
+    //     document.getElementById("prev-ubicacion").innerText = ciudadTexto;
+    //     const direccion = document.getElementById("direccion").value || "-";
+    //     document.getElementById("prev-direccion").innerText = direccion;
+    // }
 
 });

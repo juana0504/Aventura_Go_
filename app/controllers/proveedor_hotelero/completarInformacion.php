@@ -40,7 +40,6 @@ class CompletarInformacionController
 
         $nombre_representante = $_POST['nombre_representante'] ?? '';
         $identificacion_representante = $_POST['identificacion_representante'] ?? '';
-        $email_representante = $_POST['email_representante'] ?? '';
         $telefono_representante = $_POST['telefono_representante'] ?? '';
 
         $id_ciudad = $_POST['id_ciudad'] ?? '';
@@ -67,7 +66,6 @@ class CompletarInformacionController
             empty($telefono) ||
             empty($nombre_representante) ||
             empty($identificacion_representante) ||
-            empty($email_representante) ||
             empty($telefono_representante) ||
             empty($id_ciudad) ||
             empty($tipo_documento) ||
@@ -105,7 +103,7 @@ class CompletarInformacionController
 
         $nuevoLogo = subirArchivo(
             $_FILES['logo'],
-            'proveedores_hoteleros',
+            'hotelero/hospedaje',
             'logo_'
         );
 
@@ -121,7 +119,7 @@ class CompletarInformacionController
 
         $nuevaFoto = subirArchivo(
             $_FILES['foto_representante'],
-            'proveedores_hoteleros',
+            'hotelero/hospedaje',
             'repre_'
         );
 
@@ -137,7 +135,7 @@ class CompletarInformacionController
 
         $nuevaCamara = subirArchivo(
             $_FILES['camara_comercio'],
-            'proveedores_hoteleros',
+            'hotelero/hospedaje',
             'camara_'
         );
 
@@ -153,7 +151,7 @@ class CompletarInformacionController
 
         $nuevaLicencia = subirArchivo(
             $_FILES['licencia'],
-            'proveedores_hoteleros',
+            'hotelero/hospedaje',
             'licencia_'
         );
 
@@ -179,7 +177,6 @@ class CompletarInformacionController
 
             ':nombre_representante' => $nombre_representante,
             ':identificacion_representante' => $identificacion_representante,
-            ':email_representante' => $email_representante,
             ':telefono_representante' => $telefono_representante,
 
             ':id_ciudad' => $id_ciudad,

@@ -592,9 +592,42 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/proveedor_hotelero/registrar_hotel.php';
         break;
     case '/proveedor_hotelero/consultar-hospedajes':
-        require BASE_PATH . '/app/views/dashboard/proveedor_hotelero/consultar_hospedaje.php'; //consulta la tabla con las actividades turisticas registradas
+        require BASE_PATH . '/app/views/dashboard/proveedor_hotelero/consultar_hospedaje.php'; //consulta la tabla con los hospedajes registradas
         break;
 
+    
+    case '/proveedor_hotelero/guardar-hospedaje':
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/hospedajes.php';  //redirige al guardar hospedaje
+        break;
+
+    // case '/proveedor_hotelero/pdf-hospedaje':
+    //     require_once BASE_PATH . '/app/controllers/proveedor_hotelero/hospedajePdfController.php';
+    //     generarPdfHospedajes();
+    //     break;
+
+    case '/proveedorproveedor_hotelero/editar-hospedaje':
+        require BASE_PATH . '/app/views/dashboard/proveedor_hotelero/editar_hospedaje.php'; //editar le hospedaje
+        break;
+    case '/proveedor_hotelero/actualizar-hospedaje':
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/hospedajes.php';  
+        break;
+
+    case '/proveedor_hotelero/eliminar-hospedaje':
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/hospedajes.php';  
+        break;
+
+    case '/proveedor_hotelero/consultar-reservas':
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/reservaController.php';
+        break;
+
+    case '/proveedor_hotelero/reserva-detalle':
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/reservaDetalle.php';
+        break;
+
+    case '/proveedor_hotelero/pdf-reservas':
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/reservaPdfController.php';
+        generarPdfReservas();
+        break;
 
 
 

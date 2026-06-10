@@ -67,7 +67,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                 <div class="pv-sidebar__logo-icon">A</div>
                 <div>
                     <div class="pv-sidebar__logo-text">AVENTURA GO</div>
-                    <div class="pv-sidebar__logo-sub">Proveedor Turístico</div>
+                    <div class="pv-sidebar__logo-sub">Proveedor Hotelero</div>
                 </div>
             </div>
 

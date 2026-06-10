@@ -74,7 +74,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
             <a href="<?= BASE_URL ?>proveedor_hotelero/completar-informacion" class="pv-nav-item pv-nav-item--active">
                 <i class="bi bi-pen"></i> Registrar/Actualizar Información
             </a>
-            <a href="<?= BASE_URL ?>proveedor_hotelero/registrar-hospedaje" class="pv-nav-item">
+            <a href="<?= BASE_URL ?>proveedor_hotelero/registrar-hospedajes" class="pv-nav-item">
                 <i class="bi bi-plus-circle pv-nav-item__icon"></i> Nuevo Hospedaje
             </a>
             <a href="<?= BASE_URL ?>proveedor_hotelero/consultar-hospedajes" class="pv-nav-item">
@@ -104,86 +104,86 @@ foreach (array_slice($partes, 0, 2) as $p) {
             <!-- TOPBAR -->
             <header class="pv-topbar">
 
-                    <div class="pv-topbar__search">
-                        <i class="bi bi-search"></i>
-                        <input type="text" placeholder="Buscar actividades, reservas..." class="pv-topbar__input" id="pv-search-input" autocomplete="off">
-                    </div>
+                <div class="pv-topbar__search">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Buscar actividades, reservas..." class="pv-topbar__input" id="pv-search-input" autocomplete="off">
+                </div>
 
-                    <div class="pv-topbar__actions">
+                <div class="pv-topbar__actions">
 
-                        <!-- Modo oscuro -->
-                        <button class="pv-icon-btn" id="pv-dark-toggle" title="Modo oscuro">
-                            <i class="bi bi-moon-fill" id="pv-dark-icon"></i>
+                    <!-- Modo oscuro -->
+                    <button class="pv-icon-btn" id="pv-dark-toggle" title="Modo oscuro">
+                        <i class="bi bi-moon-fill" id="pv-dark-icon"></i>
+                    </button>
+
+                    <!-- Notificaciones -->
+                    <div class="pv-topbar__dropdown-wrap">
+                        <button class="pv-icon-btn pv-icon-btn--notif" id="pv-notif-btn">
+                            <i class="bi bi-bell-fill"></i>
                         </button>
-
-                        <!-- Notificaciones -->
-                        <div class="pv-topbar__dropdown-wrap">
-                            <button class="pv-icon-btn pv-icon-btn--notif" id="pv-notif-btn">
-                                <i class="bi bi-bell-fill"></i>
-                            </button>
-                            <div class="pv-dropdown pv-dropdown--notif" id="pv-notif-panel">
-                                <div class="pv-dropdown__header">
-                                    <span class="pv-dropdown__title">Notificaciones</span>
-                                    <button class="pv-dropdown__mark-all">Marcar todas</button>
-                                </div>
-                                <div class="pv-notif-list">
-                                    <div class="pv-notif-item pv-notif-item--unread">
-                                        <div class="pv-notif-item__icon pv-notif-item__icon--green"><i class="bi bi-check-circle-fill"></i></div>
-                                        <div class="pv-notif-item__body">
-                                            <p class="pv-notif-item__text">Nueva reserva confirmada en tu actividad.</p>
-                                            <span class="pv-notif-item__time">Hace 1 hora</span>
-                                        </div>
-                                        <span class="pv-notif-item__dot"></span>
-                                    </div>
-                                    <div class="pv-notif-item pv-notif-item--unread">
-                                        <div class="pv-notif-item__icon pv-notif-item__icon--amber"><i class="bi bi-clock-fill"></i></div>
-                                        <div class="pv-notif-item__body">
-                                            <p class="pv-notif-item__text">Tienes una reserva <strong>pendiente</strong> de confirmación.</p>
-                                            <span class="pv-notif-item__time">Hace 3 horas</span>
-                                        </div>
-                                        <span class="pv-notif-item__dot"></span>
-                                    </div>
-                                </div>
-                                <a href="<?= BASE_URL ?>proveedor/tickets" class="pv-dropdown__footer">Ver todas las notificaciones</a>
+                        <div class="pv-dropdown pv-dropdown--notif" id="pv-notif-panel">
+                            <div class="pv-dropdown__header">
+                                <span class="pv-dropdown__title">Notificaciones</span>
+                                <button class="pv-dropdown__mark-all">Marcar todas</button>
                             </div>
-                        </div>
-
-                        <!-- Perfil -->
-                        <div class="pv-topbar__dropdown-wrap">
-                            <button class="pv-profile-btn" id="pv-profile-btn">
-                                <div class="pv-profile-btn__avatar"><?= htmlspecialchars($iniciales) ?></div>
-                                <div class="pv-profile-btn__info">
-                                    <span class="pv-profile-btn__name"><?= htmlspecialchars($nombreProveedor) ?></span>
-                                    <span class="pv-profile-btn__role">Proveedor Hotelero</span>
-                                </div>
-                                <i class="bi bi-chevron-down pv-profile-btn__chevron" id="pv-profile-chevron"></i>
-                            </button>
-                            <div class="pv-dropdown pv-dropdown--profile" id="pv-profile-panel">
-                                <div class="pv-dropdown__user-header">
-                                    <div class="pv-profile-btn__avatar pv-profile-btn__avatar--lg"><?= htmlspecialchars($iniciales) ?></div>
-                                    <div>
-                                        <div class="pv-dropdown__user-name"><?= htmlspecialchars($nombreProveedor) ?></div>
-                                        <div class="pv-dropdown__user-role">Proveedor Hotelero · AventuraGO</div>
+                            <div class="pv-notif-list">
+                                <div class="pv-notif-item pv-notif-item--unread">
+                                    <div class="pv-notif-item__icon pv-notif-item__icon--green"><i class="bi bi-check-circle-fill"></i></div>
+                                    <div class="pv-notif-item__body">
+                                        <p class="pv-notif-item__text">Nueva reserva confirmada en tu actividad.</p>
+                                        <span class="pv-notif-item__time">Hace 1 hora</span>
                                     </div>
+                                    <span class="pv-notif-item__dot"></span>
                                 </div>
-                                <div class="pv-dropdown__divider"></div>
-                                <a href="<?= BASE_URL ?>proveedor/perfil" class="pv-dropdown__item">
-                                    <i class="bi bi-person-circle"></i> Mi perfil
-                                </a>
-                                <a href="<?= BASE_URL ?>proveedor/consultar-actividad" class="pv-dropdown__item">
-                                    <i class="bi bi-compass"></i> Mis actividades
-                                </a>
-                                <a href="<?= BASE_URL ?>proveedor/tickets" class="pv-dropdown__item">
-                                    <i class="bi bi-headset"></i> Soporte
-                                </a>
-                                <div class="pv-dropdown__divider"></div>
-                                <a href="<?= BASE_URL ?>logout" class="pv-dropdown__item pv-dropdown__item--danger">
-                                    <i class="bi bi-box-arrow-right"></i> Cerrar sesión
-                                </a>
+                                <div class="pv-notif-item pv-notif-item--unread">
+                                    <div class="pv-notif-item__icon pv-notif-item__icon--amber"><i class="bi bi-clock-fill"></i></div>
+                                    <div class="pv-notif-item__body">
+                                        <p class="pv-notif-item__text">Tienes una reserva <strong>pendiente</strong> de confirmación.</p>
+                                        <span class="pv-notif-item__time">Hace 3 horas</span>
+                                    </div>
+                                    <span class="pv-notif-item__dot"></span>
+                                </div>
                             </div>
+                            <a href="<?= BASE_URL ?>proveedor/tickets" class="pv-dropdown__footer">Ver todas las notificaciones</a>
                         </div>
-
                     </div>
+
+                    <!-- Perfil -->
+                    <div class="pv-topbar__dropdown-wrap">
+                        <button class="pv-profile-btn" id="pv-profile-btn">
+                            <div class="pv-profile-btn__avatar"><?= htmlspecialchars($iniciales) ?></div>
+                            <div class="pv-profile-btn__info">
+                                <span class="pv-profile-btn__name"><?= htmlspecialchars($nombreProveedor) ?></span>
+                                <span class="pv-profile-btn__role">Proveedor Hotelero</span>
+                            </div>
+                            <i class="bi bi-chevron-down pv-profile-btn__chevron" id="pv-profile-chevron"></i>
+                        </button>
+                        <div class="pv-dropdown pv-dropdown--profile" id="pv-profile-panel">
+                            <div class="pv-dropdown__user-header">
+                                <div class="pv-profile-btn__avatar pv-profile-btn__avatar--lg"><?= htmlspecialchars($iniciales) ?></div>
+                                <div>
+                                    <div class="pv-dropdown__user-name"><?= htmlspecialchars($nombreProveedor) ?></div>
+                                    <div class="pv-dropdown__user-role">Proveedor Hotelero · AventuraGO</div>
+                                </div>
+                            </div>
+                            <div class="pv-dropdown__divider"></div>
+                            <a href="<?= BASE_URL ?>proveedor/perfil" class="pv-dropdown__item">
+                                <i class="bi bi-person-circle"></i> Mi perfil
+                            </a>
+                            <a href="<?= BASE_URL ?>proveedor/consultar-actividad" class="pv-dropdown__item">
+                                <i class="bi bi-compass"></i> Mis actividades
+                            </a>
+                            <a href="<?= BASE_URL ?>proveedor/tickets" class="pv-dropdown__item">
+                                <i class="bi bi-headset"></i> Soporte
+                            </a>
+                            <div class="pv-dropdown__divider"></div>
+                            <a href="<?= BASE_URL ?>logout" class="pv-dropdown__item pv-dropdown__item--danger">
+                                <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
             </header>
 
             <!-- FORMULARIO -->
@@ -262,7 +262,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                                         name="nombre_establecimiento"
                                                         class="form-control"
                                                         value="<?= $proveedor['nombre_establecimiento'] ?? '' ?>"
-                                                    required>
+                                                        required>
                                                 </div>
 
                                                 <div class="col-md-6 mb-3">
@@ -476,7 +476,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                                         type="text"
                                                         name="nombre_representante"
                                                         class="form-control"
-                                                        value="<?= $proveedor['nombre_representante'] ?? '' ?>"
+                                                        value="<?= $proveedor['nombre_representante'] ?: $proveedor['nombre'] ?>"
                                                         required>
 
                                                 </div>
@@ -512,7 +512,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                                         type="number"
                                                         name="identificacion_representante"
                                                         class="form-control"
-                                                        value="<?= $proveedor['identificacion_representante'] ?? '' ?>"
+                                                        value="<?= $proveedor['identificacion_representante'] ?: $proveedor['identificacion'] ?>"
                                                         required>
 
                                                 </div>
@@ -527,7 +527,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                                         type="tel"
                                                         name="telefono_representante"
                                                         class="form-control"
-                                                        value="<?= $proveedor['telefono_representante'] ?? '' ?>"
+                                                        value="<?= $proveedor['telefono_representante'] ?: $proveedor['telefono'] ?>"
                                                         required>
 
                                                 </div>
@@ -556,8 +556,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                                     <input
                                                         type="file"
                                                         name="camara_comercio"
-                                                        class="form-control"
-                                                        required>
+                                                        class="form-control">
 
                                                 </div>
 
@@ -570,8 +569,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                                     <input
                                                         type="file"
                                                         name="licencia"
-                                                        class="form-control"
-                                                        required>
+                                                        class="form-control">
 
                                                 </div>
 

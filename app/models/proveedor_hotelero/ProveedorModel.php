@@ -25,12 +25,17 @@ class ProveedorModel
     public function obtenerPorUsuario($idUsuario)
     {
 
-        $sql = "SELECT ph.*, u.email AS email_login
-                FROM proveedor_hotelero ph
-                JOIN usuario u 
-                ON ph.id_usuario = u.id_usuario
-                WHERE ph.id_usuario = :id
-                LIMIT 1";
+        $sql = "SELECT
+            p.*,
+            u.nombre,
+            u.email,
+            u.telefono,
+            u.identificacion
+        FROM proveedor_hotelero p
+        JOIN usuario u
+            ON p.id_usuario = u.id_usuario
+        WHERE p.id_usuario = :id
+        LIMIT 1";
 
         $stmt = $this->conexion->prepare($sql);
 
@@ -83,7 +88,6 @@ class ProveedorModel
 
             nombre_representante = :nombre_representante,
             identificacion_representante = :identificacion_representante,
-            email_representante = :email_representante,
             telefono_representante = :telefono_representante,
 
             id_ciudad = :id_ciudad,
