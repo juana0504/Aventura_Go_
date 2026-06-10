@@ -254,7 +254,7 @@ header {
 /* BOTONES */
 .tab-btn {
     margin: 80px 30px;
-    padding: 20px 30px;
+    padding: 20px 30px 1px 30px;
     border-radius: 25px 25px 0 0;
     font-family: var(--font-titles);
     font-weight: 600;

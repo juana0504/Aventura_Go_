@@ -10,7 +10,7 @@
 <script src="<?= BASE_URL ?>public/assets/dashboard/administrador/administrador/administrador.js"></script>
 
 <!-- JavaScript -->
-<script src="<?= BASE_URL ?>public/assets/dashboard/administrador/historial de reservas/historial_reservas.js"></script>
+<script src="<?= BASE_URL ?>public/assets/dashboard/administrador/historial_de_reservas/historial_reservas.js"></script>
 
 <!-- JS -->
 <script src="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/perfil.js"></script>

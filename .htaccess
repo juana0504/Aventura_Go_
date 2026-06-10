@@ -1,0 +1,29 @@
+# Activa el motor de reescritura de URLs de Apache
+RewriteEngine On
+
+# En Hostinger el proyecto está en la raíz del dominio (public_html/)
+# En local con XAMPP cambiar a: RewriteBase /aventura_go/
+RewriteBase /
+
+# No reescribir si es un archivo real (CSS, JS, imagen, PDF, etc.)
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# No reescribir si es una carpeta real
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Todo lo demás va a index.php conservando los query params
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Seguridad: deshabilitar listado de directorios
+Options -Indexes
+
+# Proteger archivos sensibles de acceso directo
+<FilesMatch "^(config\.php|database\.php|\.env|composer\.json|composer\.lock)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Bloquear acceso directo a carpetas internas
+RedirectMatch 403 ^/app/
+RedirectMatch 403 ^/config/
+RedirectMatch 403 ^/vendor/

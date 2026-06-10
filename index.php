@@ -1,9 +1,11 @@
 <?php
 //index.php - Router principal en larabel se tiene un archivo por cada carpeta de views
 
-//HABILITAR LA VISUALIZACION DE ERRORES EN PHP (PARA DESARROLLO, NO USAR EN PRODUCCION)
-// error_reporting(E_ALL);
-// ini_set('display_errors', 1);
+// Errores visibles solo en local; en produccion se registran en log sin mostrarse al usuario.
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
+$isLocal = in_array($_SERVER['REMOTE_ADDR'] ?? '', ['127.0.0.1', '::1']);
+ini_set('display_errors', $isLocal ? 1 : 0);
+ini_set('log_errors', 1);
 
 
 require_once __DIR__ . '/config/config.php';
