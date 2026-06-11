@@ -66,8 +66,7 @@ function actualizarPerfilTurista()
         exit();
     }
 
-    // OJO: el ID real de tu tabla es id_usuario
-    $id_usuario = $_SESSION['user']['id'];
+    $id_usuario = $_SESSION['user']['id_usuario'];
 
     $nombre     = $_POST['nombre'] ?? '';
     $telefono   = $_POST['telefono'] ?? '';

@@ -25,7 +25,7 @@
                     <a href="<?= BASE_URL ?>turista/ver-reservas" class="bi bi-table">Ver reservas</a>
                     <a href="<?= BASE_URL ?>turista/tickets" class="fa fa-ticket"> Tickets</a>
                     <a href="<?= BASE_URL ?>turista/" class="fa-solid fa-heart">Favoritos</a>
-                    <a href="<?= BASE_URL ?>turista/" class="fa-solid fa-heart">Reseñas</a>
+                    <a href="<?= BASE_URL ?>turista/resenas" class="fa-solid fa-star">Reseñas</a>
 
 
                 </ul>
