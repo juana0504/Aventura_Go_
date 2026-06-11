@@ -3,7 +3,7 @@ session_start();
 
 // Validar sesión mínima
 if (!isset($_SESSION['id_reserva']) || !isset($_SESSION['id_pago'])) {
-    header('Location: ' . BASE_URL . '/descubre-tours');
+    header('Location: ' . BASE_URL . 'descubre-tours');
     exit;
 }
 
@@ -38,6 +38,6 @@ if ($respuestaPayu === 'aprobado') {
     $stmtPago = $pdo->prepare("UPDATE pago SET estado = 'rechazado' WHERE id_pago = :id");
     $stmtPago->execute([':id' => $idPago]);
 
-    header('Location: ' . BASE_URL . '/checkout');
+    header('Location: ' . BASE_URL . 'checkout');
     exit;
 }
