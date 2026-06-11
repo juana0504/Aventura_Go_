@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
 // Lógica original intacta
@@ -568,5 +568,6 @@ foreach (array_slice($partes, 0, 2) as $p) {
 })();
 </script>
 
+    <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
 </body>
 </html>

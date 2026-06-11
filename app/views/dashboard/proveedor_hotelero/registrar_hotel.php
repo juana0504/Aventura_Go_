@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
 
 // Lógica intacta
@@ -839,6 +839,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
 </body>
 
 </html>

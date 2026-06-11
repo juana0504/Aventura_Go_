@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once BASE_PATH . '/app/helpers/session_administrador.php';
 require_once BASE_PATH . '/app/controllers/administrador/turista.php';
 
@@ -129,6 +129,7 @@ $turista = listarTuristaId($id);
         crossorigin="anonymous"></script>
 
     <script src="<?= BASE_URL ?>public/assets/dashboard/administrador/registrar_proveedor/editar_proveedor.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
 </body>
 
 </html>

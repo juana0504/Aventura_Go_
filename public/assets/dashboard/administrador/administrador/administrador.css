@@ -54,8 +54,21 @@
    SIDEBAR
 ============================================= */
 .adm-sidebar {
-    overflow: hidden;
+    width: var(--adm-sidebar-width);
+    min-height: 100vh;
+    background: var(--adm-sidebar-bg);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
 }
+
+.adm-sidebar::-webkit-scrollbar { display: none; }
 
 .adm-sidebar::before {
     content: '';
@@ -846,6 +859,38 @@
 .adm-dark .adm-btn-clear         { background: var(--adm-surface); border-color: var(--adm-border); }
 .adm-dark .adm-income-card       { background: #111c27; }
 
+/* ─── SIDEBAR TOGGLE (mobile) ─────────────── */
+.adm-sidebar-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background: var(--adm-surface);
+    border: 1px solid var(--adm-border);
+    border-radius: var(--adm-radius-sm);
+    cursor: pointer;
+    color: var(--adm-text);
+    font-size: 20px;
+    flex-shrink: 0;
+    transition: background .2s, border-color .2s;
+}
+
+.adm-sidebar-toggle:hover {
+    background: var(--adm-primary-light);
+    border-color: rgba(234,130,23,.35);
+    color: var(--adm-primary);
+}
+
+.adm-sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    backdrop-filter: blur(2px);
+    z-index: 999;
+}
+
 /* ─── RESPONSIVE ──────────────────────────── */
 @media (max-width: 1200px) {
     .adm-stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -858,8 +903,22 @@
 }
 
 @media (max-width: 768px) {
-    :root { --adm-sidebar-width: 0px; }
-    .adm-sidebar { display: none; }
+    .adm-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform .28s cubic-bezier(.4,0,.2,1);
+    }
+
+    .adm-layout--sidebar-open .adm-sidebar  { transform: translateX(0); }
+    .adm-layout--sidebar-open .adm-sidebar-backdrop { display: block; }
+
+    .adm-sidebar-toggle { display: inline-flex; }
+    .adm-no-scroll { overflow: hidden; }
+
     .adm-content { padding: 20px 18px; }
     .adm-stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
     .adm-dashboard-aside { grid-template-columns: 1fr; }

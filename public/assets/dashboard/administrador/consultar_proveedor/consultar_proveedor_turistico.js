@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             try {
-                const res = await fetch(`/aventura_go/administrador/consultar-proveedor-id?id=${encodeURIComponent(id)}`);
+                const res = await fetch(`${window.BASE_URL}administrador/consultar-proveedor-id?id=${encodeURIComponent(id)}`);
                 if (!res.ok) {
                     console.error('Respuesta HTTP inesperada', res.status);
                     return;
@@ -67,8 +67,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 badge.textContent = data.estado ?? 'Desconocido';
                 badge.className =
-                    estado === 'ACTIVO' ? 'status-badge badge-activo' :
-                    estado === 'INACTIVO' ? 'status-badge badge-inactivo' :
+                    estado === 'activo' ? 'status-badge badge-activo' :
+                    estado === 'inactivo' ? 'status-badge badge-inactivo' :
                     'status-badge badge-pendiente';
 
                 // Actividades
@@ -92,8 +92,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Logo
                 const logoEl = document.getElementById('modal-logo');
                 logoEl.src = data.logo
-                    ? `/aventura_go/public/uploads/turistico/${data.logo}`
-                    : `/aventura_go/public/assets/img/default-proveedor.jpg`;
+                    ? `${window.BASE_URL}public/uploads/turistico/${data.logo}`
+                    : `${window.BASE_URL}public/assets/img/default-proveedor.jpg`;
 
                 // // Foto representante
                 // const fotoRepreEl = document.getElementById('modal-foto-representante');
@@ -101,9 +101,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 //     ? `/aventura_go/public/uploads/usuario/${data.foto_representante}`
                 //     : `/aventura_go/public/assets/img/default-proveedor.jpg`;
 
-                // Mostrar modal
+                // Mostrar modal (una sola instancia para evitar backdrops duplicados)
                 const modalEl = document.getElementById('verProveedorModal');
-                const modal = new bootstrap.Modal(modalEl);
+                const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
                 modal.show();
                 
                 // guardamos el id en el modal y en los botones del footer para que sepan qué proveedor están manejando
@@ -117,11 +117,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log("Llegué a la parte del HREF");
                 
                 btnActivar.setAttribute('href',
-                    `/aventura_go/administrador/cambiar-estado-proveedor?id=${id}&accion=activar`
+                    `${window.BASE_URL}administrador/cambiar-estado-proveedor?id=${id}&accion=activar`
                 );
 
                 btnDesactivar.setAttribute('href',
-                    `/aventura_go/administrador/cambiar-estado-proveedor?id=${id}&accion=desactivar`
+                    `${window.BASE_URL}administrador/cambiar-estado-proveedor?id=${id}&accion=desactivar`
                 );
 
                 console.log("HREF ACTIVAR:", btnActivar.href);
@@ -154,7 +154,7 @@ document.addEventListener("click", function (e) {
 
     let nuevoEstado = estado === "activo" ? "inactivo" : "activo";
 
-    fetch("/aventura_go/administrador/cambiar-estado-proveedor", {
+    fetch(`${window.BASE_URL}administrador/cambiar-estado-proveedor`, {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"

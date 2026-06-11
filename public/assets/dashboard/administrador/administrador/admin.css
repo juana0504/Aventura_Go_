@@ -54,8 +54,21 @@
    SIDEBAR
 ============================================= */
 .adm-sidebar {
-    overflow: hidden;
+    width: var(--adm-sidebar-width);
+    min-height: 100vh;
+    background: var(--adm-sidebar-bg);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
 }
+
+.adm-sidebar::-webkit-scrollbar { display: none; }
 
 .adm-sidebar::before {
     content: '';
@@ -1176,6 +1189,83 @@ a.adm-notif-item__body {
     .adm-dashboard-aside { display: grid; grid-template-columns: 1fr 1fr; }
 }
 
+/* ─── RELOJ TOPBAR ───────────────────────── */
+.adm-topbar__clock {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    max-width: 380px;
+    padding: 0 4px;
+}
+
+.adm-clock__cal-icon {
+    font-size: 20px;
+    color: var(--adm-primary);
+    flex-shrink: 0;
+}
+
+.adm-clock__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.adm-clock__date {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--adm-muted);
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.2;
+    text-transform: capitalize;
+}
+
+.adm-clock__time {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: var(--adm-primary);
+    line-height: 1;
+}
+
+/* ─── SIDEBAR TOGGLE (mobile) ─────────────── */
+.adm-sidebar-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background: var(--adm-surface);
+    border: 1px solid var(--adm-border);
+    border-radius: var(--adm-radius-sm);
+    cursor: pointer;
+    color: var(--adm-text);
+    font-size: 20px;
+    flex-shrink: 0;
+    transition: background .2s, border-color .2s;
+}
+
+.adm-sidebar-toggle:hover {
+    background: var(--adm-primary-light);
+    border-color: rgba(234,130,23,.35);
+    color: var(--adm-primary);
+}
+
+.adm-sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    backdrop-filter: blur(2px);
+    z-index: 999;
+    animation: backdropIn .2s ease;
+}
+
+@keyframes backdropIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
 @media (max-width: 768px) {
     .adm-topbar {
         height: auto;
@@ -1217,6 +1307,31 @@ a.adm-notif-item__body {
 
     .adm-stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
     .adm-dashboard-aside { grid-template-columns: 1fr; }
+
+    /* Sidebar oculto por defecto, slide-in con toggle */
+    .adm-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform .28s cubic-bezier(.4,0,.2,1);
+        min-height: 100vh;
+    }
+
+    .adm-layout--sidebar-open .adm-sidebar {
+        transform: translateX(0);
+    }
+
+    .adm-layout--sidebar-open .adm-sidebar-backdrop {
+        display: block;
+    }
+
+    /* Botón toggle visible en mobile */
+    .adm-sidebar-toggle { display: inline-flex; }
+
+    .adm-no-scroll { overflow: hidden; }
 }
 
 @media (max-width: 480px) {

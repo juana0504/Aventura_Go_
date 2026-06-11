@@ -222,7 +222,7 @@ body:not(.adm-dark) .adm-pv-stat--featured {
 
 .adm-table-wrap--card .adm-table thead th {
     background: #f9fafb;
-    padding: 12px 20px;
+    padding: 12px 10px;
     text-align: left;
     font-size: 11px;
     letter-spacing: 1.5px;
@@ -244,9 +244,17 @@ body:not(.adm-dark) .adm-pv-stat--featured {
 }
 
 .adm-table-wrap--card .adm-table td {
-    padding: 14px 20px;
+    padding: 12px 10px;
     color: var(--adm-text);
     vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.adm-table-wrap--card .adm-table td:last-child {
+    overflow: visible;
+    white-space: normal;
 }
 
 /* ─── MODO OSCURO ─────────────────────────── */

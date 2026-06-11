@@ -165,8 +165,10 @@ class Hotelero
     public function listar()
     {
         try {
-            // Variable que almacena laq sentencia de sql a ejecutar
-            $consultar = "SELECT * FROM proveedor_hotelero WHERE id_proveedor_hotelero = id_proveedor_hotelero order BY id_proveedor_hotelero DESC";
+            $consultar = "SELECT ph.*, c.nombre AS nombre_ciudad
+                          FROM proveedor_hotelero ph
+                          LEFT JOIN ciudades c ON ph.id_ciudad = c.id_ciudad
+                          ORDER BY ph.id_proveedor_hotelero DESC";
 
             // Preparar lo necesario para ejecutar la función
             $resultado = $this->conexion->prepare($consultar);
@@ -312,8 +314,8 @@ class Hotelero
     public function activarProveedorHotelero($id)
     {
         try {
-            $sql = "UPDATE proveedor_hotelero 
-                SET validado = 1, estado = 'ACTIVO' 
+            $sql = "UPDATE proveedor_hotelero
+                SET estado = 'ACTIVO'
                 WHERE id_proveedor_hotelero = :id";
 
             $stmt = $this->conexion->prepare($sql);
@@ -330,8 +332,8 @@ class Hotelero
     public function desactivarProveedorHotelero($id)
     {
         try {
-            $sql = "UPDATE proveedor_hotelero 
-                SET validado = 0, estado = 'INACTIVO' 
+            $sql = "UPDATE proveedor_hotelero
+                SET estado = 'INACTIVO'
                 WHERE id_proveedor_hotelero = :id";
 
             $stmt = $this->conexion->prepare($sql);

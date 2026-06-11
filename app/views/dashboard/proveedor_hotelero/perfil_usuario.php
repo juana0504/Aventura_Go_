@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
 require_once __DIR__ . '/../../../helpers/alert_helper.php';
@@ -211,6 +211,7 @@ $usuario = mostrarPerfilProveedorHotelero($id);
     <!-- JS -->
     <script src="<?= BASE_URL ?>public/assets/dashboard/proveedor_hotelero/perfil_usuario/perfil.js"></script>
 
+    <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
 </body>
 
 </html>
