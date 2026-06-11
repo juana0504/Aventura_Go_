@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 require_once BASE_PATH . '/app/helpers/session_turista.php';
 require_once __DIR__ . '/../../../helpers/alert_helper.php';
@@ -113,6 +113,7 @@ $usuario = mostrarPerfilTurista($id);
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
+    <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
 </body>
 
 </html>

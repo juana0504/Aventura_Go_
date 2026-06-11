@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
 $nombreAdmin = $_SESSION['user']['nombre'] ?? 'Administrador';
@@ -306,5 +306,6 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
 })();
 </script>
 
+    <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
 </body>
 </html>

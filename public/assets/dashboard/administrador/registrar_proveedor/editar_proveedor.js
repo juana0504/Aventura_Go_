@@ -17,14 +17,14 @@ function showStep(step) {
 
     const nextBtn = document.getElementById("nextBtn");
 
-    // Si es el paso final → pasa a "Registrar"
-    if (step === 4) {
+    // En paso 5 → botón se convierte en Actualizar y carga preview
+    if (step === 5) {
         nextBtn.innerHTML = `Actualizar <i class="fas fa-check"></i>`;
-        nextBtn.type = "submit"; // ✅ Aquí ya envía
-        loadPreview(); // ✅ cargar vista previa
+        nextBtn.type = "submit";
+        loadPreview();
     } else {
         nextBtn.innerHTML = `Siguiente <i class="fas fa-arrow-right"></i>`;
-        nextBtn.type = "button"; // ✅ NO envía aún
+        nextBtn.type = "button";
     }
 }
 
@@ -36,7 +36,7 @@ function changeStep(direction) {
 
     currentStep += direction;
     if (currentStep < 1) currentStep = 1;
-    if (currentStep > 4) currentStep = 4;
+    if (currentStep > 5) currentStep = 5;
 
     showStep(currentStep);
 }
@@ -57,33 +57,62 @@ function validateStep(step) {
     return true;
 }
 
-// Cargar datos en vista previa (Paso 4)
+// Cargar datos en vista previa (Paso 5)
 function loadPreview() {
-    document.getElementById("prev-empresa").textContent = empresa.value;
-    document.getElementById("prev-nit").textContent = nit.value;
-    document.getElementById("prev-representante").textContent = representante.value;
-    document.getElementById("prev-email").textContent = email.value;
-    document.getElementById("prev-telefono").textContent = telefono.value;
+    const val = id => document.getElementById(id)?.value || "-";
 
-    let actividades = [];
-    document.querySelectorAll('input[name="actividades[]"]:checked') .forEach(el => actividades.push(el.value));
-    document.getElementById("prev-actividades").textContent = actividades.join(", ") || "-";
+    // Empresa
+    document.getElementById("prev-empresa").textContent   = val("empresa");
+    document.getElementById("prev-nit").textContent       = val("nit");
+    document.getElementById("prev-email").textContent     = val("email");
+    document.getElementById("prev-telefono").textContent  = val("telefono");
 
-    document.getElementById("prev-ubicacion").textContent = `${ciudad.value}, ${departamento.value}`;
-    document.getElementById("prev-descripcion").textContent = descripcion.value || "-";
+    // Representante
+    document.getElementById("prev-representante").textContent  = val("representante");
+    document.getElementById("prev-email-repre").textContent    = val("email_repre");
+    document.getElementById("prev-telefono-repre").textContent = val("telefono_repre");
+
+    const tipoDoc = val("tipo_documento");
+    const identi  = val("identificacion");
+    document.getElementById("prev-identificacion").textContent = `${tipoDoc} · ${identi}`;
+
+    // Actividades — renderiza como badges
+    const container = document.getElementById("prev-actividades");
+    container.innerHTML = "";
+    const actividadesChecked = [];
+    document.querySelectorAll('input[name="actividades[]"]:checked').forEach(el => actividadesChecked.push(el.value));
+    if (actividadesChecked.length > 0) {
+        actividadesChecked.forEach(a => {
+            const span = document.createElement("span");
+            span.className = "badge-servicio";
+            span.style.cssText = "display:inline-block;background:rgba(234,130,23,.15);color:#ea8217;border:1px solid rgba(234,130,23,.3);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:600;margin:2px";
+            span.textContent = a;
+            container.appendChild(span);
+        });
+    } else {
+        container.textContent = "-";
+    }
+
+    // Ubicación
+    const selectDep = document.getElementById("departamento");
+    const selectCiu = document.getElementById("id_ciudad");
+    const depTexto  = selectDep?.options[selectDep?.selectedIndex]?.text || "-";
+    const ciudTexto = selectCiu?.options[selectCiu?.selectedIndex]?.text || "-";
+    document.getElementById("prev-ubicacion").textContent  = `${depTexto} · ${ciudTexto}`;
+    document.getElementById("prev-direccion").textContent  = val("direccion");
 }
 
 // Iniciar
 showStep(currentStep);
 
-// Acción del botón Next / Registrar
+// Acción del botón Next / Actualizar
 document.getElementById("nextBtn").addEventListener("click", function (e) {
 
     // Si NO estamos en el paso final → avanzar
-    if (currentStep < 4) {
+    if (currentStep < 5) {
         e.preventDefault();
         changeStep(1);
     }
 
-    // Si estamos en paso 4, deja que el submit funcione normal ✅
+    // Si estamos en paso 5, deja que el submit funcione normal
 });

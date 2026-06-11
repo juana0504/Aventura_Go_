@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
 
@@ -484,6 +484,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
     <script src="<?= BASE_URL ?>public/assets/dashboard/proveedor_hotelero/registrar_informacion/departamento.js"></script>
 
 
+    <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
 </body>
 
 </html>

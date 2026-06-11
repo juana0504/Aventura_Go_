@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
 $nombreProveedor = $_SESSION['user']['nombre'] ?? '';
@@ -534,5 +534,6 @@ function cancelarReserva(id) {
 <!-- JS original del módulo -->
 <script src="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/consultar_reservas/consultar_reservas.js"></script>
 
+    <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
 </body>
 </html>

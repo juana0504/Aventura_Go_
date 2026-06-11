@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once BASE_PATH . '/app/helpers/session_turista.php';
 
 $nombreUsuario = $_SESSION['user']['nombre'] ?? '';
@@ -571,5 +571,6 @@ $errorMsg = match($_GET['error'] ?? '') {
 })();
 </script>
 
+    <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
 </body>
 </html>

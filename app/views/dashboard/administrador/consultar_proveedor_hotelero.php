@@ -275,9 +275,12 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
                     </thead>
                     <tbody>
                         <?php if (!empty($datos)): ?>
-                            <?php foreach ($datos as $hotelero): ?>
+                            <?php foreach ($datos as $hotelero):
+                                $estadoUp = strtoupper(trim($hotelero['estado'] ?? ''));
+                                $estadoKey = ($estadoUp === 'ACTIVO') ? 'activo' : (($estadoUp === 'INACTIVO') ? 'inactivo' : 'pendiente');
+                            ?>
                                 <tr id="fila-<?= $hotelero['id_proveedor_hotelero'] ?>"
-                                    data-estado="<?= strtolower($hotelero['estado']) ?>">
+                                    data-estado="<?= $estadoKey ?>">
 
                                     <td>
                                         <img src="<?= BASE_URL ?>public/uploads/hoteles/<?= htmlspecialchars($hotelero['logo']) ?>"
@@ -296,11 +299,11 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
                                     <td><?= htmlspecialchars($hotelero['nombre_ciudad'] ?? '—') ?></td>
 
                                     <td class="col-estado">
-                                        <?php if ($hotelero['estado'] == 'ACTIVO'): ?>
+                                        <?php if ($estadoKey === 'activo'): ?>
                                             <span class="adm-badge adm-badge--confirmed">
                                                 <span class="adm-badge__dot"></span> Activo
                                             </span>
-                                        <?php elseif ($hotelero['estado'] == 'INACTIVO'): ?>
+                                        <?php elseif ($estadoKey === 'inactivo'): ?>
                                             <span class="adm-badge adm-badge--cancelled">
                                                 <span class="adm-badge__dot"></span> Inactivo
                                             </span>
@@ -614,11 +617,7 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
 
             const f = btn.dataset.filter;
             filas.forEach(row => {
-                const estado  = row.dataset.estado;
-                const visible = f === 'all'
-                    || estado === f
-                    || (f === 'pendiente' && estado !== 'activo' && estado !== 'inactivo');
-                row.style.display = visible ? '' : 'none';
+                row.style.display = (f === 'all' || row.dataset.estado === f) ? '' : 'none';
             });
         });
     });

@@ -170,3 +170,14 @@
 
   cargarNotificaciones();
 })();
+
+/* ── Reloj topbar (admin) ─────────────────────────────────────────────── */
+(function () {
+    var src = document.currentScript ? document.currentScript.src : '';
+    var base = src.includes('/public/assets/')
+        ? src.split('/public/assets/')[0] + '/'
+        : window.location.origin + '/';
+    var s = document.createElement('script');
+    s.src = base + 'public/assets/dashboard/adm-clock.js';
+    document.head.appendChild(s);
+})();

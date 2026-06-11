@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 require_once BASE_PATH . '/app/helpers/session_administrador.php';
 require_once BASE_PATH . '/app/controllers/administrador/hotelero.php';
@@ -421,6 +421,7 @@ if (!empty($hotelero['metodo_pago'])) {
     </script>
 
     <script src="<?= BASE_URL ?>public/assets/dashboard/administrador/registrar_proveedor/departamento.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
 </body>
 
 </html>

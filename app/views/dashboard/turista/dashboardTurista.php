@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 if (!isset($datos_turista)) {
     header('Location: ' . BASE_URL . 'turista/dashboard');
     exit;
@@ -438,6 +438,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
     })();
     </script>
 
+    <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
 </body>
 
 </html>

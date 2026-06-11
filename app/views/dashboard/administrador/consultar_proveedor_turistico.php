@@ -354,8 +354,6 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
                                             <button
                                                 class="adm-pv-btn adm-pv-btn--view btn-ver"
                                                 data-id="<?= $proveedor['id_proveedor'] ?>"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#verProveedorModal"
                                                 title="Ver detalles">
                                                 <i class="bi bi-eye"></i>
                                             </button>
@@ -396,40 +394,14 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
 
         </main>
     </div><!-- /.adm-main -->
-
-<div class="modal fade" id="verProveedorModal" tabindex="-1" aria-labelledby="verProveedorModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content adm-modal">
-
-            <!-- Header -->
-            <div class="adm-modal__header">
-                <div class="adm-modal__logo-wrap">
-                    <img src="" alt="Logo proveedor" id="modal-logo" class="adm-modal__logo">
-                </div>
-                <div class="adm-modal__header-info">
-                    <div class="adm-modal__eyebrow">Proveedor Turístico</div>
-                    <h5 class="adm-modal__title" id="verProveedorModalLabel">Detalles del Proveedor</h5>
-                    <small class="adm-modal__subtitle">Información completa del proveedor turístico</small>
-                </div>
-                <button type="button" class="adm-modal__close" data-bs-dismiss="modal" aria-label="Cerrar">
-                    <i class="bi bi-x-lg"></i>
-                </button>
-            </div>
-
-            <!-- Body -->
-            <div class="modal-body adm-modal__body">
-
 </div><!-- /.adm-layout -->
 
 
-<!-- ==========================================
-     MODAL VER PROVEEDOR
-     IDs originales intactos para el JS externo
+<!-- MODAL VER PROVEEDOR -->
 <div class="modal fade" id="verProveedorModal" tabindex="-1" aria-labelledby="verProveedorModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content adm-modal">
 
-            <!-- Header -->
             <div class="adm-modal__header">
                 <div class="adm-modal__logo-wrap">
                     <img src="" alt="Logo proveedor" id="modal-logo" class="adm-modal__logo">
@@ -572,6 +544,8 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
 <script src="<?= BASE_URL ?>public/assets/dashboard/administrador/consultar_proveedor/consultar_proveedor_turistico.js"></script>
 
 <script>
+window.BASE_URL = '<?= BASE_URL ?>';
+
 (function () {
 
     /* ─── MODO OSCURO ────────────────────────── */

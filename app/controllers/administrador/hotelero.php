@@ -42,7 +42,7 @@ switch ($method) {
         }
 
         if (isset($_GET['id'])) {
-            listarHotelId($_GET['id']);
+            consultarProveedorHoteleroOjo();
         } else {
             listarHoteles();
         }
