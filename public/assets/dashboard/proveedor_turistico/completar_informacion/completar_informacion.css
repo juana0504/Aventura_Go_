@@ -1,319 +1,776 @@
-/* ================= ESTILOS WIZARD PROVEEDOR TURISTICO - AVENTURA GO ================= */
+/* =============================================
+   AVENTURAGO
+   completar_informacion.css
+   Basado en proveedor.css
+   ============================================= */
 
-/* Fuentes */
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+/* ──────────────────────────────────────────
+   HEADER DE LA PÁGINA
+   ────────────────────────────────────────── */
 
-/* ================= PALETA ================= */
-
-:root {
-    --color-primary: #2D4059;
-    --color-secondary: #EA8217;
-    --color-white: #FFFFFF;
-    --color-bg-light: #F8F9FA;
-    --color-border: #E0E0E0;
-    --color-text: #2B2B2B;
-    --font-titles: 'Raleway', sans-serif;
-    --font-text: 'Lato', sans-serif;
+.pv-page-title{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:38px;
+    letter-spacing:2px;
+    color:var(--pv-text);
+    line-height:1;
+    margin:0 0 8px;
 }
 
-/* ================= TIPOGRAFÍA ================= */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: var(--font-titles);
+.pv-page-title span{
+    color:var(--pv-primary);
 }
 
-body,
-p,
-a,
-button,
-input,
-select,
-textarea {
-    font-family: var(--font-text);
+/* ──────────────────────────────────────────
+   LAYOUT GENERAL
+   ────────────────────────────────────────── */
+
+.pv-ci-layout{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 340px;
+    gap:24px;
+    align-items:start;
 }
 
-/* =====================================================
-   ESTRUCTURA BASE DASHBOARD
-===================================================== */
-
-#informacion-proveedor {
-    display: flex;
-    min-height: 100vh;
+.pv-ci-wizard-wrap{
+    min-width:0;
 }
 
-/* SIDEBAR */
+/* ──────────────────────────────────────────
+   WIZARD
+   ────────────────────────────────────────── */
 
-.sidebar {
-    width: 280px;
-    flex-shrink: 0;
+.pv-wizard{
+    background:var(--pv-surface);
+    border:1px solid var(--pv-border);
+    border-radius:var(--pv-radius-lg);
+    overflow:hidden;
+    box-shadow:var(--pv-shadow);
 }
 
-/* CONTENIDO PRINCIPAL */
+/* Header */
 
-.informacion-main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+.pv-wizard__header{
+    background:#1a2b3c;
+    padding:18px 28px;
+    border-bottom:3px solid var(--pv-primary);
 }
 
-/* TOPBAR */
-
-.informacion-topbar {
-    height: 80px;
-    flex-shrink: 0;
+.pv-wizard__header-text{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:20px;
+    letter-spacing:2px;
+    color:#fff;
+    margin:0;
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
-/* CONTENIDO DE LA PAGINA */
-
-.formulario {
-    flex: 1;
-    padding: 20px;
-    background: var(--color-bg-light);
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+.pv-wizard__header-text i{
+    color:var(--pv-primary);
 }
 
-.parrafos-informativos {
-    background: var(--color-white);
-    border: 1px solid var(--color-border);
-    border-radius: 10px;
-    padding: 20px 20px;
+/* ──────────────────────────────────────────
+   PASOS
+   ────────────────────────────────────────── */
+
+.pv-wizard__steps{
+    display:flex;
+    justify-content:center;
+    padding:28px 40px 0;
+    background:var(--pv-bg);
+    position:relative;
 }
 
-.parrafos-informativos img {
-    margin-bottom: 15px;
-    width: 100%;
-    max-width: 200px;
-    margin: 0 auto;
-    display: block;
+.pv-wizard__steps::after{
+    content:'';
+    position:absolute;
+    top:49px;
+    left:calc(10% + 20px);
+    right:calc(10% + 20px);
+    height:2px;
+    background:var(--pv-border);
+    z-index:0;
 }
 
-
-
-/* ================= WIZARD ================= */
-
-.wizard-container {
-    width: 100%;
-    max-width: 1100px;
-    background: var(--color-white);
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+.wizard-steps .step{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    flex:1;
+    position:relative;
+    z-index:1;
 }
 
-/* HEADER */
+.wizard-steps .step-circle{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:var(--pv-surface);
+    border:2px solid var(--pv-border);
 
-.wizard-header {
-    width: 100%;
-    background: linear-gradient(135deg, #2D4059, #3E5C76);
-    border-radius: 12px 12px 0 0;
-    padding: 30px 20px;
-    text-align: center;
-    color: #FFFFFF;
-    font-size: 22px;
-    font-weight: 700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-family:'Bebas Neue',sans-serif;
+    font-size:18px;
+
+    color:var(--pv-muted);
+
+    transition:all .3s;
 }
 
-/* ================= STEPS ================= */
-
-.wizard-steps {
-    display: flex;
-    justify-content: space-between;
-    margin: 30px 20px;
-    gap: 8px;
+.wizard-steps .step.active .step-circle,
+.wizard-steps .step.completed .step-circle{
+    background:var(--pv-primary);
+    border-color:var(--pv-primary);
+    color:#fff;
+    box-shadow:0 4px 12px rgba(234,130,23,.35);
 }
 
-.step {
-    flex: 1;
-    text-align: center;
-    opacity: 0.4;
+.wizard-steps .step-label{
+    font-size:11px;
+    font-weight:500;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    color:var(--pv-muted);
+    text-align:center;
+    white-space:nowrap;
 }
 
-.step.active {
-    opacity: 1;
+.wizard-steps .step.active .step-label{
+    color:var(--pv-primary);
+    font-weight:700;
 }
 
-.step-circle {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: var(--color-border);
-    color: var(--color-text);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 6px auto;
-    font-weight: 700;
+/* ──────────────────────────────────────────
+   CONTENIDO
+   ────────────────────────────────────────── */
+
+.pv-wizard__content{
+    padding:32px 36px;
 }
 
-.step.active .step-circle {
-    background: var(--color-secondary);
-    color: #FFFFFF;
+.step-content{
+    display:none;
 }
 
-.step-label {
-    font-size: 13px;
-    color: var(--color-primary);
+.step-content.active{
+    display:block;
+    animation:pvFadeStepIn .25s ease-out;
 }
 
-/* ================= CONTENIDO ================= */
-
-.step-content {
-    display: none;
-    padding: 0 25px 10px 25px;
+@keyframes pvFadeStepIn{
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-.step-content.active {
-    display: block;
+/* ──────────────────────────────────────────
+   TITULO DE CADA PASO
+   ────────────────────────────────────────── */
+
+.pv-wizard__step-title{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:28px;
+    padding-bottom:18px;
+    border-bottom:1px solid var(--pv-border);
 }
 
-/* ================= BOTONES ================= */
+.pv-wizard__step-icon{
+    width:44px;
+    height:44px;
+    border-radius:var(--pv-radius-sm);
 
-.wizard-actions {
-    display: flex;
-    justify-content: space-between;
-    margin: 30px 25px;
+    background:var(--pv-primary-light);
+    color:var(--pv-primary);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:18px;
+    flex-shrink:0;
 }
 
-/* Botón principal */
-
-.btn-primary-wizard {
-    background: var(--color-secondary);
-    border: none;
-    color: #FFFFFF;
-    padding: 10px 24px;
-    border-radius: 8px;
-    font-size: 14px;
+.pv-wizard__step-title h4{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:22px;
+    letter-spacing:1.5px;
+    color:var(--pv-text);
+    margin:0;
 }
 
-.btn-primary-wizard:hover {
-    background: #d87314;
+/* ──────────────────────────────────────────
+   FORMULARIOS
+   ────────────────────────────────────────── */
+
+.pv-form-label{
+    display:block;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--pv-muted);
+    margin-bottom:6px;
 }
 
-/* Botón secundario */
+.pv-form-input{
+    width:100%;
+    padding:11px 14px;
 
-.btn-secondary-wizard {
-    background: var(--color-primary);
-    border: none;
-    color: #FFFFFF;
-    padding: 10px 24px;
-    border-radius: 8px;
-    font-size: 14px;
+    border:1px solid var(--pv-border);
+    border-radius:var(--pv-radius-sm);
+
+    font-size:14px;
+    font-family:'DM Sans',sans-serif;
+
+    color:var(--pv-text);
+    background:var(--pv-bg);
+
+    transition:border-color .2s,
+               box-shadow .2s,
+               background .2s;
+
+    outline:none;
 }
 
-.btn-secondary-wizard:hover {
-    background: #1f2d3f;
+.pv-form-input:focus{
+    border-color:var(--pv-primary);
+    box-shadow:0 0 0 3px rgba(234,130,23,.12);
+    background:var(--pv-surface);
 }
 
-/* ================= PREVIEW ================= */
-
-.preview-card {
-    border: 1px solid var(--color-border);
-    border-radius: 10px;
-    padding: 16px;
-    margin-bottom: 12px;
-    background: var(--color-bg-light);
+.pv-form-input--file{
+    padding:9px 14px;
+    cursor:pointer;
 }
 
-.preview-label {
-    font-size: 12px;
-    color: #6c757d;
+.pv-form-textarea{
+    resize:vertical;
+    min-height:120px;
 }
 
-.preview-value {
-    font-size: 14px;
-    color: var(--color-text);
-    font-weight: 600;
+.pv-form-select{
+    cursor:pointer;
+    padding-right:38px;
 }
 
-.success-icon {
-    font-size: 48px;
-    color: #28a745;
-    margin-bottom: 10px;
+.pv-form-input--readonly{
+    background:rgba(234,130,23,.05);
+    cursor:not-allowed;
 }
 
-/* ================= RESPONSIVE ================= */
+.pv-form-hint{
+    display:block;
+    margin-top:6px;
+    font-size:12px;
+    color:var(--pv-muted);
+}
 
+/* ──────────────────────────────────────────
+   ACCIONES DEL WIZARD
+   ────────────────────────────────────────── */
 
-@media (max-width: 992px) {
+.pv-wizard__actions{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 
-    .ag-buscador-proveedor {
-        gap: 10px;
-        padding: 0 20px;
+    padding:20px 36px 28px;
+
+    border-top:1px solid var(--pv-border);
+    background:var(--pv-bg);
+}
+
+.pv-wizard__btn-prev,
+.pv-wizard__btn-next{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    padding:12px 28px;
+
+    border:none;
+    border-radius:var(--pv-radius-sm);
+
+    font-size:14px;
+    font-weight:600;
+
+    cursor:pointer;
+    transition:all .2s;
+}
+
+.pv-wizard__btn-prev{
+    background:var(--pv-surface);
+    border:1px solid var(--pv-border);
+    color:var(--pv-muted);
+}
+
+.pv-wizard__btn-prev:hover{
+    color:var(--pv-text);
+}
+
+.pv-wizard__btn-next,
+.btn-primary-wizard{
+    background:var(--pv-primary);
+    color:#fff;
+}
+
+.pv-wizard__btn-next:hover,
+.btn-primary-wizard:hover{
+    background:var(--pv-primary-dark);
+    transform:translateY(-1px);
+}
+
+/* ──────────────────────────────────────────
+   ACTIVIDADES
+   ────────────────────────────────────────── */
+
+.pv-ci-activities-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.pv-ci-activity-card{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    padding:18px 12px;
+
+    background:var(--pv-bg);
+    border:2px solid var(--pv-border);
+    border-radius:var(--pv-radius);
+
+    cursor:pointer;
+    text-align:center;
+    position:relative;
+
+    transition:all .25s ease;
+}
+
+.pv-ci-activity-card:hover{
+    border-color:rgba(234,130,23,.4);
+    background:rgba(234,130,23,.04);
+    transform:translateY(-2px);
+}
+
+.pv-ci-activity-card--selected{
+    border-color:var(--pv-primary);
+    background:var(--pv-primary-light);
+    box-shadow:0 4px 12px rgba(234,130,23,.20);
+}
+
+.pv-ci-activity-card__check{
+    position:absolute;
+    top:10px;
+    right:10px;
+
+    width:16px;
+    height:16px;
+
+    accent-color:var(--pv-primary);
+}
+
+.pv-ci-activity-card__emoji{
+    font-size:28px;
+    line-height:1;
+}
+
+.pv-ci-activity-card__label{
+    font-size:12px;
+    font-weight:600;
+    color:var(--pv-text);
+}
+
+/* ──────────────────────────────────────────
+   PANEL INFORMATIVO
+   ────────────────────────────────────────── */
+
+.pv-ci-info-panel{
+    background:var(--pv-surface);
+    border:1px solid var(--pv-border);
+    border-radius:var(--pv-radius-lg);
+
+    padding:24px;
+
+    position:sticky;
+    top:90px;
+
+    box-shadow:var(--pv-shadow);
+}
+
+.pv-ci-info-logo{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:28px;
+}
+
+.pv-ci-info-logo img{
+    max-width:180px;
+    width:100%;
+    height:auto;
+}
+
+.pv-ci-info-item{
+    display:flex;
+    gap:14px;
+
+    padding:14px 0;
+
+    border-bottom:1px solid var(--pv-border);
+}
+
+.pv-ci-info-item:last-child{
+    border-bottom:none;
+    padding-bottom:0;
+}
+
+.pv-ci-info-item__icon{
+    width:42px;
+    height:42px;
+
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:var(--pv-primary-light);
+    color:var(--pv-primary);
+
+    font-size:18px;
+}
+
+.pv-ci-info-item__title{
+    font-size:14px;
+    font-weight:700;
+    color:var(--pv-text);
+
+    margin-bottom:4px;
+}
+
+.pv-ci-info-item__text{
+    margin:0;
+
+    font-size:12px;
+    line-height:1.5;
+
+    color:var(--pv-muted);
+}
+
+/* ──────────────────────────────────────────
+   CONFIRMACIÓN
+   ────────────────────────────────────────── */
+
+.pv-wizard__confirm-header{
+    text-align:center;
+    padding:20px 0 32px;
+}
+
+.pv-wizard__confirm-icon{
+    font-size:54px;
+    color:var(--pv-green);
+    margin-bottom:14px;
+}
+
+.pv-wizard__confirm-header h4{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:30px;
+    letter-spacing:2px;
+    color:var(--pv-text);
+
+    margin-bottom:6px;
+}
+
+.pv-wizard__confirm-header p{
+    color:var(--pv-muted);
+    font-size:14px;
+    margin:0;
+}
+
+/* ──────────────────────────────────────────
+   PREVIEW
+   ────────────────────────────────────────── */
+
+.pv-preview-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.pv-preview-card{
+    background:var(--pv-bg);
+    border:1px solid var(--pv-border);
+    border-radius:var(--pv-radius);
+
+    overflow:hidden;
+}
+
+.pv-preview-card--full{
+    grid-column:1 / -1;
+}
+
+.pv-preview-card__header{
+    background:#1a2b3c;
+    color:var(--pv-primary);
+
+    font-family:'Bebas Neue',sans-serif;
+    font-size:16px;
+    letter-spacing:1px;
+
+    padding:12px 16px;
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.pv-preview-card__header i{
+    color:var(--pv-primary);
+}
+
+.pv-preview-card__body{
+    padding:14px 16px;
+
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.pv-preview-field{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+}
+
+.pv-preview-label{
+    font-size:10px;
+    font-weight:600;
+
+    letter-spacing:1px;
+    text-transform:uppercase;
+
+    color:var(--pv-muted);
+}
+
+.preview-value{
+    font-size:14px;
+    font-weight:500;
+    color:var(--pv-text);
+
+    word-break:break-word;
+}
+
+.pv-preview-activities{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.pv-preview-activities span{
+    background:var(--pv-primary-light);
+    color:var(--pv-primary);
+
+    border-radius:20px;
+
+    padding:5px 10px;
+
+    font-size:11px;
+    font-weight:600;
+}
+
+/* ──────────────────────────────────────────
+   EFECTOS
+   ────────────────────────────────────────── */
+
+.pv-wizard,
+.pv-preview-card,
+.pv-ci-info-panel{
+    transition:all .25s ease;
+}
+
+.pv-preview-card:hover{
+    box-shadow:var(--pv-shadow-hover);
+}
+
+/* ──────────────────────────────────────────
+   DARK MODE
+   ────────────────────────────────────────── */
+
+.pv-dark .pv-wizard{
+    background:var(--pv-surface);
+    border-color:var(--pv-border);
+}
+
+.pv-dark .pv-wizard__content{
+    background:var(--pv-surface);
+}
+
+.pv-dark .pv-wizard__steps{
+    background:var(--pv-bg);
+}
+
+.pv-dark .pv-form-input{
+    background:var(--pv-bg);
+    color:var(--pv-text);
+    border-color:var(--pv-border);
+}
+
+.pv-dark .pv-form-input:focus{
+    background:var(--pv-surface);
+}
+
+.pv-dark .pv-ci-activity-card{
+    background:var(--pv-bg);
+    border-color:var(--pv-border);
+}
+
+.pv-dark .pv-ci-activity-card:hover{
+    background:rgba(234,130,23,.05);
+}
+
+.pv-dark .pv-ci-activity-card--selected{
+    background:rgba(234,130,23,.10);
+}
+
+.pv-dark .pv-preview-card{
+    background:var(--pv-bg);
+    border-color:var(--pv-border);
+}
+
+.pv-dark .pv-preview-card__body{
+    background:var(--pv-bg);
+}
+
+.pv-dark .pv-ci-info-panel{
+    background:var(--pv-surface);
+    border-color:var(--pv-border);
+}
+
+.pv-dark .pv-wizard__actions{
+    background:var(--pv-bg);
+    border-color:var(--pv-border);
+}
+
+.pv-dark .pv-wizard__btn-prev{
+    background:var(--pv-surface);
+    border-color:var(--pv-border);
+}
+
+.pv-dark .wizard-steps .step-circle{
+    background:var(--pv-surface);
+}
+
+/* ──────────────────────────────────────────
+   RESPONSIVE
+   ────────────────────────────────────────── */
+
+@media (max-width:1200px){
+
+    .pv-ci-layout{
+        grid-template-columns:1fr;
     }
 
-    .busqueda-wrapper {
-        display: none;
+    .pv-ci-info-panel{
+        position:relative;
+        top:auto;
     }
-
-    .parrafos-informativos {
-        margin-top: 20px;
-    }
-
-    #informacion-proveedor {
-        flex-direction: column;
-    }
-
-    .wizard-container {
-        max-width: 100%;
-    }
-
-    h4 {
-        margin-top: 15px;
-    }
-
-
-
 }
 
-@media (max-width:768px) {
+@media (max-width:992px){
 
-    #informacion-proveedor {
-        flex-direction: column;
+    .pv-ci-activities-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
+    .pv-preview-grid{
+        grid-template-columns:1fr;
     }
-
-    .informacion-main {
-        width: 100%;
-    }
-
-    .wizard-steps {
-        flex-wrap: wrap;
-        gap: 15px;
-    }
-
-    .step {
-        flex: 0 0 45%;
-    }
-
-    .parrafos-informativos {
-        margin-top: 25px;
-    }
-
 }
 
+@media (max-width:768px){
 
-@media (max-width:576px) {
-
-    .wizard-header {
-        font-size: 18px;
-        padding: 20px;
+    .pv-wizard__content{
+        padding:24px 20px;
     }
 
-    .wizard-steps {
-        display: none;
+    .pv-wizard__actions{
+        padding:18px 20px;
+        flex-direction:column-reverse;
+        gap:10px;
     }
 
+    .pv-wizard__btn-prev,
+    .pv-wizard__btn-next,
+    .btn-primary-wizard{
+        width:100%;
+    }
+
+    .pv-wizard__steps{
+        padding:20px 16px 10px;
+        overflow-x:auto;
+        justify-content:flex-start;
+        gap:8px;
+    }
+
+    .pv-wizard__steps::after{
+        display:none;
+    }
+
+    .wizard-steps .step{
+        min-width:90px;
+    }
+
+    .wizard-steps .step-label{
+        font-size:9px;
+    }
+}
+
+@media (max-width:480px){
+
+    .pv-page-title{
+        font-size:28px;
+    }
+
+    .pv-ci-activities-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .pv-ci-activity-card{
+        padding:14px 10px;
+    }
+
+    .pv-ci-activity-card__emoji{
+        font-size:24px;
+    }
+
+    .wizard-steps .step-circle{
+        width:34px;
+        height:34px;
+        font-size:15px;
+    }
+
+    .pv-wizard__confirm-header h4{
+        font-size:24px;
+    }
 }
