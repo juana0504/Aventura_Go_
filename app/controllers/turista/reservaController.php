@@ -10,7 +10,7 @@ class ReservaController
         require_once BASE_PATH . '/app/models/turista/reservaModel.php';
 
         if (!isset($_GET['id'])) {
-            header('Location: ' . BASE_URL . '/descubre-tours');
+            header('Location: ' . BASE_URL . 'descubre-tours');
             exit;
         }
 
@@ -23,7 +23,7 @@ class ReservaController
         $actividad = $actividadModel->obtenerPorId($idActividad);
 
         if (!$actividad || $actividad['estado'] !== 'ACTIVO') {
-            header('Location: ' . BASE_URL . '/descubre-tours');
+            header('Location: ' . BASE_URL . 'descubre-tours');
             exit;
         }
 
@@ -36,7 +36,7 @@ class ReservaController
             ':estado'            => 'pendiente'
         ]);
 
-        header('Location: ' . BASE_URL . '/turista/ver-reservas');
+        header('Location: ' . BASE_URL . 'turista/ver-reservas');
         exit;
     }
 

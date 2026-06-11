@@ -38,7 +38,7 @@ class TicketProveedorController
                 'error',
                 'Acceso denegado',
                 'No puedes ver este ticket',
-                BASE_URL . '/proveedor_turistico/listar'
+                BASE_URL . 'proveedor_turistico/listar'
             );
             exit();
         }
@@ -56,7 +56,7 @@ class TicketProveedorController
     public function guardar()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: ' . BASE_URL . '/proveedor/tickets');
+            header('Location: ' . BASE_URL . 'proveedor/tickets');
             exit();
         }
 
@@ -69,7 +69,7 @@ class TicketProveedorController
                 'error',
                 'Campos obligatorios',
                 'Completa todos los campos',
-                BASE_URL . '/proveedor/tickets/crear'
+                BASE_URL . 'proveedor/tickets/crear'
             );
             exit();
         }
@@ -80,7 +80,7 @@ class TicketProveedorController
             'success',
             'Ticket enviado',
             'Tu ticket fue creado correctamente',
-            BASE_URL . '/proveedor/tickets'
+            BASE_URL . 'proveedor/tickets'
         );
     }
 }

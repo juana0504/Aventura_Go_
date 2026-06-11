@@ -5,7 +5,7 @@ require_once BASE_PATH . '/app/models/proveedor_turistico/actividadTuristica.php
 
 $id = $_GET['id'] ?? null;
 if (!$id) {
-    header('Location: ' . BASE_URL . '/formulario-reserva');
+    header('Location: ' . BASE_URL . 'formulario-reserva');
     exit;
 }
 
@@ -13,7 +13,7 @@ $actividadModel = new ActividadTuristica();
 $actividad = $actividadModel->obtenerDetalleActividad($id);
 
 if (!$actividad) {
-    header('Location: ' . BASE_URL . '/descubre-tours');
+    header('Location: ' . BASE_URL . 'descubre-tours');
     exit;
 }
 

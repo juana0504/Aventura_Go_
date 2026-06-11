@@ -24,7 +24,7 @@ class TicketAdminController
     public function responderForm($id_ticket)
     {
         if (!$id_ticket) {
-            header('Location: ' . BASE_URL . '/administrador/tickets');
+            header('Location: ' . BASE_URL . 'administrador/tickets');
             exit();
         }
 
@@ -35,7 +35,7 @@ class TicketAdminController
                 'error',
                 'Ticket no encontrado',
                 'El ticket no existe',
-                BASE_URL . '/administrador/tickets'
+                BASE_URL . 'administrador/tickets'
             );
             exit();
         }
@@ -55,7 +55,7 @@ class TicketAdminController
                 'error',
                 'Error',
                 'Respuesta vacía',
-                BASE_URL . '/administrador/tickets'
+                BASE_URL . 'administrador/tickets'
             );
             exit();
         }
@@ -66,7 +66,7 @@ class TicketAdminController
             'success',
             'Respuesta enviada',
             'El ticket fue respondido correctamente',
-            BASE_URL . '/administrador/tickets'
+            BASE_URL . 'administrador/tickets'
         );
     }
 
@@ -76,7 +76,7 @@ class TicketAdminController
         $id = $_GET['id'] ?? null;
 
         if (!$id) {
-            header('Location: ' . BASE_URL . '/administrador/tickets');
+            header('Location: ' . BASE_URL . 'administrador/tickets');
             exit();
         }
 
@@ -86,7 +86,7 @@ class TicketAdminController
             'success',
             'Ticket cerrado',
             'El ticket fue cerrado',
-            BASE_URL . '/administrador/tickets'
+            BASE_URL . 'administrador/tickets'
         );
     }
 }

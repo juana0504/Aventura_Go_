@@ -58,22 +58,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'administrador':
             $redirectUrl = BASE_URL . 'administrador/dashboard';
             $mensaje = 'Bienvenido Administrador.';
-            $bgVideo = BASE_URL . '/public/assets/video/roles/bg_administrador.mp4';
+            $bgVideo = BASE_URL . 'public/assets/video/roles/bg_administrador.mp4';
             break;
         case 'proveedor':
             $redirectUrl = BASE_URL . 'proveedor/dashboard';
             $mensaje = 'Bienvenido Proveedor Turistico.';
-            $bgVideo = BASE_URL . '/public/assets/video/roles/bg_proveedor.mp4';
+            $bgVideo = BASE_URL . 'public/assets/video/roles/bg_proveedor.mp4';
             break;
         case 'proveedor_hotelero':
             $redirectUrl = BASE_URL . 'proveedor_hotelero/dashboard';
             $mensaje = 'Bienvenido Proveedor Hotelero.';
-            $bgVideo = BASE_URL . '/public/assets/video/roles/bg_proveedor_hotelero.mp4';
+            $bgVideo = BASE_URL . 'public/assets/video/roles/bg_proveedor_hotelero.mp4';
             break;
         case 'turista':
             $redirectUrl = BASE_URL;
             $mensaje = 'Bienvenido Turista.';
-            $bgVideo = BASE_URL . '/public/assets/video/roles/bg_turista.mp4';
+            $bgVideo = BASE_URL . 'public/assets/video/roles/bg_turista.mp4';
             break;
 
         default:
