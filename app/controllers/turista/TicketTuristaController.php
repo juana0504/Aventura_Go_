@@ -30,7 +30,7 @@ class TicketTuristaController // NOMBRE NUEVO
     public function guardar()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: ' . BASE_URL . '/turista/tickets');
+            header('Location: ' . BASE_URL . 'turista/tickets');
             exit();
         }
 
@@ -45,7 +45,7 @@ class TicketTuristaController // NOMBRE NUEVO
             'success',
             'Ticket enviado',
             'Tu ticket fue creado correctamente',
-            BASE_URL . '/turista/tickets'
+            BASE_URL . 'turista/tickets'
         );
     }
 }

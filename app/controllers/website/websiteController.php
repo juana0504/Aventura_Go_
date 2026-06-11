@@ -23,7 +23,7 @@ class WebsiteController
     public function tourEscogido()
     {
         if (!isset($_GET['id']) || empty($_GET['id'])) {
-            header('Location: ' . BASE_URL . '/descubre-tours');
+            header('Location: ' . BASE_URL . 'descubre-tours');
             exit;
         }
 
@@ -33,7 +33,7 @@ class WebsiteController
         $actividad = $actividadModel->obtenerActividadPorId($idActividad);
 
         if (!$actividad) {
-            header('Location: ' . BASE_URL . '/descubre-tours');
+            header('Location: ' . BASE_URL . 'descubre-tours');
             exit;
         }
 
@@ -56,7 +56,7 @@ class WebsiteController
                 !isset($_POST['cantidad_personas']) ||
                 !isset($_POST['fecha'])
             ) {
-                header('Location: ' . BASE_URL . '/descubre-tours');
+                header('Location: ' . BASE_URL . 'descubre-tours');
                 exit;
             }
 
@@ -68,7 +68,7 @@ class WebsiteController
             $actividad = $actividadModel->obtenerActividadPorId($idActividad);
 
             if (!$actividad || $actividad['estado'] !== 'ACTIVO') {
-                header('Location: ' . BASE_URL . '/descubre-tours');
+                header('Location: ' . BASE_URL . 'descubre-tours');
                 exit;
             }
 
@@ -101,7 +101,7 @@ class WebsiteController
 
         // 🔥 CASO 2: viene del LOGIN (GET)
         if (!isset($_SESSION['reserva_tmp'])) {
-            header('Location: ' . BASE_URL . '/descubre-tours');
+            header('Location: ' . BASE_URL . 'descubre-tours');
             exit;
         }
 

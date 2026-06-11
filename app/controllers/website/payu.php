@@ -3,7 +3,7 @@ session_start();
 
 // 1. Validar que existan los datos mínimos
 if (!isset($_SESSION['id_reserva']) || !isset($_SESSION['id_pago'])) {
-    header('Location: ' . BASE_URL . '/descubre-tours');
+    header('Location: ' . BASE_URL . 'descubre-tours');
     exit;
 }
 
@@ -37,7 +37,7 @@ if ($respuestaPayu === 'aprobado') {
     ]);
 
     // 6. Redirigir a una página de confirmación (por ahora puede ser simple)
-    header('Location: ' . BASE_URL . '/confirmacion');
+    header('Location: ' . BASE_URL . 'confirmacion');
     exit;
 } else {
 
@@ -48,6 +48,6 @@ if ($respuestaPayu === 'aprobado') {
         ':id_pago' => $idPago
     ]);
 
-    header('Location: ' . BASE_URL . '/checkout');
+    header('Location: ' . BASE_URL . 'checkout');
     exit;
 }
