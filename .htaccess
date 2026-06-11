@@ -1,9 +1,8 @@
 # Activa el motor de reescritura de URLs de Apache
 RewriteEngine On
 
-# En Hostinger el proyecto está en la raíz del dominio (public_html/)
-# En local con XAMPP cambiar a: RewriteBase /aventura_go/
-RewriteBase /
+# Sin RewriteBase fijo: Apache resuelve index.php relativo a donde este el .htaccess
+# Funciona automaticamente en local (/aventura_go/) y en Hostinger (raiz /)
 
 # No reescribir si es un archivo real (CSS, JS, imagen, PDF, etc.)
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -12,7 +11,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 # Todo lo demás va a index.php conservando los query params
-RewriteRule ^(.*)$ index.php [QSA,L]
+RewriteRule ^ index.php [QSA,L]
 
 # Seguridad: deshabilitar listado de directorios
 Options -Indexes

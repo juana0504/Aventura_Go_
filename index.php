@@ -179,6 +179,17 @@ switch ($request) {
         break;
 
 
+    // RUTAS RESEÑAS TURISTA
+    case '/turista/resenas':
+        require_once BASE_PATH . '/app/controllers/turista/ResenaController.php';
+        (new ResenaController())->listar();
+        break;
+
+    case '/turista/guardar-resena':
+        require_once BASE_PATH . '/app/controllers/turista/ResenaController.php';
+        (new ResenaController())->guardar();
+        break;
+
     // RUTA EN TURISTA PARA SELECCIONAR HOSPEDAJE
 
 
