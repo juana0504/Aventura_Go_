@@ -114,6 +114,7 @@ function registrarHospedaje()
     $objHospedaje = new Hospedaje();
 
     $data = [
+        'id_proveedor_hotelero' => $id_proveedor_hotelero,
         'nombre'                => $nombre,
         'descripcion'           => $descripcion,
         'tipo'                  => $tipoTexto,

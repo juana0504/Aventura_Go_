@@ -58,53 +58,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
     <div class="pv-layout" id="listado">
 
-        <!-- ==========================================
-            SIDEBAR PROVEEDOR TURÍSTICO
-        =========================================== -->
-        <nav class="pv-sidebar">
-
-            <div class="pv-sidebar__logo">
-                <div class="pv-sidebar__logo-icon">A</div>
-                <div>
-                    <div class="pv-sidebar__logo-text">AVENTURA GO</div>
-                    <div class="pv-sidebar__logo-sub">Proveedor Hotelero</div>
-                </div>
-            </div>
-
-            <div class="pv-sidebar__section-label">Panel</div>
-
-            <a href="<?= BASE_URL ?>proveedor_hotelero/dashboard" class="pv-nav-item pv-nav-item--active">
-                <i class="bi bi-grid-1x2-fill pv-nav-item__icon"></i> Dashboard
-            </a>
-
-            <div class="pv-sidebar__section-label">Actividades</div>
-
-            <a href="<?= BASE_URL ?>proveedor_hotelero/completar-informacion" class="pv-nav-item">
-                <i class="bi bi-pen"></i> Registrar/Actualizar Información
-            </a>
-            <a href="<?= BASE_URL ?>proveedor_hotelero/registrar-hospedajes" class="pv-nav-item">
-                <i class="bi bi-plus-circle pv-nav-item__icon"></i> Nuevo Hospedaje
-            </a>
-            <a href="<?= BASE_URL ?>proveedor_hotelero/consultar-hospedajes" class="pv-nav-item">
-                <i class="bi bi-compass pv-nav-item__icon"></i> Mis Hospedajes
-            </a>
-            <a href="<?= BASE_URL ?>proveedor_hotelero/consultar-reservas" class="pv-nav-item">
-                <i class="bi bi-calendar3 pv-nav-item__icon"></i> Reservas
-            </a>
-            <a href="<?= BASE_URL ?>proveedor_hotelero/ingresos" class="pv-nav-item">
-                <i class="bi bi-bar-chart-line pv-nav-item__icon"></i> Ingresos
-            </a>
-
-            <div class="pv-sidebar__section-label">Soporte</div>
-
-            <a href="<?= BASE_URL ?>proveedor_hotelero/tickets" class="pv-nav-item">
-                <i class="bi bi-headset pv-nav-item__icon"></i> Tickets
-            </a>
-            <a href="<?= BASE_URL ?>proveedor_hotelero/perfil" class="pv-nav-item">
-                <i class="bi bi-person-circle pv-nav-item__icon"></i> Mi Perfil
-            </a>
-
-        </nav>
+        <?php $activeSection = 'dashboard'; include __DIR__ . '/_sidebar.php'; ?>
 
         <!-- ==========================================
             ÁREA PRINCIPAL
@@ -154,7 +108,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                     <span class="pv-notif-item__dot"></span>
                                 </div>
                             </div>
-                            <a href="<?= BASE_URL ?>proveedor/tickets" class="pv-dropdown__footer">Ver todas las notificaciones</a>
+                            <a href="<?= BASE_URL ?>proveedor_hotelero/tickets" class="pv-dropdown__footer">Ver todas las notificaciones</a>
                         </div>
                     </div>
 
@@ -177,13 +131,13 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                 </div>
                             </div>
                             <div class="pv-dropdown__divider"></div>
-                            <a href="<?= BASE_URL ?>proveedor/perfil" class="pv-dropdown__item">
+                            <a href="<?= BASE_URL ?>proveedor_hotelero/perfil" class="pv-dropdown__item">
                                 <i class="bi bi-person-circle"></i> Mi perfil
                             </a>
-                            <a href="<?= BASE_URL ?>proveedor/consultar-actividad" class="pv-dropdown__item">
-                                <i class="bi bi-compass"></i> Mis actividades
+                            <a href="<?= BASE_URL ?>proveedor_hotelero/consultar-hospedajes" class="pv-dropdown__item">
+                                <i class="bi bi-building"></i> Mis hospedajes
                             </a>
-                            <a href="<?= BASE_URL ?>proveedor/tickets" class="pv-dropdown__item">
+                            <a href="<?= BASE_URL ?>proveedor_hotelero/tickets" class="pv-dropdown__item">
                                 <i class="bi bi-headset"></i> Soporte
                             </a>
                             <div class="pv-dropdown__divider"></div>
@@ -198,7 +152,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
             <!-- CONTENIDO -->
             <main class="pv-content"
-                data-dashboard-url="<?= BASE_URL ?>proveedor/dashboard/data">
+                data-dashboard-url="<?= BASE_URL ?>proveedor_hotelero/dashboard/data">
 
                 <!-- Saludo -->
                 <div class="pv-greeting">
@@ -257,15 +211,15 @@ foreach (array_slice($partes, 0, 2) as $p) {
                 </div>
 
                 <div class="pv-quick-grid">
-                    <a href="<?= BASE_URL ?>proveedor/registrar-actividad" class="pv-quick-card">
+                    <a href="<?= BASE_URL ?>proveedor_hotelero/registrar-hospedajes" class="pv-quick-card">
                         <div class="pv-quick-card__icon"><i class="bi bi-plus-circle-fill"></i></div>
                         <div>
-                            <div class="pv-quick-card__label">Nueva actividad</div>
-                            <div class="pv-quick-card__sub">Registra una nueva experiencia</div>
+                            <div class="pv-quick-card__label">Nuevo hospedaje</div>
+                            <div class="pv-quick-card__sub">Registra un nuevo hospedaje</div>
                         </div>
                         <i class="bi bi-chevron-right pv-quick-card__arrow"></i>
                     </a>
-                    <a href="<?= BASE_URL ?>proveedor/consultar-reservas" class="pv-quick-card">
+                    <a href="<?= BASE_URL ?>proveedor_hotelero/consultar-reservas" class="pv-quick-card">
                         <div class="pv-quick-card__icon"><i class="bi bi-calendar-event"></i></div>
                         <div>
                             <div class="pv-quick-card__label">Ver reservas</div>
@@ -273,11 +227,11 @@ foreach (array_slice($partes, 0, 2) as $p) {
                         </div>
                         <i class="bi bi-chevron-right pv-quick-card__arrow"></i>
                     </a>
-                    <a href="<?= BASE_URL ?>proveedor/ingresos" class="pv-quick-card">
-                        <div class="pv-quick-card__icon"><i class="bi bi-bar-chart-line"></i></div>
+                    <a href="<?= BASE_URL ?>proveedor_hotelero/consultar-hospedajes" class="pv-quick-card">
+                        <div class="pv-quick-card__icon"><i class="bi bi-building-fill"></i></div>
                         <div>
-                            <div class="pv-quick-card__label">Ver ingresos</div>
-                            <div class="pv-quick-card__sub">Consulta tus estadísticas</div>
+                            <div class="pv-quick-card__label">Mis hospedajes</div>
+                            <div class="pv-quick-card__sub">Administra tus hospedajes</div>
                         </div>
                         <i class="bi bi-chevron-right pv-quick-card__arrow"></i>
                     </a>
@@ -343,9 +297,9 @@ foreach (array_slice($partes, 0, 2) as $p) {
                     <table class="pv-table" id="tabla-reservas-proveedor">
                         <thead>
                             <tr>
-                                <th>Cliente</th>
-                                <th>Fecha</th>
-                                <th>Experiencia</th>
+                                <th>Huésped</th>
+                                <th>Fecha entrada</th>
+                                <th>Hospedaje</th>
                                 <th>Personas</th>
                                 <th>Precio</th>
                                 <th>Estado</th>
@@ -359,7 +313,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                             <div class="pv-table__name"><?= htmlspecialchars($r['nombre_turista']) ?></div>
                                         </td>
                                         <td><?= htmlspecialchars($r['fecha']) ?></td>
-                                        <td><?= htmlspecialchars($r['nombre_actividad']) ?></td>
+                                        <td><?= htmlspecialchars($r['nombre_hospedaje']) ?></td>
                                         <td>
                                             <span class="pv-personas">
                                                 <i class="bi bi-people"></i>

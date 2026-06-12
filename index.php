@@ -598,7 +598,7 @@ switch ($request) {
 
     //aca deben ir rutas dashboard proveedor hotelero
     case '/proveedor_hotelero/dashboard':
-        require BASE_PATH . '/app/views/dashboard/proveedor_hotelero/dashboard.php';
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/dashboardController.php';
         break;
      //rutas actualizacion proveedor hotelero
     case '/proveedor_hotelero/pendiente':
@@ -655,10 +655,25 @@ switch ($request) {
 
     case '/proveedor_hotelero/pdf-reservas':
         require_once BASE_PATH . '/app/controllers/proveedor_hotelero/reservaPdfController.php';
-        generarPdfReservas();
         break;
 
+    case '/proveedor_hotelero/tickets':
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/TicketHoteleroController.php';
+        $ticketCtrl = new TicketHoteleroController();
+        $ticketCtrl->listar();
+        break;
 
+    case '/proveedor_hotelero/crear-ticket':
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/TicketHoteleroController.php';
+        $ticketCtrl = new TicketHoteleroController();
+        $ticketCtrl->crear();
+        break;
+
+    case '/proveedor_hotelero/guardar-ticket':
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/TicketHoteleroController.php';
+        $ticketCtrl = new TicketHoteleroController();
+        $ticketCtrl->guardar();
+        break;
 
 
 

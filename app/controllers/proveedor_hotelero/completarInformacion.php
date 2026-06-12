@@ -46,12 +46,22 @@ class CompletarInformacionController
 
         $tipo_documento = $_POST['tipo_documento'] ?? '';
         $tipo_establecimiento = $_POST['tipo_establecimiento'] ?? '';
-        $tipo_habitacion = $_POST['tipo_habitacion'] ?? '';
+        $tipo_habitacion_raw = $_POST['tipo_habitacion'] ?? [];
+        $tipo_habitacion = is_array($tipo_habitacion_raw)
+            ? implode(',', array_filter($tipo_habitacion_raw))
+            : $tipo_habitacion_raw;
 
         $max_huesped = $_POST['max_huesped'] ?? '';
 
-        $metodo_pago = $_POST['metodo_pago'] ?? '';
-        $servicio_incluido = $_POST['servicio_incluido'] ?? '';
+        $metodo_pago_raw = $_POST['metodo_pago'] ?? [];
+        $metodo_pago = is_array($metodo_pago_raw)
+            ? implode(',', array_filter($metodo_pago_raw))
+            : $metodo_pago_raw;
+
+        $servicio_incluido_raw = $_POST['servicio_incluido'] ?? [];
+        $servicio_incluido = is_array($servicio_incluido_raw)
+            ? implode(',', array_filter($servicio_incluido_raw))
+            : $servicio_incluido_raw;
 
         // =========================
         // VALIDAR CAMPOS
@@ -94,15 +104,17 @@ class CompletarInformacionController
 
         $nombreLogo = $proveedorActual['logo'] ?? null;
         $nombreFoto = $proveedorActual['foto_representante'] ?? null;
-        $nombreCamara = $proveedorActual['camara_comercio'] ?? null;
-        $nombreLicencia = $proveedorActual['licencia'] ?? null;
+
+        // Cámara de comercio y licencia son números de registro (texto)
+        $nombreCamara   = $_POST['camara_comercio'] ?? '';
+        $nombreLicencia = $_POST['licencia'] ?? '';
 
         // =========================================
         // SUBIR LOGO
         // =========================================
 
         $nuevoLogo = subirArchivo(
-            $_FILES['logo'],
+            $_FILES['logo'] ?? [],
             'hotelero/hospedaje',
             'logo_'
         );
@@ -110,7 +122,13 @@ class CompletarInformacionController
         if ($nuevoLogo) {
             $nombreLogo = $nuevoLogo;
         } elseif (empty($nombreLogo)) {
-            die("Debes subir el logo del establecimiento.");
+            mostrarSweetAlert(
+                'error',
+                'Logo requerido',
+                'Debes subir el logo del establecimiento en el paso 1.',
+                BASE_URL . 'proveedor_hotelero/completar-informacion'
+            );
+            exit;
         }
 
         // =========================================
@@ -118,7 +136,7 @@ class CompletarInformacionController
         // =========================================
 
         $nuevaFoto = subirArchivo(
-            $_FILES['foto_representante'],
+            $_FILES['foto_representante'] ?? [],
             'hotelero/hospedaje',
             'repre_'
         );
@@ -126,39 +144,13 @@ class CompletarInformacionController
         if ($nuevaFoto) {
             $nombreFoto = $nuevaFoto;
         } elseif (empty($nombreFoto)) {
-            die("Debes subir la foto del representante.");
-        }
-
-        // =========================================
-        // SUBIR CÁMARA DE COMERCIO
-        // =========================================
-
-        $nuevaCamara = subirArchivo(
-            $_FILES['camara_comercio'],
-            'hotelero/hospedaje',
-            'camara_'
-        );
-
-        if ($nuevaCamara) {
-            $nombreCamara = $nuevaCamara;
-        } elseif (empty($nombreCamara)) {
-            die("Debes subir la cámara de comercio.");
-        }
-
-        // =========================================
-        // SUBIR LICENCIA
-        // =========================================
-
-        $nuevaLicencia = subirArchivo(
-            $_FILES['licencia'],
-            'hotelero/hospedaje',
-            'licencia_'
-        );
-
-        if ($nuevaLicencia) {
-            $nombreLicencia = $nuevaLicencia;
-        } elseif (empty($nombreLicencia)) {
-            die("Debes subir la licencia.");
+            mostrarSweetAlert(
+                'error',
+                'Foto requerida',
+                'Debes subir la foto del representante en el paso 4.',
+                BASE_URL . 'proveedor_hotelero/completar-informacion'
+            );
+            exit;
         }
 
         // =========================================
