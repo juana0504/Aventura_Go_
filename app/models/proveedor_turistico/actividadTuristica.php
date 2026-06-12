@@ -144,6 +144,7 @@ class ActividadTuristica
     public function listarParaModal($id)
     {
         $sql = "SELECT a.*,
+                       a.imagen AS imagen_principal,
                        c.nombre AS ciudad,
                        d.nombre AS departamento
                 FROM actividad a
