@@ -308,25 +308,21 @@ class Hospedaje
 
     public function obtenerPorId($idActividad)
     {
-        $sql = "SELECT 
+        $sql = "SELECT
         h.id_hospedaje,
         h.nombre,
         h.descripcion,
-        h.precio, 
+        h.precio,
+        h.imagen,
         h.created_at,
-
+        h.imagen AS imagen_principal,
         c.nombre AS ciudad,
-        d.nombre AS departamento,
-
-        img_principal.imagen AS imagen_principal
+        d.nombre AS departamento
     FROM hospedaje h
-    INNER JOIN ciudades c 
+    INNER JOIN ciudades c
         ON h.id_ciudad = c.id_ciudad
     INNER JOIN departamentos d
         ON c.id_departamento = d.id_departamento
-    LEFT JOIN hospedaje_imagen img_principal
-        ON img_principal.id_hospedaje = h.id_hospedaje
-       AND img_principal.es_principal = 1
     WHERE h.id_hospedaje = :id
     LIMIT 1";
 
@@ -339,32 +335,28 @@ class Hospedaje
 
 
 
-    //OBTENER DETALLES DE ACTIVIDADES PARA EL MODAL
+    //OBTENER DETALLES DE HOSPEDAJE PARA EL MODAL
     public function obtenerDetalleActividad($id)
     {
         $sql = "
-        SELECT 
+        SELECT
             h.id_hospedaje,
             h.nombre,
             h.descripcion,
             h.ubicacion,
             h.capacidad,
             h.precio,
+            h.imagen,
             h.estado,
             h.created_at,
-
+            h.imagen AS imagen_principal,
             c.nombre AS ciudad,
-            d.nombre AS departamento,
-
-            img_principal.imagen AS imagen_principal
+            d.nombre AS departamento
             FROM hospedaje h
-            INNER JOIN ciudades c 
+            INNER JOIN ciudades c
                 ON h.id_ciudad = c.id_ciudad
             INNER JOIN departamentos d
                 ON c.id_departamento = d.id_departamento
-            LEFT JOIN hospedaje_imagen img_principal
-                ON img_principal.id_hospedaje = h.id_hospedaje
-            AND img_principal.es_principal = 1
             WHERE h.id_hospedaje = :id
             LIMIT 1
             ";
@@ -379,36 +371,24 @@ class Hospedaje
             return null;
         }
 
-        // 🔹 Galería de imágenes
-        $sqlImgs = "
-        SELECT imagen 
-        FROM hospedaje_imagen 
-        WHERE id_hospedaje = :id
-        ORDER BY es_principal DESC
-        ";
-
-        $stmtImgs = $this->conexion->prepare($sqlImgs);
-        $stmtImgs->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmtImgs->execute();
-
-        $actividad['imagenes'] = $stmtImgs->fetchAll(PDO::FETCH_COLUMN);
+        $actividad['imagenes'] = $actividad['imagen'] ? [$actividad['imagen']] : [];
 
         return $actividad;
     }
 
 
 
-    // SE OBTIENE 1 SOLA ACTIVIDAD PARA TOUR ESCOGIDO
+    // SE OBTIENE 1 SOLO HOSPEDAJE
     public function obtenerActividadPorId($id)
     {
         $sql = "
         SELECT h.*
         FROM hospedaje h
-        INNER JOIN proveedor p
-        ON h.id_proveedor_hotelero = p.id_proveedor_hotelero
+        INNER JOIN proveedor_hotelero ph
+        ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
         WHERE h.id_hospedaje = :id
         AND h.estado = 'ACTIVO'
-        AND p.estado = 'ACTIVO'
+        AND ph.estado = 'APROBADO'
         LIMIT 1
         ";
 
@@ -475,5 +455,65 @@ class Hospedaje
         $reservadas = (int)($resultado['reservadas'] ?? 0);
 
         return ($reservadas + $cantidad) <= $capacidadTotales;
+    }
+
+    public function listarPublicos()
+    {
+        try {
+            $sql = "SELECT
+                h.id_hospedaje,
+                h.nombre,
+                h.descripcion,
+                h.precio,
+                h.capacidad,
+                h.imagen,
+                ph.logo,
+                c.nombre AS ciudad
+            FROM hospedaje h
+            INNER JOIN proveedor_hotelero ph
+                ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
+            INNER JOIN ciudades c
+                ON h.id_ciudad = c.id_ciudad
+            WHERE ph.estado = 'APROBADO'
+            ORDER BY h.created_at DESC";
+
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Hospedaje::listarPublicos: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function listarPublicosPorCiudad($ciudad)
+    {
+        try {
+            $sql = "SELECT
+                h.id_hospedaje,
+                h.nombre,
+                h.descripcion,
+                h.precio,
+                h.capacidad,
+                h.imagen,
+                ph.logo,
+                c.nombre AS ciudad
+            FROM hospedaje h
+            INNER JOIN proveedor_hotelero ph
+                ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
+            INNER JOIN ciudades c
+                ON h.id_ciudad = c.id_ciudad
+            WHERE ph.estado = 'APROBADO'
+            AND UPPER(c.nombre) = UPPER(:ciudad)
+            ORDER BY h.created_at DESC";
+
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':ciudad', $ciudad);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Hospedaje::listarPublicosPorCiudad: " . $e->getMessage());
+            return [];
+        }
     }
 }

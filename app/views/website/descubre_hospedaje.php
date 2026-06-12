@@ -1,4 +1,14 @@
-<?php session_start(); ?>
+<?php
+require_once BASE_PATH . '/app/models/proveedor_hotelero/hospedaje.php';
+
+$hospedajeModel = new Hospedaje();
+$ciudad = $_GET['ciudad'] ?? null;
+if ($ciudad) {
+    $actividades = $hospedajeModel->listarPublicosPorCiudad($ciudad);
+} else {
+    $actividades = $hospedajeModel->listarPublicos();
+}
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -90,13 +100,13 @@
   <main class="main-content">
     <div class="container">
       <div class="tabs-container">
-        <a class="tab-btn active" href="<?= BASE_URL ?>descubre-tours" class="tab-btn"> TOURS Y AVENTURA </a>
-        <a href="<?= BASE_URL ?>descubre-hospedaje" class="tab-btn"> HOSPEDAJE </a>
+        <a href="<?= BASE_URL ?>descubre-tours" class="tab-btn"> TOURS Y AVENTURA </a>
+        <a class="tab-btn active" href="<?= BASE_URL ?>descubre-hospedaje" class="tab-btn"> HOSPEDAJE </a>
       </div>
 
 
 
-      <!-- aca va las actividdes -->
+      <!-- hospedajes disponibles -->
       <div class="activities-grid">
 
         <?php if (!empty($actividades)): ?>
@@ -105,9 +115,10 @@
             <div class="activity-card">
 
               <img
-                src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= $actividad['imagen'] ?>"
+                src="<?= BASE_URL ?>public/uploads/hoteles/<?= htmlspecialchars($actividad['logo'] ?? 'default.png') ?>"
                 alt="<?= htmlspecialchars($actividad['nombre']) ?>"
-                class="activity-image">
+                class="activity-image"
+                onerror="this.src='<?= BASE_URL ?>public/assets/website_externos/index/img/LOGO-FINAL.png'">
 
               <div class="activity-content">
 
@@ -129,10 +140,10 @@
                   <?= substr(htmlspecialchars($actividad['descripcion']), 0, 90) ?>...
                 </p>
 
-                <!-- Cupos -->
+                <!-- Capacidad -->
                 <div class="activity-duration">
                   <i class="fas fa-users"></i>
-                  <span><?= (int)$actividad['cupos'] ?> cupos disponibles</span>
+                  <span><?= (int)$actividad['capacidad'] ?> personas máx.</span>
                 </div>
 
                 <!-- Precio -->
@@ -143,19 +154,12 @@
                   </span>
                 </div>
 
-                <div class="button">
-                  <a href="<?= BASE_URL ?>tour-escogido?id=<?= $actividad['id_actividad'] ?>" class="btn-ver-mas">
-                    Ver más
-                  </a>
-                </div>
-
-
               </div>
             </div>
 
           <?php endforeach; ?>
         <?php else: ?>
-          <p>No hay actividades disponibles.</p>
+          <p>No hay hospedajes disponibles.</p>
         <?php endif; ?>
 
       </div>
