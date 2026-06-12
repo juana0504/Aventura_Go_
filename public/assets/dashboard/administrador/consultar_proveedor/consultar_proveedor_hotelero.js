@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Header
         setText('modal-nombre-establecimiento', data.nombre_establecimiento ?? '—');
-        setImg('modal-logo', `${BASE_URL}/public/uploads/hoteles/${data.logo}`);
+        setImg('modal-logo', `${BASE_URL}public/uploads/hoteles/${data.logo}`);
 
         // Estado y fecha
         setText('modal-status', data.estado);

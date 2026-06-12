@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const idReserva = btn.dataset.id;
 
-            fetch(`${BASE_URL}/turista/obtener-reserva?id=${idReserva}`)
+            fetch(`${BASE_URL}turista/obtener-reserva?id=${idReserva}`)
                 .then(response => response.json())
                 .then(data => {
 
@@ -59,12 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             || data.imagenes[0];
 
                         imgPrincipal.src =
-                            `${BASE_URL}/public/uploads/turistico/actividades/${principal.imagen}`;
+                            `${BASE_URL}public/uploads/turistico/actividades/${principal.imagen}`;
 
                         data.imagenes.forEach(img => {
                             const miniatura = document.createElement('img');
                             miniatura.src =
-                                `${BASE_URL}/public/uploads/turistico/actividades/${img.imagen}`;
+                                `${BASE_URL}public/uploads/turistico/actividades/${img.imagen}`;
                             miniatura.width = 60;
                             miniatura.classList.add('rounded');
                             galeria.appendChild(miniatura);
@@ -108,7 +108,7 @@ document.addEventListener('click', function (e) {
 
         if (!confirm('¿Confirmar esta reserva?')) return;
 
-        fetch(`${BASE_URL}/turista/confirmar-reserva`, {
+        fetch(`${BASE_URL}turista/confirmar-reserva`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

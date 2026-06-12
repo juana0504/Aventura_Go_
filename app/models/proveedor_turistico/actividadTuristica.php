@@ -134,6 +134,31 @@ class ActividadTuristica
     }
 
 
+    /** Listar actividad con ciudad/departamento para modal */
+    public function listarParaModal($id)
+    {
+        $sql = "SELECT a.*,
+                       a.imagen AS imagen_principal,
+                       c.nombre AS ciudad,
+                       d.nombre AS departamento
+                FROM actividad a
+                LEFT JOIN ciudades c ON a.id_ciudad = c.id_ciudad
+                LEFT JOIN departamentos d ON c.id_departamento = d.id_departamento
+                WHERE a.id_actividad = :id
+                LIMIT 1";
+
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($data) {
+            $data['imagenes'] = $data['imagen_principal'] ? [$data['imagen_principal']] : [];
+        }
+        return $data;
+    }
+
+
     /** Activar actividad turística*/
     public function activar($id)
     {

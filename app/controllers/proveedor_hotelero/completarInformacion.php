@@ -80,7 +80,7 @@ class CompletarInformacionController
                 'error',
                 'Campos incompletos',
                 'Por favor completa todos los campos obligatorios.',
-                '/aventura_go/proveedor_hotelero/completar-informacion'
+                BASE_URL . 'proveedor_hotelero/completar-informacion'
             );
 
             exit;
@@ -209,7 +209,7 @@ class CompletarInformacionController
                 'success',
                 'Información actualizada',
                 'La información del proveedor hotelero fue actualizada correctamente.',
-                '/aventura_go/proveedor_hotelero/completar-informacion'
+                BASE_URL . 'proveedor_hotelero/completar-informacion'
             );
 
             exit;
