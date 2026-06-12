@@ -107,8 +107,7 @@ class ProveedorModel
             logo = :logo,
             foto_representante = :foto_representante,
 
-            estado = 'EN_REVISION',
-            validado = 0
+            estado = 'EN_REVISION'
 
         WHERE id_usuario = :id_usuario";
 

@@ -97,16 +97,12 @@ class Hospedaje
     /** Listar todas las actividades de un proveedor */
     public function listarPorProveedor($id_proveedor_hotelero)
     {
-        $sql = "SELECT 
+        $sql = "SELECT
                 a.*,
-                c.nombre AS destino,
-                img.imagen AS imagen_principal
+                c.nombre AS destino
             FROM hospedaje a
-            INNER JOIN ciudades c 
+            LEFT JOIN ciudades c
                 ON a.id_ciudad = c.id_ciudad
-            LEFT JOIN hospedaje_imagen img 
-                ON img.id_hospedaje = a.id_hospedaje
-               AND img.es_principal = 1
             WHERE a.id_proveedor_hotelero = :id_proveedor_hotelero
             ORDER BY a.created_at DESC";
 

@@ -88,8 +88,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $idUsuario = $conexion->lastInsertId();
 
         $sqlProveedor_hotelero = "
-        INSERT INTO proveedor_hotelero (id_usuario, estado, validado)
-        VALUES (:id_usuario, 'PENDIENTE', 0)
+        INSERT INTO proveedor_hotelero (id_usuario, estado)
+        VALUES (:id_usuario, 'PENDIENTE')
     ";
 
         $stmtProveedor_hotelero = $conexion->prepare($sqlProveedor_hotelero);

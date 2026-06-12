@@ -50,53 +50,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
     <section id="registrar-actividades">
 
-        <!-- ==========================================
-            SIDEBAR PROVEEDOR HOTELERO
-        =========================================== -->
-        <nav class="pv-sidebar">
-
-            <div class="pv-sidebar__logo">
-                <div class="pv-sidebar__logo-icon">A</div>
-                <div>
-                    <div class="pv-sidebar__logo-text">AVENTURA GO</div>
-                    <div class="pv-sidebar__logo-sub">Proveedor Turístico</div>
-                </div>
-            </div>
-
-            <div class="pv-sidebar__section-label">Panel</div>
-
-            <a href="<?= BASE_URL ?>proveedor_hotelero/dashboard" class="pv-nav-item">
-                <i class="bi bi-grid-1x2-fill pv-nav-item__icon"></i> Dashboard
-            </a>
-
-            <div class="pv-sidebar__section-label">Actividades</div>
-
-            <a href="<?= BASE_URL ?>proveedor_hotelero/completar-informacion" class="pv-nav-item">
-                <i class="bi bi-pen"></i> Registrar/Actualizar Información
-            </a>
-            <a href="<?= BASE_URL ?>proveedor_hotelero/registrar-hospedajes" class="pv-nav-item pv-nav-item--active">
-                <i class="bi bi-plus-circle pv-nav-item__icon"></i> Nuevo Hospedaje
-            </a>
-            <a href="<?= BASE_URL ?>proveedor_hotelero/consultar-hoteles" class="pv-nav-item">
-                <i class="bi bi-compass pv-nav-item__icon"></i> Mis Hospedajes
-            </a>
-            <a href="<?= BASE_URL ?>proveedor_hotelero/consultar-reservas" class="pv-nav-item">
-                <i class="bi bi-calendar3 pv-nav-item__icon"></i> Reservas
-            </a>
-            <a href="<?= BASE_URL ?>proveedor_hotelero/ingresos" class="pv-nav-item">
-                <i class="bi bi-bar-chart-line pv-nav-item__icon"></i> Ingresos
-            </a>
-
-            <div class="pv-sidebar__section-label">Soporte</div>
-
-            <a href="<?= BASE_URL ?>proveedor_hotelero/tickets" class="pv-nav-item">
-                <i class="bi bi-headset pv-nav-item__icon"></i> Tickets
-            </a>
-            <a href="<?= BASE_URL ?>proveedor_hotelero/perfil" class="pv-nav-item">
-                <i class="bi bi-person-circle pv-nav-item__icon"></i> Mi Perfil
-            </a>
-
-        </nav>
+        <?php $activeSection = 'nuevo'; include __DIR__ . '/_sidebar.php'; ?>
 
         <div class="pv-main">
 
@@ -143,7 +97,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                     <span class="pv-notif-item__dot"></span>
                                 </div>
                             </div>
-                            <a href="<?= BASE_URL ?>proveedor/tickets" class="pv-dropdown__footer">Ver todas las notificaciones</a>
+                            <a href="<?= BASE_URL ?>proveedor_hotelero/tickets" class="pv-dropdown__footer">Ver todas las notificaciones</a>
                         </div>
                     </div>
 
@@ -166,13 +120,13 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                 </div>
                             </div>
                             <div class="pv-dropdown__divider"></div>
-                            <a href="<?= BASE_URL ?>proveedor/perfil" class="pv-dropdown__item">
+                            <a href="<?= BASE_URL ?>proveedor_hotelero/perfil" class="pv-dropdown__item">
                                 <i class="bi bi-person-circle"></i> Mi perfil
                             </a>
-                            <a href="<?= BASE_URL ?>proveedor/consultar-actividad" class="pv-dropdown__item">
-                                <i class="bi bi-compass"></i> Mis actividades
+                            <a href="<?= BASE_URL ?>proveedor_hotelero/consultar-hospedajes" class="pv-dropdown__item">
+                                <i class="bi bi-building"></i> Mis hospedajes
                             </a>
-                            <a href="<?= BASE_URL ?>proveedor/tickets" class="pv-dropdown__item">
+                            <a href="<?= BASE_URL ?>proveedor_hotelero/tickets" class="pv-dropdown__item">
                                 <i class="bi bi-headset"></i> Soporte
                             </a>
                             <div class="pv-dropdown__divider"></div>

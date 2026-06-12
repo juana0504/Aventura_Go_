@@ -26,7 +26,7 @@ $conexion = $db->getConexion();
 
 $idUsuario = $_SESSION['user']['id_usuario'];
 // Consulta para obtener el estado de validación del proveedor hotelero
-$sql = "SELECT validado FROM proveedor_hotelero WHERE id_usuario = :id LIMIT 1";
+$sql = "SELECT estado FROM proveedor_hotelero WHERE id_usuario = :id LIMIT 1";
 // Preparar y ejecutar la consulta
 $stmt = $conexion->prepare($sql);
 $stmt->bindParam(':id', $idUsuario, PDO::PARAM_INT);
@@ -34,8 +34,9 @@ $stmt->execute();
 // Obtener el resultado como un arreglo asociativo
 $proveedor = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Si el proveedor existe y no está validado, redirige a la página de pendiente de aprobación
-if ($proveedor && $proveedor['validado'] == 0) {
+// Si el proveedor existe y no está aprobado, redirige a la página de pendiente de aprobación
+$estadoNoAprobado = ['PENDIENTE', 'EN_REVISION'];
+if ($proveedor && in_array(strtoupper($proveedor['estado'] ?? ''), $estadoNoAprobado)) {
     // Verificar la ruta actual para evitar redirecciones infinitas
     $currentPath = $_SERVER['REQUEST_URI'];
     // Rutas que NO puede usar si no está validado
