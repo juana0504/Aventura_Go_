@@ -1,263 +1,304 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <title>Reporte de Reservas - Aventura Go</title>
-
     <style>
-        /* Fuentes */
-        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+        @page { margin: 20px 22px 40px 22px; }
 
         body {
-            margin: 30px;
-        }
-
-        /* Encabezado */
-        .header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .header img {
-            width: 120px;
-        }
-
-        h1 {
-            color: #2D4059;
-            font-size: 22px;
-            margin-top: 10px;
-            text-transform: uppercase;
-            font-family: 'Raleway', sans-serif;
-        }
-
-        p {
-            color: #000000;
-            font-size: 12px;
-            margin-bottom: 25px;
-            font-family: 'Lato', sans-serif;
-        }
-
-        /* Estadísticas */
-        .estadisticas-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .estadistica-item {
-            background-color: #f8f9fa;
-            border-left: 4px solid #2D4059;
-            padding: 15px;
-            text-align: center;
-        }
-
-        .estadistica-item .numero {
-            font-size: 20px;
-            font-weight: bold;
-            color: #2D4059;
-            font-family: 'Raleway', sans-serif;
-        }
-
-        .estadistica-item .label {
+            font-family: DejaVu Sans, sans-serif;
+            color: #1a1a2e;
             font-size: 11px;
-            color: #666;
-            font-family: 'Lato', sans-serif;
+            margin: 0;
+            background: #ffffff;
         }
 
-        /* Tabla */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
-            margin-top: 15px;
-        }
+        .page-shell { width: 100%; }
 
-        table th {
-            background-color: #2D4059;
+        /* ── HERO ── */
+        .hero {
+            background: #1A2B3C;
+            border-top: 6px solid #EA8217;
+            border-radius: 12px;
+            padding: 16px 18px;
+            margin-bottom: 16px;
             color: #ffffff;
-            font-weight: 700;
-            font-family: 'Lato', sans-serif;
-            text-align: center;
-            font-size: 10px;
-            text-transform: uppercase;
-            padding: 15px 12px;
-            border-bottom: 2px solid #e5e7eb;
         }
 
-        table td {
-            padding: 8px;
-            border: 1px solid #ddd;
-            font-family: 'Lato', sans-serif;
+        .hero table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+
+        .hero__brand    { width: 18%; vertical-align: top; text-align: center; }
+        .hero__logo-wrap { display: inline-block; padding: 0; max-width: 146px; margin: 30px auto 0; }
+
+        .hero__title    { width: 54%; vertical-align: top; padding: 0 14px 0 12px; }
+        .hero__eyebrow  { display: inline-block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #F5B15A; font-weight: bold; margin-bottom: 4px; }
+        .hero__title-main { margin: 0; font-size: 22px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; line-height: 1.05; }
+        .hero__title-sub  { margin: 5px 0 0 0; font-size: 9.2px; color: #d7e1ec; }
+
+        .hero__meta     { width: 28%; vertical-align: middle; text-align: right; font-size: 9px; line-height: 1.4; color: #e2e8f0; }
+        .hero__meta-card { display: inline-block; min-width: 128px; text-align: center; }
+        .hero__meta-date { font-size: 10px; font-weight: bold; color: #ffffff; }
+        .hero__meta-page { margin-top: 5px; font-size: 8px; letter-spacing: .7px; text-transform: uppercase; color: #b9c7d6; }
+        .hero__meta-page-value { margin-top: 2px; font-size: 10px; font-weight: bold; color: #ffffff; }
+
+        .hero__rule { margin-top: 10px; height: 3px; background: #EA8217; border-radius: 999px; }
+
+        /* ── INTRO ── */
+        .intro { text-align: center; color: #4b5563; font-size: 11px; line-height: 1.5; margin: 4px 28px 16px; }
+
+        /* ── STATS ── */
+        .stats { width: 100%; margin-bottom: 18px; border-collapse: separate; border-spacing: 12px 0; }
+
+        .stat {
+            background: #ffffff;
+            border: 1px solid #d9e2ec;
+            border-left-width: 5px;
+            border-radius: 10px;
+            padding: 11px 14px 10px;
+            width: 25%;
         }
+        .stat__label { font-size: 9px; text-transform: uppercase; letter-spacing: 1.3px; color: #6b7280; margin-bottom: 6px; font-weight: bold; }
+        .stat__value { font-size: 26px; font-weight: bold; color: #1A2B3C; line-height: 1; }
+
+        .stat--blue   { border-left-color: #1A2B3C; }
+        .stat--orange { border-left-color: #EA8217; }
+        .stat--green  { border-left-color: #10b981; }
+        .stat--red    { border-left-color: #ef4444; }
+
+        /* ── SECTION TITLE ── */
+        .section-title {
+            margin: 8px 0 10px 0;
+            font-size: 22px;
+            text-transform: uppercase;
+            letter-spacing: 1.1px;
+            color: #1a1a2e;
+            font-weight: bold;
+            padding-bottom: 6px;
+            border-bottom: 3px solid #EA8217;
+            line-height: 1;
+        }
+
+        /* ── TABLE ── */
+        table.report { width: 100%; border-collapse: collapse; font-size: 10px; margin-top: 8px; }
+
+        .report th {
+            background: #1A2B3C;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: .7px;
+            font-size: 9px;
+            padding: 10px 8px;
+            border: 1px solid #90a0b2;
+            border-bottom: 3px solid #EA8217;
+        }
+
+        .report td { padding: 9px 8px; border: 1px solid #d9e2ec; vertical-align: middle; color: #1a1a2e; }
+        .report tbody tr:nth-child(even) td { background: #fafbfd; }
+
+        .text-center { text-align: center; }
+        .text-right  { text-align: right; }
 
         .badge {
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: bold;
             display: inline-block;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 9px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: .5px;
         }
+        .badge--ok     { background: #dcfce7; color: #166534; }
+        .badge--warn   { background: #fef9c3; color: #854d0e; }
+        .badge--red    { background: #fee2e2; color: #991b1b; }
 
-        .badge-pendiente {
-            background-color: #ffc107;
-            color: #000;
-        }
+        .empty-row { text-align: center; color: #6b7280; padding: 16px 8px; font-style: italic; }
 
-        .badge-confirmada {
-            background-color: #28a745;
-            color: #fff;
-        }
-
-        .badge-cancelada {
-            background-color: #dc3545;
-            color: #fff;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .text-right {
+        /* ── TOTALS ── */
+        .totals-box {
+            margin-top: 16px;
+            border: 1px solid #d9e2ec;
+            border-radius: 8px;
+            padding: 12px 18px;
+            background: #f8fafc;
             text-align: right;
-        }
-
-        strong {
-            font-weight: 700;
-        }
-
-        /* Footer */
-        footer {
-            position: fixed;
-            bottom: 15px;
-            left: 0;
-            right: 0;
-            text-align: center;
             font-size: 10px;
-            color: #555;
+            line-height: 1.8;
         }
+        .totals-box .total-main { font-size: 13px; font-weight: bold; color: #1A2B3C; }
+
+        /* ── FOOTER ── */
+        footer { position: fixed; bottom: 12px; left: 0; right: 0; font-size: 8.5px; color: #7b8794; }
+        .footer-table { width: 100%; border-collapse: collapse; }
+        .footer-table td { width: 33.33%; vertical-align: middle; }
+        .footer-left   { text-align: left; }
+        .footer-center { text-align: center; }
+        .footer-right  { text-align: right; color: #5f6b7a; font-weight: bold; }
     </style>
 </head>
-
 <body>
 
-    <!-- Encabezado -->
-    <div class="header">
-        <img src="<?= BASE_URL ?>public/assets/estilos_globales/img/LOGO-FINAL.png" alt="Logo Aventura Go">
+<?php
+$logoHeaderSvg = pdf_brand_logo_svg_markup();
+
+$reservas_pdf     = $reservas_pdf ?? [];
+$estadisticas_pdf = $estadisticas_pdf ?? [];
+$filtro_actual    = $filtro_actual ?? 'all';
+$nombre_proveedor = $nombre_proveedor ?? '';
+
+$totalRes    = (int)($estadisticas_pdf['total_reservas']  ?? count($reservas_pdf));
+$pendientes  = (int)($estadisticas_pdf['pendientes']      ?? 0);
+$confirmadas = (int)($estadisticas_pdf['confirmadas']     ?? 0);
+$canceladas  = (int)($estadisticas_pdf['canceladas']      ?? 0);
+
+$filtroLabel = match($filtro_actual) {
+    'pendiente'  => 'Pendientes',
+    'confirmada' => 'Confirmadas',
+    'cancelada'  => 'Canceladas',
+    default      => 'Todas las reservas',
+};
+?>
+
+<div class="page-shell">
+
+    <!-- HERO -->
+    <div class="hero">
+        <table>
+            <tr>
+                <td class="hero__brand">
+                    <div class="hero__logo-wrap"><?= $logoHeaderSvg ?></div>
+                </td>
+                <td class="hero__title">
+                    <span class="hero__eyebrow">Módulo Proveedor Turístico</span>
+                    <h1 class="hero__title-main">Reporte de Reservas</h1>
+                    <p class="hero__title-sub">
+                        Consolidado de reservas gestionadas en la plataforma
+                        <?php if ($nombre_proveedor): ?>
+                            · <?= htmlspecialchars($nombre_proveedor) ?>
+                        <?php endif; ?>
+                    </p>
+                </td>
+                <td class="hero__meta">
+                    <div class="hero__meta-card">
+                        <div class="hero__meta-date"><?= date('d/m/Y H:i') ?></div>
+                        <div class="hero__meta-page">Filtro: <?= $filtroLabel ?></div>
+                        <div class="hero__meta-page-value">Pág. 1 / 1</div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="hero__rule"></div>
     </div>
 
-    <h1>Reporte de Reservas</h1>
+    <!-- INTRO -->
+    <div class="intro">
+        Informe de reservas registradas en Aventura Go. Permite revisar el estado de cada reserva,
+        los turistas involucrados y los ingresos potenciales generados por las actividades.
+    </div>
 
-    <p>
-        El presente documento contiene el registro consolidado de las reservas gestionadas por su empresa en Aventura Go. Este reporte
-        permite evaluar el rendimiento de sus actividades turísticas, analizar el comportamiento de los clientes y mantener
-        actualizada la información relevante para la gestión administrativa.
-    </p>
+    <!-- STATS -->
+    <table class="stats">
+        <tr>
+            <td class="stat stat--blue">
+                <div class="stat__label">Total reservas</div>
+                <div class="stat__value"><?= $totalRes ?></div>
+            </td>
+            <td class="stat stat--orange">
+                <div class="stat__label">Pendientes</div>
+                <div class="stat__value"><?= $pendientes ?></div>
+            </td>
+            <td class="stat stat--green">
+                <div class="stat__label">Confirmadas</div>
+                <div class="stat__value"><?= $confirmadas ?></div>
+            </td>
+            <td class="stat stat--red">
+                <div class="stat__label">Canceladas</div>
+                <div class="stat__value"><?= $canceladas ?></div>
+            </td>
+        </tr>
+    </table>
 
-    <p>
-        <strong>Proveedor:</strong> <?= htmlspecialchars($_SESSION['nombre_empresa']) ?><br>
-        <strong>Fecha de generación:</strong> <?= date('Y-m-d H:i:s') ?><br>
-        <strong>Filtro aplicado:</strong> <?= $filtro_actual ? ucfirst($filtro_actual) : 'Todas las reservas' ?>
-    </p>
+    <div class="section-title">Listado detallado</div>
 
-    <!-- Estadísticas -->
-    <?php if (isset($estadisticas_pdf) && $estadisticas_pdf): ?>
-        <div class="estadisticas-grid">
-            <div class="estadistica-item">
-                <div class="numero"><?= number_format($estadisticas_pdf['total_reservas'] ?? 0) ?></div>
-                <div class="label">Total Reservas</div>
-            </div>
-            <div class="estadistica-item">
-                <div class="numero"><?= number_format($estadisticas_pdf['pendientes'] ?? 0) ?></div>
-                <div class="label">Pendientes</div>
-            </div>
-            <div class="estadistica-item">
-                <div class="numero"><?= number_format($estadisticas_pdf['confirmadas'] ?? 0) ?></div>
-                <div class="label">Confirmadas</div>
-            </div>
-            <div class="estadistica-item">
-                <div class="numero"><?= number_format($estadisticas_pdf['canceladas'] ?? 0) ?></div>
-                <div class="label">Canceladas</div>
-            </div>
-        </div>
-    <?php endif; ?>
-
-    <!-- Tabla de Reservas -->
-    <table>
+    <!-- TABLA -->
+    <table class="report">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>#</th>
                 <th>Actividad</th>
                 <th>Turista</th>
-                <th>Fecha</th>
-                <th>Personas</th>
-                <th>Precio Unit.</th>
-                <th>Total</th>
-                <th>Estado</th>
+                <th class="text-center">Fecha</th>
+                <th class="text-center">Personas</th>
+                <th class="text-right">Precio unit.</th>
+                <th class="text-right">Total</th>
+                <th class="text-center">Estado</th>
             </tr>
         </thead>
-
         <tbody>
-            <?php if (!empty($reservas_pdf) && count($reservas_pdf) > 0): ?>
+            <?php if (!empty($reservas_pdf)): ?>
                 <?php
-                $total_reservas = 0;
-                $total_ingresos = 0;
-                $total_personas = 0;
-
-                foreach ($reservas_pdf as $reserva):
-                    $total_reservas++;
-                    $total_personas += $reserva['cantidad_personas'];
-                    $precio_unitario = $reserva['precio'] ?? 0;
-                    $total_reserva = $precio_unitario * $reserva['cantidad_personas'];
-                    $total_ingresos += $total_reserva;
+                $i = 1;
+                $gran_total = 0;
+                $gran_personas = 0;
+                foreach ($reservas_pdf as $r):
+                    $precio    = (float)($r['precio'] ?? 0);
+                    $cantidad  = (int)($r['cantidad_personas'] ?? 0);
+                    $subtotal  = $precio * $cantidad;
+                    $gran_total    += $subtotal;
+                    $gran_personas += $cantidad;
+                    $estado    = strtolower($r['estado'] ?? '');
+                    $badge = match($estado) {
+                        'confirmada' => 'badge--ok',
+                        'pendiente'  => 'badge--warn',
+                        default      => 'badge--red',
+                    };
                 ?>
-                    <tr>
-                        <td class="text-center"><?= $reserva['id_reserva'] ?></td>
-                        <td>
-                            <strong><?= htmlspecialchars($reserva['nombre_actividad']) ?></strong>
-                            <br><small style="color: #666;"><?= htmlspecialchars($reserva['ubicacion']) ?></small>
-                        </td>
-                        <td>
-                            <strong><?= htmlspecialchars($reserva['nombre_turista']) ?></strong>
-                            <br><small style="color: #666;"><?= htmlspecialchars($reserva['email_turista']) ?></small>
-                        </td>
-                        <td class="text-center"><?= date('Y-m-d', strtotime($reserva['fecha'])) ?></td>
-                        <td class="text-center"><?= $reserva['cantidad_personas'] ?></td>
-                        <td class="text-right">$<?= number_format($precio_unitario, 0) ?></td>
-                        <td class="text-right"><strong>$<?= number_format($total_reserva, 0) ?></strong></td>
-                        <td class="text-center">
-                            <?php
-                            $badgeClass = 'badge-' . $reserva['estado'];
-                            echo "<span class='$badgeClass'>" . ucfirst($reserva['estado']) . "</span>";
-                            ?>
-                        </td>
-                    </tr>
+                <tr>
+                    <td class="text-center"><?= $i++ ?></td>
+                    <td>
+                        <strong><?= htmlspecialchars($r['nombre_actividad'] ?? '') ?></strong><br>
+                        <small style="color:#6b7280"><?= htmlspecialchars($r['ubicacion'] ?? '') ?></small>
+                    </td>
+                    <td>
+                        <strong><?= htmlspecialchars($r['nombre_turista'] ?? '') ?></strong><br>
+                        <small style="color:#6b7280"><?= htmlspecialchars($r['email_turista'] ?? '') ?></small>
+                    </td>
+                    <td class="text-center"><?= htmlspecialchars($r['fecha'] ?? '') ?></td>
+                    <td class="text-center"><?= $cantidad ?></td>
+                    <td class="text-right">$<?= number_format($precio, 0, ',', '.') ?></td>
+                    <td class="text-right"><strong>$<?= number_format($subtotal, 0, ',', '.') ?></strong></td>
+                    <td class="text-center">
+                        <span class="badge <?= $badge ?>"><?= ucfirst($estado) ?></span>
+                    </td>
+                </tr>
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="8" class="text-center">No se encontraron reservas con los filtros seleccionados</td>
+                    <td colspan="8" class="empty-row">No se encontraron reservas<?= $filtro_actual && $filtro_actual !== 'all' ? " con filtro \"$filtroLabel\"" : '' ?>.</td>
                 </tr>
             <?php endif; ?>
         </tbody>
     </table>
 
-    <!-- Resumen de Totales -->
-    <?php if (!empty($reservas_pdf) && count($reservas_pdf) > 0): ?>
-        <div style="margin-top: 20px; text-align: right; font-family: 'Lato', sans-serif;">
-            <p style="margin: 5px 0;"><strong>Total Reservas:</strong> <?= number_format($total_reservas) ?></p>
-            <p style="margin: 5px 0;"><strong>Total Personas:</strong> <?= number_format($total_personas) ?></p>
-            <p style="margin: 5px 0;"><strong>Ingresos Potenciales:</strong> $<?= number_format($total_ingresos, 0) ?></p>
-        </div>
+    <?php if (!empty($reservas_pdf)): ?>
+    <div class="totals-box">
+        <div>Total personas: <strong><?= number_format($gran_personas) ?></strong></div>
+        <div class="total-main">Ingresos potenciales: $<?= number_format($gran_total, 0, ',', '.') ?></div>
+    </div>
     <?php endif; ?>
 
-    <!-- Footer -->
-    <footer>
-        © Aventura Go 2025 - Todos los derechos reservados
-    </footer>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <table class="footer-table">
+        <tr>
+            <td class="footer-left">© Aventura Go <?= date('Y') ?> — Todos los derechos reservados</td>
+            <td class="footer-center">Documento generado automáticamente</td>
+            <td class="footer-right">CONFIDENCIAL</td>
+        </tr>
+    </table>
+</footer>
 
 </body>
-
 </html>

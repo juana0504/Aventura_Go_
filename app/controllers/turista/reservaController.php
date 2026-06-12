@@ -140,17 +140,30 @@ class ReservaController
     {
         header('Content-Type: application/json');
 
-        echo json_encode([
-            'nombre_actividad'  => 'PRUEBA OK',
-            'estado'            => 'pendiente',
-            'fecha'             => date('Y-m-d'),
-            'proveedor'         => 'Proveedor prueba',
-            'cantidad_personas' => 1,
-            'precio'            => 10000,
-            'descripcion'       => 'Descripción prueba',
-            'imagenes'          => []
-        ]);
+        if (session_status() === PHP_SESSION_NONE) { session_start(); }
 
+        if (!isset($_SESSION['user']) || $_SESSION['user']['rol'] !== 'turista') {
+            echo json_encode(['error' => 'No autorizado']);
+            exit;
+        }
+
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            echo json_encode(['error' => 'ID no recibido']);
+            exit;
+        }
+
+        require_once BASE_PATH . '/app/models/turista/ReservaModel.php';
+
+        $model = new ReservaModel();
+        $data  = $model->obtenerDetalleReserva((int)$id);
+
+        if (!$data) {
+            echo json_encode(['error' => 'Reserva no encontrada']);
+            exit;
+        }
+
+        echo json_encode($data);
         exit;
     }
 

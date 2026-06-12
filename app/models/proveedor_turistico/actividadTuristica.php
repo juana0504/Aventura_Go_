@@ -72,6 +72,12 @@ class ActividadTuristica
 
 
 
+    public function eliminarImagenes($id_actividad)
+    {
+        $stmt = $this->conexion->prepare("DELETE FROM actividad_imagen WHERE id_actividad = :id");
+        return $stmt->execute([':id' => (int)$id_actividad]);
+    }
+
     public function guardarImagen($data)
     {
         $sql = "INSERT INTO actividad_imagen (
@@ -138,7 +144,6 @@ class ActividadTuristica
     public function listarParaModal($id)
     {
         $sql = "SELECT a.*,
-                       a.imagen AS imagen_principal,
                        c.nombre AS ciudad,
                        d.nombre AS departamento
                 FROM actividad a
@@ -152,9 +157,42 @@ class ActividadTuristica
         $stmt->execute();
 
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($data) {
-            $data['imagenes'] = $data['imagen_principal'] ? [$data['imagen_principal']] : [];
+
+        if (!$data) {
+            return null;
         }
+
+        // Cargar imágenes reales desde actividad_imagen
+        $sqlImg = "SELECT imagen, es_principal
+                   FROM actividad_imagen
+                   WHERE id_actividad = :id
+                   ORDER BY es_principal DESC, id_imagen ASC";
+        $stmtImg = $this->conexion->prepare($sqlImg);
+        $stmtImg->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmtImg->execute();
+        $imagenes = $stmtImg->fetchAll(PDO::FETCH_ASSOC);
+
+        // imagen_principal = la marcada como principal, o la primera, o el campo legacy
+        $principal = null;
+        $lista = [];
+        foreach ($imagenes as $img) {
+            $lista[] = $img['imagen'];
+            if ($img['es_principal'] && !$principal) {
+                $principal = $img['imagen'];
+            }
+        }
+        if (!$principal && !empty($lista)) {
+            $principal = $lista[0];
+        }
+        // fallback al campo legacy si no hay registros en actividad_imagen
+        if (!$principal) {
+            $principal = $data['imagen'] ?? null;
+            if ($principal) $lista = [$principal];
+        }
+
+        $data['imagen_principal'] = $principal;
+        $data['imagenes']         = $lista;
+
         return $data;
     }
 

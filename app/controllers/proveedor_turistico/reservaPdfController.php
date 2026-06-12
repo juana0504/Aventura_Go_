@@ -2,34 +2,23 @@
 require_once __DIR__ . '/../../helpers/session_proveedor.php';
 require_once __DIR__ . '/../../helpers/pdf_helper.php';
 require_once __DIR__ . '/../../models/proveedor_turistico/Reserva.php';
+require_once __DIR__ . '/../../models/proveedor_turistico/Proveedor.php';
 
-/**
- * Función principal para generar PDF de reservas
- */
 function generarPdfReservas() {
-    // Verificar sesión activa
-    if (!isset($_SESSION['id_proveedor'])) {
-        die('Acceso denegado: no hay sesión de proveedor activa');
+    if (!isset($_SESSION['user'])) {
+        die('Acceso denegado: no hay sesión activa');
     }
-    
-    // Inicializar modelo y obtener datos
+
     $reservaModel = new Reserva();
-    $id_proveedor = $_SESSION['id_proveedor'];
+    $id_proveedor = (new Proveedor())->obtenerIdProveedorPorUsuario($_SESSION['user']['id_usuario']);
     $filtro = $_GET['filtro'] ?? 'all';
-    
-    // Obtener las reservas según el filtro
-    $reservas = $reservaModel->listarParaPdf($id_proveedor, $filtro);
-    
-    // Obtener estadísticas adicionales
-    $estadisticas = $reservaModel->obtenerEstadisticas($id_proveedor);
-    
-    // Capturar el HTML del reporte
+
+    $reservas_pdf     = $reservaModel->listarParaPdf($id_proveedor, $filtro);
+    $estadisticas_pdf = $reservaModel->obtenerEstadisticas($id_proveedor);
+    $filtro_actual    = $filtro;
+    $nombre_proveedor = $_SESSION['user']['nombre'] ?? '';
+
     ob_start();
-    
-    // Pasar variables a la vista
-    $reservas_pdf = $reservas;
-    $estadisticas_pdf = $estadisticas;
-    $filtro_actual = $filtro;
     
     // Cargar la vista del PDF con estilos de actividades
     require_once BASE_PATH . '/app/views/pdf/reservas_proveedor_pdf.php';
@@ -52,13 +41,12 @@ function generarPdfReservas() {
 
 // Función para generar PDF de reserva individual (opcional)
 function generarPdfReservaIndividual($id_reserva) {
-    // Verificar sesión y permisos
-    if (!isset($_SESSION['id_proveedor'])) {
-        die('Acceso denegado: no hay sesión de proveedor activa');
+    if (!isset($_SESSION['user'])) {
+        die('Acceso denegado: no hay sesión activa');
     }
-    
+
     $reservaModel = new Reserva();
-    $id_proveedor = $_SESSION['id_proveedor'];
+    $id_proveedor = (new Proveedor())->obtenerIdProveedorPorUsuario($_SESSION['user']['id_usuario']);
     
     // Verificar que la reserva pertenezca al proveedor
     if (!$reservaModel->verificarReservaDeProveedor($id_reserva, $id_proveedor)) {

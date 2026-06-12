@@ -34,16 +34,16 @@ class TuristaModel {
             'nombre' => $row['nombre'],
             'preferencias' => $row['preferencias'],
             'id_turista' => $id_turista,
-            'reservas' => $id_turista ? $this->getReservas($id_turista) : [],
-            'estadisticas' => $id_turista ? $this->getEstadisticas($id_turista) : [],
+            'reservas' => $this->getReservas($id_usuario),
+            'estadisticas' => $this->getEstadisticas($id_usuario),
             'actividades' => $id_turista ? $this->getActividades($id_turista) : [],
             'lugares_visitados' => $id_turista ? $this->getLugaresVisitados($id_turista) : []
         ];
     }
 
-    public function getReservas($id_turista) {
+    public function getReservas($id_usuario) {
         try {
-            $query = "SELECT 
+            $query = "SELECT
                         r.id_reserva,
                         r.fecha,
                         r.estado,
@@ -55,10 +55,10 @@ class TuristaModel {
                         a.precio as precio_unitario
                       FROM reserva r
                       JOIN actividad a ON r.id_actividad = a.id_actividad
-                      WHERE r.id_turista = :id_turista
+                      WHERE r.id_turista = :id_usuario
                       ORDER BY r.fecha DESC";
             $stmt = $this->conexion->prepare($query);
-            $stmt->execute([':id_turista' => $id_turista]);
+            $stmt->execute([':id_usuario' => $id_usuario]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log("[TuristaModel] getReservas error: " . $e->getMessage());
@@ -66,18 +66,19 @@ class TuristaModel {
         }
     }
 
-    public function getEstadisticas($id_turista) {
+    public function getEstadisticas($id_usuario) {
         try {
-            $query = "SELECT 
+            $query = "SELECT
                         COUNT(*) as total_reservas,
-                        SUM(CASE WHEN estado = 'confirmada' THEN 1 ELSE 0 END) as confirmadas,
-                        SUM(CASE WHEN estado = 'pendiente' THEN 1 ELSE 0 END) as pendientes,
-                        SUM(CASE WHEN estado = 'cancelada' THEN 1 ELSE 0 END) as canceladas,
-                        SUM(r.precio) as total_gastado
+                        SUM(CASE WHEN r.estado = 'confirmada' THEN 1 ELSE 0 END) as confirmadas,
+                        SUM(CASE WHEN r.estado = 'pendiente' THEN 1 ELSE 0 END) as pendientes,
+                        SUM(CASE WHEN r.estado = 'cancelada' THEN 1 ELSE 0 END) as canceladas,
+                        SUM(r.cantidad_personas * a.precio) as total_gastado
                       FROM reserva r
-                      WHERE r.id_turista = :id_turista";
+                      JOIN actividad a ON r.id_actividad = a.id_actividad
+                      WHERE r.id_turista = :id_usuario";
             $stmt = $this->conexion->prepare($query);
-            $stmt->execute([':id_turista' => $id_turista]);
+            $stmt->execute([':id_usuario' => $id_usuario]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log("[TuristaModel] getEstadisticas error: " . $e->getMessage());

@@ -216,7 +216,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                             <th>Asunto</th>
                             <th>Estado</th>
                             <th>Fecha</th>
-                            <th>Respuesta</th>
+                            <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -261,15 +261,11 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                     </td>
                                     <td><?= date('d/m/Y H:i', strtotime($ticket['fecha_creacion'])) ?></td>
                                     <td>
-                                        <?php if (!empty($ticket['respuesta'])): ?>
-                                            <button class="ag-btn-ver"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#respuesta<?= $ticket['id_ticket'] ?>">
-                                                <i class="bi bi-eye"></i> Ver
-                                            </button>
-                                        <?php else: ?>
-                                            <span class="ag-tk-sin-respuesta">Sin respuesta</span>
-                                        <?php endif; ?>
+                                        <button class="ag-btn-ver"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#respuesta<?= $ticket['id_ticket'] ?>">
+                                            <i class="bi bi-eye"></i> Ver
+                                        </button>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -289,37 +285,54 @@ foreach (array_slice($partes, 0, 2) as $p) {
 =========================================== -->
 <?php if (!empty($tickets)): ?>
     <?php foreach ($tickets as $ticket): ?>
-        <?php if (!empty($ticket['respuesta'])): ?>
-            <div class="modal fade" id="respuesta<?= $ticket['id_ticket'] ?>" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered">
-                    <div class="modal-content ag-modal">
-                        <div class="ag-modal__header">
-                            <div>
-                                <div class="ag-modal__eyebrow">Ticket #<?= $ticket['id_ticket'] ?></div>
-                                <h5 class="ag-modal__title"><?= htmlspecialchars($ticket['asunto']) ?></h5>
-                            </div>
-                            <button type="button" class="ag-modal__close" data-bs-dismiss="modal" aria-label="Cerrar">
-                                <i class="bi bi-x-lg"></i>
-                            </button>
+        <div class="modal fade" id="respuesta<?= $ticket['id_ticket'] ?>" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content ag-modal">
+                    <div class="ag-modal__header">
+                        <div>
+                            <div class="ag-modal__eyebrow">Ticket #<?= $ticket['id_ticket'] ?></div>
+                            <h5 class="ag-modal__title"><?= htmlspecialchars($ticket['asunto']) ?></h5>
                         </div>
-                        <div class="ag-modal__body">
-                            <div class="ag-modal__block ag-modal__block--query">
-                                <div class="ag-modal__block-label">
-                                    <i class="bi bi-person-circle"></i> Tu consulta
-                                </div>
-                                <p><?= nl2br(htmlspecialchars($ticket['descripcion'])) ?></p>
+                        <button type="button" class="ag-modal__close" data-bs-dismiss="modal" aria-label="Cerrar">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+                    <div class="ag-modal__body">
+                        <div class="ag-modal__block" style="margin-bottom:.5rem;">
+                            <div class="ag-modal__block-label">
+                                <i class="bi bi-tag"></i> Estado
                             </div>
+                            <?php if ($ticket['estado'] === 'abierto'): ?>
+                                <span class="ag-badge ag-badge--pending"><span class="ag-badge__dot"></span> Abierto</span>
+                            <?php elseif ($ticket['estado'] === 'respondido'): ?>
+                                <span class="ag-badge ag-badge--confirmed"><span class="ag-badge__dot"></span> Respondido</span>
+                            <?php else: ?>
+                                <span class="ag-badge ag-badge--cancelled"><span class="ag-badge__dot"></span> Cerrado</span>
+                            <?php endif; ?>
+                        </div>
+                        <div class="ag-modal__block ag-modal__block--query">
+                            <div class="ag-modal__block-label">
+                                <i class="bi bi-person-circle"></i> Tu consulta
+                            </div>
+                            <p><?= nl2br(htmlspecialchars($ticket['descripcion'])) ?></p>
+                        </div>
+                        <?php if (!empty($ticket['respuesta'])): ?>
                             <div class="ag-modal__block ag-modal__block--reply">
                                 <div class="ag-modal__block-label">
                                     <i class="bi bi-headset"></i> Respuesta del equipo
                                 </div>
                                 <p><?= nl2br(htmlspecialchars($ticket['respuesta'])) ?></p>
                             </div>
-                        </div>
+                        <?php else: ?>
+                            <div class="ag-modal__block" style="background:var(--ag-surface-2,#f8f9fa);border-radius:8px;padding:1rem;text-align:center;color:var(--ag-muted,#888);">
+                                <i class="bi bi-hourglass-split" style="font-size:1.5rem;display:block;margin-bottom:.4rem;"></i>
+                                <p style="margin:0;">Sin respuesta aún — el equipo está revisando tu ticket.</p>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
-        <?php endif; ?>
+        </div>
     <?php endforeach; ?>
 <?php endif; ?>
 

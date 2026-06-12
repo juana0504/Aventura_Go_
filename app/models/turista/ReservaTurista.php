@@ -65,14 +65,13 @@ class ReservaTurista
      */
     public function listarPorId($id_reserva, $id_turista)
     {
-        $sql = "SELECT 
+        $sql = "SELECT
                     r.*,
                     a.nombre as nombre_actividad,
                     a.descripcion as descripcion_actividad,
                     a.ubicacion,
                     a.precio,
                     a.cupos,
-                    a.imagen,
                     p.nombre_empresa,
                     p.email_representante,
                     p.telefono_representante,
@@ -80,11 +79,10 @@ class ReservaTurista
                     c.nombre as nombre_ciudad,
                     d.nombre as nombre_departamento
                 FROM reserva r
-                JOIN reserva_actividad ra ON r.id_reserva = ra.id_reserva
-                JOIN actividad a ON ra.id_actividad = a.id_actividad
+                JOIN actividad a ON r.id_actividad = a.id_actividad
                 JOIN proveedor p ON a.id_proveedor = p.id_proveedor
-                JOIN ciudades c ON a.id_ciudad = c.id_ciudad
-                JOIN departamentos d ON c.id_departamento = d.id_departamento
+                LEFT JOIN ciudades c ON a.id_ciudad = c.id_ciudad
+                LEFT JOIN departamentos d ON c.id_departamento = d.id_departamento
                 WHERE r.id_reserva = :id_reserva AND r.id_turista = :id_turista";
 
         try {

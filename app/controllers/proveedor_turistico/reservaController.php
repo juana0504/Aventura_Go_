@@ -2,10 +2,11 @@
 require_once __DIR__ . '/../../helpers/session_proveedor.php';
 require_once __DIR__ . '/../../helpers/alert_helper.php';
 require_once __DIR__ . '/../../models/proveedor_turistico/Reserva.php';
+require_once __DIR__ . '/../../models/proveedor_turistico/Proveedor.php';
 
-// Inicializar modelo
+// Obtener id_proveedor real desde la tabla proveedor
 $reservaModel = new Reserva();
-$id_proveedor = $_SESSION['id_proveedor'] ?? null;
+$id_proveedor = (new Proveedor())->obtenerIdProveedorPorUsuario($_SESSION['user']['id_usuario']);
 
 
 // Manejar acciones GET para confirmar/cancelar reservas

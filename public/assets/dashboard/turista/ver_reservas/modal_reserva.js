@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         data.cantidad_personas;
 
                     document.getElementById('modal-total').textContent =
-                        Number(data.precio).toLocaleString('es-CO');
+                        (Number(data.precio) * Number(data.cantidad_personas)).toLocaleString('es-CO');
 
                     document.getElementById('modal-estado-texto').textContent =
                         data.estado;

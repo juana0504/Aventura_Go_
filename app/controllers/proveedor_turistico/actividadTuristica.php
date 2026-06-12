@@ -92,20 +92,21 @@ function registrarActividad()
 
 
     // VALIDACIONES
-    if (
-        !$id_proveedor ||
-        empty($nombre) ||
-        empty($id_ciudad) ||
-        empty($ubicacion) ||
-        empty($descripcion) ||
-        empty($cupos) ||
-        empty($precio)
-    ) {
-        mostrarSweetAlert(
-            'error',
-            'Campos incompletos',
-            'Por favor completa todos los campos obligatorios'
-        );
+    if (!$id_proveedor) {
+        mostrarSweetAlert('error', 'Error de cuenta', 'No se encontró el perfil de proveedor. Contacta al soporte.');
+        exit;
+    }
+    if (empty($nombre) || empty($id_ciudad) || empty($ubicacion) || empty($descripcion) || empty($cupos) || empty($precio)) {
+        $faltante = match(true) {
+            empty($nombre)      => 'Nombre',
+            empty($id_ciudad)   => 'Ciudad (debes seleccionar departamento y luego ciudad)',
+            empty($ubicacion)   => 'Ubicación exacta',
+            empty($descripcion) => 'Descripción',
+            empty($cupos)       => 'Cupos',
+            empty($precio)      => 'Precio',
+            default             => 'campo desconocido',
+        };
+        mostrarSweetAlert('error', 'Campo requerido', "Falta completar: $faltante", BASE_URL . 'proveedor/registrar-actividad');
         exit;
     }
 
@@ -136,8 +137,7 @@ function registrarActividad()
 
     foreach ($_FILES['imagenes']['name'] as $index => $nombreArchivo) {
 
-        $tmpName = $_FILES['imagenes']['tmp_name'][$index];
-        $size    = $_FILES['imagenes']['size'][$index];
+        $size = $_FILES['imagenes']['size'][$index];
 
         $ext = strtolower(pathinfo($nombreArchivo, PATHINFO_EXTENSION));
 
@@ -274,21 +274,65 @@ function actualizarActividad()
     // MODELO
     $resultado = $actividadModel->actualizarActividad($data);
 
-    // RESPUESTA
-    if ($resultado === true) {
-        mostrarSweetAlert(
-            'success',
-            'Actividad actualizada',
-            'La actividad turística fue actualizada correctamente',
-            BASE_URL . 'proveedor/consultar-actividad'
-        );
-    } else {
-        mostrarSweetAlert(
-            'error',
-            'Error',
-            'No se pudo actualizar la actividad turística'
-        );
+    if ($resultado !== true) {
+        mostrarSweetAlert('error', 'Error', 'No se pudo actualizar la actividad turística');
+        exit;
     }
+
+    // IMÁGENES OPCIONALES: si se subieron archivos nuevos, reemplazar
+    if (!empty($_FILES['imagenes']['name'][0])) {
+
+        $cantidadImagenes = count($_FILES['imagenes']['name']);
+
+        if ($cantidadImagenes > 5) {
+            mostrarSweetAlert('error', 'Demasiadas imágenes', 'Máximo se permiten 5 imágenes por actividad');
+            exit;
+        }
+
+        $permitidas = ['jpg', 'jpeg', 'png'];
+        $maxSize    = 2 * 1024 * 1024;
+
+        foreach ($_FILES['imagenes']['name'] as $index => $nombreArchivo) {
+            $ext  = strtolower(pathinfo($nombreArchivo, PATHINFO_EXTENSION));
+            $size = $_FILES['imagenes']['size'][$index];
+
+            if (!in_array($ext, $permitidas)) {
+                mostrarSweetAlert('error', 'Extensión no permitida', 'Solo se permiten imágenes JPG o PNG');
+                exit;
+            }
+            if ($size > $maxSize) {
+                mostrarSweetAlert('error', 'Imagen muy pesada', 'Cada imagen debe pesar máximo 2MB');
+                exit;
+            }
+        }
+
+        // Eliminar imágenes anteriores y guardar las nuevas
+        $actividadModel->eliminarImagenes($id_actividad);
+
+        $directorio = BASE_PATH . '/public/uploads/turistico/actividades/';
+        if (!is_dir($directorio)) {
+            mkdir($directorio, 0777, true);
+        }
+
+        foreach ($_FILES['imagenes']['name'] as $index => $nombreArchivo) {
+            $ext         = strtolower(pathinfo($nombreArchivo, PATHINFO_EXTENSION));
+            $nombreFinal = uniqid('actividad_') . '.' . $ext;
+            move_uploaded_file($_FILES['imagenes']['tmp_name'][$index], $directorio . $nombreFinal);
+
+            $actividadModel->guardarImagen([
+                'id_actividad' => $id_actividad,
+                'imagen'       => $nombreFinal,
+                'es_principal' => ($index === 0) ? 1 : 0,
+            ]);
+        }
+    }
+
+    mostrarSweetAlert(
+        'success',
+        'Actividad actualizada',
+        'La actividad turística fue actualizada correctamente',
+        BASE_URL . 'proveedor/consultar-actividad'
+    );
 }
 
 

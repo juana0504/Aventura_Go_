@@ -1,26 +1,20 @@
 <?php
 require_once __DIR__ . '/../../helpers/session_proveedor.php';
 require_once __DIR__ . '/../../models/proveedor_turistico/Reserva.php';
+require_once __DIR__ . '/../../models/proveedor_turistico/Proveedor.php';
 
-// Configurar headers para respuesta JSON
 header('Content-Type: application/json');
 header('Cache-Control: no-cache, must-revalidate');
 
-// Obtener ID de la reserva desde la URL
 $id_reserva = $_GET['id'] ?? '';
 
-// Validar que se proporcionó un ID
 if (empty($id_reserva) || !is_numeric($id_reserva)) {
-    echo json_encode([
-        'success' => false, 
-        'message' => 'ID de reserva no válido o no proporcionado'
-    ]);
+    echo json_encode(['success' => false, 'message' => 'ID de reserva no válido o no proporcionado']);
     exit;
 }
 
-// Inicializar modelo
 $reservaModel = new Reserva();
-$id_proveedor = $_SESSION['id_proveedor'];
+$id_proveedor = (new Proveedor())->obtenerIdProveedorPorUsuario($_SESSION['user']['id_usuario']);
 
 try {
     // Verificar seguridad: la reserva debe pertenecer al proveedor actual
