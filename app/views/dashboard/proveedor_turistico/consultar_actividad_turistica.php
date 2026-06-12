@@ -31,7 +31,8 @@ foreach (array_slice($partes, 0, 2) as $p) {
     <!-- Sistema proveedor -->
 <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/dashboard/dashboard.css">
     <!-- CSS específico -->
-<link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/consultar_actividad_turistica/consultar_actividad_turistica.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/consultar_actividad_turistica/consultar_actividad_turistica.css">
+</head>
 <body class="pv-body">
 
 <div class="pv-layout" id="proveedor-actividades">
@@ -227,9 +228,10 @@ foreach (array_slice($partes, 0, 2) as $p) {
                             <?php foreach ($datos as $actividad): ?>
                                 <tr data-estado="<?= strtolower($actividad['estado']) ?>">
                                     <td>
-                                        <img src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= htmlspecialchars($actividad['imagen_principal'] ?? 'actividad_default.png') ?>"
+                                        <img src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= htmlspecialchars($actividad['imagen_principal'] ?? '') ?>"
                                              alt="<?= htmlspecialchars($actividad['nombre']) ?>"
-                                             class="pv-act-img">
+                                             class="pv-act-img"
+                                             onerror="this.src='<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/consultar_actividad_turistica/img/no-image.png'; this.onerror=null;">
                                     </td>
                                     <td>
                                         <div class="pv-table__name"><?= htmlspecialchars($actividad['nombre']) ?></div>

@@ -5,6 +5,7 @@ require_once __DIR__ . '/../../../config/database.php';
 require_once __DIR__ . '/../../helpers/alert_helper.php';
 require_once __DIR__ . '/../../models/proveedor_turistico/ProveedorModel.php';
 require_once __DIR__ . '/../../helpers/upload_helper.php';
+require_once __DIR__ . '/../../models/Ciudad.php';
 
 $model = new ProveedorModel();
 $idUsuario = $_SESSION['user']['id_usuario'];
@@ -69,6 +70,10 @@ class CompletarInformacionController
 
         $proveedorActual = $this->model->obtenerArchivosActuales($this->idUsuario);
 
+        if (!is_array($proveedorActual)) {
+            $proveedorActual = ['logo' => null, 'foto_representante' => null];
+        }
+
         $nombreLogo = $proveedorActual['logo'];
         $nombreFoto = $proveedorActual['foto_representante'];
 
@@ -79,7 +84,13 @@ class CompletarInformacionController
         if ($nuevoLogo) {
             $nombreLogo = $nuevoLogo;
         } elseif (empty($proveedorActual['logo'])) {
-            die("Debes subir el logo.");
+            mostrarSweetAlert(
+                'error',
+                'Logo requerido',
+                'Debes subir el logo de tu empresa.',
+                BASE_URL . 'proveedor/completar-informacion'
+            );
+            exit;
         }
 
         // FOTO - Se llama a la función subirArchivo para manejar la subida de la foto del representante.
@@ -89,7 +100,13 @@ class CompletarInformacionController
         if ($nuevaFoto) {
             $nombreFoto = $nuevaFoto;
         } elseif (empty($proveedorActual['foto_representante'])) {
-            die("Debes subir la foto del representante.");
+            mostrarSweetAlert(
+                'error',
+                'Foto requerida',
+                'Debes subir la foto del representante.',
+                BASE_URL . 'proveedor/completar-informacion'
+            );
+            exit;
         }
 
         // Se prepara un array con todos los datos para actualizar el proveedor.
@@ -117,13 +134,19 @@ class CompletarInformacionController
         if ($this->model->actualizarProveedor($data)) {
             mostrarSweetAlert(
                 'success',
-                'Información actualizada',
-                'La información del proveedor ha sido actualizada correctamente.',
-                BASE_URL . 'proveedor/completar-informacion'
+                'Información guardada',
+                'Tu información fue enviada correctamente. El administrador revisará tu solicitud.',
+                BASE_URL . 'proveedor/pendiente'
             );
             exit;
         } else {
-            die("Error al actualizar la información.");
+            mostrarSweetAlert(
+                'error',
+                'Error al guardar',
+                'No se pudo guardar la información. Por favor intenta de nuevo.',
+                BASE_URL . 'proveedor/completar-informacion'
+            );
+            exit;
         }
     }
 
@@ -131,6 +154,11 @@ class CompletarInformacionController
     public function mostrarFormulario()
     {
         $proveedor = $this->model->obtenerPorUsuario($this->idUsuario);
+        if (!is_array($proveedor)) {
+            $proveedor = [];
+        }
+        $ciudadModel = new Ciudad();
+        $ciudades = $ciudadModel->obtenerCiudadesActivas();
         require __DIR__ . '/../../views/dashboard/proveedor_turistico/completar_informacion.php';
     }
 }

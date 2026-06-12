@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../models/turista/ReservaTurista.php';
 
 // Inicializar modelo
 $reservaModel = new ReservaTurista();
-$id_turista = $_SESSION['user']['id'];
+$id_turista = $_SESSION['user']['id_usuario'];
 
 // Manejar acciones GET para cancelar reservas
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {

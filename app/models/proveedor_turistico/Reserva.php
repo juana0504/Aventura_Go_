@@ -15,7 +15,7 @@ class Reserva
      */
     public function listarPorProveedor($id_proveedor, $filtro = '')
     {
-        $sql = "SELECT 
+        $sql = "SELECT
                     r.id_reserva,
                     r.fecha,
                     r.estado,
@@ -29,8 +29,7 @@ class Reserva
                     u.telefono as telefono_turista
                 FROM reserva r
                 JOIN actividad a ON r.id_actividad = a.id_actividad
-                JOIN turista t ON r.id_turista = t.id_turista
-                JOIN usuario u ON t.id_usuario = u.id_usuario
+                LEFT JOIN usuario u ON r.id_turista = u.id_usuario
                 WHERE a.id_proveedor = :id_proveedor";
 
         if ($filtro && $filtro !== 'all') {
@@ -74,8 +73,7 @@ class Reserva
                     p.email_representante
                 FROM reserva r
                 JOIN actividad a ON r.id_actividad = a.id_actividad
-                JOIN turista t ON r.id_turista = t.id_turista
-                JOIN usuario u ON t.id_usuario = u.id_usuario
+                LEFT JOIN usuario u ON r.id_turista = u.id_usuario
                 JOIN proveedor p ON a.id_proveedor = p.id_proveedor
                 WHERE r.id_reserva = :id_reserva";
 
@@ -162,11 +160,11 @@ class Reserva
      */
     public function obtenerEstadisticas($id_proveedor)
     {
-        $sql = "SELECT 
+        $sql = "SELECT
                     COUNT(*) as total_reservas,
-                    SUM(CASE WHEN estado = 'pendiente' THEN 1 ELSE 0 END) as pendientes,
-                    SUM(CASE WHEN estado = 'confirmada' THEN 1 ELSE 0 END) as confirmadas,
-                    SUM(CASE WHEN estado = 'cancelada' THEN 1 ELSE 0 END) as canceladas,
+                    SUM(CASE WHEN r.estado = 'pendiente' THEN 1 ELSE 0 END) as pendientes,
+                    SUM(CASE WHEN r.estado = 'confirmada' THEN 1 ELSE 0 END) as confirmadas,
+                    SUM(CASE WHEN r.estado = 'cancelada' THEN 1 ELSE 0 END) as canceladas,
                     SUM(r.cantidad_personas * a.precio) as ingresos_potenciales
                 FROM reserva r
                 JOIN actividad a ON r.id_actividad = a.id_actividad
@@ -299,9 +297,8 @@ class Reserva
                     u.email as email_turista,
                     u.telefono as telefono_turista
                 FROM reserva r
-                JOIN reserva_actividad ra ON r.id_reserva = ra.id_reserva
-                JOIN actividad a ON ra.id_actividad = a.id_actividad
-                JOIN usuario u ON r.id_turista = u.id_usuario
+                JOIN actividad a ON r.id_actividad = a.id_actividad
+                LEFT JOIN usuario u ON r.id_turista = u.id_usuario
                 WHERE a.id_proveedor = :id_proveedor";
 
         if ($anio !== null) {

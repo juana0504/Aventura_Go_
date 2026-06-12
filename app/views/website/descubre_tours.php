@@ -6,19 +6,11 @@ require_once BASE_PATH . '/app/controllers/website/websiteController.php';
 $actividadModel = new ActividadTuristica();
 $ciudad = $_GET['ciudad'] ?? null;
 
-    if ($ciudad) {
-        $actividades = $actividadModel->obtenerPorCiudad($ciudad);
-    } else {
-        $actividades = $actividadModel->listarActividadesPublicas();
-    }
-
-$ciudad = $_GET['ciudad'] ?? null;
-
-    if ($ciudad) {
-        $actividades = $actividadModel->obtenerPorCiudad($ciudad);
-    } else {
-        $actividades = $actividadModel->listarActividadesPublicas();
-    }
+if ($ciudad) {
+    $actividades = $actividadModel->obtenerPorCiudad($ciudad);
+} else {
+    $actividades = $actividadModel->listarActividadesPublicas();
+}
 
 ?>
 

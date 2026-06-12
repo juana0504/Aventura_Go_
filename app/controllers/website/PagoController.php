@@ -7,6 +7,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+/* Validar que el usuario esté autenticado */
+if (!isset($_SESSION['user'])) {
+    $_SESSION['redirect_after_login'] = BASE_URL . 'checkout';
+    header('Location: ' . BASE_URL . 'login');
+    exit;
+}
+
 
 
 /*| 2. Validar que exista la reserva temporal*/

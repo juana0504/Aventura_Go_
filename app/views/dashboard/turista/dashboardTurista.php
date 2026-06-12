@@ -283,7 +283,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                 </div>
 
                 <div class="ag-quick-grid">
-                    <a href="<?= BASE_URL ?>turista/actividades" class="ag-quick-card">
+                    <a href="<?= BASE_URL ?>" class="ag-quick-card">
                         <div class="ag-quick-card__icon"><i class="bi bi-compass"></i></div>
                         <div>
                             <div class="ag-quick-card__label">Explorar actividades</div>
@@ -291,7 +291,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                         </div>
                         <i class="bi bi-chevron-right ag-quick-card__arrow"></i>
                     </a>
-                    <a href="<?= BASE_URL ?>turista/destinos" class="ag-quick-card">
+                    <a href="<?= BASE_URL ?>descubre-tours" class="ag-quick-card">
                         <div class="ag-quick-card__icon"><i class="bi bi-geo-alt"></i></div>
                         <div>
                             <div class="ag-quick-card__label">Ver destinos</div>
@@ -355,7 +355,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                         <div class="ag-empty-state">
                                             <i class="bi bi-calendar-x ag-empty-state__icon"></i>
                                             <p>No tienes reservas aún.</p>
-                                            <a href="<?= BASE_URL ?>turista/actividades" class="ag-btn-primary">
+                                            <a href="<?= BASE_URL ?>" class="ag-btn-primary">
                                                 Explorar actividades
                                             </a>
                                         </div>

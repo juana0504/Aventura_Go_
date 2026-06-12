@@ -1,5 +1,7 @@
 <?php require_once BASE_PATH . '/app/helpers/session_proveedor.php'; ?>
 <?php
+/** @var array $ticket — set by TicketProveedorController::ver() before this view is required */
+$ticket          = $ticket ?? [];
 $nombreProveedor = $_SESSION['user']['nombre'] ?? '';
 $iniciales = '';
 foreach (array_slice(explode(' ', trim($nombreProveedor)), 0, 2) as $p) {
@@ -11,7 +13,7 @@ foreach (array_slice(explode(' ', trim($nombreProveedor)), 0, 2) as $p) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Ticket — AventuraGO</title>
+    <title>Ticket #<?= (int)($ticket['id_ticket'] ?? 0) ?> — AventuraGO</title>
 
     <link rel="shortcut icon" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,75 +28,119 @@ foreach (array_slice(explode(' ', trim($nombreProveedor)), 0, 2) as $p) {
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/consultar_actividad_turistica/consultar_actividad_turistica.css">
 
     <style>
-        .pv-tk-form-card {
-            max-width: 760px;
-            animation: pvFadeIn .4s ease-out;
-        }
-        @keyframes pvFadeIn {
-            from { opacity: 0; transform: translateY(14px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        .pv-tk-card {
+        .pv-tk-detail-card {
+            max-width: 820px;
             background: var(--pv-surface, #fff);
             border: 1px solid var(--pv-border, #e2e8f0);
             border-radius: 14px;
             overflow: hidden;
             box-shadow: 0 2px 10px rgba(0,0,0,.05);
+            animation: pvFadeIn .4s ease-out;
         }
-        .pv-tk-card__header {
+        @keyframes pvFadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .pv-tk-detail-header {
             background: #1a2b3c;
             color: #fff;
-            padding: 16px 24px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
+            padding: 22px 28px;
             border-bottom: 3px solid #ea8217;
         }
-        .pv-tk-card__header i { color: #ea8217; }
-        .pv-tk-card__body { padding: 28px; }
-
-        .pv-tk-label {
-            display: block;
-            font-size: .75rem;
-            font-weight: 700;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: .6px;
-            margin-bottom: 8px;
+        .pv-tk-detail-header h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            margin: 0 0 8px;
         }
-        .pv-tk-input,
-        .pv-tk-textarea {
-            width: 100%;
+        .pv-tk-meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: .8rem;
+            color: #94a3b8;
+        }
+        .pv-tk-meta span { display: flex; align-items: center; gap: 5px; }
+
+        .pv-tk-badge {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 999px;
+            font-size: .72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .4px;
+        }
+        .pv-tk-badge--open     { background: #fef9c3; color: #854d0e; }
+        .pv-tk-badge--answered { background: #dcfce7; color: #166534; }
+        .pv-tk-badge--closed   { background: #f1f5f9; color: #64748b; }
+
+        .pv-tk-body { padding: 28px; }
+
+        .pv-tk-section-label {
+            font-size: .72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+            color: #94a3b8;
+            margin-bottom: 10px;
+        }
+        .pv-tk-asunto-text {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--pv-text, #1a2b3c);
+            margin-bottom: 22px;
+        }
+        .pv-tk-message-box {
             background: var(--pv-bg, #f8fafc);
             border: 1px solid var(--pv-border, #e2e8f0);
-            border-radius: 8px;
-            padding: 12px 16px;
-            color: var(--pv-text, #1e293b);
+            border-radius: 10px;
+            padding: 18px 22px;
+            color: var(--pv-text, #334155);
             font-size: .92rem;
-            font-family: 'DM Sans', sans-serif;
-            transition: border-color .2s, box-shadow .2s;
+            line-height: 1.75;
+            white-space: pre-wrap;
+            word-break: break-word;
         }
-        .pv-tk-input:focus,
-        .pv-tk-textarea:focus {
-            outline: none;
-            border-color: #ea8217;
-            box-shadow: 0 0 0 3px rgba(234,130,23,.12);
-            background: #fff;
+        .pv-tk-divider {
+            border: none;
+            border-top: 2px dashed var(--pv-border, #e2e8f0);
+            margin: 28px 0;
         }
-        .pv-tk-textarea { resize: vertical; min-height: 160px; }
-
-        .pv-tk-tip { margin-top: 6px; font-size: .75rem; color: #94a3b8; }
-
-        .pv-tk-form-actions {
+        .pv-tk-response-box {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-left: 5px solid #ea8217;
+            border-radius: 10px;
+            padding: 18px 22px;
+            color: #1e293b;
+            font-size: .92rem;
+            line-height: 1.75;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .pv-tk-response-meta {
+            font-size: .78rem;
+            color: #94a3b8;
+            margin-top: 10px;
             display: flex;
             align-items: center;
-            gap: 16px;
-            margin-top: 28px;
+            gap: 6px;
         }
-        .pv-tk-btn-back {
+        .pv-tk-waiting {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 36px;
+            color: #94a3b8;
+            text-align: center;
+            gap: 10px;
+        }
+        .pv-tk-waiting i { font-size: 2rem; color: #cbd5e1; }
+        .pv-tk-waiting p { margin: 0; font-size: .9rem; }
+
+        .pv-tk-back {
             display: inline-flex;
             align-items: center;
             gap: 6px;
@@ -102,16 +148,17 @@ foreach (array_slice(explode(' ', trim($nombreProveedor)), 0, 2) as $p) {
             font-size: .88rem;
             font-weight: 500;
             text-decoration: none;
-            padding: 10px 14px;
+            padding: 8px 14px;
             border-radius: 8px;
+            margin-bottom: 20px;
             transition: all .2s;
         }
-        .pv-tk-btn-back:hover { color: #1a2b3c; background: var(--pv-bg, #f1f5f9); }
+        .pv-tk-back:hover { background: var(--pv-bg, #f1f5f9); color: #1a2b3c; }
     </style>
 </head>
 <body class="pv-body">
 
-<div class="pv-layout" id="proveedor-crear-ticket">
+<div class="pv-layout" id="proveedor-ver-ticket">
 
     <!-- SIDEBAR -->
     <nav class="pv-sidebar">
@@ -228,55 +275,70 @@ foreach (array_slice(explode(' ', trim($nombreProveedor)), 0, 2) as $p) {
             <div class="pv-page-header">
                 <div>
                     <div class="pv-greeting__eyebrow">Soporte</div>
-                    <h1 class="pv-page-title">Nuevo <span>Ticket</span></h1>
-                    <p class="pv-greeting__sub">Envía tu consulta o problema al equipo de administración</p>
+                    <h1 class="pv-page-title">Detalle del <span>Ticket</span></h1>
+                    <p class="pv-greeting__sub">Revisa tu solicitud y la respuesta del administrador</p>
                 </div>
             </div>
 
-            <div class="pv-tk-form-card">
-                <div class="pv-tk-card">
-                    <div class="pv-tk-card__header">
-                        <i class="bi bi-send"></i>
-                        Crear ticket de soporte
+            <a href="<?= BASE_URL ?>proveedor/tickets" class="pv-tk-back">
+                <i class="bi bi-arrow-left"></i> Volver a mis tickets
+            </a>
+
+            <div class="pv-tk-detail-card">
+
+                <!-- HEADER -->
+                <div class="pv-tk-detail-header">
+                    <h2><i class="bi bi-ticket-perforated me-2"></i>Ticket #<?= (int)$ticket['id_ticket'] ?></h2>
+                    <div class="pv-tk-meta">
+                        <span>
+                            <?php
+                            $estado = $ticket['estado'];
+                            $cls = match($estado) {
+                                'abierto'    => 'pv-tk-badge--open',
+                                'respondido' => 'pv-tk-badge--answered',
+                                default      => 'pv-tk-badge--closed',
+                            };
+                            $label = match($estado) {
+                                'abierto'    => 'Abierto',
+                                'respondido' => 'Respondido',
+                                default      => 'Cerrado',
+                            };
+                            ?>
+                            <span class="pv-tk-badge <?= $cls ?>"><?= $label ?></span>
+                        </span>
+                        <span><i class="bi bi-calendar3"></i><?= date('d/m/Y H:i', strtotime($ticket['fecha_creacion'])) ?></span>
                     </div>
-                    <div class="pv-tk-card__body">
-                        <form method="POST" action="<?= BASE_URL ?>proveedor/tickets/guardar">
+                </div>
 
-                            <div class="mb-4">
-                                <label class="pv-tk-label" for="asunto">Asunto</label>
-                                <input
-                                    type="text"
-                                    id="asunto"
-                                    name="asunto"
-                                    class="pv-tk-input"
-                                    placeholder="Ej: Problema con mis actividades registradas"
-                                    required
-                                    maxlength="150">
-                                <p class="pv-tk-tip">Escribe un título corto y descriptivo.</p>
-                            </div>
+                <!-- BODY -->
+                <div class="pv-tk-body">
 
-                            <div class="mb-2">
-                                <label class="pv-tk-label" for="descripcion">Descripción del problema</label>
-                                <textarea
-                                    id="descripcion"
-                                    name="descripcion"
-                                    class="pv-tk-textarea"
-                                    placeholder="Describe con detalle el problema o consulta que tienes..."
-                                    required></textarea>
-                                <p class="pv-tk-tip">Incluye la mayor cantidad de detalle posible para agilizar la respuesta.</p>
-                            </div>
+                    <p class="pv-tk-section-label"><i class="bi bi-tag me-1"></i>Asunto</p>
+                    <p class="pv-tk-asunto-text"><?= htmlspecialchars($ticket['asunto']) ?></p>
 
-                            <div class="pv-tk-form-actions">
-                                <button type="submit" class="pv-btn-primary">
-                                    <i class="bi bi-send"></i> Enviar Ticket
-                                </button>
-                                <a href="<?= BASE_URL ?>proveedor/tickets" class="pv-tk-btn-back">
-                                    <i class="bi bi-arrow-left"></i> Volver a mis tickets
-                                </a>
-                            </div>
+                    <p class="pv-tk-section-label"><i class="bi bi-chat-left-dots me-1"></i>Tu mensaje</p>
+                    <div class="pv-tk-message-box"><?= htmlspecialchars($ticket['descripcion']) ?></div>
 
-                        </form>
-                    </div>
+                    <hr class="pv-tk-divider">
+
+                    <p class="pv-tk-section-label"><i class="bi bi-reply me-1"></i>Respuesta del administrador</p>
+
+                    <?php if (!empty($ticket['respuesta'])): ?>
+                        <div class="pv-tk-response-box"><?= htmlspecialchars($ticket['respuesta']) ?></div>
+                        <?php if (!empty($ticket['fecha_respuesta'])): ?>
+                            <p class="pv-tk-response-meta">
+                                <i class="bi bi-clock"></i>
+                                Respondido el <?= date('d/m/Y H:i', strtotime($ticket['fecha_respuesta'])) ?>
+                            </p>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <div class="pv-tk-waiting">
+                            <i class="bi bi-hourglass-split"></i>
+                            <p>Aún no hay respuesta del administrador.</p>
+                            <p style="font-size:.8rem;">Te notificaremos cuando tu ticket sea atendido.</p>
+                        </div>
+                    <?php endif; ?>
+
                 </div>
             </div>
 

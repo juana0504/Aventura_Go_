@@ -547,41 +547,27 @@ switch ($request) {
         generarPdfReservas();
         break;
 
-    case '/proveedor/crear-ticket':
-        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/crear_ticket.php'; //crear los tiquets
-        break;
-
-
-
-
-
     // Tickets del proveedor turistico
-    case '/proveedor_turistico/listar':
-        require_once BASE_PATH . '/app/controllers/proveedor_turistico/ticketProveedorController.php';
-        $controller = new TicketProveedorController();
-        $controller->listar();
-        break;
-
-    case '/proveedor_turistico/crear_ticket':
-        require_once BASE_PATH . '/app/controllers/proveedor_turistico/ticketProveedorController.php';
-        $controller = new TicketProveedorController();
-        $controller->crear();
-        break;
-
-    case '/proveedor_turistico/guardar_ticket':
-        require_once BASE_PATH . '/app/controllers/proveedor_turistico/ticketProveedorController.php';
-        $controller = new TicketProveedorController();
-        $controller->guardar();
-        break;
-
     case '/proveedor/tickets':
         require_once BASE_PATH . '/app/controllers/proveedor_turistico/ticketProveedorController.php';
         $controller = new TicketProveedorController();
         $controller->listar();
         break;
 
-    case '/proveedor_turistico/ticket/ver':
-        require BASE_PATH . '/app/controllers/proveedor_turistico/ticketProveedorController.php';
+    case '/proveedor/tickets/crear':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/ticketProveedorController.php';
+        $controller = new TicketProveedorController();
+        $controller->crear();
+        break;
+
+    case '/proveedor/tickets/guardar':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/ticketProveedorController.php';
+        $controller = new TicketProveedorController();
+        $controller->guardar();
+        break;
+
+    case '/proveedor/tickets/ver':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/ticketProveedorController.php';
         $controller = new TicketProveedorController();
         $controller->ver($_GET['id'] ?? null);
         break;

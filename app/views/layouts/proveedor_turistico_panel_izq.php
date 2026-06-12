@@ -26,10 +26,9 @@
                     <a href="<?= BASE_URL ?>proveedor/registrar-actividad" class="bi bi-layout-text-sidebar-reverse">Registrar actividad turistica</a>
                     <a href="<?= BASE_URL ?>proveedor/consultar-actividad" class="bi bi-table">Consultar actividades turisiticas</a>
                     <a href="<?= BASE_URL ?>proveedor/consultar-reservas" class="bi bi-calendar-check">Consultar reservas</a>
-                    <a href="<?= BASE_URL ?>proveedor/tickets">
-                        <i class="fa fa-ticket"></i> Tickets
-                    </a>
+                    <a href="<?= BASE_URL ?>proveedor/tickets" class="bi bi-ticket-perforated">Tickets</a>
                     <a href="<?= BASE_URL ?>proveedor/ingresos" class="bi bi-cash-stack" id="menu-ingresos">Ingresos</a>
+                    <a href="<?= BASE_URL ?>proveedor/perfil" class="bi bi-person-circle">Mi Perfil</a>
                 </ul>
 
                 <script>

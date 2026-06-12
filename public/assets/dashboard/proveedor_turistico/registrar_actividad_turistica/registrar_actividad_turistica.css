@@ -1,304 +1,462 @@
-/* ========================================
-   AVENTURA GO - REGISTRAR ACTIVIDAD
-======================================== */
+/* =============================================
+   AVENTURAGO — REGISTRAR ACTIVIDAD TURÍSTICA
+   registrar_actividad_turistica.css
+   Basado en el sistema pv- (dashboard.css + completar_informacion.css)
+============================================= */
 
-/* Fuentes */
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+/* ── LAYOUT ──────────────────────────────── */
 
-/* ================= PALETA ================= */
-
-:root {
-    --color-primary: #2D4059;
-    --color-secondary: #EA8217;
-    --color-white: #FFFFFF;
-    --color-bg-light: #F8F9FA;
-    --color-border: #E0E0E0;
-    --color-text: #2B2B2B;
-    --font-titles: 'Raleway', sans-serif;
-    --font-text: 'Lato', sans-serif;
+.pv-ra-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 24px;
+    align-items: start;
 }
 
-/* ================= TIPOGRAFÍA ================= */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: var(--font-titles);
+.pv-ra-wizard-wrap {
+    min-width: 0;
 }
 
-body,
-p,
-a,
-button,
-input,
-select,
-textarea {
-    font-family: var(--font-text);
+/* ── WIZARD ──────────────────────────────── */
+
+.pv-wizard {
+    background: var(--pv-surface);
+    border: 1px solid var(--pv-border);
+    border-radius: var(--pv-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--pv-shadow);
 }
 
-/*ESTRUCTURA DASHBOARD*/
+.pv-wizard__header {
+    background: #1a2b3c;
+    padding: 18px 28px;
+    border-bottom: 3px solid var(--pv-primary);
+}
 
-#registrar-actividades {
+.pv-wizard__header-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: #fff;
+    margin: 0;
     display: flex;
-    min-height: 100vh;
+    align-items: center;
+    gap: 10px;
 }
 
-.sidebar {
-    width: 280px;
-    flex-shrink: 0;
-}
+.pv-wizard__header-text i { color: var(--pv-primary); }
 
-.registrar-main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
+/* ── PASOS ───────────────────────────────── */
 
-.registrar-topbar {
-    height: 80px;
-    flex-shrink: 0;
-}
-
-/* CONTENIDO PAGINA */
-
-.formulario {
-    flex: 1;
-    padding: 20px;
-    background: var(--color-bg-light);
+.pv-wizard__steps {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    padding: 28px 40px 0;
+    background: var(--pv-bg);
+    position: relative;
 }
 
-.parrafos-informativos {
-    background: var(--color-white);
-    border: 1px solid var(--color-border);
-    border-radius: 10px;
-    padding: 20px 20px;
+.pv-wizard__steps::after {
+    content: '';
+    position: absolute;
+    top: 49px;
+    left: calc(12% + 20px);
+    right: calc(12% + 20px);
+    height: 2px;
+    background: var(--pv-border);
+    z-index: 0;
 }
 
-.parrafos-informativos img {
-    margin-bottom: 15px;
-    width: 100%;
-    max-width: 200px;
-    margin: 0 auto;
-    display: block;
-}
-
-/* =========================================
-CONTENEDOR PRINCIPAL
-========================================= */
-
-.wizard-container {
-    background: #FFFFFF;
-    border-radius: 10px;
-    padding: 40px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-
-/* =========================================
-HEADER
-========================================= */
-
-.wizard-header {
-    text-align: center;
-    margin-top: 0;
-    margin-bottom: 35px;
-    background: #2D4059;
-    padding: 20px;
-    border-radius: 10px 10px 0 0;
-    margin-left: -40px;
-    margin-right: -40px;
-    margin-top: -40px;
-}
-
-.wizard-header p {
-    font-size: 24px;
-    font-weight: 600;
-    color: #FFFFFF;
-}
-
-
-/* =========================================
-PASOS DEL WIZARD
-========================================= */
-
-.wizard-steps {
+.wizard-steps .step {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 40px;
-}
-
-.step {
-    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
     flex: 1;
+    position: relative;
+    z-index: 1;
 }
 
-.step-circle {
+.wizard-steps .step-circle {
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    background: #E0E0E0;
-    color: #777;
+    background: var(--pv-surface);
+    border: 2px solid var(--pv-border);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: auto;
-    font-weight: bold;
-    transition: 0.3s;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: var(--pv-muted);
+    transition: all .3s;
 }
 
-.step-label {
-    margin-top: 8px;
-    font-size: 14px;
-    color: #777;
+.wizard-steps .step.active .step-circle {
+    background: var(--pv-primary);
+    border-color: var(--pv-primary);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(234, 130, 23, .35);
 }
 
-/* PASO ACTIVO */
-
-.step.active .step-circle {
-    background: #EA8217;
-    color: #FFFFFF;
+.wizard-steps .step-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    color: var(--pv-muted);
+    text-align: center;
+    white-space: nowrap;
 }
 
-.step.active .step-label {
-    color: #2D4059;
-    font-weight: 600;
+.wizard-steps .step.active .step-label {
+    color: var(--pv-primary);
+    font-weight: 700;
 }
 
+/* ── CONTENIDO PASOS ─────────────────────── */
 
-/* =========================================
-CONTENIDO
-========================================= */
-
-.wizard-content {
-    margin-top: 20px;
+.pv-wizard__content {
+    padding: 32px 36px;
 }
 
+/* Clase usada en registrar actividad para visibilidad de pasos */
 .wizard-step {
     display: none;
 }
 
 .wizard-step.active {
     display: block;
+    animation: pvFadeStepIn .25s ease-out;
 }
 
+@keyframes pvFadeStepIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
 
-/* =========================================
-INPUTS
-========================================= */
+/* ── TÍTULO DE CADA PASO ─────────────────── */
 
-.wizard-step label {
+.pv-wizard__step-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--pv-border);
+}
+
+.pv-wizard__step-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--pv-radius-sm);
+    background: var(--pv-primary-light);
+    color: var(--pv-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.pv-wizard__step-title h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1.5px;
+    color: var(--pv-text);
+    margin: 0;
+}
+
+/* ── FORMULARIOS ─────────────────────────── */
+
+.pv-form-label {
+    display: block;
+    font-size: 12px;
     font-weight: 600;
-    color: #2B2B2B;
-    margin-top: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--pv-muted);
     margin-bottom: 6px;
-    margin-left: 10px;
-    margin-right: 10px;
 }
 
-.wizard-step input,
-.wizard-step textarea,
-.wizard-step select {
+.pv-form-input {
     width: 100%;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #E0E0E0;
-    margin-bottom: 15px;
-    margin-left: 10px;
-    margin-right: 10px;
+    padding: 11px 14px;
+    border: 1px solid var(--pv-border);
+    border-radius: var(--pv-radius-sm);
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--pv-text);
+    background: var(--pv-bg);
+    transition: border-color .2s, box-shadow .2s, background .2s;
+    outline: none;
 }
 
-.wizard-step textarea {
-    min-height: 110px;
+.pv-form-input:focus {
+    border-color: var(--pv-primary);
+    box-shadow: 0 0 0 3px rgba(234, 130, 23, .12);
+    background: var(--pv-surface);
 }
 
-.wizard-step small {
-    color: #777;
+.pv-form-input--file {
+    padding: 9px 14px;
+    cursor: pointer;
 }
 
+.pv-form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
 
-/* =========================================
-BOTONES
-========================================= */
+.pv-form-select {
+    cursor: pointer;
+    appearance: auto;
+}
 
-.wizard-actions {
+.pv-form-hint {
+    font-size: 12px;
+    color: var(--pv-muted);
+}
+
+/* ── ACCIONES DEL WIZARD ─────────────────── */
+
+.pv-wizard__actions {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    align-items: center;
+    padding: 20px 36px 28px;
+    border-top: 1px solid var(--pv-border);
+    background: var(--pv-bg);
 }
 
-.wizard-actions button {
-    padding: 10px 20px;
-    border-radius: 6px;
+.pv-wizard__btn-prev,
+.pv-wizard__btn-next {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 28px;
     border: none;
-    cursor: pointer;
-    font-weight: 600;
+    border-radius: var(--pv-radius-sm);
     font-size: 14px;
-}
-
-.wizard-actions button:first-child {
-    background: #6c757d;
-    color: #FFFFFF;
-}
-
-.wizard-actions button:last-child {
-    background: #EA8217;
-    color: #FFFFFF;
-}
-
-.wizard-actions button:hover {
-    opacity: 0.9;
-}
-
-
-/* =========================================
-TARJETAS DE RESUMEN
-========================================= */
-
-.preview-card {
-    border: 1px solid #E0E0E0;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    background: #F8F9FA;
-}
-
-.preview-card h6 {
     font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all .2s;
 }
 
-.preview-label {
-    font-size: 13px;
-    color: #777;
+.pv-wizard__btn-prev {
+    background: var(--pv-surface);
+    border: 1px solid var(--pv-border);
+    color: var(--pv-muted);
+}
+
+.pv-wizard__btn-prev:hover { color: var(--pv-text); }
+
+.pv-wizard__btn-next {
+    background: var(--pv-primary);
+    color: #fff;
+}
+
+.pv-wizard__btn-next:hover {
+    background: var(--pv-primary-dark);
+    transform: translateY(-1px);
+}
+
+/* ── PANEL INFORMATIVO ───────────────────── */
+
+.pv-ci-info-panel {
+    background: var(--pv-surface);
+    border: 1px solid var(--pv-border);
+    border-radius: var(--pv-radius-lg);
+    padding: 24px;
+    position: sticky;
+    top: 90px;
+    box-shadow: var(--pv-shadow);
+}
+
+.pv-ci-info-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.pv-ci-info-logo img {
+    max-width: 160px;
+    width: 100%;
+    height: auto;
+}
+
+.pv-ci-info-item {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--pv-border);
+}
+
+.pv-ci-info-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.pv-ci-info-item__icon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--pv-primary-light);
+    color: var(--pv-primary);
+    font-size: 18px;
+}
+
+.pv-ci-info-item__title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--pv-text);
+    margin-bottom: 4px;
+}
+
+.pv-ci-info-item__text {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--pv-muted);
+}
+
+/* ── PREVIEW (PASO 4) ────────────────────── */
+
+.pv-preview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.pv-preview-card {
+    background: var(--pv-bg);
+    border: 1px solid var(--pv-border);
+    border-radius: var(--pv-radius);
+    overflow: hidden;
+}
+
+.pv-preview-card__header {
+    background: #1a2b3c;
+    color: var(--pv-primary);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pv-preview-card__body {
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pv-preview-field {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.pv-preview-field--full { grid-column: 1 / -1; }
+
+.pv-preview-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--pv-muted);
 }
 
 .preview-value {
-    font-weight: 600;
-    color: #2B2B2B;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--pv-text);
+    word-break: break-word;
 }
 
+/* ── PAGE TITLE ──────────────────────────── */
 
-/* =========================================
-RESPONSIVE
-========================================= */
+.pv-page-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 38px;
+    letter-spacing: 2px;
+    color: var(--pv-text);
+    line-height: 1;
+    margin: 0 0 8px;
+}
 
-@media(max-width:768px) {
+.pv-page-title span { color: var(--pv-primary); }
 
-    .wizard-container {
-        padding: 25px;
+/* ── DARK MODE ───────────────────────────── */
+
+.pv-dark .pv-wizard,
+.pv-dark .pv-ci-info-panel { border-color: var(--pv-border); }
+
+.pv-dark .pv-wizard__content,
+.pv-dark .pv-wizard__steps,
+.pv-dark .pv-wizard__actions { background: var(--pv-bg); }
+
+.pv-dark .pv-form-input {
+    background: var(--pv-bg);
+    color: var(--pv-text);
+    border-color: var(--pv-border);
+}
+
+.pv-dark .pv-form-input:focus { background: var(--pv-surface); }
+
+.pv-dark .pv-preview-card { background: var(--pv-bg); }
+
+.pv-dark .wizard-steps .step-circle { background: var(--pv-surface); }
+
+/* ── RESPONSIVE ──────────────────────────── */
+
+@media (max-width: 1200px) {
+    .pv-ra-layout {
+        grid-template-columns: 1fr;
     }
-
-    .wizard-steps {
-        flex-direction: column;
-        gap: 15px;
+    .pv-ci-info-panel {
+        position: relative;
+        top: auto;
     }
+}
 
+@media (max-width: 992px) {
+    .pv-preview-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    .pv-wizard__content { padding: 24px 20px; }
+    .pv-wizard__actions {
+        padding: 18px 20px;
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+    .pv-wizard__btn-prev,
+    .pv-wizard__btn-next { width: 100%; }
+    .pv-wizard__steps {
+        padding: 20px 16px 10px;
+        overflow-x: auto;
+        justify-content: flex-start;
+    }
+    .pv-wizard__steps::after { display: none; }
+    .wizard-steps .step { min-width: 80px; }
+    .wizard-steps .step-label { font-size: 9px; }
+}
+
+@media (max-width: 480px) {
+    .pv-page-title { font-size: 28px; }
+    .wizard-steps .step-circle {
+        width: 34px;
+        height: 34px;
+        font-size: 15px;
+    }
 }

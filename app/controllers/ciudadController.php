@@ -1,6 +1,22 @@
 <?php
 // Importamos el modelo Ciudad, que es el encargado de comunicarse con la base de datos
 require_once __DIR__ . '/../models/Ciudad.php';
+require_once __DIR__ . '/../../config/database.php';
+
+header('Content-Type: application/json');
+
+// Buscar el departamento al que pertenece una ciudad (usado en editar actividad)
+if (isset($_GET['find_departamento'])) {
+    $idCiudad = (int)$_GET['find_departamento'];
+    $db = new conexion();
+    $pdo = $db->getConexion();
+    $stmt = $pdo->prepare("SELECT id_departamento FROM ciudades WHERE id_ciudad = :id LIMIT 1");
+    $stmt->bindParam(':id', $idCiudad, PDO::PARAM_INT);
+    $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    echo json_encode($row ?: []);
+    exit;
+}
 
 // Validamos que desde la URL venga el id del departamento
 // Ejemplo de URL esperada:
@@ -22,10 +38,6 @@ $ciudadModel = new Ciudad();
 // Llamamos al método del modelo que obtiene las ciudades
 // asociadas al departamento seleccionado
 $ciudades = $ciudadModel->obtenerPorDepartamento($id_departamento);
-
-// Indicamos que la respuesta será en formato JSON
-// Esto es importante para que JavaScript lo pueda leer correctamente
-header('Content-Type: application/json');
 
 // Enviamos las ciudades al frontend en formato JSON
 // Ejemplo de respuesta:

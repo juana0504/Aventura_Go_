@@ -119,13 +119,18 @@ function registrarTurista()
 
     if ($resultado === true) {
 
-        session_start();
+        // Obtener id_usuario recién creado
+        $userRecord = $objTurista->emailUsuarioExiste($email);
+        $id_usuario = $userRecord ? $userRecord['id_usuario'] : null;
 
-        // 🔐 Iniciar sesión automáticamente
+        // Iniciar sesión automáticamente
         $_SESSION['user'] = [
-            'nombre' => $nombre,
-            'email'  => $email,
-            'rol'    => 'turista'
+            'id_usuario' => $id_usuario,
+            'nombre'     => $nombre,
+            'email'      => $email,
+            'rol'        => 'turista',
+            'telefono'   => $telefono,
+            'foto'       => $foto_url,
         ];
 
         // 🔄 Redirección inteligente

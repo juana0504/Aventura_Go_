@@ -330,7 +330,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                 <th>Fecha</th>
                                 <th>Experiencia</th>
                                 <th>Personas</th>
-                                <th>Precio</th>
+                                <th>Precio Total</th>
                                 <th>Estado</th>
                             </tr>
                         </thead>
@@ -350,7 +350,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                             </span>
                                         </td>
                                         <td>
-                                            <span class="pv-precio">$<?= number_format($r['precio'], 2) ?></span>
+                                            <span class="pv-precio">$<?= number_format((float)($r['precio'] ?? 0) * (int)($r['cantidad_personas'] ?? 1), 2) ?></span>
                                         </td>
                                         <td>
                                             <span class="<?= $estadoBadgeClass($r['estado'] ?? '') ?>">

@@ -27,18 +27,16 @@ class TicketProveedorController
     // 👁 VER DETALLE DEL TICKET (con respuesta)
     public function ver($id_ticket)
     {
-        session_start();
         $id_usuario = $_SESSION['user']['id_usuario'];
 
         $ticket = $this->ticketModel->buscarPorId($id_ticket);
 
-        // Seguridad: que el ticket sea del proveedor
         if (!$ticket || $ticket['id_usuario'] != $id_usuario) {
             mostrarSweetAlert(
                 'error',
                 'Acceso denegado',
                 'No puedes ver este ticket',
-                BASE_URL . 'proveedor_turistico/listar'
+                BASE_URL . 'proveedor/tickets'
             );
             exit();
         }

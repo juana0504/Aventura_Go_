@@ -50,9 +50,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     =============================== */
                     const imgPrincipal = data.imagen_principal
                         ? `${BASE_URL}public/uploads/turistico/actividades/${data.imagen_principal}`
-                        : `${BASE_URL}public/uploads/turistico/actividades/actividad_default.png`;
+                        : `${BASE_URL}public/assets/dashboard/proveedor_turistico/consultar_actividad_turistica/img/no-image.png`;
 
-                    document.getElementById('modal-imagen-principal').src = imgPrincipal;
+                    const imgEl = document.getElementById('modal-imagen-principal');
+                    imgEl.src = imgPrincipal;
+                    imgEl.onerror = function() {
+                        this.src = `${BASE_URL}public/assets/dashboard/proveedor_turistico/consultar_actividad_turistica/img/no-image.png`;
+                        this.onerror = null;
+                    };
 
                     /* ===============================
                        GALERÍA

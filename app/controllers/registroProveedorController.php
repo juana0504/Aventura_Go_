@@ -89,13 +89,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $idUsuario = $conexion->lastInsertId();
 
         $sqlProveedor = "
-        INSERT INTO proveedor (id_usuario, estado, validado)
-        VALUES (:id_usuario, 'PENDIENTE', 0)
+        INSERT INTO proveedor
+            (id_usuario, estado, validado, nombre_empresa, nit_rut, email, telefono,
+             direccion, nombre_representante, tipo_documento, identificacion_representante,
+             telefono_representante, id_ciudad, departamento, actividades, descripcion,
+             logo, foto_representante)
+        VALUES
+            (:id_usuario, 'PENDIENTE', 0, '', '', '', '', '', '', '', '', '', NULL, '', '', '', '', '')
     ";
 
         $stmtProveedor = $conexion->prepare($sqlProveedor);
         $stmtProveedor->bindParam(':id_usuario', $idUsuario);
-        $stmtProveedor->execute();
+
+        if (!$stmtProveedor->execute()) {
+            mostrarSweetAlert('error', 'Error interno', 'No se pudo crear el perfil de proveedor. Intenta de nuevo.');
+            exit();
+        }
 
         mostrarSweetAlert(
             'success',

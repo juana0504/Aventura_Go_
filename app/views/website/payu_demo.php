@@ -1,6 +1,8 @@
 <?php
 // Vista DEMO. No proceses ni guardes datos reales aquí.
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Seguridad mínima: si no hay operación en curso, regresa al inicio
 if (!isset($_SESSION['id_reserva']) || !isset($_SESSION['id_pago'])) {
