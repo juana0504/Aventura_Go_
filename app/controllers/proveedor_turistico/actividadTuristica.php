@@ -35,17 +35,17 @@ switch ($method) {
         $accion = $_GET['accion'] ?? '';
 
         if ($accion === 'eliminar') {
-            eliminaractividad($_GET['id_usuario']);
+            eliminaractividad($_GET['id'] ?? null);
             exit;
         }
 
         if ($accion === 'activar') {
-            activarActividad($_GET['id_usuario']);
+            activarActividad($_GET['id'] ?? null);
             exit;
         }
 
         if ($accion === 'desactivar') {
-            desactivarActividad($_GET['id_usuario']);
+            desactivarActividad($_GET['id'] ?? null);
             exit;
         }
 
@@ -373,4 +373,30 @@ function eliminaractividad($id)
     } else {
         mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar la actividad.');
     }
+}
+
+function consultarActividadOjo()
+{
+    $id = $_GET['id'] ?? null;
+
+    if (!$id) {
+        http_response_code(400);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['error' => 'ID no especificado']);
+        exit;
+    }
+
+    $objActividad = new ActividadTuristica();
+    $actividad = $objActividad->listarParaModal($id);
+
+    if (!$actividad) {
+        http_response_code(404);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['error' => 'Actividad no encontrada']);
+        exit;
+    }
+
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($actividad);
+    exit;
 }

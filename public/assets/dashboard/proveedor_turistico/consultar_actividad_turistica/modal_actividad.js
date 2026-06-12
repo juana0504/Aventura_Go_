@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const idActividad = btn.dataset.id;
 
-            fetch(`${BASE_URL}/proveedor/consultar-actividad-id?id=${idActividad}`)
+            fetch(`${BASE_URL}proveedor/consultar-actividad-id?id=${idActividad}`)
             .then(res => res.json())
             .then(data => {
 
@@ -49,8 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
                        IMAGEN PRINCIPAL
                     =============================== */
                     const imgPrincipal = data.imagen_principal
-                        ? `${BASE_URL}/public/uploads/turistico/actividades/${data.imagen_principal}`
-                        : `${BASE_URL}/public/uploads/turistico/actividades/actividad_default.png`;
+                        ? `${BASE_URL}public/uploads/turistico/actividades/${data.imagen_principal}`
+                        : `${BASE_URL}public/uploads/turistico/actividades/actividad_default.png`;
 
                     document.getElementById('modal-imagen-principal').src = imgPrincipal;
 
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (data.imagenes && data.imagenes.length > 0) {
                         data.imagenes.forEach(img => {
                             const thumb = document.createElement('img');
-                            thumb.src = `${BASE_URL}/public/uploads/turistico/actividades/${img}`;
+                            thumb.src = `${BASE_URL}public/uploads/turistico/actividades/${img}`;
                             thumb.classList.add('img-thumbnail');
                             thumb.style.width = '70px';
                             thumb.style.cursor = 'pointer';
@@ -129,12 +129,12 @@ document.addEventListener('DOMContentLoaded', () => {
     =============================== */
     document.getElementById('btn-activar').addEventListener('click', e => {
         location.href =
-            `${BASE_URL}/proveedor/actividadTuristica?accion=activar&id=${e.target.dataset.id}`;
+            `${BASE_URL}proveedor/actividadTuristica?accion=activar&id=${e.target.dataset.id}`;
     });
 
     document.getElementById('btn-desactivar').addEventListener('click', e => {
         location.href =
-            `${BASE_URL}/proveedor/actividadTuristica?accion=desactivar&id=${e.target.dataset.id}`;
+            `${BASE_URL}proveedor/actividadTuristica?accion=desactivar&id=${e.target.dataset.id}`;
     });
 });
 

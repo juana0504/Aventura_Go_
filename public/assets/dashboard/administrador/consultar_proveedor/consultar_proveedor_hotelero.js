@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!idProveedor) return;
 
         try {
-            const response = await fetch(`/aventura_go/administrador/consultar-proveedor-hotelero-id?id=${encodeURIComponent(idProveedor)}`);
+            const response = await fetch(`${BASE_URL}administrador/consultar-proveedor-hotelero-id?id=${encodeURIComponent(idProveedor)}`);
 
             if (!response.ok) {
                 throw new Error('No se pudo obtener la información');
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Header
         setText('modal-nombre-establecimiento', data.nombre_establecimiento ?? '—');
-        setImg('modal-logo', `${BASE_URL}/public/uploads/hoteles/${data.logo}`);
+        setImg('modal-logo', `${BASE_URL}public/uploads/hoteles/${data.logo}`);
 
         // Estado y fecha
         setText('modal-status', data.estado);
@@ -104,12 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         btnActivar.setAttribute(
             'href',
-            `/aventura_go/administrador/cambiar-estado-proveedor-hotelero?id=${data.id_proveedor_hotelero}&accion=activar`
+            `${BASE_URL}administrador/cambiar-estado-proveedor-hotelero?id=${data.id_proveedor_hotelero}&accion=activar`
         );
 
         btnDesactivar.setAttribute(
             'href',
-            `/aventura_go/administrador/cambiar-estado-proveedor-hotelero?id=${data.id_proveedor_hotelero}&accion=desactivar`
+            `${BASE_URL}administrador/cambiar-estado-proveedor-hotelero?id=${data.id_proveedor_hotelero}&accion=desactivar`
         );
 
         console.log("HREF ACTIVAR:", btnActivar.href);
@@ -182,7 +182,7 @@ document.addEventListener("click", function (e) {
 
     let nuevoEstado = estado === "activo" ? "inactivo" : "activo";
 
-    fetch("/aventura_go/administrador/cambiar-estado-proveedor-hotelero", {
+    fetch(`${BASE_URL}administrador/cambiar-estado-proveedor-hotelero`, {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"

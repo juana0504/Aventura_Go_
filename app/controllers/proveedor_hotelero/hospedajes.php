@@ -134,7 +134,7 @@ function registrarHospedaje()
             'success',
             'Hospedaje registrado',
             'El hospedaje fue registrado correctamente',
-            '/aventura_go/proveedor_hotelero/registrar-hospedajes'
+            BASE_URL . 'proveedor_hotelero/registrar-hospedajes'
         );
     } else {
 
@@ -203,7 +203,7 @@ function actualizarHospedaje()
             'success',
             'Hospedaje actualizado',
             'El hospedaje fue actualizado correctamente',
-            '/aventura_go/proveedor_hotelero/consultar-hospedaje'
+            BASE_URL . 'proveedor_hotelero/consultar-hospedajes'
         );
     } else {
         mostrarSweetAlert(
@@ -244,7 +244,7 @@ function activarHospedaje($id)
             'success',
             'Hospedaje activado',
             'El hospedaje fue activado correctamente',
-            '/aventura_go/proveedor_hotelero/consultar-hospedaje'
+            BASE_URL . 'proveedor_hotelero/consultar-hospedajes'
         );
     } else {
         mostrarSweetAlert(
@@ -265,7 +265,7 @@ function desactivarHospedaje($id)
             'success',
             'Hospedaje desactivado',
             'El hospedaje fue desactivado correctamente',
-            '/aventura_go/proveedor_hotelero/consultar-hospedaje'
+            BASE_URL . 'proveedor_hotelero/consultar-hospedajes'
         );
     } else {
         mostrarSweetAlert(
@@ -283,7 +283,7 @@ function eliminarHospedaje($id)
     $resultado = $objHospedaje->eliminar($id);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Eliminación exitosa', 'hospedaje eliminado.', '/aventura_go/proveedor_hotelero/consultar-hospedaje');
+        mostrarSweetAlert('success', 'Eliminación exitosa', 'hospedaje eliminado.', BASE_URL . 'proveedor_hotelero/consultar-hospedajes');
     } else {
         mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el hospedaje.');
     }

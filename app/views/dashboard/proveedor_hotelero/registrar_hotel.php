@@ -74,7 +74,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
             <a href="<?= BASE_URL ?>proveedor_hotelero/completar-informacion" class="pv-nav-item">
                 <i class="bi bi-pen"></i> Registrar/Actualizar Información
             </a>
-            <a href="<?= BASE_URL ?>proveedor_hotelero/registrar-hospedaje" class="pv-nav-item pv-nav-item--active">
+            <a href="<?= BASE_URL ?>proveedor_hotelero/registrar-hospedajes" class="pv-nav-item pv-nav-item--active">
                 <i class="bi bi-plus-circle pv-nav-item__icon"></i> Nuevo Hospedaje
             </a>
             <a href="<?= BASE_URL ?>proveedor_hotelero/consultar-hoteles" class="pv-nav-item">

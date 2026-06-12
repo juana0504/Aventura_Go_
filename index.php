@@ -126,9 +126,19 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/turista/registrar_reserva.php';
         break;
 
-    case '/turista/ver-reservas':  //crud confirmar reserva 
+    case '/turista/ver-reservas':  //crud confirmar reserva
         require_once BASE_PATH . '/app/controllers/turista/reservaController.php';
         (new ReservaController())->verReservas();
+        break;
+
+    case '/turista/obtener-reserva':
+        require_once BASE_PATH . '/app/controllers/turista/reservaController.php';
+        (new ReservaController())->obtenerReserva();
+        break;
+
+    case '/turista/confirmar-reserva':
+        require_once BASE_PATH . '/app/controllers/turista/reservaController.php';
+        (new ReservaController())->confirmarReserva();
         break;
 
     case '/turista/seleccionar-actividad':
@@ -471,11 +481,6 @@ switch ($request) {
         $controller->cambiarClave();
         break;
 
-    //rutas dashboard   
-    case '/proveedor/dashboard':
-        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/dashboard.php';
-        break;
-
     //rutas actualizacion proveedor
     //rutas actualizacion proveedor
     case '/proveedor/pendiente':
@@ -501,7 +506,16 @@ switch ($request) {
         break;
 
     case '/proveedor/consultar-actividad':
-        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/consultar_actividad_turistica.php'; //consulta la tabla con las actividades turisticas registradas
+        require BASE_PATH . '/app/views/dashboard/proveedor_turistico/consultar_actividad_turistica.php';
+        break;
+
+    case '/proveedor/consultar-actividad-id':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php';
+        consultarActividadOjo();
+        break;
+
+    case '/proveedor/actividadTuristica':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php';
         break;
 
     case '/proveedor/pdf-actividades':
@@ -605,9 +619,12 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/proveedor_hotelero/pendiente_aprobacion.php'; //redirige a la pagina de pendiente de aprobacion del proveedor hotelero
         break;
 
-    case '/proveedor_hotelero/completar-informacion':
-        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/completarInformacion.php'; //redirige a completar la informacion del proveedor hotelero
+    case '/proveedor_hotelero/registrar-informacion':
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/registrarInformacion.php';
         break;
+
+    case '/proveedor_hotelero/completar-informacion':
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/completarInformacion.php';
         break;
 
     case '/proveedor_hotelero/guardar-informacion':
@@ -631,8 +648,8 @@ switch ($request) {
     //     generarPdfHospedajes();
     //     break;
 
-    case '/proveedorproveedor_hotelero/editar-hospedaje':
-        require BASE_PATH . '/app/views/dashboard/proveedor_hotelero/editar_hospedaje.php'; //editar le hospedaje
+    case '/proveedor_hotelero/editar-hospedaje':
+        require BASE_PATH . '/app/views/dashboard/proveedor_hotelero/editar_hospedaje.php';
         break;
     case '/proveedor_hotelero/actualizar-hospedaje':
         require_once BASE_PATH . '/app/controllers/proveedor_hotelero/hospedajes.php';  

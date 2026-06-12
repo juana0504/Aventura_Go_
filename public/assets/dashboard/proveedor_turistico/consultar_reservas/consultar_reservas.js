@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', function() {
             const filtro = this.dataset.filter;
             // Redirigimos para que el backend procese la consulta y el PDF sea consistente
-            window.location.href = `${BASE_URL}/proveedor/consultar-reservas?filtro=${filtro}`;
+            window.location.href = `${BASE_URL}proveedor/consultar-reservas?filtro=${filtro}`;
         });
     });
 
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 function confirmarReserva(id) {
     if (confirm('¿Está seguro de confirmar esta reserva?\n\nEl turista será notificado y se esperará su asistencia.')) {
-        window.location.href = `${BASE_URL}/proveedor/consultar-reservas?accion=confirmar&id=${id}`;
+        window.location.href = `${BASE_URL}proveedor/consultar-reservas?accion=confirmar&id=${id}`;
     }
 }
 
@@ -52,7 +52,7 @@ function cancelarReserva(id) {
     const motivo = prompt('Por favor, indique el motivo de la cancelación (opcional):');
     if (motivo !== null) {
         if (confirm('¿Confirmar la cancelación definitiva de esta reserva?')) {
-            window.location.href = `${BASE_URL}/proveedor/consultar-reservas?accion=cancelar&id=${id}&motivo=${encodeURIComponent(motivo)}`;
+            window.location.href = `${BASE_URL}proveedor/consultar-reservas?accion=cancelar&id=${id}&motivo=${encodeURIComponent(motivo)}`;
         }
     }
 }
