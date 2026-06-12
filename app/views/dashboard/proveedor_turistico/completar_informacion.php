@@ -162,7 +162,9 @@ foreach (array_slice($partes, 0, 2) as $p) {
                 <div class="pv-ci-wizard-wrap">
 
                     <!-- Formulario — action, method, names originales intactos -->
-                    <form id="formCompletarProveedor" action="<?= BASE_URL ?>proveedor/guardar-informacion" method="POST" enctype="multipart/form-data">
+                    <form id="formCompletarProveedor" action="<?= BASE_URL ?>proveedor/guardar-informacion" method="POST" enctype="multipart/form-data"
+                          data-has-logo="<?= !empty($proveedor['logo']) ? '1' : '0' ?>"
+                          data-has-foto="<?= !empty($proveedor['foto_representante']) ? '1' : '0' ?>">
                         <input type="hidden" name="accion" value="actualizar">
 
                         <div class="pv-wizard">

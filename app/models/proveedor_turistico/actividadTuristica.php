@@ -74,29 +74,37 @@ class ActividadTuristica
 
     public function eliminarImagenes($id_actividad)
     {
-        $stmt = $this->conexion->prepare("DELETE FROM actividad_imagen WHERE id_actividad = :id");
-        return $stmt->execute([':id' => (int)$id_actividad]);
+        try {
+            $stmt = $this->conexion->prepare("DELETE FROM actividad_imagen WHERE id_actividad = :id");
+            return $stmt->execute([':id' => (int)$id_actividad]);
+        } catch (PDOException $e) {
+            return true;
+        }
     }
 
     public function guardarImagen($data)
     {
-        $sql = "INSERT INTO actividad_imagen (
-        id_actividad,
-        imagen,
-        es_principal
-        ) VALUES (
-            :id_actividad,
-            :imagen,
-            :es_principal
-        )";
+        try {
+            $sql = "INSERT INTO actividad_imagen (
+            id_actividad,
+            imagen,
+            es_principal
+            ) VALUES (
+                :id_actividad,
+                :imagen,
+                :es_principal
+            )";
 
-        $stmt = $this->conexion->prepare($sql);
+            $stmt = $this->conexion->prepare($sql);
 
-        return $stmt->execute([
-            ':id_actividad' => $data['id_actividad'],
-            ':imagen'       => $data['imagen'],
-            ':es_principal' => $data['es_principal']
-        ]);
+            return $stmt->execute([
+                ':id_actividad' => $data['id_actividad'],
+                ':imagen'       => $data['imagen'],
+                ':es_principal' => $data['es_principal']
+            ]);
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
 
@@ -105,16 +113,13 @@ class ActividadTuristica
     /** Listar todas las actividades de un proveedor */
     public function listarPorProveedor($id_proveedor)
     {
-        $sql = "SELECT 
+        $sql = "SELECT
                 a.*,
                 c.nombre AS destino,
-                img.imagen AS imagen_principal
+                a.imagen AS imagen_principal
             FROM actividad a
-            INNER JOIN ciudades c 
+            INNER JOIN ciudades c
                 ON a.id_ciudad = c.id_ciudad
-            LEFT JOIN actividad_imagen img 
-                ON img.id_actividad = a.id_actividad
-               AND img.es_principal = 1
             WHERE a.id_proveedor = :id_proveedor
             ORDER BY a.created_at DESC";
 
@@ -163,33 +168,9 @@ class ActividadTuristica
             return null;
         }
 
-        // Cargar imágenes reales desde actividad_imagen
-        $sqlImg = "SELECT imagen, es_principal
-                   FROM actividad_imagen
-                   WHERE id_actividad = :id
-                   ORDER BY es_principal DESC, id_imagen ASC";
-        $stmtImg = $this->conexion->prepare($sqlImg);
-        $stmtImg->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmtImg->execute();
-        $imagenes = $stmtImg->fetchAll(PDO::FETCH_ASSOC);
-
-        // imagen_principal = la marcada como principal, o la primera, o el campo legacy
-        $principal = null;
-        $lista = [];
-        foreach ($imagenes as $img) {
-            $lista[] = $img['imagen'];
-            if ($img['es_principal'] && !$principal) {
-                $principal = $img['imagen'];
-            }
-        }
-        if (!$principal && !empty($lista)) {
-            $principal = $lista[0];
-        }
-        // fallback al campo legacy si no hay registros en actividad_imagen
-        if (!$principal) {
-            $principal = $data['imagen'] ?? null;
-            if ($principal) $lista = [$principal];
-        }
+        // Usar el campo imagen de la tabla actividad (campo principal)
+        $principal = $data['imagen'] ?? null;
+        $lista     = $principal ? [$principal] : [];
 
         $data['imagen_principal'] = $principal;
         $data['imagenes']         = $lista;
@@ -254,7 +235,7 @@ class ActividadTuristica
     public function listarActividadesPublicas()
     {
         $sql = "
-        SELECT 
+        SELECT
             a.id_actividad,
             a.nombre,
             a.precio,
@@ -262,15 +243,12 @@ class ActividadTuristica
             a.cupos,
             a.ubicacion,
             c.nombre AS ciudad,
-            img.imagen
+            a.imagen
         FROM actividad a
         INNER JOIN proveedor p
             ON a.id_proveedor = p.id_proveedor
-        INNER JOIN ciudades c 
+        INNER JOIN ciudades c
             ON a.id_ciudad = c.id_ciudad
-        LEFT JOIN actividad_imagen img 
-            ON img.id_actividad = a.id_actividad 
-        AND img.es_principal = 1
         WHERE a.estado = 'ACTIVO'
         AND p.estado = 'ACTIVO'
         ORDER BY a.created_at DESC
@@ -285,7 +263,7 @@ class ActividadTuristica
     public function obtenerPorCiudad($ciudad)
     {
         $sql = "
-    SELECT 
+    SELECT
         a.id_actividad,
         a.nombre,
         a.precio,
@@ -293,15 +271,12 @@ class ActividadTuristica
         a.cupos,
         a.ubicacion,
         c.nombre AS ciudad,
-        img.imagen
+        a.imagen
     FROM actividad a
     INNER JOIN proveedor p
         ON a.id_proveedor = p.id_proveedor
-    INNER JOIN ciudades c 
+    INNER JOIN ciudades c
         ON a.id_ciudad = c.id_ciudad
-    LEFT JOIN actividad_imagen img 
-        ON img.id_actividad = a.id_actividad 
-        AND img.es_principal = 1
     WHERE a.estado = 'ACTIVO'
     AND p.estado = 'ACTIVO'
     AND UPPER(c.nombre) = UPPER(:ciudad)
@@ -333,16 +308,13 @@ class ActividadTuristica
     public function listar($id_proveedor)
     {
         try {
-            $sql = "SELECT 
+            $sql = "SELECT
             a.*,
             c.nombre AS destino,
-            img.imagen AS imagen_principal
+            a.imagen AS imagen_principal
         FROM actividad a
-        INNER JOIN ciudades c 
+        INNER JOIN ciudades c
         ON a.id_ciudad = c.id_ciudad
-        LEFT JOIN actividad_imagen img 
-        ON img.id_actividad = a.id_actividad
-        AND img.es_principal = 1
         WHERE a.id_proveedor = :id_proveedor
         ORDER BY a.created_at DESC
         ";
@@ -378,24 +350,19 @@ class ActividadTuristica
 
     public function obtenerPorId($idActividad)
     {
-        $sql = "SELECT 
+        $sql = "SELECT
         a.id_actividad,
         a.nombre,
-        a.precio, 
+        a.precio,
         a.created_at,
-
+        a.imagen AS imagen_principal,
         c.nombre AS ciudad,
-        d.nombre AS departamento,
-
-        img_principal.imagen AS imagen_principal
+        d.nombre AS departamento
     FROM actividad a
-    INNER JOIN ciudades c 
+    INNER JOIN ciudades c
         ON a.id_ciudad = c.id_ciudad
     INNER JOIN departamentos d
         ON c.id_departamento = d.id_departamento
-    LEFT JOIN actividad_imagen img_principal
-        ON img_principal.id_actividad = a.id_actividad
-       AND img_principal.es_principal = 1
     WHERE a.id_actividad = :id
     LIMIT 1";
 
@@ -412,7 +379,7 @@ class ActividadTuristica
     public function obtenerDetalleActividad($id)
     {
         $sql = "
-        SELECT 
+        SELECT
             a.id_actividad,
             a.nombre,
             a.descripcion,
@@ -421,19 +388,14 @@ class ActividadTuristica
             a.precio,
             a.estado,
             a.created_at,
-
+            a.imagen AS imagen_principal,
             c.nombre AS ciudad,
-            d.nombre AS departamento,
-
-            img_principal.imagen AS imagen_principal
+            d.nombre AS departamento
             FROM actividad a
-            INNER JOIN ciudades c 
+            INNER JOIN ciudades c
                 ON a.id_ciudad = c.id_ciudad
             INNER JOIN departamentos d
                 ON c.id_departamento = d.id_departamento
-            LEFT JOIN actividad_imagen img_principal
-                ON img_principal.id_actividad = a.id_actividad
-            AND img_principal.es_principal = 1
             WHERE a.id_actividad = :id
             LIMIT 1
             ";
@@ -448,19 +410,8 @@ class ActividadTuristica
             return null;
         }
 
-        // 🔹 Galería de imágenes
-        $sqlImgs = "
-        SELECT imagen 
-        FROM actividad_imagen 
-        WHERE id_actividad = :id
-        ORDER BY es_principal DESC
-        ";
-
-        $stmtImgs = $this->conexion->prepare($sqlImgs);
-        $stmtImgs->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmtImgs->execute();
-
-        $actividad['imagenes'] = $stmtImgs->fetchAll(PDO::FETCH_COLUMN);
+        // Galería: usar el campo imagen de la tabla actividad
+        $actividad['imagenes'] = $actividad['imagen'] ? [$actividad['imagen']] : [];
 
         return $actividad;
     }

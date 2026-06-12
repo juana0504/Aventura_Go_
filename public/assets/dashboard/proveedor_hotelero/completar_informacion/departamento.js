@@ -19,44 +19,25 @@ fetch(BASE_URL + 'departamentos')
     });
 
 
-// Al cargar la página, dejamos el select de ciudades deshabilitado
-selectCiudad.disabled = true;
-
 // Escuchamos cuando el usuario cambia el departamento
 selectDepartamento.addEventListener('change', function () {
 
-    // Obtenemos el id del departamento seleccionado
     const idDepartamento = this.value;
 
-    // Reiniciamos el select de ciudades
+    // Limpiar ciudades anteriores
     selectCiudad.innerHTML = '<option value="">Seleccione una ciudad</option>';
-    selectCiudad.disabled = true;
 
-    // Si no se seleccionó ningún departamento, no hacemos nada más
-    if (!idDepartamento) {
-        return;
-    }
+    if (!idDepartamento) return;
 
-    // Llamamos al controlador que trae las ciudades desde la base de datos
     fetch(BASE_URL + `ciudades?id_departamento=${idDepartamento}`)
-        .then(response => response.json()) // Convertimos la respuesta a JSON
+        .then(response => response.json())
         .then(data => {
-
-            // Si no vienen ciudades, dejamos el select deshabilitado
-            if (data.length === 0) {
-                return;
-            }
-
-            // Recorremos las ciudades recibidas
             data.forEach(ciudad => {
                 const option = document.createElement('option');
-                option.value = ciudad.id_ciudad; // ID real (FK)
-                option.textContent = ciudad.nombre; // Nombre visible
+                option.value = ciudad.id_ciudad;
+                option.textContent = ciudad.nombre;
                 selectCiudad.appendChild(option);
             });
-
-            // Habilitamos el select de ciudades
-            selectCiudad.disabled = false;
         })
         .catch(error => {
             console.error('Error cargando ciudades:', error);
