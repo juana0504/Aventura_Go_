@@ -131,7 +131,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $stmtProveedor = $conexion->prepare($sqlProveedor);
         $stmtProveedor->bindParam(':id_usuario', $idUsuario);
-        $stmtProveedor->execute();
+
+        if (!$stmtProveedor->execute()) {
+            mostrarSweetAlert('error', 'Error interno', 'No se pudo crear el perfil de proveedor. Intenta de nuevo.');
+            exit();
+        }
 
         $conexion->commit();
 
