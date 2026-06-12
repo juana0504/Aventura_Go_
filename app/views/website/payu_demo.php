@@ -4,7 +4,7 @@ session_start();
 
 // Seguridad mínima: si no hay operación en curso, regresa al inicio
 if (!isset($_SESSION['id_reserva']) || !isset($_SESSION['id_pago'])) {
-    header('Location: ' . BASE_URL . '/descubre-tours');
+    header('Location: ' . BASE_URL . 'descubre-tours');
     exit;
 }
 ?>

@@ -64,7 +64,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("prev-email").innerText = document.getElementById("email").value || "-";
         document.getElementById("prev-telefono").innerText = document.getElementById("telefono").value || "-";
 
-        document.getElementById("prev-nombre_repre").innerText = document.getElementById("nombre_repre").value || "-";
         document.getElementById("prev-email_repre").innerText = document.getElementById("email_repre").value || "-";
         document.getElementById("prev-telefono_repre").innerText = document.getElementById("telefono_repre").value || "-";
         document.getElementById("prev-representante").innerText = document.getElementById("nombre_repre").value || "-";

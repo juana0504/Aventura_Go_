@@ -1,10 +1,27 @@
 <?php
 require_once __DIR__ . '/../../../../config/config.php';
 require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
-require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';
+require_once BASE_PATH . '/app/controllers/administrador/hotelero.php';
 
-$proveedor = listarProveedores()[0] ?? null; // Assuming the first provider is used
+$proveedor = listarHoteles()[0] ?? null; // Assuming the first provider is used
+
+
+// Lógica intacta
+$estadoBadgeClass = static function (string $estado): string {
+    if ($estado === 'confirmada') return 'pv-badge pv-badge--confirmed';
+    if ($estado === 'pendiente')  return 'pv-badge pv-badge--pending';
+    return 'pv-badge pv-badge--cancelled';
+};
+
+// Iniciales para el topbar
+$nombreProveedor = $_SESSION['user']['nombre'] ?? '';
+$iniciales = '';
+$partes = explode(' ', trim($nombreProveedor));
+foreach (array_slice($partes, 0, 2) as $p) {
+    $iniciales .= mb_strtoupper(mb_substr($p, 0, 1));
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -38,6 +55,7 @@ $proveedor = listarProveedores()[0] ?? null; // Assuming the first provider is u
 
     <!-- Estilos CSS (siempre al final)-->
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/proveedor_hotelero/pendiente_aprobacion/pendiente_aprobacion.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/dashboard/dashboard.css">
 </head>
 
 <body>
@@ -45,32 +63,152 @@ $proveedor = listarProveedores()[0] ?? null; // Assuming the first provider is u
     <section class="pendiente-aprobacion">
 
         <!-- PANEL LATERAL -->
-        <aside class="sidebar">
-            <?php include_once __DIR__ . '/../../layouts/proveedor_hotelero_panel_izq.php'; ?>
-        </aside>
+        <!-- ==========================================
+            SIDEBAR PROVEEDOR TURÍSTICO
+        =========================================== -->
+        <nav class="pv-sidebar">
+
+            <div class="pv-sidebar__logo">
+                <div class="pv-sidebar__logo-icon">A</div>
+                <div>
+                    <div class="pv-sidebar__logo-text">AVENTURA GO</div>
+                    <div class="pv-sidebar__logo-sub">Proveedor Hotelero</div>
+                </div>
+            </div>
+
+            <div class="pv-sidebar__section-label">Panel</div>
+
+            <a href="<?= BASE_URL ?>proveedor_hotelero/dashboard" class="pv-nav-item pv-nav-item--active">
+                <i class="bi bi-grid-1x2-fill pv-nav-item__icon"></i> Dashboard
+            </a>
+
+            <div class="pv-sidebar__section-label">Actividades</div>
+
+            <a href="<?= BASE_URL ?>proveedor_hotelero/completar-informacion" class="pv-nav-item">
+                <i class="bi bi-pen"></i> Registrar/Actualizar Información
+            </a>
+            <a href="<?= BASE_URL ?>proveedor_hotelero/registrar-hospedajes" class="pv-nav-item">
+                <i class="bi bi-plus-circle pv-nav-item__icon"></i> Nuevo Hospedaje
+            </a>
+            <a href="<?= BASE_URL ?>proveedor_hotelero/consultar-hospedajes" class="pv-nav-item">
+                <i class="bi bi-compass pv-nav-item__icon"></i> Mis Hospedajes
+            </a>
+            <a href="<?= BASE_URL ?>proveedor_hotelero/consultar-reservas" class="pv-nav-item">
+                <i class="bi bi-calendar3 pv-nav-item__icon"></i> Reservas
+            </a>
+            <a href="<?= BASE_URL ?>proveedor_hotelero/ingresos" class="pv-nav-item">
+                <i class="bi bi-bar-chart-line pv-nav-item__icon"></i> Ingresos
+            </a>
+
+            <div class="pv-sidebar__section-label">Soporte</div>
+
+            <a href="<?= BASE_URL ?>proveedor_hotelero/tickets" class="pv-nav-item">
+                <i class="bi bi-headset pv-nav-item__icon"></i> Tickets
+            </a>
+            <a href="<?= BASE_URL ?>proveedor_hotelero/perfil" class="pv-nav-item">
+                <i class="bi bi-person-circle pv-nav-item__icon"></i> Mi Perfil
+            </a>
+
+        </nav>
 
         <!-- Contenido Principal -->
         <main class="informacion-main">
 
-            <!-- BARRA SUPERIOR -->
-            <header class="informacion-topbar">
-                <button id="btnMenu" class="btn-hamburguesa">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <?php
-                include_once __DIR__ . '/../../layouts/buscador_proveedor_hotelero.php';
-                ?>
+            <!-- TOPBAR -->
+            <header class="pv-topbar">
+
+                <div class="pv-topbar__search">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Buscar actividades, reservas..." class="pv-topbar__input" id="pv-search-input" autocomplete="off">
+                </div>
+
+                <div class="pv-topbar__actions">
+
+                    <!-- Modo oscuro -->
+                    <button class="pv-icon-btn" id="pv-dark-toggle" title="Modo oscuro">
+                        <i class="bi bi-moon-fill" id="pv-dark-icon"></i>
+                    </button>
+
+                    <!-- Notificaciones -->
+                    <div class="pv-topbar__dropdown-wrap">
+                        <button class="pv-icon-btn pv-icon-btn--notif" id="pv-notif-btn">
+                            <i class="bi bi-bell-fill"></i>
+                        </button>
+                        <div class="pv-dropdown pv-dropdown--notif" id="pv-notif-panel">
+                            <div class="pv-dropdown__header">
+                                <span class="pv-dropdown__title">Notificaciones</span>
+                                <button class="pv-dropdown__mark-all">Marcar todas</button>
+                            </div>
+                            <div class="pv-notif-list">
+                                <div class="pv-notif-item pv-notif-item--unread">
+                                    <div class="pv-notif-item__icon pv-notif-item__icon--green"><i class="bi bi-check-circle-fill"></i></div>
+                                    <div class="pv-notif-item__body">
+                                        <p class="pv-notif-item__text">Nueva reserva confirmada en tu actividad.</p>
+                                        <span class="pv-notif-item__time">Hace 1 hora</span>
+                                    </div>
+                                    <span class="pv-notif-item__dot"></span>
+                                </div>
+                                <div class="pv-notif-item pv-notif-item--unread">
+                                    <div class="pv-notif-item__icon pv-notif-item__icon--amber"><i class="bi bi-clock-fill"></i></div>
+                                    <div class="pv-notif-item__body">
+                                        <p class="pv-notif-item__text">Tienes una reserva <strong>pendiente</strong> de confirmación.</p>
+                                        <span class="pv-notif-item__time">Hace 3 horas</span>
+                                    </div>
+                                    <span class="pv-notif-item__dot"></span>
+                                </div>
+                            </div>
+                            <a href="<?= BASE_URL ?>proveedor/tickets" class="pv-dropdown__footer">Ver todas las notificaciones</a>
+                        </div>
+                    </div>
+
+                    <!-- Perfil -->
+                    <div class="pv-topbar__dropdown-wrap">
+                        <button class="pv-profile-btn" id="pv-profile-btn">
+                            <div class="pv-profile-btn__avatar"><?= htmlspecialchars($iniciales) ?></div>
+                            <div class="pv-profile-btn__info">
+                                <span class="pv-profile-btn__name"><?= htmlspecialchars($nombreProveedor) ?></span>
+                                <span class="pv-profile-btn__role">Proveedor Hotelero</span>
+                            </div>
+                            <i class="bi bi-chevron-down pv-profile-btn__chevron" id="pv-profile-chevron"></i>
+                        </button>
+                        <div class="pv-dropdown pv-dropdown--profile" id="pv-profile-panel">
+                            <div class="pv-dropdown__user-header">
+                                <div class="pv-profile-btn__avatar pv-profile-btn__avatar--lg"><?= htmlspecialchars($iniciales) ?></div>
+                                <div>
+                                    <div class="pv-dropdown__user-name"><?= htmlspecialchars($nombreProveedor) ?></div>
+                                    <div class="pv-dropdown__user-role">Proveedor Hotelero · AventuraGO</div>
+                                </div>
+                            </div>
+                            <div class="pv-dropdown__divider"></div>
+                            <a href="<?= BASE_URL ?>proveedor/perfil" class="pv-dropdown__item">
+                                <i class="bi bi-person-circle"></i> Mi perfil
+                            </a>
+                            <a href="<?= BASE_URL ?>proveedor/consultar-actividad" class="pv-dropdown__item">
+                                <i class="bi bi-compass"></i> Mis actividades
+                            </a>
+                            <a href="<?= BASE_URL ?>proveedor/tickets" class="pv-dropdown__item">
+                                <i class="bi bi-headset"></i> Soporte
+                            </a>
+                            <div class="pv-dropdown__divider"></div>
+                            <a href="<?= BASE_URL ?>logout" class="pv-dropdown__item pv-dropdown__item--danger">
+                                <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
             </header>
 
+            
             <!-- CONTENIDO DE LA PAGINA -->
             <section class="pendiente">
 
                 <div class="container-fluid">
 
-                    <?php if ($proveedor['validado'] == 0): ?>
+                    <?php if ($proveedor['validado'] == 1): ?>
                         <div class="alert alert-warning">
                             <strong>Completa tu información para continuar el proceso.</strong>
-                            <a href="<?= BASE_URL ?>proveedor_hotelero/registrar-informacion" class="btn btn-sm btn-primary ms-2">
+                            <a href="<?= BASE_URL ?>proveedor_hotelero/completar-informacion" class="btn btn-sm btn-primary ms-2">
                                 Completar información
                             </a>
                         </div>
@@ -110,6 +248,86 @@ $proveedor = listarProveedores()[0] ?? null; // Assuming the first provider is u
         btnMenu.addEventListener("click", () => {
             sidebar.classList.toggle("activo");
         });
+    </script>
+
+    <script>
+        (function() {
+
+            /* ─── MODO OSCURO ────────────────────────── */
+            const body = document.body;
+            const darkBtn = document.getElementById('pv-dark-toggle');
+            const darkIcon = document.getElementById('pv-dark-icon');
+            const DARK_KEY = 'pv_dark_mode';
+
+            function applyDark(on) {
+                body.classList.toggle('pv-dark', on);
+                darkIcon.className = on ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
+                darkBtn.title = on ? 'Modo claro' : 'Modo oscuro';
+                localStorage.setItem(DARK_KEY, on ? '1' : '0');
+            }
+
+            applyDark(localStorage.getItem(DARK_KEY) === '1');
+            darkBtn.addEventListener('click', () => applyDark(!body.classList.contains('pv-dark')));
+
+            /* ─── DROPDOWNS ──────────────────────────── */
+            function makeDropdown(btnId, panelId, chevronId) {
+                const btn = document.getElementById(btnId);
+                const panel = document.getElementById(panelId);
+                const chev = chevronId ? document.getElementById(chevronId) : null;
+                if (!btn || !panel) return;
+                btn.addEventListener('click', e => {
+                    e.stopPropagation();
+                    const open = panel.classList.toggle('pv-dropdown--open');
+                    if (chev) chev.classList.toggle('pv-profile-btn__chevron--open', open);
+                    document.querySelectorAll('.pv-dropdown--open').forEach(d => {
+                        if (d !== panel) {
+                            d.classList.remove('pv-dropdown--open');
+                            document.querySelectorAll('.pv-profile-btn__chevron--open')
+                                .forEach(c => c.classList.remove('pv-profile-btn__chevron--open'));
+                        }
+                    });
+                });
+            }
+
+            makeDropdown('pv-notif-btn', 'pv-notif-panel');
+            makeDropdown('pv-profile-btn', 'pv-profile-panel', 'pv-profile-chevron');
+
+            document.addEventListener('click', () => {
+                document.querySelectorAll('.pv-dropdown--open').forEach(d => d.classList.remove('pv-dropdown--open'));
+                document.querySelectorAll('.pv-profile-btn__chevron--open')
+                    .forEach(c => c.classList.remove('pv-profile-btn__chevron--open'));
+            });
+
+            /* ─── NOTIFICACIONES ─────────────────────── */
+            const markAll = document.querySelector('.pv-dropdown__mark-all');
+            if (markAll) {
+                markAll.addEventListener('click', () => {
+                    document.querySelectorAll('.pv-notif-item--unread').forEach(el => el.classList.remove('pv-notif-item--unread'));
+                    document.querySelector('.pv-icon-btn--notif')?.classList.remove('pv-icon-btn--notif');
+                });
+            }
+
+            /* ─── BOTÓN FILTRAR ──────────────────────── */
+            const btnFiltrar = document.getElementById('btn-filtrar');
+            if (btnFiltrar) {
+                btnFiltrar.addEventListener('click', () => {
+                    const panel = document.getElementById('filtros-reservas');
+                    if (panel) panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+                });
+            }
+
+            /* ─── BÚSQUEDA ───────────────────────────── */
+            const searchInput = document.getElementById('pv-search-input');
+            if (searchInput) {
+                searchInput.addEventListener('input', () => {
+                    const q = searchInput.value.toLowerCase().trim();
+                    document.querySelectorAll('#tabla-reservas-proveedor tbody tr').forEach(row => {
+                        row.style.display = (!q || row.textContent.toLowerCase().includes(q)) ? '' : 'none';
+                    });
+                });
+            }
+
+        })();
     </script>
 
 </body>

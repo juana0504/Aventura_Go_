@@ -5,7 +5,7 @@ session_start();
 
 // Validamos que llegue el ID de la actividad
 if (!isset($_POST['id_actividad'])) {
-    header('Location: ' . BASE_URL . '/descubre-tours');
+    header('Location: ' . BASE_URL . 'descubre-tours');
     exit;
 }
 
@@ -24,10 +24,10 @@ $_SESSION['actividad_pendiente'] = [
 
 // ¿El usuario ya inició sesión?
 if (isset($_SESSION['user']) && $_SESSION['user']['rol'] === 'turista') {
-    header('Location: ' . BASE_URL . '/turista/confirmar-reserva');
+    header('Location: ' . BASE_URL . 'turista/confirmar-reserva');
     exit;
 }
 
 // Si no está logueado → login
-header('Location: ' . BASE_URL . '/login');
+header('Location: ' . BASE_URL . 'login');
 exit;

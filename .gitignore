@@ -17,11 +17,9 @@
 # Mantener carpetas vacias versionables cuando se use .gitkeep
 !/public/uploads/**/.gitkeep
 
-# Configuración sensible
-config/config.php
-
-#la configuracion ya esta en hostinguer se deja para trabajar localmente sin afectar el hosting
+# Credenciales de base de datos (cada entorno tiene las suyas)
+# Copiar config/database.example.php → config/database.php y rellenar
 config/database.php
 
-# ignorar htaccess local
-.htaccess
+# ignorar htaccess local de desarrollo
+# .htaccess   <-- descomentado: el .htaccess de produccion ya esta listo en el repo

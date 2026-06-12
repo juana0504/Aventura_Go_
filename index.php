@@ -1,9 +1,11 @@
 <?php
 //index.php - Router principal en larabel se tiene un archivo por cada carpeta de views
 
-// Habilitar errores en desarrollo, excluyendo deprecated de librerias legacy.
+// Errores visibles solo en local; en produccion se registran en log sin mostrarse al usuario.
 error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
-ini_set('display_errors', 1);
+$isLocal = in_array($_SERVER['REMOTE_ADDR'] ?? '', ['127.0.0.1', '::1']);
+ini_set('display_errors', $isLocal ? 1 : 0);
+ini_set('log_errors', 1);
 
 
 require_once __DIR__ . '/config/config.php';
@@ -61,6 +63,10 @@ switch ($request) {
     // Ruta: descubre tours
     case '/descubre-tours':
         require BASE_PATH . '/app/views/website/descubre_tours.php';
+        break;
+
+    case '/descubre-hospedaje':
+        require BASE_PATH . '/app/views/website/descubre_hospedaje.php';
         break;
 
     // Ruta: /tour escogido
@@ -173,11 +179,19 @@ switch ($request) {
         break;
 
 
-    // RUTA EN TURISTA PARA SELECCIONAR HOSPEDAJE
-    // Ruta: descubre hospedaje
-    case '/descubre-hospedaje':
-        require BASE_PATH . '/app/views/website/descubre_hospedaje.php';
+    // RUTAS RESEÑAS TURISTA
+    case '/turista/resenas':
+        require_once BASE_PATH . '/app/controllers/turista/ResenaController.php';
+        (new ResenaController())->listar();
         break;
+
+    case '/turista/guardar-resena':
+        require_once BASE_PATH . '/app/controllers/turista/ResenaController.php';
+        (new ResenaController())->guardar();
+        break;
+
+    // RUTA EN TURISTA PARA SELECCIONAR HOSPEDAJE
+
 
 
 
@@ -463,6 +477,7 @@ switch ($request) {
         break;
 
     //rutas actualizacion proveedor
+    //rutas actualizacion proveedor
     case '/proveedor/pendiente':
         require BASE_PATH . '/app/views/dashboard/proveedor_turistico/pendiente_aprobacion.php'; //redirige a la pagina de pendiente de aprobacion del proveedor turistico ALB 19/02/2026
         break;
@@ -585,22 +600,59 @@ switch ($request) {
     case '/proveedor_hotelero/dashboard':
         require BASE_PATH . '/app/views/dashboard/proveedor_hotelero/dashboard.php';
         break;
-
-    //aca deben ir rutas para completar informacion del proveedor hotelero
+     //rutas actualizacion proveedor hotelero
     case '/proveedor_hotelero/pendiente':
         require BASE_PATH . '/app/views/dashboard/proveedor_hotelero/pendiente_aprobacion.php'; //redirige a la pagina de pendiente de aprobacion del proveedor hotelero
         break;
 
-    case '/proveedor_hotelero/registrar-informacion':
-        require BASE_PATH . '/app/views/dashboard/proveedor_hotelero/registrar_informacion.php';
+    case '/proveedor_hotelero/completar-informacion':
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/completarInformacion.php'; //redirige a completar la informacion del proveedor hotelero
+        break;
         break;
 
     case '/proveedor_hotelero/guardar-informacion':
-        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/registrarInformacion.php'; //redirige al guardar la informacion del proveedor hotelero
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/completarInformacion.php'; //redirige al guardar la informacion del proveedor hotelero
         break;
 
-    case '/proveedor_hotelero/registrar-hospedaje':
-        require BASE_PATH . '/app/views/dashboard/proveedor_hotelero/registrar_hospedaje.php'; //redirige a registrar hospedaje del proveedor hotelero
+    case '/proveedor_hotelero/registrar-hospedajes':
+        require BASE_PATH . '/app/views/dashboard/proveedor_hotelero/registrar_hotel.php';
+        break;
+    case '/proveedor_hotelero/consultar-hospedajes':
+        require BASE_PATH . '/app/views/dashboard/proveedor_hotelero/consultar_hospedaje.php'; //consulta la tabla con los hospedajes registradas
+        break;
+
+    
+    case '/proveedor_hotelero/guardar-hospedaje':
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/hospedajes.php';  //redirige al guardar hospedaje
+        break;
+
+    // case '/proveedor_hotelero/pdf-hospedaje':
+    //     require_once BASE_PATH . '/app/controllers/proveedor_hotelero/hospedajePdfController.php';
+    //     generarPdfHospedajes();
+    //     break;
+
+    case '/proveedorproveedor_hotelero/editar-hospedaje':
+        require BASE_PATH . '/app/views/dashboard/proveedor_hotelero/editar_hospedaje.php'; //editar le hospedaje
+        break;
+    case '/proveedor_hotelero/actualizar-hospedaje':
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/hospedajes.php';  
+        break;
+
+    case '/proveedor_hotelero/eliminar-hospedaje':
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/hospedajes.php';  
+        break;
+
+    case '/proveedor_hotelero/consultar-reservas':
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/reservaController.php';
+        break;
+
+    case '/proveedor_hotelero/reserva-detalle':
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/reservaDetalle.php';
+        break;
+
+    case '/proveedor_hotelero/pdf-reservas':
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/reservaPdfController.php';
+        generarPdfReservas();
         break;
 
 
