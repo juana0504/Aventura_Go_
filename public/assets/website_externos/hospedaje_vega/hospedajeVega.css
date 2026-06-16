@@ -294,6 +294,69 @@ header {
     color: var(--color-text);
 }
 
+/* ─── BUSCADOR PESTAÑAS ────────────────────── */
+.tabs-search {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    background: #fff;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 50px;
+    padding: 5px 8px 5px 14px;
+    gap: 6px;
+    box-shadow: 0 2px 8px rgba(45,64,89,.08);
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.tabs-search:focus-within {
+    border-color: var(--color-secondary);
+    box-shadow: 0 2px 12px rgba(234,130,23,.18);
+}
+
+.tabs-search__icon {
+    color: #aaa;
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+.tabs-search:focus-within .tabs-search__icon {
+    color: var(--color-secondary);
+}
+
+.tabs-search__input {
+    border: none;
+    outline: none;
+    font-family: var(--font-text);
+    font-size: 13px;
+    color: var(--color-primary);
+    width: 210px;
+    background: transparent;
+}
+
+.tabs-search__input::placeholder {
+    color: #bbb;
+}
+
+.tabs-search__btn {
+    background: var(--color-secondary);
+    border: none;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 18px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background .2s;
+}
+
+.tabs-search__btn:hover {
+    background: #d0710f;
+}
+
 /* ─── BANNER INTRO ────────────────────────── */
 .tab-intro {
     display: flex;

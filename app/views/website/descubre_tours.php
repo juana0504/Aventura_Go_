@@ -131,6 +131,11 @@ if ($ciudad) {
                 <a class="tab-btn" href="<?= BASE_URL ?>descubre-hospedaje">
                     <i class="bi bi-house-heart tab-icon"></i> Hospedaje
                 </a>
+                <form class="tabs-search" action="<?= BASE_URL ?>busqueda" method="GET">
+                    <i class="bi bi-search tabs-search__icon"></i>
+                    <input class="tabs-search__input" type="text" name="q" placeholder="Ciudad o actividad...">
+                    <button class="tabs-search__btn" type="submit"><i class="bi bi-arrow-right-circle-fill"></i></button>
+                </form>
             </div>
 
 
