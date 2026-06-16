@@ -38,6 +38,11 @@
 }
 
 /* ─── RESET PUNTUAL ───────────────────────── */
+html {
+    margin: 0;
+    padding: 0;
+}
+
 .ag-body {
     margin: 0;
     padding: 0;

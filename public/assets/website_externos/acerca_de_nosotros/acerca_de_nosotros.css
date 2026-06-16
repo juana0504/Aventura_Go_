@@ -86,6 +86,12 @@ header {
 .nav-link i {
     font-size: 15px;
     transition: transform .2s;
+    color: var(--color-secondary);
+}
+
+.nav-link:hover i,
+.nav-link.active i {
+    color: #fff;
 }
 
 .nav-link:hover {
@@ -101,7 +107,7 @@ header {
 
 .nav-link.active {
     background: var(--color-secondary);
-    color: #fff;
+    color: #fff !important;
     font-weight: 600;
     box-shadow: 0 4px 14px rgba(234,130,23,.35);
 }

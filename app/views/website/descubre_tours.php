@@ -202,6 +202,11 @@ if ($q !== '') {
                                 </div>
 
                                 <div class="button">
+                                    <button class="btn-resenas"
+                                        data-id="<?= $actividad['id_actividad'] ?>"
+                                        data-nombre="<?= htmlspecialchars($actividad['nombre']) ?>">
+                                        <i class="bi bi-star-fill"></i> Reseñas
+                                    </button>
                                     <a href="<?= BASE_URL ?>tour-escogido?id=<?= $actividad['id_actividad'] ?>" class="btn-ver-mas">
                                         Ver más
                                     </a>
@@ -400,6 +405,108 @@ if ($q !== '') {
     <!-- FIN MODAL REGISTRO -->
 
 
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- MODAL RESEÑAS PÚBLICAS -->
+    <div class="modal fade" id="modalResenasPublico" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content dt-resenas-modal">
+
+                <div class="dt-resenas-modal__header">
+                    <div>
+                        <div class="dt-resenas-modal__eyebrow"><i class="bi bi-star-fill"></i> Opiniones de turistas</div>
+                        <h5 class="dt-resenas-modal__titulo" id="dt-resenas-titulo">—</h5>
+                    </div>
+                    <button class="dt-resenas-modal__close" data-bs-dismiss="modal">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+
+                <div class="modal-body dt-resenas-modal__body" id="dt-resenas-body">
+                    <div class="dt-resenas-loading">
+                        <div class="spinner-border" role="status" style="color:var(--color-secondary)"></div>
+                        <span>Cargando reseñas…</span>
+                    </div>
+                </div>
+
+                <div class="dt-resenas-modal__footer">
+                    <button data-bs-dismiss="modal" class="dt-resenas-modal__btn-cerrar">
+                        <i class="bi bi-arrow-left"></i> Cerrar
+                    </button>
+                    <span id="dt-resenas-promedio" class="dt-resenas-avg"></span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- FIN MODAL RESEÑAS -->
+
+    <script>
+        const BASE_URL = '<?= BASE_URL ?>';
+
+        (function () {
+            const modalEl     = document.getElementById('modalResenasPublico');
+            const modalBS     = new bootstrap.Modal(modalEl);
+            const modalTitulo = document.getElementById('dt-resenas-titulo');
+            const modalBody   = document.getElementById('dt-resenas-body');
+            const modalProm   = document.getElementById('dt-resenas-promedio');
+
+            function estrellas(n) {
+                n = parseInt(n, 10) || 0;
+                return Array.from({ length: 5 }, (_, i) =>
+                    `<i class="bi bi-star${i < n ? '-fill' : ''} dt-star${i < n ? ' dt-star--on' : ''}"></i>`
+                ).join('');
+            }
+
+            document.querySelectorAll('.btn-resenas').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id     = btn.dataset.id;
+                    const nombre = btn.dataset.nombre;
+
+                    modalTitulo.textContent = nombre;
+                    modalProm.textContent   = '';
+                    modalBody.innerHTML     = '<div class="dt-resenas-loading"><div class="spinner-border" style="color:var(--color-secondary)" role="status"></div><span>Cargando…</span></div>';
+                    modalBS.show();
+
+                    fetch(`${BASE_URL}tours/resenas?id=${id}`)
+                        .then(r => { if (!r.ok) throw new Error('red'); return r.json(); })
+                        .then(data => {
+                            if (!data.ok) {
+                                modalBody.innerHTML = '<div class="dt-resenas-empty"><i class="bi bi-exclamation-circle"></i><p>No se pudieron cargar las reseñas.</p></div>';
+                                return;
+                            }
+                            const resenas = data.resenas;
+                            if (!resenas.length) {
+                                modalBody.innerHTML = '<div class="dt-resenas-empty"><i class="bi bi-chat-square-text"></i><p>Esta actividad aún no tiene reseñas.</p></div>';
+                                return;
+                            }
+
+                            const sum = resenas.reduce((a, r) => a + parseInt(r.calificacion, 10), 0);
+                            const avg = (sum / resenas.length).toFixed(1);
+                            modalProm.innerHTML = `${estrellas(Math.round(avg))} <strong>${avg}</strong> / 5 &nbsp;(${resenas.length} reseña${resenas.length !== 1 ? 's' : ''})`;
+
+                            modalBody.innerHTML = resenas.map(r => `
+                                <div class="dt-resena-card">
+                                    <div class="dt-resena-card__top">
+                                        <div class="dt-resena-card__avatar">${(r.nombre_turista || '?').charAt(0).toUpperCase()}</div>
+                                        <div class="dt-resena-card__info">
+                                            <div class="dt-resena-card__nombre">${r.nombre_turista || 'Turista'}</div>
+                                            <div class="dt-resena-card__fecha">${r.fecha ? r.fecha.slice(0, 10) : ''}</div>
+                                        </div>
+                                        <div class="dt-resena-card__estrellas">${estrellas(r.calificacion)}</div>
+                                    </div>
+                                    ${r.comentario ? `<p class="dt-resena-card__comentario">${r.comentario}</p>` : ''}
+                                </div>
+                            `).join('');
+                        })
+                        .catch(() => {
+                            modalBody.innerHTML = '<div class="dt-resenas-empty"><i class="bi bi-wifi-off"></i><p>Error de conexión.</p></div>';
+                        });
+                });
+            });
+        })();
+    </script>
 
     <script>
         const profileToggle = document.getElementById('profileToggle');

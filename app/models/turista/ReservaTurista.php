@@ -123,11 +123,11 @@ class ReservaTurista
             $this->conexion->beginTransaction();
 
             // 1. Obtener datos de la reserva
-            $sql = "SELECT id_actividad, cantidad_personas, fecha 
-                FROM reserva 
-                WHERE id_reserva = :id 
+            $sql = "SELECT id_actividad, cantidad_personas, fecha
+                FROM reserva
+                WHERE id_reserva = :id
                   AND id_turista = :id_turista
-                  AND estado = 'pendiente'
+                  AND estado IN ('pendiente', 'confirmada')
                 FOR UPDATE";
 
             $stmt = $this->conexion->prepare($sql);

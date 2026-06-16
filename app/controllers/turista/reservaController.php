@@ -1,6 +1,4 @@
 <?php
-require_once BASE_PATH . '/app/models/turista/actividadModel.php';
-
 class ReservaController
 {
     public function prepararReserva()
@@ -220,6 +218,43 @@ class ReservaController
         $ok = $model->actualizarEstado($idReserva, $estado);
 
         echo json_encode(['ok' => $ok]);
+        exit;
+    }
+
+    public function cancelarReserva()
+    {
+        header('Content-Type: application/json');
+
+        if (session_status() === PHP_SESSION_NONE) { session_start(); }
+
+        if (!isset($_SESSION['user']) || $_SESSION['user']['rol'] !== 'turista') {
+            echo json_encode(['ok' => false, 'error' => 'No autorizado']);
+            exit;
+        }
+
+        $idReserva = $_POST['id_reserva'] ?? null;
+        if (!$idReserva) {
+            echo json_encode(['ok' => false, 'error' => 'ID de reserva no recibido']);
+            exit;
+        }
+
+        require_once BASE_PATH . '/app/models/turista/ReservaTurista.php';
+
+        $idTurista = $_SESSION['user']['id_usuario'];
+        $model     = new ReservaTurista();
+
+        if (!$model->verificarReservaDeTurista($idReserva, $idTurista)) {
+            echo json_encode(['ok' => false, 'error' => 'Reserva no encontrada o no autorizada']);
+            exit;
+        }
+
+        $ok = $model->cancelarReserva($idReserva, $idTurista);
+
+        if ($ok) {
+            echo json_encode(['ok' => true]);
+        } else {
+            echo json_encode(['ok' => false, 'error' => 'No se pudo cancelar. Verifica que la reserva no sea de una fecha pasada.']);
+        }
         exit;
     }
 }

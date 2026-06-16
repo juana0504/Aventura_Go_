@@ -271,6 +271,12 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                                 title="Ver detalles">
                                                 <i class="bi bi-eye"></i>
                                             </button>
+                                            <button class="pv-act-btn pv-act-btn--reviews btn-ver-resenas"
+                                                data-id="<?= $actividad['id_actividad'] ?>"
+                                                data-nombre="<?= htmlspecialchars($actividad['nombre']) ?>"
+                                                title="Ver reseñas">
+                                                <i class="bi bi-star"></i>
+                                            </button>
                                             <a href="<?= BASE_URL ?>proveedor/editar-actividad?id=<?= $actividad['id_actividad'] ?>"
                                                class="pv-act-btn pv-act-btn--edit" title="Editar">
                                                 <i class="bi bi-pencil"></i>
@@ -486,5 +492,102 @@ foreach (array_slice($partes, 0, 2) as $p) {
 </script>
 
     <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
+
+<!-- MODAL RESEÑAS -->
+<div class="modal fade" id="modalResenas" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content pv-modal">
+
+            <div class="pv-modal__header">
+                <div class="pv-modal__header-info">
+                    <div class="pv-modal__eyebrow">Opiniones de turistas</div>
+                    <h5 class="pv-modal__title" id="resenas-modal-titulo">Reseñas</h5>
+                </div>
+                <button class="pv-modal__close" data-bs-dismiss="modal" aria-label="Cerrar">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="modal-body pv-modal__body" id="resenas-modal-body">
+                <div class="pv-resenas-loading">
+                    <div class="spinner-border text-warning" role="status"></div>
+                    <span>Cargando reseñas…</span>
+                </div>
+            </div>
+
+            <div class="pv-modal__footer">
+                <button data-bs-dismiss="modal" class="pv-btn-outline-sm">
+                    <i class="bi bi-arrow-left"></i> Cerrar
+                </button>
+                <span id="resenas-modal-promedio" class="pv-resenas-avg"></span>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    const modalEl      = document.getElementById('modalResenas');
+    const modalBS      = new bootstrap.Modal(modalEl);
+    const modalTitulo  = document.getElementById('resenas-modal-titulo');
+    const modalBody    = document.getElementById('resenas-modal-body');
+    const modalProm    = document.getElementById('resenas-modal-promedio');
+
+    function estrellas(n) {
+        n = parseInt(n, 10) || 0;
+        return Array.from({ length: 5 }, (_, i) =>
+            `<i class="bi bi-star${i < n ? '-fill' : ''} pv-star${i < n ? ' pv-star--on' : ''}"></i>`
+        ).join('');
+    }
+
+    document.querySelectorAll('.btn-ver-resenas').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const idActividad = btn.dataset.id;
+            const nombre      = btn.dataset.nombre;
+
+            modalTitulo.textContent = nombre;
+            modalProm.textContent   = '';
+            modalBody.innerHTML     = '<div class="pv-resenas-loading"><div class="spinner-border text-warning" role="status"></div><span>Cargando reseñas…</span></div>';
+            modalBS.show();
+
+            fetch(`${BASE_URL}proveedor/resenas-actividad?id=${idActividad}`)
+                .then(r => { if (!r.ok) throw new Error('red'); return r.json(); })
+                .then(data => {
+                    if (!data.ok) {
+                        modalBody.innerHTML = '<p class="pv-resenas-empty">No se pudieron cargar las reseñas.</p>';
+                        return;
+                    }
+                    const resenas = data.resenas;
+                    if (!resenas.length) {
+                        modalBody.innerHTML = '<div class="pv-resenas-empty"><i class="bi bi-chat-square-text"></i><p>Esta actividad aún no tiene reseñas.</p></div>';
+                        return;
+                    }
+
+                    const sum = resenas.reduce((a, r) => a + parseInt(r.calificacion, 10), 0);
+                    const avg = (sum / resenas.length).toFixed(1);
+                    modalProm.innerHTML = `${estrellas(Math.round(avg))} <strong>${avg}</strong> / 5 (${resenas.length} reseña${resenas.length !== 1 ? 's' : ''})`;
+
+                    modalBody.innerHTML = resenas.map(r => `
+                        <div class="pv-resena-card">
+                            <div class="pv-resena-card__top">
+                                <div class="pv-resena-card__avatar">${(r.nombre_turista || '?').charAt(0).toUpperCase()}</div>
+                                <div class="pv-resena-card__info">
+                                    <div class="pv-resena-card__nombre">${r.nombre_turista || 'Turista'}</div>
+                                    <div class="pv-resena-card__fecha">${r.fecha ? r.fecha.slice(0, 10) : ''}</div>
+                                </div>
+                                <div class="pv-resena-card__estrellas">${estrellas(r.calificacion)}</div>
+                            </div>
+                            ${r.comentario ? `<p class="pv-resena-card__comentario">${r.comentario}</p>` : ''}
+                        </div>
+                    `).join('');
+                })
+                .catch(() => {
+                    modalBody.innerHTML = '<p class="pv-resenas-empty">Error al cargar las reseñas.</p>';
+                });
+        });
+    });
+})();
+</script>
 </body>
 </html>

@@ -152,6 +152,11 @@ switch ($request) {
         (new ReservaController())->confirmarReserva();
         break;
 
+    case '/turista/cancelar-reserva':
+        require_once BASE_PATH . '/app/controllers/turista/reservaController.php';
+        (new ReservaController())->cancelarReserva();
+        break;
+
     case '/turista/seleccionar-actividad':
         require_once BASE_PATH . '/app/controllers/website/websiteController.php';
         break;
@@ -526,6 +531,14 @@ switch ($request) {
 
     case '/proveedor/consultar-actividad':
         require BASE_PATH . '/app/views/dashboard/proveedor_turistico/consultar_actividad_turistica.php';
+        break;
+
+    case '/proveedor/resenas-actividad':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/resenasActividad.php';
+        break;
+
+    case '/tours/resenas':
+        require_once BASE_PATH . '/app/controllers/website/resenasPublicas.php';
         break;
 
     case '/proveedor/consultar-actividad-id':
