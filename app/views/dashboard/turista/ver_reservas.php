@@ -403,6 +403,8 @@ foreach (array_slice($partes, 0, 2) as $p) {
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
+<script>const BASE_URL = '<?= BASE_URL ?>';</script>
+
 <!-- JS del modal -->
 <script src="<?= BASE_URL ?>public/assets/dashboard/turista/ver_reservas/modal_reserva.js"></script>
 

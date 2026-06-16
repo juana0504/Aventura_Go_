@@ -8,7 +8,7 @@
 /* ─── ENCABEZADO DE PÁGINA ────────────────── */
 .ag-page-header {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
     margin-bottom: 28px;
     gap: 16px;
@@ -335,7 +335,8 @@
     transition: border-color .2s, transform .2s;
 }
 
-.ag-rv-modal__thumbs img:hover {
+.ag-rv-modal__thumbs img:hover,
+.ag-rv-modal__thumbs img.ag-thumb--active {
     border-color: var(--ag-primary);
     transform: scale(1.06);
 }

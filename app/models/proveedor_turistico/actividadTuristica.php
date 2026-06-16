@@ -561,4 +561,31 @@ class ActividadTuristica
 
         return ($reservadas + $cantidad) <= $cuposTotales;
     }
+
+    public function buscarPublicos(string $q): array
+    {
+        $like = '%' . $q . '%';
+        $sql = "
+            SELECT
+                a.id_actividad,
+                a.nombre,
+                a.descripcion,
+                a.precio,
+                a.cupos,
+                a.ubicacion,
+                c.nombre AS ciudad,
+                COALESCE(ai.imagen, a.imagen) AS imagen
+            FROM actividad a
+            INNER JOIN proveedor p ON a.id_proveedor = p.id_proveedor
+            INNER JOIN ciudades c ON a.id_ciudad = c.id_ciudad
+            LEFT JOIN actividad_imagen ai ON ai.id_actividad = a.id_actividad AND ai.es_principal = 1
+            WHERE a.estado = 'ACTIVO' AND p.estado = 'ACTIVO'
+              AND (a.nombre LIKE :q1 OR a.descripcion LIKE :q2 OR c.nombre LIKE :q3)
+            ORDER BY a.nombre ASC
+        ";
+
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->execute([':q1' => $like, ':q2' => $like, ':q3' => $like]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

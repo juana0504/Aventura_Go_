@@ -516,4 +516,33 @@ class Hospedaje
             return [];
         }
     }
+
+    public function buscarPublicos(string $q): array
+    {
+        try {
+            $like = '%' . $q . '%';
+            $sql = "
+                SELECT
+                    h.id_hospedaje,
+                    h.nombre,
+                    h.tipo,
+                    h.ubicacion,
+                    h.precio,
+                    h.capacidad,
+                    h.servicios,
+                    COALESCE(d.municipio, d.nombre) AS ciudad
+                FROM hospedaje h
+                LEFT JOIN destino d ON h.id_destino = d.id_destino
+                WHERE h.estado = 'ACTIVO'
+                  AND (h.nombre LIKE :q1 OR h.tipo LIKE :q2 OR d.municipio LIKE :q3 OR d.nombre LIKE :q4)
+                ORDER BY h.nombre ASC
+            ";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute([':q1' => $like, ':q2' => $like, ':q3' => $like, ':q4' => $like]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Hospedaje::buscarPublicos: " . $e->getMessage());
+            return [];
+        }
+    }
 }

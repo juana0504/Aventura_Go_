@@ -72,6 +72,14 @@ switch ($request) {
         require BASE_PATH . '/app/views/website/descubre_hospedaje.php';
         break;
 
+    case '/busqueda':
+        require_once BASE_PATH . '/app/models/proveedor_turistico/actividadTuristica.php';
+        $actividadModel = new ActividadTuristica();
+        $q = trim($_GET['q'] ?? '');
+        $resultados = $q !== '' ? $actividadModel->buscar($q) : [];
+        require BASE_PATH . '/app/views/website/busqueda.php';
+        break;
+
     // Ruta: /tour escogido
     case '/tour-escogido': //ojo se modifico aca para darle login
         require BASE_PATH . '/app/views/website/tour_escogido.php';
@@ -142,6 +150,11 @@ switch ($request) {
     case '/turista/confirmar-reserva':
         require_once BASE_PATH . '/app/controllers/turista/reservaController.php';
         (new ReservaController())->confirmarReserva();
+        break;
+
+    case '/turista/cancelar-reserva':
+        require_once BASE_PATH . '/app/controllers/turista/reservaController.php';
+        (new ReservaController())->cancelarReserva();
         break;
 
     case '/turista/seleccionar-actividad':
@@ -518,6 +531,14 @@ switch ($request) {
 
     case '/proveedor/consultar-actividad':
         require BASE_PATH . '/app/views/dashboard/proveedor_turistico/consultar_actividad_turistica.php';
+        break;
+
+    case '/proveedor/resenas-actividad':
+        require_once BASE_PATH . '/app/controllers/proveedor_turistico/resenasActividad.php';
+        break;
+
+    case '/tours/resenas':
+        require_once BASE_PATH . '/app/controllers/website/resenasPublicas.php';
         break;
 
     case '/proveedor/consultar-actividad-id':

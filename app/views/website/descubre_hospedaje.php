@@ -2,8 +2,11 @@
 require_once BASE_PATH . '/app/models/proveedor_hotelero/hospedaje.php';
 
 $hospedajeModel = new Hospedaje();
+$q      = trim($_GET['q'] ?? '');
 $ciudad = $_GET['ciudad'] ?? null;
-if ($ciudad) {
+if ($q !== '') {
+    $actividades = $hospedajeModel->buscarPublicos($q);
+} elseif ($ciudad) {
     $actividades = $hospedajeModel->listarPublicosPorCiudad($ciudad);
 } else {
     $actividades = $hospedajeModel->listarPublicos();
@@ -23,6 +26,10 @@ if ($ciudad) {
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Fuentes Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
   <!-- Estilos personalizados -->
   <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/hospedaje_vega/hospedajeVega.css">
@@ -40,6 +47,22 @@ if ($ciudad) {
 
           <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
             class="navbar-logo">
+        </div>
+
+        <!-- Nav center -->
+        <div class="navbar-center">
+            <a href="<?= BASE_URL ?>" class="nav-pill">
+                <i class="bi bi-house-door-fill"></i> Inicio
+            </a>
+            <a href="<?= BASE_URL ?>descubre-tours" class="nav-pill">
+                <i class="bi bi-compass-fill"></i> Tours
+            </a>
+            <a href="<?= BASE_URL ?>descubre-hospedaje" class="nav-pill active">
+                <i class="bi bi-house-heart-fill"></i> Hospedaje
+            </a>
+            <a href="<?= BASE_URL ?>contactanos" class="nav-pill">
+                <i class="bi bi-chat-dots-fill"></i> Contáctanos
+            </a>
         </div>
 
         <!-- Botones y menú móvil -->
@@ -100,11 +123,30 @@ if ($ciudad) {
   <main class="main-content">
     <div class="container">
       <div class="tabs-container">
-        <a href="<?= BASE_URL ?>descubre-tours" class="tab-btn"> TOURS Y AVENTURA </a>
-        <a class="tab-btn active" href="<?= BASE_URL ?>descubre-hospedaje" class="tab-btn"> HOSPEDAJE </a>
+        <a class="tab-btn" href="<?= BASE_URL ?>descubre-tours">
+            <i class="bi bi-compass tab-icon"></i> Tours y Aventura
+        </a>
+        <a class="tab-btn active" href="<?= BASE_URL ?>descubre-hospedaje">
+            <i class="bi bi-house-heart tab-icon"></i> Hospedaje
+        </a>
       </div>
 
-
+      <!-- Banner informativo con buscador -->
+      <div class="tab-intro">
+          <div class="tab-intro__icon"><i class="bi bi-house-heart"></i></div>
+          <div style="flex:1">
+              <h2 class="tab-intro__title">Encuentra tu lugar de descanso ideal</h2>
+              <p class="tab-intro__text">Explora hoteles, hostales, cabañas y glamping disponibles en cada destino.</p>
+              <form class="tab-intro__search" action="<?= BASE_URL ?>descubre-hospedaje" method="GET">
+                  <i class="bi bi-search"></i>
+                  <input type="text" name="q" value="<?= htmlspecialchars($q) ?>" placeholder="Busca por ciudad u hospedaje...">
+                  <?php if ($q !== ''): ?>
+                      <a class="tab-intro__clear" href="<?= BASE_URL ?>descubre-hospedaje"><i class="bi bi-x-circle-fill"></i></a>
+                  <?php endif; ?>
+                  <button type="submit">Buscar</button>
+              </form>
+          </div>
+      </div>
 
       <!-- hospedajes disponibles -->
       <div class="activities-grid">

@@ -82,6 +82,50 @@ class ResenaModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    // Reseñas públicas de una actividad (sin restricción de proveedor)
+    public function obtenerResenasPorActividadPublico($idActividad)
+    {
+        $sql = "
+            SELECT
+                res.calificacion,
+                res.comentario,
+                res.fecha,
+                u.nombre AS nombre_turista
+            FROM resena res
+            LEFT JOIN usuario u ON res.id_usuario = u.id_usuario
+            WHERE res.id_actividad = :id_actividad
+            ORDER BY res.fecha DESC
+        ";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':id_actividad' => $idActividad]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Reseñas de una actividad (para que el proveedor las vea)
+    public function obtenerResenasPorActividad($idActividad, $idProveedor)
+    {
+        $sql = "
+            SELECT
+                res.id_resena,
+                res.calificacion,
+                res.comentario,
+                res.fecha,
+                u.nombre AS nombre_turista
+            FROM resena res
+            INNER JOIN actividad a  ON res.id_actividad = a.id_actividad
+            LEFT  JOIN usuario   u  ON res.id_usuario   = u.id_usuario
+            WHERE res.id_actividad = :id_actividad
+              AND a.id_proveedor   = :id_proveedor
+            ORDER BY res.fecha DESC
+        ";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([
+            ':id_actividad' => $idActividad,
+            ':id_proveedor' => $idProveedor,
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // Guardar reseña
     public function guardar($idUsuario, $idReserva, $idActividad, $calificacion, $comentario)
     {

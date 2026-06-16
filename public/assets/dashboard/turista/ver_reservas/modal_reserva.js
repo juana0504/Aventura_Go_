@@ -1,165 +1,196 @@
-console.log('modal_reserva.js CARGADO');
+/* =============================================
+   AVENTURAGO — MODAL DETALLE RESERVA (TURISTA)
+============================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    const botonesVer = document.querySelectorAll('.btn-ver-reserva');
-    const modal = document.getElementById('modalReserva');
+    const botonesVer     = document.querySelectorAll('.btn-ver-reserva');
+    const modalEl        = document.getElementById('modalReserva');
+    if (!modalEl) return;
 
-    if (!modal) return;
+    const modalBootstrap = new bootstrap.Modal(modalEl);
 
-    const modalBootstrap = new bootstrap.Modal(modal);
+    const elNombre      = document.getElementById('modal-nombre-actividad');
+    const elEstadoBadge = document.getElementById('modal-estado');
+    const elEyebrow     = document.getElementById('modal-fecha-reserva');
+    const elProveedor   = document.getElementById('modal-proveedor');
+    const elFecha       = document.getElementById('modal-fecha');
+    const elPersonas    = document.getElementById('modal-personas');
+    const elTotal       = document.getElementById('modal-total');
+    const elEstadoText  = document.getElementById('modal-estado-texto');
+    const elDesc        = document.getElementById('modal-descripcion');
+    const imgPrincipal  = document.getElementById('modal-imagen-principal');
+    const galeria       = document.getElementById('modal-galeria');
+    const btnCancelar   = document.getElementById('btn-cancelar');
+    const btnConfirmar  = document.getElementById('btn-confirmar');
 
     botonesVer.forEach(btn => {
         btn.addEventListener('click', () => {
 
             const idReserva = btn.dataset.id;
 
+            /* Resetear modal mientras carga */
+            elNombre.textContent      = 'Cargando...';
+            elEstadoBadge.textContent = '';
+            elEyebrow.textContent     = '';
+            elDesc.textContent        = '';
+            imgPrincipal.src          = '';
+            galeria.innerHTML         = '';
+            btnCancelar.style.display = 'none';
+            btnConfirmar.style.display = 'none';
+
+            modalBootstrap.show();
+
             fetch(`${BASE_URL}turista/obtener-reserva?id=${idReserva}`)
-                .then(response => response.json())
+                .then(res => {
+                    if (!res.ok) throw new Error('Error de red');
+                    return res.json();
+                })
                 .then(data => {
+                    if (data.error) {
+                        elNombre.textContent = 'Error al cargar los datos';
+                        return;
+                    }
 
-                    // HEADER
-                    document.getElementById('modal-nombre-actividad').textContent =
-                        data.nombre_actividad;
+                    /* ── HEADER ── */
+                    elNombre.textContent  = data.nombre_actividad ?? '—';
+                    elEyebrow.textContent = `Reserva #${data.id_reserva} · ${data.fecha ?? ''}`;
 
-                    document.getElementById('modal-estado').textContent =
-                        data.estado;
+                    const estadoLabel = ucFirst(data.estado ?? '');
+                    elEstadoBadge.textContent = estadoLabel;
+                    elEstadoBadge.className   = 'ag-badge mt-1 ' + badgeClass(data.estado);
 
-                    document.getElementById('modal-fecha-reserva').textContent =
-                        `Fecha: ${data.fecha}`;
+                    /* ── INFO ── */
+                    elProveedor.textContent  = data.proveedor       ?? '—';
+                    elFecha.textContent      = data.fecha           ?? '—';
+                    elPersonas.textContent   = data.cantidad_personas ?? '—';
+                    elTotal.textContent      = numFormat(
+                        Number(data.precio) * Number(data.cantidad_personas)
+                    );
+                    elEstadoText.textContent = estadoLabel;
+                    elDesc.textContent       = data.descripcion     ?? 'Sin descripción';
 
-                    // INFO
-                    document.getElementById('modal-proveedor').textContent =
-                        data.proveedor;
-
-                    document.getElementById('modal-fecha').textContent =
-                        data.fecha;
-
-                    document.getElementById('modal-personas').textContent =
-                        data.cantidad_personas;
-
-                    document.getElementById('modal-total').textContent =
-                        (Number(data.precio) * Number(data.cantidad_personas)).toLocaleString('es-CO');
-
-                    document.getElementById('modal-estado-texto').textContent =
-                        data.estado;
-
-                    document.getElementById('modal-descripcion').textContent =
-                        data.descripcion;
-
-                    // IMÁGENES
-                    const imgPrincipal = document.getElementById('modal-imagen-principal');
-                    const galeria = document.getElementById('modal-galeria');
-
+                    /* ── IMÁGENES ── */
                     galeria.innerHTML = '';
-
                     if (data.imagenes && data.imagenes.length > 0) {
+                        const principal = data.imagenes.find(i => i.es_principal == 1)
+                            ?? data.imagenes[0];
 
-                        const principal = data.imagenes.find(img => img.es_principal == 1)
-                            || data.imagenes[0];
-
-                        imgPrincipal.src =
-                            `${BASE_URL}public/uploads/turistico/actividades/${principal.imagen}`;
+                        imgPrincipal.src = `${BASE_URL}public/uploads/turistico/actividades/${principal.imagen}`;
 
                         data.imagenes.forEach(img => {
                             const miniatura = document.createElement('img');
-                            miniatura.src =
-                                `${BASE_URL}public/uploads/turistico/actividades/${img.imagen}`;
-                            miniatura.width = 60;
-                            miniatura.classList.add('rounded');
+                            miniatura.src   = `${BASE_URL}public/uploads/turistico/actividades/${img.imagen}`;
+                            miniatura.title = 'Ver imagen';
+                            miniatura.addEventListener('click', () => {
+                                imgPrincipal.src = miniatura.src;
+                                galeria.querySelectorAll('img').forEach(t => t.classList.remove('ag-thumb--active'));
+                                miniatura.classList.add('ag-thumb--active');
+                            });
+                            if (img.es_principal == 1) miniatura.classList.add('ag-thumb--active');
                             galeria.appendChild(miniatura);
                         });
-
                     } else {
                         imgPrincipal.src = '';
+                        imgPrincipal.alt = 'Sin imagen disponible';
                     }
 
-                    // FOOTER (acciones)
-                    const btnConfirmar = document.getElementById('btn-confirmar');
-                    btnConfirmar.dataset.id = data.id_reserva;
+                    /* ── BOTONES DE ACCIÓN ── */
+                    btnCancelar.dataset.id = data.id_reserva;
+                    btnConfirmar.style.display = 'none';
 
-                    if (data.estado === 'pendiente') {
-                        btnConfirmar.style.display = 'inline-block';
-                        btnCancelar.style.display = 'inline-block';
-                    } else {
-                        btnConfirmar.style.display = 'none';
-                        btnCancelar.style.display = 'none';
-                    }
-
-                    modalBootstrap.show();
+                    const cancelable = data.estado === 'pendiente' || data.estado === 'confirmada';
+                    btnCancelar.style.display = cancelable ? 'inline-flex' : 'none';
                 })
-                .catch(error => {
-                    console.error('Error al cargar la reserva:', error);
+                .catch(err => {
+                    console.error('Error al cargar reserva:', err);
+                    elNombre.textContent = 'No se pudo cargar la reserva.';
                 });
-
         });
     });
 
-});
-
-
-document.addEventListener('click', function (e) {
-
-    if (e.target.id === 'btn-confirmar') {
-
-        const idReserva = e.target.dataset.id;
-
+    /* ── CANCELAR RESERVA (AJAX) ── */
+    btnCancelar.addEventListener('click', () => {
+        const idReserva = btnCancelar.dataset.id;
         if (!idReserva) return;
 
-        if (!confirm('¿Confirmar esta reserva?')) return;
+        if (!confirm('¿Estás seguro de que deseas cancelar esta reserva?\n\nSe liberarán los cupos para que otros turistas puedan reservar.')) return;
 
-        fetch(`${BASE_URL}turista/confirmar-reserva`, {
+        btnCancelar.disabled    = true;
+        btnCancelar.textContent = 'Cancelando...';
+
+        fetch(`${BASE_URL}turista/cancelar-reserva`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: `id_reserva=${idReserva}`
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `id_reserva=${encodeURIComponent(idReserva)}`
         })
         .then(res => res.json())
         .then(data => {
             if (data.ok) {
-                alert('Reserva confirmada');
+                modalBootstrap.hide();
                 location.reload();
             } else {
-                alert(data.error);
+                alert(data.error ?? 'No se pudo cancelar la reserva. Intenta de nuevo.');
+                btnCancelar.disabled    = false;
+                btnCancelar.innerHTML   = '<i class="bi bi-x-lg"></i> Cancelar reserva';
             }
+        })
+        .catch(() => {
+            alert('Error de conexión. Intenta de nuevo.');
+            btnCancelar.disabled  = false;
+            btnCancelar.innerHTML = '<i class="bi bi-x-lg"></i> Cancelar reserva';
         });
+    });
+
+    /* ── HELPERS ── */
+    function ucFirst(str) {
+        return str ? str.charAt(0).toUpperCase() + str.slice(1) : '';
+    }
+
+    function numFormat(n) {
+        return new Intl.NumberFormat('es-CO', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        }).format(n);
+    }
+
+    function badgeClass(estado) {
+        switch (estado) {
+            case 'confirmada': return 'ag-badge--confirmed';
+            case 'pendiente':  return 'ag-badge--pending';
+            default:           return 'ag-badge--cancelled';
+        }
     }
 
 });
 
 
+/* ── FILTROS DE ESTADO ── */
 document.addEventListener('DOMContentLoaded', function () {
-    const filtrosBtn = document.querySelectorAll('.filtro-btn');
+    const filtrosBtn    = document.querySelectorAll('.filtro-btn');
     const filasReservas = document.querySelectorAll('tbody tr');
 
     filtrosBtn.forEach(btn => {
         btn.addEventListener('click', function () {
-            // 1. Gestionar clase 'active' en los botones
             filtrosBtn.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
 
             const filtro = this.getAttribute('data-filter').toLowerCase();
 
-            // 2. Lógica de filtrado
             filasReservas.forEach(fila => {
-                // Obtenemos el texto de la columna de estado (columna 7)
                 const celdaEstado = fila.querySelector('td:nth-child(7)');
-                if (!celdaEstado) return; // Saltar si es la fila de "No hay reservas"
+                if (!celdaEstado) return;
 
                 const estadoTexto = celdaEstado.textContent.trim().toLowerCase();
 
-                // Reglas de visualización
                 if (filtro === 'all') {
                     fila.style.display = '';
                 } else if (filtro === 'activo') {
-                    // Se consideran activos los estados 'confirmada'
-                    fila.style.display = (estadoTexto === 'confirmada') ? '' : 'none';
+                    fila.style.display = estadoTexto === 'confirmada' ? '' : 'none';
                 } else if (filtro === 'inactivo') {
-                    // Se consideran inactivos los estados 'cancelada'
-                    fila.style.display = (estadoTexto === 'cancelada') ? '' : 'none';
+                    fila.style.display = estadoTexto === 'cancelada' ? '' : 'none';
                 } else if (filtro === 'pendiente') {
-                    fila.style.display = (estadoTexto === 'pendiente') ? '' : 'none';
+                    fila.style.display = estadoTexto === 'pendiente' ? '' : 'none';
                 }
             });
         });

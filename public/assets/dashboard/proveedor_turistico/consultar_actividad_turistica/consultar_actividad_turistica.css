@@ -289,6 +289,100 @@
 .pv-act-btn--delete:hover  { background: var(--pv-red);   color: #fff; transform: translateY(-1px); text-decoration: none; }
 .pv-act-btn--confirm { background: var(--pv-green-light); color: var(--pv-green); }
 .pv-act-btn--confirm:hover { background: var(--pv-green); color: #fff; transform: translateY(-1px); }
+.pv-act-btn--reviews { background: #fdf4c2; color: #b45309; }
+.pv-act-btn--reviews:hover { background: #f59e0b; color: #fff; transform: translateY(-1px); }
+
+/* ─── MODAL RESEÑAS ───────────────────────── */
+.pv-resenas-loading {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 40px 24px;
+    color: var(--pv-muted);
+    font-size: 14px;
+}
+
+.pv-resenas-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 52px 24px;
+    color: var(--pv-muted);
+    font-size: 14px;
+    text-align: center;
+}
+
+.pv-resenas-empty i { font-size: 36px; opacity: .25; }
+.pv-resenas-empty p { margin: 0; }
+
+.pv-resenas-avg {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--pv-text);
+}
+
+.pv-star { color: var(--pv-border); font-size: 14px; }
+.pv-star--on { color: #f59e0b; }
+
+.pv-resena-card {
+    background: var(--pv-surface);
+    border: 1px solid var(--pv-border);
+    border-radius: var(--pv-radius);
+    padding: 16px 18px;
+    margin-bottom: 12px;
+}
+
+.pv-resena-card:last-child { margin-bottom: 0; }
+
+.pv-resena-card__top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.pv-resena-card__avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: #1a2b3c;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+}
+
+.pv-resena-card__info { flex: 1; }
+
+.pv-resena-card__nombre {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--pv-text);
+    line-height: 1.2;
+}
+
+.pv-resena-card__fecha {
+    font-size: 11px;
+    color: var(--pv-muted);
+    margin-top: 2px;
+}
+
+.pv-resena-card__estrellas { display: flex; gap: 2px; }
+
+.pv-resena-card__comentario {
+    font-size: 13px;
+    color: var(--pv-text);
+    line-height: 1.7;
+    margin: 0;
+    padding-top: 4px;
+    border-top: 1px solid var(--pv-border);
+}
+
+.pv-dark .pv-resena-card { background: var(--pv-bg); border-color: var(--pv-border); }
+.pv-dark .pv-resena-card__comentario { border-color: var(--pv-border); color: var(--pv-text); }
 
 /* Badges */
 .pv-badge {
