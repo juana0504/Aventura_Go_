@@ -29,6 +29,19 @@ if ($respuestaPayu === 'aprobado') {
     $stmtReserva = $pdo->prepare("UPDATE reserva SET estado = 'confirmada' WHERE id_reserva = :id");
     $stmtReserva->execute([':id' => $idReserva]);
 
+    // Descontar cupos de la actividad
+    $stmtDatos = $pdo->prepare("SELECT id_actividad, cantidad_personas FROM reserva WHERE id_reserva = :id LIMIT 1");
+    $stmtDatos->execute([':id' => $idReserva]);
+    $datosReserva = $stmtDatos->fetch(PDO::FETCH_ASSOC);
+
+    if ($datosReserva) {
+        $pdo->prepare("UPDATE actividad SET cupos = GREATEST(cupos - :cantidad, 0) WHERE id_actividad = :id")
+            ->execute([
+                ':cantidad' => $datosReserva['cantidad_personas'],
+                ':id'       => $datosReserva['id_actividad'],
+            ]);
+    }
+
     // Redirigir a confirmación
     header('Location: ' . BASE_URL . 'confirmacion');
     exit;
