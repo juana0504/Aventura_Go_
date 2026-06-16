@@ -4,9 +4,12 @@
 require_once BASE_PATH . '/app/controllers/website/websiteController.php';
 
 $actividadModel = new ActividadTuristica();
+$q      = trim($_GET['q'] ?? '');
 $ciudad = $_GET['ciudad'] ?? null;
 
-if ($ciudad) {
+if ($q !== '') {
+    $actividades = $actividadModel->buscarPublicos($q);
+} elseif ($ciudad) {
     $actividades = $actividadModel->obtenerPorCiudad($ciudad);
 } else {
     $actividades = $actividadModel->listarActividadesPublicas();
@@ -131,21 +134,22 @@ if ($ciudad) {
                 <a class="tab-btn" href="<?= BASE_URL ?>descubre-hospedaje">
                     <i class="bi bi-house-heart tab-icon"></i> Hospedaje
                 </a>
-                <form class="tabs-search" action="<?= BASE_URL ?>busqueda" method="GET">
-                    <i class="bi bi-search tabs-search__icon"></i>
-                    <input class="tabs-search__input" type="text" name="q" placeholder="Ciudad o actividad...">
-                    <button class="tabs-search__btn" type="submit"><i class="bi bi-arrow-right-circle-fill"></i></button>
-                </form>
             </div>
 
-
-
-            <!-- Banner informativo -->
+            <!-- Banner informativo con buscador -->
             <div class="tab-intro">
                 <div class="tab-intro__icon"><i class="bi bi-compass"></i></div>
-                <div>
+                <div style="flex:1">
                     <h2 class="tab-intro__title">Explora nuestros tours y aventuras</h2>
-                    <p class="tab-intro__text">Elige la actividad que más te emocione, selecciona una fecha disponible y reserva tu lugar en minutos. Nuestros proveedores certificados te garantizan una experiencia segura e inolvidable.</p>
+                    <p class="tab-intro__text">Elige la actividad que más te emocione, selecciona una fecha disponible y reserva tu lugar en minutos.</p>
+                    <form class="tab-intro__search" action="<?= BASE_URL ?>descubre-tours" method="GET">
+                        <i class="bi bi-search"></i>
+                        <input type="text" name="q" value="<?= htmlspecialchars($q) ?>" placeholder="Busca por ciudad o actividad...">
+                        <?php if ($q !== ''): ?>
+                            <a class="tab-intro__clear" href="<?= BASE_URL ?>descubre-tours"><i class="bi bi-x-circle-fill"></i></a>
+                        <?php endif; ?>
+                        <button type="submit">Buscar</button>
+                    </form>
                 </div>
             </div>
 

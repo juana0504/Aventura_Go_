@@ -2,8 +2,11 @@
 require_once BASE_PATH . '/app/models/proveedor_hotelero/hospedaje.php';
 
 $hospedajeModel = new Hospedaje();
+$q      = trim($_GET['q'] ?? '');
 $ciudad = $_GET['ciudad'] ?? null;
-if ($ciudad) {
+if ($q !== '') {
+    $actividades = $hospedajeModel->buscarPublicos($q);
+} elseif ($ciudad) {
     $actividades = $hospedajeModel->listarPublicosPorCiudad($ciudad);
 } else {
     $actividades = $hospedajeModel->listarPublicos();
@@ -126,21 +129,22 @@ if ($ciudad) {
         <a class="tab-btn active" href="<?= BASE_URL ?>descubre-hospedaje">
             <i class="bi bi-house-heart tab-icon"></i> Hospedaje
         </a>
-        <form class="tabs-search" action="<?= BASE_URL ?>busqueda" method="GET">
-            <i class="bi bi-search tabs-search__icon"></i>
-            <input class="tabs-search__input" type="text" name="q" placeholder="Ciudad o actividad...">
-            <button class="tabs-search__btn" type="submit"><i class="bi bi-arrow-right-circle-fill"></i></button>
-        </form>
       </div>
 
-
-
-      <!-- Banner informativo -->
+      <!-- Banner informativo con buscador -->
       <div class="tab-intro">
           <div class="tab-intro__icon"><i class="bi bi-house-heart"></i></div>
-          <div>
+          <div style="flex:1">
               <h2 class="tab-intro__title">Encuentra tu lugar de descanso ideal</h2>
-              <p class="tab-intro__text">Explora hoteles, hostales, cabañas y glamping disponibles en cada destino. Escoge el alojamiento que se adapte a tu viaje, revisa los servicios incluidos y realiza tu reserva de forma rápida y segura.</p>
+              <p class="tab-intro__text">Explora hoteles, hostales, cabañas y glamping disponibles en cada destino.</p>
+              <form class="tab-intro__search" action="<?= BASE_URL ?>descubre-hospedaje" method="GET">
+                  <i class="bi bi-search"></i>
+                  <input type="text" name="q" value="<?= htmlspecialchars($q) ?>" placeholder="Busca por ciudad u hospedaje...">
+                  <?php if ($q !== ''): ?>
+                      <a class="tab-intro__clear" href="<?= BASE_URL ?>descubre-hospedaje"><i class="bi bi-x-circle-fill"></i></a>
+                  <?php endif; ?>
+                  <button type="submit">Buscar</button>
+              </form>
           </div>
       </div>
 
