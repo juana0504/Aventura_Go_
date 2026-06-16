@@ -82,21 +82,34 @@ header {
 
 .nav-link i {
   font-size: 15px;
+  transition: transform .2s;
 }
 
 .nav-link:hover {
-  background: rgba(45,64,89,.08);
-  color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45,64,89,.18);
+}
+
+.nav-link:hover i {
+  transform: scale(1.18);
 }
 
 .nav-link.active {
   background: var(--color-secondary);
   color: #fff;
   font-weight: 600;
+  box-shadow: 0 4px 14px rgba(234,130,23,.35);
+}
+
+.nav-link.active i {
+  transform: scale(1.1);
 }
 
 .nav-link.active:hover {
   background: #d0710f;
+  transform: translateY(-2px);
 }
 
 .nav-link.active::after {

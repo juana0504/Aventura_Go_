@@ -67,20 +67,33 @@ header {
 
 .navbar-center .nav-pill i {
     font-size: 15px;
+    transition: transform .2s;
 }
 
 .navbar-center .nav-pill:hover {
-    background: rgba(45,64,89,.08);
-    color: var(--color-primary);
+    background: var(--color-primary);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(45,64,89,.18);
+}
+
+.navbar-center .nav-pill:hover i {
+    transform: scale(1.18);
 }
 
 .navbar-center .nav-pill.active {
     background: var(--color-secondary);
     color: #fff;
+    box-shadow: 0 4px 14px rgba(234,130,23,.35);
+}
+
+.navbar-center .nav-pill.active i {
+    transform: scale(1.1);
 }
 
 .navbar-center .nav-pill.active:hover {
     background: #d0710f;
+    transform: translateY(-2px);
 }
 
 .navbar-logo {
