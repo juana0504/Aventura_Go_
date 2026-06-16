@@ -317,6 +317,34 @@ class ActividadTuristica
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function listarDestinosPopulares()
+    {
+        $sql = "
+            SELECT
+                c.id_ciudad,
+                c.nombre AS ciudad,
+                COUNT(DISTINCT a.id_actividad) AS total_actividades,
+                COALESCE(
+                    MIN(CASE WHEN ai.es_principal = 1 THEN ai.imagen END),
+                    MIN(a.imagen)
+                ) AS imagen_destino
+            FROM ciudades c
+            INNER JOIN actividad a
+                ON c.id_ciudad = a.id_ciudad AND a.estado = 'ACTIVO'
+            INNER JOIN proveedor p
+                ON a.id_proveedor = p.id_proveedor AND p.estado = 'ACTIVO'
+            LEFT JOIN actividad_imagen ai
+                ON ai.id_actividad = a.id_actividad AND ai.es_principal = 1
+            GROUP BY c.id_ciudad, c.nombre
+            ORDER BY total_actividades DESC
+        ";
+
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function eliminar($id)
     {
         try {
