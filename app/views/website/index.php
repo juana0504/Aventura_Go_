@@ -221,91 +221,62 @@ if (session_status() === PHP_SESSION_NONE) {
 
         </div>
 
-        <!-- GRID DE DESTINOS -->
+        <!-- GRID DE DESTINOS (dinámico desde BD) -->
+        <?php
+        // Imágenes estáticas de respaldo por nombre de ciudad conocida
+        $imagenesEstaticas = [
+            'nimaima'      => 'destinos_populares_nimaima.png',
+            'villeta'      => 'destinos_visitados_villeta.png',
+            'la vega'      => 'destinos_populares_lavega.png',
+            'san francisco'=> 'destinos_populares_sanFrancisco.png',
+            'sasaima'      => 'destinos_populares_sasaima.png',
+            'tobia'        => 'destinos_populares_tobia.png',
+        ];
+        $imgBase    = BASE_URL . 'public/assets/website_externos/index/img/';
+        $imgDefault = BASE_URL . 'public/assets/website_externos/descubre_tours/img/imagen%20tour.png';
+
+        // Mostrar máximo 6 en el inicio; el resto en "descubre-tours"
+        $destinosMostrar = array_slice($destinosPopulares, 0, 6);
+        ?>
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <!-- Tarjeta 1 -->
-            <div class="col">
-                <a href="<?= BASE_URL ?>descubre-tours?ciudad=Nimaima" class="text-decoration-none">
-                    <div class="card destino-card shadow-sm">
-                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_nimaima.png"
-                            class="card-img-top" alt="Nimaima">
-                        <div class="card-body">
-                            <h5 class="card-title">NIMAIMA</h5>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            <?php if (empty($destinosMostrar)): ?>
+                <div class="col-12 text-center text-muted py-5">
+                    <p>Próximamente más destinos disponibles.</p>
+                </div>
+            <?php else: ?>
+                <?php foreach ($destinosMostrar as $destino):
+                    $nombreCiudad = $destino['ciudad'];
+                    $clave        = strtolower($nombreCiudad);
 
-            <!-- Tarjeta 2 -->
-            <div class="col">
-                <a href="<?= BASE_URL ?>descubre-tours?ciudad=Villeta" class="text-decoration-none">
-                    <div class="card destino-card shadow-sm">
-                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_visitados_villeta.png"
-                            class="card-img-top" alt="Villeta">
-                        <div class="card-body">
-                            <h5 class="card-title">VILLETA</h5>
+                    // Imagen: primero estática si es ciudad conocida, luego la de BD, luego default
+                    if (isset($imagenesEstaticas[$clave])) {
+                        $imgSrc = $imgBase . $imagenesEstaticas[$clave];
+                    } elseif (!empty($destino['imagen_destino'])) {
+                        $imgSrc = BASE_URL . 'public/uploads/turistico/actividades/' . rawurlencode($destino['imagen_destino']);
+                    } else {
+                        $imgSrc = $imgDefault;
+                    }
+                ?>
+                <div class="col">
+                    <a href="<?= BASE_URL ?>descubre-tours?ciudad=<?= rawurlencode($nombreCiudad) ?>" class="text-decoration-none">
+                        <div class="card destino-card shadow-sm">
+                            <img src="<?= htmlspecialchars($imgSrc) ?>"
+                                class="card-img-top" alt="<?= htmlspecialchars($nombreCiudad) ?>"
+                                onerror="this.onerror=null;this.src='<?= $imgDefault ?>'">
+                            <div class="card-body">
+                                <h5 class="card-title"><?= strtoupper(htmlspecialchars($nombreCiudad)) ?></h5>
+                                <small class="text-muted"><?= $destino['total_actividades'] ?> actividad<?= $destino['total_actividades'] != 1 ? 'es' : '' ?></small>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </div>
-
-
-            <!-- Tarjeta 3 -->
-            <div class="col">
-                <a href="<?= BASE_URL ?>descubre-tours?ciudad=La Vega" class="text-decoration-none">
-                    <div class="card destino-card shadow-sm">
-                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_lavega.png"
-                            class="card-img-top" alt="La Vega">
-                        <div class="card-body">
-                            <h5 class="card-title">LA VEGA</h5>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Tarjeta 4 -->
-            <div class="col">
-                <a href="<?= BASE_URL ?>descubre-tours?ciudad=San Francisco" class="text-decoration-none">
-                    <div class="card destino-card shadow-sm">
-                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_sanFrancisco.png"
-                            class="card-img-top" alt="San Francisco">
-                        <div class="card-body">
-                            <h5 class="card-title">SAN FRANCISCO</h5>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Tarjeta 5 -->
-            <div class="col">
-                <a href="<?= BASE_URL ?>descubre-tours?ciudad=Sasaima" class="text-decoration-none">
-                    <div class="card destino-card shadow-sm">
-                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_sasaima.png"
-                            class="card-img-top" alt="Sasaima">
-                        <div class="card-body">
-                            <h5 class="card-title">SASAIMA</h5>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Tarjeta 6 -->
-            <div class="col">
-                <a href="<?= BASE_URL ?>descubre-tours?ciudad=Tobia" class="text-decoration-none">
-                    <div class="card destino-card shadow-sm">
-                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_tobia.png"
-                            class="card-img-top" alt="Tobia">
-                        <div class="card-body">
-                            <h5 class="card-title">TOBIA</h5>
-                        </div>
-                    </div>
-                </a>
-            </div>
+                    </a>
+                </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
 
         <!-- BOTÓN MÁS DESTINOS -->
         <div class="text-center mt-5">
-            <a href="#" class="btn-ver-mas">Más destinos </a>
+            <a href="<?= BASE_URL ?>descubre-tours" class="btn-ver-mas">Más destinos</a>
         </div>
     </section>
 

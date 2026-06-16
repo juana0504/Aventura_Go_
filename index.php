@@ -42,6 +42,9 @@ switch ($request) {
     // PAGINAS PUBLICAS
     // INICIO
     case '/':
+        require_once BASE_PATH . '/app/models/proveedor_turistico/actividadTuristica.php';
+        $actividadModel      = new ActividadTuristica();
+        $destinosPopulares   = $actividadModel->listarDestinosPopulares();
         require BASE_PATH . '/app/views/website/index.php';
         break;
 
