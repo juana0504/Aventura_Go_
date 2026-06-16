@@ -37,10 +37,10 @@
 
         <!-- Menú principal -->
         <ul class="navbar-nav" id="navbarNav">
-          <li><a class="nav-link" href="<?= BASE_URL ?>">Inicio</a></li>
-          <li><a class="nav-link active" href="<?= BASE_URL ?>destacados">Destacados</a></li>
-          <li><a class="nav-link" href="<?= BASE_URL ?>acerca-de-nosotros">Acerca de nosotros</a></li>
-          <li><a class="nav-link" href="<?= BASE_URL ?>contactanos">Contáctanos</a></li>
+          <li><a class="nav-link" href="<?= BASE_URL ?>"><i class="bi bi-house-door-fill"></i> Inicio</a></li>
+          <li><a class="nav-link active" href="<?= BASE_URL ?>destacados"><i class="bi bi-star-fill"></i> Destacados</a></li>
+          <li><a class="nav-link" href="<?= BASE_URL ?>acerca-de-nosotros"><i class="bi bi-info-circle-fill"></i> Acerca de nosotros</a></li>
+          <li><a class="nav-link" href="<?= BASE_URL ?>contactanos"><i class="bi bi-chat-dots-fill"></i> Contáctanos</a></li>
         </ul>
 
         <!-- Botones y menú móvil -->

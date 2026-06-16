@@ -20,6 +20,8 @@
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -43,10 +45,10 @@
 
                 <!-- Menú principal -->
                 <ul class="navbar-nav" id="navbarNav">
-                    <li><a class="nav-link" href="<?= BASE_URL ?>">Inicio</a></li>
-                    <li><a class="nav-link" href="<?= BASE_URL ?>destacados">Destacados</a></li>
-                    <li><a class="nav-link" href="<?= BASE_URL ?>acerca-de-nosotros">Acerca de nosotros</a></li>
-                    <li><a class="nav-link active" href="<?= BASE_URL ?>contactanos">Contáctanos</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>"><i class="bi bi-house-door-fill"></i> Inicio</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>destacados"><i class="bi bi-star-fill"></i> Destacados</a></li>
+                    <li><a class="nav-link" href="<?= BASE_URL ?>acerca-de-nosotros"><i class="bi bi-info-circle-fill"></i> Acerca de nosotros</a></li>
+                    <li><a class="nav-link active" href="<?= BASE_URL ?>contactanos"><i class="bi bi-chat-dots-fill"></i> Contáctanos</a></li>
                 </ul>
 
                 <!-- Botones y menú móvil -->
