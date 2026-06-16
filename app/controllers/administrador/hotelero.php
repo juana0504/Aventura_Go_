@@ -41,11 +41,7 @@ switch ($method) {
             exit;
         }
 
-        if (isset($_GET['id'])) {
-            consultarProveedorHoteleroOjo();
-        } else {
-            listarHoteles();
-        }
+        listarHoteles();
 
         break;
 
