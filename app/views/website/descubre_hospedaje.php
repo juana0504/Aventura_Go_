@@ -42,6 +42,22 @@ if ($ciudad) {
             class="navbar-logo">
         </div>
 
+        <!-- Nav center -->
+        <div class="navbar-center">
+            <a href="<?= BASE_URL ?>" class="nav-pill">
+                <i class="bi bi-house-door-fill"></i> Inicio
+            </a>
+            <a href="<?= BASE_URL ?>descubre-tours" class="nav-pill">
+                <i class="bi bi-compass-fill"></i> Tours
+            </a>
+            <a href="<?= BASE_URL ?>descubre-hospedaje" class="nav-pill active">
+                <i class="bi bi-house-heart-fill"></i> Hospedaje
+            </a>
+            <a href="<?= BASE_URL ?>contactanos" class="nav-pill">
+                <i class="bi bi-chat-dots-fill"></i> Contáctanos
+            </a>
+        </div>
+
         <!-- Botones y menú móvil -->
         <div class="actions">
 
@@ -109,6 +125,15 @@ if ($ciudad) {
       </div>
 
 
+
+      <!-- Banner informativo -->
+      <div class="tab-intro">
+          <div class="tab-intro__icon"><i class="bi bi-house-heart"></i></div>
+          <div>
+              <h2 class="tab-intro__title">Encuentra tu lugar de descanso ideal</h2>
+              <p class="tab-intro__text">Explora hoteles, hostales, cabañas y glamping disponibles en cada destino. Escoge el alojamiento que se adapte a tu viaje, revisa los servicios incluidos y realiza tu reserva de forma rápida y segura.</p>
+          </div>
+      </div>
 
       <!-- hospedajes disponibles -->
       <div class="activities-grid">

@@ -38,6 +38,49 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 16px;
+}
+
+/* ─── NAVBAR CENTER LINKS ──────────────────── */
+.navbar-center {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+    justify-content: center;
+}
+
+.navbar-center .nav-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border-radius: 50px;
+    font-family: var(--font-titles);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: background .2s, color .2s;
+    letter-spacing: .3px;
+}
+
+.navbar-center .nav-pill i {
+    font-size: 15px;
+}
+
+.navbar-center .nav-pill:hover {
+    background: rgba(45,64,89,.08);
+    color: var(--color-primary);
+}
+
+.navbar-center .nav-pill.active {
+    background: var(--color-secondary);
+    color: #fff;
+}
+
+.navbar-center .nav-pill.active:hover {
+    background: #d0710f;
 }
 
 .navbar-logo {
@@ -127,7 +170,7 @@ header {
 
 .main-content {
     margin-top: 80px;
-    padding: 40px 20px;
+    padding: 8px 20px;
 }
 
 .page-title {
@@ -299,7 +342,7 @@ header {
     display: flex;
     align-items: flex-end;
     gap: 6px;
-    padding: 48px 0 0;
+    padding: 20px 0 0;
 }
 
 .tab-btn {

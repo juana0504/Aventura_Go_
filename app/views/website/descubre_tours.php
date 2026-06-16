@@ -51,6 +51,22 @@ if ($ciudad) {
                     class="navbar-logo">
                 </div>
 
+                <!-- Nav center -->
+                <div class="navbar-center">
+                    <a href="<?= BASE_URL ?>" class="nav-pill">
+                        <i class="bi bi-house-door-fill"></i> Inicio
+                    </a>
+                    <a href="<?= BASE_URL ?>descubre-tours" class="nav-pill active">
+                        <i class="bi bi-compass-fill"></i> Tours
+                    </a>
+                    <a href="<?= BASE_URL ?>descubre-hospedaje" class="nav-pill">
+                        <i class="bi bi-house-heart-fill"></i> Hospedaje
+                    </a>
+                    <a href="<?= BASE_URL ?>contactanos" class="nav-pill">
+                        <i class="bi bi-chat-dots-fill"></i> Contáctanos
+                    </a>
+                </div>
+
                 <!-- Botones y menú móvil -->
                 <div class="actions">
 
@@ -119,7 +135,16 @@ if ($ciudad) {
 
 
 
-            <!-- aca va las actividdes -->
+            <!-- Banner informativo -->
+            <div class="tab-intro">
+                <div class="tab-intro__icon"><i class="bi bi-compass"></i></div>
+                <div>
+                    <h2 class="tab-intro__title">Explora nuestros tours y aventuras</h2>
+                    <p class="tab-intro__text">Elige la actividad que más te emocione, selecciona una fecha disponible y reserva tu lugar en minutos. Nuestros proveedores certificados te garantizan una experiencia segura e inolvidable.</p>
+                </div>
+            </div>
+
+            <!-- aca va las actividades -->
             <div class="activities-grid">
 
                 <?php if (!empty($actividades)): ?>
