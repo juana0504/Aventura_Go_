@@ -86,6 +86,9 @@ foreach (array_slice($partes, 0, 2) as $p) {
             <a href="<?= BASE_URL ?>proveedor/perfil" class="pv-nav-item">
                 <i class="bi bi-person-circle pv-nav-item__icon"></i> Mi Perfil
             </a>
+            <a href="<?= BASE_URL ?>proveedor/completar-informacion" class="pv-nav-item">
+                <i class="bi bi-building pv-nav-item__icon"></i> Mi Empresa
+            </a>
 
         </nav>
 
@@ -165,6 +168,9 @@ foreach (array_slice($partes, 0, 2) as $p) {
                             </a>
                             <a href="<?= BASE_URL ?>proveedor/consultar-actividad" class="pv-dropdown__item">
                                 <i class="bi bi-compass"></i> Mis actividades
+                            </a>
+                            <a href="<?= BASE_URL ?>proveedor/completar-informacion" class="pv-dropdown__item">
+                                <i class="bi bi-building"></i> Mi empresa
                             </a>
                             <a href="<?= BASE_URL ?>proveedor/tickets" class="pv-dropdown__item">
                                 <i class="bi bi-headset"></i> Soporte

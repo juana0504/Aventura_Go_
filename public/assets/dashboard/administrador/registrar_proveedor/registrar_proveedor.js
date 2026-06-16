@@ -57,23 +57,35 @@ function validateStep(step) {
     return true;
 }
 
-// Cargar datos en vista previa (Paso 4)
+// Cargar datos en vista previa (Paso 5)
 function loadPreview() {
     document.getElementById("prev-empresa").textContent = empresa.value;
     document.getElementById("prev-nit").textContent = nit.value;
     document.getElementById("prev-email").textContent = email.value;
     document.getElementById("prev-telefono").textContent = telefono.value;
 
+    const logoEl = document.getElementById('logo');
+    document.getElementById("prev-logo").textContent = logoEl && logoEl.files[0] ? logoEl.files[0].name : 'Sin archivo seleccionado';
+
     let actividades = [];
-    document.querySelectorAll('input[name="actividades[]"]:checked') .forEach(el => actividades.push(el.value));
+    document.querySelectorAll('input[name="actividades[]"]:checked').forEach(el => actividades.push(el.value));
     document.getElementById("prev-actividades").textContent = actividades.join(", ") || "-";
 
-    document.getElementById("prev-ubicacion").textContent = `${ciudad.value}, ${departamento.value}`;
-    document.getElementById("prev-descripcion").textContent = descripcion.value || "-";
+    const ciudadSel = document.getElementById('id_ciudad');
+    const deptSel = document.getElementById('departamento');
+    const ciudadNombre = ciudadSel && ciudadSel.selectedIndex > 0 ? ciudadSel.options[ciudadSel.selectedIndex].text : '-';
+    const deptNombre = deptSel && deptSel.selectedIndex > 0 ? deptSel.options[deptSel.selectedIndex].text : '-';
+    document.getElementById("prev-ubicacion").textContent = `${deptNombre}, ${ciudadNombre}`;
+    document.getElementById("prev-direccion").textContent = document.getElementById('direccion')?.value || '-';
 
     document.getElementById("prev-nombre_repre").textContent = nombre_repre.value;
     document.getElementById("prev-email_repre").textContent = email_repre.value;
     document.getElementById("prev-telefono_repre").textContent = telefono_repre.value;
+    const tipoDocEl = document.getElementById('tipo_documento');
+    document.getElementById("prev-tipo_doc").textContent = tipoDocEl ? tipoDocEl.value : '-';
+    document.getElementById("prev-identificacion").textContent = document.getElementById('identiificacion_repre')?.value || '-';
+    const fotoEl = document.getElementById('foto_representante');
+    document.getElementById("prev-foto").textContent = fotoEl && fotoEl.files[0] ? fotoEl.files[0].name : 'Sin archivo seleccionado';
 }
 
 // Iniciar

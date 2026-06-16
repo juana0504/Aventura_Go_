@@ -335,6 +335,14 @@ switch ($request) {
         require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';  //elimina el proveedor
         break;
 
+    case '/administrador/archivar-proveedor':
+        require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';  //archiva el proveedor y pausa sus actividades
+        break;
+
+    case '/administrador/desarchivar-proveedor':
+        require_once BASE_PATH . '/app/controllers/administrador/proveedor.php';  //desarchiva el proveedor y reactiva sus actividades
+        break;
+
     case '/administrador/reporte':
         require_once BASE_PATH . '/app/controllers/reportesPdfController.php';  //elimina el proveedor
         reportesPdfControlers();

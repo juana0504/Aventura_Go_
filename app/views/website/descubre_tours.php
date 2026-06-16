@@ -124,9 +124,10 @@ if ($ciudad) {
                         <div class="activity-card">
 
                             <img
-                                src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= $actividad['imagen'] ?>"
+                                src="<?= !empty($actividad['imagen']) ? BASE_URL . 'public/uploads/turistico/actividades/' . rawurlencode($actividad['imagen']) : BASE_URL . 'public/assets/website_externos/descubre_tours/img/imagen%20tour.png' ?>"
                                 alt="<?= htmlspecialchars($actividad['nombre']) ?>"
-                                class="activity-image">
+                                class="activity-image"
+                                onerror="this.onerror=null;this.src='<?= BASE_URL ?>public/assets/website_externos/descubre_tours/img/imagen%20tour.png'">
 
                             <div class="activity-content">
 

@@ -5,6 +5,21 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 $id = $_GET['id'];
 $proveedor = listarProveedorId($id);
 
+// Resolver rutas de imagen con fallback para datos viejos de producción
+$logoFile = $proveedor['logo'] ?? '';
+if ($logoFile && $logoFile !== 'default_proveedor.png' && !file_exists(BASE_PATH . '/public/uploads/proveedores/' . $logoFile) && file_exists(BASE_PATH . '/public/uploads/turistico/' . $logoFile)) {
+    $logoUrl = BASE_URL . 'public/uploads/turistico/' . rawurlencode($logoFile);
+} else {
+    $logoUrl = BASE_URL . 'public/uploads/proveedores/' . rawurlencode($logoFile);
+}
+
+$fotoFile = $proveedor['foto_representante'] ?? '';
+if ($fotoFile && $fotoFile !== 'default_proveedor.png' && !file_exists(BASE_PATH . '/public/uploads/proveedores/' . $fotoFile) && file_exists(BASE_PATH . '/public/uploads/usuario/' . $fotoFile)) {
+    $fotoUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoFile);
+} else {
+    $fotoUrl = BASE_URL . 'public/uploads/proveedores/' . rawurlencode($fotoFile);
+}
+
 $actividadesSeleccionadas = [];
 if (!empty($proveedor['actividades'])) {
     $actividadesSeleccionadas = array_map('trim', explode(",", $proveedor['actividades']));
@@ -235,7 +250,7 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
                                 <div class="col-md-6">
                                     <label class="adm-form-label">Logo actual</label>
                                     <div class="adm-img-preview">
-                                        <img src="<?= BASE_URL ?>public/uploads/turistico/<?= htmlspecialchars($proveedor['logo']) ?>"
+                                        <img src="<?= htmlspecialchars($logoUrl) ?>"
                                             alt="Logo proveedor" class="adm-img-preview__thumb">
                                     </div>
                                     <input type="file" name="logo" class="adm-form-input adm-form-input--file mt-2" accept=".png,.jpg,.jpeg">
@@ -343,7 +358,7 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
                                 <div class="col-md-6">
                                     <label class="adm-form-label">Foto del representante (opcional)</label>
                                     <div class="adm-img-preview">
-                                        <img src="<?= BASE_URL ?>public/uploads/usuario/<?= htmlspecialchars($proveedor['foto_representante']) ?>"
+                                        <img src="<?= htmlspecialchars($fotoUrl) ?>"
                                             alt="Foto representante" class="adm-img-preview__thumb adm-img-preview__thumb--sm">
                                     </div>
                                     <input type="file" name="foto_representante" class="adm-form-input adm-form-input--file mt-2" accept=".png,.jpg,.jpeg">

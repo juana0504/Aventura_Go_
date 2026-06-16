@@ -248,6 +248,9 @@ $fotoUrl = !empty($usuario['foto'])
         <a href="<?= BASE_URL ?>proveedor/perfil" class="pv-nav-item pv-nav-item--active">
             <i class="bi bi-person-circle pv-nav-item__icon"></i> Mi Perfil
         </a>
+        <a href="<?= BASE_URL ?>proveedor/completar-informacion" class="pv-nav-item">
+            <i class="bi bi-building pv-nav-item__icon"></i> Mi Empresa
+        </a>
     </nav>
 
     <!-- ÁREA PRINCIPAL -->
@@ -313,6 +316,7 @@ $fotoUrl = !empty($usuario['foto'])
                         <div class="pv-dropdown__divider"></div>
                         <a href="<?= BASE_URL ?>proveedor/perfil" class="pv-dropdown__item"><i class="bi bi-person-circle"></i> Mi perfil</a>
                         <a href="<?= BASE_URL ?>proveedor/consultar-actividad" class="pv-dropdown__item"><i class="bi bi-compass"></i> Mis actividades</a>
+                        <a href="<?= BASE_URL ?>proveedor/completar-informacion" class="pv-dropdown__item"><i class="bi bi-building"></i> Mi empresa</a>
                         <a href="<?= BASE_URL ?>proveedor/tickets" class="pv-dropdown__item"><i class="bi bi-headset"></i> Soporte</a>
                         <div class="pv-dropdown__divider"></div>
                         <a href="<?= BASE_URL ?>logout" class="pv-dropdown__item pv-dropdown__item--danger"><i class="bi bi-box-arrow-right"></i> Cerrar sesión</a>

@@ -270,8 +270,12 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
                                     <!-- Foto -->
                                     <td>
                                         <div class="adm-turista-avatar">
-                                            <?php if (!empty($turista['foto'])): ?>
-                                                <img src="<?= BASE_URL ?>public/uploads/usuario/<?= htmlspecialchars($turista['foto']) ?>"
+                                            <?php
+                                            $fotoT = $turista['foto'] ?? '';
+                                            $fotoTExiste = !empty($fotoT) && file_exists(BASE_PATH . '/public/uploads/usuario/' . $fotoT);
+                                            ?>
+                                            <?php if ($fotoTExiste): ?>
+                                                <img src="<?= BASE_URL ?>public/uploads/usuario/<?= htmlspecialchars($fotoT) ?>"
                                                      alt="<?= htmlspecialchars($turista['nombre']) ?>"
                                                      class="adm-turista-avatar__img">
                                             <?php else: ?>

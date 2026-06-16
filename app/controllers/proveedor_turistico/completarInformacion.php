@@ -129,15 +129,30 @@ class CompletarInformacionController
             ':id_usuario' => $this->idUsuario
         ];
 
-        // Se llama al modelo para actualizar la información del proveedor. 
-        // Si la actualización es exitosa, se muestra un mensaje de éxito. Si no, se muestra un error.
+        $db2 = new conexion();
+        $conn2 = $db2->getConexion();
+        $stmtV = $conn2->prepare("SELECT validado FROM proveedor WHERE id_usuario = :id LIMIT 1");
+        $stmtV->bindParam(':id', $this->idUsuario, PDO::PARAM_INT);
+        $stmtV->execute();
+        $rowV = $stmtV->fetch(PDO::FETCH_ASSOC);
+        $yaValidado = $rowV && $rowV['validado'] == 1;
+
         if ($this->model->actualizarProveedor($data)) {
-            mostrarSweetAlert(
-                'success',
-                'Información guardada',
-                'Tu información fue enviada correctamente. El administrador revisará tu solicitud.',
-                BASE_URL . 'proveedor/pendiente'
-            );
+            if ($yaValidado) {
+                mostrarSweetAlert(
+                    'success',
+                    'Datos actualizados',
+                    'Tus datos de empresa han sido actualizados. El administrador revisará los cambios.',
+                    BASE_URL . 'proveedor/dashboard'
+                );
+            } else {
+                mostrarSweetAlert(
+                    'success',
+                    'Información guardada',
+                    'Tu información fue enviada correctamente. El administrador revisará tu solicitud.',
+                    BASE_URL . 'proveedor/pendiente'
+                );
+            }
             exit;
         } else {
             mostrarSweetAlert(

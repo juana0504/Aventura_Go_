@@ -267,16 +267,125 @@ class Proveedor
     public function eliminar($id)
     {
         try {
+            // Obtener id_usuario antes de eliminar
+            $stmt = $this->conexion->prepare("SELECT id_usuario FROM proveedor WHERE id_proveedor = :id LIMIT 1");
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $eliminar = "DELETE FROM proveedor WHERE id_proveedor = :id_proveedor";
+            if (!$row) {
+                return false;
+            }
 
-            $resultado = $this->conexion->prepare($eliminar);
-            $resultado->bindParam(':id_proveedor', $id);
+            $idUsuario = $row['id_usuario'];
 
-            return $resultado->execute();
+            $this->conexion->beginTransaction();
+
+            // 1. Registros de reservas que referencian actividades de este proveedor
+            $this->conexion->prepare("
+                DELETE ra FROM reserva_actividad ra
+                INNER JOIN actividad a ON ra.id_actividad = a.id_actividad
+                WHERE a.id_proveedor = :id
+            ")->execute([':id' => $id]);
+
+            // 2. Calificaciones de actividades de este proveedor
+            $this->conexion->prepare("
+                DELETE c FROM calificacion c
+                INNER JOIN actividad a ON c.id_actividad = a.id_actividad
+                WHERE a.id_proveedor = :id
+            ")->execute([':id' => $id]);
+
+            // 3. Imágenes de actividades
+            $this->conexion->prepare("
+                DELETE ai FROM actividad_imagen ai
+                INNER JOIN actividad a ON ai.id_actividad = a.id_actividad
+                WHERE a.id_proveedor = :id
+            ")->execute([':id' => $id]);
+
+            // 4. Actividades del proveedor
+            $this->conexion->prepare("DELETE FROM actividad WHERE id_proveedor = :id")
+                ->execute([':id' => $id]);
+
+            // 5. Documentos del proveedor
+            $this->conexion->prepare("DELETE FROM documento_proveedor WHERE id_proveedor = :id")
+                ->execute([':id' => $id]);
+
+            // 6. Registro del proveedor
+            $this->conexion->prepare("DELETE FROM proveedor WHERE id_proveedor = :id")
+                ->execute([':id' => $id]);
+
+            // 7. Registros auxiliares del usuario
+            $this->conexion->prepare("DELETE FROM login_intentos WHERE id_usuario = :id")
+                ->execute([':id' => $idUsuario]);
+
+            $this->conexion->prepare("DELETE FROM pago WHERE id_usuario = :id")
+                ->execute([':id' => $idUsuario]);
+
+            $this->conexion->prepare("DELETE FROM ticket_reporte WHERE id_usuario = :id")
+                ->execute([':id' => $idUsuario]);
+
+            // 8. Usuario asociado
+            $this->conexion->prepare("DELETE FROM usuario WHERE id_usuario = :id")
+                ->execute([':id' => $idUsuario]);
+
+            $this->conexion->commit();
+            return true;
         } catch (PDOException $e) {
+            $this->conexion->rollBack();
             error_log("Error al eliminar proveedor::eliminar->" . $e->getMessage());
-            return;
+            return false;
+        }
+    }
+
+    public function desarchivar($id)
+    {
+        try {
+            $this->conexion->beginTransaction();
+
+            // Reactivar actividades que quedaron INACTIVO por el archivo
+            $this->conexion->prepare("
+                UPDATE actividad SET estado = 'ACTIVO'
+                WHERE id_proveedor = :id AND estado = 'INACTIVO'
+            ")->execute([':id' => $id]);
+
+            // Restaurar proveedor a ACTIVO y devolver acceso al dashboard
+            $this->conexion->prepare("
+                UPDATE proveedor SET estado = 'ACTIVO', validado = 1
+                WHERE id_proveedor = :id
+            ")->execute([':id' => $id]);
+
+            $this->conexion->commit();
+            return true;
+        } catch (PDOException $e) {
+            $this->conexion->rollBack();
+            error_log("Error al desarchivar proveedor::desarchivar->" . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function archivar($id)
+    {
+        try {
+            $this->conexion->beginTransaction();
+
+            // Pausar todas las actividades activas del proveedor
+            $this->conexion->prepare("
+                UPDATE actividad SET estado = 'INACTIVO'
+                WHERE id_proveedor = :id AND estado = 'ACTIVO'
+            ")->execute([':id' => $id]);
+
+            // Marcar al proveedor como archivado y revocar acceso al dashboard
+            $this->conexion->prepare("
+                UPDATE proveedor SET estado = 'ARCHIVADO', validado = 0
+                WHERE id_proveedor = :id
+            ")->execute([':id' => $id]);
+
+            $this->conexion->commit();
+            return true;
+        } catch (PDOException $e) {
+            $this->conexion->rollBack();
+            error_log("Error al archivar proveedor::archivar->" . $e->getMessage());
+            return false;
         }
     }
 

@@ -187,7 +187,8 @@ $_SESSION['reserva']['total'] = $total;
                         <tbody>
                             <tr>
                                 <td>
-                                    <img src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= htmlspecialchars($actividad['imagen_principal']) ?>" width="60" class="me-2">
+                                    <img src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= rawurlencode($actividad['imagen_principal'] ?? '') ?>" width="60" class="me-2"
+                                         onerror="this.onerror=null;this.src='<?= BASE_URL ?>public/assets/website_externos/descubre_tours/img/imagen%20tour.png'">
 
                                     <strong><?= htmlspecialchars($actividad['nombre']) ?></strong><br>
                                     <small class="text-muted"><?= htmlspecialchars($fecha) ?></small>

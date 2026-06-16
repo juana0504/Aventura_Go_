@@ -47,17 +47,21 @@ const images = document.querySelectorAll(".carousel-track img");
 const items = document.querySelectorAll(".item");
 const next = document.querySelector(".next");
 const prev = document.querySelector(".prev");
-const carousel = document.querySelector(".cont-img-principal");
 
 let index = 0;
 
 function moveCarousel(i) {
-    track.style.transform = `translateX(-${i * 100}%)`;
-
+    if (!track || images.length === 0) return;
+    index = (i + images.length) % images.length;
+    track.style.transform = `translateX(-${index * 100}%)`;
     items.forEach(b => b.classList.remove("active"));
-    items[i].classList.add("active");
-
-    index = i;
+    if (items[index]) items[index].classList.add("active");
 }
 
+if (next) next.addEventListener("click", () => moveCarousel(index + 1));
+if (prev) prev.addEventListener("click", () => moveCarousel(index - 1));
+
+items.forEach((btn, i) => {
+    btn.addEventListener("click", () => moveCarousel(i));
+});
 
