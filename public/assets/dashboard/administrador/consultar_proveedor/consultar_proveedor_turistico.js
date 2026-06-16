@@ -1,3 +1,89 @@
+// --- Confirmar DESARCHIVAR proveedor ---
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.btn-desarchivar-proveedor').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const id     = this.dataset.id;
+            const nombre = this.dataset.nombre;
+            Swal.fire({
+                title: '¿Desarchivar proveedor?',
+                html: `<p style="font-size:15px;color:#444;line-height:1.7;">
+                    El proveedor <strong>${nombre}</strong> será restaurado al estado <strong>Activo</strong>.<br><br>
+                    Sus actividades que fueron pausadas al archivar quedarán <strong>activas nuevamente</strong> y serán visibles para los turistas.
+                </p>`,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#059669',
+                cancelButtonColor: '#1a2b3c',
+                confirmButtonText: '&#8635; Sí, desarchivar',
+                cancelButtonText: 'Cancelar',
+                reverseButtons: true
+            }).then(result => {
+                if (result.isConfirmed) {
+                    window.location.href = `${window.BASE_URL}administrador/desarchivar-proveedor?accion=desarchivar&id=${id}`;
+                }
+            });
+        });
+    });
+});
+
+// --- Confirmar ARCHIVAR proveedor ---
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.btn-archivar-proveedor').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const id     = this.dataset.id;
+            const nombre = this.dataset.nombre;
+            Swal.fire({
+                title: '¿Archivar proveedor?',
+                html: `<p style="font-size:15px;color:#444;line-height:1.7;">
+                    El proveedor <strong>${nombre}</strong> será archivado.<br><br>
+                    <strong>Todas sus actividades activas quedarán pausadas</strong> de inmediato y no serán visibles para los turistas.<br><br>
+                    El proveedor puede ser reactivado en cualquier momento o eliminado definitivamente después de 6 meses.
+                </p>`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#475569',
+                cancelButtonColor: '#1a2b3c',
+                confirmButtonText: '&#128451; Sí, archivar',
+                cancelButtonText: 'Cancelar',
+                reverseButtons: true
+            }).then(result => {
+                if (result.isConfirmed) {
+                    window.location.href = `${window.BASE_URL}administrador/archivar-proveedor?accion=archivar&id=${id}`;
+                }
+            });
+        });
+    });
+});
+
+// --- Confirmar ELIMINAR proveedor ---
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.btn-eliminar-proveedor').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const id     = this.dataset.id;
+            const nombre = this.dataset.nombre;
+            Swal.fire({
+                title: '¿Eliminar definitivamente?',
+                html: `<p style="font-size:15px;color:#444;line-height:1.7;">
+                    Estás a punto de eliminar al proveedor <strong>${nombre}</strong>.<br><br>
+                    <strong style="color:#dc2626;">⚠ Esta acción no se puede deshacer.</strong><br><br>
+                    Se eliminarán permanentemente todos sus datos, incluyendo sus actividades registradas, imágenes e historial. No será posible recuperarlos.
+                </p>`,
+                icon: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#dc2626',
+                cancelButtonColor: '#1a2b3c',
+                confirmButtonText: '&#128465; Sí, eliminar todo',
+                cancelButtonText: 'Cancelar',
+                reverseButtons: true
+            }).then(result => {
+                if (result.isConfirmed) {
+                    window.location.href = `${window.BASE_URL}administrador/eliminar-proveedor?accion=eliminar&id=${id}`;
+                }
+            });
+        });
+    });
+});
+
 // --- Cargar datos del proveedor y llenar el modal ---
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -92,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Logo
                 const logoEl = document.getElementById('modal-logo');
                 logoEl.src = data.logo
-                    ? `${window.BASE_URL}public/uploads/turistico/${data.logo}`
+                    ? `${window.BASE_URL}public/uploads/proveedores/${data.logo}`
                     : `${window.BASE_URL}public/assets/img/default-proveedor.jpg`;
 
                 // // Foto representante

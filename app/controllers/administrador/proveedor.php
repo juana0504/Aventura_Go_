@@ -32,6 +32,12 @@ switch ($method) {
         if ($accion === 'eliminar') {
             // esta funcion elimina el proveedor segun su id
             eliminarProveedor($_GET['id']);
+        } else if ($accion === 'archivar') {
+            // esta funcion archiva el proveedor y pausa sus actividades
+            archivarProveedor($_GET['id']);
+        } else if ($accion === 'desarchivar') {
+            // esta funcion desarchiva el proveedor y reactiva sus actividades
+            desarchivarProveedor($_GET['id']);
         } else if ($accion === 'activar') {
             // esta funcion ACTIVA el proveedor segun su id
             activarProveedorTuristico($_GET['id']);
@@ -133,7 +139,7 @@ function registrarProveedor()
         }
 
         $logo_url = uniqid('logo_') . "." . $ext;
-        $destino = BASE_PATH . "/public/uploads/turistico/" . $logo_url;
+        $destino = BASE_PATH . "/public/uploads/proveedores/" . $logo_url;
         move_uploaded_file($file['tmp_name'], $destino);
     } else {
         $logo_url = 'default_proveedor.png';
@@ -145,8 +151,8 @@ function registrarProveedor()
         $file = $_FILES['foto_representante'];
         $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
-        $foto_url = uniqid('foto_') . "." . $ext;
-        $destino = BASE_PATH . "/public/uploads/usuario/" . $foto_url;
+        $foto_url = uniqid('repre_') . "." . $ext;
+        $destino = BASE_PATH . "/public/uploads/proveedores/" . $foto_url;
 
         move_uploaded_file($file['tmp_name'], $destino);
     } else {
@@ -289,14 +295,43 @@ function eliminarProveedor($id)
     }
 }
 
+function archivarProveedor($id)
+{
+    $objProveedor = new Proveedor();
+
+    $resultado = $objProveedor->archivar($id);
+
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Proveedor archivado', 'El proveedor fue archivado y sus actividades activas han sido pausadas.', BASE_URL . 'administrador/consultar-proveedor');
+    } else {
+        mostrarSweetAlert('error', 'Error al archivar', 'No se pudo archivar el proveedor.');
+    }
+}
+
+function desarchivarProveedor($id)
+{
+    $objProveedor = new Proveedor();
+
+    $resultado = $objProveedor->desarchivar($id);
+
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Proveedor restaurado', 'El proveedor fue reactivado y sus actividades han sido restauradas.', BASE_URL . 'administrador/consultar-proveedor');
+    } else {
+        mostrarSweetAlert('error', 'Error al desarchivar', 'No se pudo desarchivar el proveedor.');
+    }
+}
+
 // consultar un proveedor (boton ojo de la tabla)
 function consultarProveedorOjo()
 {
+    ob_start();
+
     // Obtener ID desde GET
     $id = $_GET['id'] ?? null;
 
     // Validar ID
     if (!$id) {
+        ob_end_clean();
         http_response_code(400);
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode(['error' => 'ID del proveedor no especificado']);
@@ -307,16 +342,16 @@ function consultarProveedorOjo()
     $objProveedor = new Proveedor();
     $proveedor = $objProveedor->listarProveedor($id);
 
-
     // Validar si se encontró el proveedor
     if (!$proveedor) {
+        ob_end_clean();
         http_response_code(404);
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode(['error' => 'Proveedor no encontrado']);
         exit;
     }
 
-    // Responder con JSON (ok)
+    ob_end_clean();
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($proveedor);
     exit;

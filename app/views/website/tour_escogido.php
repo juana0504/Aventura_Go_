@@ -134,7 +134,8 @@ if (!$actividad) {
 
                                     <div class="carousel-track">
                                         <?php foreach ($actividad['imagenes'] as $img): ?>
-                                            <img src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= $img ?>">
+                                            <img src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= rawurlencode($img) ?>"
+                                                 onerror="this.onerror=null;this.src='<?= BASE_URL ?>public/assets/website_externos/descubre_tours/img/imagen%20tour.png'">
                                         <?php endforeach; ?>
                                     </div>
 
@@ -144,7 +145,8 @@ if (!$actividad) {
                                 <div class="cont-items">
                                     <?php foreach ($actividad['imagenes'] as $index => $img): ?>
                                         <button type="button" class="item <?= $index === 0 ? 'active' : '' ?>">
-                                            <img src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= $img ?>">
+                                            <img src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= rawurlencode($img) ?>"
+                                                 onerror="this.onerror=null;this.src='<?= BASE_URL ?>public/assets/website_externos/descubre_tours/img/imagen%20tour.png'">
                                         </button>
                                     <?php endforeach; ?>
                                 </div>

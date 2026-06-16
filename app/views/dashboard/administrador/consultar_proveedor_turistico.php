@@ -41,6 +41,9 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- CSS sistema admin (sidebar, topbar, dropdowns, dark mode) -->
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/administrador/administrador/admin.css">
 
@@ -229,10 +232,11 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
 
             <!-- Tarjetas resumen -->
             <?php
-            $total    = count($datos ?? []);
-            $activos  = count(array_filter($datos ?? [], fn($p) => strtoupper($p['estado']) === 'ACTIVO'));
-            $inactivos = count(array_filter($datos ?? [], fn($p) => strtoupper($p['estado']) === 'INACTIVO'));
-            $pendientes = count(array_filter($datos ?? [], fn($p) => !in_array(strtoupper($p['estado']), ['ACTIVO','INACTIVO'])));
+            $total      = count($datos ?? []);
+            $activos    = count(array_filter($datos ?? [], fn($p) => strtoupper($p['estado']) === 'ACTIVO'));
+            $inactivos  = count(array_filter($datos ?? [], fn($p) => strtoupper($p['estado']) === 'INACTIVO'));
+            $archivados = count(array_filter($datos ?? [], fn($p) => strtoupper($p['estado']) === 'ARCHIVADO'));
+            $pendientes = count(array_filter($datos ?? [], fn($p) => !in_array(strtoupper($p['estado']), ['ACTIVO','INACTIVO','ARCHIVADO'])));
             ?>
             <div class="adm-pv-stats">
                 <div class="adm-pv-stat adm-pv-stat--featured">
@@ -263,6 +267,13 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
                         <div class="adm-pv-stat__value"><?= $pendientes ?></div>
                     </div>
                 </div>
+                <div class="adm-pv-stat">
+                    <div class="adm-pv-stat__icon" style="background:#f1f5f9;color:#475569;"><i class="bi bi-archive-fill"></i></div>
+                    <div>
+                        <div class="adm-pv-stat__label">Archivados</div>
+                        <div class="adm-pv-stat__value"><?= $archivados ?></div>
+                    </div>
+                </div>
             </div>
 
             <!-- Filtros rápidos -->
@@ -278,6 +289,9 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
                 </button>
                 <button class="adm-pv-filter" data-filter="pendiente">
                     <i class="bi bi-clock"></i> Pendientes
+                </button>
+                <button class="adm-pv-filter" data-filter="archivado">
+                    <i class="bi bi-archive"></i> Archivados
                 </button>
             </div>
 
@@ -309,7 +323,7 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
                                     <!-- Logo -->
                                     <td>
                                         <img
-                                            src="<?= BASE_URL ?>public/uploads/turistico/<?= htmlspecialchars($proveedor['logo']) ?>"
+                                            src="<?= BASE_URL ?>public/uploads/proveedores/<?= htmlspecialchars($proveedor['logo']) ?>"
                                             alt="Logo <?= htmlspecialchars($proveedor['nombre_empresa']) ?>"
                                             class="adm-pv-logo">
                                     </td>
@@ -341,6 +355,10 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
                                             <span class="adm-badge adm-badge--cancelled">
                                                 <span class="adm-badge__dot"></span> Inactivo
                                             </span>
+                                        <?php elseif ($proveedor['estado'] == 'ARCHIVADO'): ?>
+                                            <span class="adm-badge adm-badge--archived">
+                                                <span class="adm-badge__dot"></span> Archivado
+                                            </span>
                                         <?php else: ?>
                                             <span class="adm-badge adm-badge--pending">
                                                 <span class="adm-badge__dot"></span> Pendiente
@@ -364,12 +382,31 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
                                                 <i class="bi bi-pencil"></i>
                                             </a>
 
-                                            <a href="<?= BASE_URL ?>administrador/eliminar-proveedor?accion=eliminar&id=<?= $proveedor['id_proveedor'] ?>"
-                                               class="adm-pv-btn adm-pv-btn--delete"
-                                               title="Eliminar"
-                                               onclick="return confirm('¿Estás seguro de eliminar este proveedor?')">
+                                            <?php if (strtoupper($proveedor['estado']) === 'ARCHIVADO'): ?>
+                                            <button
+                                                class="adm-pv-btn adm-pv-btn--restore btn-desarchivar-proveedor"
+                                                data-id="<?= $proveedor['id_proveedor'] ?>"
+                                                data-nombre="<?= htmlspecialchars($proveedor['nombre_empresa'], ENT_QUOTES) ?>"
+                                                title="Desarchivar proveedor">
+                                                <i class="bi bi-arrow-counterclockwise"></i>
+                                            </button>
+                                            <?php else: ?>
+                                            <button
+                                                class="adm-pv-btn adm-pv-btn--archive btn-archivar-proveedor"
+                                                data-id="<?= $proveedor['id_proveedor'] ?>"
+                                                data-nombre="<?= htmlspecialchars($proveedor['nombre_empresa'], ENT_QUOTES) ?>"
+                                                title="Archivar proveedor">
+                                                <i class="bi bi-archive"></i>
+                                            </button>
+                                            <?php endif; ?>
+
+                                            <button
+                                                class="adm-pv-btn adm-pv-btn--delete btn-eliminar-proveedor"
+                                                data-id="<?= $proveedor['id_proveedor'] ?>"
+                                                data-nombre="<?= htmlspecialchars($proveedor['nombre_empresa'], ENT_QUOTES) ?>"
+                                                title="Eliminar definitivamente">
                                                 <i class="bi bi-trash"></i>
-                                            </a>
+                                            </button>
                                         </div>
                                     </td>
 
@@ -621,7 +658,7 @@ window.BASE_URL = '<?= BASE_URL ?>';
                 const estado = row.dataset.estado;
                 const visible = f === 'all'
                     || estado === f
-                    || (f === 'pendiente' && estado !== 'activo' && estado !== 'inactivo');
+                    || (f === 'pendiente' && estado !== 'activo' && estado !== 'inactivo' && estado !== 'archivado');
                 row.style.display = visible ? '' : 'none';
             });
         });

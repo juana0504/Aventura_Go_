@@ -140,9 +140,10 @@ if (!isset($_SESSION['reference_code'])) {
                             <div class="card-body">
                                 <div class="row g-3 align-items-start">
                                     <div class="col-md-4">
-                                        <img src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= $reserva['imagen'] ?>"
+                                        <img src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= rawurlencode($reserva['imagen'] ?? '') ?>"
                                             class="img-fluid rounded"
-                                            alt="<?= htmlspecialchars($reserva['nombre']) ?>">
+                                            alt="<?= htmlspecialchars($reserva['nombre']) ?>"
+                                            onerror="this.onerror=null;this.src='<?= BASE_URL ?>public/assets/website_externos/descubre_tours/img/imagen%20tour.png'">
                                     </div>
 
                                     <div class="col-md-8">

@@ -195,6 +195,8 @@ function registrarActividad()
         mkdir($directorio, 0777, true);
     }
 
+    $imagenPrincipal = null;
+
     foreach ($_FILES['imagenes']['name'] as $index => $nombreArchivo) {
 
         $ext = strtolower(pathinfo($nombreArchivo, PATHINFO_EXTENSION));
@@ -205,14 +207,20 @@ function registrarActividad()
             $directorio . $nombreFinal
         );
 
-        // Primera imagen = principal
-        $esPrincipal = ($index === 0) ? 1 : 0;
+        if ($index === 0) {
+            $imagenPrincipal = $nombreFinal;
+        }
 
         $objActividad->guardarImagen([
             'id_actividad' => $id_actividad,
             'imagen'       => $nombreFinal,
-            'es_principal' => $esPrincipal
+            'es_principal' => ($index === 0) ? 1 : 0,
         ]);
+    }
+
+    // Guardar imagen principal en actividad.imagen para compatibilidad con producción
+    if ($imagenPrincipal) {
+        $objActividad->actualizarImagenPrincipal($id_actividad, $imagenPrincipal);
     }
 
     mostrarSweetAlert(
@@ -314,16 +322,27 @@ function actualizarActividad()
             mkdir($directorio, 0777, true);
         }
 
+        $imagenPrincipal = null;
+
         foreach ($_FILES['imagenes']['name'] as $index => $nombreArchivo) {
             $ext         = strtolower(pathinfo($nombreArchivo, PATHINFO_EXTENSION));
             $nombreFinal = uniqid('actividad_') . '.' . $ext;
             move_uploaded_file($_FILES['imagenes']['tmp_name'][$index], $directorio . $nombreFinal);
+
+            if ($index === 0) {
+                $imagenPrincipal = $nombreFinal;
+            }
 
             $actividadModel->guardarImagen([
                 'id_actividad' => $id_actividad,
                 'imagen'       => $nombreFinal,
                 'es_principal' => ($index === 0) ? 1 : 0,
             ]);
+        }
+
+        // Guardar imagen principal en actividad.imagen para compatibilidad con producción
+        if ($imagenPrincipal) {
+            $actividadModel->actualizarImagenPrincipal($id_actividad, $imagenPrincipal);
         }
     }
 

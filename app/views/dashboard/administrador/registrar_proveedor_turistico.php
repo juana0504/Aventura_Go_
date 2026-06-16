@@ -403,6 +403,10 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
                                             <span class="adm-preview-label">Teléfono</span>
                                             <span class="preview-value" id="prev-telefono">—</span>
                                         </div>
+                                        <div class="adm-preview-field">
+                                            <span class="adm-preview-label">Logo</span>
+                                            <span class="preview-value" id="prev-logo">—</span>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -421,8 +425,12 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
                                     </div>
                                     <div class="adm-preview-card__body">
                                         <div class="adm-preview-field">
-                                            <span class="adm-preview-label">Dirección</span>
+                                            <span class="adm-preview-label">Departamento / Ciudad</span>
                                             <span class="preview-value" id="prev-ubicacion">—</span>
+                                        </div>
+                                        <div class="adm-preview-field">
+                                            <span class="adm-preview-label">Dirección</span>
+                                            <span class="preview-value" id="prev-direccion">—</span>
                                         </div>
                                     </div>
                                 </div>
@@ -437,12 +445,24 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
                                             <span class="preview-value" id="prev-nombre_repre">—</span>
                                         </div>
                                         <div class="adm-preview-field">
+                                            <span class="adm-preview-label">Tipo Documento</span>
+                                            <span class="preview-value" id="prev-tipo_doc">—</span>
+                                        </div>
+                                        <div class="adm-preview-field">
+                                            <span class="adm-preview-label">Identificación</span>
+                                            <span class="preview-value" id="prev-identificacion">—</span>
+                                        </div>
+                                        <div class="adm-preview-field">
                                             <span class="adm-preview-label">Email</span>
                                             <span class="preview-value" id="prev-email_repre">—</span>
                                         </div>
                                         <div class="adm-preview-field">
                                             <span class="adm-preview-label">Teléfono</span>
                                             <span class="preview-value" id="prev-telefono_repre">—</span>
+                                        </div>
+                                        <div class="adm-preview-field">
+                                            <span class="adm-preview-label">Foto</span>
+                                            <span class="preview-value" id="prev-foto">—</span>
                                         </div>
                                     </div>
                                 </div>

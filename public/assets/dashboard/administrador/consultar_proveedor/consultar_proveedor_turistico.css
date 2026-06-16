@@ -109,7 +109,7 @@
 /* ─── TARJETAS RESUMEN ────────────────────── */
 .adm-pv-stats {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 16px;
     margin-bottom: 24px;
 }
@@ -312,6 +312,34 @@
     text-decoration: none;
 }
 
+.adm-pv-btn--archive {
+    background: #f1f5f9;
+    color: #475569;
+    border: none;
+    cursor: pointer;
+}
+
+.adm-pv-btn--archive:hover {
+    background: #475569;
+    color: #fff;
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+
+.adm-pv-btn--restore {
+    background: var(--adm-green-light, #dcfce7);
+    color: #059669;
+    border: none;
+    cursor: pointer;
+}
+
+.adm-pv-btn--restore:hover {
+    background: #059669;
+    color: #fff;
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+
 /* Badges en tabla */
 .adm-badge {
     display: inline-flex;
@@ -337,6 +365,7 @@
 .adm-badge--confirmed { background: var(--adm-green-light); color: #059669; }
 .adm-badge--pending   { background: var(--adm-amber-light); color: #d97706; }
 .adm-badge--cancelled { background: var(--adm-red-light);   color: #dc2626; }
+.adm-badge--archived  { background: #f1f5f9;               color: #475569; }
 
 /* ─── MODAL REDISEÑADO ────────────────────── */
 .adm-modal {

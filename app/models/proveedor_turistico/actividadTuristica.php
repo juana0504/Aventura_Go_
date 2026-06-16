@@ -72,6 +72,16 @@ class ActividadTuristica
 
 
 
+    public function actualizarImagenPrincipal($id_actividad, $imagen)
+    {
+        try {
+            $stmt = $this->conexion->prepare("UPDATE actividad SET imagen = :imagen WHERE id_actividad = :id");
+            return $stmt->execute([':imagen' => $imagen, ':id' => (int)$id_actividad]);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
     public function eliminarImagenes($id_actividad)
     {
         try {
@@ -116,10 +126,12 @@ class ActividadTuristica
         $sql = "SELECT
                 a.*,
                 c.nombre AS destino,
-                a.imagen AS imagen_principal
+                COALESCE(ai.imagen, a.imagen) AS imagen_principal
             FROM actividad a
             INNER JOIN ciudades c
                 ON a.id_ciudad = c.id_ciudad
+            LEFT JOIN actividad_imagen ai
+                ON ai.id_actividad = a.id_actividad AND ai.es_principal = 1
             WHERE a.id_proveedor = :id_proveedor
             ORDER BY a.created_at DESC";
 
@@ -149,12 +161,14 @@ class ActividadTuristica
     public function listarParaModal($id)
     {
         $sql = "SELECT a.*,
-                       a.imagen AS imagen_principal,
+                       COALESCE(ai.imagen, a.imagen) AS imagen_principal,
                        c.nombre AS ciudad,
                        d.nombre AS departamento
                 FROM actividad a
                 LEFT JOIN ciudades c ON a.id_ciudad = c.id_ciudad
                 LEFT JOIN departamentos d ON c.id_departamento = d.id_departamento
+                LEFT JOIN actividad_imagen ai
+                    ON ai.id_actividad = a.id_actividad AND ai.es_principal = 1
                 WHERE a.id_actividad = :id
                 LIMIT 1";
 
@@ -168,12 +182,21 @@ class ActividadTuristica
             return null;
         }
 
-        // Usar el campo imagen de la tabla actividad (campo principal)
-        $principal = $data['imagen'] ?? null;
-        $lista     = $principal ? [$principal] : [];
+        // Galería: intentar desde actividad_imagen; fallback a imagen principal
+        $imagenes = [];
+        try {
+            $sqlImg = "SELECT imagen FROM actividad_imagen WHERE id_actividad = :id ORDER BY es_principal DESC";
+            $stmtImg = $this->conexion->prepare($sqlImg);
+            $stmtImg->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmtImg->execute();
+            $imagenes = $stmtImg->fetchAll(PDO::FETCH_COLUMN);
+        } catch (PDOException $e) { }
 
-        $data['imagen_principal'] = $principal;
-        $data['imagenes']         = $lista;
+        if (empty($imagenes) && !empty($data['imagen'])) {
+            $imagenes = [$data['imagen']];
+        }
+
+        $data['imagenes'] = $imagenes;
 
         return $data;
     }
@@ -243,12 +266,14 @@ class ActividadTuristica
             a.cupos,
             a.ubicacion,
             c.nombre AS ciudad,
-            a.imagen
+            COALESCE(ai.imagen, a.imagen) AS imagen
         FROM actividad a
         INNER JOIN proveedor p
             ON a.id_proveedor = p.id_proveedor
         INNER JOIN ciudades c
             ON a.id_ciudad = c.id_ciudad
+        LEFT JOIN actividad_imagen ai
+            ON ai.id_actividad = a.id_actividad AND ai.es_principal = 1
         WHERE a.estado = 'ACTIVO'
         AND p.estado = 'ACTIVO'
         ORDER BY a.created_at DESC
@@ -271,12 +296,14 @@ class ActividadTuristica
         a.cupos,
         a.ubicacion,
         c.nombre AS ciudad,
-        a.imagen
+        COALESCE(ai.imagen, a.imagen) AS imagen
     FROM actividad a
     INNER JOIN proveedor p
         ON a.id_proveedor = p.id_proveedor
     INNER JOIN ciudades c
         ON a.id_ciudad = c.id_ciudad
+    LEFT JOIN actividad_imagen ai
+        ON ai.id_actividad = a.id_actividad AND ai.es_principal = 1
     WHERE a.estado = 'ACTIVO'
     AND p.estado = 'ACTIVO'
     AND UPPER(c.nombre) = UPPER(:ciudad)
@@ -355,7 +382,7 @@ class ActividadTuristica
         a.nombre,
         a.precio,
         a.created_at,
-        a.imagen AS imagen_principal,
+        COALESCE(ai.imagen, a.imagen) AS imagen_principal,
         c.nombre AS ciudad,
         d.nombre AS departamento
     FROM actividad a
@@ -363,6 +390,8 @@ class ActividadTuristica
         ON a.id_ciudad = c.id_ciudad
     INNER JOIN departamentos d
         ON c.id_departamento = d.id_departamento
+    LEFT JOIN actividad_imagen ai
+        ON ai.id_actividad = a.id_actividad AND ai.es_principal = 1
     WHERE a.id_actividad = :id
     LIMIT 1";
 
@@ -388,7 +417,7 @@ class ActividadTuristica
             a.precio,
             a.estado,
             a.created_at,
-            a.imagen AS imagen_principal,
+            COALESCE(ai.imagen, a.imagen) AS imagen_principal,
             c.nombre AS ciudad,
             d.nombre AS departamento
             FROM actividad a
@@ -396,6 +425,8 @@ class ActividadTuristica
                 ON a.id_ciudad = c.id_ciudad
             INNER JOIN departamentos d
                 ON c.id_departamento = d.id_departamento
+            LEFT JOIN actividad_imagen ai
+                ON ai.id_actividad = a.id_actividad AND ai.es_principal = 1
             WHERE a.id_actividad = :id
             LIMIT 1
             ";
@@ -410,8 +441,14 @@ class ActividadTuristica
             return null;
         }
 
-        // Galería: usar el campo imagen de la tabla actividad
-        $actividad['imagenes'] = $actividad['imagen'] ? [$actividad['imagen']] : [];
+        // Galería: todas las imágenes subidas, principal primero
+        $sqlImg = "SELECT imagen FROM actividad_imagen WHERE id_actividad = :id ORDER BY es_principal DESC";
+        $stmtImg = $this->conexion->prepare($sqlImg);
+        $stmtImg->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmtImg->execute();
+        $imagenes = $stmtImg->fetchAll(PDO::FETCH_COLUMN);
+
+        $actividad['imagenes'] = !empty($imagenes) ? $imagenes : ($actividad['imagen_principal'] ? [$actividad['imagen_principal']] : []);
 
         return $actividad;
     }
