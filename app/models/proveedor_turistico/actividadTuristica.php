@@ -586,16 +586,16 @@ class ActividadTuristica
             SELECT
                 h.id_hospedaje AS id,
                 h.nombre,
-                h.descripcion,
+                CONCAT(h.tipo, ' - ', COALESCE(h.servicios, '')) AS descripcion,
                 h.precio,
                 c.nombre AS ciudad,
-                COALESCE(h.logo, h.imagen) AS imagen,
+                COALESCE(ph.logo, h.imagen) AS imagen,
                 'hospedaje' AS tipo
             FROM hospedaje h
             INNER JOIN proveedor_hotelero ph ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
             INNER JOIN ciudades c ON h.id_ciudad = c.id_ciudad
             WHERE ph.estado = 'APROBADO'
-              AND (h.nombre LIKE :q4 OR h.descripcion LIKE :q5 OR c.nombre LIKE :q6)
+              AND (h.nombre LIKE :q4 OR h.tipo LIKE :q5 OR c.nombre LIKE :q6)
 
             ORDER BY nombre ASC
         ";
