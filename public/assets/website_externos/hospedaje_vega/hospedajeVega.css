@@ -251,37 +251,67 @@ header {
     color: var(--color-text);
 }
 
-/* BOTONES */
+/* ─── TABS ─────────────────────────────────── */
+.tabs-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    padding: 48px 0 0;
+}
+
 .tab-btn {
-    margin: 80px 30px;
-    padding: 20px 30px;
-    border-radius: 25px 25px 0 0;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 38px 18px;
+    border-radius: 16px 16px 0 0;
     font-family: var(--font-titles);
-    font-weight: 600;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
     text-decoration: none;
+    cursor: pointer;
+    transition: all .3s cubic-bezier(.4,0,.2,1);
+    border: none;
+    outline: none;
 }
 
-/* BOTÓN ACTIVO (NARANJA) */
+.tab-btn .tab-icon {
+    font-size: 19px;
+    transition: color .3s, transform .3s;
+}
+
 .tab-btn.active {
-    background-color: #d6d5d5;
-    /* Naranja cálido */
-    color: var(--color-text);
+    background: #ffffff;
+    color: var(--color-primary);
+    box-shadow: 0 -6px 24px rgba(234,130,23,.18), 0 -2px 0 0 var(--color-secondary) inset;
+    z-index: 2;
+    padding-bottom: 22px;
 }
 
-/* BOTÓN INACTIVO (GRIS CLARO) */
+.tab-btn.active .tab-icon {
+    color: var(--color-secondary);
+    transform: scale(1.15);
+}
+
 .tab-btn:not(.active) {
-    background-color: var(--color-primary);
-    color: var(--color-white);
+    background: var(--color-primary);
+    color: rgba(255,255,255,.7);
+    margin-bottom: 2px;
 }
 
-/* EFECTO HOVER */
-.tab-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.tab-btn:not(.active):hover {
+    background: #3a5070;
+    color: #ffffff;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(45,64,89,.3);
+}
+
+.tab-btn:not(.active):hover .tab-icon {
+    color: var(--color-secondary);
+    transform: scale(1.1);
 }
 
 /* ===============================
@@ -295,9 +325,10 @@ header {
 }
 
 .activities-grid {
-    padding: 100px;
-    border-radius: 30px;
-    background: #d6d5d5;
+    padding: 48px 48px 64px;
+    border-radius: 0 16px 16px 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 40px rgba(45,64,89,.1);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 30px;
