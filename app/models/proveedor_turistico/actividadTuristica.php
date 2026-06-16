@@ -561,4 +561,50 @@ class ActividadTuristica
 
         return ($reservadas + $cantidad) <= $cuposTotales;
     }
+
+    public function buscar(string $q): array
+    {
+        $like = '%' . $q . '%';
+        $sql = "
+            SELECT
+                a.id_actividad AS id,
+                a.nombre,
+                a.descripcion,
+                a.precio,
+                c.nombre AS ciudad,
+                COALESCE(ai.imagen, a.imagen) AS imagen,
+                'actividad' AS tipo
+            FROM actividad a
+            INNER JOIN proveedor p ON a.id_proveedor = p.id_proveedor
+            INNER JOIN ciudades c ON a.id_ciudad = c.id_ciudad
+            LEFT JOIN actividad_imagen ai ON ai.id_actividad = a.id_actividad AND ai.es_principal = 1
+            WHERE a.estado = 'ACTIVO' AND p.estado = 'ACTIVO'
+              AND (a.nombre LIKE :q1 OR a.descripcion LIKE :q2 OR c.nombre LIKE :q3)
+
+            UNION ALL
+
+            SELECT
+                h.id_hospedaje AS id,
+                h.nombre,
+                h.descripcion,
+                h.precio,
+                c.nombre AS ciudad,
+                COALESCE(h.logo, h.imagen) AS imagen,
+                'hospedaje' AS tipo
+            FROM hospedaje h
+            INNER JOIN proveedor_hotelero ph ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
+            INNER JOIN ciudades c ON h.id_ciudad = c.id_ciudad
+            WHERE ph.estado = 'APROBADO'
+              AND (h.nombre LIKE :q4 OR h.descripcion LIKE :q5 OR c.nombre LIKE :q6)
+
+            ORDER BY nombre ASC
+        ";
+
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->execute([
+            ':q1' => $like, ':q2' => $like, ':q3' => $like,
+            ':q4' => $like, ':q5' => $like, ':q6' => $like,
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

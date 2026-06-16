@@ -72,6 +72,14 @@ switch ($request) {
         require BASE_PATH . '/app/views/website/descubre_hospedaje.php';
         break;
 
+    case '/busqueda':
+        require_once BASE_PATH . '/app/models/proveedor_turistico/actividadTuristica.php';
+        $actividadModel = new ActividadTuristica();
+        $q = trim($_GET['q'] ?? '');
+        $resultados = $q !== '' ? $actividadModel->buscar($q) : [];
+        require BASE_PATH . '/app/views/website/busqueda.php';
+        break;
+
     // Ruta: /tour escogido
     case '/tour-escogido': //ojo se modifico aca para darle login
         require BASE_PATH . '/app/views/website/tour_escogido.php';
