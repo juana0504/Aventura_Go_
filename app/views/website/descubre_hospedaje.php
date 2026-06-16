@@ -100,8 +100,12 @@ if ($ciudad) {
   <main class="main-content">
     <div class="container">
       <div class="tabs-container">
-        <a href="<?= BASE_URL ?>descubre-tours" class="tab-btn"> TOURS Y AVENTURA </a>
-        <a class="tab-btn active" href="<?= BASE_URL ?>descubre-hospedaje" class="tab-btn"> HOSPEDAJE </a>
+        <a class="tab-btn" href="<?= BASE_URL ?>descubre-tours">
+            <i class="bi bi-compass tab-icon"></i> Tours y Aventura
+        </a>
+        <a class="tab-btn active" href="<?= BASE_URL ?>descubre-hospedaje">
+            <i class="bi bi-house-heart tab-icon"></i> Hospedaje
+        </a>
       </div>
 
 
