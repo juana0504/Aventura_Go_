@@ -576,12 +576,54 @@ header {
     transition: all 0.3s ease;
 }
 
-/* Contenedor del botón */
+/* Contenedor de botones */
 .activity-card .button {
-    position: absolute;
-    bottom: 16px;
-    right: 16px;
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 14px;
 }
+
+/* Botón reseñas */
+.btn-resenas {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Lato', sans-serif;
+    color: #b45309;
+    background-color: #fef3c7;
+    border: 1px solid #fcd34d;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-resenas:hover {
+    background-color: #f59e0b;
+    color: #fff;
+    border-color: #f59e0b;
+    transform: translateY(-2px);
+}
+
+.btn-resenas i { font-size: 12px; }
+
+/* ─── MODAL RESEÑAS ─── */
+.dt-resenas-modal { border:none !important; border-radius:16px !important; overflow:hidden; box-shadow:0 24px 64px rgba(0,0,0,.15) !important; }
+.dt-resenas-modal__header { background:#2D4059; padding:20px 24px; display:flex; align-items:flex-start; justify-content:space-between; gap:16px; }
+.dt-resenas-modal__eyebrow { font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:5px; font-family:'Lato',sans-serif; }
+.dt-resenas-modal__titulo { font-family:'Raleway',sans-serif; font-size:20px; font-weight:700; color:#fff; margin:0; line-height:1.2; }
+.dt-resenas-modal__close { background:rgba(255,255,255,.12); border:none; color:rgba(255,255,255,.75); width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; font-size:13px; transition:background .2s; }
+.dt-resenas-modal__close:hover { background:rgba(255,255,255,.25); color:#fff; }
+.dt-resenas-modal__body { padding:20px 24px; background:#f8f9fa; max-height:60vh; overflow-y:auto; }
+.dt-resenas-modal__footer { padding:14px 24px; background:#fff; border-top:1px solid #e5e7eb; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.dt-resenas-modal__btn-cerrar { display:inline-flex; align-items:center; gap:6px; background:transparent; color:#6b7280; border:1px solid #d1d5db; border-radius:8px; padding:8px 16px; font-size:13px; font-weight:500; cursor:pointer; font-family:'Lato',sans-serif; transition:all .2s; }
+.dt-resenas-modal__btn-cerrar:hover { background:#f3f4f6; color:#2D4059; }
+.dt-resenas-avg { display:inline-flex; align-items:center; gap:5px; font-size:13px; color:#374151; font-family:'Lato',sans-serif; }
+.dt-resenas-loading { display:flex; align-items:center; gap:12px; padding:24px; color:#6b7280; font-family:'Lato',sans-serif; }
 
 /* Botón */
 .btn-ver-mas {

@@ -196,6 +196,20 @@ if ($q !== '') {
                   </span>
                 </div>
 
+                <!-- Botones -->
+                <div class="button">
+                  <button class="btn-resenas"
+                      data-id="<?= $actividad['id_hospedaje'] ?>"
+                      data-nombre="<?= htmlspecialchars($actividad['nombre']) ?>"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalResenasHospedaje">
+                      <i class="bi bi-star-fill"></i> Reseñas
+                  </button>
+                  <a href="<?= BASE_URL ?>hospedaje-escogido?id=<?= $actividad['id_hospedaje'] ?>" class="btn-ver-mas">
+                      Ver más
+                  </a>
+                </div>
+
               </div>
             </div>
 
@@ -318,6 +332,88 @@ if ($q !== '') {
   </footer>
 
           
+
+  <!-- MODAL RESEÑAS HOSPEDAJE -->
+  <div class="modal fade" id="modalResenasHospedaje" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content dt-resenas-modal">
+        <div class="dt-resenas-modal__header">
+          <div>
+            <div class="dt-resenas-modal__eyebrow"><i class="bi bi-star-fill"></i> Opiniones de turistas</div>
+            <h5 class="dt-resenas-modal__titulo" id="dt-resenas-hosp-titulo">—</h5>
+          </div>
+          <button class="dt-resenas-modal__close" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="modal-body dt-resenas-modal__body" id="dt-resenas-hosp-body">
+          <div class="dt-resenas-loading">
+            <div class="spinner-border" role="status" style="color:#EA8217"></div>
+            <span>Cargando reseñas…</span>
+          </div>
+        </div>
+        <div class="dt-resenas-modal__footer">
+          <button data-bs-dismiss="modal" class="dt-resenas-modal__btn-cerrar"><i class="bi bi-arrow-left"></i> Cerrar</button>
+          <span id="dt-resenas-hosp-promedio" class="dt-resenas-avg"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const BASE_URL = '<?= BASE_URL ?>';
+    (function () {
+      const modalTitulo = document.getElementById('dt-resenas-hosp-titulo');
+      const modalBody   = document.getElementById('dt-resenas-hosp-body');
+      const modalProm   = document.getElementById('dt-resenas-hosp-promedio');
+
+      function estrellas(n) {
+        n = parseInt(n, 10) || 0;
+        return Array.from({length: 5}, (_, i) =>
+          `<i class="bi bi-star${i < n ? '-fill' : ''}" style="color:${i < n ? '#f59e0b' : '#d1d5db'}"></i>`
+        ).join('');
+      }
+
+      document.querySelectorAll('.btn-resenas').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id     = btn.dataset.id;
+          const nombre = btn.dataset.nombre;
+          modalTitulo.textContent = nombre;
+          modalProm.textContent   = '';
+          modalBody.innerHTML     = '<div class="dt-resenas-loading"><div class="spinner-border" style="color:#EA8217" role="status"></div><span>Cargando…</span></div>';
+
+          fetch(`${BASE_URL}hospedaje/resenas?id=${id}`)
+            .then(r => { if (!r.ok) throw new Error('red'); return r.json(); })
+            .then(data => {
+              if (!data.ok || !data.resenas.length) {
+                modalBody.innerHTML = '<div class="dt-resenas-empty" style="text-align:center;padding:32px;color:#6b7280"><i class="bi bi-chat-square-text" style="font-size:32px;display:block;margin-bottom:12px"></i><p>Este hospedaje aún no tiene reseñas.</p></div>';
+                return;
+              }
+              const sum = data.resenas.reduce((a, r) => a + parseInt(r.calificacion, 10), 0);
+              const avg = (sum / data.resenas.length).toFixed(1);
+              modalProm.innerHTML = `${estrellas(Math.round(avg))} <strong>${avg}</strong>/5 (${data.resenas.length} reseña${data.resenas.length !== 1 ? 's' : ''})`;
+              modalBody.innerHTML = data.resenas.map(r => `
+                <div class="dt-resena-card" style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px;margin-bottom:12px">
+                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+                    <div style="width:36px;height:36px;border-radius:50%;background:#2D4059;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px">
+                      ${(r.nombre_turista || '?').charAt(0).toUpperCase()}
+                    </div>
+                    <div>
+                      <div style="font-weight:600;font-size:14px;color:#111">${r.nombre_turista || 'Turista'}</div>
+                      <div style="font-size:12px;color:#9ca3af">${r.fecha ? r.fecha.slice(0,10) : ''}</div>
+                    </div>
+                    <div style="margin-left:auto">${estrellas(r.calificacion)}</div>
+                  </div>
+                  ${r.comentario ? `<p style="font-size:14px;color:#374151;margin:0">${r.comentario}</p>` : ''}
+                </div>
+              `).join('');
+            })
+            .catch(() => {
+              modalBody.innerHTML = '<div style="text-align:center;padding:32px;color:#6b7280"><i class="bi bi-wifi-off" style="font-size:28px;display:block;margin-bottom:10px"></i><p>Error de conexión.</p></div>';
+            });
+        });
+      });
+    })();
+  </script>
 
   <script>
     const profileToggle = document.getElementById('profileToggle');

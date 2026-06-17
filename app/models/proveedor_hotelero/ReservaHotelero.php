@@ -137,6 +137,25 @@ class ReservaHotelero
         return $stmt->execute();
     }
 
+    public function crear($data)
+    {
+        $sql = "INSERT INTO reserva (id_hospedaje, id_turista, fecha, cantidad_personas, estado)
+                VALUES (:id_hospedaje, :id_turista, :fecha, :cantidad_personas, 'pendiente')";
+        try {
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute([
+                ':id_hospedaje'      => $data['id_hospedaje'],
+                ':id_turista'        => $data['id_turista'],
+                ':fecha'             => $data['fecha'],
+                ':cantidad_personas' => $data['cantidad_personas'],
+            ]);
+            return $this->conexion->lastInsertId();
+        } catch (PDOException $e) {
+            error_log("ReservaHotelero::crear: " . $e->getMessage());
+            return false;
+        }
+    }
+
     public function obtenerRecentesParaDashboard($id_proveedor_hotelero, $limit = 10)
     {
         $sql = "SELECT
