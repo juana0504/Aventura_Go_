@@ -31,46 +31,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conexion = $db->getConexion();
 
     // Verificar si email ya existe
-    $sqlCheck = "SELECT id_usuario FROM usuario WHERE email = :email LIMIT 1";
+    $sqlCheck = "SELECT u.id_usuario, ph.id_proveedor_hotelero
+                 FROM usuario u
+                 LEFT JOIN proveedor_hotelero ph ON ph.id_usuario = u.id_usuario
+                 WHERE u.email = :email LIMIT 1";
     $stmtCheck = $conexion->prepare($sqlCheck);
     $stmtCheck->bindParam(':email', $email);
     $stmtCheck->execute();
+    $existing = $stmtCheck->fetch(PDO::FETCH_ASSOC);
 
-    if ($stmtCheck->fetch()) {
-        mostrarSweetAlert('error', 'Correo duplicado', 'El correo ya está registrado.');
+    if ($existing) {
+        if (empty($existing['id_proveedor_hotelero'])) {
+            $idUsuario = $existing['id_usuario'];
+            $sqlPH = "
+                INSERT INTO proveedor_hotelero
+                    (id_usuario, logo, nombre_establecimiento, email, telefono, tipo_establecimiento,
+                     nombre_representante, tipo_documento, identificacion_representante, foto_representante,
+                     email_representante, telefono_representante, departamento, id_ciudad, direccion,
+                     tipo_habitacion, max_huesped, servicio_incluido, nit_rut, camara_comercio,
+                     licencia, metodo_pago, estado)
+                VALUES
+                    (:id_usuario, '', '', '', '', '', '', '', '', '', '', '', '',
+                     (SELECT MIN(id_ciudad) FROM ciudades), '', '', 0, '', '', '', '', '', 'PENDIENTE')
+            ";
+            $stmtPH = $conexion->prepare($sqlPH);
+            $stmtPH->bindParam(':id_usuario', $idUsuario);
+            $stmtPH->execute();
+            mostrarSweetAlert(
+                'success',
+                'Registro completado',
+                'Tu cuenta ya existía. El registro fue completado correctamente.',
+                BASE_URL . 'login'
+            );
+        } else {
+            mostrarSweetAlert('error', 'Correo duplicado', 'El correo ya está registrado.');
+        }
         exit();
     }
 
-    // Subida de foto
-    // $foto_url = 'default_proveedor.png';
-
-    // if (!empty($_FILES['foto']['name'])) {
-    //     $file = $_FILES['foto'];
-    //     $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-    //     $permitidas = ['png', 'jpg', 'jpeg'];
-
-    //     if (!in_array($ext, $permitidas)) {
-    //         mostrarSweetAlert('error', 'Extensión no permitida', 'Solo PNG, JPG y JPEG.');
-    //         exit();
-    //     }
-
-    //     if ($file['size'] > 2 * 1024 * 1024) {
-    //         mostrarSweetAlert('error', 'Archivo muy pesado', 'Máximo 2MB.');
-    //         exit();
-    //     }
-
-    //     $foto_url = uniqid('proveedor_') . '.' . $ext;
-    //     $destino = BASE_PATH . "/public/uploads/usuario/" . $foto_url;
-    //     move_uploaded_file($file['tmp_name'], $destino);
-    // }
+    $foto_url = 'default_proveedor.png';
 
     $claveHash = password_hash($clave, PASSWORD_DEFAULT);
 
     $sqlInsert = "
         INSERT INTO usuario
-        (nombre, identificacion, tipo_documento, genero, telefono, email, clave, rol, estado, intentos_fallidos)
+        (nombre, identificacion, tipo_documento, genero, telefono, email, clave, rol, estado, foto, intentos_fallidos)
         VALUES
-        (:nombre, :identificacion, :tipo_documento, :genero, :telefono, :email, :clave, 'proveedor_hotelero', 'activo', 0)
+        (:nombre, :identificacion, :tipo_documento, :genero, :telefono, :email, :clave, 'proveedor_hotelero', 'activo', :foto, 0)
     ";
 
     $stmtInsert = $conexion->prepare($sqlInsert);
@@ -81,6 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmtInsert->bindParam(':telefono', $telefono);
     $stmtInsert->bindParam(':email', $email);
     $stmtInsert->bindParam(':clave', $claveHash);
+    $stmtInsert->bindParam(':foto', $foto_url);
 
     $conexion->beginTransaction();
     try {
@@ -88,8 +96,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $idUsuario = $conexion->lastInsertId();
 
         $sqlProveedor_hotelero = "
-            INSERT INTO proveedor_hotelero (id_usuario, estado)
-            VALUES (:id_usuario, 'PENDIENTE')
+            INSERT INTO proveedor_hotelero
+                (id_usuario, logo, nombre_establecimiento, email, telefono, tipo_establecimiento,
+                 nombre_representante, tipo_documento, identificacion_representante, foto_representante,
+                 email_representante, telefono_representante, departamento, id_ciudad, direccion,
+                 tipo_habitacion, max_huesped, servicio_incluido, nit_rut, camara_comercio,
+                 licencia, metodo_pago, estado)
+            VALUES
+                (:id_usuario, '', '', '', '', '', '', '', '', '', '', '', '',
+                 (SELECT MIN(id_ciudad) FROM ciudades), '', '', 0, '', '', '', '', '', 'PENDIENTE')
         ";
         $stmtProveedor_hotelero = $conexion->prepare($sqlProveedor_hotelero);
         $stmtProveedor_hotelero->bindParam(':id_usuario', $idUsuario);
