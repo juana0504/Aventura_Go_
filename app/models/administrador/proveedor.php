@@ -230,6 +230,8 @@ class Proveedor
                 nit_rut = :nit_rut,
                 email = :email,
                 telefono = :telefono,
+                logo = :logo,
+                foto_representante = :foto_representante,
                 nombre_representante = :nombre_representante,
                 tipo_documento = :tipo_documento,
                 identificacion_representante = :identificacion_representante,
@@ -247,6 +249,8 @@ class Proveedor
             $resultado->bindParam(':nit_rut', $data['nit_rut']);
             $resultado->bindParam(':email', $data['email']);
             $resultado->bindParam(':telefono', $data['telefono']);
+            $resultado->bindParam(':logo', $data['logo']);
+            $resultado->bindParam(':foto_representante', $data['foto_representante']);
             $resultado->bindParam(':nombre_representante', $data['nombre_representante']);
             $resultado->bindParam(':tipo_documento', $data['tipo_documento']);
             $resultado->bindParam(':identificacion_representante', $data['identificacion_representante']);

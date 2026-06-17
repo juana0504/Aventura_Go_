@@ -253,12 +253,42 @@ function actualizarProveedor()
         $actividades = implode(",", $actividades);
     }
 
+    // LOGO
+    if (!empty($_FILES['logo']['name'])) {
+        $file = $_FILES['logo'];
+        $ext  = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        if (!in_array($ext, ['png', 'jpg', 'jpeg'])) {
+            mostrarSweetAlert('error', 'Extensión no permitida', 'Solo PNG, JPG y JPEG');
+            exit;
+        }
+        if ($file['size'] > 2 * 1024 * 1024) {
+            mostrarSweetAlert('error', 'Archivo muy pesado', 'Máximo 2MB');
+            exit;
+        }
+        $logo_url = uniqid('logo_') . '.' . $ext;
+        move_uploaded_file($file['tmp_name'], BASE_PATH . '/public/uploads/proveedores/' . $logo_url);
+    } else {
+        $logo_url = $_POST['logo_actual'] ?? 'default_proveedor.png';
+    }
+
+    // FOTO REPRESENTANTE
+    if (!empty($_FILES['foto_representante']['name'])) {
+        $file     = $_FILES['foto_representante'];
+        $ext      = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        $foto_url = uniqid('repre_') . '.' . $ext;
+        move_uploaded_file($file['tmp_name'], BASE_PATH . '/public/uploads/proveedores/' . $foto_url);
+    } else {
+        $foto_url = $_POST['foto_actual'] ?? 'default_proveedor.png';
+    }
+
     $objProveedor = new Proveedor();
 
     $data = [
         'id_proveedor'                  => $id_proveedor,
         'id_usuario'                    => $id_usuario,
         'nombre_empresa'                => $nombre_empresa,
+        'logo'                          => $logo_url,
+        'foto_representante'            => $foto_url,
         'email'                         => $email,
         'telefono'                      => $telefono,
         'nit_rut'                       => $nit_rut,

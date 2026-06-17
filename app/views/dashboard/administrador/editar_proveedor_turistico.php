@@ -205,6 +205,8 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
                 <input type="hidden" name="id_proveedor" value="<?= $proveedor['id_proveedor'] ?>">
                 <input type="hidden" name="id_usuario"   value="<?= $proveedor['id_usuario'] ?>">
                 <input type="hidden" name="accion"        value="actualizar">
+                <input type="hidden" name="logo_actual"   value="<?= htmlspecialchars($proveedor['logo'] ?? '') ?>">
+                <input type="hidden" name="foto_actual"   value="<?= htmlspecialchars($proveedor['foto_representante'] ?? '') ?>">
 
                 <div class="adm-wizard">
 
