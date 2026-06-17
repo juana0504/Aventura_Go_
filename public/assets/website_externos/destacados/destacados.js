@@ -9,32 +9,21 @@ toggle.addEventListener('click', () => {
 
 
 // =====================================================
-// SECCIÓN 1: CARGA Y BÚSQUEDA DE TOURS
+// SECCIÓN 1: CARGA DE TOURS POPULARES
 // =====================================================
 document.addEventListener('DOMContentLoaded', () => {
   const contenedor = document.getElementById('contenedor-tours');
-  const botonBuscar = document.querySelector('.btn-buscar');
-  const inputBusqueda = document.getElementById('input-busqueda');
+  const BASE_URL = window.BASE_URL || '/';
 
-  let toursGuardados = []; // guardaremos los tours cargados
+  function generarEstrellas(promedio) {
+    const n = Math.min(5, Math.max(0, Math.round(Number(promedio))));
+    return '<span style="color:#f8b400">' + '★'.repeat(n) + '☆'.repeat(5 - n) + '</span>';
+  }
 
-  // Cargar tours desde el JSON
-  fetch('../assets/website_externos/destacados/tours.json')
-    .then(response => {
-      if (!response.ok) throw new Error("Error al cargar el JSON");
-      return response.json();
-    })
-    .then(tours => {
-      toursGuardados = tours; // guardamos para poder filtrar después
-      mostrarTours(toursGuardados);
-    })
-    .catch(error => console.error("Error cargando los tours:", error));
-
-  // Función para mostrar los tours
   function mostrarTours(lista) {
-    contenedor.innerHTML = ''; // limpiar
+    contenedor.innerHTML = '';
     if (lista.length === 0) {
-      contenedor.innerHTML = '<p>No se encontraron resultados.</p>';
+      contenedor.innerHTML = '<p style="text-align:center;color:#888;padding:30px;">No hay tours disponibles por el momento.</p>';
       return;
     }
 
@@ -42,31 +31,53 @@ document.addEventListener('DOMContentLoaded', () => {
       const card = document.createElement('div');
       card.classList.add('tarjeta-tour');
 
+      const imagenUrl = tour.imagen
+        ? BASE_URL + 'public/uploads/turistico/actividades/' + encodeURIComponent(tour.imagen)
+        : BASE_URL + 'public/assets/website_externos/destacados/img/image_11.png';
+
+      const precio = Number(tour.precio).toLocaleString('es-CO');
+      const descripcion = tour.descripcion ? tour.descripcion.substring(0, 85) + '...' : '';
+      const estrellas = generarEstrellas(tour.promedio_calificacion);
+      const nResenas = Number(tour.total_resenas);
+
       card.innerHTML = `
-        <img src="${tour.img}" alt="${tour.titulo}">
-        <div class="tour-info">
-          <h3>${tour.titulo}</h3>
-          <div class="tour-rating">
-            ⭐⭐⭐⭐⭐ <span>(1 Review)</span>
+        <a href="${BASE_URL}tour-escogido?id=${tour.id_actividad}" style="text-decoration:none;color:inherit;display:block;">
+          <img src="${imagenUrl}" alt="${tour.nombre}"
+               onerror="this.src='${BASE_URL}public/assets/website_externos/destacados/img/image_11.png'">
+          <div class="tour-info">
+            <h3>${tour.nombre}</h3>
+            <div class="tour-rating">
+              ${estrellas}
+              <span>(${nResenas} reseña${nResenas !== 1 ? 's' : ''})</span>
+            </div>
+            <p><strong>📍 ${tour.ciudad}</strong></p>
+            <p>${descripcion}</p>
+            <p class="tour-precio">$${precio}</p>
           </div>
-          <p><strong>${tour.tipo}</strong></p>
-          <p>${tour.descripcion}</p>
-          <p class="tour-precio">${tour.precio}</p>
-        </div>
+        </a>
       `;
       contenedor.appendChild(card);
     });
   }
 
-  // Evento para buscar
-  botonBuscar.addEventListener('click', () => {
-    const texto = inputBusqueda.value.toLowerCase().trim();
-    const filtrados = toursGuardados.filter(tour =>
-      tour.titulo.toLowerCase().includes(texto) ||
-      tour.tipo.toLowerCase().includes(texto)
-    );
-    mostrarTours(filtrados);
-  });
+  contenedor.innerHTML = '<p style="text-align:center;color:#aaa;padding:30px;">Cargando tours...</p>';
+
+  fetch(BASE_URL + 'tours/populares')
+    .then(response => {
+      if (!response.ok) throw new Error('Error al cargar tours');
+      return response.json();
+    })
+    .then(data => {
+      if (data.ok) {
+        mostrarTours(data.tours);
+      } else {
+        contenedor.innerHTML = '<p style="text-align:center;color:#888;padding:30px;">No hay tours disponibles.</p>';
+      }
+    })
+    .catch(error => {
+      console.error('Error cargando tours populares:', error);
+      contenedor.innerHTML = '<p style="text-align:center;color:#888;padding:30px;">Error al cargar los tours.</p>';
+    });
 });
 
 

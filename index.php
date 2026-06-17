@@ -541,6 +541,10 @@ switch ($request) {
         require_once BASE_PATH . '/app/controllers/website/resenasPublicas.php';
         break;
 
+    case '/tours/populares':
+        require_once BASE_PATH . '/app/controllers/website/toursPopulares.php';
+        break;
+
     case '/proveedor/consultar-actividad-id':
         require_once BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php';
         consultarActividadOjo();
