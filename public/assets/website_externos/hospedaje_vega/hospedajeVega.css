@@ -1,4 +1,4 @@
-:root {
+﻿:root {
     --color-primary: #2D4059;
     --color-secondary: #EA8217;
     --color-white: #FFFFFF;
@@ -1391,14 +1391,17 @@ h6 {
         font-size: 18px;
     }
 }
-/* ─── NAVBAR + FOOTER RESPONSIVE (≤768px) ─── */
+/* ─── NAVBAR + FOOTER RESPONSIVE (≤768px) — v2 ─── */
 @media screen and (max-width: 768px) {
-    /* Navbar collapse */
+    /* Navbar */
+    .navbar      { padding: 8px 16px; }
+    .navbar-logo { width: 90px; }
+
     .navbar-nav {
         display: none;
         position: absolute;
-        top: 60px;
-        right: 18px;
+        top: 58px;
+        right: 12px;
         width: 200px;
         background-color: #ffffff;
         box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
@@ -1410,15 +1413,23 @@ h6 {
     }
     .navbar-nav.show { display: flex; }
     .menu-toggle     { display: block; font-size: 22px; }
-    .actions         { margin-right: 6px; gap: 8px; }
+    .actions         { margin-right: 0; gap: 8px; }
     .btn-login,
-    .btn-register    { padding: 6px 12px; font-size: 12px; border-radius: 6px; }
+    .btn-register    { padding: 6px 10px; font-size: 12px; border-radius: 6px; }
 
-    /* Carousel texto */
-    #hero .carousel  { margin: 0 12px; border-radius: 14px; }
+    /* Carousel full-width */
+    #hero            { margin-top: 60px; }
+    #hero .carousel  { margin: 0; border-radius: 0; }
+    #hero .carousel-item img { height: 260px; object-fit: cover; }
+    #hero .carousel-caption  {
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 90%;
+    }
     #hero .carousel-caption h1,
-    #hero .carousel-caption h2 { font-size: 28px; line-height: 1.2; }
-    #hero .carousel-caption p  { font-size: 13px; }
+    #hero .carousel-caption h2 { font-size: 26px; line-height: 1.2; }
+    #hero .carousel-caption p  { font-size: 12px; }
     #hero h2.marca             { display: none; }
 
     /* Footer superior */
