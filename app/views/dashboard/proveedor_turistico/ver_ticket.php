@@ -1,4 +1,4 @@
-<?php require_once BASE_PATH . '/app/helpers/session_proveedor.php'; ?>
+﻿<?php require_once BASE_PATH . '/app/helpers/session_proveedor.php'; ?>
 <?php
 /** @var array $ticket — set by TicketProveedorController::ver() before this view is required */
 $ticket          = $ticket ?? [];
@@ -391,5 +391,6 @@ foreach (array_slice(explode(' ', trim($nombreProveedor)), 0, 2) as $p) {
 })();
 </script>
 <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/dashboard/sidebar-toggle-universal.js"></script>
 </body>
 </html>

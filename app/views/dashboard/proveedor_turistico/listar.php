@@ -1,4 +1,4 @@
-<?php require_once BASE_PATH . '/app/helpers/session_proveedor.php'; ?>
+﻿<?php require_once BASE_PATH . '/app/helpers/session_proveedor.php'; ?>
 <?php
 $nombreProveedor = $_SESSION['user']['nombre'] ?? '';
 $iniciales = '';
@@ -424,5 +424,6 @@ const BASE_URL = "<?= BASE_URL ?>";
 })();
 </script>
 <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/dashboard/sidebar-toggle-universal.js"></script>
 </body>
 </html>

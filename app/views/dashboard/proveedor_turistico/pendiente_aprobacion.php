@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 
 $nombreProveedor = $_SESSION['user']['nombre'] ?? '';
@@ -230,5 +230,6 @@ foreach (array_slice($partes, 0, 2) as $p) {
 })();
 </script>
 
+    <script src="<?= BASE_URL ?>public/assets/dashboard/sidebar-toggle-universal.js"></script>
 </body>
 </html>

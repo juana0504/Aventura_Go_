@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once BASE_PATH . '/app/helpers/session_proveedor.php';
 require_once BASE_PATH . '/app/controllers/proveedor_turistico/actividadTuristica.php';
 
@@ -451,5 +451,6 @@ function prevStep(step) {
 </script>
 
 <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/dashboard/sidebar-toggle-universal.js"></script>
 </body>
 </html>
