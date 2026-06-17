@@ -72,6 +72,18 @@ switch ($request) {
         require BASE_PATH . '/app/views/website/descubre_hospedaje.php';
         break;
 
+    case '/hospedaje-escogido':
+        require BASE_PATH . '/app/views/website/hospedaje_escogido.php';
+        break;
+
+    case '/hospedaje/resenas':
+        require_once BASE_PATH . '/app/controllers/website/resenasHospedajePublicas.php';
+        break;
+
+    case '/guardar-reserva-hospedaje':
+        require_once BASE_PATH . '/app/controllers/website/reservaHospedajeController.php';
+        break;
+
     case '/busqueda':
         require_once BASE_PATH . '/app/models/proveedor_turistico/actividadTuristica.php';
         $actividadModel = new ActividadTuristica();

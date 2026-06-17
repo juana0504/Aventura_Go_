@@ -27,6 +27,7 @@ class Hospedaje
             $sql = "INSERT INTO hospedaje (
                 id_proveedor_hotelero,
                 nombre,
+                descripcion,
                 tipo,
                 id_ciudad,
                 ubicacion,
@@ -38,6 +39,7 @@ class Hospedaje
             ) VALUES (
                 :id_proveedor_hotelero,
                 :nombre,
+                :descripcion,
                 :tipo,
                 :id_ciudad,
                 :ubicacion,
@@ -52,15 +54,16 @@ class Hospedaje
 
             $stmt->execute([
                 ':id_proveedor_hotelero' => $data['id_proveedor_hotelero'],
-                ':nombre' => $data['nombre'],
-                ':tipo' => $data['tipo'],
-                ':id_ciudad' => $data['id_ciudad'],
-                ':ubicacion' => $data['ubicacion'],
-                ':capacidad' => $data['capacidad'],
-                ':precio' => $data['precio'],
-                ':servicios' => $data['servicios'],
-                ':estado' => $data['estado'],
-                ':imagen' => $data['imagen']
+                ':nombre'                => $data['nombre'],
+                ':descripcion'           => $data['descripcion'] ?? '',
+                ':tipo'                  => $data['tipo'],
+                ':id_ciudad'             => $data['id_ciudad'],
+                ':ubicacion'             => $data['ubicacion'],
+                ':capacidad'             => $data['capacidad'],
+                ':precio'                => $data['precio'],
+                ':servicios'             => $data['servicios'],
+                ':estado'                => $data['estado'],
+                ':imagen'                => $data['imagen']
             ]);
 
             // 🔥 DEVOLVEMOS EL ID DE LA ACTIVIDAD
@@ -170,18 +173,17 @@ class Hospedaje
         $stmt = $this->conexion->prepare($sql);
 
         return $stmt->execute([
-        
-            ':nombre' => $data['nombre'],
-            ':descripcion' => $data['descripcion'],
-            ':tipo' => $data['tipo'],
-            ':id_ciudad' => $data['id_ciudad'],
-            ':ubicacion' => $data['ubicacion'],
-            ':capacidad' => $data['capacidad'],
-            ':precio' => $data['precio'],
-            ':servicios' => $data['servicios'],
-            ':estado' => $data['estado'],
-            ':id_hospedaje' => $data['id_hospedaje']
-
+            ':nombre'                => $data['nombre'],
+            ':descripcion'           => $data['descripcion'],
+            ':tipo'                  => is_array($data['tipo']) ? implode(', ', $data['tipo']) : $data['tipo'],
+            ':id_ciudad'             => $data['id_ciudad'],
+            ':ubicacion'             => $data['ubicacion'],
+            ':capacidad'             => $data['capacidad'],
+            ':precio'                => $data['precio'],
+            ':servicios'             => $data['servicios'],
+            ':estado'                => $data['estado'],
+            ':id_hospedaje'          => $data['id_hospedaje'],
+            ':id_proveedor_hotelero' => $data['id_proveedor_hotelero'],
         ]);
     }
 
@@ -402,6 +404,42 @@ class Hospedaje
         $stmt->execute();
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function obtenerPublico($id)
+    {
+        try {
+            $sql = "SELECT
+                h.id_hospedaje,
+                h.nombre,
+                h.descripcion,
+                h.tipo,
+                h.ubicacion,
+                h.capacidad,
+                h.precio,
+                h.servicios,
+                h.imagen,
+                h.estado,
+                c.nombre AS ciudad,
+                d.nombre AS departamento,
+                ph.logo AS logo_proveedor,
+                ph.nombre_establecimiento
+            FROM hospedaje h
+            INNER JOIN ciudades c ON h.id_ciudad = c.id_ciudad
+            INNER JOIN departamentos d ON c.id_departamento = d.id_departamento
+            INNER JOIN proveedor_hotelero ph ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
+            WHERE h.id_hospedaje = :id
+            AND h.estado = 'ACTIVO'
+            AND ph.estado = 'APROBADO'
+            LIMIT 1";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Hospedaje::obtenerPublico: " . $e->getMessage());
+            return null;
+        }
     }
 
     public function descontarcapacidad($id_hospedaje, $cantidad)
