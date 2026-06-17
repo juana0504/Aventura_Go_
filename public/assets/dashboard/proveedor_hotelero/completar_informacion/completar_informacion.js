@@ -116,7 +116,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         document.getElementById("prev-nombre_estab").innerText = val("nombre_estab");
         document.getElementById("prev-nit").innerText          = val("nit");
-        document.getElementById("prev-tipo_estab").innerText   = val("tipo_estab");
+        const tipoEstabChecked = document.querySelector('input[name="tipo_establecimiento"]:checked');
+        document.getElementById("prev-tipo_estab").innerText = tipoEstabChecked ? tipoEstabChecked.value : '—';
         document.getElementById("prev-telefono").innerText     = val("telefono");
 
         renderTags("prev-habitaciones", getCheckedLabels("tipo_habitacion[]"));

@@ -181,14 +181,28 @@ foreach (array_slice(explode(' ', trim($nombreProveedor)), 0, 2) as $p) {
                                                 value="<?= htmlspecialchars($proveedor['nit_rut'] ?? '') ?>"
                                                 placeholder="123456789-0" required>
                                         </div>
-                                        <div class="col-md-6">
-                                            <label class="pv-form-label">Tipo de establecimiento *</label>
-                                            <select name="tipo_establecimiento" class="pv-form-input pv-form-select" id="tipo_estab" required>
-                                                <option value="">Seleccione</option>
-                                                <?php foreach (['Hotel','Hostal','Cabaña','Glamping'] as $t): ?>
-                                                    <option value="<?= $t ?>" <?= ($proveedor['tipo_establecimiento'] ?? '') === $t ? 'selected' : '' ?>><?= $t ?></option>
+                                        <div class="col-12">
+                                            <label class="pv-form-label mb-3">Tipo de establecimiento *</label>
+                                            <div class="pv-ci-activities-grid" style="grid-template-columns:repeat(4,1fr);">
+                                                <?php
+                                                $tiposEstab = [
+                                                    ['valor'=>'Hotel',    'emoji'=>'🏨'],
+                                                    ['valor'=>'Hostal',   'emoji'=>'🏠'],
+                                                    ['valor'=>'Cabaña',   'emoji'=>'🌲'],
+                                                    ['valor'=>'Glamping', 'emoji'=>'⛺'],
+                                                ];
+                                                foreach ($tiposEstab as $te):
+                                                    $checked = ($proveedor['tipo_establecimiento'] ?? '') === $te['valor'];
+                                                ?>
+                                                <label class="pv-ci-activity-card <?= $checked ? 'pv-ci-activity-card--selected' : '' ?>" for="te_<?= strtolower($te['valor']) ?>">
+                                                    <input class="pv-ci-activity-card__check" type="radio"
+                                                        name="tipo_establecimiento" id="te_<?= strtolower($te['valor']) ?>"
+                                                        value="<?= $te['valor'] ?>" <?= $checked ? 'checked' : '' ?> required>
+                                                    <span class="pv-ci-activity-card__emoji"><?= $te['emoji'] ?></span>
+                                                    <span class="pv-ci-activity-card__label"><?= $te['valor'] ?></span>
+                                                </label>
                                                 <?php endforeach; ?>
-                                            </select>
+                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label class="pv-form-label">Email *</label>
@@ -568,6 +582,11 @@ foreach (array_slice(explode(' ', trim($nombreProveedor)), 0, 2) as $p) {
 
     document.querySelectorAll('.pv-ci-activity-card__check').forEach(check => {
         check.addEventListener('change', () => {
+            if (check.type === 'radio') {
+                document.querySelectorAll(`input[name="${check.name}"]`).forEach(r => {
+                    r.closest('.pv-ci-activity-card')?.classList.remove('pv-ci-activity-card--selected');
+                });
+            }
             check.closest('.pv-ci-activity-card')?.classList.toggle('pv-ci-activity-card--selected', check.checked);
         });
     });
