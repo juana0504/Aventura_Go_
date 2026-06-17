@@ -1201,16 +1201,120 @@ header {
   }
 }
 
-/* ======== RESPONSIVE ======== */
+/* ======== RESPONSIVE — TABLETS Y MÓVILES (≤768px) ======== */
 @media (max-width: 768px) {
+
+  /* NAVBAR — colapsar menú y mostrar hamburguesa */
+  .navbar-nav {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 18px;
+    width: 200px;
+    background-color: #fff;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 20px;
+    z-index: 1000;
+  }
+
+  .navbar-nav.show { display: flex; }
+  .menu-toggle { display: block; font-size: 22px; }
+
+  .actions {
+    margin-right: 6px;
+    gap: 8px;
+  }
+
+  .btn-login,
+  .btn-register {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  /* HERO — carousel y barra de búsqueda */
+  #hero .carousel {
+    margin: 0 12px;
+    border-radius: 14px;
+  }
+
+  #hero .carousel-caption h1,
+  #hero .carousel-caption h2 {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  #hero .carousel-caption p { font-size: 13px; }
+
+  #hero h2.marca { display: none; }
+
+  /* Barra búsqueda fuera del hero */
+  .fuera-hero {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 94%;
+  }
+
+  /* TOURS GRID */
   #contenedor-tours {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     padding: 30px;
   }
 
-  .tarjeta-tour img {
-    height: 180px;
+  .tarjeta-tour img { height: 180px; }
+
+  /* FOOTER SUPERIOR — quitar márgenes hardcoded */
+  .footer-top {
+    text-align: center;
+    padding: 20px 15px;
   }
+
+  .footer-top .row .col-md-12 {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin: 0;
+  }
+
+  .footer-top h2 {
+    margin-left: 0;
+    font-size: 18px;
+    text-align: center;
+    padding: 0;
+  }
+
+  .footer-top a {
+    margin-right: 0;
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+
+  /* FOOTER INFERIOR — apilar columnas */
+  .footer-bottom .row {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-bottom .col-md-2 {
+    min-width: 45%;
+    text-align: center;
+  }
+
+  .dest-section,
+  .enlaces-section,
+  .contacto-section,
+  .redes-section {
+    margin-left: 0;
+  }
+
+  .footer-bottom .list-unstyled li {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .social-links { justify-content: center; margin-left: 0; }
 }
 
 
