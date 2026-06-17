@@ -48,43 +48,43 @@
         <!-- Botones y menú móvil -->
         <div class="actions">
 
-            <?php if (isset($_SESSION['user'])): ?>
+          <?php if (isset($_SESSION['user'])): ?>
             <div class="profile-dropdown">
-            <button class="profile-btn" id="profileToggle">
-              <i class="fas fa-user-circle"></i>
-            <span class="profile-name">
-            <?= htmlspecialchars(
-            ucwords(
-            explode(' ', $_SESSION['user']['nombre'])[0] . ' ' .
-            (explode(' ', $_SESSION['user']['nombre'])[1] ?? '')
-              )
-            ) ?>
-            </span>
-              <i class="fas fa-chevron-down"></i>
-            </button>
+              <button class="profile-btn" id="profileToggle">
+                <i class="fas fa-user-circle"></i>
+                <span class="profile-name">
+                  <?= htmlspecialchars(
+                    ucwords(
+                      explode(' ', $_SESSION['user']['nombre'])[0] . ' ' .
+                        (explode(' ', $_SESSION['user']['nombre'])[1] ?? '')
+                    )
+                  ) ?>
+                </span>
+                <i class="fas fa-chevron-down"></i>
+              </button>
 
-           <ul class="profile-menu" id="profileMenu">
-            <li>
-              <a href="<?= BASE_URL ?>turista/perfil">Mi perfil</a>
-            </li>
-            <li>
-              <a href="<?= BASE_URL ?>turista/dashboard">Centro de ayuda</a>
-            </li>
-            <li class="divider"></li>
-            <li>
-              <a href="<?= BASE_URL ?>logout" class="logout">Cerrar sesión</a>
-            </li>
-            </ul>
-          </div>
+              <ul class="profile-menu" id="profileMenu">
+                <li>
+                  <a href="<?= BASE_URL ?>turista/perfil">Mi perfil</a>
+                </li>
+                <li>
+                  <a href="<?= BASE_URL ?>turista/dashboard">Centro de ayuda</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <a href="<?= BASE_URL ?>logout" class="logout">Cerrar sesión</a>
+                </li>
+              </ul>
+            </div>
           <?php else: ?>
 
-          <a href="<?= BASE_URL ?>login" class="btn-login">
-            Ingresa
-          </a>
+            <a href="<?= BASE_URL ?>login" class="btn-login">
+              Ingresa
+            </a>
 
-          <a href="#" class="btn-register" data-bs-toggle="modal" data-bs-target="#registroModal">
-            Regístrate
-          </a>
+            <a href="#" class="btn-register" data-bs-toggle="modal" data-bs-target="#registroModal">
+              Regístrate
+            </a>
 
           <?php endif; ?>
 
@@ -142,17 +142,17 @@
 
 
   <!-- Barra de búsqueda dentro del banner, no se les olvide copiar el js, el css y las img para los iconos -->
-  <div class="search-box fuera-hero">
+  <!-- <div class="search-box fuera-hero">
     <div class="search-item">
       <i class="fas fa-map-marker-alt"></i>
       <div>
         <p>Ubicación</p>
         <input type="text" id="input-busqueda" placeholder="¿A dónde vas?" />
       </div>
-    </div>
+    </div> -->
 
-    <!-- DATEPICKER INTEGRADO -->
-    <div class="search-item">
+  <!-- DATEPICKER INTEGRADO -->
+  <!-- <div class="search-item">
       <i class="fas fa-calendar-alt"></i>
       <div class="date-picker-container">
         <button id="openCalendarBtn" class="date-button" type="button" aria-haspopup="dialog" aria-expanded="false">
@@ -185,19 +185,19 @@
           <div id="yearGrid" class="grid hidden" aria-hidden="true"></div>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <!-- CONTADOR DE INVITADOS INTEGRADO -->
-    <div class="search-item">
+  <!-- CONTADOR DE INVITADOS INTEGRADO -->
+  <!-- <div class="search-item">
       <i class="fas fa-user"></i>
       <div>
         <p>Invitados</p>
         <button id="openGuestCounter" class="guest-button" type="button">
           <span id="guestSummary">0 invitados, 0 habitación</span>
-        </button>
+        </button> -->
 
-        <!-- Panel desplegable del contador -->
-        <div id="guestPanel" class="guest-panel hidden">
+  <!-- Panel desplegable del contador -->
+  <!-- <div id="guestPanel" class="guest-panel hidden">
           <div class="contenedor-reservas">
             <div class="contenedor-blanco">
               <h2>Dinos quién se apunta</h2>
@@ -265,13 +265,13 @@
                   <button class="btn-mas" data-tipo="mascotas">+</button>
                 </div>
               </div>
-            </div>
+            </div> -->
 
-            <!-- Franja azul separadora -->
-            <div class="franja-azul"></div>
+  <!-- Franja azul separadora -->
+  <!-- <div class="franja-azul"></div> -->
 
-            <!-- Sección Habitaciones -->
-            <div class="contenedor-blanco habitaciones">
+  <!-- Sección Habitaciones -->
+  <!-- <div class="contenedor-blanco habitaciones">
               <div class="grupo">
                 <div class="info">
                   <div class="icono"><img src="<?= BASE_URL ?>public/assets/dashboard/turista/reserva/img/image 48 (1).png" alt="" />
@@ -286,13 +286,13 @@
                   <button class="btn-mas" data-tipo="habitaciones">+</button>
                 </div>
               </div>
-            </div>
+            </div> -->
 
-            <!-- Franja azul inferior -->
-            <div class="franja-azul"></div>
+  <!-- Franja azul inferior -->
+  <!-- <div class="franja-azul"></div> -->
 
-            <!-- Zona de resumen -->
-            <div class="resumen">
+  <!-- Zona de resumen -->
+  <!-- <div class="resumen">
               <p id="resumen-texto">
                 Total: 0 personas (0 adultos, 0 niño), 0 mascota | Total Habitaciones: 0
               </p>
@@ -301,12 +301,12 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <button class="btn-buscar">
+  <!-- <button class="btn-buscar">
       <i class="fas fa-search"></i> Buscar
     </button>
-  </div>
+  </div> -->
 
 
 
