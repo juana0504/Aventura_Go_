@@ -186,8 +186,8 @@ foreach (array_slice(explode(' ', trim($nombreProveedor)), 0, 2) as $p) {
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label class="pv-form-label" for="id_departamento">Departamento *</label>
-                                            <select name="id_departamento" id="id_departamento" class="pv-form-input pv-form-select" required>
+                                            <label class="pv-form-label" for="departamento">Departamento *</label>
+                                            <select name="departamento" id="departamento" class="pv-form-input pv-form-select" required>
                                                 <option value="">Seleccione departamento</option>
                                             </select>
                                         </div>
@@ -226,14 +226,22 @@ foreach (array_slice(explode(' ', trim($nombreProveedor)), 0, 2) as $p) {
                                             <div class="pv-ci-activities-grid" style="grid-template-columns:repeat(4,1fr);">
                                                 <?php
                                                 $serviciosOpts = [
-                                                    ['id'=>'sv_wifi',       'valor'=>'WiFi',             'emoji'=>'📶'],
-                                                    ['id'=>'sv_piscina',    'valor'=>'Piscina',           'emoji'=>'🏊'],
-                                                    ['id'=>'sv_rest',       'valor'=>'Restaurante',       'emoji'=>'🍽'],
-                                                    ['id'=>'sv_spa',        'valor'=>'Spa',               'emoji'=>'💆'],
-                                                    ['id'=>'sv_parq',       'valor'=>'Parqueadero',       'emoji'=>'🚗'],
-                                                    ['id'=>'sv_pet',        'valor'=>'Pet Friendly',      'emoji'=>'🐶'],
-                                                    ['id'=>'sv_desayuno',   'valor'=>'Desayuno incluido', 'emoji'=>'☕'],
-                                                    ['id'=>'sv_transporte', 'valor'=>'Transporte',        'emoji'=>'🚐'],
+                                                    ['id'=>'sv_wifi',        'valor'=>'WiFi',          'emoji'=>'📶'],
+                                                    ['id'=>'sv_piscina',     'valor'=>'Piscina',        'emoji'=>'🏊'],
+                                                    ['id'=>'sv_desayuno',    'valor'=>'Desayuno',       'emoji'=>'🍳'],
+                                                    ['id'=>'sv_parking',     'valor'=>'Parking',        'emoji'=>'🅿️'],
+                                                    ['id'=>'sv_gym',         'valor'=>'Gimnasio',       'emoji'=>'🏋️'],
+                                                    ['id'=>'sv_spa',         'valor'=>'Spa',            'emoji'=>'💆'],
+                                                    ['id'=>'sv_restaurant',  'valor'=>'Restaurante',    'emoji'=>'🍽️'],
+                                                    ['id'=>'sv_ac',          'valor'=>'Aire acond.',    'emoji'=>'❄️'],
+                                                    ['id'=>'sv_tv',          'valor'=>'TV Cable',       'emoji'=>'📺'],
+                                                    ['id'=>'sv_lavanderia',  'valor'=>'Lavandería',     'emoji'=>'👕'],
+                                                    ['id'=>'sv_bar',         'valor'=>'Bar',            'emoji'=>'🍹'],
+                                                    ['id'=>'sv_jacuzzi',     'valor'=>'Jacuzzi',        'emoji'=>'🛁'],
+                                                    ['id'=>'sv_terraza',     'valor'=>'Terraza',        'emoji'=>'🌿'],
+                                                    ['id'=>'sv_mascotas',    'valor'=>'Mascotas',       'emoji'=>'🐾'],
+                                                    ['id'=>'sv_transporte',  'valor'=>'Transporte',     'emoji'=>'🚐'],
+                                                    ['id'=>'sv_roomservice', 'valor'=>'Room Service',   'emoji'=>'🛎️'],
                                                 ];
                                                 foreach ($serviciosOpts as $s): ?>
                                                 <label class="pv-ci-activity-card" for="<?= $s['id'] ?>">
@@ -419,33 +427,8 @@ foreach (array_slice(explode(' ', trim($nombreProveedor)), 0, 2) as $p) {
 })();
 </script>
 
-<!-- Departamento → Ciudad -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const depSel = document.getElementById('id_departamento');
-    const ciudadSel = document.getElementById('id_ciudad');
-
-    fetch('<?= BASE_URL ?>app/controllers/departamentoController.php')
-        .then(r => r.json())
-        .then(data => data.forEach(d => {
-            const o = document.createElement('option');
-            o.value = d.id_departamento; o.textContent = d.nombre;
-            depSel.appendChild(o);
-        }));
-
-    depSel.addEventListener('change', () => {
-        ciudadSel.innerHTML = '<option value="">Seleccione ciudad</option>';
-        if (!depSel.value) return;
-        fetch(`<?= BASE_URL ?>app/controllers/ciudadController.php?id_departamento=${depSel.value}`)
-            .then(r => r.json())
-            .then(data => data.forEach(c => {
-                const o = document.createElement('option');
-                o.value = c.id_ciudad; o.textContent = c.nombre;
-                ciudadSel.appendChild(o);
-            }));
-    });
-});
-</script>
+<script>const BASE_URL = "<?= BASE_URL ?>";</script>
+<script src="<?= BASE_URL ?>public/assets/dashboard/proveedor_hotelero/completar_informacion/departamento.js"></script>
 
 <!-- Wizard -->
 <script>
