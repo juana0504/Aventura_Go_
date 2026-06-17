@@ -67,14 +67,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $claveHash = password_hash($clave, PASSWORD_DEFAULT);
 
     $sqlInsert = "
-        INSERT INTO usuario 
+        INSERT INTO usuario
         (nombre, identificacion, tipo_documento, genero, telefono, email, clave, rol, estado, intentos_fallidos)
         VALUES
         (:nombre, :identificacion, :tipo_documento, :genero, :telefono, :email, :clave, 'proveedor_hotelero', 'activo', 0)
     ";
 
     $stmtInsert = $conexion->prepare($sqlInsert);
-
     $stmtInsert->bindParam(':nombre', $nombre);
     $stmtInsert->bindParam(':identificacion', $identificacion);
     $stmtInsert->bindParam(':tipo_documento', $tipo_documento);
@@ -83,18 +82,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmtInsert->bindParam(':email', $email);
     $stmtInsert->bindParam(':clave', $claveHash);
 
-    if ($stmtInsert->execute()) {
-
+    $conexion->beginTransaction();
+    try {
+        $stmtInsert->execute();
         $idUsuario = $conexion->lastInsertId();
 
         $sqlProveedor_hotelero = "
-        INSERT INTO proveedor_hotelero (id_usuario, estado)
-        VALUES (:id_usuario, 'PENDIENTE')
-    ";
-
+            INSERT INTO proveedor_hotelero (id_usuario, estado)
+            VALUES (:id_usuario, 'PENDIENTE')
+        ";
         $stmtProveedor_hotelero = $conexion->prepare($sqlProveedor_hotelero);
         $stmtProveedor_hotelero->bindParam(':id_usuario', $idUsuario);
         $stmtProveedor_hotelero->execute();
+
+        $conexion->commit();
 
         mostrarSweetAlert(
             'success',
@@ -102,7 +103,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'Tu registro fue enviado correctamente. En un plazo de 7 días hábiles validaremos tu información.',
             BASE_URL . 'login'
         );
-    } else {
-        mostrarSweetAlert('error', 'Error', 'No se pudo completar el registro.');
+    } catch (Exception $e) {
+        $conexion->rollBack();
+        error_log('registroProveedorHotelero error: ' . $e->getMessage());
+        mostrarSweetAlert('error', 'Error interno', 'No se pudo completar el registro. Intenta de nuevo.');
     }
 }
