@@ -437,6 +437,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
     </script>
 
     <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/dashboard/sidebar-toggle-universal.js"></script>
 </body>
 
 </html>

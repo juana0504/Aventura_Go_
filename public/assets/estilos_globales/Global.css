@@ -362,7 +362,50 @@ header {
 
 
 
-/* RESPONSIVE PARA IPHONE 14 PRO MAX - 430px x 932ps_____________________________________________________________________________ */
+/* RESPONSIVE NAVBAR — tabletas y teléfonos (≤768px) ________________________________________________________________________ */
+
+@media screen and (max-width: 768px) {
+    .navbar { padding: 8px 16px; }
+
+    .navbar .container-fluid {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0;
+    }
+
+    .navbar-logo { width: 110px; margin-left: 0; }
+
+    /* Menú horizontal → dropdown overlay */
+    .navbar-nav {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 18px;
+        width: 200px;
+        background-color: var(--color-white);
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px 20px;
+        z-index: 1000;
+    }
+
+    .navbar-nav.show {
+        display: flex;
+        animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .menu-toggle { display: block; font-size: 22px; }
+}
+
+/* RESPONSIVE PARA IPHONE 14 PRO MAX - 430px x 932px ________________________________________________________________________ */
 
     @media screen and (max-width: 430px) {
 

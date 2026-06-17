@@ -485,6 +485,7 @@ require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
 
 
     <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/dashboard/sidebar-toggle-universal.js"></script>
 </body>
 
 </html>
