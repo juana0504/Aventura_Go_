@@ -562,6 +562,42 @@ class ActividadTuristica
         return ($reservadas + $cantidad) <= $cuposTotales;
     }
 
+    public function listarPopulares(int $limite = 8): array
+    {
+        $sql = "
+            SELECT
+                a.id_actividad,
+                a.nombre,
+                a.precio,
+                a.descripcion,
+                c.nombre AS ciudad,
+                COALESCE(MIN(ai.imagen), a.imagen) AS imagen,
+                COUNT(DISTINCT r.id_reserva)          AS total_reservas,
+                COUNT(DISTINCT res.id_resena)          AS total_resenas,
+                COALESCE(AVG(res.calificacion), 0)    AS promedio_calificacion
+            FROM actividad a
+            INNER JOIN proveedor p  ON a.id_proveedor = p.id_proveedor
+            INNER JOIN ciudades  c  ON a.id_ciudad    = c.id_ciudad
+            LEFT JOIN actividad_imagen ai
+                ON ai.id_actividad = a.id_actividad AND ai.es_principal = 1
+            LEFT JOIN reserva r
+                ON r.id_actividad = a.id_actividad
+                AND r.estado IN ('confirmada', 'completada')
+            LEFT JOIN resena res
+                ON res.id_actividad = a.id_actividad
+            WHERE a.estado = 'ACTIVO'
+              AND p.estado = 'ACTIVO'
+            GROUP BY a.id_actividad, a.nombre, a.precio, a.descripcion, a.imagen, c.nombre
+            ORDER BY total_reservas DESC, promedio_calificacion DESC
+            LIMIT :limite
+        ";
+
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindValue(':limite', $limite, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function buscarPublicos(string $q): array
     {
         $like = '%' . $q . '%';
