@@ -97,20 +97,25 @@ class Hospedaje
     /** Listar todas las actividades de un proveedor */
     public function listarPorProveedor($id_proveedor_hotelero)
     {
-        $sql = "SELECT
-                a.*,
-                c.nombre AS destino
-            FROM hospedaje a
-            LEFT JOIN ciudades c
-                ON a.id_ciudad = c.id_ciudad
-            WHERE a.id_proveedor_hotelero = :id_proveedor_hotelero
-            ORDER BY a.created_at DESC";
+        try {
+            $sql = "SELECT
+                    a.*,
+                    c.nombre AS destino
+                FROM hospedaje a
+                LEFT JOIN ciudades c
+                    ON a.id_ciudad = c.id_ciudad
+                WHERE a.id_proveedor_hotelero = :id_proveedor_hotelero
+                ORDER BY a.id_hospedaje DESC";
 
-        $stmt = $this->conexion->prepare($sql);
-        $stmt->bindParam(':id_proveedor_hotelero', $id_proveedor_hotelero, PDO::PARAM_INT);
-        $stmt->execute();
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':id_proveedor_hotelero', $id_proveedor_hotelero, PDO::PARAM_INT);
+            $stmt->execute();
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log('Hospedaje::listarPorProveedor error: ' . $e->getMessage());
+            return [];
+        }
     }
 
     /** Listar una actividad por su ID */
