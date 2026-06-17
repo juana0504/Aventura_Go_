@@ -1209,7 +1209,8 @@ header {
 
   .navbar-logo { width: 90px; }
 
-  .navbar-nav {
+  /* Usar ID para mayor especificidad y sobrepasar Bootstrap */
+  #navbarNav {
     display: none;
     position: absolute;
     top: 58px;
@@ -1224,7 +1225,7 @@ header {
     z-index: 1000;
   }
 
-  .navbar-nav.show { display: flex; }
+  #navbarNav.show { display: flex; }
   .menu-toggle { display: block; font-size: 22px; }
 
   .actions { margin-right: 0; gap: 8px; }
