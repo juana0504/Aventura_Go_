@@ -3,9 +3,14 @@ require_once BASE_PATH . '/app/helpers/session_proveedor_hotelero.php';
 require_once BASE_PATH . '/app/models/proveedor_hotelero/hospedaje.php';
 require_once BASE_PATH . '/app/models/proveedor_hotelero/Proveedor_hotelero.php';
 
-$id_proveedor_hotelero = (new Proveedor())->obtenerIdProveedorPorUsuario($_SESSION['user']['id_usuario']);
-$hospedajeModel = new Hospedaje();
-$datos = $id_proveedor_hotelero ? $hospedajeModel->listarPorProveedor($id_proveedor_hotelero) : [];
+try {
+    $id_proveedor_hotelero = (new Proveedor())->obtenerIdProveedorPorUsuario($_SESSION['user']['id_usuario']);
+    $hospedajeModel = new Hospedaje();
+    $datos = $id_proveedor_hotelero ? $hospedajeModel->listarPorProveedor($id_proveedor_hotelero) : [];
+} catch (Throwable $e) {
+    error_log('consultar_hospedaje error: ' . $e->getMessage());
+    $datos = [];
+}
 
 $nombreProveedor = $_SESSION['user']['nombre'] ?? '';
 $iniciales = '';
