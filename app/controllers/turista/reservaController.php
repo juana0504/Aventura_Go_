@@ -145,23 +145,44 @@ class ReservaController
             exit;
         }
 
-        $id = $_GET['id'] ?? null;
+        $id        = $_GET['id'] ?? null;
+        $idTurista = (int) $_SESSION['user']['id_usuario'];
+
         if (!$id) {
             echo json_encode(['error' => 'ID no recibido']);
             exit;
         }
 
-        require_once BASE_PATH . '/app/models/turista/ReservaModel.php';
+        try {
+            require_once BASE_PATH . '/app/models/turista/ReservaModel.php';
 
-        $model = new ReservaModel();
-        $data  = $model->obtenerDetalleReserva((int)$id);
+            $model = new ReservaModel();
+            $data  = $model->obtenerDetalleReserva((int)$id);
 
-        if (!$data) {
-            echo json_encode(['error' => 'Reserva no encontrada']);
-            exit;
+            if (!$data) {
+                echo json_encode(['error' => 'Reserva no encontrada']);
+                exit;
+            }
+
+            // Verificar que la reserva pertenece al turista logueado
+            if ((int)$data['id_turista'] !== $idTurista) {
+                echo json_encode(['error' => 'No autorizado']);
+                exit;
+            }
+
+            $json = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            if ($json === false) {
+                echo json_encode(['error' => 'Error al procesar los datos']);
+                exit;
+            }
+
+            echo $json;
+
+        } catch (Throwable $e) {
+            error_log('obtenerReserva controller: ' . $e->getMessage());
+            echo json_encode(['error' => 'Error interno: ' . $e->getMessage()]);
         }
 
-        echo json_encode($data);
         exit;
     }
 

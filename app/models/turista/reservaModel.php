@@ -75,44 +75,57 @@ class ReservaModel
 
     public function obtenerDetalleReserva($idReserva)
     {
-        // Datos principales
-        $sql = "
-        SELECT
-            r.id_reserva,
-            r.fecha,
-            r.cantidad_personas,
-            r.precio,
-            r.estado,
-            a.nombre AS nombre_actividad,
-            a.descripcion,
-            p.nombre_empresa AS proveedor
-        FROM reserva r
-        INNER JOIN actividad a ON r.id_actividad = a.id_actividad
-        INNER JOIN proveedor p ON a.id_proveedor = p.id_proveedor
-        WHERE r.id_reserva = :id
-    ";
+        try {
+            $sql = "
+            SELECT
+                r.id_reserva,
+                r.id_turista,
+                r.fecha,
+                r.cantidad_personas,
+                r.precio,
+                r.estado,
+                a.nombre   AS nombre_actividad,
+                a.descripcion,
+                p.nombre_empresa AS proveedor
+            FROM reserva r
+            INNER JOIN actividad a ON r.id_actividad = a.id_actividad
+            INNER JOIN proveedor p ON a.id_proveedor = p.id_proveedor
+            WHERE r.id_reserva = :id
+            LIMIT 1
+            ";
 
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([':id' => $idReserva]);
-        $reserva = $stmt->fetch(PDO::FETCH_ASSOC);
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':id' => $idReserva]);
+            $reserva = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Imágenes
-        $sqlImg = "
-        SELECT imagen, es_principal
-        FROM actividad_imagen
-        WHERE id_actividad = (
-            SELECT id_actividad FROM reserva WHERE id_reserva = :id
-        )
-        ORDER BY es_principal DESC
-    ";
+            if (!$reserva) {
+                return null;
+            }
 
-        $stmtImg = $this->db->prepare($sqlImg);
-        $stmtImg->execute([':id' => $idReserva]);
-        $imagenes = $stmtImg->fetchAll(PDO::FETCH_ASSOC);
+            // Imágenes — consulta independiente con su propio try-catch
+            try {
+                $sqlImg = "
+                SELECT imagen, es_principal
+                FROM actividad_imagen
+                WHERE id_actividad = (
+                    SELECT id_actividad FROM reserva WHERE id_reserva = :id
+                )
+                ORDER BY es_principal DESC
+                ";
+                $stmtImg = $this->db->prepare($sqlImg);
+                $stmtImg->execute([':id' => $idReserva]);
+                $reserva['imagenes'] = $stmtImg->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                error_log('obtenerDetalleReserva - imagenes: ' . $e->getMessage());
+                $reserva['imagenes'] = [];
+            }
 
-        $reserva['imagenes'] = $imagenes;
+            return $reserva;
 
-        return $reserva;
+        } catch (PDOException $e) {
+            error_log('obtenerDetalleReserva: ' . $e->getMessage());
+            return null;
+        }
     }
 
 
