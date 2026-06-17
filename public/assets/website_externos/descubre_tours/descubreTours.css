@@ -1605,3 +1605,47 @@ h6 {
         font-size: 18px;
     }
 }
+/* ─── NAVBAR + FOOTER RESPONSIVE (≤768px) ─── */
+@media screen and (max-width: 768px) {
+    /* Navbar collapse */
+    .navbar-nav {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 18px;
+        width: 200px;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px 20px;
+        z-index: 1000;
+    }
+    .navbar-nav.show { display: flex; }
+    .menu-toggle     { display: block; font-size: 22px; }
+    .actions         { margin-right: 6px; gap: 8px; }
+    .btn-login,
+    .btn-register    { padding: 6px 12px; font-size: 12px; border-radius: 6px; }
+
+    /* Carousel texto */
+    #hero .carousel  { margin: 0 12px; border-radius: 14px; }
+    #hero .carousel-caption h1,
+    #hero .carousel-caption h2 { font-size: 28px; line-height: 1.2; }
+    #hero .carousel-caption p  { font-size: 13px; }
+    #hero h2.marca             { display: none; }
+
+    /* Footer superior */
+    .footer-top { text-align: center; padding: 20px 15px; }
+    .footer-top .row .col-md-12 { flex-direction: column; align-items: center; gap: 16px; margin: 0; }
+    .footer-top h2 { margin-left: 0; font-size: 18px; text-align: center; padding: 0; }
+    .footer-top a  { margin-right: 0; margin-left: 0; font-size: 14px; padding: 10px 20px; }
+
+    /* Footer inferior */
+    .footer-bottom .row     { flex-wrap: wrap; gap: 20px; }
+    .footer-bottom .col-md-2 { min-width: 45%; text-align: center; }
+    .dest-section, .enlaces-section,
+    .contacto-section, .redes-section { margin-left: 0; }
+    .footer-bottom .list-unstyled li  { margin-left: 0; margin-right: 0; }
+    .social-links { justify-content: center; margin-left: 0; }
+}
