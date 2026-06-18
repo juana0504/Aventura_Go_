@@ -283,10 +283,18 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
                                     data-estado="<?= $estadoKey ?>">
 
                                     <td>
-                                        <img src="<?= BASE_URL ?>public/uploads/hoteles/<?= htmlspecialchars($hotelero['logo'] ?? '') ?>"
-                                             alt="Logo <?= htmlspecialchars($hotelero['nombre_establecimiento']) ?>"
-                                             class="adm-pv-logo"
-                                             onerror="this.src='<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/default-avatar.png';this.onerror=null;">
+                                        <?php
+                                        $logoFile = $hotelero['logo'] ?? '';
+                                        $logoValido = !empty($logoFile) && $logoFile !== 'default_proveedor_hotelero.png';
+                                        ?>
+                                        <?php if ($logoValido): ?>
+                                            <img src="<?= BASE_URL ?>public/uploads/hoteles/<?= htmlspecialchars($logoFile) ?>"
+                                                 alt="Logo"
+                                                 class="adm-pv-logo"
+                                                 onerror="this.outerHTML='<div class=\'adm-pv-logo-ph\' title=\'Sin logo\'><i class=\'bi bi-building\'></i></div>';this.onerror=null;">
+                                        <?php else: ?>
+                                            <div class="adm-pv-logo-ph" title="Sin logo"><i class="bi bi-building"></i></div>
+                                        <?php endif; ?>
                                     </td>
                                     <td>
                                         <div class="adm-table__act-name"><?= htmlspecialchars($hotelero['nombre_establecimiento']) ?></div>
