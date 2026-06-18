@@ -173,22 +173,24 @@ $activeSection = 'hospedajes';
                                                 <i class="bi bi-pencil"></i>
                                             </a>
                                             <?php if (strtoupper($h['estado']) === 'ACTIVO'): ?>
-                                                <a href="<?= BASE_URL ?>proveedor_hotelero/guardar-hospedaje?accion=desactivar&id_usuario=<?= $h['id_hospedaje'] ?>"
-                                                   class="pv-act-btn pv-act-btn--delete" title="Desactivar"
-                                                   onclick="return confirm('¿Desactivar este hospedaje?')">
+                                                <button class="pv-act-btn pv-act-btn--delete" title="Pausar"
+                                                        data-bs-toggle="modal" data-bs-target="#modalPausar"
+                                                        data-href="<?= BASE_URL ?>proveedor_hotelero/guardar-hospedaje?accion=desactivar&id_usuario=<?= $h['id_hospedaje'] ?>"
+                                                        data-nombre="<?= htmlspecialchars($h['nombre']) ?>">
                                                     <i class="bi bi-pause-circle"></i>
-                                                </a>
+                                                </button>
                                             <?php else: ?>
                                                 <a href="<?= BASE_URL ?>proveedor_hotelero/guardar-hospedaje?accion=activar&id_usuario=<?= $h['id_hospedaje'] ?>"
                                                    class="pv-act-btn pv-act-btn--confirm" title="Activar">
                                                     <i class="bi bi-play-circle"></i>
                                                 </a>
                                             <?php endif; ?>
-                                            <a href="<?= BASE_URL ?>proveedor_hotelero/guardar-hospedaje?accion=eliminar&id_usuario=<?= $h['id_hospedaje'] ?>"
-                                               class="pv-act-btn pv-act-btn--delete" title="Eliminar"
-                                               onclick="return confirm('¿Estás seguro de eliminar este hospedaje?')">
+                                            <button class="pv-act-btn pv-act-btn--delete" title="Eliminar"
+                                                    data-bs-toggle="modal" data-bs-target="#modalEliminar"
+                                                    data-href="<?= BASE_URL ?>proveedor_hotelero/guardar-hospedaje?accion=eliminar&id_usuario=<?= $h['id_hospedaje'] ?>"
+                                                    data-nombre="<?= htmlspecialchars($h['nombre']) ?>">
                                                 <i class="bi bi-trash"></i>
-                                            </a>
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -250,6 +252,84 @@ $activeSection = 'hospedajes';
 })();
 </script>
 <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
-    <script src="<?= BASE_URL ?>public/assets/dashboard/sidebar-toggle-universal.js"></script>
+<script src="<?= BASE_URL ?>public/assets/dashboard/sidebar-toggle-universal.js"></script>
+
+<!-- MODAL PAUSAR -->
+<div class="modal fade" id="modalPausar" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width:440px">
+        <div class="modal-content" style="border:none;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.18);">
+            <div style="background:linear-gradient(135deg,#f59e0b,#d97706);padding:28px 24px 22px;text-align:center;">
+                <div style="width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;backdrop-filter:blur(4px);">
+                    <i class="bi bi-pause-circle-fill" style="font-size:28px;color:#fff;"></i>
+                </div>
+                <h5 style="color:#fff;font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;margin:0 0 4px;">¿Pausar hospedaje?</h5>
+                <p id="pausar-nombre" style="color:rgba(255,255,255,.8);font-size:13px;margin:0;font-style:italic;"></p>
+            </div>
+            <div style="padding:24px;background:#fff;">
+                <p style="color:#374151;font-size:14px;line-height:1.65;margin:0 0 22px;text-align:center;">
+                    Este hospedaje <strong>dejará de ser visible</strong> para los turistas mientras esté pausado.<br>
+                    Puedes reactivarlo en cualquier momento desde esta misma sección.
+                </p>
+                <div style="display:flex;gap:10px;">
+                    <button data-bs-dismiss="modal"
+                            style="flex:1;padding:12px;background:#f1f5f9;color:#374151;border:none;border-radius:10px;font-weight:600;cursor:pointer;font-size:14px;transition:background .15s;"
+                            onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
+                        Cancelar
+                    </button>
+                    <a id="pausar-confirm-btn" href="#"
+                       style="flex:1;padding:12px;background:#f59e0b;color:#fff;border:none;border-radius:10px;font-weight:600;cursor:pointer;font-size:14px;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .15s;"
+                       onmouseover="this.style.background='#d97706'" onmouseout="this.style.background='#f59e0b'">
+                        <i class="bi bi-pause-circle"></i> Sí, pausar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL ELIMINAR -->
+<div class="modal fade" id="modalEliminar" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width:440px">
+        <div class="modal-content" style="border:none;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.18);">
+            <div style="background:linear-gradient(135deg,#ef4444,#dc2626);padding:28px 24px 22px;text-align:center;">
+                <div style="width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;backdrop-filter:blur(4px);">
+                    <i class="bi bi-trash3-fill" style="font-size:28px;color:#fff;"></i>
+                </div>
+                <h5 style="color:#fff;font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;margin:0 0 4px;">¿Eliminar hospedaje?</h5>
+                <p id="eliminar-nombre" style="color:rgba(255,255,255,.8);font-size:13px;margin:0;font-style:italic;"></p>
+            </div>
+            <div style="padding:24px;background:#fff;">
+                <p style="color:#374151;font-size:14px;line-height:1.65;margin:0 0 22px;text-align:center;">
+                    Esta acción <strong>no podrá deshacerse</strong>. El hospedaje y todos sus datos serán eliminados permanentemente.
+                </p>
+                <div style="display:flex;gap:10px;">
+                    <button data-bs-dismiss="modal"
+                            style="flex:1;padding:12px;background:#f1f5f9;color:#374151;border:none;border-radius:10px;font-weight:600;cursor:pointer;font-size:14px;transition:background .15s;"
+                            onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
+                        Cancelar
+                    </button>
+                    <a id="eliminar-confirm-btn" href="#"
+                       style="flex:1;padding:12px;background:#ef4444;color:#fff;border:none;border-radius:10px;font-weight:600;cursor:pointer;font-size:14px;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .15s;"
+                       onmouseover="this.style.background='#dc2626'" onmouseout="this.style.background='#ef4444'">
+                        <i class="bi bi-trash"></i> Sí, eliminar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('modalPausar').addEventListener('show.bs.modal', function(e) {
+    const btn = e.relatedTarget;
+    document.getElementById('pausar-confirm-btn').href = btn.dataset.href;
+    document.getElementById('pausar-nombre').textContent = btn.dataset.nombre || '';
+});
+document.getElementById('modalEliminar').addEventListener('show.bs.modal', function(e) {
+    const btn = e.relatedTarget;
+    document.getElementById('eliminar-confirm-btn').href = btn.dataset.href;
+    document.getElementById('eliminar-nombre').textContent = btn.dataset.nombre || '';
+});
+</script>
 </body>
 </html>
