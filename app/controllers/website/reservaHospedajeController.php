@@ -11,7 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 if (!isset($_SESSION['user'])) {
-    $_SESSION['redirect_after_login'] = BASE_URL . 'descubre-hospedaje';
+    $id_hosp = (int)($_POST['id_hospedaje'] ?? 0);
+    $_SESSION['redirect_after_login'] = BASE_URL . 'hospedaje-escogido?id=' . $id_hosp;
     header('Location: ' . BASE_URL . 'login');
     exit;
 }
@@ -66,6 +67,7 @@ $id_reserva   = $reservaModel->crear([
     'id_turista'        => $id_turista,
     'fecha'             => $fecha,
     'cantidad_personas' => $cantidad_personas,
+    'precio'            => $hospedaje['precio'] ?? 0,
 ]);
 
 if ($id_reserva) {
