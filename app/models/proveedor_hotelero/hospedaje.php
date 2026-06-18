@@ -511,25 +511,17 @@ class Hospedaje
                 h.precio,
                 h.capacidad,
                 h.imagen,
+                h.imagen AS imagen_card,
                 ph.logo,
                 ph.nombre_establecimiento,
                 ph.tipo_establecimiento,
                 c.nombre AS ciudad,
-                COALESCE(img.imagen, h.imagen) AS imagen_card,
-                (
-                    SELECT COALESCE(SUM(r.cantidad_personas), 0)
-                    FROM reserva r
-                    WHERE r.id_hospedaje = h.id_hospedaje
-                    AND r.estado IN ('pendiente', 'confirmada')
-                    AND r.fecha >= CURDATE()
-                ) AS cupos_reservados
+                0 AS cupos_reservados
             FROM hospedaje h
             INNER JOIN proveedor_hotelero ph
                 ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
             INNER JOIN ciudades c
                 ON h.id_ciudad = c.id_ciudad
-            LEFT JOIN hospedaje_imagen img
-                ON img.id_hospedaje = h.id_hospedaje AND img.es_principal = 1
             WHERE h.estado = 'ACTIVO'
             AND ph.estado = 'ACTIVO'
             ORDER BY h.created_at DESC";
@@ -554,25 +546,17 @@ class Hospedaje
                 h.precio,
                 h.capacidad,
                 h.imagen,
+                h.imagen AS imagen_card,
                 ph.logo,
                 ph.nombre_establecimiento,
                 ph.tipo_establecimiento,
                 c.nombre AS ciudad,
-                COALESCE(img.imagen, h.imagen) AS imagen_card,
-                (
-                    SELECT COALESCE(SUM(r.cantidad_personas), 0)
-                    FROM reserva r
-                    WHERE r.id_hospedaje = h.id_hospedaje
-                    AND r.estado IN ('pendiente', 'confirmada')
-                    AND r.fecha >= CURDATE()
-                ) AS cupos_reservados
+                0 AS cupos_reservados
             FROM hospedaje h
             INNER JOIN proveedor_hotelero ph
                 ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
             INNER JOIN ciudades c
                 ON h.id_ciudad = c.id_ciudad
-            LEFT JOIN hospedaje_imagen img
-                ON img.id_hospedaje = h.id_hospedaje AND img.es_principal = 1
             WHERE h.estado = 'ACTIVO'
             AND ph.estado = 'ACTIVO'
             AND UPPER(c.nombre) = UPPER(:ciudad)
@@ -601,25 +585,17 @@ class Hospedaje
                     h.precio,
                     h.capacidad,
                     h.imagen,
+                    h.imagen AS imagen_card,
                     ph.logo,
                     ph.nombre_establecimiento,
                     ph.tipo_establecimiento,
                     c.nombre AS ciudad,
-                    COALESCE(img.imagen, h.imagen) AS imagen_card,
-                    (
-                        SELECT COALESCE(SUM(r.cantidad_personas), 0)
-                        FROM reserva r
-                        WHERE r.id_hospedaje = h.id_hospedaje
-                        AND r.estado IN ('pendiente', 'confirmada')
-                        AND r.fecha >= CURDATE()
-                    ) AS cupos_reservados
+                    0 AS cupos_reservados
                 FROM hospedaje h
                 INNER JOIN proveedor_hotelero ph
                     ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
                 INNER JOIN ciudades c
                     ON h.id_ciudad = c.id_ciudad
-                LEFT JOIN hospedaje_imagen img
-                    ON img.id_hospedaje = h.id_hospedaje AND img.es_principal = 1
                 WHERE h.estado = 'ACTIVO'
                 AND ph.estado = 'ACTIVO'
                 AND (h.nombre LIKE :q1 OR h.tipo LIKE :q2 OR c.nombre LIKE :q3
@@ -627,7 +603,7 @@ class Hospedaje
                 ORDER BY h.nombre ASC
             ";
             $stmt = $this->conexion->prepare($sql);
-            $stmt->execute([':q1' => $like, ':q2' => $like, ':q3' => $like]);
+            $stmt->execute([':q1' => $like, ':q2' => $like, ':q3' => $like, ':q4' => $like]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log("Hospedaje::buscarPublicos: " . $e->getMessage());
