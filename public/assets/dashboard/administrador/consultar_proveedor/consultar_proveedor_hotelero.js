@@ -34,7 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Header
         setText('modal-nombre-establecimiento', data.nombre_establecimiento ?? '—');
-        setImg('modal-logo', `${BASE_URL}public/uploads/hoteles/${data.logo}`);
+        const logoFile = data.logo ?? '';
+        if (logoFile && logoFile !== 'default_proveedor_hotelero.png') {
+            setImg('modal-logo', `${BASE_URL}public/uploads/hoteles/${logoFile}`);
+        } else {
+            const wrap = document.getElementById('modal-logo')?.closest('.adm-modal__logo-wrap');
+            if (wrap) wrap.innerHTML = '<i class="bi bi-building" style="font-size:1.8rem;color:#ea8217;"></i>';
+        }
 
         // Estado y fecha
         setText('modal-status', data.estado);
