@@ -478,6 +478,7 @@ class Hospedaje
 
     public function haycapacidadDisponibles($idHospedaje, $fecha, $cantidad)
     {
+        try {
         $sql = "SELECT capacidad FROM hospedaje WHERE id_hospedaje = :id";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':id', $idHospedaje, PDO::PARAM_INT);
@@ -495,7 +496,7 @@ class Hospedaje
             FROM reserva
             WHERE id_hospedaje = :id
             AND fecha = :fecha
-            AND estado = 'Confirmada'";
+            AND estado IN ('confirmada', 'Confirmada', 'pendiente')";
 
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':id', $idHospedaje, PDO::PARAM_INT);
@@ -507,6 +508,10 @@ class Hospedaje
         $reservadas = (int)($resultado['reservadas'] ?? 0);
 
         return ($reservadas + $cantidad) <= $capacidadTotales;
+        } catch (PDOException $e) {
+            error_log("Hospedaje::haycapacidadDisponibles: " . $e->getMessage());
+            return true; // si falla el check, permite la reserva
+        }
     }
 
     public function listarPublicos()
