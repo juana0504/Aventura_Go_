@@ -156,6 +156,32 @@ class ReservaHotelero
         }
     }
 
+    public function listarIngresosPorProveedor($id_proveedor_hotelero)
+    {
+        $sql = "SELECT
+                    r.id_reserva,
+                    r.created_at AS fecha_reserva,
+                    r.fecha AS fecha_actividad,
+                    h.nombre AS nombre_actividad,
+                    r.cantidad_personas,
+                    h.precio,
+                    (r.cantidad_personas * h.precio) AS total,
+                    r.estado
+                FROM reserva r
+                JOIN hospedaje h ON r.id_hospedaje = h.id_hospedaje
+                WHERE h.id_proveedor_hotelero = :id_proveedor_hotelero
+                ORDER BY r.created_at DESC";
+        try {
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':id_proveedor_hotelero', $id_proveedor_hotelero, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("ReservaHotelero::listarIngresosPorProveedor: " . $e->getMessage());
+            return [];
+        }
+    }
+
     public function obtenerRecentesParaDashboard($id_proveedor_hotelero, $limit = 10)
     {
         $sql = "SELECT

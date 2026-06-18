@@ -16,10 +16,7 @@
         <i class="bi bi-grid-1x2-fill pv-nav-item__icon"></i> Dashboard
     </a>
 
-    <div class="pv-sidebar__section-label">Actividades</div>
-    <a href="<?= BASE_URL ?>proveedor_hotelero/completar-informacion" class="pv-nav-item <?= ($activeSection==='info') ? 'pv-nav-item--active':'' ?>">
-        <i class="bi bi-pen pv-nav-item__icon"></i> Actualizar Información
-    </a>
+    <div class="pv-sidebar__section-label">Hospedajes</div>
     <a href="<?= BASE_URL ?>proveedor_hotelero/registrar-hospedajes" class="pv-nav-item <?= ($activeSection==='nuevo') ? 'pv-nav-item--active':'' ?>">
         <i class="bi bi-plus-circle pv-nav-item__icon"></i> Nuevo Hospedaje
     </a>
@@ -39,5 +36,8 @@
     </a>
     <a href="<?= BASE_URL ?>proveedor_hotelero/perfil" class="pv-nav-item <?= ($activeSection==='perfil') ? 'pv-nav-item--active':'' ?>">
         <i class="bi bi-person-circle pv-nav-item__icon"></i> Mi Perfil
+    </a>
+    <a href="<?= BASE_URL ?>proveedor_hotelero/completar-informacion" class="pv-nav-item <?= ($activeSection==='info') ? 'pv-nav-item--active':'' ?>">
+        <i class="bi bi-building-gear pv-nav-item__icon"></i> Mi Empresa
     </a>
 </nav>
