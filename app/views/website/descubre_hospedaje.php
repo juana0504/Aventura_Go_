@@ -156,8 +156,18 @@ if ($q !== '') {
 
             <div class="activity-card">
 
+              <?php
+                $imgCard = $actividad['imagen_card'] ?? $actividad['imagen'] ?? '';
+                if (!empty($imgCard) && $imgCard !== 'hospedaje_default.png') {
+                    $imgSrc = BASE_URL . 'public/uploads/hotelero/actividades/' . rawurlencode($imgCard);
+                } elseif (!empty($actividad['logo'])) {
+                    $imgSrc = BASE_URL . 'public/uploads/hoteles/' . rawurlencode($actividad['logo']);
+                } else {
+                    $imgSrc = BASE_URL . 'public/assets/website_externos/index/img/LOGO-FINAL.png';
+                }
+              ?>
               <img
-                src="<?= BASE_URL ?>public/uploads/hoteles/<?= htmlspecialchars($actividad['logo'] ?? 'default.png') ?>"
+                src="<?= $imgSrc ?>"
                 alt="<?= htmlspecialchars($actividad['nombre']) ?>"
                 class="activity-image"
                 onerror="this.src='<?= BASE_URL ?>public/assets/website_externos/index/img/LOGO-FINAL.png'">
