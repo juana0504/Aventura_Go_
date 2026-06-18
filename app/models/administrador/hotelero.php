@@ -345,4 +345,40 @@ class Hotelero
             return false;
         }
     }
+
+    // archivar proveedor hotelero
+    public function archivarProveedorHotelero($id)
+    {
+        try {
+            $sql = "UPDATE proveedor_hotelero
+                SET estado = 'ARCHIVADO'
+                WHERE id_proveedor_hotelero = :id";
+
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error archivarProveedorHotelero: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    // desarchivar proveedor hotelero
+    public function desarchivarProveedorHotelero($id)
+    {
+        try {
+            $sql = "UPDATE proveedor_hotelero
+                SET estado = 'ACTIVO'
+                WHERE id_proveedor_hotelero = :id";
+
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error desarchivarProveedorHotelero: " . $e->getMessage());
+            return false;
+        }
+    }
 }

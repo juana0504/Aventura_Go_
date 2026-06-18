@@ -406,6 +406,14 @@ switch ($request) {
         require_once BASE_PATH . '/app/controllers/administrador/hotelero.php';
         break;
 
+    case '/administrador/archivar-proveedor-hotelero':
+        require_once BASE_PATH . '/app/controllers/administrador/hotelero.php';
+        break;
+
+    case '/administrador/desarchivar-proveedor-hotelero':
+        require_once BASE_PATH . '/app/controllers/administrador/hotelero.php';
+        break;
+
 
     // CRUD del Proveedor Hotelero
     case '/administrador/guardar-proveedor-hotelero':
