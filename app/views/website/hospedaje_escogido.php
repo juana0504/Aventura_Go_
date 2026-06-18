@@ -17,8 +17,9 @@ if (!$hospedaje) {
     exit;
 }
 
-$servicios = array_filter(array_map('trim', explode(',', $hospedaje['servicios'] ?? '')));
-$tipos     = array_filter(array_map('trim', explode(',', $hospedaje['tipo'] ?? '')));
+$servicios    = array_filter(array_map('trim', explode(',', $hospedaje['servicios'] ?? '')));
+$tipos        = array_filter(array_map('trim', explode(',', $hospedaje['tipo'] ?? '')));
+$fechasLlenas = $hospedajeModel->obtenerFechasLlenas($id);
 
 $servicioIconos = [
     'WiFi' => '📶', 'Piscina' => '🏊', 'Desayuno' => '🍳', 'Parking' => '🅿️',
@@ -138,6 +139,11 @@ $servicioIconos = [
 
         <!-- DETALLES -->
         <div>
+            <?php if (!empty($hospedaje['nombre_establecimiento'])): ?>
+                <div style="font-size:12px;font-weight:700;color:#EA8217;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">
+                    <i class="bi bi-building"></i> <?= htmlspecialchars($hospedaje['nombre_establecimiento']) ?>
+                </div>
+            <?php endif; ?>
             <h1 class="he-title"><?= htmlspecialchars($hospedaje['nombre']) ?></h1>
             <div class="he-location">
                 <i class="bi bi-geo-alt-fill" style="color:#EA8217"></i>
@@ -198,20 +204,45 @@ $servicioIconos = [
                 <hr class="he-divider">
 
                 <?php if (isset($_SESSION['user']) && ($_SESSION['user']['rol'] ?? '') === 'turista'): ?>
-                    <form action="<?= BASE_URL ?>guardar-reserva-hospedaje" method="POST">
+                    <form action="<?= BASE_URL ?>guardar-reserva-hospedaje" method="POST" id="formReservaHosp">
                         <input type="hidden" name="id_hospedaje" value="<?= $hospedaje['id_hospedaje'] ?>">
                         <div class="he-form-group">
                             <label><i class="bi bi-calendar3"></i> Fecha de llegada</label>
-                            <input type="date" name="fecha" min="<?= date('Y-m-d') ?>" required>
+                            <input type="date" name="fecha" id="fechaReserva"
+                                   min="<?= date('Y-m-d') ?>" required>
+                            <div id="fechaAviso" style="display:none;margin-top:6px;padding:8px 10px;background:#fef2f2;border:1px solid #fca5a5;border-radius:6px;font-size:12px;color:#b91c1c;">
+                                <i class="bi bi-exclamation-circle"></i> Esta fecha está <strong>agotada</strong>. Elige otra.
+                            </div>
                         </div>
                         <div class="he-form-group">
                             <label><i class="bi bi-people"></i> Cantidad de personas</label>
-                            <input type="number" name="cantidad_personas" min="1" max="<?= (int)$hospedaje['capacidad'] ?>" value="1" required>
+                            <input type="number" name="cantidad_personas" min="1"
+                                   max="<?= (int)$hospedaje['capacidad'] ?>" value="1" required>
                         </div>
-                        <button type="submit" class="he-btn-reservar">
+                        <button type="submit" class="he-btn-reservar" id="btnReservar">
                             <i class="bi bi-calendar-check"></i> Reservar ahora
                         </button>
                     </form>
+                    <script>
+                    (function(){
+                        const fechasLlenas = <?= json_encode($fechasLlenas) ?>;
+                        const inputFecha   = document.getElementById('fechaReserva');
+                        const aviso        = document.getElementById('fechaAviso');
+                        const btnReservar  = document.getElementById('btnReservar');
+
+                        inputFecha.addEventListener('change', function(){
+                            if (fechasLlenas.includes(this.value)) {
+                                aviso.style.display = 'block';
+                                btnReservar.disabled = true;
+                                btnReservar.style.opacity = '.5';
+                            } else {
+                                aviso.style.display = 'none';
+                                btnReservar.disabled = false;
+                                btnReservar.style.opacity = '1';
+                            }
+                        });
+                    })();
+                    </script>
                 <?php else: ?>
                     <div class="he-login-notice">
                         <i class="bi bi-lock-fill"></i>

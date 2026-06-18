@@ -154,25 +154,43 @@ if ($q !== '') {
         <?php if (!empty($actividades)): ?>
           <?php foreach ($actividades as $actividad): ?>
 
-            <div class="activity-card">
+            <?php
+              $cuposReservados = (int)($actividad['cupos_reservados'] ?? 0);
+              $capacidadTotal  = (int)($actividad['capacidad'] ?? 0);
+              $agotado         = $cuposReservados >= $capacidadTotal && $capacidadTotal > 0;
 
-              <?php
-                $imgCard = $actividad['imagen_card'] ?? $actividad['imagen'] ?? '';
-                if (!empty($imgCard) && $imgCard !== 'hospedaje_default.png') {
-                    $imgSrc = BASE_URL . 'public/uploads/hotelero/actividades/' . rawurlencode($imgCard);
-                } elseif (!empty($actividad['logo'])) {
-                    $imgSrc = BASE_URL . 'public/uploads/hoteles/' . rawurlencode($actividad['logo']);
-                } else {
-                    $imgSrc = BASE_URL . 'public/assets/website_externos/index/img/LOGO-FINAL.png';
-                }
-              ?>
-              <img
-                src="<?= $imgSrc ?>"
-                alt="<?= htmlspecialchars($actividad['nombre']) ?>"
-                class="activity-image"
-                onerror="this.src='<?= BASE_URL ?>public/assets/website_externos/index/img/LOGO-FINAL.png'">
+              $imgCard = $actividad['imagen_card'] ?? $actividad['imagen'] ?? '';
+              if (!empty($imgCard) && $imgCard !== 'hospedaje_default.png') {
+                  $imgSrc = BASE_URL . 'public/uploads/hotelero/actividades/' . rawurlencode($imgCard);
+              } elseif (!empty($actividad['logo'])) {
+                  $imgSrc = BASE_URL . 'public/uploads/hoteles/' . rawurlencode($actividad['logo']);
+              } else {
+                  $imgSrc = BASE_URL . 'public/assets/website_externos/index/img/LOGO-FINAL.png';
+              }
+            ?>
+            <div class="activity-card<?= $agotado ? ' activity-card--agotado' : '' ?>">
+
+              <div style="position:relative;">
+                <img
+                  src="<?= $imgSrc ?>"
+                  alt="<?= htmlspecialchars($actividad['nombre']) ?>"
+                  class="activity-image"
+                  onerror="this.src='<?= BASE_URL ?>public/assets/website_externos/index/img/LOGO-FINAL.png'">
+                <?php if ($agotado): ?>
+                  <span style="position:absolute;top:10px;right:10px;background:#e53e3e;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.5px;">AGOTADO</span>
+                <?php elseif (!empty($actividad['tipo'])): ?>
+                  <span style="position:absolute;top:10px;left:10px;background:rgba(45,64,89,.8);color:#fff;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;"><?= htmlspecialchars($actividad['tipo']) ?></span>
+                <?php endif; ?>
+              </div>
 
               <div class="activity-content">
+
+                <!-- Establecimiento -->
+                <?php if (!empty($actividad['nombre_establecimiento'])): ?>
+                <div style="font-size:11px;font-weight:700;color:#EA8217;text-transform:uppercase;letter-spacing:.8px;margin-bottom:2px;">
+                  <i class="bi bi-building"></i> <?= htmlspecialchars($actividad['nombre_establecimiento']) ?>
+                </div>
+                <?php endif; ?>
 
                 <!-- Ciudad -->
                 <div class="activity-category">
@@ -181,7 +199,7 @@ if ($q !== '') {
                   <span> <?= htmlspecialchars($actividad['ciudad']) ?></span>
                 </div>
 
-                <!-- Nombre -->
+                <!-- Nombre unidad -->
                 <h3 class="activity-title">
                   <?= htmlspecialchars($actividad['nombre']) ?>
                 </h3>
@@ -192,10 +210,14 @@ if ($q !== '') {
                   <?= substr(htmlspecialchars($actividad['descripcion']), 0, 90) ?>...
                 </p>
 
-                <!-- Capacidad -->
+                <!-- Disponibilidad -->
                 <div class="activity-duration">
                   <i class="fas fa-users"></i>
-                  <span><?= (int)$actividad['capacidad'] ?> personas máx.</span>
+                  <?php if ($agotado): ?>
+                    <span style="color:#e53e3e;font-weight:600;">Sin disponibilidad próxima</span>
+                  <?php else: ?>
+                    <span><?= $capacidadTotal ?> personas máx.</span>
+                  <?php endif; ?>
                 </div>
 
                 <!-- Precio -->
@@ -204,6 +226,7 @@ if ($q !== '') {
                   <span class="price-current">
                     $<?= number_format($actividad['precio'], 0, ',', '.') ?>
                   </span>
+                  <span style="font-size:11px;color:#6b7280;margin-left:2px;">/ noche</span>
                 </div>
 
                 <!-- Botones -->
@@ -216,7 +239,7 @@ if ($q !== '') {
                       <i class="bi bi-star-fill"></i> Reseñas
                   </button>
                   <a href="<?= BASE_URL ?>hospedaje-escogido?id=<?= $actividad['id_hospedaje'] ?>" class="btn-ver-mas">
-                      Ver más
+                      <?= $agotado ? 'Ver fechas' : 'Reservar' ?>
                   </a>
                 </div>
 
