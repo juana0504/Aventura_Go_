@@ -41,6 +41,16 @@ switch ($method) {
             exit;
         }
 
+        if ($accion === 'archivar') {
+            archivarProveedorHotelero($_GET['id']);
+            exit;
+        }
+
+        if ($accion === 'desarchivar') {
+            desarchivarProveedorHotelero($_GET['id']);
+            exit;
+        }
+
         listarHoteles();
 
         break;
@@ -422,6 +432,50 @@ function desactivarProveedorHotelero($id)
             'error',
             'Error al desactivar',
             'No se pudo desactivar el proveedor hotelero.',
+            BASE_URL . 'administrador/consultar-proveedor-hotelero'
+        );
+    }
+}
+
+function archivarProveedorHotelero($id)
+{
+    $objHotelero = new Hotelero();
+    $resultado = $objHotelero->archivarProveedorHotelero($id);
+
+    if ($resultado === true) {
+        mostrarSweetAlert(
+            'success',
+            'Proveedor archivado',
+            'El proveedor hotelero ha sido archivado.',
+            BASE_URL . 'administrador/consultar-proveedor-hotelero'
+        );
+    } else {
+        mostrarSweetAlert(
+            'error',
+            'Error al archivar',
+            'No se pudo archivar el proveedor hotelero.',
+            BASE_URL . 'administrador/consultar-proveedor-hotelero'
+        );
+    }
+}
+
+function desarchivarProveedorHotelero($id)
+{
+    $objHotelero = new Hotelero();
+    $resultado = $objHotelero->desarchivarProveedorHotelero($id);
+
+    if ($resultado === true) {
+        mostrarSweetAlert(
+            'success',
+            'Proveedor restaurado',
+            'El proveedor hotelero vuelve a estar activo.',
+            BASE_URL . 'administrador/consultar-proveedor-hotelero'
+        );
+    } else {
+        mostrarSweetAlert(
+            'error',
+            'Error al desarchivar',
+            'No se pudo restaurar el proveedor hotelero.',
             BASE_URL . 'administrador/consultar-proveedor-hotelero'
         );
     }

@@ -336,11 +336,33 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
                                                class="adm-pv-btn adm-pv-btn--edit" title="Editar">
                                                 <i class="bi bi-pencil"></i>
                                             </a>
-                                            <a href="<?= BASE_URL ?>administrador/eliminar-proveedor-hotelero?accion=eliminar&id=<?= $hotelero['id_proveedor_hotelero'] ?>"
-                                               class="adm-pv-btn adm-pv-btn--delete" title="Eliminar"
-                                               onclick="return confirm('¿Estás seguro de eliminar este establecimiento?')">
+                                            <?php if (strtoupper($hotelero['estado'] ?? '') === 'ARCHIVADO'): ?>
+                                            <button class="adm-pv-btn adm-pv-btn--restore"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modalDesarchivarH"
+                                                data-href="<?= BASE_URL ?>administrador/desarchivar-proveedor-hotelero?accion=desarchivar&id=<?= $hotelero['id_proveedor_hotelero'] ?>"
+                                                data-nombre="<?= htmlspecialchars($hotelero['nombre_establecimiento'], ENT_QUOTES) ?>"
+                                                title="Desarchivar">
+                                                <i class="bi bi-arrow-counterclockwise"></i>
+                                            </button>
+                                            <?php else: ?>
+                                            <button class="adm-pv-btn adm-pv-btn--archive"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modalArchivarH"
+                                                data-href="<?= BASE_URL ?>administrador/archivar-proveedor-hotelero?accion=archivar&id=<?= $hotelero['id_proveedor_hotelero'] ?>"
+                                                data-nombre="<?= htmlspecialchars($hotelero['nombre_establecimiento'], ENT_QUOTES) ?>"
+                                                title="Archivar">
+                                                <i class="bi bi-archive"></i>
+                                            </button>
+                                            <?php endif; ?>
+                                            <button class="adm-pv-btn adm-pv-btn--delete"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modalEliminarH"
+                                                data-href="<?= BASE_URL ?>administrador/eliminar-proveedor-hotelero?accion=eliminar&id=<?= $hotelero['id_proveedor_hotelero'] ?>"
+                                                data-nombre="<?= htmlspecialchars($hotelero['nombre_establecimiento'], ENT_QUOTES) ?>"
+                                                title="Eliminar">
                                                 <i class="bi bi-trash"></i>
-                                            </a>
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -646,6 +668,98 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
 </script>
 
 <script src="<?= BASE_URL ?>public/assets/dashboard/administrador/administrador/sidebar-toggle.js"></script>
+
+<!-- ── MODAL ARCHIVAR HOTELERO ─────────────────────────────────── -->
+<div class="modal fade" id="modalArchivarH" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0" style="border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.25);">
+            <div style="background:linear-gradient(135deg,#475569,#334155);padding:28px 28px 20px;text-align:center;">
+                <div style="width:64px;height:64px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:28px;">📦</div>
+                <h5 style="color:#fff;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;margin:0 0 6px;">¿Archivar establecimiento?</h5>
+                <p style="color:rgba(255,255,255,.7);font-size:13px;margin:0;"><strong id="archivar-h-nombre" style="color:#fff;"></strong> dejará de estar activo.</p>
+            </div>
+            <div style="padding:22px 28px;background:#fff;">
+                <div style="background:#f8fafc;border-left:3px solid #475569;border-radius:8px;padding:14px 16px;margin-bottom:20px;font-size:13px;color:#475569;line-height:1.6;">
+                    El establecimiento quedará <strong>archivado</strong> y no será visible para los turistas.<br>
+                    Puede ser reactivado en cualquier momento.
+                </div>
+                <div style="display:flex;gap:10px;justify-content:flex-end;">
+                    <button class="btn btn-sm" data-bs-dismiss="modal" style="background:#f1f5f9;color:#475569;border-radius:10px;padding:9px 20px;font-weight:600;">Cancelar</button>
+                    <a id="archivar-h-confirm-btn" href="#" class="btn btn-sm" style="background:linear-gradient(135deg,#475569,#334155);color:#fff;border-radius:10px;padding:9px 20px;font-weight:600;text-decoration:none;">
+                        📦 Sí, archivar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── MODAL DESARCHIVAR HOTELERO ──────────────────────────────── -->
+<div class="modal fade" id="modalDesarchivarH" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0" style="border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.25);">
+            <div style="background:linear-gradient(135deg,#059669,#047857);padding:28px 28px 20px;text-align:center;">
+                <div style="width:64px;height:64px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:28px;">↩️</div>
+                <h5 style="color:#fff;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;margin:0 0 6px;">¿Restaurar establecimiento?</h5>
+                <p style="color:rgba(255,255,255,.7);font-size:13px;margin:0;"><strong id="desarchivar-h-nombre" style="color:#fff;"></strong> volverá a estar activo.</p>
+            </div>
+            <div style="padding:22px 28px;background:#fff;">
+                <div style="background:#f0fdf4;border-left:3px solid #059669;border-radius:8px;padding:14px 16px;margin-bottom:20px;font-size:13px;color:#065f46;line-height:1.6;">
+                    El establecimiento volverá al estado <strong>Activo</strong> y será visible para los turistas nuevamente.
+                </div>
+                <div style="display:flex;gap:10px;justify-content:flex-end;">
+                    <button class="btn btn-sm" data-bs-dismiss="modal" style="background:#f1f5f9;color:#475569;border-radius:10px;padding:9px 20px;font-weight:600;">Cancelar</button>
+                    <a id="desarchivar-h-confirm-btn" href="#" class="btn btn-sm" style="background:linear-gradient(135deg,#059669,#047857);color:#fff;border-radius:10px;padding:9px 20px;font-weight:600;text-decoration:none;">
+                        ↩️ Sí, restaurar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── MODAL ELIMINAR HOTELERO ─────────────────────────────────── -->
+<div class="modal fade" id="modalEliminarH" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0" style="border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.25);">
+            <div style="background:linear-gradient(135deg,#ef4444,#dc2626);padding:28px 28px 20px;text-align:center;">
+                <div style="width:64px;height:64px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:28px;">🗑️</div>
+                <h5 style="color:#fff;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;margin:0 0 6px;">¿Eliminar definitivamente?</h5>
+                <p style="color:rgba(255,255,255,.7);font-size:13px;margin:0;">Estás a punto de eliminar a <strong id="eliminar-h-nombre" style="color:#fff;"></strong>.</p>
+            </div>
+            <div style="padding:22px 28px;background:#fff;">
+                <div style="background:#fef2f2;border-left:3px solid #ef4444;border-radius:8px;padding:14px 16px;margin-bottom:20px;font-size:13px;color:#7f1d1d;line-height:1.6;">
+                    ⚠️ <strong>Esta acción no se puede deshacer.</strong><br>
+                    Se eliminarán permanentemente todos los datos del establecimiento e historial de reservas.
+                </div>
+                <div style="display:flex;gap:10px;justify-content:flex-end;">
+                    <button class="btn btn-sm" data-bs-dismiss="modal" style="background:#f1f5f9;color:#475569;border-radius:10px;padding:9px 20px;font-weight:600;">Cancelar</button>
+                    <a id="eliminar-h-confirm-btn" href="#" class="btn btn-sm" style="background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;border-radius:10px;padding:9px 20px;font-weight:600;text-decoration:none;">
+                        🗑️ Sí, eliminar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('modalArchivarH').addEventListener('show.bs.modal', function(e) {
+    const btn = e.relatedTarget;
+    document.getElementById('archivar-h-confirm-btn').href = btn.dataset.href;
+    document.getElementById('archivar-h-nombre').textContent = btn.dataset.nombre || '';
+});
+document.getElementById('modalDesarchivarH').addEventListener('show.bs.modal', function(e) {
+    const btn = e.relatedTarget;
+    document.getElementById('desarchivar-h-confirm-btn').href = btn.dataset.href;
+    document.getElementById('desarchivar-h-nombre').textContent = btn.dataset.nombre || '';
+});
+document.getElementById('modalEliminarH').addEventListener('show.bs.modal', function(e) {
+    const btn = e.relatedTarget;
+    document.getElementById('eliminar-h-confirm-btn').href = btn.dataset.href;
+    document.getElementById('eliminar-h-nombre').textContent = btn.dataset.nombre || '';
+});
+</script>
 
 </body>
 </html>
