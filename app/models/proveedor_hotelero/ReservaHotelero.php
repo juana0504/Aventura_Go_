@@ -139,8 +139,8 @@ class ReservaHotelero
 
     public function crear($data)
     {
-        $sql = "INSERT INTO reserva (id_hospedaje, id_turista, fecha, cantidad_personas, estado)
-                VALUES (:id_hospedaje, :id_turista, :fecha, :cantidad_personas, 'pendiente')";
+        $sql = "INSERT INTO reserva (id_hospedaje, id_turista, fecha, cantidad_personas, estado, tipo_reserva, precio)
+                VALUES (:id_hospedaje, :id_turista, :fecha, :cantidad_personas, 'pendiente', 'hospedaje', :precio)";
         try {
             $stmt = $this->conexion->prepare($sql);
             $stmt->execute([
@@ -148,6 +148,7 @@ class ReservaHotelero
                 ':id_turista'        => $data['id_turista'],
                 ':fecha'             => $data['fecha'],
                 ':cantidad_personas' => $data['cantidad_personas'],
+                ':precio'            => $data['precio'] ?? 0,
             ]);
             return $this->conexion->lastInsertId();
         } catch (PDOException $e) {
