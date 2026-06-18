@@ -283,9 +283,10 @@ $avatarAdminUrl = BASE_URL . 'public/uploads/usuario/' . rawurlencode($fotoAdmin
                                     data-estado="<?= $estadoKey ?>">
 
                                     <td>
-                                        <img src="<?= BASE_URL ?>public/uploads/hoteles/<?= htmlspecialchars($hotelero['logo']) ?>"
+                                        <img src="<?= BASE_URL ?>public/uploads/hoteles/<?= htmlspecialchars($hotelero['logo'] ?? '') ?>"
                                              alt="Logo <?= htmlspecialchars($hotelero['nombre_establecimiento']) ?>"
-                                             class="adm-pv-logo">
+                                             class="adm-pv-logo"
+                                             onerror="this.src='<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/default-avatar.png';this.onerror=null;">
                                     </td>
                                     <td>
                                         <div class="adm-table__act-name"><?= htmlspecialchars($hotelero['nombre_establecimiento']) ?></div>

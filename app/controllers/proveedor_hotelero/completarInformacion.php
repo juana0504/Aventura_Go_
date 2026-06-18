@@ -115,7 +115,7 @@ class CompletarInformacionController
 
         $nuevoLogo = subirArchivo(
             $_FILES['logo'] ?? [],
-            'hotelero/hospedaje',
+            'hoteles',
             'logo_'
         );
 

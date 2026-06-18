@@ -485,6 +485,10 @@
     font-family: 'DM Sans', sans-serif;
 }
 
+.badge-activo   { background: rgba(22,163,74,.12);  color: #16a34a; }
+.badge-inactivo { background: rgba(220,38,38,.1);   color: #dc2626; }
+.badge-pendiente{ background: rgba(202,138,4,.12);  color: #b45309; }
+
 .adm-modal__date {
     font-size: 12px;
     color: var(--adm-muted);

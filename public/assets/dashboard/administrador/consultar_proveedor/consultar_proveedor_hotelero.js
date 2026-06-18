@@ -93,9 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         badge.textContent = data.estado ?? 'Desconocido';
         badge.className =
-            estado === 'ACTIVO' ? 'status-badge badge-activo' :
-            estado === 'INACTIVO' ? 'status-badge badge-inactivo' :
-            'status-badge badge-pendiente';
+            estado === 'activo' ? 'adm-modal__status-badge badge-activo' :
+            estado === 'inactivo' ? 'adm-modal__status-badge badge-inactivo' :
+            'adm-modal__status-badge badge-pendiente';
 
         const modalEl = document.getElementById('verProveedorModal');
 
@@ -141,7 +141,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function setImg(id, src) {
         const img = document.getElementById(id);
-        if (img) img.src = src;
+        if (!img) return;
+        img.src = src;
+        img.onerror = function() {
+            this.src = `${BASE_URL}public/assets/dashboard/administrador/perfil_usuario/img/default-avatar.png`;
+            this.onerror = null;
+        };
     }
 
     function setChips(id, values) {
