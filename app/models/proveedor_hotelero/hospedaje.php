@@ -168,8 +168,8 @@ class Hospedaje
             servicios = :servicios,
             estado = :estado
         WHERE id_hospedaje = :id_hospedaje"
-        . " AND id_proveedor_hotelero = :id_proveedor_hotelero";
-        
+            . " AND id_proveedor_hotelero = :id_proveedor_hotelero";
+
         $stmt = $this->conexion->prepare($sql);
 
         return $stmt->execute([
