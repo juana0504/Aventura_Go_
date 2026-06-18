@@ -627,7 +627,7 @@ class Hospedaje
                 ORDER BY h.nombre ASC
             ";
             $stmt = $this->conexion->prepare($sql);
-            $stmt->execute([':q1' => $like, ':q2' => $like, ':q3' => $like, ':q4' => $like]);
+            $stmt->execute([':q1' => $like, ':q2' => $like, ':q3' => $like]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log("Hospedaje::buscarPublicos: " . $e->getMessage());
