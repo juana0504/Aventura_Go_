@@ -395,7 +395,7 @@ class Hospedaje
         ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
         WHERE h.id_hospedaje = :id
         AND h.estado = 'ACTIVO'
-        AND ph.estado = 'APROBADO'
+        AND ph.estado = 'ACTIVO'
         LIMIT 1
         ";
 
@@ -430,7 +430,7 @@ class Hospedaje
             INNER JOIN proveedor_hotelero ph ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
             WHERE h.id_hospedaje = :id
             AND h.estado = 'ACTIVO'
-            AND ph.estado = 'APROBADO'
+            AND ph.estado = 'ACTIVO'
             LIMIT 1";
             $stmt = $this->conexion->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -511,13 +511,17 @@ class Hospedaje
                 h.capacidad,
                 h.imagen,
                 ph.logo,
-                c.nombre AS ciudad
+                c.nombre AS ciudad,
+                COALESCE(img.imagen, h.imagen) AS imagen_card
             FROM hospedaje h
             INNER JOIN proveedor_hotelero ph
                 ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
             INNER JOIN ciudades c
                 ON h.id_ciudad = c.id_ciudad
-            WHERE ph.estado = 'APROBADO'
+            LEFT JOIN hospedaje_imagen img
+                ON img.id_hospedaje = h.id_hospedaje AND img.es_principal = 1
+            WHERE h.estado = 'ACTIVO'
+            AND ph.estado = 'ACTIVO'
             ORDER BY h.created_at DESC";
 
             $stmt = $this->conexion->prepare($sql);
@@ -540,13 +544,17 @@ class Hospedaje
                 h.capacidad,
                 h.imagen,
                 ph.logo,
-                c.nombre AS ciudad
+                c.nombre AS ciudad,
+                COALESCE(img.imagen, h.imagen) AS imagen_card
             FROM hospedaje h
             INNER JOIN proveedor_hotelero ph
                 ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
             INNER JOIN ciudades c
                 ON h.id_ciudad = c.id_ciudad
-            WHERE ph.estado = 'APROBADO'
+            LEFT JOIN hospedaje_imagen img
+                ON img.id_hospedaje = h.id_hospedaje AND img.es_principal = 1
+            WHERE h.estado = 'ACTIVO'
+            AND ph.estado = 'ACTIVO'
             AND UPPER(c.nombre) = UPPER(:ciudad)
             ORDER BY h.created_at DESC";
 
@@ -568,20 +576,27 @@ class Hospedaje
                 SELECT
                     h.id_hospedaje,
                     h.nombre,
-                    h.tipo,
-                    h.ubicacion,
+                    h.descripcion,
                     h.precio,
                     h.capacidad,
-                    h.servicios,
-                    COALESCE(d.municipio, d.nombre) AS ciudad
+                    h.imagen,
+                    ph.logo,
+                    c.nombre AS ciudad,
+                    COALESCE(img.imagen, h.imagen) AS imagen_card
                 FROM hospedaje h
-                LEFT JOIN destino d ON h.id_destino = d.id_destino
+                INNER JOIN proveedor_hotelero ph
+                    ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
+                INNER JOIN ciudades c
+                    ON h.id_ciudad = c.id_ciudad
+                LEFT JOIN hospedaje_imagen img
+                    ON img.id_hospedaje = h.id_hospedaje AND img.es_principal = 1
                 WHERE h.estado = 'ACTIVO'
-                  AND (h.nombre LIKE :q1 OR h.tipo LIKE :q2 OR d.municipio LIKE :q3 OR d.nombre LIKE :q4)
+                AND ph.estado = 'ACTIVO'
+                AND (h.nombre LIKE :q1 OR h.tipo LIKE :q2 OR c.nombre LIKE :q3)
                 ORDER BY h.nombre ASC
             ";
             $stmt = $this->conexion->prepare($sql);
-            $stmt->execute([':q1' => $like, ':q2' => $like, ':q3' => $like, ':q4' => $like]);
+            $stmt->execute([':q1' => $like, ':q2' => $like, ':q3' => $like]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log("Hospedaje::buscarPublicos: " . $e->getMessage());
