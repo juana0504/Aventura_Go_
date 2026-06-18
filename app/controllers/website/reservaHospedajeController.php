@@ -45,7 +45,18 @@ if (!$hospedaje) {
 }
 
 if ($cantidad_personas > (int)$hospedaje['capacidad']) {
-    mostrarSweetAlert('error', 'Sin capacidad', 'La cantidad de personas supera la capacidad del hospedaje (' . $hospedaje['capacidad'] . ' personas).', BASE_URL . 'hospedaje-escogido?id=' . $id_hospedaje);
+    mostrarSweetAlert('error', 'Sin capacidad', 'La cantidad de personas supera la capacidad de esta acomodación (' . $hospedaje['capacidad'] . ' personas).', BASE_URL . 'hospedaje-escogido?id=' . $id_hospedaje);
+    exit;
+}
+
+// Verificar disponibilidad específica para la fecha solicitada
+if (!$hospedajeModel->haycapacidadDisponibles($id_hospedaje, $fecha, $cantidad_personas)) {
+    mostrarSweetAlert(
+        'error',
+        'Fecha no disponible',
+        'Esta acomodación ya está completa para el ' . date('d/m/Y', strtotime($fecha)) . '. Por favor elige otra fecha.',
+        BASE_URL . 'hospedaje-escogido?id=' . $id_hospedaje
+    );
     exit;
 }
 

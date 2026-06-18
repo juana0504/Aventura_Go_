@@ -506,13 +506,23 @@ class Hospedaje
             $sql = "SELECT
                 h.id_hospedaje,
                 h.nombre,
+                h.tipo,
                 h.descripcion,
                 h.precio,
                 h.capacidad,
                 h.imagen,
                 ph.logo,
+                ph.nombre_establecimiento,
+                ph.tipo_establecimiento,
                 c.nombre AS ciudad,
-                COALESCE(img.imagen, h.imagen) AS imagen_card
+                COALESCE(img.imagen, h.imagen) AS imagen_card,
+                (
+                    SELECT COALESCE(SUM(r.cantidad_personas), 0)
+                    FROM reserva r
+                    WHERE r.id_hospedaje = h.id_hospedaje
+                    AND r.estado IN ('pendiente', 'confirmada')
+                    AND r.fecha >= CURDATE()
+                ) AS cupos_reservados
             FROM hospedaje h
             INNER JOIN proveedor_hotelero ph
                 ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
@@ -539,13 +549,23 @@ class Hospedaje
             $sql = "SELECT
                 h.id_hospedaje,
                 h.nombre,
+                h.tipo,
                 h.descripcion,
                 h.precio,
                 h.capacidad,
                 h.imagen,
                 ph.logo,
+                ph.nombre_establecimiento,
+                ph.tipo_establecimiento,
                 c.nombre AS ciudad,
-                COALESCE(img.imagen, h.imagen) AS imagen_card
+                COALESCE(img.imagen, h.imagen) AS imagen_card,
+                (
+                    SELECT COALESCE(SUM(r.cantidad_personas), 0)
+                    FROM reserva r
+                    WHERE r.id_hospedaje = h.id_hospedaje
+                    AND r.estado IN ('pendiente', 'confirmada')
+                    AND r.fecha >= CURDATE()
+                ) AS cupos_reservados
             FROM hospedaje h
             INNER JOIN proveedor_hotelero ph
                 ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
@@ -576,13 +596,23 @@ class Hospedaje
                 SELECT
                     h.id_hospedaje,
                     h.nombre,
+                    h.tipo,
                     h.descripcion,
                     h.precio,
                     h.capacidad,
                     h.imagen,
                     ph.logo,
+                    ph.nombre_establecimiento,
+                    ph.tipo_establecimiento,
                     c.nombre AS ciudad,
-                    COALESCE(img.imagen, h.imagen) AS imagen_card
+                    COALESCE(img.imagen, h.imagen) AS imagen_card,
+                    (
+                        SELECT COALESCE(SUM(r.cantidad_personas), 0)
+                        FROM reserva r
+                        WHERE r.id_hospedaje = h.id_hospedaje
+                        AND r.estado IN ('pendiente', 'confirmada')
+                        AND r.fecha >= CURDATE()
+                    ) AS cupos_reservados
                 FROM hospedaje h
                 INNER JOIN proveedor_hotelero ph
                     ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
@@ -592,7 +622,8 @@ class Hospedaje
                     ON img.id_hospedaje = h.id_hospedaje AND img.es_principal = 1
                 WHERE h.estado = 'ACTIVO'
                 AND ph.estado = 'ACTIVO'
-                AND (h.nombre LIKE :q1 OR h.tipo LIKE :q2 OR c.nombre LIKE :q3)
+                AND (h.nombre LIKE :q1 OR h.tipo LIKE :q2 OR c.nombre LIKE :q3
+                     OR ph.nombre_establecimiento LIKE :q4)
                 ORDER BY h.nombre ASC
             ";
             $stmt = $this->conexion->prepare($sql);

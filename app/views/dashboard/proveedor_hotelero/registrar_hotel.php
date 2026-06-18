@@ -98,9 +98,9 @@ foreach (array_slice(explode(' ', trim($nombreProveedor)), 0, 2) as $p) {
         <main class="pv-content">
 
             <div style="margin-bottom:24px;">
-                <div class="pv-greeting__eyebrow">Gestión de hospedajes</div>
-                <h1 class="pv-page-title">Nuevo <span>Hospedaje</span></h1>
-                <p class="pv-greeting__sub">Completa los 3 pasos para publicar tu hospedaje</p>
+                <div class="pv-greeting__eyebrow">Gestión de acomodaciones</div>
+                <h1 class="pv-page-title">Nueva <span>Acomodación</span></h1>
+                <p class="pv-greeting__sub">Publica una habitación, cabaña, glamping u otro servicio de tu establecimiento</p>
             </div>
 
             <div class="pv-ci-layout">
@@ -119,7 +119,7 @@ foreach (array_slice(explode(' ', trim($nombreProveedor)), 0, 2) as $p) {
                             <div class="pv-wizard__header">
                                 <p class="pv-wizard__header-text">
                                     <i class="bi bi-building-gear"></i>
-                                    Registro de Hospedaje
+                                    Registrar Acomodación
                                 </p>
                             </div>
 
@@ -143,26 +143,31 @@ foreach (array_slice(explode(' ', trim($nombreProveedor)), 0, 2) as $p) {
                                 <!-- PASO 1 — Información -->
                                 <div class="step-content active" id="step-1" data-step="1">
                                     <div class="pv-wizard__step-title">
-                                        <div class="pv-wizard__step-icon"><i class="fas fa-hotel"></i></div>
-                                        <h4>Información del hospedaje</h4>
+                                        <div class="pv-wizard__step-icon"><i class="fas fa-bed"></i></div>
+                                        <h4>Información de la acomodación</h4>
                                     </div>
 
                                     <div class="row g-3">
                                         <div class="col-12">
-                                            <label class="pv-form-label">Nombre del hospedaje *</label>
-                                            <input type="text" class="pv-form-input" name="nombre" placeholder="Ej: Hotel Las Palmas" required>
+                                            <label class="pv-form-label">Nombre de la acomodación *</label>
+                                            <input type="text" class="pv-form-input" name="nombre" placeholder="Ej: Cabaña El Pino, Glamping Domo Azul, Habitación Doble Vista Montaña" required>
                                         </div>
 
                                         <div class="col-12">
-                                            <label class="pv-form-label mb-3">Tipo de hospedaje *</label>
+                                            <label class="pv-form-label mb-3">Tipo de acomodación *</label>
                                             <div class="pv-ci-activities-grid" style="grid-template-columns:repeat(5,1fr);">
                                                 <?php
                                                 $tiposHosp = [
-                                                    ['id'=>'tipo_hotel',  'valor'=>'hotel',  'emoji'=>'🏨', 'label'=>'Hotel'],
-                                                    ['id'=>'tipo_hostal', 'valor'=>'Hostal', 'emoji'=>'🛏', 'label'=>'Hostal'],
-                                                    ['id'=>'tipo_finca',  'valor'=>'finca',  'emoji'=>'🌿', 'label'=>'Finca'],
-                                                    ['id'=>'tipo_cabana', 'valor'=>'cabaña', 'emoji'=>'🏡', 'label'=>'Cabaña'],
-                                                    ['id'=>'tipo_otro',   'valor'=>'otro',   'emoji'=>'🏕', 'label'=>'Otro'],
+                                                    ['id'=>'tipo_hab_std',    'valor'=>'Habitación Estándar', 'emoji'=>'🛏',  'label'=>'Hab. Estándar'],
+                                                    ['id'=>'tipo_hab_doble',  'valor'=>'Habitación Doble',    'emoji'=>'🛌',  'label'=>'Hab. Doble'],
+                                                    ['id'=>'tipo_suite',      'valor'=>'Suite',               'emoji'=>'🌟',  'label'=>'Suite'],
+                                                    ['id'=>'tipo_cabana',     'valor'=>'Cabaña',              'emoji'=>'🏡',  'label'=>'Cabaña'],
+                                                    ['id'=>'tipo_glamping',   'valor'=>'Glamping',            'emoji'=>'⛺',  'label'=>'Glamping'],
+                                                    ['id'=>'tipo_domo',       'valor'=>'Domo',                'emoji'=>'🔮',  'label'=>'Domo'],
+                                                    ['id'=>'tipo_apartamento','valor'=>'Apartamento',         'emoji'=>'🏢',  'label'=>'Apartamento'],
+                                                    ['id'=>'tipo_finca',      'valor'=>'Finca',               'emoji'=>'🌿',  'label'=>'Finca'],
+                                                    ['id'=>'tipo_hostal',     'valor'=>'Habitación Hostal',   'emoji'=>'🏘',  'label'=>'Hostal'],
+                                                    ['id'=>'tipo_otro',       'valor'=>'Otro',                'emoji'=>'🏕',  'label'=>'Otro'],
                                                 ];
                                                 foreach ($tiposHosp as $t): ?>
                                                 <label class="pv-ci-activity-card" for="<?= $t['id'] ?>">
@@ -255,9 +260,9 @@ foreach (array_slice(explode(' ', trim($nombreProveedor)), 0, 2) as $p) {
                                         </div>
 
                                         <div class="col-12">
-                                            <label class="pv-form-label">Descripción del hospedaje *</label>
+                                            <label class="pv-form-label">Descripción de la acomodación *</label>
                                             <textarea name="descripcion" id="descripcion" class="pv-form-input"
-                                                rows="4" placeholder="Describe tu hospedaje, experiencia, ubicación y servicios..." required
+                                                rows="4" placeholder="Describe la acomodación: qué incluye, vista, comodidades, experiencia que ofrece..." required
                                                 style="resize:vertical;min-height:100px;"></textarea>
                                         </div>
 
