@@ -481,6 +481,12 @@ switch ($request) {
         $controller->responder();
         break;
 
+    case '/administrador/tickets/cerrar':
+        require_once BASE_PATH . '/app/controllers/administrador/TicketAdminController.php';
+        $controller = new TicketAdminController();
+        $controller->cerrar();
+        break;
+
     case '/administrador/consultar-tickets':
         require BASE_PATH . '/app/views/dashboard/administrador/consultar_tickets.php'; //consultar tiquets enviados por el usuario
         break;
