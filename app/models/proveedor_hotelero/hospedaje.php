@@ -459,12 +459,21 @@ class Hospedaje
 
     public function obtenerFechasLlenas($id_hospedaje)
     {
-        $sql = "SELECT r.fecha FROM reserva r JOIN hospedaje h ON h.id_hospedaje = r.id_hospedaje WHERE r.id_hospedaje = ? AND r.estado = 'Confirmada' GROUP BY r.fecha, h.capacidad HAVING SUM(r.cantidad_personas) >= h.capacidad";
-
-        $stmt = $this->conexion->prepare($sql);
-        $stmt->execute([$id_hospedaje]);
-
-        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+        try {
+            $sql = "SELECT r.fecha
+                    FROM reserva r
+                    JOIN hospedaje h ON h.id_hospedaje = r.id_hospedaje
+                    WHERE r.id_hospedaje = ?
+                    AND r.estado IN ('confirmada', 'Confirmada')
+                    GROUP BY r.fecha, h.capacidad
+                    HAVING SUM(r.cantidad_personas) >= h.capacidad";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute([$id_hospedaje]);
+            return $stmt->fetchAll(PDO::FETCH_COLUMN);
+        } catch (PDOException $e) {
+            error_log("Hospedaje::obtenerFechasLlenas: " . $e->getMessage());
+            return [];
+        }
     }
 
     public function haycapacidadDisponibles($idHospedaje, $fecha, $cantidad)

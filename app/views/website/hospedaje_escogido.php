@@ -19,7 +19,11 @@ if (!$hospedaje) {
 
 $servicios    = array_filter(array_map('trim', explode(',', $hospedaje['servicios'] ?? '')));
 $tipos        = array_filter(array_map('trim', explode(',', $hospedaje['tipo'] ?? '')));
-$fechasLlenas = $hospedajeModel->obtenerFechasLlenas($id);
+try {
+    $fechasLlenas = $hospedajeModel->obtenerFechasLlenas($id);
+} catch (Exception $e) {
+    $fechasLlenas = [];
+}
 
 $servicioIconos = [
     'WiFi' => '📶', 'Piscina' => '🏊', 'Desayuno' => '🍳', 'Parking' => '🅿️',
