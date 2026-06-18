@@ -32,7 +32,7 @@ if ($q !== '') {
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
   <!-- Estilos personalizados -->
-  <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/hospedaje_vega/hospedajeVega.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/hospedaje_vega/hospedajeVega.css?v=3">
 
 </head>
 
@@ -386,6 +386,51 @@ if ($q !== '') {
         <div class="dt-resenas-modal__footer">
           <button data-bs-dismiss="modal" class="dt-resenas-modal__btn-cerrar"><i class="bi bi-arrow-left"></i> Cerrar</button>
           <span id="dt-resenas-hosp-promedio" class="dt-resenas-avg"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL REGISTRO -->
+  <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="registroModalLabel">¿Cómo quieres registrarte?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container py-3">
+            <div class="row g-4 justify-content-center">
+              <div class="col-md-4">
+                <div class="card card-registro text-center p-4">
+                  <div class="card-body">
+                    <h3 class="card-title">Turista</h3>
+                    <p class="card-text">Quiero reservar actividades y experiencias.</p>
+                    <a href="<?= BASE_URL ?>registrarse?tipo=turista" class="btn btn-aventura">Elegir</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card card-registro text-center p-4">
+                  <div class="card-body">
+                    <h3 class="card-title">Proveedor turístico</h3>
+                    <p class="card-text">Quiero publicar actividades de aventura.</p>
+                    <a href="<?= BASE_URL ?>registrar-proveedor" class="btn btn-aventura">Elegir</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card card-registro text-center p-4">
+                  <div class="card-body">
+                    <h3 class="card-title">Proveedor hotelero</h3>
+                    <p class="card-text">Quiero publicar hospedajes.</p>
+                    <a href="<?= BASE_URL ?>registrar-proveedor-hotelero" class="btn btn-aventura">Elegir</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
