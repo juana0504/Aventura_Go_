@@ -193,16 +193,21 @@ $serviciosExistentes = array_map('trim', explode(',', $h['servicios'] ?? ''));
                                 </div>
                             </div>
 
-                            <div class="pv-form-section"><i class="bi bi-star"></i> Servicios</div>
+                            <div class="pv-form-section"><i class="bi bi-star"></i> Servicios incluidos</div>
                             <div class="pv-check-grid">
                                 <?php
-                                $serviciosList = ['WiFi', 'Parqueadero', 'Piscina', 'Restaurante', 'Bar', 'Spa', 'Gym', 'Aire acondicionado', 'TV por cable', 'Lavandería'];
-                                foreach ($serviciosList as $s):
+                                $serviciosList = [
+                                    'WiFi' => '📶', 'Piscina' => '🏊', 'Desayuno' => '🍳', 'Parking' => '🅿️',
+                                    'Gimnasio' => '🏋️', 'Spa' => '💆', 'Restaurante' => '🍽️', 'Aire acond.' => '❄️',
+                                    'TV Cable' => '📺', 'Lavandería' => '👕', 'Bar' => '🍹', 'Jacuzzi' => '🛁',
+                                    'Terraza' => '🌿', 'Mascotas' => '🐾', 'Transporte' => '🚐', 'Room Service' => '🛎️',
+                                ];
+                                foreach ($serviciosList as $s => $emoji):
                                     $checked = in_array(strtolower($s), array_map('strtolower', $serviciosExistentes)) ? 'checked' : '';
                                 ?>
                                     <label class="pv-check-item">
                                         <input type="checkbox" name="servicios[]" value="<?= $s ?>" <?= $checked ?>>
-                                        <span><?= $s ?></span>
+                                        <span><?= $emoji ?> <?= $s ?></span>
                                     </label>
                                 <?php endforeach; ?>
                             </div>
