@@ -723,6 +723,10 @@ switch ($request) {
         $ticketCtrl->guardar();
         break;
 
+    case '/proveedor_hotelero/ingresos':
+        require_once BASE_PATH . '/app/controllers/proveedor_hotelero/ingresosController.php';
+        break;
+
 
 
 
