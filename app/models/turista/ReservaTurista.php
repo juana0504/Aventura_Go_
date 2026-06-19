@@ -10,37 +10,35 @@ class ReservaTurista
         $this->conexion = (new Conexion())->getConexion();
     }
 
-    /** Listar reservas de un turista con filtros */
+    /** Listar reservas de un turista con filtros (actividades + hospedajes) */
     public function listarPorTurista($id_turista, $filtro = '')
     {
         $sql = "
-        SELECT 
+        SELECT
             r.id_reserva,
             r.fecha,
             r.estado,
             r.cantidad_personas,
+            r.tipo_reserva,
 
-            a.nombre AS nombre_actividad,
-            a.precio,
+            COALESCE(a.nombre, h.nombre)         AS nombre_actividad,
+            COALESCE(a.precio, r.precio)          AS precio,
+            COALESCE(p.nombre_empresa, ph.nombre_establecimiento) AS proveedor,
 
-            c.nombre AS nombre_ciudad,
+            img.imagen AS imagen,
+            h.imagen   AS imagen_hospedaje
 
-            p.nombre_empresa,
-            p.email_representante,
-
-            img.imagen
-
-             FROM reserva r
-            LEFT JOIN actividad a ON r.id_actividad = a.id_actividad
-            LEFT JOIN ciudades c ON a.id_ciudad = c.id_ciudad
-            LEFT JOIN proveedor p ON a.id_proveedor = p.id_proveedor
-            LEFT JOIN actividad_imagen img 
-            ON img.id_actividad = a.id_actividad 
-            AND img.es_principal = 1
-
+        FROM reserva r
+        LEFT JOIN actividad a        ON r.id_actividad  = a.id_actividad
+        LEFT JOIN proveedor p        ON a.id_proveedor  = p.id_proveedor
+        LEFT JOIN actividad_imagen img
+            ON img.id_actividad = a.id_actividad AND img.es_principal = 1
+        LEFT JOIN hospedaje h        ON r.id_hospedaje  = h.id_hospedaje
+        LEFT JOIN proveedor_hotelero ph
+            ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
 
         WHERE r.id_turista = :id_turista
-    ";
+        ";
 
         if ($filtro) {
             $sql .= " AND r.estado = :estado ";
