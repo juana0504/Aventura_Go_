@@ -514,6 +514,12 @@ class Hospedaje
         }
     }
 
+    public function actualizarImagen($id_hospedaje, $imagen)
+    {
+        $stmt = $this->conexion->prepare("UPDATE hospedaje SET imagen = :imagen WHERE id_hospedaje = :id");
+        return $stmt->execute([':imagen' => $imagen, ':id' => $id_hospedaje]);
+    }
+
     public function listarPublicos()
     {
         try {
@@ -525,7 +531,7 @@ class Hospedaje
                 h.precio,
                 h.capacidad,
                 h.imagen,
-                h.imagen AS imagen_card,
+                COALESCE(img.imagen, h.imagen) AS imagen_card,
                 ph.logo,
                 ph.nombre_establecimiento,
                 ph.tipo_establecimiento,
@@ -536,6 +542,8 @@ class Hospedaje
                 ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
             INNER JOIN ciudades c
                 ON h.id_ciudad = c.id_ciudad
+            LEFT JOIN hospedaje_imagen img
+                ON img.id_hospedaje = h.id_hospedaje AND img.es_principal = 1
             WHERE h.estado = 'ACTIVO'
             AND ph.estado = 'ACTIVO'
             ORDER BY h.created_at DESC";
@@ -560,7 +568,7 @@ class Hospedaje
                 h.precio,
                 h.capacidad,
                 h.imagen,
-                h.imagen AS imagen_card,
+                COALESCE(img.imagen, h.imagen) AS imagen_card,
                 ph.logo,
                 ph.nombre_establecimiento,
                 ph.tipo_establecimiento,
@@ -571,6 +579,8 @@ class Hospedaje
                 ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
             INNER JOIN ciudades c
                 ON h.id_ciudad = c.id_ciudad
+            LEFT JOIN hospedaje_imagen img
+                ON img.id_hospedaje = h.id_hospedaje AND img.es_principal = 1
             WHERE h.estado = 'ACTIVO'
             AND ph.estado = 'ACTIVO'
             AND UPPER(c.nombre) = UPPER(:ciudad)
@@ -599,7 +609,7 @@ class Hospedaje
                     h.precio,
                     h.capacidad,
                     h.imagen,
-                    h.imagen AS imagen_card,
+                    COALESCE(img.imagen, h.imagen) AS imagen_card,
                     ph.logo,
                     ph.nombre_establecimiento,
                     ph.tipo_establecimiento,
@@ -610,6 +620,8 @@ class Hospedaje
                     ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
                 INNER JOIN ciudades c
                     ON h.id_ciudad = c.id_ciudad
+                LEFT JOIN hospedaje_imagen img
+                    ON img.id_hospedaje = h.id_hospedaje AND img.es_principal = 1
                 WHERE h.estado = 'ACTIVO'
                 AND ph.estado = 'ACTIVO'
                 AND (h.nombre LIKE :q1 OR h.tipo LIKE :q2 OR c.nombre LIKE :q3
