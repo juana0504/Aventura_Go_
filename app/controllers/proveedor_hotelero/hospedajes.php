@@ -131,6 +131,32 @@ function registrarHospedaje()
 
     if ($id_hospedaje) {
 
+        // Guardar imágenes subidas
+        $imagenes = $_FILES['imagenes'] ?? [];
+        if (!empty($imagenes['name'][0])) {
+            $permitidas = ['jpg', 'jpeg', 'png'];
+            $max = min(count($imagenes['name']), 6);
+            $esPrimera = true;
+            for ($i = 0; $i < $max; $i++) {
+                if (($imagenes['error'][$i] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) continue;
+                $ext = strtolower(pathinfo($imagenes['name'][$i], PATHINFO_EXTENSION));
+                if (!in_array($ext, $permitidas)) continue;
+                $nombreImg = 'hosp_' . uniqid() . '.' . $ext;
+                $ruta = __DIR__ . '/../../../public/uploads/hotelero/actividades/' . $nombreImg;
+                if (move_uploaded_file($imagenes['tmp_name'][$i], $ruta)) {
+                    $objHospedaje->guardarImagen([
+                        'id_hospedaje' => $id_hospedaje,
+                        'imagen'       => $nombreImg,
+                        'es_principal' => $esPrimera ? 1 : 0,
+                    ]);
+                    if ($esPrimera) {
+                        $objHospedaje->actualizarImagen($id_hospedaje, $nombreImg);
+                        $esPrimera = false;
+                    }
+                }
+            }
+        }
+
         mostrarSweetAlert(
             'success',
             'Hospedaje registrado',
