@@ -45,6 +45,7 @@ $serviciosExistentes = array_map('trim', explode(',', $h['servicios'] ?? ''));
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/dashboard/dashboard.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/consultar_actividad_turistica/consultar_actividad_turistica.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/proveedor_turistico/completar_informacion/completar_informacion.css">
     <style>
         .pv-edit-card { max-width:860px; }
         .pv-form-card { background:var(--pv-surface,#fff); border:1px solid var(--pv-border,#e2e8f0); border-radius:14px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.05); }
@@ -146,16 +147,29 @@ $serviciosExistentes = array_map('trim', explode(',', $h['servicios'] ?? ''));
                                 </div>
                             </div>
 
-                            <div class="pv-form-section"><i class="bi bi-building"></i> Tipo de hospedaje</div>
-                            <div class="pv-check-grid">
+                            <div class="pv-form-section"><i class="bi bi-building"></i> Tipo de acomodación</div>
+                            <div class="pv-ci-activities-grid" style="grid-template-columns:repeat(5,1fr);">
                                 <?php
-                                $tipos = ['Hotel' => '🏨', 'Hostal' => '🛏', 'Finca' => '🌿', 'Cabaña' => '🏡', 'Otro' => '🏕'];
-                                foreach ($tipos as $valor => $emoji):
-                                    $checked = in_array(strtolower($valor), array_map('strtolower', $tiposExistentes)) ? 'checked' : '';
+                                $tiposHosp = [
+                                    ['id'=>'e_tipo_hab_std',    'valor'=>'Habitación Estándar', 'emoji'=>'🛏',  'label'=>'Hab. Estándar'],
+                                    ['id'=>'e_tipo_hab_doble',  'valor'=>'Habitación Doble',    'emoji'=>'🛌',  'label'=>'Hab. Doble'],
+                                    ['id'=>'e_tipo_suite',      'valor'=>'Suite',               'emoji'=>'🌟',  'label'=>'Suite'],
+                                    ['id'=>'e_tipo_cabana',     'valor'=>'Cabaña',              'emoji'=>'🏡',  'label'=>'Cabaña'],
+                                    ['id'=>'e_tipo_glamping',   'valor'=>'Glamping',            'emoji'=>'⛺',  'label'=>'Glamping'],
+                                    ['id'=>'e_tipo_domo',       'valor'=>'Domo',                'emoji'=>'🔮',  'label'=>'Domo'],
+                                    ['id'=>'e_tipo_apartamento','valor'=>'Apartamento',         'emoji'=>'🏢',  'label'=>'Apartamento'],
+                                    ['id'=>'e_tipo_finca',      'valor'=>'Finca',               'emoji'=>'🌿',  'label'=>'Finca'],
+                                    ['id'=>'e_tipo_hostal',     'valor'=>'Habitación Hostal',   'emoji'=>'🏘',  'label'=>'Hostal'],
+                                    ['id'=>'e_tipo_otro',       'valor'=>'Otro',                'emoji'=>'🏕',  'label'=>'Otro'],
+                                ];
+                                foreach ($tiposHosp as $t):
+                                    $checked = in_array(strtolower($t['valor']), array_map('strtolower', $tiposExistentes)) ? 'checked' : '';
                                 ?>
-                                    <label class="pv-check-item">
-                                        <input type="checkbox" name="tipo[]" value="<?= $valor ?>" <?= $checked ?>>
-                                        <span><?= $emoji ?> <?= $valor ?></span>
+                                    <label class="pv-ci-activity-card" for="<?= $t['id'] ?>">
+                                        <input class="pv-ci-activity-card__check" type="checkbox"
+                                            name="tipo[]" id="<?= $t['id'] ?>" value="<?= $t['valor'] ?>" <?= $checked ?>>
+                                        <span class="pv-ci-activity-card__emoji"><?= $t['emoji'] ?></span>
+                                        <span class="pv-ci-activity-card__label"><?= $t['label'] ?></span>
                                     </label>
                                 <?php endforeach; ?>
                             </div>
@@ -194,20 +208,34 @@ $serviciosExistentes = array_map('trim', explode(',', $h['servicios'] ?? ''));
                             </div>
 
                             <div class="pv-form-section"><i class="bi bi-star"></i> Servicios incluidos</div>
-                            <div class="pv-check-grid">
+                            <div class="pv-ci-activities-grid" style="grid-template-columns:repeat(4,1fr);">
                                 <?php
-                                $serviciosList = [
-                                    'WiFi' => '📶', 'Piscina' => '🏊', 'Desayuno' => '🍳', 'Parking' => '🅿️',
-                                    'Gimnasio' => '🏋️', 'Spa' => '💆', 'Restaurante' => '🍽️', 'Aire acond.' => '❄️',
-                                    'TV Cable' => '📺', 'Lavandería' => '👕', 'Bar' => '🍹', 'Jacuzzi' => '🛁',
-                                    'Terraza' => '🌿', 'Mascotas' => '🐾', 'Transporte' => '🚐', 'Room Service' => '🛎️',
+                                $serviciosOpts = [
+                                    ['id'=>'e_sv_wifi',        'valor'=>'WiFi',          'emoji'=>'📶'],
+                                    ['id'=>'e_sv_piscina',     'valor'=>'Piscina',        'emoji'=>'🏊'],
+                                    ['id'=>'e_sv_desayuno',    'valor'=>'Desayuno',       'emoji'=>'🍳'],
+                                    ['id'=>'e_sv_parking',     'valor'=>'Parking',        'emoji'=>'🅿️'],
+                                    ['id'=>'e_sv_gym',         'valor'=>'Gimnasio',       'emoji'=>'🏋️'],
+                                    ['id'=>'e_sv_spa',         'valor'=>'Spa',            'emoji'=>'💆'],
+                                    ['id'=>'e_sv_restaurant',  'valor'=>'Restaurante',    'emoji'=>'🍽️'],
+                                    ['id'=>'e_sv_ac',          'valor'=>'Aire acond.',    'emoji'=>'❄️'],
+                                    ['id'=>'e_sv_tv',          'valor'=>'TV Cable',       'emoji'=>'📺'],
+                                    ['id'=>'e_sv_lavanderia',  'valor'=>'Lavandería',     'emoji'=>'👕'],
+                                    ['id'=>'e_sv_bar',         'valor'=>'Bar',            'emoji'=>'🍹'],
+                                    ['id'=>'e_sv_jacuzzi',     'valor'=>'Jacuzzi',        'emoji'=>'🛁'],
+                                    ['id'=>'e_sv_terraza',     'valor'=>'Terraza',        'emoji'=>'🌿'],
+                                    ['id'=>'e_sv_mascotas',    'valor'=>'Mascotas',       'emoji'=>'🐾'],
+                                    ['id'=>'e_sv_transporte',  'valor'=>'Transporte',     'emoji'=>'🚐'],
+                                    ['id'=>'e_sv_roomservice', 'valor'=>'Room Service',   'emoji'=>'🛎️'],
                                 ];
-                                foreach ($serviciosList as $s => $emoji):
-                                    $checked = in_array(strtolower($s), array_map('strtolower', $serviciosExistentes)) ? 'checked' : '';
+                                foreach ($serviciosOpts as $s):
+                                    $checked = in_array(strtolower($s['valor']), array_map('strtolower', $serviciosExistentes)) ? 'checked' : '';
                                 ?>
-                                    <label class="pv-check-item">
-                                        <input type="checkbox" name="servicios[]" value="<?= $s ?>" <?= $checked ?>>
-                                        <span><?= $emoji ?> <?= $s ?></span>
+                                    <label class="pv-ci-activity-card" for="<?= $s['id'] ?>">
+                                        <input class="pv-ci-activity-card__check" type="checkbox"
+                                            name="servicios[]" id="<?= $s['id'] ?>" value="<?= $s['valor'] ?>" <?= $checked ?>>
+                                        <span class="pv-ci-activity-card__emoji"><?= $s['emoji'] ?></span>
+                                        <span class="pv-ci-activity-card__label"><?= $s['valor'] ?></span>
                                     </label>
                                 <?php endforeach; ?>
                             </div>
