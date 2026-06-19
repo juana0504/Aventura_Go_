@@ -201,24 +201,44 @@ try {
                                 <label>Fecha de llegada</label>
                                 <input type="date" name="fecha" id="fechaReserva"
                                     class="form-control" min="<?= date('Y-m-d') ?>" required>
-                                <div id="fechaAviso" style="display:none;margin-top:6px;padding:8px;background:#fef2f2;border:1px solid #fca5a5;border-radius:6px;font-size:12px;color:#b91c1c">
-                                    <i class="bi bi-exclamation-circle"></i> Esta fecha está <strong>agotada</strong>.
+                                <div id="fechaAviso" style="display:none;margin-top:8px;padding:10px 12px;background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;font-size:13px;color:#b91c1c;line-height:1.4">
+                                    <i class="bi bi-calendar-x"></i> <strong>Fecha no disponible.</strong><br>
+                                    <span style="font-size:12px">Este hospedaje ya está reservado para esa fecha. Por favor elige otra fecha.</span>
                                 </div>
                             </div>
 
-                            <button type="submit">Reservar</button>
+                            <button type="submit" id="btnReservar">Reservar</button>
                         </form>
                         <script>
-                            (function() {
-                                const fechasLlenas = <?= json_encode($fechasLlenas) ?>;
-                                const input = document.getElementById('fechaReserva');
-                                const aviso = document.getElementById('fechaAviso');
-                                if (input) {
-                                    input.addEventListener('change', function() {
-                                        aviso.style.display = fechasLlenas.includes(this.value) ? 'block' : 'none';
-                                    });
-                                }
-                            })();
+                        (function() {
+                            const fechasLlenas = <?= json_encode($fechasLlenas) ?>;
+                            const input  = document.getElementById('fechaReserva');
+                            const aviso  = document.getElementById('fechaAviso');
+                            const btn    = document.getElementById('btnReservar');
+                            const form   = btn ? btn.closest('form') : null;
+
+                            function verificarFecha() {
+                                const llena = fechasLlenas.includes(input.value);
+                                aviso.style.display = llena ? 'block' : 'none';
+                                btn.disabled        = llena;
+                                btn.style.opacity   = llena ? '0.45' : '1';
+                                btn.style.cursor    = llena ? 'not-allowed' : 'pointer';
+                            }
+
+                            if (input) {
+                                input.addEventListener('change', verificarFecha);
+                            }
+
+                            if (form) {
+                                form.addEventListener('submit', function(e) {
+                                    if (fechasLlenas.includes(input.value)) {
+                                        e.preventDefault();
+                                        aviso.style.display = 'block';
+                                        input.focus();
+                                    }
+                                });
+                            }
+                        })();
                         </script>
                     </div>
 
