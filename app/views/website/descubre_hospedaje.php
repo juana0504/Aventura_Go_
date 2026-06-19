@@ -5,11 +5,11 @@ $hospedajeModel = new Hospedaje();
 $q      = trim($_GET['q'] ?? '');
 $ciudad = $_GET['ciudad'] ?? null;
 if ($q !== '') {
-    $actividades = $hospedajeModel->buscarPublicos($q);
+  $actividades = $hospedajeModel->buscarPublicos($q);
 } elseif ($ciudad) {
-    $actividades = $hospedajeModel->listarPublicosPorCiudad($ciudad);
+  $actividades = $hospedajeModel->listarPublicosPorCiudad($ciudad);
 } else {
-    $actividades = $hospedajeModel->listarPublicos();
+  $actividades = $hospedajeModel->listarPublicos();
 }
 ?>
 
@@ -51,18 +51,18 @@ if ($q !== '') {
 
         <!-- Nav center -->
         <div class="navbar-center">
-            <a href="<?= BASE_URL ?>" class="nav-pill">
-                <i class="bi bi-house-door-fill"></i> Inicio
-            </a>
-            <a href="<?= BASE_URL ?>descubre-tours" class="nav-pill">
-                <i class="bi bi-compass-fill"></i> Tours
-            </a>
-            <a href="<?= BASE_URL ?>descubre-hospedaje" class="nav-pill active">
-                <i class="bi bi-house-heart-fill"></i> Hospedaje
-            </a>
-            <a href="<?= BASE_URL ?>contactanos" class="nav-pill">
-                <i class="bi bi-chat-dots-fill"></i> Contáctanos
-            </a>
+          <a href="<?= BASE_URL ?>" class="nav-pill">
+            <i class="bi bi-house-door-fill"></i> Inicio
+          </a>
+          <a href="<?= BASE_URL ?>descubre-tours" class="nav-pill">
+            <i class="bi bi-compass-fill"></i> Tours
+          </a>
+          <a href="<?= BASE_URL ?>descubre-hospedaje" class="nav-pill active">
+            <i class="bi bi-house-heart-fill"></i> Hospedaje
+          </a>
+          <a href="<?= BASE_URL ?>contactanos" class="nav-pill">
+            <i class="bi bi-chat-dots-fill"></i> Contáctanos
+          </a>
         </div>
 
         <!-- Botones y menú móvil -->
@@ -124,28 +124,28 @@ if ($q !== '') {
     <div class="container">
       <div class="tabs-container">
         <a class="tab-btn" href="<?= BASE_URL ?>descubre-tours">
-            <i class="bi bi-compass tab-icon"></i> Tours y Aventura
+          <i class="bi bi-compass tab-icon"></i> Tours y Aventura
         </a>
         <a class="tab-btn active" href="<?= BASE_URL ?>descubre-hospedaje">
-            <i class="bi bi-house-heart tab-icon"></i> Hospedaje
+          <i class="bi bi-house-heart tab-icon"></i> Hospedaje
         </a>
       </div>
 
       <!-- Banner informativo con buscador -->
       <div class="tab-intro">
-          <div class="tab-intro__icon"><i class="bi bi-house-heart"></i></div>
-          <div style="flex:1">
-              <h2 class="tab-intro__title">Encuentra tu lugar de descanso ideal</h2>
-              <p class="tab-intro__text">Explora hoteles, hostales, cabañas y glamping disponibles en cada destino.</p>
-              <form class="tab-intro__search" action="<?= BASE_URL ?>descubre-hospedaje" method="GET">
-                  <i class="bi bi-search"></i>
-                  <input type="text" name="q" value="<?= htmlspecialchars($q) ?>" placeholder="Busca por ciudad u hospedaje...">
-                  <?php if ($q !== ''): ?>
-                      <a class="tab-intro__clear" href="<?= BASE_URL ?>descubre-hospedaje"><i class="bi bi-x-circle-fill"></i></a>
-                  <?php endif; ?>
-                  <button type="submit">Buscar</button>
-              </form>
-          </div>
+        <div class="tab-intro__icon"><i class="bi bi-house-heart"></i></div>
+        <div style="flex:1">
+          <h2 class="tab-intro__title">Encuentra tu lugar de descanso ideal</h2>
+          <p class="tab-intro__text">Explora hoteles, hostales, cabañas y glamping disponibles en cada destino.</p>
+          <form class="tab-intro__search" action="<?= BASE_URL ?>descubre-hospedaje" method="GET">
+            <i class="bi bi-search"></i>
+            <input type="text" name="q" value="<?= htmlspecialchars($q) ?>" placeholder="Busca por ciudad u hospedaje...">
+            <?php if ($q !== ''): ?>
+              <a class="tab-intro__clear" href="<?= BASE_URL ?>descubre-hospedaje"><i class="bi bi-x-circle-fill"></i></a>
+            <?php endif; ?>
+            <button type="submit">Buscar</button>
+          </form>
+        </div>
       </div>
 
       <!-- hospedajes disponibles -->
@@ -155,18 +155,18 @@ if ($q !== '') {
           <?php foreach ($actividades as $actividad): ?>
 
             <?php
-              $cuposReservados = (int)($actividad['cupos_reservados'] ?? 0);
-              $capacidadTotal  = (int)($actividad['capacidad'] ?? 0);
-              $agotado         = $cuposReservados >= $capacidadTotal && $capacidadTotal > 0;
+            $cuposReservados = (int)($actividad['cupos_reservados'] ?? 0);
+            $capacidadTotal  = (int)($actividad['capacidad'] ?? 0);
+            $agotado         = $cuposReservados >= $capacidadTotal && $capacidadTotal > 0;
 
-              $imgCard = $actividad['imagen_card'] ?? $actividad['imagen'] ?? '';
-              if (!empty($imgCard) && $imgCard !== 'hospedaje_default.png') {
-                  $imgSrc = BASE_URL . 'public/uploads/hotelero/actividades/' . rawurlencode($imgCard);
-              } elseif (!empty($actividad['logo'])) {
-                  $imgSrc = BASE_URL . 'public/uploads/hoteles/' . rawurlencode($actividad['logo']);
-              } else {
-                  $imgSrc = BASE_URL . 'public/assets/website_externos/index/img/LOGO-FINAL.png';
-              }
+            $imgCard = $actividad['imagen_card'] ?? $actividad['imagen'] ?? '';
+            if (!empty($imgCard) && $imgCard !== 'hospedaje_default.png') {
+              $imgSrc = BASE_URL . 'public/uploads/hotelero/actividades/' . rawurlencode($imgCard);
+            } elseif (!empty($actividad['logo'])) {
+              $imgSrc = BASE_URL . 'public/uploads/hoteles/' . rawurlencode($actividad['logo']);
+            } else {
+              $imgSrc = BASE_URL . 'public/assets/website_externos/index/img/LOGO-FINAL.png';
+            }
             ?>
             <div class="activity-card<?= $agotado ? ' activity-card--agotado' : '' ?>">
 
@@ -187,9 +187,9 @@ if ($q !== '') {
 
                 <!-- Establecimiento -->
                 <?php if (!empty($actividad['nombre_establecimiento'])): ?>
-                <div style="font-size:11px;font-weight:700;color:#EA8217;text-transform:uppercase;letter-spacing:.8px;margin-bottom:2px;">
-                  <i class="bi bi-building"></i> <?= htmlspecialchars($actividad['nombre_establecimiento']) ?>
-                </div>
+                  <div style="font-size:11px;font-weight:700;color:#EA8217;text-transform:uppercase;letter-spacing:.8px;margin-bottom:2px;">
+                    <i class="bi bi-building"></i> <?= htmlspecialchars($actividad['nombre_establecimiento']) ?>
+                  </div>
                 <?php endif; ?>
 
                 <!-- Ciudad -->
@@ -232,14 +232,14 @@ if ($q !== '') {
                 <!-- Botones -->
                 <div class="button">
                   <button class="btn-resenas"
-                      data-id="<?= $actividad['id_hospedaje'] ?>"
-                      data-nombre="<?= htmlspecialchars($actividad['nombre']) ?>"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalResenasHospedaje">
-                      <i class="bi bi-star-fill"></i> Reseñas
+                    data-id="<?= $actividad['id_hospedaje'] ?>"
+                    data-nombre="<?= htmlspecialchars($actividad['nombre']) ?>"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalResenasHospedaje">
+                    <i class="bi bi-star-fill"></i> Reseñas
                   </button>
                   <a href="<?= BASE_URL ?>hospedaje-escogido?id=<?= $actividad['id_hospedaje'] ?>" class="btn-ver-mas">
-                      <?= $agotado ? 'Ver fechas' : 'Reservar' ?>
+                    <?= $agotado ? 'Ver fechas' : 'Reservar' ?>
                   </a>
                 </div>
 
@@ -256,7 +256,7 @@ if ($q !== '') {
 
 
       <!-- barra de busqyeda -->
-      <form class="search-banner" action="<?= BASE_URL ?>busqueda" method="GET">
+      <!-- <form class="search-banner" action="<?= BASE_URL ?>busqueda" method="GET">
         <div class="search-banner-text">
           <i class="fas fa-search"></i>
           <input type="text" name="q" placeholder="¿Buscas alguna actividad específica?" required>
@@ -266,7 +266,7 @@ if ($q !== '') {
           <i class="fas fa-search"></i>
           Buscar
         </button>
-      </form>
+      </form> -->
 
     </div>
   </main>
@@ -364,7 +364,7 @@ if ($q !== '') {
 
   </footer>
 
-          
+
 
   <!-- MODAL RESEÑAS HOSPEDAJE -->
   <div class="modal fade" id="modalResenasHospedaje" tabindex="-1">
@@ -439,28 +439,33 @@ if ($q !== '') {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     const BASE_URL = '<?= BASE_URL ?>';
-    (function () {
+    (function() {
       const modalTitulo = document.getElementById('dt-resenas-hosp-titulo');
-      const modalBody   = document.getElementById('dt-resenas-hosp-body');
-      const modalProm   = document.getElementById('dt-resenas-hosp-promedio');
+      const modalBody = document.getElementById('dt-resenas-hosp-body');
+      const modalProm = document.getElementById('dt-resenas-hosp-promedio');
 
       function estrellas(n) {
         n = parseInt(n, 10) || 0;
-        return Array.from({length: 5}, (_, i) =>
+        return Array.from({
+            length: 5
+          }, (_, i) =>
           `<i class="bi bi-star${i < n ? '-fill' : ''}" style="color:${i < n ? '#f59e0b' : '#d1d5db'}"></i>`
         ).join('');
       }
 
       document.querySelectorAll('.btn-resenas').forEach(btn => {
         btn.addEventListener('click', () => {
-          const id     = btn.dataset.id;
+          const id = btn.dataset.id;
           const nombre = btn.dataset.nombre;
           modalTitulo.textContent = nombre;
-          modalProm.textContent   = '';
-          modalBody.innerHTML     = '<div class="dt-resenas-loading"><div class="spinner-border" style="color:#EA8217" role="status"></div><span>Cargando…</span></div>';
+          modalProm.textContent = '';
+          modalBody.innerHTML = '<div class="dt-resenas-loading"><div class="spinner-border" style="color:#EA8217" role="status"></div><span>Cargando…</span></div>';
 
           fetch(`${BASE_URL}hospedaje/resenas?id=${id}`)
-            .then(r => { if (!r.ok) throw new Error('red'); return r.json(); })
+            .then(r => {
+              if (!r.ok) throw new Error('red');
+              return r.json();
+            })
             .then(data => {
               if (!data.ok || !data.resenas.length) {
                 modalBody.innerHTML = '<div class="dt-resenas-empty" style="text-align:center;padding:32px;color:#6b7280"><i class="bi bi-chat-square-text" style="font-size:32px;display:block;margin-bottom:12px"></i><p>Este hospedaje aún no tiene reseñas.</p></div>';
