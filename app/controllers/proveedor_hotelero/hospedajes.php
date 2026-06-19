@@ -226,6 +226,36 @@ function actualizarHospedaje()
     $resultado = $hospedajeModel->actualizarHospedaje($data);
 
     if ($resultado === true) {
+
+        // Procesar nuevas imágenes si se subieron
+        $imagenes = $_FILES['imagenes'] ?? [];
+        if (!empty($imagenes['name'][0])) {
+            $permitidas = ['jpg', 'jpeg', 'png'];
+            $max = min(count($imagenes['name']), 6);
+            $nuevas = [];
+            for ($i = 0; $i < $max; $i++) {
+                if (($imagenes['error'][$i] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) continue;
+                $ext = strtolower(pathinfo($imagenes['name'][$i], PATHINFO_EXTENSION));
+                if (!in_array($ext, $permitidas)) continue;
+                $nombreImg = 'hosp_' . uniqid() . '.' . $ext;
+                $ruta = __DIR__ . '/../../../public/uploads/hotelero/actividades/' . $nombreImg;
+                if (move_uploaded_file($imagenes['tmp_name'][$i], $ruta)) {
+                    $nuevas[] = $nombreImg;
+                }
+            }
+            if (!empty($nuevas)) {
+                $hospedajeModel->eliminarImagenes($id_hospedaje);
+                foreach ($nuevas as $idx => $nombreImg) {
+                    $hospedajeModel->guardarImagen([
+                        'id_hospedaje' => $id_hospedaje,
+                        'imagen'       => $nombreImg,
+                        'es_principal' => $idx === 0 ? 1 : 0,
+                    ]);
+                }
+                $hospedajeModel->actualizarImagen($id_hospedaje, $nuevas[0]);
+            }
+        }
+
         mostrarSweetAlert(
             'success',
             'Hospedaje actualizado',
