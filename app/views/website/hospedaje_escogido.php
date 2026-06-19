@@ -159,11 +159,11 @@ try {
                                             ];
                                             foreach ($servicios as $s): ?>
                                                 <span title="<?= htmlspecialchars($s) ?>"
-                                                    style="position:static;background:#fff7ed;border:1px solid #fed7aa;border-radius:20px;
-                                                         padding:3px 9px;font-size:12px;color:#92400e;
-                                                         display:inline-flex;align-items:center;gap:4px;white-space:nowrap">
-                                                    <span style="position:static;font-size:14px;line-height:1"><?= $iconos[$s] ?? '✔' ?></span>
-                                                    <span style="position:static;font-size:11px;font-weight:500"><?= htmlspecialchars($s) ?></span>
+                                                    style="position:static;background:#ffffff;border:1px solid #EA8217;border-radius:20px;
+                                                         padding:4px 11px;font-size:12px;color:#2D4059;
+                                                         display:inline-flex;align-items:center;gap:5px;white-space:nowrap">
+                                                    <span style="position:static;background:transparent;padding:0;font-size:14px;line-height:1;color:inherit"><?= $iconos[$s] ?? '✔' ?></span>
+                                                    <span style="position:static;background:transparent;padding:0;font-size:11px;font-weight:600;color:#2D4059"><?= htmlspecialchars($s) ?></span>
                                                 </span>
                                             <?php endforeach; ?>
                                         </div>

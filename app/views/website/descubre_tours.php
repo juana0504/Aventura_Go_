@@ -51,7 +51,7 @@ if ($q !== '') {
                 <div class="logo">
 
                     <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/LOGO-FINAL.png" alt="Logo Aventura Go"
-                    class="navbar-logo">
+                        class="navbar-logo">
                 </div>
 
                 <!-- Nav center -->
@@ -226,7 +226,7 @@ if ($q !== '') {
 
 
             <!-- barra de busqyeda -->
-            <form class="search-banner" action="<?= BASE_URL ?>busqueda" method="GET">
+            <!-- <form class="search-banner" action="<?= BASE_URL ?>busqueda" method="GET">
                 <div class="search-banner-text">
                     <i class="fas fa-search"></i>
                     <input type="text" name="q" placeholder="¿Buscas alguna actividad específica?" required>
@@ -236,7 +236,7 @@ if ($q !== '') {
                     <i class="fas fa-search"></i>
                     Buscar
                 </button>
-            </form>
+            </form> -->
 
         </div>
     </main>
@@ -445,32 +445,37 @@ if ($q !== '') {
     <script>
         const BASE_URL = '<?= BASE_URL ?>';
 
-        (function () {
-            const modalEl     = document.getElementById('modalResenasPublico');
-            const modalBS     = new bootstrap.Modal(modalEl);
+        (function() {
+            const modalEl = document.getElementById('modalResenasPublico');
+            const modalBS = new bootstrap.Modal(modalEl);
             const modalTitulo = document.getElementById('dt-resenas-titulo');
-            const modalBody   = document.getElementById('dt-resenas-body');
-            const modalProm   = document.getElementById('dt-resenas-promedio');
+            const modalBody = document.getElementById('dt-resenas-body');
+            const modalProm = document.getElementById('dt-resenas-promedio');
 
             function estrellas(n) {
                 n = parseInt(n, 10) || 0;
-                return Array.from({ length: 5 }, (_, i) =>
+                return Array.from({
+                        length: 5
+                    }, (_, i) =>
                     `<i class="bi bi-star${i < n ? '-fill' : ''} dt-star${i < n ? ' dt-star--on' : ''}"></i>`
                 ).join('');
             }
 
             document.querySelectorAll('.btn-resenas').forEach(btn => {
                 btn.addEventListener('click', () => {
-                    const id     = btn.dataset.id;
+                    const id = btn.dataset.id;
                     const nombre = btn.dataset.nombre;
 
                     modalTitulo.textContent = nombre;
-                    modalProm.textContent   = '';
-                    modalBody.innerHTML     = '<div class="dt-resenas-loading"><div class="spinner-border" style="color:var(--color-secondary)" role="status"></div><span>Cargando…</span></div>';
+                    modalProm.textContent = '';
+                    modalBody.innerHTML = '<div class="dt-resenas-loading"><div class="spinner-border" style="color:var(--color-secondary)" role="status"></div><span>Cargando…</span></div>';
                     modalBS.show();
 
                     fetch(`${BASE_URL}tours/resenas?id=${id}`)
-                        .then(r => { if (!r.ok) throw new Error('red'); return r.json(); })
+                        .then(r => {
+                            if (!r.ok) throw new Error('red');
+                            return r.json();
+                        })
                         .then(data => {
                             if (!data.ok) {
                                 modalBody.innerHTML = '<div class="dt-resenas-empty"><i class="bi bi-exclamation-circle"></i><p>No se pudieron cargar las reseñas.</p></div>';
