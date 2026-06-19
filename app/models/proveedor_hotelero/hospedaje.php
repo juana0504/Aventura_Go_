@@ -520,6 +520,12 @@ class Hospedaje
         return $stmt->execute([':imagen' => $imagen, ':id' => $id_hospedaje]);
     }
 
+    public function eliminarImagenes($id_hospedaje)
+    {
+        $stmt = $this->conexion->prepare("DELETE FROM hospedaje_imagen WHERE id_hospedaje = :id");
+        return $stmt->execute([':id' => $id_hospedaje]);
+    }
+
     public function listarPublicos()
     {
         try {

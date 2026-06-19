@@ -130,7 +130,7 @@ $serviciosExistentes = array_map('trim', explode(',', $h['servicios'] ?? ''));
                         Editar: <?= htmlspecialchars($h['nombre']) ?>
                     </div>
                     <div class="pv-form-card__body">
-                        <form method="POST" action="<?= BASE_URL ?>proveedor_hotelero/actualizar-hospedaje">
+                        <form method="POST" action="<?= BASE_URL ?>proveedor_hotelero/actualizar-hospedaje" enctype="multipart/form-data">
                             <input type="hidden" name="accion" value="actualizar">
                             <input type="hidden" name="id_hospedaje" value="<?= $h['id_hospedaje'] ?>">
                             <input type="hidden" name="id_proveedor_hotelero" value="<?= $id_proveedor_hotelero ?>">
@@ -211,6 +211,22 @@ $serviciosExistentes = array_map('trim', explode(',', $h['servicios'] ?? ''));
                                     </label>
                                 <?php endforeach; ?>
                             </div>
+
+                            <div class="pv-form-section"><i class="bi bi-images"></i> Fotos del hospedaje</div>
+                            <?php
+                            $imgActual = $h['imagen'] ?? '';
+                            $tieneImg  = !empty($imgActual) && $imgActual !== 'hospedaje_default.png';
+                            ?>
+                            <?php if ($tieneImg): ?>
+                                <div style="margin-bottom:12px">
+                                    <p style="font-size:12px;color:#64748b;margin-bottom:6px">Foto actual:</p>
+                                    <img src="<?= BASE_URL ?>public/uploads/hotelero/actividades/<?= htmlspecialchars($imgActual) ?>"
+                                         style="width:180px;height:120px;object-fit:cover;border-radius:8px;border:2px solid #ea8217">
+                                </div>
+                            <?php endif; ?>
+                            <label class="pv-form-label"><?= $tieneImg ? 'Reemplazar fotos (opcional)' : 'Subir fotos' ?></label>
+                            <input type="file" name="imagenes[]" multiple accept=".jpg,.jpeg,.png" class="pv-form-input pv-form-input--file">
+                            <p style="font-size:11px;color:#94a3b8;margin-top:4px">Puedes subir varias fotos. La primera será la imagen principal de la tarjeta.</p>
 
                             <div class="pv-form-actions">
                                 <button type="submit" class="pv-btn-primary"><i class="bi bi-save"></i> Guardar cambios</button>
