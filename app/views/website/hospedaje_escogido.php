@@ -132,17 +132,36 @@ try {
 
                             <?php if (!empty($servicios)): ?>
                                 <div style="margin-top:14px">
-                                    <p style="font-size:12px;font-weight:700;color:#2D4059;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">
-                                        <i class="bi bi-check2-circle"></i> Servicios incluidos
+                                    <p style="font-size:11px;font-weight:700;color:#2D4059;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">
+                                        <i class="bi bi-check2-circle" style="color:#EA8217"></i> Servicios incluidos
                                     </p>
-                                    <div style="display:flex;flex-wrap:wrap;gap:6px">
+                                    <div style="display:flex;flex-wrap:wrap;gap:5px">
                                         <?php
-                                        $iconos = ['WiFi'=>'📶','Piscina'=>'🏊','Desayuno'=>'🍳','Parking'=>'🅿️',
-                                            'Gimnasio'=>'🏋️','Spa'=>'💆','Restaurante'=>'🍽️','Aire acond.'=>'❄️',
-                                            'TV Cable'=>'📺','Bar'=>'🍹','Jacuzzi'=>'🛁','Terraza'=>'🌿'];
+                                        $iconos = [
+                                            'WiFi'         => '📶',
+                                            'Piscina'      => '🏊',
+                                            'Desayuno'     => '🍳',
+                                            'Parking'      => '🅿️',
+                                            'Gimnasio'     => '🏋️',
+                                            'Spa'          => '💆',
+                                            'Restaurante'  => '🍽️',
+                                            'Aire acond.'  => '❄️',
+                                            'TV Cable'     => '📺',
+                                            'Lavandería'   => '👕',
+                                            'Bar'          => '🍹',
+                                            'Jacuzzi'      => '🛁',
+                                            'Terraza'      => '🌿',
+                                            'Mascotas'     => '🐾',
+                                            'Transporte'   => '🚐',
+                                            'Room Service' => '🛎️',
+                                        ];
                                         foreach ($servicios as $s): ?>
-                                            <span style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:5px 10px;font-size:12px;color:#374151">
-                                                <?= $iconos[$s] ?? '✅' ?> <?= htmlspecialchars($s) ?>
+                                            <span title="<?= htmlspecialchars($s) ?>"
+                                                  style="background:#fff7ed;border:1px solid #fed7aa;border-radius:20px;
+                                                         padding:3px 9px;font-size:12px;color:#92400e;
+                                                         display:inline-flex;align-items:center;gap:4px;white-space:nowrap">
+                                                <span style="font-size:14px;line-height:1"><?= $iconos[$s] ?? '✔' ?></span>
+                                                <span style="font-size:11px;font-weight:500"><?= htmlspecialchars($s) ?></span>
                                             </span>
                                         <?php endforeach; ?>
                                     </div>

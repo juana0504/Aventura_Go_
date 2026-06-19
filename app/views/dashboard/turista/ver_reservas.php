@@ -258,19 +258,33 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                 <tr data-estado="<?= htmlspecialchars($reserva['estado']) ?>">
                                     <td>
                                         <div class="ag-rv-actividad">
-                                            <?php if (!empty($reserva['imagen'])): ?>
-                                                <img src="<?= BASE_URL ?>public/uploads/turistico/actividades/<?= htmlspecialchars($reserva['imagen']) ?>"
-                                                    class="ag-rv-img" alt="<?= htmlspecialchars($reserva['nombre_actividad']) ?>">
+                                            <?php
+                                            $esHospedaje = ($reserva['tipo_reserva'] ?? '') === 'hospedaje';
+                                            $imgFile = $esHospedaje
+                                                ? ($reserva['imagen_hospedaje'] ?? '')
+                                                : ($reserva['imagen'] ?? '');
+                                            $imgPath = $esHospedaje
+                                                ? BASE_URL . 'public/uploads/hotelero/actividades/'
+                                                : BASE_URL . 'public/uploads/turistico/actividades/';
+                                            ?>
+                                            <?php if (!empty($imgFile)): ?>
+                                                <img src="<?= $imgPath . htmlspecialchars($imgFile) ?>"
+                                                    class="ag-rv-img" alt="<?= htmlspecialchars($reserva['nombre_actividad'] ?? '') ?>">
                                             <?php else: ?>
-                                                <div class="ag-rv-img ag-rv-img--placeholder"><i class="bi bi-image"></i></div>
+                                                <div class="ag-rv-img ag-rv-img--placeholder">
+                                                    <i class="bi bi-<?= $esHospedaje ? 'building' : 'image' ?>"></i>
+                                                </div>
                                             <?php endif; ?>
                                             <div>
-                                                <div class="ag-table__act-name"><?= htmlspecialchars($reserva['nombre_actividad']) ?></div>
+                                                <div class="ag-table__act-name"><?= htmlspecialchars($reserva['nombre_actividad'] ?? '—') ?></div>
+                                                <?php if ($esHospedaje): ?>
+                                                    <div class="ag-table__act-meta" style="color:#EA8217;font-size:10px;font-weight:600">🏨 HOSPEDAJE</div>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="ag-table__act-meta"><?= htmlspecialchars($reserva['proveedor']) ?></div>
+                                        <div class="ag-table__act-meta"><?= htmlspecialchars($reserva['proveedor'] ?? '—') ?></div>
                                     </td>
                                     <td><?= date('d/m/Y', strtotime($reserva['fecha'])) ?></td>
                                     <td>
