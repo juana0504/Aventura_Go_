@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                 .then(data => {
                     if (data.error) {
-                        elNombre.textContent = 'Error al cargar los datos';
+                        elNombre.textContent = 'ERR: ' + data.error;
                         return;
                     }
 
