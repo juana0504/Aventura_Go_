@@ -57,6 +57,61 @@ class ReservaTurista
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function listarActividadesPorTurista($id_turista)
+    {
+        $sql = "
+        SELECT
+            r.id_reserva,
+            r.fecha,
+            r.estado,
+            r.cantidad_personas,
+            'actividad' AS tipo_reserva,
+            COALESCE(a.nombre, '—') AS nombre_actividad,
+            COALESCE(a.precio, r.precio) AS precio,
+            p.nombre_empresa AS proveedor,
+            img.imagen AS imagen
+        FROM reserva r
+        LEFT JOIN actividad a ON r.id_actividad = a.id_actividad
+        LEFT JOIN proveedor p ON a.id_proveedor = p.id_proveedor
+        LEFT JOIN actividad_imagen img
+            ON img.id_actividad = a.id_actividad AND img.es_principal = 1
+        WHERE r.id_turista = :id_turista
+          AND r.tipo_reserva = 'actividad'
+        ORDER BY r.created_at DESC
+        ";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':id_turista', $id_turista, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function listarHospedajesPorTurista($id_turista)
+    {
+        $sql = "
+        SELECT
+            r.id_reserva,
+            r.fecha,
+            r.estado,
+            r.cantidad_personas,
+            'hospedaje' AS tipo_reserva,
+            h.nombre AS nombre_actividad,
+            r.precio,
+            ph.nombre_establecimiento AS proveedor,
+            hi.imagen AS imagen
+        FROM reserva r
+        LEFT JOIN hospedaje h ON r.id_hospedaje = h.id_hospedaje
+        LEFT JOIN proveedor_hotelero ph ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
+        LEFT JOIN hospedaje_imagen hi
+            ON hi.id_hospedaje = h.id_hospedaje AND hi.es_principal = 1
+        WHERE r.id_turista = :id_turista
+          AND r.tipo_reserva = 'hospedaje'
+        ORDER BY r.created_at DESC
+        ";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':id_turista', $id_turista, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     /**
      * Obtener detalles completos de una reserva específica
