@@ -93,21 +93,12 @@ foreach (array_slice($partes, 0, 2) as $p) {
                 <i class="bi bi-grid-1x2-fill ag-nav-item__icon"></i>
                 Dashboard
             </a>
-            <div class="ag-nav-sub">
-                <button class="ag-nav-item ag-nav-sub__toggle" id="ag-reservas-toggle">
-                    <i class="bi bi-calendar3 ag-nav-item__icon"></i>
-                    <span>Reservas</span>
-                    <i class="bi bi-chevron-down ag-nav-sub__chevron"></i>
-                </button>
-                <div class="ag-nav-sub__menu">
-                    <a href="<?= BASE_URL ?>turista/ver-reservas" class="ag-nav-item ag-nav-item--child">
-                        <i class="bi bi-compass ag-nav-item__icon"></i> Tours
-                    </a>
-                    <a href="<?= BASE_URL ?>turista/ver-reservas-hotel" class="ag-nav-item ag-nav-item--child">
-                        <i class="bi bi-building ag-nav-item__icon"></i> Hotel
-                    </a>
-                </div>
-            </div>
+            <a href="<?= BASE_URL ?>turista/ver-reservas" class="ag-nav-item">
+                <i class="bi bi-compass ag-nav-item__icon"></i> Mis Tours
+            </a>
+            <a href="<?= BASE_URL ?>turista/ver-reservas-hotel" class="ag-nav-item">
+                <i class="bi bi-building ag-nav-item__icon"></i> Mis Hoteles
+            </a>
             <a href="<?= BASE_URL ?>turista/tickets" class="ag-nav-item">
                 <i class="bi bi-ticket-perforated ag-nav-item__icon"></i>
                 Tickets
@@ -451,11 +442,6 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
     <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
     <script src="<?= BASE_URL ?>public/assets/dashboard/sidebar-toggle-universal.js"></script>
-    <script>
-    document.getElementById('ag-reservas-toggle')?.addEventListener('click', function () {
-        this.closest('.ag-nav-sub').classList.toggle('ag-nav-sub--open');
-    });
-    </script>
 </body>
 
 </html>

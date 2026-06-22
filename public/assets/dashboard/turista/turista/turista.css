@@ -180,42 +180,6 @@ html {
     flex-shrink: 0;
 }
 
-/* ── Sidebar submenu desplegable (Reservas) ── */
-.ag-nav-sub__toggle {
-    width: 100%;
-    background: none;
-    border: none;
-    text-align: left;
-    justify-content: flex-start;
-}
-.ag-nav-sub__chevron {
-    margin-left: auto;
-    font-size: 11px;
-    transition: transform .25s;
-    flex-shrink: 0;
-    opacity: .5;
-}
-.ag-nav-sub--open .ag-nav-sub__chevron {
-    transform: rotate(-180deg);
-    opacity: 1;
-}
-.ag-nav-sub__menu {
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height .3s ease;
-}
-.ag-nav-sub--open .ag-nav-sub__menu {
-    max-height: 130px;
-}
-.ag-nav-item--child {
-    padding-left: 47px;
-    font-size: 13px;
-    color: rgba(255, 255, 255, .42);
-    margin-top: 1px;
-}
-.ag-nav-item--child:hover { color: #fff; }
-.ag-nav-item--child.ag-nav-item--active { color: var(--ag-primary); }
-
 /* Sidebar sin bloque de usuario — el perfil está en el topbar */
 
 /* =============================================
