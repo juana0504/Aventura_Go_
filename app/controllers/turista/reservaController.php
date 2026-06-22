@@ -44,12 +44,12 @@ class ReservaController
     public function verReservas()
     {
         require_once BASE_PATH . '/app/helpers/session_turista.php';
-        require_once BASE_PATH . '/app/models/turista/reservaModel.php';
+        require_once BASE_PATH . '/app/models/turista/ReservaTurista.php';
 
-        $idUsuario = $_SESSION['user']['id_usuario'];
+        $idUsuario = (int) $_SESSION['user']['id_usuario'];
 
-        $reservaModel = new ReservaModel();
-        $reservas = $reservaModel->obtenerPorTurista($idUsuario);
+        $reservaModel = new ReservaTurista();
+        $reservas     = $reservaModel->listarPorTurista($idUsuario);
 
         require BASE_PATH . '/app/views/dashboard/turista/ver_reservas.php';
     }
