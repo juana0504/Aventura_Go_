@@ -1099,33 +1099,41 @@ html {
 
 .ag-totales__label {
     font-size: 12px;
-    color: rgba(255,255,255,.55);
+    color: #fff;
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
 .ag-totales__row--total .ag-totales__label {
-    color: rgba(255,255,255,.75);
-    font-weight: 600;
+    color: #EA8217;
+    font-weight: 700;
     font-size: 13px;
 }
 
 .ag-totales__val {
     font-size: 13px;
-    font-weight: 600;
-    color: var(--ag-primary);
+    font-weight: 700;
+    color: #fff;
 }
 
 .ag-totales__val--big {
     font-size: 18px;
+    font-weight: 800;
     color: #EA8217;
 }
 
 .ag-totales__divider {
     height: 1px;
-    background: rgba(234,130,23,.35);
-    margin: 2px 0;
+    background: rgba(255,255,255,.2);
+    margin: 4px 0;
+}
+
+/* línea naranja entre la fila de subtotales y el total */
+.ag-totales__row--total {
+    border-top: 2px solid #EA8217;
+    margin-top: 4px;
+    padding-top: 10px;
 }
 
 /* =============================================
@@ -1141,18 +1149,21 @@ html {
     border-bottom: none;
 }
 
-.ag-table__total-row td {
-    background: #2D4059;
-    color: #fff;
-    padding: 12px 16px;
+#tabla-reservas-turista tfoot tr.ag-table__total-row td,
+#tabla-reservas-hospedaje tfoot tr.ag-table__total-row td {
+    background: #2D4059 !important;
+    color: #fff !important;
+    padding: 13px 20px;
     font-size: 14px;
     border: none;
 }
 
-.ag-table tfoot .ag-table__total-row td:first-child {
+#tabla-reservas-turista tfoot tr.ag-table__total-row td:first-child,
+#tabla-reservas-hospedaje tfoot tr.ag-table__total-row td:first-child {
     border-radius: 0 0 0 8px;
 }
 
-.ag-table tfoot .ag-table__total-row td:last-child {
+#tabla-reservas-turista tfoot tr.ag-table__total-row td:last-child,
+#tabla-reservas-hospedaje tfoot tr.ag-table__total-row td:last-child {
     border-radius: 0 0 8px 0;
 }
