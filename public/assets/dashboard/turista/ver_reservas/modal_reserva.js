@@ -71,16 +71,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     elDesc.textContent       = data.descripcion     ?? 'Sin descripción';
 
                     /* ── IMÁGENES ── */
+                    const esHospedaje = data.tipo_reserva === 'hospedaje';
+                    const imgBase = esHospedaje
+                        ? `${BASE_URL}public/uploads/hotelero/actividades/`
+                        : `${BASE_URL}public/uploads/turistico/actividades/`;
+
                     galeria.innerHTML = '';
                     if (data.imagenes && data.imagenes.length > 0) {
                         const principal = data.imagenes.find(i => i.es_principal == 1)
                             ?? data.imagenes[0];
 
-                        imgPrincipal.src = `${BASE_URL}public/uploads/turistico/actividades/${principal.imagen}`;
+                        imgPrincipal.src = imgBase + principal.imagen;
 
                         data.imagenes.forEach(img => {
                             const miniatura = document.createElement('img');
-                            miniatura.src   = `${BASE_URL}public/uploads/turistico/actividades/${img.imagen}`;
+                            miniatura.src   = imgBase + img.imagen;
                             miniatura.title = 'Ver imagen';
                             miniatura.addEventListener('click', () => {
                                 imgPrincipal.src = miniatura.src;
@@ -92,11 +97,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         });
                     } else {
                         imgPrincipal.src = '';
-                        imgPrincipal.alt = 'Sin imagen disponible';
+                        imgPrincipal.alt = esHospedaje ? 'Sin foto del hospedaje' : 'Sin imagen disponible';
                     }
 
                     /* ── BOTONES DE ACCIÓN ── */
-                    btnCancelar.dataset.id = data.id_reserva;
+                    btnCancelar.dataset.id    = data.id_reserva;
+                    btnCancelar.dataset.fecha = data.fecha;
+                    btnCancelar.dataset.total = Number(data.precio) * Number(data.cantidad_personas);
                     btnConfirmar.style.display = 'none';
 
                     const cancelable = data.estado === 'pendiente' || data.estado === 'confirmada';
@@ -111,10 +118,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ── CANCELAR RESERVA (AJAX) ── */
     btnCancelar.addEventListener('click', () => {
-        const idReserva = btnCancelar.dataset.id;
+        const idReserva   = btnCancelar.dataset.id;
+        const fechaStr    = btnCancelar.dataset.fecha;   // 'YYYY-MM-DD'
+        const totalValor  = Number(btnCancelar.dataset.total) || 0;
         if (!idReserva) return;
 
-        if (!confirm('¿Estás seguro de que deseas cancelar esta reserva?\n\nSe liberarán los cupos para que otros turistas puedan reservar.')) return;
+        // Política de 24 horas
+        const ahora       = new Date();
+        const fechaReserva = new Date(fechaStr + 'T00:00:00');
+        const diffHoras   = (fechaReserva - ahora) / (1000 * 60 * 60);
+
+        let mensaje;
+        if (diffHoras > 24) {
+            mensaje = '¿Cancelar esta reserva?\n\n✅ Cancelación sin costo: la fecha de tu reserva es en más de 24 horas.';
+        } else if (diffHoras > 0) {
+            const penalidad = numFormat(Math.round(totalValor * 0.10));
+            mensaje = `¿Cancelar esta reserva?\n\n⚠️ Atención — estás dentro de las últimas 24 horas antes de la reserva.\nSe descontará el 10% del valor total ($${penalidad} COP) como penalidad por cancelación tardía.`;
+        } else {
+            mensaje = '¿Cancelar esta reserva?\n\n⚠️ La fecha de la reserva ya ha pasado.';
+        }
+
+        if (!confirm(mensaje)) return;
 
         btnCancelar.disabled    = true;
         btnCancelar.textContent = 'Cancelando...';
