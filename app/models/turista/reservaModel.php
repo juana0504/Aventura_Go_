@@ -76,50 +76,63 @@ class ReservaModel
     public function obtenerDetalleReserva($idReserva)
     {
         try {
-            $sql = "
-            SELECT
-                r.id_reserva,
-                r.id_turista,
-                r.fecha,
-                r.cantidad_personas,
-                r.precio,
-                r.estado,
-                r.tipo_reserva,
-                COALESCE(a.nombre,  h.nombre)                          AS nombre_actividad,
-                COALESCE(a.descripcion, h.descripcion)                 AS descripcion,
-                COALESCE(p.nombre_empresa, ph.nombre_establecimiento)  AS proveedor
-            FROM reserva r
-            LEFT JOIN actividad a        ON r.id_actividad  = a.id_actividad
-            LEFT JOIN proveedor p        ON a.id_proveedor  = p.id_proveedor
-            LEFT JOIN hospedaje h        ON r.id_hospedaje  = h.id_hospedaje
-            LEFT JOIN proveedor_hotelero ph
-                ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
-            WHERE r.id_reserva = :id
-            LIMIT 1
-            ";
+            // Paso 1: obtener fila cruda de reserva (SELECT * funciona sin importar qué columnas existan)
+            $stmtBase = $this->db->prepare("SELECT * FROM reserva WHERE id_reserva = :id LIMIT 1");
+            $stmtBase->execute([':id' => $idReserva]);
+            $base = $stmtBase->fetch(PDO::FETCH_ASSOC);
+            if (!$base) return null;
 
-            $stmt = $this->db->prepare($sql);
+            $esHospedaje = ($base['tipo_reserva'] ?? '') === 'hospedaje';
+
+            // Paso 2: query de detalle según tipo (solo referencias a tablas que seguro existen)
+            if ($esHospedaje) {
+                $sqlDetalle = "
+                    SELECT r.id_reserva, r.id_turista, r.fecha, r.cantidad_personas,
+                           r.precio, r.estado, r.tipo_reserva,
+                           h.nombre      AS nombre_actividad,
+                           h.descripcion AS descripcion,
+                           ph.nombre_establecimiento AS proveedor
+                    FROM reserva r
+                    LEFT JOIN hospedaje h
+                        ON r.id_hospedaje = h.id_hospedaje
+                    LEFT JOIN proveedor_hotelero ph
+                        ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
+                    WHERE r.id_reserva = :id LIMIT 1";
+            } else {
+                $sqlDetalle = "
+                    SELECT r.id_reserva, r.id_turista, r.fecha, r.cantidad_personas,
+                           r.precio, r.estado, r.tipo_reserva,
+                           a.nombre      AS nombre_actividad,
+                           a.descripcion AS descripcion,
+                           p.nombre_empresa AS proveedor
+                    FROM reserva r
+                    LEFT JOIN actividad a ON r.id_actividad = a.id_actividad
+                    LEFT JOIN proveedor p ON a.id_proveedor = p.id_proveedor
+                    WHERE r.id_reserva = :id LIMIT 1";
+            }
+
+            $stmt = $this->db->prepare($sqlDetalle);
             $stmt->execute([':id' => $idReserva]);
             $reserva = $stmt->fetch(PDO::FETCH_ASSOC);
-
             if (!$reserva) return null;
 
-            // Imágenes según tipo de reserva
-            $esHospedaje = ($reserva['tipo_reserva'] ?? '') === 'hospedaje';
+            // Paso 3: imágenes usando IDs ya obtenidos (sin subquery)
             try {
                 if ($esHospedaje) {
-                    $sqlImg = "SELECT imagen, es_principal
-                               FROM hospedaje_imagen
-                               WHERE id_hospedaje = (SELECT id_hospedaje FROM reserva WHERE id_reserva = :id)
-                               ORDER BY es_principal DESC";
+                    $idHosp  = (int)($base['id_hospedaje'] ?? 0);
+                    $stmtImg = $this->db->prepare(
+                        "SELECT imagen, es_principal FROM hospedaje_imagen
+                         WHERE id_hospedaje = :xid ORDER BY es_principal DESC"
+                    );
+                    $stmtImg->execute([':xid' => $idHosp]);
                 } else {
-                    $sqlImg = "SELECT imagen, es_principal
-                               FROM actividad_imagen
-                               WHERE id_actividad = (SELECT id_actividad FROM reserva WHERE id_reserva = :id)
-                               ORDER BY es_principal DESC";
+                    $idAct   = (int)($base['id_actividad'] ?? 0);
+                    $stmtImg = $this->db->prepare(
+                        "SELECT imagen, es_principal FROM actividad_imagen
+                         WHERE id_actividad = :xid ORDER BY es_principal DESC"
+                    );
+                    $stmtImg->execute([':xid' => $idAct]);
                 }
-                $stmtImg = $this->db->prepare($sqlImg);
-                $stmtImg->execute([':id' => $idReserva]);
                 $reserva['imagenes'] = $stmtImg->fetchAll(PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
                 error_log('obtenerDetalleReserva - imagenes: ' . $e->getMessage());
