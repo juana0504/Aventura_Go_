@@ -225,8 +225,12 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                 <tr data-estado="<?= htmlspecialchars($reserva['estado']) ?>">
                                     <td>
                                         <div class="ag-rv-actividad">
-                                            <?php if (!empty($reserva['imagen'])): ?>
-                                                <img src="<?= BASE_URL ?>public/uploads/hotelero/actividades/<?= htmlspecialchars($reserva['imagen']) ?>"
+                                            <?php
+                                            $imgH = $reserva['imagen'] ?? '';
+                                            $imgHValida = !empty($imgH) && $imgH !== 'hospedaje_default.png';
+                                            ?>
+                                            <?php if ($imgHValida): ?>
+                                                <img src="<?= BASE_URL ?>public/uploads/hotelero/actividades/<?= htmlspecialchars($imgH) ?>"
                                                      class="ag-rv-img" alt="<?= htmlspecialchars($reserva['nombre_actividad'] ?? '') ?>">
                                             <?php else: ?>
                                                 <div class="ag-rv-img ag-rv-img--placeholder">

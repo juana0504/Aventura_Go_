@@ -186,6 +186,7 @@ class ReservaController
             if ($esHospedaje) {
                 $stmt = $db->prepare("
                     SELECT h.nombre AS nombre_actividad, h.descripcion,
+                           h.imagen AS imagen_fallback,
                            ph.nombre_establecimiento AS proveedor
                     FROM hospedaje h
                     LEFT JOIN proveedor_hotelero ph
@@ -218,6 +219,12 @@ class ReservaController
 
             $extra    = $stmt->fetch(PDO::FETCH_ASSOC) ?: [];
             $imagenes = $stmtImg->fetchAll(PDO::FETCH_ASSOC);
+
+            // Fallback: si hospedaje_imagen está vacía usa h.imagen directamente
+            if ($esHospedaje && empty($imagenes) && !empty($extra['imagen_fallback'])
+                && $extra['imagen_fallback'] !== 'hospedaje_default.png') {
+                $imagenes = [['imagen' => $extra['imagen_fallback'], 'es_principal' => 1]];
+            }
 
             $data = array_merge($base, $extra, ['imagenes' => $imagenes]);
 
