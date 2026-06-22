@@ -169,25 +169,24 @@ class ReservaTurista
     }
 
 
-    /** Cancelar reserva (solo el turista puede cancelar sus propias reservas)*/
+    /** Cancelar reserva (actividad o hospedaje) */
     public function cancelarReserva($id_reserva, $id_turista)
     {
         try {
             $this->conexion->beginTransaction();
 
             // 1. Obtener datos de la reserva
-            $sql = "SELECT id_actividad, cantidad_personas, fecha
-                FROM reserva
-                WHERE id_reserva = :id
-                  AND id_turista = :id_turista
-                  AND estado IN ('pendiente', 'confirmada')
-                FOR UPDATE";
-
-            $stmt = $this->conexion->prepare($sql);
+            $stmt = $this->conexion->prepare(
+                "SELECT tipo_reserva, id_actividad, id_hospedaje, cantidad_personas, fecha
+                 FROM reserva
+                 WHERE id_reserva = :id
+                   AND id_turista = :id_turista
+                   AND estado IN ('pendiente', 'confirmada')
+                 FOR UPDATE"
+            );
             $stmt->bindParam(':id', $id_reserva);
             $stmt->bindParam(':id_turista', $id_turista);
             $stmt->execute();
-
             $reserva = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if (!$reserva) {
@@ -195,34 +194,36 @@ class ReservaTurista
                 return false;
             }
 
-            // 2. Validar fecha (no cancelar reservas pasadas)
+            // 2. No cancelar reservas con fecha ya pasada
             if (strtotime($reserva['fecha']) < strtotime(date('Y-m-d'))) {
                 $this->conexion->rollBack();
                 return false;
             }
 
-            // 3. Cancelar reserva
-            $sql = "UPDATE reserva 
-                SET estado = 'cancelada' 
-                WHERE id_reserva = :id";
+            // 3. Marcar como cancelada
+            $this->conexion->prepare(
+                "UPDATE reserva SET estado = 'cancelada' WHERE id_reserva = :id"
+            )->execute([':id' => $id_reserva]);
 
-            $stmt = $this->conexion->prepare($sql);
-            $stmt->bindParam(':id', $id_reserva);
-            $stmt->execute();
-
-            // 4. Reintegrar cupos
-            $sql = "UPDATE actividad 
-                SET cupos = cupos + :personas 
-                WHERE id_actividad = :id_actividad";
-
-            $stmt = $this->conexion->prepare($sql);
-            $stmt->bindParam(':personas', $reserva['cantidad_personas']);
-            $stmt->bindParam(':id_actividad', $reserva['id_actividad']);
-            $stmt->execute();
+            // 4. Reintegrar disponibilidad solo para actividades
+            if (($reserva['tipo_reserva'] ?? 'actividad') === 'actividad'
+                && (int)$reserva['id_actividad'] > 0) {
+                $this->conexion->prepare(
+                    "UPDATE actividad SET cupos = cupos + :personas WHERE id_actividad = :id"
+                )->execute([
+                    ':personas' => (int)$reserva['cantidad_personas'],
+                    ':id'       => (int)$reserva['id_actividad'],
+                ]);
+            }
+            // Para hospedaje no hace falta: la disponibilidad se calcula
+            // contando reservas activas vs capacidad, así que al cancelar
+            // el cupo se libera automáticamente.
 
             $this->conexion->commit();
             return true;
+
         } catch (Exception $e) {
+            error_log('cancelarReserva: ' . $e->getMessage());
             $this->conexion->rollBack();
             return false;
         }
