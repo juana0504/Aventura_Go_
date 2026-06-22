@@ -576,5 +576,10 @@ $errorMsg = match($_GET['error'] ?? '') {
 
     <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
     <script src="<?= BASE_URL ?>public/assets/dashboard/sidebar-toggle-universal.js"></script>
+    <script>
+    document.getElementById('ag-reservas-toggle')?.addEventListener('click', function () {
+        this.closest('.ag-nav-sub').classList.toggle('ag-nav-sub--open');
+    });
+    </script>
 </body>
 </html>
