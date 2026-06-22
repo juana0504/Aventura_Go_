@@ -35,6 +35,7 @@ class TuristaModel {
             'preferencias' => $row['preferencias'],
             'id_turista' => $id_turista,
             'reservas' => $this->getReservas($id_usuario),
+            'reservas_hospedaje' => $this->getReservasHospedaje($id_usuario),
             'estadisticas' => $this->getEstadisticas($id_usuario),
             'actividades' => $id_turista ? $this->getActividades($id_turista) : [],
             'lugares_visitados' => $id_turista ? $this->getLugaresVisitados($id_turista) : []
@@ -62,6 +63,34 @@ class TuristaModel {
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log("[TuristaModel] getReservas error: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function getReservasHospedaje($id_usuario) {
+        try {
+            $query = "SELECT
+                        r.id_reserva,
+                        r.fecha,
+                        r.estado,
+                        r.cantidad_personas,
+                        r.precio,
+                        r.created_at AS fecha_reserva,
+                        h.nombre AS nombre_hospedaje,
+                        c.nombre AS ciudad,
+                        ph.nombre_establecimiento AS establecimiento
+                      FROM reserva r
+                      JOIN hospedaje h ON r.id_hospedaje = h.id_hospedaje
+                      LEFT JOIN ciudades c ON h.id_ciudad = c.id_ciudad
+                      LEFT JOIN proveedor_hotelero ph ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
+                      WHERE r.id_turista = :id_usuario
+                        AND r.tipo_reserva = 'hospedaje'
+                      ORDER BY r.fecha DESC";
+            $stmt = $this->conexion->prepare($query);
+            $stmt->execute([':id_usuario' => $id_usuario]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("[TuristaModel] getReservasHospedaje error: " . $e->getMessage());
             return [];
         }
     }
