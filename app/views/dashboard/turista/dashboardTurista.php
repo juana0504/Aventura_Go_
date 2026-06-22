@@ -4,9 +4,10 @@ if (!isset($datos_turista)) {
     exit;
 }
 
-$nombreUsuario = $datos_turista['nombre'] ?? ($_SESSION['user']['nombre'] ?? '');
-$estadisticas = $datos_turista['estadisticas'] ?? [];
-$reservas = $datos_turista['reservas'] ?? [];
+$nombreUsuario    = $datos_turista['nombre'] ?? ($_SESSION['user']['nombre'] ?? '');
+$estadisticas     = $datos_turista['estadisticas'] ?? [];
+$reservas         = $datos_turista['reservas'] ?? [];
+$reservasHosp     = $datos_turista['reservas_hospedaje'] ?? [];
 
 $totalReservas = $estadisticas['total_reservas'] ?? 0;
 $confirmadas = $estadisticas['confirmadas'] ?? 0;
@@ -312,11 +313,11 @@ foreach (array_slice($partes, 0, 2) as $p) {
                 </div>
 
                 <!-- ==============================
-                     TABLA DE RESERVAS
+                     TABLA RESERVAS ACTIVIDADES
                 =============================== -->
                 <div class="ag-section-header">
-                    <h2 class="ag-section-title">Mis <span>Reservas</span></h2>
-                    <a href="<?= BASE_URL ?>turista/reservas" class="ag-btn-outline">Ver todas</a>
+                    <h2 class="ag-section-title">Mi Reserva de <span>Actividades</span></h2>
+                    <a href="<?= BASE_URL ?>turista/ver-reservas" class="ag-btn-outline">Ver todas</a>
                 </div>
 
                 <div class="ag-table-wrap">
@@ -337,16 +338,16 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                     <tr>
                                         <td>
                                             <div class="ag-table__act-name"><?= htmlspecialchars($r['nombre_actividad']) ?></div>
-                                            <div class="ag-table__act-meta"><?= htmlspecialchars($r['ubicacion']) ?></div>
+                                            <div class="ag-table__act-meta"><?= htmlspecialchars($r['ubicacion'] ?? '') ?></div>
                                         </td>
-                                        <td><?= htmlspecialchars($r['fecha']) ?></td>
-                                        <td><?= htmlspecialchars($r['ubicacion']) ?></td>
-                                        <td><?= htmlspecialchars($r['cantidad_personas']) ?></td>
-                                        <td>$<?= number_format($r['precio'], 2) ?></td>
+                                        <td><?= date('d/m/Y', strtotime($r['fecha'])) ?></td>
+                                        <td><?= htmlspecialchars($r['ubicacion'] ?? '—') ?></td>
+                                        <td><?= (int)$r['cantidad_personas'] ?></td>
+                                        <td>$<?= number_format($r['precio'], 0, ',', '.') ?></td>
                                         <td>
                                             <span class="<?= $estadoBadgeClass($r['estado'] ?? '') ?>">
                                                 <span class="ag-badge__dot"></span>
-                                                <?= htmlspecialchars($r['estado']) ?>
+                                                <?= ucfirst(htmlspecialchars($r['estado'])) ?>
                                             </span>
                                         </td>
                                     </tr>
@@ -355,11 +356,64 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                 <tr>
                                     <td colspan="6">
                                         <div class="ag-empty-state">
-                                            <i class="bi bi-calendar-x ag-empty-state__icon"></i>
-                                            <p>No tienes reservas aún.</p>
-                                            <a href="<?= BASE_URL ?>" class="ag-btn-primary">
-                                                Explorar actividades
-                                            </a>
+                                            <i class="bi bi-compass ag-empty-state__icon"></i>
+                                            <p>No tienes reservas de tours aún.</p>
+                                            <a href="<?= BASE_URL ?>descubre-tours" class="ag-btn-primary">Explorar tours</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ==============================
+                     TABLA RESERVAS HOSPEDAJES
+                =============================== -->
+                <div class="ag-section-header" style="margin-top:32px;">
+                    <h2 class="ag-section-title">Mi Reserva de <span>Hospedajes</span></h2>
+                    <a href="<?= BASE_URL ?>turista/ver-reservas-hotel" class="ag-btn-outline">Ver todas</a>
+                </div>
+
+                <div class="ag-table-wrap">
+                    <table class="ag-table" id="tabla-reservas-hospedaje">
+                        <thead>
+                            <tr>
+                                <th>Hospedaje</th>
+                                <th>Establecimiento</th>
+                                <th>Fecha</th>
+                                <th>Personas</th>
+                                <th>Precio</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (!empty($reservasHosp)): ?>
+                                <?php foreach ($reservasHosp as $rh): ?>
+                                    <tr>
+                                        <td>
+                                            <div class="ag-table__act-name"><?= htmlspecialchars($rh['nombre_hospedaje']) ?></div>
+                                            <div class="ag-table__act-meta"><?= htmlspecialchars($rh['ciudad'] ?? '') ?></div>
+                                        </td>
+                                        <td><?= htmlspecialchars($rh['establecimiento'] ?? '—') ?></td>
+                                        <td><?= date('d/m/Y', strtotime($rh['fecha'])) ?></td>
+                                        <td><?= (int)$rh['cantidad_personas'] ?></td>
+                                        <td>$<?= number_format($rh['precio'], 0, ',', '.') ?></td>
+                                        <td>
+                                            <span class="<?= $estadoBadgeClass($rh['estado'] ?? '') ?>">
+                                                <span class="ag-badge__dot"></span>
+                                                <?= ucfirst(htmlspecialchars($rh['estado'])) ?>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="6">
+                                        <div class="ag-empty-state">
+                                            <i class="bi bi-building ag-empty-state__icon"></i>
+                                            <p>No tienes reservas de hospedaje aún.</p>
+                                            <a href="<?= BASE_URL ?>descubre-hospedaje" class="ag-btn-primary">Explorar hospedajes</a>
                                         </div>
                                     </td>
                                 </tr>
