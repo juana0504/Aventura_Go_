@@ -10,9 +10,12 @@ $reservas         = $datos_turista['reservas'] ?? [];
 $reservasHosp     = $datos_turista['reservas_hospedaje'] ?? [];
 
 $totalReservas = $estadisticas['total_reservas'] ?? 0;
-$confirmadas = $estadisticas['confirmadas'] ?? 0;
-$pendientes = $estadisticas['pendientes'] ?? 0;
-$totalGastado = $estadisticas['total_gastado'] ?? 0;
+$confirmadas   = $estadisticas['confirmadas'] ?? 0;
+$pendientes    = $estadisticas['pendientes'] ?? 0;
+
+$totalGastadoAct  = array_sum(array_column($reservas,     'precio'));
+$totalGastadoHosp = array_sum(array_column($reservasHosp, 'precio'));
+$totalGastado     = $totalGastadoAct + $totalGastadoHosp;
 
 // Badge classes para la tabla — misma lógica, nuevas clases CSS
 $estadoBadgeClass = static function (string $estado): string {
@@ -268,12 +271,26 @@ foreach (array_slice($partes, 0, 2) as $p) {
                         <div class="ag-stat-card__value"><?= number_format($pendientes) ?></div>
                     </div>
 
-                    <div class="ag-stat-card ag-stat-card--featured">
+                    <div class="ag-stat-card ag-stat-card--featured ag-stat-card--totales">
                         <div class="ag-stat-card__icon ag-stat-card__icon--orange">
                             <i class="bi bi-cash-stack"></i>
                         </div>
-                        <div class="ag-stat-card__label">Total Gastado</div>
-                        <div class="ag-stat-card__value">$<?= number_format($totalGastado, 2) ?></div>
+                        <div class="ag-totales">
+                            <div class="ag-totales__row">
+                                <span class="ag-totales__label"><i class="bi bi-compass"></i> Actividades</span>
+                                <span class="ag-totales__val">$<?= number_format($totalGastadoAct, 0, ',', '.') ?></span>
+                            </div>
+                            <div class="ag-totales__divider"></div>
+                            <div class="ag-totales__row">
+                                <span class="ag-totales__label"><i class="bi bi-building"></i> Hospedajes</span>
+                                <span class="ag-totales__val">$<?= number_format($totalGastadoHosp, 0, ',', '.') ?></span>
+                            </div>
+                            <div class="ag-totales__divider"></div>
+                            <div class="ag-totales__row ag-totales__row--total">
+                                <span class="ag-totales__label">Total gastado</span>
+                                <span class="ag-totales__val ag-totales__val--big">$<?= number_format($totalGastado, 0, ',', '.') ?></span>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -364,6 +381,13 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                 </tr>
                             <?php endif; ?>
                         </tbody>
+                        <tfoot>
+                            <tr class="ag-table__total-row">
+                                <td colspan="4"><strong>Total actividades turísticas</strong></td>
+                                <td><strong>$<?= number_format($totalGastadoAct, 0, ',', '.') ?></strong></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
 
@@ -419,6 +443,13 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                 </tr>
                             <?php endif; ?>
                         </tbody>
+                        <tfoot>
+                            <tr class="ag-table__total-row">
+                                <td colspan="4"><strong>Total reservas de hospedaje</strong></td>
+                                <td><strong>$<?= number_format($totalGastadoHosp, 0, ',', '.') ?></strong></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
 
