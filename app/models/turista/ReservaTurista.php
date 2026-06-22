@@ -97,7 +97,7 @@ class ReservaTurista
             h.nombre AS nombre_actividad,
             r.precio,
             ph.nombre_establecimiento AS proveedor,
-            hi.imagen AS imagen
+            COALESCE(hi.imagen, h.imagen) AS imagen
         FROM reserva r
         LEFT JOIN hospedaje h ON r.id_hospedaje = h.id_hospedaje
         LEFT JOIN proveedor_hotelero ph ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
