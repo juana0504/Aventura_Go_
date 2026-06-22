@@ -1069,3 +1069,90 @@ html {
     .ag-greeting__name { font-size: 24px; }
     .ag-topbar { padding: 0 10px; gap: 6px; }
 }
+
+/* =============================================
+   TARJETA TOTALES (ACTIVIDADES + HOSPEDAJES)
+============================================= */
+.ag-stat-card--totales {
+    justify-content: flex-start;
+    gap: 0;
+}
+
+.ag-totales {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 4px;
+}
+
+.ag-totales__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+}
+
+.ag-totales__row--total {
+    padding-top: 8px;
+    margin-top: 2px;
+}
+
+.ag-totales__label {
+    font-size: 12px;
+    color: rgba(255,255,255,.55);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.ag-totales__row--total .ag-totales__label {
+    color: rgba(255,255,255,.75);
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.ag-totales__val {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ag-primary);
+}
+
+.ag-totales__val--big {
+    font-size: 18px;
+    color: #EA8217;
+}
+
+.ag-totales__divider {
+    height: 1px;
+    background: rgba(234,130,23,.35);
+    margin: 2px 0;
+}
+
+/* =============================================
+   TABLAS — SEPARADOR NARANJA + FILA TOTAL
+============================================= */
+#tabla-reservas-turista tbody tr,
+#tabla-reservas-hospedaje tbody tr {
+    border-bottom: 1.5px solid rgba(234,130,23,.25);
+}
+
+#tabla-reservas-turista tbody tr:last-child,
+#tabla-reservas-hospedaje tbody tr:last-child {
+    border-bottom: none;
+}
+
+.ag-table__total-row td {
+    background: #2D4059;
+    color: #fff;
+    padding: 12px 16px;
+    font-size: 14px;
+    border: none;
+}
+
+.ag-table tfoot .ag-table__total-row td:first-child {
+    border-radius: 0 0 0 8px;
+}
+
+.ag-table tfoot .ag-table__total-row td:last-child {
+    border-radius: 0 0 8px 0;
+}
