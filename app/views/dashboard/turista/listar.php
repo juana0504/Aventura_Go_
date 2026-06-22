@@ -64,8 +64,10 @@ foreach (array_slice($partes, 0, 2) as $p) {
             Dashboard
         </a>
         <a href="<?= BASE_URL ?>turista/ver-reservas" class="ag-nav-item">
-            <i class="bi bi-calendar3 ag-nav-item__icon"></i>
-            Ver reservas
+            <i class="bi bi-compass ag-nav-item__icon"></i> Mis Tours
+        </a>
+        <a href="<?= BASE_URL ?>turista/ver-reservas-hotel" class="ag-nav-item">
+            <i class="bi bi-building ag-nav-item__icon"></i> Mis Hoteles
         </a>
         <a href="<?= BASE_URL ?>turista/tickets" class="ag-nav-item ag-nav-item--active">
             <i class="bi bi-ticket-perforated ag-nav-item__icon"></i>

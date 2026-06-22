@@ -246,6 +246,17 @@ switch ($request) {
         (new ResenaController())->guardar();
         break;
 
+    // RUTAS FAVORITOS TURISTA
+    case '/turista/favoritos':
+        require_once BASE_PATH . '/app/controllers/turista/favoritoController.php';
+        (new FavoritoController())->ver();
+        break;
+
+    case '/turista/toggle-favorito':
+        require_once BASE_PATH . '/app/controllers/turista/favoritoController.php';
+        (new FavoritoController())->toggle();
+        break;
+
     // RUTA EN TURISTA PARA SELECCIONAR HOSPEDAJE
 
 

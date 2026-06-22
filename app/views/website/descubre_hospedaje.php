@@ -11,6 +11,13 @@ if ($q !== '') {
 } else {
   $actividades = $hospedajeModel->listarPublicos();
 }
+
+$esTurista   = isset($_SESSION['user']) && ($_SESSION['user']['rol'] ?? '') === 'turista';
+$favHospIds  = [];
+if ($esTurista) {
+    require_once BASE_PATH . '/app/models/turista/FavoritoModel.php';
+    $favHospIds = (new FavoritoModel())->obtenerIds((int)$_SESSION['user']['id_usuario'], 'hospedaje');
+}
 ?>
 
 <!DOCTYPE html>
@@ -168,9 +175,18 @@ if ($q !== '') {
               $imgSrc = BASE_URL . 'public/assets/website_externos/index/img/LOGO-FINAL.png';
             }
             ?>
-            <div class="activity-card<?= $agotado ? ' activity-card--agotado' : '' ?>">
+            <?php $esFavHosp = in_array($actividad['id_hospedaje'], $favHospIds); ?>
+            <div class="activity-card<?= $agotado ? ' activity-card--agotado' : '' ?>" style="position:relative;">
 
               <div style="position:relative;">
+                <?php if ($esTurista): ?>
+                <button class="ag-fav-btn <?= $esFavHosp ? 'ag-fav-btn--active' : '' ?>"
+                    data-tipo="hospedaje"
+                    data-id="<?= $actividad['id_hospedaje'] ?>"
+                    title="<?= $esFavHosp ? 'Quitar de favoritos' : 'Guardar en favoritos' ?>">
+                    <i class="bi <?= $esFavHosp ? 'bi-heart-fill' : 'bi-heart' ?>"></i>
+                </button>
+                <?php endif; ?>
                 <img
                   src="<?= $imgSrc ?>"
                   alt="<?= htmlspecialchars($actividad['nombre']) ?>"
@@ -513,6 +529,67 @@ if ($q !== '') {
         profileMenu.style.display = 'none';
       });
     }
+  </script>
+
+  <!-- FAVORITOS -->
+  <style>
+  .ag-fav-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 10;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,.92);
+      color: #ccc;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,.18);
+      transition: transform .18s, color .18s;
+  }
+  .ag-fav-btn:hover { transform: scale(1.12); color: #EA8217; }
+  .ag-fav-btn--active { color: #EA8217; }
+  </style>
+  <script>
+  const BASE_URL_FAV = '<?= BASE_URL ?>';
+  document.querySelectorAll('.ag-fav-btn').forEach(btn => {
+      btn.addEventListener('click', function (e) {
+          e.preventDefault(); e.stopPropagation();
+          fetch(BASE_URL_FAV + 'turista/toggle-favorito', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: `tipo=${this.dataset.tipo}&id_referencia=${this.dataset.id}`
+          })
+          .then(r => r.json())
+          .then(data => {
+              if (!data.ok) return;
+              const activo = data.estado === 'agregado';
+              const ico = this.querySelector('i');
+              ico.className = activo ? 'bi bi-heart-fill' : 'bi bi-heart';
+              this.classList.toggle('ag-fav-btn--active', activo);
+              this.title = activo ? 'Quitar de favoritos' : 'Guardar en favoritos';
+              mostrarToastFav(activo);
+          }).catch(() => {});
+      });
+  });
+  function mostrarToastFav(agregado) {
+      let t = document.getElementById('ag-fav-toast');
+      if (!t) {
+          t = document.createElement('div');
+          t.id = 'ag-fav-toast';
+          t.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:9999;background:#2D4059;color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:500;box-shadow:0 4px 16px rgba(0,0,0,.25);transition:opacity .3s;';
+          document.body.appendChild(t);
+      }
+      t.textContent = agregado ? '❤️ Agregado a favoritos' : '🤍 Eliminado de favoritos';
+      t.style.opacity = '1';
+      clearTimeout(t._timer);
+      t._timer = setTimeout(() => { t.style.opacity = '0'; }, 2500);
+  }
   </script>
 </body>
 
