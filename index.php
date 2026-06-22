@@ -101,7 +101,7 @@ switch ($request) {
         require_once BASE_PATH . '/app/models/proveedor_turistico/actividadTuristica.php';
         $actividadModel = new ActividadTuristica();
         $q = trim($_GET['q'] ?? '');
-        $resultados = $q !== '' ? $actividadModel->buscar($q) : [];
+        $resultados = $q !== '' ? $actividadModel->buscarPublicos($q) : [];
         require BASE_PATH . '/app/views/website/busqueda.php';
         break;
 
