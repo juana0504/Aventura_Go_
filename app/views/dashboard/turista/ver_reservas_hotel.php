@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once BASE_PATH . '/app/helpers/session_turista.php';
 
 $nombreUsuario = $_SESSION['user']['nombre'] ?? '';
@@ -14,26 +14,18 @@ foreach (array_slice($partes, 0, 2) as $p) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis Reservas — AventuraGO</title>
+    <title>Mis Hoteles — AventuraGO</title>
 
-    <!-- Favicon -->
     <link rel="shortcut icon" href="<?= BASE_URL ?>public/assets/dashboard/administrador/perfil_usuario/img/FAVICON.png">
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- CSS del sistema -->
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/turista/turista/turista.css">
-
-    <!-- CSS específico de esta vista -->
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/turista/ver_reservas/ver_reservas.css">
 </head>
 
@@ -56,10 +48,10 @@ foreach (array_slice($partes, 0, 2) as $p) {
         <a href="<?= BASE_URL ?>turista/dashboard" class="ag-nav-item">
             <i class="bi bi-grid-1x2-fill ag-nav-item__icon"></i> Dashboard
         </a>
-        <a href="<?= BASE_URL ?>turista/ver-reservas" class="ag-nav-item ag-nav-item--active">
+        <a href="<?= BASE_URL ?>turista/ver-reservas" class="ag-nav-item">
             <i class="bi bi-compass ag-nav-item__icon"></i> Reservas Tours
         </a>
-        <a href="<?= BASE_URL ?>turista/ver-reservas-hotel" class="ag-nav-item">
+        <a href="<?= BASE_URL ?>turista/ver-reservas-hotel" class="ag-nav-item ag-nav-item--active">
             <i class="bi bi-building ag-nav-item__icon"></i> Reservas Hotel
         </a>
         <a href="<?= BASE_URL ?>turista/tickets" class="ag-nav-item">
@@ -80,16 +72,14 @@ foreach (array_slice($partes, 0, 2) as $p) {
         <header class="ag-topbar">
             <div class="ag-topbar__search">
                 <i class="bi bi-search"></i>
-                <input type="text" placeholder="Buscar reservas, actividades..." class="ag-topbar__input" id="ag-search-input" autocomplete="off">
+                <input type="text" placeholder="Buscar hospedajes, hoteles..." class="ag-topbar__input" id="ag-search-input" autocomplete="off">
             </div>
 
             <div class="ag-topbar__actions">
-
                 <button class="ag-icon-btn" id="ag-dark-toggle" title="Modo oscuro">
                     <i class="bi bi-moon-fill" id="ag-dark-icon"></i>
                 </button>
 
-                <!-- Notificaciones -->
                 <div class="ag-topbar__dropdown-wrap">
                     <button class="ag-icon-btn ag-icon-btn--notif" id="ag-notif-btn" title="Notificaciones">
                         <i class="bi bi-bell-fill"></i>
@@ -99,36 +89,11 @@ foreach (array_slice($partes, 0, 2) as $p) {
                             <span class="ag-dropdown__title">Notificaciones</span>
                             <button class="ag-dropdown__mark-all">Marcar todas</button>
                         </div>
-                        <div class="ag-notif-list">
-                            <div class="ag-notif-item ag-notif-item--unread">
-                                <div class="ag-notif-item__icon ag-notif-item__icon--green"><i class="bi bi-check-circle-fill"></i></div>
-                                <div class="ag-notif-item__body">
-                                    <p class="ag-notif-item__text">Tu reserva de <strong>Rafting</strong> fue confirmada.</p>
-                                    <span class="ag-notif-item__time">Hace 2 horas</span>
-                                </div>
-                                <span class="ag-notif-item__dot"></span>
-                            </div>
-                            <div class="ag-notif-item ag-notif-item--unread">
-                                <div class="ag-notif-item__icon ag-notif-item__icon--amber"><i class="bi bi-clock-fill"></i></div>
-                                <div class="ag-notif-item__body">
-                                    <p class="ag-notif-item__text">Tienes una reserva <strong>pendiente</strong> de pago.</p>
-                                    <span class="ag-notif-item__time">Hace 5 horas</span>
-                                </div>
-                                <span class="ag-notif-item__dot"></span>
-                            </div>
-                            <div class="ag-notif-item">
-                                <div class="ag-notif-item__icon ag-notif-item__icon--blue"><i class="bi bi-star-fill"></i></div>
-                                <div class="ag-notif-item__body">
-                                    <p class="ag-notif-item__text">¿Cómo fue tu experiencia en <strong>Parapente</strong>?</p>
-                                    <span class="ag-notif-item__time">Ayer</span>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="ag-notif-list"></div>
                         <a href="<?= BASE_URL ?>turista/notificaciones" class="ag-dropdown__footer">Ver todas las notificaciones</a>
                     </div>
                 </div>
 
-                <!-- Perfil -->
                 <div class="ag-topbar__dropdown-wrap">
                     <button class="ag-profile-btn" id="ag-profile-btn">
                         <div class="ag-profile-btn__avatar"><?= htmlspecialchars($iniciales) ?></div>
@@ -156,9 +121,6 @@ foreach (array_slice($partes, 0, 2) as $p) {
                         <a href="<?= BASE_URL ?>turista/ver-reservas-hotel" class="ag-dropdown__item">
                             <i class="bi bi-building"></i> Reservas Hotel
                         </a>
-                        <a href="<?= BASE_URL ?>turista/favoritos" class="ag-dropdown__item">
-                            <i class="bi bi-heart"></i> Favoritos
-                        </a>
                         <a href="<?= BASE_URL ?>turista/configuracion" class="ag-dropdown__item">
                             <i class="bi bi-gear"></i> Configuración
                         </a>
@@ -168,7 +130,6 @@ foreach (array_slice($partes, 0, 2) as $p) {
                         </a>
                     </div>
                 </div>
-
             </div>
         </header>
 
@@ -178,15 +139,15 @@ foreach (array_slice($partes, 0, 2) as $p) {
             <div class="ag-page-header">
                 <div>
                     <div class="ag-greeting__eyebrow">Panel Turista</div>
-                    <h1 class="ag-page-header__title">Mis <span>Reservas</span></h1>
-                    <p class="ag-greeting__sub">Consulta, confirma o cancela tus reservas de aventura</p>
+                    <h1 class="ag-page-header__title">Mis <span>Hoteles</span></h1>
+                    <p class="ag-greeting__sub">Consulta y gestiona tus reservas de hospedaje</p>
                 </div>
                 <a href="<?= BASE_URL ?>turista/pdf-reservas?tipo=turista_reservas" class="ag-btn-pdf" target="_blank">
                     <i class="bi bi-file-earmark-pdf"></i> Generar Reporte
                 </a>
             </div>
 
-            <!-- Tarjetas de estadísticas -->
+            <!-- Estadísticas -->
             <?php
             $total       = count($reservas ?? []);
             $confirmadas = count(array_filter($reservas ?? [], fn($r) => $r['estado'] === 'confirmada'));
@@ -195,9 +156,9 @@ foreach (array_slice($partes, 0, 2) as $p) {
             ?>
             <div class="ag-rv-stats">
                 <div class="ag-rv-stat ag-rv-stat--featured">
-                    <div class="ag-rv-stat__icon ag-rv-stat__icon--orange"><i class="bi bi-calendar3"></i></div>
+                    <div class="ag-rv-stat__icon ag-rv-stat__icon--orange"><i class="bi bi-building"></i></div>
                     <div>
-                        <div class="ag-rv-stat__label">Total reservas</div>
+                        <div class="ag-rv-stat__label">Total hospedajes</div>
                         <div class="ag-rv-stat__value"><?= $total ?></div>
                     </div>
                 </div>
@@ -224,7 +185,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                 </div>
             </div>
 
-            <!-- Filtros rápidos -->
+            <!-- Filtros -->
             <div class="ag-rv-filters">
                 <button class="ag-rv-filter ag-rv-filter--active" data-filter="all">
                     <i class="bi bi-grid"></i> Todos
@@ -249,8 +210,8 @@ foreach (array_slice($partes, 0, 2) as $p) {
                 <table class="ag-table" id="tablaReservas">
                     <thead>
                         <tr>
-                            <th>Actividad</th>
-                            <th>Proveedor</th>
+                            <th>Hospedaje</th>
+                            <th>Establecimiento</th>
                             <th>Fecha</th>
                             <th>Personas</th>
                             <th>Total</th>
@@ -264,28 +225,16 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                 <tr data-estado="<?= htmlspecialchars($reserva['estado']) ?>">
                                     <td>
                                         <div class="ag-rv-actividad">
-                                            <?php
-                                            $esHospedaje = ($reserva['tipo_reserva'] ?? '') === 'hospedaje';
-                                            $imgFile = $esHospedaje
-                                                ? ($reserva['imagen_hospedaje'] ?? '')
-                                                : ($reserva['imagen'] ?? '');
-                                            $imgPath = $esHospedaje
-                                                ? BASE_URL . 'public/uploads/hotelero/actividades/'
-                                                : BASE_URL . 'public/uploads/turistico/actividades/';
-                                            ?>
-                                            <?php if (!empty($imgFile)): ?>
-                                                <img src="<?= $imgPath . htmlspecialchars($imgFile) ?>"
-                                                    class="ag-rv-img" alt="<?= htmlspecialchars($reserva['nombre_actividad'] ?? '') ?>">
+                                            <?php if (!empty($reserva['imagen'])): ?>
+                                                <img src="<?= BASE_URL ?>public/uploads/hotelero/actividades/<?= htmlspecialchars($reserva['imagen']) ?>"
+                                                     class="ag-rv-img" alt="<?= htmlspecialchars($reserva['nombre_actividad'] ?? '') ?>">
                                             <?php else: ?>
                                                 <div class="ag-rv-img ag-rv-img--placeholder">
-                                                    <i class="bi bi-<?= $esHospedaje ? 'building' : 'image' ?>"></i>
+                                                    <i class="bi bi-building"></i>
                                                 </div>
                                             <?php endif; ?>
-                                            <div>
-                                                <div class="ag-table__act-name"><?= htmlspecialchars($reserva['nombre_actividad'] ?? '—') ?></div>
-                                                <?php if ($esHospedaje): ?>
-                                                    <div class="ag-table__act-meta" style="color:#EA8217;font-size:10px;font-weight:600">🏨 HOSPEDAJE</div>
-                                                <?php endif; ?>
+                                            <div class="ag-table__act-name">
+                                                <?= htmlspecialchars($reserva['nombre_actividad'] ?? '—') ?>
                                             </div>
                                         </div>
                                     </td>
@@ -327,10 +276,10 @@ foreach (array_slice($partes, 0, 2) as $p) {
                             <tr>
                                 <td colspan="7">
                                     <div class="ag-empty-state">
-                                        <i class="bi bi-calendar-x ag-empty-state__icon"></i>
-                                        <p>No tienes reservas registradas aún.</p>
-                                        <a href="<?= BASE_URL ?>descubre-tours" class="ag-btn-primary">
-                                            <i class="bi bi-compass"></i> Explorar actividades
+                                        <i class="bi bi-building ag-empty-state__icon"></i>
+                                        <p>No tienes reservas de hospedaje aún.</p>
+                                        <a href="<?= BASE_URL ?>descubre-hospedaje" class="ag-btn-primary">
+                                            <i class="bi bi-building"></i> Explorar hospedajes
                                         </a>
                                     </div>
                                 </td>
@@ -364,14 +313,14 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
             <div class="ag-rv-modal__body">
                 <div class="ag-rv-modal__gallery">
-                    <img id="modal-imagen-principal" class="ag-rv-modal__img-main" alt="Imagen actividad">
+                    <img id="modal-imagen-principal" class="ag-rv-modal__img-main" alt="Imagen hospedaje">
                     <div id="modal-galeria" class="ag-rv-modal__thumbs"></div>
                 </div>
 
                 <div class="ag-rv-modal__info">
                     <div class="ag-rv-modal__info-grid">
                         <div class="ag-rv-info-item">
-                            <div class="ag-rv-info-item__label"><i class="bi bi-person-workspace"></i> Proveedor</div>
+                            <div class="ag-rv-info-item__label"><i class="bi bi-building"></i> Establecimiento</div>
                             <div class="ag-rv-info-item__value" id="modal-proveedor">—</div>
                         </div>
                         <div class="ag-rv-info-item">
@@ -422,15 +371,11 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
 <script>const BASE_URL = '<?= BASE_URL ?>';</script>
-
-<!-- JS del modal -->
 <script src="<?= BASE_URL ?>public/assets/dashboard/turista/ver_reservas/modal_reserva.js"></script>
 
 <script>
 (function () {
-    /* MODO OSCURO */
     const body     = document.body;
     const darkBtn  = document.getElementById('ag-dark-toggle');
     const darkIcon = document.getElementById('ag-dark-icon');
@@ -446,7 +391,6 @@ foreach (array_slice($partes, 0, 2) as $p) {
     applyDark(localStorage.getItem(DARK_KEY) === '1');
     darkBtn.addEventListener('click', () => applyDark(!body.classList.contains('ag-dark')));
 
-    /* DROPDOWNS */
     function makeDropdown(btnId, panelId, chevronId) {
         const btn   = document.getElementById(btnId);
         const panel = document.getElementById(panelId);
@@ -475,18 +419,6 @@ foreach (array_slice($partes, 0, 2) as $p) {
             .forEach(c => c.classList.remove('ag-profile-btn__chevron--open'));
     });
 
-    /* NOTIFICACIONES */
-    const markAll = document.querySelector('.ag-dropdown__mark-all');
-    if (markAll) {
-        markAll.addEventListener('click', () => {
-            document.querySelectorAll('.ag-notif-item--unread')
-                .forEach(el => el.classList.remove('ag-notif-item--unread'));
-            document.querySelector('.ag-icon-btn--notif')
-                ?.classList.remove('ag-icon-btn--notif');
-        });
-    }
-
-    /* FILTROS DE ESTADO */
     const filtros = document.querySelectorAll('.ag-rv-filter');
     const filas   = document.querySelectorAll('#tablaReservas tbody tr[data-estado]');
 
@@ -501,7 +433,6 @@ foreach (array_slice($partes, 0, 2) as $p) {
         });
     });
 
-    /* BÚSQUEDA EN TABLA */
     const searchInput = document.getElementById('ag-search-input');
     if (searchInput) {
         searchInput.addEventListener('input', () => {
@@ -514,7 +445,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
 })();
 </script>
 
-    <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
-    <script src="<?= BASE_URL ?>public/assets/dashboard/sidebar-toggle-universal.js"></script>
+<script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
+<script src="<?= BASE_URL ?>public/assets/dashboard/sidebar-toggle-universal.js"></script>
 </body>
 </html>

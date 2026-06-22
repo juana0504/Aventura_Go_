@@ -46,12 +46,23 @@ class ReservaController
         require_once BASE_PATH . '/app/helpers/session_turista.php';
         require_once BASE_PATH . '/app/models/turista/ReservaTurista.php';
 
-        $idUsuario = (int) $_SESSION['user']['id_usuario'];
-
+        $idUsuario    = (int) $_SESSION['user']['id_usuario'];
         $reservaModel = new ReservaTurista();
-        $reservas     = $reservaModel->listarPorTurista($idUsuario);
+        $reservas     = $reservaModel->listarActividadesPorTurista($idUsuario);
 
         require BASE_PATH . '/app/views/dashboard/turista/ver_reservas.php';
+    }
+
+    public function verReservasHotel()
+    {
+        require_once BASE_PATH . '/app/helpers/session_turista.php';
+        require_once BASE_PATH . '/app/models/turista/ReservaTurista.php';
+
+        $idUsuario    = (int) $_SESSION['user']['id_usuario'];
+        $reservaModel = new ReservaTurista();
+        $reservas     = $reservaModel->listarHospedajesPorTurista($idUsuario);
+
+        require BASE_PATH . '/app/views/dashboard/turista/ver_reservas_hotel.php';
     }
 
 
@@ -140,47 +151,81 @@ class ReservaController
 
         if (session_status() === PHP_SESSION_NONE) { session_start(); }
 
-        if (!isset($_SESSION['user']) || $_SESSION['user']['rol'] !== 'turista') {
+        if (empty($_SESSION['user']['id_usuario']) || ($_SESSION['user']['rol'] ?? '') !== 'turista') {
             echo json_encode(['error' => 'No autorizado']);
             exit;
         }
 
-        $id        = $_GET['id'] ?? null;
-        $idTurista = (int) $_SESSION['user']['id_usuario'];
+        $id        = (int)($_GET['id'] ?? 0);
+        $idTurista = (int)$_SESSION['user']['id_usuario'];
 
-        if (!$id) {
-            echo json_encode(['error' => 'ID no recibido']);
+        if ($id <= 0) {
+            echo json_encode(['error' => 'ID inválido']);
             exit;
         }
 
         try {
-            require_once BASE_PATH . '/app/models/turista/ReservaModel.php';
+            require_once BASE_PATH . '/config/database.php';
+            $db = (new conexion())->getConexion();
 
-            $model = new ReservaModel();
-            $data  = $model->obtenerDetalleReserva((int)$id);
+            // Paso 1: reserva — verificar propietario en la misma query
+            $stmt = $db->prepare(
+                "SELECT * FROM reserva WHERE id_reserva = ? AND id_turista = ? LIMIT 1"
+            );
+            $stmt->execute([$id, $idTurista]);
+            $base = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if (!$data) {
+            if (!$base) {
                 echo json_encode(['error' => 'Reserva no encontrada']);
                 exit;
             }
 
-            // Verificar que la reserva pertenece al turista logueado
-            if ((int)$data['id_turista'] !== $idTurista) {
-                echo json_encode(['error' => 'No autorizado']);
-                exit;
+            $esHospedaje = ($base['tipo_reserva'] ?? '') === 'hospedaje';
+
+            // Paso 2: datos del servicio reservado
+            if ($esHospedaje) {
+                $stmt = $db->prepare("
+                    SELECT h.nombre AS nombre_actividad, h.descripcion,
+                           ph.nombre_establecimiento AS proveedor
+                    FROM hospedaje h
+                    LEFT JOIN proveedor_hotelero ph
+                        ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
+                    WHERE h.id_hospedaje = ? LIMIT 1
+                ");
+                $stmt->execute([$base['id_hospedaje'] ?? 0]);
+
+                $stmtImg = $db->prepare(
+                    "SELECT imagen, es_principal FROM hospedaje_imagen
+                     WHERE id_hospedaje = ? ORDER BY es_principal DESC"
+                );
+                $stmtImg->execute([$base['id_hospedaje'] ?? 0]);
+            } else {
+                $stmt = $db->prepare("
+                    SELECT a.nombre AS nombre_actividad, a.descripcion,
+                           p.nombre_empresa AS proveedor
+                    FROM actividad a
+                    LEFT JOIN proveedor p ON a.id_proveedor = p.id_proveedor
+                    WHERE a.id_actividad = ? LIMIT 1
+                ");
+                $stmt->execute([$base['id_actividad'] ?? 0]);
+
+                $stmtImg = $db->prepare(
+                    "SELECT imagen, es_principal FROM actividad_imagen
+                     WHERE id_actividad = ? ORDER BY es_principal DESC"
+                );
+                $stmtImg->execute([$base['id_actividad'] ?? 0]);
             }
 
-            $json = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-            if ($json === false) {
-                echo json_encode(['error' => 'Error al procesar los datos']);
-                exit;
-            }
+            $extra    = $stmt->fetch(PDO::FETCH_ASSOC) ?: [];
+            $imagenes = $stmtImg->fetchAll(PDO::FETCH_ASSOC);
 
-            echo $json;
+            $data = array_merge($base, $extra, ['imagenes' => $imagenes]);
+
+            echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_IGNORE);
 
         } catch (Throwable $e) {
-            error_log('obtenerReserva controller: ' . $e->getMessage());
-            echo json_encode(['error' => 'Error interno: ' . $e->getMessage()]);
+            error_log('obtenerReserva: ' . $e->getMessage());
+            echo json_encode(['error' => 'Error: ' . $e->getMessage()]);
         }
 
         exit;

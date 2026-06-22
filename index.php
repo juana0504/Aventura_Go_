@@ -172,6 +172,11 @@ switch ($request) {
         (new ReservaController())->obtenerReserva();
         break;
 
+    case '/turista/ver-reservas-hotel':
+        require_once BASE_PATH . '/app/controllers/turista/reservaController.php';
+        (new ReservaController())->verReservasHotel();
+        break;
+
     case '/turista/confirmar-reserva':
         require_once BASE_PATH . '/app/controllers/turista/reservaController.php';
         (new ReservaController())->confirmarReserva();
