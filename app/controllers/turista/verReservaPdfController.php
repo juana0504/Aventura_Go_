@@ -34,27 +34,20 @@ function generarPdfReservasTurista()
     // Inicializar modelo y obtener datos
     $reservaModel = new ReservaTurista();
     $id_turista = $_SESSION['user']['id_usuario'];
-    $filtro = $_GET['filtro'] ?? 'all';
+    $filtro = $_GET['filtro'] ?? '';
+    if ($filtro === 'all') $filtro = '';
 
-    // Obtener las reservas según el filtro
+    // Obtener las reservas según el filtro (actividades + hospedajes)
     $reservas = $reservaModel->listarParaPdf($id_turista, $filtro);
-
-    // Obtener estadísticas adicionales
-    $estadisticas = $reservaModel->obtenerEstadisticas($id_turista);
-
-    // Obtener actividades populares
-    $actividades_populares = $reservaModel->obtenerActividadesPopulares($id_turista);
 
     // Capturar el HTML del reporte
     ob_start();
 
     // Pasar variables a la vista
-    $reservas_pdf = $reservas;
-    $estadisticas_pdf = $estadisticas;
-    $actividades_populares_pdf = $actividades_populares;
-    $filtro_actual = $filtro;
+    $reservas_pdf   = $reservas;
+    $filtro_actual  = $filtro;
     $nombre_turista = $_SESSION['user']['nombre'] ?? 'Turista';
-    $email_turista = $_SESSION['user']['email'] ?? '';
+    $email_turista  = $_SESSION['user']['email'] ?? '';
 
     // Cargar la vista del PDF
     require_once BASE_PATH . '/app/views/pdf/reservas_turista_pdf.php';
