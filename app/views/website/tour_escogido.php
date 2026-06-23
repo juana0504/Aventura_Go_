@@ -200,6 +200,12 @@ if (!$actividad) {
 
                         <!-- BOTON DE RESERVAR____________________________________________________________________________________________________________ -->
 
+                        <?php if (isset($_GET['error']) && $_GET['error'] === 'cupos'): ?>
+                            <div class="alert alert-danger" role="alert" style="margin-bottom:12px;padding:10px 14px;border-radius:6px;background:#ffe0e0;color:#b00020;border:1px solid #ffb3b3;font-size:14px;">
+                                No hay suficientes cupos disponibles. Solo quedan <strong><?= (int)$actividad['cupos'] ?></strong> cupo(s) disponibles.
+                            </div>
+                        <?php endif; ?>
+
                         <form class="form-reserva" action="<?= BASE_URL ?>checkout" method="POST">
 
                             <h1>Reserva tu actividad</h1>
@@ -208,9 +214,9 @@ if (!$actividad) {
                             <input type="hidden" name="id_actividad" value="<?= $actividad['id_actividad'] ?>">
 
                             <div class="form-group">
-                                <label>Cantidad de personas</label>
-                                <input type="number" name="cantidad_personas" class="form-control" min="1" value="1"
-                                    required>
+                                <label>Cantidad de personas <small style="color:#888;">(máx. <?= (int)$actividad['cupos'] ?>)</small></label>
+                                <input type="number" name="cantidad_personas" class="form-control" min="1"
+                                    max="<?= (int)$actividad['cupos'] ?>" value="1" required>
                             </div>
 
                             <div class="form-group">

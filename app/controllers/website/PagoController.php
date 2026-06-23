@@ -68,10 +68,20 @@ $reservaTmp = $_SESSION['reserva'];
 // Si el usuario está logueado como turista, tomamos su ID, si no, null
 $idTurista = $_SESSION['user']['id_usuario'] ?? null;
 
+// Validar cupos disponibles antes de insertar (segunda línea de defensa)
+$stmtCupos = $pdo->prepare("SELECT cupos FROM actividad WHERE id_actividad = :id LIMIT 1");
+$stmtCupos->execute([':id' => $reservaTmp['id_actividad']]);
+$actCupos = $stmtCupos->fetch(PDO::FETCH_ASSOC);
+if (!$actCupos || (int)$reservaTmp['cantidad'] > (int)$actCupos['cupos']) {
+    unset($_SESSION['reserva']);
+    header('Location: ' . BASE_URL . 'descubre-tours?error=cupos');
+    exit;
+}
+
 // Insertar reserva en estado PENDIENTE
-$sql = "INSERT INTO reserva 
+$sql = "INSERT INTO reserva
     (id_turista, id_actividad, fecha, estado, tipo_reserva, cantidad_personas, precio)
-    VALUES 
+    VALUES
     (:id_turista, :id_actividad, :fecha, :estado, :tipo_reserva, :cantidad_personas, :precio)";
 
 $stmt = $pdo->prepare($sql);
