@@ -191,6 +191,17 @@ switch ($request) {
         require_once BASE_PATH . '/app/controllers/website/websiteController.php';
         break;
 
+    // Notificaciones turista (AJAX)
+    case '/turista/notificaciones/listar':
+    case '/turista/notificaciones/contar':
+    case '/turista/notificaciones/archivar':
+    case '/turista/notificaciones/leer-todas':
+        $accion = basename($ruta); // listar | contar | archivar | leer-todas
+        $_GET['accion']  = $_GET['accion']  ?? $accion;
+        $_POST['accion'] = $_POST['accion'] ?? $accion;
+        require_once BASE_PATH . '/app/controllers/turista/notificacionTuristaController.php';
+        break;
+
     // PDF
     case '/turista/pdf-reservas':
         require_once BASE_PATH . '/app/controllers/turista/verReservaPdfController.php';
