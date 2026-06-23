@@ -271,25 +271,33 @@ foreach (array_slice($partes, 0, 2) as $p) {
                         <div class="ag-stat-card__value"><?= number_format($pendientes) ?></div>
                     </div>
 
-                    <div class="ag-stat-card ag-stat-card--featured ag-stat-card--totales">
-                        <div class="ag-stat-card__icon ag-stat-card__icon--orange">
-                            <i class="bi bi-cash-stack"></i>
+                    <div class="ag-stat-card ag-stat-card--featured" style="flex-direction:column;align-items:flex-start;gap:6px;padding:20px;">
+                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                            <div class="ag-stat-card__icon ag-stat-card__icon--orange" style="width:36px;height:36px;min-width:36px;">
+                                <i class="bi bi-cash-stack" style="font-size:16px;"></i>
+                            </div>
+                            <span style="color:rgba(255,255,255,.6);font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;">Total Gastado</span>
                         </div>
-                        <div class="ag-totales">
-                            <div class="ag-totales__row">
-                                <span class="ag-totales__label"><i class="bi bi-compass"></i> Actividades</span>
-                                <span class="ag-totales__val">$<?= number_format($totalGastadoAct, 0, ',', '.') ?></span>
-                            </div>
-                            <div class="ag-totales__divider"></div>
-                            <div class="ag-totales__row">
-                                <span class="ag-totales__label"><i class="bi bi-building"></i> Hospedajes</span>
-                                <span class="ag-totales__val">$<?= number_format($totalGastadoHosp, 0, ',', '.') ?></span>
-                            </div>
-                            <div class="ag-totales__divider"></div>
-                            <div class="ag-totales__row ag-totales__row--total">
-                                <span class="ag-totales__label">Total gastado</span>
-                                <span class="ag-totales__val ag-totales__val--big">$<?= number_format($totalGastado, 0, ',', '.') ?></span>
-                            </div>
+                        <!-- fila actividades -->
+                        <div style="display:flex;justify-content:space-between;width:100%;align-items:center;">
+                            <span style="color:#fff;font-size:13px;display:flex;align-items:center;gap:5px;">
+                                <i class="bi bi-compass" style="color:#EA8217;"></i> Actividades
+                            </span>
+                            <span style="color:#fff;font-size:14px;font-weight:700;">$<?= number_format($totalGastadoAct, 0, ',', '.') ?></span>
+                        </div>
+                        <!-- fila hospedajes -->
+                        <div style="display:flex;justify-content:space-between;width:100%;align-items:center;">
+                            <span style="color:#fff;font-size:13px;display:flex;align-items:center;gap:5px;">
+                                <i class="bi bi-building" style="color:#EA8217;"></i> Hospedajes
+                            </span>
+                            <span style="color:#fff;font-size:14px;font-weight:700;">$<?= number_format($totalGastadoHosp, 0, ',', '.') ?></span>
+                        </div>
+                        <!-- divisor naranja -->
+                        <div style="width:100%;height:2px;background:#EA8217;margin:4px 0;border-radius:2px;"></div>
+                        <!-- total -->
+                        <div style="display:flex;justify-content:space-between;width:100%;align-items:center;">
+                            <span style="color:#EA8217;font-size:13px;font-weight:700;">Total gastado</span>
+                            <span style="color:#EA8217;font-size:20px;font-weight:800;">$<?= number_format($totalGastado, 0, ',', '.') ?></span>
                         </div>
                     </div>
 
@@ -382,10 +390,10 @@ foreach (array_slice($partes, 0, 2) as $p) {
                             <?php endif; ?>
                         </tbody>
                         <tfoot>
-                            <tr class="ag-table__total-row">
-                                <td colspan="4"><strong>Total actividades turísticas</strong></td>
-                                <td><strong>$<?= number_format($totalGastadoAct, 0, ',', '.') ?></strong></td>
-                                <td></td>
+                            <tr>
+                                <td colspan="4" style="background:#2D4059;color:#fff;padding:13px 20px;font-size:14px;font-weight:700;border:none;border-radius:0 0 0 8px;">Total actividades turísticas</td>
+                                <td style="background:#2D4059;color:#fff;padding:13px 20px;font-size:14px;font-weight:700;border:none;">$<?= number_format($totalGastadoAct, 0, ',', '.') ?></td>
+                                <td style="background:#2D4059;border:none;border-radius:0 0 8px 0;"></td>
                             </tr>
                         </tfoot>
                     </table>
@@ -444,10 +452,10 @@ foreach (array_slice($partes, 0, 2) as $p) {
                             <?php endif; ?>
                         </tbody>
                         <tfoot>
-                            <tr class="ag-table__total-row">
-                                <td colspan="4"><strong>Total reservas de hospedaje</strong></td>
-                                <td><strong>$<?= number_format($totalGastadoHosp, 0, ',', '.') ?></strong></td>
-                                <td></td>
+                            <tr>
+                                <td colspan="4" style="background:#2D4059;color:#fff;padding:13px 20px;font-size:14px;font-weight:700;border:none;border-radius:0 0 0 8px;">Total reservas de hospedaje</td>
+                                <td style="background:#2D4059;color:#fff;padding:13px 20px;font-size:14px;font-weight:700;border:none;">$<?= number_format($totalGastadoHosp, 0, ',', '.') ?></td>
+                                <td style="background:#2D4059;border:none;border-radius:0 0 8px 0;"></td>
                             </tr>
                         </tfoot>
                     </table>
