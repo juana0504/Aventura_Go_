@@ -181,7 +181,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                     <h1 class="ag-page-header__title">Mis <span>Reservas</span></h1>
                     <p class="ag-greeting__sub">Consulta, confirma o cancela tus reservas de aventura</p>
                 </div>
-                <a href="<?= BASE_URL ?>turista/pdf-reservas?tipo=turista_reservas" class="ag-btn-pdf" target="_blank">
+                <a href="<?= BASE_URL ?>turista/pdf-reservas?tipo_reserva=actividad" class="ag-btn-pdf" target="_blank">
                     <i class="bi bi-file-earmark-pdf"></i> Generar Reporte
                 </a>
             </div>

@@ -31,14 +31,29 @@ function generarPdfReservasTurista()
 {
     // La sesión ya está validada por session_turista.php
 
-    // Inicializar modelo y obtener datos
     $reservaModel = new ReservaTurista();
-    $id_turista = $_SESSION['user']['id_usuario'];
-    $filtro = $_GET['filtro'] ?? '';
+    $id_turista   = $_SESSION['user']['id_usuario'];
+    $tipo_reserva = $_GET['tipo_reserva'] ?? 'actividad'; // 'actividad' | 'hospedaje'
+    $filtro       = $_GET['filtro'] ?? '';
     if ($filtro === 'all') $filtro = '';
 
-    // Obtener las reservas según el filtro (actividades + hospedajes)
-    $reservas = $reservaModel->listarParaPdf($id_turista, $filtro);
+    // Cargar reservas del tipo correspondiente
+    if ($tipo_reserva === 'hospedaje') {
+        $reservas   = $reservaModel->listarHospedajesPorTurista($id_turista);
+        $titulo_pdf = 'Mis Reservas de Hospedaje';
+        $modulo_pdf = 'Módulo Turista — Hospedajes';
+        $intro_pdf  = 'Registro consolidado de reservas de hospedaje realizadas en Aventura Go.';
+    } else {
+        $reservas   = $reservaModel->listarActividadesPorTurista($id_turista);
+        $titulo_pdf = 'Mis Reservas de Tours';
+        $modulo_pdf = 'Módulo Turista — Actividades';
+        $intro_pdf  = 'Registro consolidado de reservas de actividades turísticas realizadas en Aventura Go.';
+    }
+
+    // Filtrar por estado si se indicó
+    if ($filtro) {
+        $reservas = array_values(array_filter($reservas, fn($r) => ($r['estado'] ?? '') === $filtro));
+    }
 
     // Capturar el HTML del reporte
     ob_start();
