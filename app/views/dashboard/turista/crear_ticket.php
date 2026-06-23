@@ -67,20 +67,16 @@ foreach (array_slice($partes, 0, 2) as $p) {
                 </button>
 
                 <div class="ag-topbar__dropdown-wrap">
-                    <button class="ag-icon-btn ag-icon-btn--notif" id="ag-notif-btn">
+                    <button class="ag-icon-btn" id="ag-notif-btn" title="Notificaciones" style="position:relative;">
                         <i class="bi bi-bell-fill"></i>
+                        <span id="ag-notif-badge" style="display:none;position:absolute;top:-4px;right:-4px;background:#EA8217;color:#fff;font-size:10px;font-weight:700;min-width:18px;height:18px;border-radius:999px;align-items:center;justify-content:center;padding:0 4px;line-height:1;"></span>
                     </button>
                     <div class="ag-dropdown ag-dropdown--notif" id="ag-notif-panel">
                         <div class="ag-dropdown__header">
                             <span class="ag-dropdown__title">Notificaciones</span>
+                            <button class="ag-dropdown__mark-all" id="ag-notif-marcar-todas">Marcar todas</button>
                         </div>
-                        <div class="ag-notif-list">
-                            <div class="ag-notif-item">
-                                <div class="ag-notif-item__body">
-                                    <p class="ag-notif-item__text">Bienvenido al centro de soporte.</p>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="ag-notif-list" id="ag-notif-list"></div>
                     </div>
                 </div>
 
@@ -195,6 +191,8 @@ foreach (array_slice($partes, 0, 2) as $p) {
 })();
 </script>
     <script src="<?= BASE_URL ?>public/assets/dashboard/adm-clock.js"></script>
+    <script>window.AG_BASE_URL = '<?= BASE_URL ?>';</script>
+    <script src="<?= BASE_URL ?>public/assets/dashboard/turista/notificaciones.js"></script>
     <script src="<?= BASE_URL ?>public/assets/dashboard/sidebar-toggle-universal.js"></script>
     <script>
     document.getElementById('ag-reservas-toggle')?.addEventListener('click', function () {
