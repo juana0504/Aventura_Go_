@@ -98,7 +98,7 @@ header {
     background: var(--color-primary);
     color: #fff;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(45,64,89,.18);
+    box-shadow: 0 4px 12px rgba(45, 64, 89, .18);
 }
 
 .nav-link:hover i {
@@ -109,7 +109,7 @@ header {
     background: var(--color-secondary);
     color: #fff !important;
     font-weight: 600;
-    box-shadow: 0 4px 14px rgba(234,130,23,.35);
+    box-shadow: 0 4px 14px rgba(234, 130, 23, .35);
 }
 
 .nav-link.active i {
@@ -279,8 +279,19 @@ header {
 #hero .carousel {
     border-radius: 25px;
     overflow: hidden;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
     margin: 0 40px;
+    box-shadow:
+        0 0 0 5px rgba(255, 255, 255, 0.92),   /* anillo blanco separador   */
+        0 0 0 9px rgba(234, 130, 23, 0.55),     /* línea naranja exterior    */
+        0 14px 44px rgba(0, 0, 0, 0.22);        /* sombra profunda           */
+    transition: box-shadow 0.4s ease;
+}
+
+#hero .carousel:hover {
+    box-shadow:
+        0 0 0 5px rgba(255, 255, 255, 0.95),
+        0 0 0 9px rgba(234, 130, 23, 0.88),     /* naranja más vivo en hover */
+        0 18px 52px rgba(0, 0, 0, 0.28);
 }
 
 /* Imágenes del carrusel */
@@ -411,7 +422,7 @@ header {
 
 /* ==================================================== SECCIÓN DESTINOS POPULARES ==============================================*/
 .destinos-populares {
-    padding: 60px 0;
+    padding: 5px 0;
     background-color: #fff;
     text-align: center;
     font-family: 'Raleway', sans-serif;
@@ -537,7 +548,7 @@ header {
 
 /* ================================ SECCIÓN DESTINOS MÁS VISITADOS ======================================== */
 .destinos-visitados {
-    padding: 60px 0;
+    padding: 5px 0;
     background-color: #fff;
     text-align: center;
 }
@@ -1113,7 +1124,8 @@ header {
     align-items: center;
     background-color: #2D4059;
     padding: 8px 14px;
-    border-radius: 50px; /* más pill, más elegante */
+    border-radius: 50px;
+    /* más pill, más elegante */
     gap: 10px;
     transition: all 0.3s ease;
     border: 1.5px solid transparent;
@@ -1134,7 +1146,8 @@ header {
     font-family: 'Lato', sans-serif;
     font-size: 13.5px;
     width: 100%;
-    order: 2; /* input siempre en el medio */
+    order: 2;
+    /* input siempre en el medio */
 }
 
 .buscador input::placeholder {
@@ -1363,6 +1376,10 @@ header {
     /* HERO ajustes móviles */
     #hero .carousel {
         margin: 0 10px;
+        box-shadow:
+            0 0 0 4px rgba(255, 255, 255, 0.92),
+            0 0 0 7px rgba(234, 130, 23, 0.5),
+            0 10px 30px rgba(0, 0, 0, 0.2);
     }
 
     #hero .carousel-item img {
@@ -1514,6 +1531,10 @@ header {
     #hero .carousel {
         border-radius: 12px;
         margin: 0 10px;
+        box-shadow:
+            0 0 0 3px rgba(255, 255, 255, 0.92),
+            0 0 0 6px rgba(234, 130, 23, 0.5),
+            0 8px 24px rgba(0, 0, 0, 0.2);
     }
 
     #hero .carousel-item img {
@@ -1610,11 +1631,18 @@ header {
         font-size: 18px;
     }
 }
+
 /* ─── NAVBAR + FOOTER RESPONSIVE (≤768px) — v2 ─── */
 @media screen and (max-width: 768px) {
+
     /* Navbar */
-    .navbar      { padding: 8px 16px; }
-    .navbar-logo { width: 90px; }
+    .navbar {
+        padding: 8px 16px;
+    }
+
+    .navbar-logo {
+        width: 90px;
+    }
 
     .navbar-nav {
         display: none;
@@ -1630,40 +1658,119 @@ header {
         padding: 16px 20px;
         z-index: 1000;
     }
-    .navbar-nav.show { display: flex; }
-    .menu-toggle     { display: block; font-size: 22px; }
-    .actions         { margin-right: 0; gap: 8px; }
+
+    .navbar-nav.show {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+        font-size: 22px;
+    }
+
+    .actions {
+        margin-right: 0;
+        gap: 8px;
+    }
+
     .btn-login,
-    .btn-register    { padding: 6px 10px; font-size: 12px; border-radius: 6px; }
+    .btn-register {
+        padding: 6px 10px;
+        font-size: 12px;
+        border-radius: 6px;
+    }
 
     /* Carousel full-width */
-    #hero            { margin-top: 60px; }
-    #hero .carousel  { margin: 0; border-radius: 0; }
-    #hero .carousel-item img { height: 260px; object-fit: cover; }
-    #hero .carousel-caption  {
+    #hero {
+        margin-top: 60px;
+    }
+
+    #hero .carousel {
+        margin: 0;
+        border-radius: 0;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    #hero .carousel-item img {
+        height: 260px;
+        object-fit: cover;
+    }
+
+    #hero .carousel-caption {
         left: 50%;
         transform: translate(-50%, -50%);
         text-align: center;
         width: 90%;
     }
+
     #hero .carousel-caption h1,
-    #hero .carousel-caption h2 { font-size: 26px; line-height: 1.2; }
-    #hero .carousel-caption p  { font-size: 12px; }
-    #hero h2.marca             { display: none; }
+    #hero .carousel-caption h2 {
+        font-size: 26px;
+        line-height: 1.2;
+    }
+
+    #hero .carousel-caption p {
+        font-size: 12px;
+    }
+
+    #hero h2.marca {
+        display: none;
+    }
 
     /* Footer superior */
-    .footer-top { text-align: center; padding: 20px 15px; }
-    .footer-top .row .col-md-12 { flex-direction: column; align-items: center; gap: 16px; margin: 0; }
-    .footer-top h2 { margin-left: 0; font-size: 18px; text-align: center; padding: 0; }
-    .footer-top a  { margin-right: 0; margin-left: 0; font-size: 14px; padding: 10px 20px; }
+    .footer-top {
+        text-align: center;
+        padding: 20px 15px;
+    }
+
+    .footer-top .row .col-md-12 {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        margin: 0;
+    }
+
+    .footer-top h2 {
+        margin-left: 0;
+        font-size: 18px;
+        text-align: center;
+        padding: 0;
+    }
+
+    .footer-top a {
+        margin-right: 0;
+        margin-left: 0;
+        font-size: 14px;
+        padding: 10px 20px;
+    }
 
     /* Footer inferior */
-    .footer-bottom .row     { flex-wrap: wrap; gap: 20px; }
-    .footer-bottom .col-md-2 { min-width: 45%; text-align: center; }
-    .dest-section, .enlaces-section,
-    .contacto-section, .redes-section { margin-left: 0; }
-    .footer-bottom .list-unstyled li  { margin-left: 0; margin-right: 0; }
-    .social-links { justify-content: center; margin-left: 0; }
+    .footer-bottom .row {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .footer-bottom .col-md-2 {
+        min-width: 45%;
+        text-align: center;
+    }
+
+    .dest-section,
+    .enlaces-section,
+    .contacto-section,
+    .redes-section {
+        margin-left: 0;
+    }
+
+    .footer-bottom .list-unstyled li {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .social-links {
+        justify-content: center;
+        margin-left: 0;
+    }
 }
 
 
@@ -1700,14 +1807,26 @@ header {
 
 /* ── fadeInDown (referenciado en header pero faltaba la definición) ── */
 @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ── Ken Burns: zoom suave en imagen del slide activo ── */
 @keyframes kenBurns {
-    from { transform: scale(1);    }
-    to   { transform: scale(1.07); }
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.07);
+    }
 }
 
 #hero .carousel-item.active img {
@@ -1716,24 +1835,40 @@ header {
 
 /* ── Caption: entrada escalonada h1 → h2 → p ── */
 @keyframes captionSlideUp {
-    from { opacity: 0; transform: translateY(28px); }
-    to   { opacity: 1; transform: translateY(0);    }
+    from {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 #hero .carousel-item.active .carousel-caption h1 {
     animation: captionSlideUp 0.65s ease 0.15s both;
 }
+
 #hero .carousel-item.active .carousel-caption h2 {
     animation: captionSlideUp 0.65s ease 0.38s both;
 }
+
 #hero .carousel-item.active .carousel-caption p {
     animation: captionSlideUp 0.65s ease 0.58s both;
 }
 
 /* ── Marca "AVENTURA GO": glow naranja pulsante ── */
 @keyframes marcaGlow {
-    0%, 100% { text-shadow: 0 0 0px rgba(234,130,23,0); }
-    50%       { text-shadow: 0 0 18px rgba(234,130,23,0.75), 0 0 36px rgba(234,130,23,0.3); }
+
+    0%,
+    100% {
+        text-shadow: 0 0 0px rgba(234, 130, 23, 0);
+    }
+
+    50% {
+        text-shadow: 0 0 18px rgba(234, 130, 23, 0.75), 0 0 36px rgba(234, 130, 23, 0.3);
+    }
 }
 
 #hero h2.marca {
@@ -1823,7 +1958,7 @@ header {
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: background-color 0.3s ease, color 0.3s ease,
-                transform 0.2s ease, box-shadow 0.3s ease;
+        transform 0.2s ease, box-shadow 0.3s ease;
     margin-top: 30px;
 }
 
@@ -1946,9 +2081,19 @@ header {
 
 /* ── Redes sociales: bounce en hover ── */
 @keyframes socialBounce {
-    0%, 100% { transform: translateY(0)    scale(1);    }
-    40%       { transform: translateY(-6px) scale(1.15); }
-    70%       { transform: translateY(-2px) scale(1.05); }
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    40% {
+        transform: translateY(-6px) scale(1.15);
+    }
+
+    70% {
+        transform: translateY(-2px) scale(1.05);
+    }
 }
 
 .social-links a:hover {
