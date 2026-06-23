@@ -345,6 +345,38 @@ class ActividadTuristica
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function listarTopPorCalificacion(int $limite = 3): array
+    {
+        $sql = "
+            SELECT
+                a.id_actividad,
+                a.nombre,
+                a.precio,
+                c.nombre AS ciudad,
+                COALESCE(
+                    MIN(CASE WHEN ai.es_principal = 1 THEN ai.imagen END),
+                    MIN(a.imagen)
+                ) AS imagen,
+                ROUND(COALESCE(AVG(r.calificacion), 0), 1) AS promedio_calificacion,
+                COUNT(r.id_resena)                          AS total_resenas
+            FROM actividad a
+            INNER JOIN proveedor p  ON a.id_proveedor = p.id_proveedor AND p.estado = 'ACTIVO'
+            INNER JOIN ciudades   c ON a.id_ciudad    = c.id_ciudad
+            LEFT  JOIN actividad_imagen ai ON ai.id_actividad = a.id_actividad AND ai.es_principal = 1
+            LEFT  JOIN resena r ON r.id_actividad = a.id_actividad
+            WHERE a.estado = 'ACTIVO'
+            GROUP BY a.id_actividad, a.nombre, a.precio, c.nombre
+            ORDER BY promedio_calificacion DESC, total_resenas DESC, a.id_actividad DESC
+            LIMIT :limite
+        ";
+
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindValue(':limite', $limite, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function eliminar($id)
     {
         try {

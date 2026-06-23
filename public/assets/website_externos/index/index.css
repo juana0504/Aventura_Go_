@@ -1672,6 +1672,32 @@ header {
    Solo CSS · sin tocar HTML / PHP / JS
    ========================================================================== */
 
+/* ── Badge tipo hospedaje (Hotel / Cabaña / etc.) ── */
+.etiqueta-tipo-hotel {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--color-primary);
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ── Sección hospedajes: igual de espaciada que visitados ── */
+.hospedajes-recomendados {
+    padding: 0 0 60px;
+}
+
+/* ── Links dentro de tarjetas sin color azul heredado ── */
+.tarjeta-visitado a,
+.tarjeta-visitado a:hover {
+    color: inherit;
+}
+
 /* ── fadeInDown (referenciado en header pero faltaba la definición) ── */
 @keyframes fadeInDown {
     from { opacity: 0; transform: translateY(-20px); }

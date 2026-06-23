@@ -43,8 +43,12 @@ switch ($request) {
     // INICIO
     case '/':
         require_once BASE_PATH . '/app/models/proveedor_turistico/actividadTuristica.php';
-        $actividadModel      = new ActividadTuristica();
-        $destinosPopulares   = $actividadModel->listarDestinosPopulares();
+        require_once BASE_PATH . '/app/models/proveedor_hotelero/hospedaje.php';
+        $actividadModel        = new ActividadTuristica();
+        $hospedajeModel        = new Hospedaje();
+        $destinosPopulares     = $actividadModel->listarDestinosPopulares();
+        $toursDestacados       = $actividadModel->listarTopPorCalificacion(3);
+        $hospedajesRecomendados = $hospedajeModel->listarTopPorCalificacion(3);
         require BASE_PATH . '/app/views/website/index.php';
         break;
 
@@ -196,7 +200,7 @@ switch ($request) {
     case '/turista/notificaciones/contar':
     case '/turista/notificaciones/archivar':
     case '/turista/notificaciones/leer-todas':
-        $accion = basename($ruta); // listar | contar | archivar | leer-todas
+        $accion = basename($request); // listar | contar | archivar | leer-todas
         $_GET['accion']  = $_GET['accion']  ?? $accion;
         $_POST['accion'] = $_POST['accion'] ?? $accion;
         require_once BASE_PATH . '/app/controllers/turista/notificacionTuristaController.php';
