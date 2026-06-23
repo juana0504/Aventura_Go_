@@ -1688,7 +1688,6 @@ header {
     #hero .carousel {
         margin: 0;
         border-radius: 0;
-        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
     }
 
     #hero .carousel-item img {
