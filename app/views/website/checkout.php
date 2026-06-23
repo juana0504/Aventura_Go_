@@ -33,6 +33,13 @@ if (!$actividad) {
     exit;
 }
 
+// Validar que la cantidad solicitada no supere los cupos disponibles
+if ((int)$cantidad > (int)$actividad['cupos']) {
+    unset($_SESSION['reserva']);
+    header('Location: ' . BASE_URL . 'tour-escogido?id=' . (int)$idActividad . '&error=cupos');
+    exit;
+}
+
 $precioUnitario = $actividad['precio'];
 $total = $precioUnitario * $cantidad;
 

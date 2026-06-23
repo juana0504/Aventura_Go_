@@ -441,6 +441,7 @@ class ActividadTuristica
         a.id_actividad,
         a.nombre,
         a.precio,
+        a.cupos,
         a.created_at,
         COALESCE(ai.imagen, a.imagen) AS imagen_principal,
         c.nombre AS ciudad,

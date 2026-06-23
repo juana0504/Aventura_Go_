@@ -205,9 +205,12 @@ class ReservaTurista
                 "UPDATE reserva SET estado = 'cancelada' WHERE id_reserva = :id"
             )->execute([':id' => $id_reserva]);
 
-            // 4. Reintegrar disponibilidad solo para actividades
+            // 4. Reintegrar disponibilidad solo para actividades CONFIRMADAS
+            // (los cupos solo se descuentan al confirmar; una reserva pendiente
+            //  nunca descontó cupos, así que no hay nada que devolver)
             if (($reserva['tipo_reserva'] ?? 'actividad') === 'actividad'
-                && (int)$reserva['id_actividad'] > 0) {
+                && (int)$reserva['id_actividad'] > 0
+                && $reserva['estado'] === 'confirmada') {
                 $this->conexion->prepare(
                     "UPDATE actividad SET cupos = cupos + :personas WHERE id_actividad = :id"
                 )->execute([
