@@ -71,18 +71,19 @@ $id_reserva   = $reservaModel->crear([
 ]);
 
 if ($id_reserva) {
-    // Notificación al turista
-    require_once BASE_PATH . '/app/models/NotificacionModel.php';
-    (new NotificacionModel())->crear(
-        $id_turista,
-        'reserva_hospedaje',
-        '¡Reserva de hospedaje registrada!',
-        'Tu reserva en "' . $hospedaje['nombre'] . '" para el ' . date('d/m/Y', strtotime($fecha)) . ' fue registrada. El proveedor la confirmará pronto.',
-        'bi-building-check',
-        'blue',
-        'turista/ver-reservas-hotel',
-        $id_reserva
-    );
+    try {
+        require_once BASE_PATH . '/app/models/NotificacionModel.php';
+        (new NotificacionModel())->crear(
+            $id_turista,
+            'reserva_hospedaje',
+            '¡Reserva de hospedaje registrada!',
+            'Tu reserva en "' . $hospedaje['nombre'] . '" para el ' . date('d/m/Y', strtotime($fecha)) . ' fue registrada. El proveedor la confirmará pronto.',
+            'bi-building-check',
+            'blue',
+            'turista/ver-reservas-hotel',
+            $id_reserva
+        );
+    } catch (Throwable $e) { /* notificación opcional */ }
     mostrarSweetAlert(
         'success',
         '¡Reserva realizada!',

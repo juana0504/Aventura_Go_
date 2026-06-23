@@ -34,17 +34,18 @@ class ReservaController
             ':estado'            => 'pendiente'
         ]);
 
-        // Notificación al turista por reserva de actividad
-        require_once BASE_PATH . '/app/models/NotificacionModel.php';
-        (new NotificacionModel())->crear(
-            (int)$idUsuario,
-            'reserva_actividad',
-            '¡Reserva de actividad registrada!',
-            'Tu reserva para "' . ($actividad['nombre'] ?? 'actividad') . '" fue registrada con estado pendiente.',
-            'bi-compass',
-            'green',
-            'turista/ver-reservas'
-        );
+        try {
+            require_once BASE_PATH . '/app/models/NotificacionModel.php';
+            (new NotificacionModel())->crear(
+                (int)$idUsuario,
+                'reserva_actividad',
+                '¡Reserva de actividad registrada!',
+                'Tu reserva para "' . ($actividad['nombre'] ?? 'actividad') . '" fue registrada con estado pendiente.',
+                'bi-compass',
+                'green',
+                'turista/ver-reservas'
+            );
+        } catch (Throwable $e) { /* notificación opcional */ }
 
         header('Location: ' . BASE_URL . 'turista/ver-reservas');
         exit;
@@ -336,16 +337,18 @@ class ReservaController
         $ok = $model->cancelarReserva($idReserva, $idTurista);
 
         if ($ok) {
-            require_once BASE_PATH . '/app/models/NotificacionModel.php';
-            (new NotificacionModel())->crear(
-                (int)$idTurista,
-                'reserva_cancelada',
-                'Reserva cancelada',
-                'Tu reserva #' . (int)$idReserva . ' fue cancelada exitosamente.',
-                'bi-x-circle',
-                'red',
-                'turista/ver-reservas'
-            );
+            try {
+                require_once BASE_PATH . '/app/models/NotificacionModel.php';
+                (new NotificacionModel())->crear(
+                    (int)$idTurista,
+                    'reserva_cancelada',
+                    'Reserva cancelada',
+                    'Tu reserva #' . (int)$idReserva . ' fue cancelada exitosamente.',
+                    'bi-x-circle',
+                    'red',
+                    'turista/ver-reservas'
+                );
+            } catch (Throwable $e) { /* notificación opcional */ }
             echo json_encode(['ok' => true]);
         } else {
             echo json_encode(['ok' => false, 'error' => 'No se pudo cancelar. Verifica que la reserva no sea de una fecha pasada.']);
