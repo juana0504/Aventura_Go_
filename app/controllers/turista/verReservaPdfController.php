@@ -74,17 +74,19 @@ function generarPdfReservasTurista()
     header('Pragma: no-cache');
     header('Expires: 0');
 
-    // Notificación de descarga de PDF
-    require_once BASE_PATH . '/app/models/NotificacionModel.php';
-    (new NotificacionModel())->crear(
-        (int)$id_turista,
-        'pdf_descargado',
-        'PDF de reservas descargado',
-        'Generaste un reporte PDF de ' . ($tipo_reserva === 'hospedaje' ? 'reservas de hospedaje' : 'actividades turísticas') . '.',
-        'bi-file-earmark-pdf',
-        'orange',
-        $tipo_reserva === 'hospedaje' ? 'turista/ver-reservas-hotel' : 'turista/ver-reservas'
-    );
+    // Notificación de descarga de PDF (silenciosa si la tabla aún no tiene las columnas nuevas)
+    try {
+        require_once BASE_PATH . '/app/models/NotificacionModel.php';
+        (new NotificacionModel())->crear(
+            (int)$id_turista,
+            'pdf_descargado',
+            'PDF de reservas descargado',
+            'Generaste un reporte PDF de ' . ($tipo_reserva === 'hospedaje' ? 'reservas de hospedaje' : 'actividades turísticas') . '.',
+            'bi-file-earmark-pdf',
+            'orange',
+            $tipo_reserva === 'hospedaje' ? 'turista/ver-reservas-hotel' : 'turista/ver-reservas'
+        );
+    } catch (Throwable $e) { /* notificación opcional, no bloquea el PDF */ }
 
     // Generar el PDF usando el helper
     try {
