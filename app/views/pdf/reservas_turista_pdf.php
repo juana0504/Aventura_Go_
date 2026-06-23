@@ -146,6 +146,9 @@ $reservas_pdf   = $reservas_pdf   ?? [];
 $filtro_actual  = $filtro_actual  ?? '';
 $nombre_turista = $nombre_turista ?? '';
 $email_turista  = $email_turista  ?? '';
+$titulo_pdf     = $titulo_pdf     ?? 'Mis Reservas';
+$modulo_pdf     = $modulo_pdf     ?? 'Módulo Turista';
+$intro_pdf      = $intro_pdf      ?? 'Registro consolidado de reservas realizadas en Aventura Go.';
 
 // Calcular estadísticas desde los datos cargados
 $totalRes    = count($reservas_pdf);
@@ -175,8 +178,8 @@ $filtroLabel = match($filtro_actual) {
                     <div class="hero__logo-wrap"><?= $logoHeaderSvg ?></div>
                 </td>
                 <td class="hero__title">
-                    <span class="hero__eyebrow">Módulo Turista</span>
-                    <h1 class="hero__title-main">Mis Reservas</h1>
+                    <span class="hero__eyebrow"><?= htmlspecialchars($modulo_pdf) ?></span>
+                    <h1 class="hero__title-main"><?= htmlspecialchars($titulo_pdf) ?></h1>
                     <p class="hero__title-sub">
                         Historial de reservas registradas en Aventura Go
                         <?php if ($nombre_turista): ?>
@@ -198,7 +201,7 @@ $filtroLabel = match($filtro_actual) {
 
     <!-- INTRO -->
     <div class="intro">
-        Registro consolidado de sus reservas de actividades turísticas y hospedajes realizadas en Aventura Go.
+        <?= htmlspecialchars($intro_pdf) ?>
         <?php if ($email_turista): ?>
             Cuenta: <strong><?= htmlspecialchars($email_turista) ?></strong>
         <?php endif; ?>
@@ -233,8 +236,7 @@ $filtroLabel = match($filtro_actual) {
         <thead>
             <tr>
                 <th>#</th>
-                <th>Actividad / Hospedaje</th>
-                <th>Tipo</th>
+                <th>Nombre</th>
                 <th>Proveedor</th>
                 <th class="text-center">Fecha</th>
                 <th class="text-center">Personas</th>
@@ -261,13 +263,10 @@ $filtroLabel = match($filtro_actual) {
                         'pendiente'  => 'badge--warn',
                         default      => 'badge--red',
                     };
-                    $tipo = $r['tipo_reserva'] ?? 'actividad';
-                    $tipoLabel = $tipo === 'hospedaje' ? 'Hospedaje' : 'Tour';
                 ?>
                 <tr>
                     <td class="text-center"><?= $i++ ?></td>
                     <td><strong><?= htmlspecialchars($r['nombre_actividad'] ?? '—') ?></strong></td>
-                    <td class="text-center"><span class="badge badge--tipo"><?= $tipoLabel ?></span></td>
                     <td><?= htmlspecialchars($r['proveedor'] ?? '—') ?></td>
                     <td class="text-center"><?= date('d/m/Y', strtotime($r['fecha'])) ?></td>
                     <td class="text-center"><?= $cantidad ?></td>
@@ -278,7 +277,7 @@ $filtroLabel = match($filtro_actual) {
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="9" class="empty-row">No se encontraron reservas<?= $filtro_actual ? " con filtro \"$filtroLabel\"" : '' ?>.</td>
+                    <td colspan="8" class="empty-row">No se encontraron reservas<?= $filtro_actual ? " con filtro \"$filtroLabel\"" : '' ?>.</td>
                 </tr>
             <?php endif; ?>
         </tbody>
