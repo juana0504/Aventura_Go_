@@ -1167,3 +1167,5 @@ html {
 #tabla-reservas-hospedaje tfoot tr.ag-table__total-row td:last-child {
     border-radius: 0 0 8px 0;
 }
+
+@keyframes spin { to { transform: rotate(360deg); } }
