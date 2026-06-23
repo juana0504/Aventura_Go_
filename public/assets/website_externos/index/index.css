@@ -1665,3 +1665,287 @@ header {
     .footer-bottom .list-unstyled li  { margin-left: 0; margin-right: 0; }
     .social-links { justify-content: center; margin-left: 0; }
 }
+
+
+/* ==========================================================================
+   MEJORAS DINÁMICAS — Aventura Go
+   Solo CSS · sin tocar HTML / PHP / JS
+   ========================================================================== */
+
+/* ── fadeInDown (referenciado en header pero faltaba la definición) ── */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Ken Burns: zoom suave en imagen del slide activo ── */
+@keyframes kenBurns {
+    from { transform: scale(1);    }
+    to   { transform: scale(1.07); }
+}
+
+#hero .carousel-item.active img {
+    animation: kenBurns 6s ease-in-out forwards;
+}
+
+/* ── Caption: entrada escalonada h1 → h2 → p ── */
+@keyframes captionSlideUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0);    }
+}
+
+#hero .carousel-item.active .carousel-caption h1 {
+    animation: captionSlideUp 0.65s ease 0.15s both;
+}
+#hero .carousel-item.active .carousel-caption h2 {
+    animation: captionSlideUp 0.65s ease 0.38s both;
+}
+#hero .carousel-item.active .carousel-caption p {
+    animation: captionSlideUp 0.65s ease 0.58s both;
+}
+
+/* ── Marca "AVENTURA GO": glow naranja pulsante ── */
+@keyframes marcaGlow {
+    0%, 100% { text-shadow: 0 0 0px rgba(234,130,23,0); }
+    50%       { text-shadow: 0 0 18px rgba(234,130,23,0.75), 0 0 36px rgba(234,130,23,0.3); }
+}
+
+#hero h2.marca {
+    animation: marcaGlow 3s ease-in-out infinite;
+}
+
+/* ── Flechas del carrusel: glow naranja en hover ── */
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background: rgba(234, 130, 23, 0.22);
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+/* ── Títulos de sección: línea decorativa animada ── */
+.titulo-seccion,
+.titulo-seccion-visitados {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.titulo-seccion::after,
+.titulo-seccion-visitados::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #EA8217, #2D4059);
+    border-radius: 2px;
+    transition: width 0.55s ease;
+}
+
+.destinos-populares:hover .titulo-seccion::after,
+.destinos-visitados:hover .titulo-seccion-visitados::after {
+    width: 55%;
+}
+
+/* ── Cards destinos: zoom de imagen + overlay "Ver destino" ── */
+.destino-card img {
+    transition: transform 0.5s ease;
+}
+
+.destino-card:hover img {
+    transform: scale(1.07);
+}
+
+.destino-card::after {
+    content: 'Ver destino →';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: rgba(45, 64, 89, 0.52);
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 1.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    border-radius: 12px 12px 0 0;
+    pointer-events: none;
+}
+
+.destino-card:hover::after {
+    opacity: 1;
+}
+
+/* ── btn-ver-mas: de texto plano a botón pill con relleno naranja ── */
+.btn-ver-mas {
+    padding: 11px 30px;
+    border: 2px solid #EA8217;
+    border-radius: 50px;
+    color: #EA8217;
+    background-color: transparent;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, color 0.3s ease,
+                transform 0.2s ease, box-shadow 0.3s ease;
+    margin-top: 30px;
+}
+
+.btn-ver-mas:hover {
+    background-color: #EA8217;
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(234, 130, 23, 0.38);
+}
+
+/* ── btn-login: ripple + glow azul oscuro ── */
+.btn-login {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-login::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.45s ease, height 0.45s ease;
+    pointer-events: none;
+}
+
+.btn-login:hover::after {
+    width: 220px;
+    height: 220px;
+}
+
+.btn-login:hover {
+    background-color: #1e2e42;
+    box-shadow: 0 6px 18px rgba(45, 64, 89, 0.38);
+    transform: scale(1.06);
+}
+
+/* ── btn-register: ripple + glow naranja ── */
+.btn-register {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-register::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.45s ease, height 0.45s ease;
+    pointer-events: none;
+}
+
+.btn-register:hover::after {
+    width: 220px;
+    height: 220px;
+}
+
+.btn-register:hover {
+    background-color: #d0710f;
+    box-shadow: 0 6px 18px rgba(234, 130, 23, 0.38);
+    transform: scale(1.06);
+}
+
+/* ── Flechas del slider visitados: naranja con glow ── */
+.slider-arrow:hover {
+    background: var(--color-secondary);
+    color: #fff;
+    border-color: var(--color-secondary);
+    box-shadow: 0 4px 16px rgba(234, 130, 23, 0.42);
+    transform: scale(1.12);
+    transition: all 0.3s ease;
+}
+
+/* ── Tarjetas visitados: zoom imagen ── */
+.imagen-container {
+    overflow: hidden;
+}
+
+.imagen-container img {
+    transition: transform 0.5s ease;
+}
+
+.tarjeta-visitado:hover .imagen-container img {
+    transform: scale(1.07);
+}
+
+/* ── Badges: escalan en hover ── */
+.etiqueta-oferta,
+.etiqueta-descuento {
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.tarjeta-visitado:hover .etiqueta-oferta {
+    background-color: #EA8217;
+    transform: scale(1.08);
+}
+
+.tarjeta-visitado:hover .etiqueta-descuento {
+    background-color: #2D4059;
+    transform: scale(1.08);
+}
+
+/* ── Precio actual: cambia a naranja en hover ── */
+.precio-actual {
+    transition: color 0.3s ease;
+}
+
+.tarjeta-visitado:hover .precio-actual {
+    color: var(--color-secondary);
+}
+
+/* ── Redes sociales: bounce en hover ── */
+@keyframes socialBounce {
+    0%, 100% { transform: translateY(0)    scale(1);    }
+    40%       { transform: translateY(-6px) scale(1.15); }
+    70%       { transform: translateY(-2px) scale(1.05); }
+}
+
+.social-links a:hover {
+    animation: socialBounce 0.5s ease forwards;
+    color: #EA8217;
+}
+
+/* ── Profile btn: oscurecer en hover ── */
+.profile-btn {
+    transition: background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.profile-btn:hover {
+    background-color: #1e2e42;
+    box-shadow: 0 4px 12px rgba(45, 64, 89, 0.3);
+}
+
+/* ── Buscador: ícono rota en focus ── */
+.buscador i {
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.3s ease;
+}
+
+.buscador:focus-within i {
+    transform: rotate(90deg) scale(1.15);
+    color: #fff;
+}
