@@ -12,6 +12,9 @@
 
     let cargado = false;
 
+    // Mostrar estado vacío por defecto para que el panel tenga altura desde el inicio
+    list.innerHTML = renderVacio();
+
     /* ── BADGE: contar no leídas al cargar ─────────────── */
     fetch(BASE + 'turista/notificaciones/contar')
         .then(r => r.json())
@@ -19,7 +22,6 @@
             if (d.ok && d.total > 0) {
                 badge.textContent = d.total > 99 ? '99+' : d.total;
                 badge.style.display = 'flex';
-                btn.classList.add('ag-icon-btn--notif-active');
             }
         })
         .catch(() => {});
@@ -29,9 +31,7 @@
         e.stopPropagation();
         const open = panel.classList.toggle('ag-dropdown--open');
         if (open && !cargado) cargarNotificaciones();
-        // Limpiar badge al abrir
         badge.style.display = 'none';
-        btn.classList.remove('ag-icon-btn--notif-active');
     });
 
     /* ── CERRAR al hacer click fuera ───────────────────── */
@@ -53,7 +53,7 @@
 
     /* ── CARGAR LISTA ──────────────────────────────────── */
     function cargarNotificaciones() {
-        list.innerHTML = '<div class="ag-notif-loading"><i class="bi bi-arrow-repeat"></i> Cargando...</div>';
+        list.innerHTML = renderCargando();
         fetch(BASE + 'turista/notificaciones/listar')
             .then(r => r.json())
             .then(d => {
@@ -63,18 +63,16 @@
                     return;
                 }
                 list.innerHTML = d.notificaciones.map(renderItem).join('');
-                // Asignar handlers de archivar
                 list.querySelectorAll('.ag-notif-archivar').forEach(b => {
                     b.addEventListener('click', function (e) {
                         e.stopPropagation();
-                        const id   = this.dataset.id;
-                        const item = this.closest('.ag-notif-item');
-                        archivarNotif(id, item);
+                        archivarNotif(this.dataset.id, this.closest('.ag-notif-item'));
                     });
                 });
             })
             .catch(() => {
-                list.innerHTML = '<div class="ag-notif-loading">Error al cargar.</div>';
+                cargado = true;
+                list.innerHTML = renderVacio();
             });
     }
 
@@ -134,9 +132,19 @@
     }
 
     function renderVacio() {
-        return `<div style="text-align:center;padding:28px 16px;color:var(--ag-muted,#888);">
-            <i class="bi bi-bell-slash" style="font-size:28px;display:block;margin-bottom:8px;"></i>
-            Sin notificaciones nuevas
+        return `<div style="text-align:center;padding:32px 20px 28px;color:#999;">
+            <div style="width:52px;height:52px;border-radius:50%;background:#f0f2f5;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+                <i class="bi bi-bell-slash" style="font-size:22px;color:#bbb;"></i>
+            </div>
+            <div style="font-weight:600;font-size:14px;color:#555;margin-bottom:4px;">Sin notificaciones</div>
+            <div style="font-size:12px;line-height:1.5;">Aquí aparecerán tus reservas,<br>cancelaciones y descargas.</div>
+        </div>`;
+    }
+
+    function renderCargando() {
+        return `<div style="text-align:center;padding:28px 16px;color:#aaa;font-size:13px;">
+            <i class="bi bi-arrow-repeat" style="font-size:20px;display:block;margin-bottom:8px;animation:spin 1s linear infinite;"></i>
+            Cargando notificaciones...
         </div>`;
     }
 
@@ -149,9 +157,9 @@
         const d   = new Date(fechaStr.replace(' ', 'T'));
         const now = new Date();
         const diff = Math.floor((now - d) / 1000);
-        if (diff < 60)   return 'Hace un momento';
-        if (diff < 3600) return `Hace ${Math.floor(diff/60)} min`;
-        if (diff < 86400)return `Hace ${Math.floor(diff/3600)} h`;
+        if (diff < 60)    return 'Hace un momento';
+        if (diff < 3600)  return `Hace ${Math.floor(diff/60)} min`;
+        if (diff < 86400) return `Hace ${Math.floor(diff/3600)} h`;
         if (diff < 172800) return 'Ayer';
         return d.toLocaleDateString('es-CO', { day:'2-digit', month:'short' });
     }
