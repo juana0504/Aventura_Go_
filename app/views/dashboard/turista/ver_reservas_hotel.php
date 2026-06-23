@@ -414,7 +414,6 @@ foreach (array_slice($partes, 0, 2) as $p) {
         });
     }
 
-    makeDropdown('ag-notif-btn',   'ag-notif-panel');
     makeDropdown('ag-profile-btn', 'ag-profile-panel', 'ag-profile-chevron');
 
     document.addEventListener('click', () => {
