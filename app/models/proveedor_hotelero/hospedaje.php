@@ -602,6 +602,41 @@ class Hospedaje
         }
     }
 
+    public function listarTopPorCalificacion(int $limite = 3): array
+    {
+        try {
+            $sql = "
+                SELECT
+                    h.id_hospedaje,
+                    h.nombre,
+                    h.precio,
+                    h.tipo,
+                    c.nombre AS ciudad,
+                    COALESCE(img.imagen, h.imagen) AS imagen,
+                    ROUND(COALESCE(AVG(rh.calificacion), 0), 1) AS promedio_calificacion,
+                    COUNT(rh.calificacion)                       AS total_resenas
+                FROM hospedaje h
+                INNER JOIN proveedor_hotelero ph ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero AND ph.estado = 'ACTIVO'
+                INNER JOIN ciudades           c  ON h.id_ciudad = c.id_ciudad
+                LEFT  JOIN hospedaje_imagen   img ON img.id_hospedaje = h.id_hospedaje AND img.es_principal = 1
+                LEFT  JOIN resena_hospedaje   rh  ON rh.id_hospedaje  = h.id_hospedaje
+                WHERE h.estado = 'ACTIVO'
+                GROUP BY h.id_hospedaje, h.nombre, h.precio, h.tipo, c.nombre, img.imagen, h.imagen
+                ORDER BY promedio_calificacion DESC, total_resenas DESC, h.id_hospedaje DESC
+                LIMIT :limite
+            ";
+
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindValue(':limite', $limite, PDO::PARAM_INT);
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Hospedaje::listarTopPorCalificacion: " . $e->getMessage());
+            return [];
+        }
+    }
+
     public function buscarPublicos(string $q): array
     {
         try {

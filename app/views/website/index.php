@@ -282,82 +282,124 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
 
-    <!-- SECCIÓN DESTINOS MÁS VISITADOS -->
+    <!-- SECCIÓN TOURS MEJOR CALIFICADOS -->
     <section class="destinos-visitados container my-5">
         <h2 class="titulo-seccion-visitados text-center">Destinos más visitados</h2>
 
         <div class="slider-visitados">
-            <!-- Flecha izquierda -->
-            <button class="slider-arrow arrow-left">
-                <i class="fas fa-chevron-left"></i>
-            </button>
+            <button class="slider-arrow arrow-left"><i class="fas fa-chevron-left"></i></button>
 
-            <!-- Contenedor de tarjetas -->
             <div class="slider-contenido">
-                <!-- Tarjeta 1 -->
-                <div class="tarjeta-visitado">
-                    <div class="imagen-container">
-                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_visitados_villeta.png"
-                            alt="Villeta Cundinamarca">
-                        <span class="etiqueta-oferta">Oferta especial</span>
+                <?php if (empty($toursDestacados)): ?>
+                    <p class="text-muted text-center w-100 py-4">Próximamente tours disponibles.</p>
+                <?php else: ?>
+                    <?php foreach ($toursDestacados as $i => $tour):
+                        $imgTour    = !empty($tour['imagen'])
+                                        ? BASE_URL . 'public/uploads/turistico/actividades/' . rawurlencode($tour['imagen'])
+                                        : BASE_URL . 'public/assets/website_externos/descubre_tours/img/imagen%20tour.png';
+                        $promedio   = (float) $tour['promedio_calificacion'];
+                        $totalRes   = (int)   $tour['total_resenas'];
+                        $estrellas  = str_repeat('★', (int) round($promedio)) . str_repeat('☆', 5 - (int) round($promedio));
+                        $precio     = '$' . number_format($tour['precio'], 0, ',', '.');
+                    ?>
+                    <div class="tarjeta-visitado">
+                        <a href="<?= BASE_URL ?>tour-escogido?id=<?= $tour['id_actividad'] ?>" class="text-decoration-none">
+                            <div class="imagen-container">
+                                <img src="<?= htmlspecialchars($imgTour) ?>"
+                                     alt="<?= htmlspecialchars($tour['nombre']) ?>"
+                                     onerror="this.src='<?= BASE_URL ?>public/assets/website_externos/descubre_tours/img/imagen%20tour.png'">
+                                <?php if ($i === 0 && $totalRes > 0): ?>
+                                    <span class="etiqueta-oferta">Más reseñas</span>
+                                <?php elseif ($promedio >= 4.5 && $totalRes > 0): ?>
+                                    <span class="etiqueta-descuento">Top rated</span>
+                                <?php endif; ?>
+                            </div>
+                            <div class="tarjeta-info">
+                                <h5 class="tarjeta-titulo"><?= strtoupper(htmlspecialchars($tour['nombre'])) ?></h5>
+                                <p class="tarjeta-estrellas">
+                                    <?= $estrellas ?>
+                                    <span class="reviews">(<?= $totalRes ?> reseña<?= $totalRes !== 1 ? 's' : '' ?>)</span>
+                                </p>
+                                <div class="tarjeta-detalles">
+                                    <p class="duracion"><i class="fas fa-map-marker-alt"></i> <?= htmlspecialchars($tour['ciudad']) ?></p>
+                                    <p class="precio">
+                                        <span class="precio-anterior">Desde</span>
+                                        <span class="precio-actual"><?= $precio ?></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                    <div class="tarjeta-info">
-                        <h5 class="tarjeta-titulo">VILLETA CUNDINAMARCA</h5>
-                        <p class="tarjeta-estrellas">★★★★★ <span class="reviews">(1 Review)</span></p>
-                        <div class="tarjeta-detalles">
-                            <p class="duracion"><i class="far fa-clock"></i> Pasadía</p>
-                            <p class="precio">
-                                <span class="precio-anterior">Desde $180.000</span>
-                                <span class="precio-actual">$120.000</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tarjeta 2 -->
-                <div class="tarjeta-visitado">
-                    <div class="imagen-container">
-                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_sasaima.png"
-                            alt="Sasaima Cundinamarca">
-                    </div>
-                    <div class="tarjeta-info">
-                        <h5 class="tarjeta-titulo">SASAIMA CUNDINAMARCA</h5>
-                        <p class="tarjeta-estrellas">★★★★★ <span class="reviews">(1 Review)</span></p>
-                        <div class="tarjeta-detalles">
-                            <p class="duracion"><i class="far fa-clock"></i> 2 días, 1 noche</p>
-                            <p class="precio">
-                                <span class="precio-anterior">Desde</span>
-                                <span class="precio-actual">$165.000</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tarjeta 3 -->
-                <div class="tarjeta-visitado">
-                    <div class="imagen-container">
-                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/destinos_populares_lavega.png"
-                            alt="La Vega Cundinamarca">
-                        <span class="etiqueta-descuento">20% off</span>
-                    </div>
-                    <div class="tarjeta-info">
-                        <h5 class="tarjeta-titulo">LA VEGA CUNDINAMARCA</h5>
-                        <p class="tarjeta-estrellas">★★★★★ <span class="reviews">(1 Review)</span></p>
-                        <div class="tarjeta-detalles">
-                            <p class="duracion"><i class="far fa-clock"></i> 2 días, 1 noche</p>
-                            <p class="precio">
-                                <span class="precio-anterior">Desde</span>
-                                <span class="precio-actual">$195.000</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
 
-            <!-- Flecha derecha -->
-            <button class="slider-arrow arrow-right">
-                <i class="fas fa-chevron-right"></i>
-            </button>
+            <button class="slider-arrow arrow-right"><i class="fas fa-chevron-right"></i></button>
+        </div>
+
+        <div class="text-center mt-3">
+            <a href="<?= BASE_URL ?>descubre-tours" class="btn-ver-mas">Ver todos los tours</a>
+        </div>
+    </section>
+
+
+    <!-- SECCIÓN HOSPEDAJES RECOMENDADOS -->
+    <section class="hospedajes-recomendados container my-5">
+        <h2 class="titulo-seccion-visitados text-center">Hospedajes recomendados</h2>
+
+        <div class="slider-visitados">
+            <button class="slider-arrow arrow-left"><i class="fas fa-chevron-left"></i></button>
+
+            <div class="slider-contenido">
+                <?php if (empty($hospedajesRecomendados)): ?>
+                    <p class="text-muted text-center w-100 py-4">Próximamente hospedajes disponibles.</p>
+                <?php else: ?>
+                    <?php foreach ($hospedajesRecomendados as $i => $hotel):
+                        $imgHotel   = !empty($hotel['imagen'])
+                                        ? BASE_URL . 'public/uploads/hotelero/actividades/' . rawurlencode($hotel['imagen'])
+                                        : BASE_URL . 'public/assets/website_externos/descubre_tours/img/imagen%20tour.png';
+                        $promedio   = (float) $hotel['promedio_calificacion'];
+                        $totalRes   = (int)   $hotel['total_resenas'];
+                        $estrellas  = str_repeat('★', (int) round($promedio)) . str_repeat('☆', 5 - (int) round($promedio));
+                        $precio     = '$' . number_format($hotel['precio'], 0, ',', '.');
+                        $tipo       = !empty($hotel['tipo']) ? ucfirst(strtolower($hotel['tipo'])) : 'Hospedaje';
+                    ?>
+                    <div class="tarjeta-visitado tarjeta-hospedaje">
+                        <a href="<?= BASE_URL ?>hospedaje-escogido?id=<?= $hotel['id_hospedaje'] ?>" class="text-decoration-none">
+                            <div class="imagen-container">
+                                <img src="<?= htmlspecialchars($imgHotel) ?>"
+                                     alt="<?= htmlspecialchars($hotel['nombre']) ?>"
+                                     onerror="this.src='<?= BASE_URL ?>public/assets/website_externos/descubre_tours/img/imagen%20tour.png'">
+                                <span class="etiqueta-tipo-hotel"><?= htmlspecialchars($tipo) ?></span>
+                                <?php if ($promedio >= 4.5 && $totalRes > 0): ?>
+                                    <span class="etiqueta-descuento">Top rated</span>
+                                <?php endif; ?>
+                            </div>
+                            <div class="tarjeta-info">
+                                <h5 class="tarjeta-titulo"><?= strtoupper(htmlspecialchars($hotel['nombre'])) ?></h5>
+                                <p class="tarjeta-estrellas">
+                                    <?= $estrellas ?>
+                                    <span class="reviews">(<?= $totalRes ?> reseña<?= $totalRes !== 1 ? 's' : '' ?>)</span>
+                                </p>
+                                <div class="tarjeta-detalles">
+                                    <p class="duracion"><i class="fas fa-map-marker-alt"></i> <?= htmlspecialchars($hotel['ciudad']) ?></p>
+                                    <p class="precio">
+                                        <span class="precio-anterior">Noche desde</span>
+                                        <span class="precio-actual"><?= $precio ?></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+
+            <button class="slider-arrow arrow-right"><i class="fas fa-chevron-right"></i></button>
+        </div>
+
+        <div class="text-center mt-3">
+            <a href="<?= BASE_URL ?>descubre-hospedaje" class="btn-ver-mas">Ver todos los hospedajes</a>
         </div>
     </section>
 
