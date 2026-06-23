@@ -41,6 +41,34 @@ if (session_status() === PHP_SESSION_NONE) {
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/index/index.css">
+
+    <style>
+        /* Overlay hover tarjetas destinos */
+        .destino-card { position: relative; overflow: hidden; }
+        .destino-card img { transition: transform 0.5s ease; }
+        .destino-card:hover img { transform: scale(1.07); }
+        .destino-card::after {
+            content: 'Ver destino \2192';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 200px;
+            background: rgba(45, 64, 89, 0.55);
+            color: #fff;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 1.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            border-radius: 12px 12px 0 0;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .destino-card:hover::after { opacity: 1; }
+    </style>
 </head>
 
 
