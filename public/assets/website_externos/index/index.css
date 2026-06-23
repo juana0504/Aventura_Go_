@@ -279,8 +279,19 @@ header {
 #hero .carousel {
     border-radius: 25px;
     overflow: hidden;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
     margin: 0 40px;
+    box-shadow:
+        0 0 0 5px rgba(255, 255, 255, 0.92),   /* anillo blanco separador   */
+        0 0 0 9px rgba(234, 130, 23, 0.55),     /* línea naranja exterior    */
+        0 14px 44px rgba(0, 0, 0, 0.22);        /* sombra profunda           */
+    transition: box-shadow 0.4s ease;
+}
+
+#hero .carousel:hover {
+    box-shadow:
+        0 0 0 5px rgba(255, 255, 255, 0.95),
+        0 0 0 9px rgba(234, 130, 23, 0.88),     /* naranja más vivo en hover */
+        0 18px 52px rgba(0, 0, 0, 0.28);
 }
 
 /* Imágenes del carrusel */
@@ -1365,6 +1376,10 @@ header {
     /* HERO ajustes móviles */
     #hero .carousel {
         margin: 0 10px;
+        box-shadow:
+            0 0 0 4px rgba(255, 255, 255, 0.92),
+            0 0 0 7px rgba(234, 130, 23, 0.5),
+            0 10px 30px rgba(0, 0, 0, 0.2);
     }
 
     #hero .carousel-item img {
@@ -1516,6 +1531,10 @@ header {
     #hero .carousel {
         border-radius: 12px;
         margin: 0 10px;
+        box-shadow:
+            0 0 0 3px rgba(255, 255, 255, 0.92),
+            0 0 0 6px rgba(234, 130, 23, 0.5),
+            0 8px 24px rgba(0, 0, 0, 0.2);
     }
 
     #hero .carousel-item img {
