@@ -45,7 +45,7 @@ if ($esTurista) {
         href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/descubre_tours/descubreTours.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/descubre_tours/descubreTours.css?v=2">
 </head>
 
 <body>

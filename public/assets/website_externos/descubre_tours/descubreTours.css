@@ -535,14 +535,18 @@ header {
 
 /* INACTIVA */
 .tab-btn:not(.active) {
-    background: var(--color-primary);
-    color: rgba(255, 255, 255, .7);
+    background: #ffffff;
+    color: var(--color-primary);
     margin-bottom: 2px;
 }
 
+.tab-btn:not(.active) .tab-icon {
+    color: var(--color-primary);
+}
+
 .tab-btn:not(.active):hover {
-    background: #ffffff;
-    color: #3a5070;
+    background: #dce4ee;
+    color: #1a2942;
     transform: translateY(-4px);
     box-shadow: 0 8px 20px rgba(45, 64, 89, .3);
 }

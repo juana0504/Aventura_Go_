@@ -39,7 +39,7 @@ if ($esTurista) {
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
   <!-- Estilos personalizados -->
-  <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/hospedaje_vega/hospedajeVega.css?v=3">
+  <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/hospedaje_vega/hospedajeVega.css?v=4">
 
 </head>
 
