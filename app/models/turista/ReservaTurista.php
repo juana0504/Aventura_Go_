@@ -177,7 +177,7 @@ class ReservaTurista
 
             // 1. Obtener datos de la reserva
             $stmt = $this->conexion->prepare(
-                "SELECT tipo_reserva, id_actividad, id_hospedaje, cantidad_personas, fecha
+                "SELECT tipo_reserva, id_actividad, id_hospedaje, cantidad_personas, fecha, estado
                  FROM reserva
                  WHERE id_reserva = :id
                    AND id_turista = :id_turista
