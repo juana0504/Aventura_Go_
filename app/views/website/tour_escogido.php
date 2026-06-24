@@ -200,34 +200,51 @@ if (!$actividad) {
 
                         <!-- BOTON DE RESERVAR____________________________________________________________________________________________________________ -->
 
-                        <?php if (isset($_GET['error']) && $_GET['error'] === 'cupos'): ?>
-                            <div class="alert alert-danger" role="alert" style="margin-bottom:12px;padding:10px 14px;border-radius:6px;background:#ffe0e0;color:#b00020;border:1px solid #ffb3b3;font-size:14px;">
-                                No hay suficientes cupos disponibles. Solo quedan <strong><?= (int)$actividad['cupos'] ?></strong> cupo(s) disponibles.
+                        <?php if ((int)$actividad['cupos'] === 0): ?>
+
+                            <div style="text-align:center;padding:30px 20px;border:2px dashed #e0e0e0;border-radius:12px;background:#fafafa;">
+                                <div style="font-size:48px;margin-bottom:12px;">😔</div>
+                                <h3 style="color:#333;font-size:20px;margin-bottom:8px;">Sin cupos disponibles</h3>
+                                <p style="color:#666;font-size:14px;margin-bottom:20px;">
+                                    Lo sentimos, esta actividad no tiene cupos disponibles en este momento.
+                                </p>
+                                <a href="<?= BASE_URL ?>descubre-tours" style="display:inline-block;background:#EA8217;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;">
+                                    Elegir otra actividad
+                                </a>
                             </div>
+
+                        <?php else: ?>
+
+                            <?php if (isset($_GET['error']) && $_GET['error'] === 'cupos'): ?>
+                                <div style="margin-bottom:12px;padding:12px 16px;border-radius:8px;background:#ffe0e0;color:#b00020;border:1px solid #ffb3b3;font-size:14px;">
+                                    ⚠️ La cantidad solicitada supera los cupos disponibles. Solo quedan <strong><?= (int)$actividad['cupos'] ?></strong> cupo(s).
+                                </div>
+                            <?php endif; ?>
+
+                            <form class="form-reserva" action="<?= BASE_URL ?>checkout" method="POST">
+
+                                <h1>Reserva tu actividad</h1>
+                                <p>Completa el formulario para reservar tu actividad.</p>
+
+                                <input type="hidden" name="id_actividad" value="<?= $actividad['id_actividad'] ?>">
+
+                                <div class="form-group">
+                                    <label>Cantidad de personas <small style="color:#888;">(máx. <?= (int)$actividad['cupos'] ?>)</small></label>
+                                    <input type="number" name="cantidad_personas" class="form-control" min="1"
+                                        max="<?= (int)$actividad['cupos'] ?>" value="1" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Fecha de la actividad</label>
+                                    <input type="date" name="fecha" class="form-control" min="<?= date('Y-m-d') ?>" required>
+                                </div>
+
+                                <button type="submit">
+                                    Reservar
+                                </button>
+                            </form>
+
                         <?php endif; ?>
-
-                        <form class="form-reserva" action="<?= BASE_URL ?>checkout" method="POST">
-
-                            <h1>Reserva tu actividad</h1>
-                            <p>Completa el formulario para reservar tu actividad.</p>
-
-                            <input type="hidden" name="id_actividad" value="<?= $actividad['id_actividad'] ?>">
-
-                            <div class="form-group">
-                                <label>Cantidad de personas <small style="color:#888;">(máx. <?= (int)$actividad['cupos'] ?>)</small></label>
-                                <input type="number" name="cantidad_personas" class="form-control" min="1"
-                                    max="<?= (int)$actividad['cupos'] ?>" value="1" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Fecha de la actividad</label>
-                                <input type="date" name="fecha" class="form-control" min="<?= date('Y-m-d') ?>" required>
-                            </div>
-
-                            <button type="submit">
-                                Reservar
-                            </button>
-                        </form>
 
 
                     </div>
