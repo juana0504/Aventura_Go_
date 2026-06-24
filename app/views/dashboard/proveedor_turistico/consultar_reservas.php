@@ -406,6 +406,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
 (function () {
@@ -523,15 +524,37 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
 /* Funciones globales — requeridas por onclick="" en HTML */
 function confirmarReserva(id) {
-    if (confirm('¿Confirmar esta reserva?\n\nEl turista será notificado.')) {
-        window.location.href = `<?= BASE_URL ?>proveedor/consultar-reservas?accion=confirmar&id=${id}`;
-    }
+    Swal.fire({
+        title: '¿Confirmar reserva?',
+        text: 'La reserva quedará marcada como confirmada y el turista será notificado.',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#2D4059',
+        cancelButtonColor: '#aaa',
+        confirmButtonText: 'Sí, confirmar',
+        cancelButtonText: 'Cancelar'
+    }).then(result => {
+        if (result.isConfirmed) {
+            window.location.href = `<?= BASE_URL ?>proveedor/consultar-reservas?accion=confirmar&id=${id}`;
+        }
+    });
 }
 
 function cancelarReserva(id) {
-    if (confirm('¿Cancelar esta reserva?\n\nEsta acción no se puede deshacer.')) {
-        window.location.href = `<?= BASE_URL ?>proveedor/consultar-reservas?accion=cancelar&id=${id}`;
-    }
+    Swal.fire({
+        title: 'Cancelar reserva',
+        text: '¿Estás seguro? Los cupos de esa fecha quedarán disponibles para otros turistas.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#c62828',
+        cancelButtonColor: '#aaa',
+        confirmButtonText: 'Sí, cancelar reserva',
+        cancelButtonText: 'No, mantener'
+    }).then(result => {
+        if (result.isConfirmed) {
+            window.location.href = `<?= BASE_URL ?>proveedor/consultar-reservas?accion=cancelar&id=${id}`;
+        }
+    });
 }
 </script>
 

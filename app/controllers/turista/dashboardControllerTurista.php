@@ -108,18 +108,10 @@ function reservarActividad() {
         exit;
     }
 
-    // Verificamos si la actividad existe y si tiene cupos disponibles
-    $actividad = $actividadModel->obtenerActividadPorId($id_actividad);
-
-    if (!$actividad || $actividad['cupos'] <= 0) {
-        mostrarSweetAlert('error', 'Cupos insuficientes', 'No hay suficientes cupos para esta actividad.');
-        exit;
-    }
-
-    // Descontamos los cupos
-    $actividadModel->descontarCupos($id_actividad, $cantidad);
-
-    mostrarSweetAlert('success', 'Reserva exitosa', 'Has reservado la actividad correctamente.', BASE_URL . 'turista/dashboard');
+    // Esta función es un stub — el flujo real de reservas pasa por checkout/PayU.
+    // Redirigir al flujo correcto.
+    header('Location: ' . BASE_URL . 'descubre-tours');
+    exit;
 
     
 }

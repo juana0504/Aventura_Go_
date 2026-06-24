@@ -142,6 +142,11 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/website/payu_respuesta.php';
         break;
 
+    // MercadoPago aún no implementado
+    case '/pago/mercadopago':
+        header('Location: ' . BASE_URL . 'checkout?error=mp_nodisponible');
+        exit;
+
     //confirmacion pago payu
     case '/confirmacion':
         require BASE_PATH . '/app/views/website/confirmacion.php';

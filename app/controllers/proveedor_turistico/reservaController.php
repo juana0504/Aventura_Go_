@@ -11,36 +11,33 @@ $id_proveedor = (new Proveedor())->obtenerIdProveedorPorUsuario($_SESSION['user'
 
 // Manejar acciones GET para confirmar/cancelar reservas
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $accion = $_GET['accion'] ?? '';
-    $id = $_GET['id'] ?? '';
+    $accion     = $_GET['accion'] ?? '';
+    $id         = $_GET['id'] ?? '';
+    $urlVolver  = BASE_URL . 'proveedor/consultar-reservas';
 
     if ($accion === 'confirmar' && $id) {
-        // Verificar seguridad: la reserva debe pertenecer al proveedor
         if ($reservaModel->verificarReservaDeProveedor($id, $id_proveedor)) {
             if ($reservaModel->confirmarReserva($id)) {
-                mostrarSweetAlert('success', 'Reserva confirmada correctamente', 'La reserva ha sido marcada como confirmada');
+                mostrarSweetAlert('success', '¡Reserva confirmada!', 'La reserva fue marcada como confirmada exitosamente.', $urlVolver);
             } else {
-                mostrarSweetAlert('error', 'Error al confirmar reserva', 'No se pudo actualizar el estado de la reserva');
+                mostrarSweetAlert('error', 'Error al confirmar', 'No se pudo actualizar el estado de la reserva.', $urlVolver);
             }
         } else {
-            mostrarSweetAlert('error', 'Acceso denegado', 'No tiene permisos para modificar esta reserva');
+            mostrarSweetAlert('error', 'Acceso denegado', 'No tienes permisos para modificar esta reserva.', $urlVolver);
         }
-        header("Location: " . BASE_URL . "/proveedor/consultar-reservas");
         exit;
     }
 
     if ($accion === 'cancelar' && $id) {
-        // Verificar seguridad: la reserva debe pertenecer al proveedor
         if ($reservaModel->verificarReservaDeProveedor($id, $id_proveedor)) {
             if ($reservaModel->cancelarReserva($id)) {
-                mostrarSweetAlert('info', 'Reserva cancelada correctamente', 'La reserva ha sido marcada como cancelada');
+                mostrarSweetAlert('info', 'Reserva cancelada', 'La reserva fue cancelada y los cupos quedaron disponibles.', $urlVolver);
             } else {
-                mostrarSweetAlert('error', 'Error al cancelar reserva', 'No se pudo actualizar el estado de la reserva');
+                mostrarSweetAlert('error', 'Error al cancelar', 'No se pudo actualizar el estado de la reserva.', $urlVolver);
             }
         } else {
-            mostrarSweetAlert('error', 'Acceso denegado', 'No tiene permisos para modificar esta reserva');
+            mostrarSweetAlert('error', 'Acceso denegado', 'No tienes permisos para modificar esta reserva.', $urlVolver);
         }
-        header("Location: " . BASE_URL . "/proveedor/consultar-reservas");
         exit;
     }
 }

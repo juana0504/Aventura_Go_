@@ -135,6 +135,14 @@ if (!isset($_SESSION['reference_code'])) {
     <main>
         <section id="formulario_confirmacion">
             <div class="container my-5">
+
+                <?php if (isset($_GET['error']) && $_GET['error'] === 'mp_nodisponible'): ?>
+                <div class="alert alert-warning mb-4" role="alert">
+                    <strong>⚠️ MercadoPago no disponible aún.</strong>
+                    Por favor selecciona <strong>PayU</strong> como método de pago para continuar.
+                </div>
+                <?php endif; ?>
+
                 <div class="row g-4">
 
                     <!-- ── RESUMEN DE RESERVA ── -->
