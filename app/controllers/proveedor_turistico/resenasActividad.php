@@ -17,7 +17,7 @@ if (!$idActividad) {
 require_once BASE_PATH . '/app/models/proveedor_turistico/Proveedor.php';
 require_once BASE_PATH . '/app/models/turista/ResenaModel.php';
 
-$idProveedor = Proveedor::obtenerIdProveedorPorUsuario($_SESSION['user']['id_usuario']);
+$idProveedor = (new Proveedor())->obtenerIdProveedorPorUsuario($_SESSION['user']['id_usuario']);
 if (!$idProveedor) {
     echo json_encode(['ok' => false, 'error' => 'Proveedor no encontrado']);
     exit;

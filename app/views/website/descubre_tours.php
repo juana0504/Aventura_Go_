@@ -160,6 +160,13 @@ if ($esTurista) {
                 </div>
             </div>
 
+            <?php if (isset($_GET['error']) && $_GET['error'] === 'cupos'): ?>
+            <div style="margin:12px 0 16px;padding:14px 18px;border-radius:10px;background:#fff3cd;color:#856404;border:1px solid #ffc107;font-size:14px;">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                <strong>Sin cupos disponibles</strong> — La fecha que elegiste está agotada para esa actividad. Prueba con otra fecha u otra actividad.
+            </div>
+            <?php endif; ?>
+
             <!-- aca va las actividades -->
             <div class="activities-grid">
 
@@ -207,7 +214,7 @@ if ($esTurista) {
                                 <!-- Cupos -->
                                 <div class="activity-duration">
                                     <i class="fas fa-users"></i>
-                                    <span><?= (int)$actividad['cupos'] ?> cupos disponibles</span>
+                                    <span>Hasta <?= (int)$actividad['cupos'] ?> personas</span>
                                 </div>
 
                                 <!-- Precio -->

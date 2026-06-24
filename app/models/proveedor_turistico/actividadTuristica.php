@@ -377,6 +377,30 @@ class ActividadTuristica
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function tieneReservas($id_actividad)
+    {
+        $sql = "SELECT COUNT(*) AS total FROM reserva
+                WHERE id_actividad = :id
+                  AND estado IN ('pendiente', 'confirmada')";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':id', $id_actividad, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return ($row && (int)$row['total'] > 0);
+    }
+
+    public function perteneceAProveedor($id_actividad, $id_proveedor)
+    {
+        $sql = "SELECT COUNT(*) AS total FROM actividad
+                WHERE id_actividad = :id AND id_proveedor = :prov";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':id', $id_actividad, PDO::PARAM_INT);
+        $stmt->bindParam(':prov', $id_proveedor, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return ($row && (int)$row['total'] > 0);
+    }
+
     public function eliminar($id)
     {
         try {
@@ -577,11 +601,12 @@ class ActividadTuristica
 
         $cuposTotales = (int)$actividad['cupos'];
 
+        // Incluir 'pendiente' y 'confirmada' para evitar overbooking
         $sql = "SELECT SUM(cantidad_personas) as reservadas
             FROM reserva
             WHERE id_actividad = :id
             AND fecha = :fecha
-            AND estado = 'Confirmada'";
+            AND estado IN ('pendiente', 'confirmada')";
 
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':id', $idActividad, PDO::PARAM_INT);
@@ -593,6 +618,29 @@ class ActividadTuristica
         $reservadas = (int)($resultado['reservadas'] ?? 0);
 
         return ($reservadas + $cantidad) <= $cuposTotales;
+    }
+
+    public function getCuposDisponiblesParaFecha($idActividad, $fecha)
+    {
+        $sql = "SELECT a.cupos,
+                       COALESCE(SUM(r.cantidad_personas), 0) AS reservadas
+                FROM actividad a
+                LEFT JOIN reserva r
+                    ON r.id_actividad = a.id_actividad
+                    AND r.fecha = :fecha
+                    AND r.estado IN ('pendiente', 'confirmada')
+                WHERE a.id_actividad = :id
+                GROUP BY a.cupos";
+
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':id', $idActividad, PDO::PARAM_INT);
+        $stmt->bindParam(':fecha', $fecha);
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$row) return 0;
+
+        return max(0, (int)$row['cupos'] - (int)$row['reservadas']);
     }
 
     public function listarPopulares(int $limite = 8): array

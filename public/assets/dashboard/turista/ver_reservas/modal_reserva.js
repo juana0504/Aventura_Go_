@@ -30,13 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const idReserva = btn.dataset.id;
 
             /* Resetear modal mientras carga */
-            elNombre.textContent      = 'Cargando...';
-            elEstadoBadge.textContent = '';
-            elEyebrow.textContent     = '';
-            elDesc.textContent        = '';
-            imgPrincipal.src          = '';
-            galeria.innerHTML         = '';
-            btnCancelar.style.display = 'none';
+            elNombre.textContent       = 'Cargando...';
+            elEstadoBadge.textContent  = '';
+            elEyebrow.textContent      = '';
+            elDesc.textContent         = '';
+            imgPrincipal.src           = '';
+            galeria.innerHTML          = '';
+            btnCancelar.style.display  = 'none';
             btnConfirmar.style.display = 'none';
 
             modalBootstrap.show();
@@ -61,14 +61,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     elEstadoBadge.className   = 'ag-badge mt-1 ' + badgeClass(data.estado);
 
                     /* ── INFO ── */
-                    elProveedor.textContent  = data.proveedor       ?? '—';
-                    elFecha.textContent      = data.fecha           ?? '—';
+                    elProveedor.textContent  = data.proveedor        ?? '—';
+                    elFecha.textContent      = data.fecha            ?? '—';
                     elPersonas.textContent   = data.cantidad_personas ?? '—';
                     elTotal.textContent      = numFormat(
                         Number(data.precio) * Number(data.cantidad_personas)
                     );
                     elEstadoText.textContent = estadoLabel;
-                    elDesc.textContent       = data.descripcion     ?? 'Sin descripción';
+                    elDesc.textContent       = data.descripcion      ?? 'Sin descripción';
 
                     /* ── IMÁGENES ── */
                     const esHospedaje = data.tipo_reserva === 'hospedaje';
@@ -104,10 +104,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     btnCancelar.dataset.id    = data.id_reserva;
                     btnCancelar.dataset.fecha = data.fecha;
                     btnCancelar.dataset.total = Number(data.precio) * Number(data.cantidad_personas);
-                    btnConfirmar.style.display = 'none';
+                    btnConfirmar.dataset.id   = data.id_reserva;
 
+                    /* Cancelar: visible si pendiente o confirmada */
                     const cancelable = data.estado === 'pendiente' || data.estado === 'confirmada';
-                    btnCancelar.style.display = cancelable ? 'inline-flex' : 'none';
+                    btnCancelar.style.display  = cancelable  ? 'inline-flex' : 'none';
+
+                    /* Confirmar: visible solo si pendiente */
+                    btnConfirmar.style.display = data.estado === 'pendiente' ? 'inline-flex' : 'none';
                 })
                 .catch(err => {
                     console.error('Error al cargar reserva:', err);
@@ -116,53 +120,133 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    /* ── CONFIRMAR RESERVA (AJAX) ── */
+    btnConfirmar.addEventListener('click', () => {
+        const idReserva = btnConfirmar.dataset.id;
+        if (!idReserva) return;
+
+        Swal.fire({
+            title: '¿Confirmar reserva?',
+            text: 'Al confirmar, tu reserva quedará marcada como confirmada.',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#2D4059',
+            cancelButtonColor: '#aaa',
+            confirmButtonText: 'Sí, confirmar',
+            cancelButtonText: 'No, volver'
+        }).then(result => {
+            if (!result.isConfirmed) return;
+
+            btnConfirmar.disabled    = true;
+            btnConfirmar.textContent = 'Confirmando...';
+
+            fetch(`${BASE_URL}turista/confirmar-reserva`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `id_reserva=${encodeURIComponent(idReserva)}`
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.ok) {
+                    modalBootstrap.hide();
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Reserva confirmada!',
+                        text: 'Tu reserva ha sido confirmada exitosamente.',
+                        confirmButtonColor: '#2D4059',
+                        timer: 2500,
+                        timerProgressBar: true
+                    }).then(() => location.reload());
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'No se pudo confirmar',
+                        text: data.error ?? 'Intenta de nuevo.',
+                        confirmButtonColor: '#2D4059'
+                    });
+                    btnConfirmar.disabled   = false;
+                    btnConfirmar.innerHTML  = '<i class="bi bi-check-lg"></i> Confirmar reserva';
+                }
+            })
+            .catch(() => {
+                Swal.fire({ icon: 'error', title: 'Error de conexión', text: 'Intenta de nuevo.', confirmButtonColor: '#2D4059' });
+                btnConfirmar.disabled   = false;
+                btnConfirmar.innerHTML  = '<i class="bi bi-check-lg"></i> Confirmar reserva';
+            });
+        });
+    });
+
     /* ── CANCELAR RESERVA (AJAX) ── */
     btnCancelar.addEventListener('click', () => {
         const idReserva   = btnCancelar.dataset.id;
-        const fechaStr    = btnCancelar.dataset.fecha;   // 'YYYY-MM-DD'
+        const fechaStr    = btnCancelar.dataset.fecha;
         const totalValor  = Number(btnCancelar.dataset.total) || 0;
         if (!idReserva) return;
 
-        // Política de 24 horas
-        const ahora       = new Date();
+        const ahora        = new Date();
         const fechaReserva = new Date(fechaStr + 'T00:00:00');
-        const diffHoras   = (fechaReserva - ahora) / (1000 * 60 * 60);
+        const diffHoras    = (fechaReserva - ahora) / (1000 * 60 * 60);
 
-        let mensaje;
+        let mensajeSwal;
+        let iconoSwal = 'warning';
         if (diffHoras > 24) {
-            mensaje = '¿Cancelar esta reserva?\n\n✅ Cancelación sin costo: la fecha de tu reserva es en más de 24 horas.';
+            mensajeSwal = '¿Cancelar esta reserva? La fecha es en más de 24 horas — sin costo adicional.';
         } else if (diffHoras > 0) {
             const penalidad = numFormat(Math.round(totalValor * 0.10));
-            mensaje = `¿Cancelar esta reserva?\n\n⚠️ Atención — estás dentro de las últimas 24 horas antes de la reserva.\nSe descontará el 10% del valor total ($${penalidad} COP) como penalidad por cancelación tardía.`;
+            mensajeSwal = `Estás dentro de las últimas 24 horas. Se aplicará una penalidad del 10% ($${penalidad} COP).`;
         } else {
-            mensaje = '¿Cancelar esta reserva?\n\n⚠️ La fecha de la reserva ya ha pasado.';
+            mensajeSwal = 'La fecha de la reserva ya pasó. ¿Deseas cancelarla de todas formas?';
+            iconoSwal = 'info';
         }
 
-        if (!confirm(mensaje)) return;
+        Swal.fire({
+            title: 'Cancelar reserva',
+            text: mensajeSwal,
+            icon: iconoSwal,
+            showCancelButton: true,
+            confirmButtonColor: '#c62828',
+            cancelButtonColor: '#aaa',
+            confirmButtonText: 'Sí, cancelar',
+            cancelButtonText: 'No, mantener'
+        }).then(result => {
+            if (!result.isConfirmed) return;
 
-        btnCancelar.disabled    = true;
-        btnCancelar.textContent = 'Cancelando...';
+            btnCancelar.disabled    = true;
+            btnCancelar.textContent = 'Cancelando...';
 
-        fetch(`${BASE_URL}turista/cancelar-reserva`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: `id_reserva=${encodeURIComponent(idReserva)}`
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.ok) {
-                modalBootstrap.hide();
-                location.reload();
-            } else {
-                alert(data.error ?? 'No se pudo cancelar la reserva. Intenta de nuevo.');
-                btnCancelar.disabled    = false;
-                btnCancelar.innerHTML   = '<i class="bi bi-x-lg"></i> Cancelar reserva';
-            }
-        })
-        .catch(() => {
-            alert('Error de conexión. Intenta de nuevo.');
-            btnCancelar.disabled  = false;
-            btnCancelar.innerHTML = '<i class="bi bi-x-lg"></i> Cancelar reserva';
+            fetch(`${BASE_URL}turista/cancelar-reserva`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `id_reserva=${encodeURIComponent(idReserva)}`
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.ok) {
+                    modalBootstrap.hide();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Reserva cancelada',
+                        text: 'Tu reserva fue cancelada. Los cupos quedan disponibles para otros turistas.',
+                        confirmButtonColor: '#2D4059',
+                        timer: 2500,
+                        timerProgressBar: true
+                    }).then(() => location.reload());
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'No se pudo cancelar',
+                        text: data.error ?? 'Intenta de nuevo.',
+                        confirmButtonColor: '#2D4059'
+                    });
+                    btnCancelar.disabled   = false;
+                    btnCancelar.innerHTML  = '<i class="bi bi-x-lg"></i> Cancelar reserva';
+                }
+            })
+            .catch(() => {
+                Swal.fire({ icon: 'error', title: 'Error de conexión', text: 'Intenta de nuevo.', confirmButtonColor: '#2D4059' });
+                btnCancelar.disabled   = false;
+                btnCancelar.innerHTML  = '<i class="bi bi-x-lg"></i> Cancelar reserva';
+            });
         });
     });
 
@@ -186,37 +270,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-});
-
-
-/* ── FILTROS DE ESTADO ── */
-document.addEventListener('DOMContentLoaded', function () {
-    const filtrosBtn    = document.querySelectorAll('.filtro-btn');
-    const filasReservas = document.querySelectorAll('tbody tr');
-
-    filtrosBtn.forEach(btn => {
-        btn.addEventListener('click', function () {
-            filtrosBtn.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-
-            const filtro = this.getAttribute('data-filter').toLowerCase();
-
-            filasReservas.forEach(fila => {
-                const celdaEstado = fila.querySelector('td:nth-child(7)');
-                if (!celdaEstado) return;
-
-                const estadoTexto = celdaEstado.textContent.trim().toLowerCase();
-
-                if (filtro === 'all') {
-                    fila.style.display = '';
-                } else if (filtro === 'activo') {
-                    fila.style.display = estadoTexto === 'confirmada' ? '' : 'none';
-                } else if (filtro === 'inactivo') {
-                    fila.style.display = estadoTexto === 'cancelada' ? '' : 'none';
-                } else if (filtro === 'pendiente') {
-                    fila.style.display = estadoTexto === 'pendiente' ? '' : 'none';
-                }
-            });
-        });
-    });
 });

@@ -427,15 +427,37 @@ function desactivarActividad($id)
 
 function eliminaractividad($id)
 {
+    require_once __DIR__ . '/../../models/proveedor_turistico/Proveedor.php';
+
     $objActividad = new ActividadTuristica();
+    $id           = (int)$id;
+
+    if (!$id) {
+        mostrarSweetAlert('error', 'ID inválido', 'No se recibió un ID de actividad válido.', BASE_URL . 'proveedor/consultar-actividad');
+        exit;
+    }
+
+    // Verificar que la actividad pertenece al proveedor actual
+    $id_proveedor = (new Proveedor())->obtenerIdProveedorPorUsuario($_SESSION['user']['id_usuario']);
+    if (!$id_proveedor || !$objActividad->perteneceAProveedor($id, $id_proveedor)) {
+        mostrarSweetAlert('error', 'Acceso denegado', 'No tienes permiso para eliminar esta actividad.', BASE_URL . 'proveedor/consultar-actividad');
+        exit;
+    }
+
+    // Verificar que no tenga reservas activas (pendiente o confirmada)
+    if ($objActividad->tieneReservas($id)) {
+        mostrarSweetAlert('warning', 'No se puede eliminar', 'Esta actividad tiene reservas pendientes o confirmadas. Desactívala en lugar de eliminarla.', BASE_URL . 'proveedor/consultar-actividad');
+        exit;
+    }
 
     $resultado = $objActividad->eliminar($id);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Eliminación exitosa', 'actividad eliminada.', BASE_URL . 'proveedor/consultar-actividad');
+        mostrarSweetAlert('success', 'Eliminación exitosa', 'La actividad fue eliminada correctamente.', BASE_URL . 'proveedor/consultar-actividad');
     } else {
-        mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar la actividad.');
+        mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar la actividad. Intenta desactivarla primero.', BASE_URL . 'proveedor/consultar-actividad');
     }
+    exit;
 }
 
 function consultarActividadOjo()

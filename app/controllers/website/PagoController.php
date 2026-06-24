@@ -58,6 +58,7 @@ $datosPago = [
 $_SESSION['pago_tmp'] = $datosPago;
 
 require_once BASE_PATH . '/config/database.php';
+require_once BASE_PATH . '/app/models/proveedor_turistico/actividadTuristica.php';
 
 $db = new conexion();
 $pdo = $db->getConexion();
@@ -68,11 +69,12 @@ $reservaTmp = $_SESSION['reserva'];
 // Si el usuario está logueado como turista, tomamos su ID, si no, null
 $idTurista = $_SESSION['user']['id_usuario'] ?? null;
 
-// Validar cupos disponibles antes de insertar (segunda línea de defensa)
-$stmtCupos = $pdo->prepare("SELECT cupos FROM actividad WHERE id_actividad = :id LIMIT 1");
-$stmtCupos->execute([':id' => $reservaTmp['id_actividad']]);
-$actCupos = $stmtCupos->fetch(PDO::FETCH_ASSOC);
-if (!$actCupos || (int)$reservaTmp['cantidad'] > (int)$actCupos['cupos']) {
+// Validar cupos disponibles por FECHA específica (no global)
+$actividadModel = new ActividadTuristica();
+$cantidad       = (int)($reservaTmp['cantidad'] ?? 1);
+$fechaReserva   = $reservaTmp['fecha'] ?? date('Y-m-d');
+
+if (!$actividadModel->hayCuposDisponibles($reservaTmp['id_actividad'], $fechaReserva, $cantidad)) {
     unset($_SESSION['reserva']);
     header('Location: ' . BASE_URL . 'descubre-tours?error=cupos');
     exit;

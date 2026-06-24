@@ -114,7 +114,7 @@ class ReservaController
     {
         require_once BASE_PATH . '/app/helpers/session_turista.php';
         require_once BASE_PATH . '/app/models/turista/reservaModel.php';
-        require_once BASE_PATH . '/app/models/turista/actividadModel.php';
+        require_once BASE_PATH . '/app/models/proveedor_turistico/actividadTuristica.php';
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             echo json_encode(['error' => 'Método no permitido']);
@@ -125,7 +125,6 @@ class ReservaController
         $idTurista = $_SESSION['user']['id_usuario'];
 
         $reservaModel   = new ReservaModel();
-        $actividadModel = new ActividadModel();
 
         $reserva = $reservaModel->obtenerPorId($idReserva, $idTurista);
 
@@ -134,21 +133,20 @@ class ReservaController
             exit;
         }
 
-        // 1️⃣ Validar cupos
-        $actividad = $actividadModel->obtenerPorId($reserva['id_actividad']);
-
-        if ($actividad['cupos'] < $reserva['cantidad_personas']) {
-            echo json_encode(['error' => 'No hay cupos disponibles']);
-            exit;
-        }
-
-        // 2️⃣ Descontar cupos
-        $actividadModel->descontarCupos(
-            $actividad['id_actividad'],
+        // Validar cupos por fecha (sin decrementar cupos globales)
+        $actividadModel = new ActividadTuristica();
+        $hayDisponibilidad = $actividadModel->hayCuposDisponibles(
+            $reserva['id_actividad'],
+            $reserva['fecha'],
             $reserva['cantidad_personas']
         );
 
-        // 3️⃣ Confirmar reserva
+        if (!$hayDisponibilidad) {
+            echo json_encode(['error' => 'No hay cupos disponibles para esa fecha']);
+            exit;
+        }
+
+        // Confirmar reserva (los cupos se calculan contando reservas por fecha)
         $reservaModel->confirmar($idReserva);
 
         echo json_encode(['ok' => true]);

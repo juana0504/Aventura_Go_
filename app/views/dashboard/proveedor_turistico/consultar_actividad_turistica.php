@@ -281,11 +281,11 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                                class="pv-act-btn pv-act-btn--edit" title="Editar">
                                                 <i class="bi bi-pencil"></i>
                                             </a>
-                                            <a href="<?= BASE_URL ?>proveedor/eliminar-actividad?accion=eliminar&id=<?= $actividad['id_actividad'] ?>"
+                                            <button type="button"
                                                class="pv-act-btn pv-act-btn--delete" title="Eliminar"
-                                               onclick="return confirm('¿Estás seguro de eliminar esta actividad?')">
+                                               onclick="confirmarEliminar(<?= (int)$actividad['id_actividad'] ?>, '<?= htmlspecialchars(addslashes($actividad['nombre'])) ?>')">
                                                 <i class="bi bi-trash"></i>
-                                            </a>
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -398,6 +398,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     const BASE_URL = "<?= BASE_URL ?>";
@@ -590,5 +591,24 @@ foreach (array_slice($partes, 0, 2) as $p) {
 })();
 </script>
     <script src="<?= BASE_URL ?>public/assets/dashboard/sidebar-toggle-universal.js"></script>
+
+<script>
+function confirmarEliminar(id, nombre) {
+    Swal.fire({
+        title: '¿Eliminar actividad?',
+        html: `Estás por eliminar <strong>${nombre}</strong>.<br>Si tiene reservas activas <strong>no podrá eliminarse</strong>; desactívala en su lugar.`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#c62828',
+        cancelButtonColor: '#aaa',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then(result => {
+        if (result.isConfirmed) {
+            window.location.href = `<?= BASE_URL ?>proveedor/eliminar-actividad?accion=eliminar&id=${id}`;
+        }
+    });
+}
+</script>
 </body>
 </html>
