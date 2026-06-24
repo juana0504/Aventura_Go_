@@ -88,7 +88,7 @@ function registrarActividad()
     $descripcion  = $_POST['descripcion'] ?? '';
     $cupos        = $_POST['cupos'] ?? '';
     $precio       = $_POST['precio'] ?? '';
-    $estado       = $_POST['estado'] ?? 'activa';
+    $estado       = $_POST['estado'] ?? 'ACTIVO';
 
 
     // VALIDACIONES
@@ -246,7 +246,7 @@ function actualizarActividad()
     $descripcion    = $_POST['descripcion'] ?? '';
     $cupos          = $_POST['cupos'] ?? '';
     $precio         = $_POST['precio'] ?? '';
-    $estado         = $_POST['estado'] ?? 'activa';
+    $estado         = $_POST['estado'] ?? 'ACTIVO';
 
     // VALIDACIONES
     if (
