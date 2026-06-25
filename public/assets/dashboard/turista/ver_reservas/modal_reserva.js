@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     elEstadoBadge.className   = 'ag-badge mt-1 ' + badgeClass(data.estado);
 
                     /* ── INFO ── */
-                    elProveedor.textContent  = data.proveedor        ?? '—';
+                    elProveedor.textContent  = data.proveedor        || '—';
                     elFecha.textContent      = data.fecha            ?? '—';
                     elPersonas.textContent   = data.cantidad_personas ?? '—';
                     elTotal.textContent      = numFormat(

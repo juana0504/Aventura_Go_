@@ -27,7 +27,8 @@ class ReservaHotelero
                 FROM reserva r
                 JOIN hospedaje h ON r.id_hospedaje = h.id_hospedaje
                 LEFT JOIN usuario u ON r.id_turista = u.id_usuario
-                WHERE h.id_proveedor_hotelero = :id_proveedor_hotelero";
+                WHERE h.id_proveedor_hotelero = :id_proveedor_hotelero
+                  AND r.tipo_reserva = 'hospedaje'";
 
         if ($filtro && $filtro !== 'all') {
             $sql .= " AND r.estado = :estado";
@@ -37,7 +38,7 @@ class ReservaHotelero
 
         try {
             $stmt = $this->conexion->prepare($sql);
-            $stmt->bindParam(':id_proveedor_hotelero', $id_proveedor_hotelero);
+            $stmt->bindParam(':id_proveedor_hotelero', $id_proveedor_hotelero, PDO::PARAM_INT);
             if ($filtro && $filtro !== 'all') {
                 $stmt->bindParam(':estado', $filtro);
             }
