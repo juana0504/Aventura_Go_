@@ -283,6 +283,28 @@
 
 .ag-rv-modal__header-info { flex: 1; min-width: 0; }
 
+.ag-modal__eyebrow {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.60);
+    margin-bottom: 4px;
+}
+
+.ag-modal__close {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.75);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: color .15s, background .15s;
+    line-height: 1;
+    align-self: flex-start;
+}
+.ag-modal__close:hover { color: #fff; background: rgba(255,255,255,.12); }
+
 .ag-rv-modal__title {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 26px;

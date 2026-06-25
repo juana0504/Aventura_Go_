@@ -231,7 +231,11 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                             ?>
                                             <?php if ($imgHValida): ?>
                                                 <img src="<?= BASE_URL ?>public/uploads/hotelero/actividades/<?= htmlspecialchars($imgH) ?>"
-                                                     class="ag-rv-img" alt="<?= htmlspecialchars($reserva['nombre_actividad'] ?? '') ?>">
+                                                     class="ag-rv-img" alt="<?= htmlspecialchars($reserva['nombre_actividad'] ?? '') ?>"
+                                                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                                                <div class="ag-rv-img ag-rv-img--placeholder" style="display:none;">
+                                                    <i class="bi bi-building"></i>
+                                                </div>
                                             <?php else: ?>
                                                 <div class="ag-rv-img ag-rv-img--placeholder">
                                                     <i class="bi bi-building"></i>
@@ -243,7 +247,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="ag-table__act-meta"><?= htmlspecialchars($reserva['proveedor'] ?? '—') ?></div>
+                                        <div class="ag-table__act-meta"><?= htmlspecialchars($reserva['proveedor'] ?: '—') ?></div>
                                     </td>
                                     <td><?= date('d/m/Y', strtotime($reserva['fecha'])) ?></td>
                                     <td>
