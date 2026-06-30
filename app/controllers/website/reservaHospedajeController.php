@@ -84,6 +84,68 @@ if ($id_reserva) {
             $id_reserva
         );
     } catch (Throwable $e) { /* notificación opcional */ }
+
+    // Enviar email con ticket PDF al turista
+    try {
+        require_once BASE_PATH . '/config/database.php';
+        $db     = (new conexion())->getConexion();
+        $stmtU  = $db->prepare("SELECT nombre, email FROM usuario WHERE id_usuario = ? LIMIT 1");
+        $stmtU->execute([$id_turista]);
+        $turista = $stmtU->fetch(PDO::FETCH_ASSOC);
+
+        if ($turista && !empty($turista['email'])) {
+            require_once BASE_PATH . '/app/helpers/mailer_helper.php';
+            require_once BASE_PATH . '/app/helpers/ticket_pdf_helper.php';
+
+            $pdf = generarTicketPDF([
+                'id_reserva'        => $id_reserva,
+                'nombre_turista'    => $turista['nombre'],
+                'tipo'              => 'hospedaje',
+                'nombre_servicio'   => $hospedaje['nombre'],
+                'proveedor'         => $hospedaje['nombre_establecimiento'] ?? '—',
+                'fecha'             => $fecha,
+                'cantidad_personas' => $cantidad_personas,
+                'precio'            => $hospedaje['precio'] ?? 0,
+                'estado'            => 'pendiente',
+            ]);
+
+            $fechaFmt  = date('d/m/Y', strtotime($fecha));
+            $nombre    = htmlspecialchars($turista['nombre']);
+            $servicio  = htmlspecialchars($hospedaje['nombre']);
+            $numTicket = str_pad($id_reserva, 6, '0', STR_PAD_LEFT);
+
+            $mail = mailer_init();
+            $mail->setFrom('aventurago.contacto@gmail.com', 'AventuraGO');
+            $mail->addAddress($turista['email'], $turista['nombre']);
+            $mail->Subject = '🏨 Tu reserva de hospedaje fue registrada — AventuraGO';
+            $mail->Body = "
+            <div style='font-family:sans-serif;max-width:560px;margin:auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e5e7eb'>
+                <div style='background:#EA8217;padding:28px 24px;text-align:center'>
+                    <h1 style='color:#fff;margin:0;font-size:22px'>¡Reserva de hospedaje registrada! 🏨</h1>
+                </div>
+                <div style='padding:28px 24px'>
+                    <p style='color:#374151;font-size:15px'>Hola <strong>$nombre</strong>,</p>
+                    <p style='color:#374151;font-size:14px'>Tu reserva de hospedaje ha sido <strong>registrada</strong> exitosamente. Adjuntamos tu ticket de reserva.</p>
+                    <div style='background:#f9fafb;border-radius:8px;padding:16px;margin:20px 0'>
+                        <p style='margin:6px 0;font-size:14px;color:#374151'><strong>🏨 Hospedaje:</strong> $servicio</p>
+                        <p style='margin:6px 0;font-size:14px;color:#374151'><strong>📅 Fecha de llegada:</strong> $fechaFmt</p>
+                        <p style='margin:6px 0;font-size:14px;color:#374151'><strong>👥 Personas:</strong> $cantidad_personas</p>
+                        <p style='margin:6px 0;font-size:14px;color:#374151'><strong>🎫 N° Reserva:</strong> #$numTicket</p>
+                        <p style='margin:6px 0;font-size:13px;color:#3b82f6'><strong>Estado:</strong> Pendiente — el proveedor la confirmará pronto.</p>
+                    </div>
+                    <p style='color:#6b7280;font-size:13px'>Tu ticket está adjunto en este correo. Puedes descargarlo o imprimirlo.</p>
+                </div>
+                <div style='background:#f3f4f6;padding:14px 24px;text-align:center'>
+                    <p style='color:#9ca3af;font-size:12px;margin:0'>AventuraGO · aventurago.com.co</p>
+                </div>
+            </div>";
+            $mail->addStringAttachment($pdf, 'ticket-reserva-' . $numTicket . '.pdf', 'base64', 'application/pdf');
+            $mail->send();
+        }
+    } catch (Throwable $e) {
+        error_log('Ticket email hospedaje: ' . $e->getMessage());
+    }
+
     mostrarSweetAlert(
         'success',
         '¡Reserva realizada!',
