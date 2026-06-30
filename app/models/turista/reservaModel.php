@@ -26,7 +26,7 @@ class ReservaModel
             $stmt = $this->db->prepare($sql);
             $stmt->execute($data);
 
-            return true;
+            return $this->db->lastInsertId();
         } catch (PDOException $e) {
             echo '<pre>';
             echo 'ERROR PDO AL INSERTAR RESERVA:' . PHP_EOL;
