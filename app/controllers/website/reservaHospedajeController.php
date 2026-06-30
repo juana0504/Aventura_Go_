@@ -88,31 +88,18 @@ if ($id_reserva) {
     // Enviar email con ticket PDF al turista
     try {
         require_once BASE_PATH . '/config/database.php';
-        $db     = (new conexion())->getConexion();
-        $stmtU  = $db->prepare("SELECT nombre, email FROM usuario WHERE id_usuario = ? LIMIT 1");
+        $db    = (new conexion())->getConexion();
+        $stmtU = $db->prepare("SELECT nombre, email FROM usuario WHERE id_usuario = ? LIMIT 1");
         $stmtU->execute([$id_turista]);
         $turista = $stmtU->fetch(PDO::FETCH_ASSOC);
 
         if ($turista && !empty($turista['email'])) {
-            require_once BASE_PATH . '/app/helpers/mailer_helper.php';
-            require_once BASE_PATH . '/app/helpers/ticket_pdf_helper.php';
-
-            $pdf = generarTicketPDF([
-                'id_reserva'        => $id_reserva,
-                'nombre_turista'    => $turista['nombre'],
-                'tipo'              => 'hospedaje',
-                'nombre_servicio'   => $hospedaje['nombre'],
-                'proveedor'         => $hospedaje['nombre_establecimiento'] ?? '—',
-                'fecha'             => $fecha,
-                'cantidad_personas' => $cantidad_personas,
-                'precio'            => $hospedaje['precio'] ?? 0,
-                'estado'            => 'pendiente',
-            ]);
-
             $fechaFmt  = date('d/m/Y', strtotime($fecha));
             $nombre    = htmlspecialchars($turista['nombre']);
             $servicio  = htmlspecialchars($hospedaje['nombre']);
             $numTicket = str_pad($id_reserva, 6, '0', STR_PAD_LEFT);
+
+            require_once BASE_PATH . '/app/helpers/mailer_helper.php';
 
             $mail = mailer_init();
             $mail->setFrom('aventurago.contacto@gmail.com', 'AventuraGO');
@@ -125,7 +112,7 @@ if ($id_reserva) {
                 </div>
                 <div style='padding:28px 24px'>
                     <p style='color:#374151;font-size:15px'>Hola <strong>$nombre</strong>,</p>
-                    <p style='color:#374151;font-size:14px'>Tu reserva de hospedaje ha sido <strong>registrada</strong> exitosamente. Adjuntamos tu ticket de reserva.</p>
+                    <p style='color:#374151;font-size:14px'>Tu reserva de hospedaje ha sido <strong>registrada</strong> exitosamente.</p>
                     <div style='background:#f9fafb;border-radius:8px;padding:16px;margin:20px 0'>
                         <p style='margin:6px 0;font-size:14px;color:#374151'><strong>🏨 Hospedaje:</strong> $servicio</p>
                         <p style='margin:6px 0;font-size:14px;color:#374151'><strong>📅 Fecha de llegada:</strong> $fechaFmt</p>
@@ -133,13 +120,32 @@ if ($id_reserva) {
                         <p style='margin:6px 0;font-size:14px;color:#374151'><strong>🎫 N° Reserva:</strong> #$numTicket</p>
                         <p style='margin:6px 0;font-size:13px;color:#3b82f6'><strong>Estado:</strong> Pendiente — el proveedor la confirmará pronto.</p>
                     </div>
-                    <p style='color:#6b7280;font-size:13px'>Tu ticket está adjunto en este correo. Puedes descargarlo o imprimirlo.</p>
+                    <p style='color:#6b7280;font-size:13px'>Si ves un archivo adjunto en este correo, es tu ticket descargable en PDF.</p>
                 </div>
                 <div style='background:#f3f4f6;padding:14px 24px;text-align:center'>
                     <p style='color:#9ca3af;font-size:12px;margin:0'>AventuraGO · aventurago.com.co</p>
                 </div>
             </div>";
-            $mail->addStringAttachment($pdf, 'ticket-reserva-' . $numTicket . '.pdf', 'base64', 'application/pdf');
+
+            // Intentar adjuntar el PDF — si DOMPDF falla, el email igual se envía
+            try {
+                require_once BASE_PATH . '/app/helpers/ticket_pdf_helper.php';
+                $pdf = generarTicketPDF([
+                    'id_reserva'        => $id_reserva,
+                    'nombre_turista'    => $turista['nombre'],
+                    'tipo'              => 'hospedaje',
+                    'nombre_servicio'   => $hospedaje['nombre'],
+                    'proveedor'         => $hospedaje['nombre_establecimiento'] ?? '—',
+                    'fecha'             => $fecha,
+                    'cantidad_personas' => $cantidad_personas,
+                    'precio'            => $hospedaje['precio'] ?? 0,
+                    'estado'            => 'pendiente',
+                ]);
+                $mail->addStringAttachment($pdf, 'ticket-reserva-' . $numTicket . '.pdf', 'base64', 'application/pdf');
+            } catch (Throwable $ePdf) {
+                error_log('Ticket PDF hospedaje (sin adjunto): ' . $ePdf->getMessage());
+            }
+
             $mail->send();
         }
     } catch (Throwable $e) {
