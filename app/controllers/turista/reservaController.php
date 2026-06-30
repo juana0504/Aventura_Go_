@@ -51,33 +51,19 @@ class ReservaController
         try {
             if ($idReserva) {
                 require_once BASE_PATH . '/config/database.php';
-                $db      = (new conexion())->getConexion();
-                $stmtU   = $db->prepare("SELECT nombre, email FROM usuario WHERE id_usuario = ? LIMIT 1");
+                $db    = (new conexion())->getConexion();
+                $stmtU = $db->prepare("SELECT nombre, email FROM usuario WHERE id_usuario = ? LIMIT 1");
                 $stmtU->execute([$idUsuario]);
                 $turista = $stmtU->fetch(PDO::FETCH_ASSOC);
 
                 if ($turista && !empty($turista['email'])) {
-                    $detalle = $reservaModel->obtenerDetallePorId($idReserva);
+                    $detalle   = $reservaModel->obtenerDetallePorId($idReserva);
+                    $nombre    = htmlspecialchars($turista['nombre']);
+                    $servicio  = htmlspecialchars($detalle['nombre_actividad'] ?? $actividad['nombre']);
+                    $numTicket = str_pad($idReserva, 6, '0', STR_PAD_LEFT);
+                    $fechaFmt  = date('d/m/Y');
 
                     require_once BASE_PATH . '/app/helpers/mailer_helper.php';
-                    require_once BASE_PATH . '/app/helpers/ticket_pdf_helper.php';
-
-                    $pdf = generarTicketPDF([
-                        'id_reserva'        => $idReserva,
-                        'nombre_turista'    => $turista['nombre'],
-                        'tipo'              => 'actividad',
-                        'nombre_servicio'   => $detalle['nombre_actividad'] ?? $actividad['nombre'],
-                        'proveedor'         => $detalle['proveedor'] ?? '—',
-                        'fecha'             => date('Y-m-d'),
-                        'cantidad_personas' => 1,
-                        'precio'            => $actividad['precio'],
-                        'estado'            => 'pendiente',
-                    ]);
-
-                    $fechaFmt = date('d/m/Y');
-                    $nombre   = htmlspecialchars($turista['nombre']);
-                    $servicio = htmlspecialchars($detalle['nombre_actividad'] ?? $actividad['nombre']);
-                    $numTicket = str_pad($idReserva, 6, '0', STR_PAD_LEFT);
 
                     $mail = mailer_init();
                     $mail->setFrom('aventurago.contacto@gmail.com', 'AventuraGO');
@@ -90,20 +76,39 @@ class ReservaController
                         </div>
                         <div style='padding:28px 24px'>
                             <p style='color:#374151;font-size:15px'>Hola <strong>$nombre</strong>,</p>
-                            <p style='color:#374151;font-size:14px'>Tu reserva de actividad ha sido <strong>registrada</strong> exitosamente. Adjuntamos tu ticket de reserva.</p>
+                            <p style='color:#374151;font-size:14px'>Tu reserva de actividad ha sido <strong>registrada</strong> exitosamente.</p>
                             <div style='background:#f9fafb;border-radius:8px;padding:16px;margin:20px 0'>
                                 <p style='margin:6px 0;font-size:14px;color:#374151'><strong>🧭 Actividad:</strong> $servicio</p>
                                 <p style='margin:6px 0;font-size:14px;color:#374151'><strong>📅 Fecha:</strong> $fechaFmt</p>
                                 <p style='margin:6px 0;font-size:14px;color:#374151'><strong>🎫 N° Reserva:</strong> #$numTicket</p>
                                 <p style='margin:6px 0;font-size:13px;color:#d97706'><strong>Estado:</strong> Pendiente de confirmación</p>
                             </div>
-                            <p style='color:#6b7280;font-size:13px'>Tu ticket está adjunto en este correo. Puedes descargarlo o imprimirlo.</p>
+                            <p style='color:#6b7280;font-size:13px'>Si ves un archivo adjunto en este correo, es tu ticket descargable en PDF.</p>
                         </div>
                         <div style='background:#f3f4f6;padding:14px 24px;text-align:center'>
                             <p style='color:#9ca3af;font-size:12px;margin:0'>AventuraGO · aventurago.com.co</p>
                         </div>
                     </div>";
-                    $mail->addStringAttachment($pdf, 'ticket-reserva-' . $numTicket . '.pdf', 'base64', 'application/pdf');
+
+                    // Intentar adjuntar el PDF — si DOMPDF falla, el email igual se envía
+                    try {
+                        require_once BASE_PATH . '/app/helpers/ticket_pdf_helper.php';
+                        $pdf = generarTicketPDF([
+                            'id_reserva'        => $idReserva,
+                            'nombre_turista'    => $turista['nombre'],
+                            'tipo'              => 'actividad',
+                            'nombre_servicio'   => $detalle['nombre_actividad'] ?? $actividad['nombre'],
+                            'proveedor'         => $detalle['proveedor'] ?? '—',
+                            'fecha'             => date('Y-m-d'),
+                            'cantidad_personas' => 1,
+                            'precio'            => $actividad['precio'],
+                            'estado'            => 'pendiente',
+                        ]);
+                        $mail->addStringAttachment($pdf, 'ticket-reserva-' . $numTicket . '.pdf', 'base64', 'application/pdf');
+                    } catch (Throwable $ePdf) {
+                        error_log('Ticket PDF actividad (sin adjunto): ' . $ePdf->getMessage());
+                    }
+
                     $mail->send();
                 }
             }
