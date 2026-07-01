@@ -278,7 +278,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                             <button class="ag-btn-ver btn-ver-reserva" data-id="<?= $reserva['id_reserva'] ?>">
                                                 <i class="bi bi-eye"></i> Ver
                                             </button>
-                                            <a href="<?= BASE_URL ?>turista/descargar-ticket?id=<?= $reserva['id_reserva'] ?>" class="ag-btn-ticket" title="Descargar ticket PDF">
+                                            <a href="<?= BASE_URL ?>turista/descargar-ticket?id=<?= $reserva['id_reserva'] ?>" class="ag-btn-ticket" title="Ver ticket en PDF" target="_blank">
                                                 <i class="bi bi-file-earmark-pdf"></i> PDF
                                             </a>
                                         </div>
