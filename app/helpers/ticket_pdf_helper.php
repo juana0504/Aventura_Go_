@@ -33,8 +33,9 @@ function generarTicketPDF(array $d): string
     $proveedor    = htmlspecialchars($d['proveedor'] ?? '—');
     $personas     = max(1, (int)($d['cantidad_personas'] ?? 1));
 
-    $precioTotal   = (float)$d['precio'];
-    $precioPersona = $precioTotal / $personas;
+    // $d['precio'] es el precio POR PERSONA (así se guarda desde la actividad/hospedaje).
+    $precioPersona = (float)$d['precio'];
+    $precioTotal   = $precioPersona * $personas;
     $precioFmt        = '$' . number_format($precioTotal, 0, ',', '.') . ' COP';
     $precioPersonaFmt = '$' . number_format($precioPersona, 0, ',', '.') . ' COP';
 

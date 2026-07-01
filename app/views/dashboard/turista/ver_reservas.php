@@ -278,7 +278,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
                                         </span>
                                     </td>
                                     <td>
-                                        <span class="ag-rv-precio">$<?= number_format($reserva['precio'], 0, ',', '.') ?></span>
+                                        <span class="ag-rv-precio">$<?= number_format($reserva['precio'] * $reserva['cantidad_personas'], 0, ',', '.') ?></span>
                                     </td>
                                     <td>
                                         <?php
