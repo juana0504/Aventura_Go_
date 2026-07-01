@@ -9,8 +9,7 @@
  */
 function generarTicketPDF(array $d): string
 {
-    require_once BASE_PATH . '/vendor/dompdf/src/Autoloader.php';
-    \Dompdf\Autoloader::register();
+    require_once BASE_PATH . '/vendor/dompdf/autoload.inc.php';
 
     $opt = new \Dompdf\Options();
     $opt->set('defaultFont', 'dejavu sans');
@@ -20,20 +19,24 @@ function generarTicketPDF(array $d): string
 
     $dompdf = new \Dompdf\Dompdf($opt);
 
-    $num         = str_pad((int)$d['id_reserva'], 6, '0', STR_PAD_LEFT);
-    $fecha       = date('d/m/Y', strtotime($d['fecha']));
-    $precio      = '$' . number_format((float)$d['precio'], 0, ',', '.') . ' COP';
-    $tipo        = $d['tipo'] === 'hospedaje' ? 'Hospedaje' : 'Actividad';
-    $estado      = strtolower($d['estado'] ?? 'pendiente');
-    $estadoLabel = ucfirst($estado);
-    $estadoColor = $estado === 'confirmada' ? '#059669' : '#d97706';
-    $estadoBg    = $estado === 'confirmada' ? '#d1fae5' : '#fef3c7';
-    $emision     = date('d/m/Y H:i');
+    $num          = str_pad((int)$d['id_reserva'], 6, '0', STR_PAD_LEFT);
+    $fecha        = date('d/m/Y', strtotime($d['fecha']));
+    $tipo         = $d['tipo'] === 'hospedaje' ? 'Hospedaje' : 'Actividad';
+    $estado       = strtolower($d['estado'] ?? 'pendiente');
+    $estadoLabel  = ucfirst($estado);
+    $estadoColor  = $estado === 'confirmada' ? '#059669' : '#d97706';
+    $estadoBg     = $estado === 'confirmada' ? '#d1fae5' : '#fef3c7';
+    $emision      = date('d/m/Y H:i');
 
-    $turista   = htmlspecialchars($d['nombre_turista'] ?? '—');
-    $servicio  = htmlspecialchars($d['nombre_servicio'] ?? '—');
-    $proveedor = htmlspecialchars($d['proveedor'] ?? '—');
-    $personas  = (int)($d['cantidad_personas'] ?? 1);
+    $turista      = htmlspecialchars($d['nombre_turista'] ?? '—');
+    $servicio     = htmlspecialchars($d['nombre_servicio'] ?? '—');
+    $proveedor    = htmlspecialchars($d['proveedor'] ?? '—');
+    $personas     = max(1, (int)($d['cantidad_personas'] ?? 1));
+
+    $precioTotal   = (float)$d['precio'];
+    $precioPersona = $precioTotal / $personas;
+    $precioFmt        = '$' . number_format($precioTotal, 0, ',', '.') . ' COP';
+    $precioPersonaFmt = '$' . number_format($precioPersona, 0, ',', '.') . ' COP';
 
     $html = '<!DOCTYPE html>
 <html>
@@ -76,7 +79,8 @@ table.r tr:last-child td{border-bottom:none;}
       <tr><td class="lb">Proveedor</td><td class="vl">' . $proveedor . '</td></tr>
       <tr><td class="lb">Fecha</td><td class="vl">' . $fecha . '</td></tr>
       <tr><td class="lb">Personas</td><td class="vl">' . $personas . '</td></tr>
-      <tr><td class="lb">Precio</td><td class="vl">' . $precio . '</td></tr>
+      <tr><td class="lb">Precio por persona</td><td class="vl">' . $precioPersonaFmt . '</td></tr>
+      <tr><td class="lb">Precio total</td><td class="vl">' . $precioFmt . '</td></tr>
       <tr>
         <td class="lb">Estado</td>
         <td class="vl">
