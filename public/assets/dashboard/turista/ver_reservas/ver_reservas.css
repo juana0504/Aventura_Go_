@@ -263,6 +263,61 @@
     border-color: var(--ag-primary);
 }
 
+/* Contenedor de botones de acción (Ver + Ticket PDF) */
+.ag-rv-acciones {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+/* Botón descargar ticket PDF individual */
+.ag-btn-ticket {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #dc2626;
+    background: #fef2f2;
+    border: 1px solid rgba(220,38,38,.25);
+    border-radius: var(--ag-radius-sm);
+    padding: 7px 13px;
+    cursor: pointer;
+    transition: all .2s;
+    letter-spacing: .3px;
+    text-decoration: none;
+}
+
+.ag-btn-ticket:hover {
+    background: #dc2626;
+    color: #fff;
+    border-color: #dc2626;
+    text-decoration: none;
+}
+
+/* ─── ANCHOS DE COLUMNAS DE LA TABLA DE RESERVAS ─── */
+#tablaReservas { table-layout: fixed; }
+#tablaReservas th:nth-child(1),
+#tablaReservas td:nth-child(1) { width: 24%; }
+#tablaReservas th:nth-child(2),
+#tablaReservas td:nth-child(2) { width: 14%; }
+#tablaReservas th:nth-child(3),
+#tablaReservas td:nth-child(3) { width: 10%; }
+#tablaReservas th:nth-child(4),
+#tablaReservas td:nth-child(4) { width: 9%; }
+#tablaReservas th:nth-child(5),
+#tablaReservas td:nth-child(5) { width: 11%; }
+#tablaReservas th:nth-child(6),
+#tablaReservas td:nth-child(6) { width: 12%; }
+#tablaReservas th:nth-child(7),
+#tablaReservas td:nth-child(7) { width: 20%; }
+
+#tablaReservas td:nth-child(1) .ag-table__act-name {
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+
 /* ─── MODAL DE RESERVA ────────────────────── */
 .ag-rv-modal {
     border: none !important;
