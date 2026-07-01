@@ -153,6 +153,36 @@ class ReservaTurista
 
 
 
+    /** Obtener los datos de una reserva (actividad u hospedaje) para generar su ticket PDF */
+    public function obtenerParaTicket($id_reserva, $id_turista)
+    {
+        $sql = "
+        SELECT
+            r.id_reserva,
+            r.fecha,
+            r.estado,
+            r.cantidad_personas,
+            r.tipo_reserva,
+            COALESCE(a.nombre, h.nombre)                           AS nombre_servicio,
+            COALESCE(a.precio, r.precio)                           AS precio,
+            COALESCE(p.nombre_empresa, ph.nombre_establecimiento)  AS proveedor
+        FROM reserva r
+        LEFT JOIN actividad a ON r.id_actividad = a.id_actividad
+        LEFT JOIN proveedor p ON a.id_proveedor = p.id_proveedor
+        LEFT JOIN hospedaje h ON r.id_hospedaje = h.id_hospedaje
+        LEFT JOIN proveedor_hotelero ph ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
+        WHERE r.id_reserva = :id_reserva
+          AND r.id_turista = :id_turista
+        ";
+
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':id_reserva', $id_reserva, PDO::PARAM_INT);
+        $stmt->bindParam(':id_turista', $id_turista, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+
     /**Verificar si una reserva pertenece al turista (seguridad) */
     public function verificarReservaDeTurista($id_reserva, $id_turista)
     {

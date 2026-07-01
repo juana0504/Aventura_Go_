@@ -135,6 +135,54 @@ class ReservaController
         require BASE_PATH . '/app/views/dashboard/turista/ver_reservas.php';
     }
 
+    public function descargarTicket()
+    {
+        require_once BASE_PATH . '/app/helpers/session_turista.php';
+        require_once BASE_PATH . '/app/models/turista/ReservaTurista.php';
+        require_once BASE_PATH . '/app/helpers/ticket_pdf_helper.php';
+
+        $idReserva = (int) ($_GET['id'] ?? 0);
+        $idUsuario = (int) $_SESSION['user']['id_usuario'];
+
+        if (!$idReserva) {
+            header('Location: ' . BASE_URL . 'turista/ver-reservas');
+            exit;
+        }
+
+        $reservaModel = new ReservaTurista();
+        $reserva      = $reservaModel->obtenerParaTicket($idReserva, $idUsuario);
+
+        if (!$reserva) {
+            header('Location: ' . BASE_URL . 'turista/ver-reservas');
+            exit;
+        }
+
+        $nombreTurista = $_SESSION['user']['nombre'] ?? 'Turista';
+        $numTicket     = str_pad($idReserva, 6, '0', STR_PAD_LEFT);
+
+        $pdf = generarTicketPDF([
+            'id_reserva'        => $reserva['id_reserva'],
+            'nombre_turista'    => $nombreTurista,
+            'tipo'              => $reserva['tipo_reserva'],
+            'nombre_servicio'   => $reserva['nombre_servicio'],
+            'proveedor'         => $reserva['proveedor'],
+            'fecha'             => $reserva['fecha'],
+            'cantidad_personas' => $reserva['cantidad_personas'],
+            'precio'            => $reserva['precio'],
+            'estado'            => $reserva['estado'],
+        ]);
+
+        while (ob_get_level() > 0) {
+            ob_end_clean();
+        }
+
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: attachment; filename="ticket-reserva-' . $numTicket . '.pdf"');
+        header('Content-Length: ' . strlen($pdf));
+        echo $pdf;
+        exit;
+    }
+
     public function verReservasHotel()
     {
         require_once BASE_PATH . '/app/helpers/session_turista.php';
