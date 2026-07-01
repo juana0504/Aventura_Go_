@@ -19,12 +19,27 @@ if (!$hospedaje) {
 
 $servicios = array_filter(array_map('trim', explode(',', $hospedaje['servicios'] ?? '')));
 $tipos     = array_filter(array_map('trim', explode(',', $hospedaje['tipo'] ?? '')));
-$servicios = array_filter(array_map('trim', explode(',', $hospedaje['servicios'] ?? '')));
-$tipos     = array_filter(array_map('trim', explode(',', $hospedaje['tipo'] ?? '')));
 try {
     $fechasLlenas = $hospedajeModel->obtenerFechasLlenas($id);
 } catch (Exception $e) {
     $fechasLlenas = [];
+}
+
+// Cargar todas las imágenes del hospedaje
+$imagenesHosp = [];
+try {
+    require_once BASE_PATH . '/config/database.php';
+    $db      = (new conexion())->getConexion();
+    $stmtImg = $db->prepare(
+        "SELECT imagen FROM hospedaje_imagen WHERE id_hospedaje = ? ORDER BY es_principal DESC, id ASC"
+    );
+    $stmtImg->execute([$id]);
+    $imagenesHosp = $stmtImg->fetchAll(PDO::FETCH_COLUMN);
+} catch (Exception $e) { /* sin imágenes */ }
+
+// Fallback: columna imagen del hospedaje si no hay registros en hospedaje_imagen
+if (empty($imagenesHosp) && !empty($hospedaje['imagen']) && $hospedaje['imagen'] !== 'hospedaje_default.png') {
+    $imagenesHosp = [$hospedaje['imagen']];
 }
 ?>
 <!DOCTYPE html>
@@ -39,7 +54,6 @@ try {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/tour_escogido/tour_escogido.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/website_externos/tour_escogido/tour_escogido.css">
 </head>
 
@@ -87,24 +101,34 @@ try {
                     <!-- COLUMNA IZQUIERDA: imagen + detalles -->
                     <div class="col-md-8">
 
-                        <!-- Imagen principal -->
+                        <!-- Galería de imágenes -->
                         <section id="galeria-hotel">
-                            <div class="cont-img-principal" style="height:420px;border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.12)">
-                                <?php
-                                $imgPrincipal = $hospedaje['imagen'] ?? '';
-                                if (!empty($imgPrincipal) && $imgPrincipal !== 'hospedaje_default.png') {
-                                    $imgSrc = BASE_URL . 'public/uploads/hotelero/actividades/' . rawurlencode($imgPrincipal);
-                                } elseif (!empty($hospedaje['logo_proveedor'])) {
-                                    $imgSrc = BASE_URL . 'public/uploads/hoteles/' . rawurlencode($hospedaje['logo_proveedor']);
-                                } else {
-                                    $imgSrc = BASE_URL . 'public/assets/website_externos/index/img/LOGO-FINAL.png';
-                                }
-                                ?>
-                                <img src="<?= $imgSrc ?>"
-                                    alt="<?= htmlspecialchars($hospedaje['nombre']) ?>"
-                                    style="width:100%;height:100%;object-fit:cover"
-                                    onerror="this.src='<?= BASE_URL ?>public/assets/website_externos/index/img/LOGO-FINAL.png'">
+                            <div class="cont-img-principal">
+                                <button class="btn prev">❮</button>
+                                <div class="carousel-track">
+                                    <?php if (!empty($imagenesHosp)): ?>
+                                        <?php foreach ($imagenesHosp as $img): ?>
+                                            <img src="<?= BASE_URL ?>public/uploads/hotelero/actividades/<?= rawurlencode($img) ?>"
+                                                 alt="<?= htmlspecialchars($hospedaje['nombre']) ?>"
+                                                 onerror="this.onerror=null;this.src='<?= BASE_URL ?>public/assets/website_externos/index/img/LOGO-FINAL.png'">
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <img src="<?= BASE_URL ?>public/assets/website_externos/index/img/LOGO-FINAL.png"
+                                             alt="<?= htmlspecialchars($hospedaje['nombre']) ?>">
+                                    <?php endif; ?>
+                                </div>
+                                <button class="btn next">❯</button>
                             </div>
+                            <?php if (count($imagenesHosp) > 1): ?>
+                            <div class="cont-items">
+                                <?php foreach ($imagenesHosp as $index => $img): ?>
+                                    <button type="button" class="item <?= $index === 0 ? 'active' : '' ?>">
+                                        <img src="<?= BASE_URL ?>public/uploads/hotelero/actividades/<?= rawurlencode($img) ?>"
+                                             onerror="this.onerror=null;this.src='<?= BASE_URL ?>public/assets/website_externos/index/img/LOGO-FINAL.png'">
+                                    </button>
+                                <?php endforeach; ?>
+                            </div>
+                            <?php endif; ?>
                         </section>
 
                         <!-- Tarjeta de detalles -->
@@ -345,6 +369,7 @@ try {
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/website_externos/tour_escogido/tour_escogido.js"></script>
     <script>
         const profileToggle = document.getElementById('profileToggle');
         const profileMenu = document.getElementById('profileMenu');
