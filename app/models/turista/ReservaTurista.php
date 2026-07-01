@@ -156,24 +156,53 @@ class ReservaTurista
     /** Obtener los datos de una reserva (actividad u hospedaje) para generar su ticket PDF */
     public function obtenerParaTicket($id_reserva, $id_turista)
     {
-        $sql = "
-        SELECT
-            r.id_reserva,
-            r.fecha,
-            r.estado,
-            r.cantidad_personas,
-            r.tipo_reserva,
-            COALESCE(a.nombre, h.nombre)                           AS nombre_servicio,
-            COALESCE(a.precio, r.precio)                           AS precio,
-            COALESCE(p.nombre_empresa, ph.nombre_establecimiento)  AS proveedor
-        FROM reserva r
-        LEFT JOIN actividad a ON r.id_actividad = a.id_actividad
-        LEFT JOIN proveedor p ON a.id_proveedor = p.id_proveedor
-        LEFT JOIN hospedaje h ON r.id_hospedaje = h.id_hospedaje
-        LEFT JOIN proveedor_hotelero ph ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
-        WHERE r.id_reserva = :id_reserva
-          AND r.id_turista = :id_turista
-        ";
+        $tipoStmt = $this->conexion->prepare(
+            "SELECT tipo_reserva FROM reserva WHERE id_reserva = :id_reserva AND id_turista = :id_turista"
+        );
+        $tipoStmt->bindParam(':id_reserva', $id_reserva, PDO::PARAM_INT);
+        $tipoStmt->bindParam(':id_turista', $id_turista, PDO::PARAM_INT);
+        $tipoStmt->execute();
+        $fila = $tipoStmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$fila) {
+            return null;
+        }
+
+        if ($fila['tipo_reserva'] === 'hospedaje') {
+            $sql = "
+            SELECT
+                r.id_reserva,
+                r.fecha,
+                r.estado,
+                r.cantidad_personas,
+                'hospedaje' AS tipo_reserva,
+                h.nombre AS nombre_servicio,
+                r.precio,
+                ph.nombre_establecimiento AS proveedor
+            FROM reserva r
+            LEFT JOIN hospedaje h ON r.id_hospedaje = h.id_hospedaje
+            LEFT JOIN proveedor_hotelero ph ON h.id_proveedor_hotelero = ph.id_proveedor_hotelero
+            WHERE r.id_reserva = :id_reserva
+              AND r.id_turista = :id_turista
+            ";
+        } else {
+            $sql = "
+            SELECT
+                r.id_reserva,
+                r.fecha,
+                r.estado,
+                r.cantidad_personas,
+                'actividad' AS tipo_reserva,
+                COALESCE(a.nombre, '—') AS nombre_servicio,
+                COALESCE(a.precio, r.precio) AS precio,
+                p.nombre_empresa AS proveedor
+            FROM reserva r
+            LEFT JOIN actividad a ON r.id_actividad = a.id_actividad
+            LEFT JOIN proveedor p ON a.id_proveedor = p.id_proveedor
+            WHERE r.id_reserva = :id_reserva
+              AND r.id_turista = :id_turista
+            ";
+        }
 
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':id_reserva', $id_reserva, PDO::PARAM_INT);

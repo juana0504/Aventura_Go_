@@ -160,25 +160,34 @@ class ReservaController
         $nombreTurista = $_SESSION['user']['nombre'] ?? 'Turista';
         $numTicket     = str_pad($idReserva, 6, '0', STR_PAD_LEFT);
 
-        $pdf = generarTicketPDF([
-            'id_reserva'        => $reserva['id_reserva'],
-            'nombre_turista'    => $nombreTurista,
-            'tipo'              => $reserva['tipo_reserva'],
-            'nombre_servicio'   => $reserva['nombre_servicio'],
-            'proveedor'         => $reserva['proveedor'],
-            'fecha'             => $reserva['fecha'],
-            'cantidad_personas' => $reserva['cantidad_personas'],
-            'precio'            => $reserva['precio'],
-            'estado'            => $reserva['estado'],
-        ]);
+        try {
+            $pdf = generarTicketPDF([
+                'id_reserva'        => $reserva['id_reserva'],
+                'nombre_turista'    => $nombreTurista,
+                'tipo'              => $reserva['tipo_reserva'],
+                'nombre_servicio'   => $reserva['nombre_servicio'],
+                'proveedor'         => $reserva['proveedor'] ?: '—',
+                'fecha'             => $reserva['fecha'],
+                'cantidad_personas' => $reserva['cantidad_personas'],
+                'precio'            => $reserva['precio'],
+                'estado'            => $reserva['estado'],
+            ]);
+        } catch (Throwable $e) {
+            error_log('descargarTicket PDF: ' . $e->getMessage());
+            http_response_code(500);
+            echo 'No fue posible generar el ticket PDF.';
+            exit;
+        }
 
         while (ob_get_level() > 0) {
             ob_end_clean();
         }
 
         header('Content-Type: application/pdf');
-        header('Content-Disposition: attachment; filename="ticket-reserva-' . $numTicket . '.pdf"');
+        header('Content-Disposition: inline; filename="ticket-reserva-' . $numTicket . '.pdf"');
         header('Content-Length: ' . strlen($pdf));
+        header('Cache-Control: private, no-cache, no-store, must-revalidate, max-age=0');
+        header('Pragma: no-cache');
         echo $pdf;
         exit;
     }
