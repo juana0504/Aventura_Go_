@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                     <p style='margin:6px 0;font-size:14px;color:#374151'><strong>🏢 Establecimiento:</strong> " . htmlspecialchars($detalle['nombre_empresa'] ?? '') . "</p>
                                     <p style='margin:6px 0;font-size:14px;color:#374151'><strong>📅 Fecha de llegada:</strong> $fechaFmt</p>
                                     <p style='margin:6px 0;font-size:14px;color:#374151'><strong>👥 Personas:</strong> " . (int)$detalle['cantidad_personas'] . "</p>
-                                    <p style='margin:6px 0;font-size:14px;color:#EA8217;font-weight:700'><strong>💰 Precio/noche:</strong> $" . number_format(($detalle['precio'] ?? 0), 0, ',', '.') . " COP</p>
+                                    <p style='margin:6px 0;font-size:14px;color:#EA8217;font-weight:700'><strong>💰 Precio total:</strong> $" . number_format(($detalle['precio'] ?? 0), 0, ',', '.') . " COP</p>
                                 </div>
                                 <p style='color:#6b7280;font-size:13px'>Puedes consultar el estado de todas tus reservas desde tu panel de turista en AventuraGO.</p>
                             </div>
