@@ -31,7 +31,7 @@ try {
     require_once BASE_PATH . '/config/database.php';
     $db      = (new conexion())->getConexion();
     $stmtImg = $db->prepare(
-        "SELECT imagen FROM hospedaje_imagen WHERE id_hospedaje = ? ORDER BY es_principal DESC, id ASC"
+        "SELECT imagen FROM hospedaje_imagen WHERE id_hospedaje = ? ORDER BY es_principal DESC, id_hospedaje_imagen ASC"
     );
     $stmtImg->execute([$id]);
     $imagenesHosp = $stmtImg->fetchAll(PDO::FETCH_COLUMN);
