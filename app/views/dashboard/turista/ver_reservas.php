@@ -37,7 +37,7 @@ foreach (array_slice($partes, 0, 2) as $p) {
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/turista/turista/turista.css">
 
     <!-- CSS específico de esta vista -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/turista/ver_reservas/ver_reservas.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/dashboard/turista/ver_reservas/ver_reservas.css?v=2">
 </head>
 
 <body class="ag-body">
