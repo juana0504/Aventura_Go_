@@ -1,11 +1,8 @@
 # Dependencias
 /vendor/
 
-# Archivos subidos por usuarios (NO versionar)
-/public/uploads/
-/public/uploads/**
-
-# Imagenes y fotos de carga de usuarios
+# Archivos subidos por usuarios (NO versionar los archivos, SÍ las carpetas)
+# Las carpetas se mantienen vía .gitkeep para que existan en el servidor
 /public/uploads/**/*.jpg
 /public/uploads/**/*.jpeg
 /public/uploads/**/*.png
@@ -13,9 +10,9 @@
 /public/uploads/**/*.webp
 /public/uploads/**/*.avif
 /public/uploads/**/*.bmp
-
-# Mantener carpetas vacias versionables cuando se use .gitkeep
-!/public/uploads/**/.gitkeep
+/public/uploads/**/*.pdf
+/public/uploads/**/*.mp4
+/public/uploads/**/*.mov
 
 # Credenciales de base de datos (cada entorno tiene las suyas)
 # Copiar config/database.example.php → config/database.php y rellenar
